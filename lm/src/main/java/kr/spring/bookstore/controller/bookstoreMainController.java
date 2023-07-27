@@ -14,9 +14,8 @@ public class bookstoreMainController {
 	
 	@RequestMapping("/bookstore/bsMain.do")
 	public String main(Model model) {
-		
-		return "bsMain";//타일스 설정의 식별자
+		return "bsMain"; //타일스 설정의 식별자
 	}
 	
-	//
+	
 }
