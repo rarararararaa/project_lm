@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class bookstoreMainController {
 
 	@RequestMapping("/")
-	public String getMain() {
+	public String getbsMain() {
 		return "redirect:/bookstore/bsMain.do";
 	}
 	
 	@RequestMapping("/bookstore/bsMain.do")
-	public String main(Model model) {
+	public String bsMain(Model model) {
 		return "bsMain"; //타일스 설정의 식별자
 	}
 	

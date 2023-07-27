@@ -26,7 +26,6 @@ public class AppConfig implements WebMvcConfigurer{
 				"/WEB-INF/tiles-def/mona.xml",
 				"/WEB-INF/tiles-def/msb.xml",
 				"/WEB-INF/tiles-def/wjswkdrms.xml"
-				
 		});
 		return configurer;
 	}
