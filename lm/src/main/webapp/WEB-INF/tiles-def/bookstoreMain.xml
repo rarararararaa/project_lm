@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="bsMain" template="/WEB-INF/views/bookstore/bsLayout.jsp">
+    	<put-attribute name="bsTitle" value="Spring Tiles Example"/>
+		<put-attribute name="bsHeader" value="/WEB-INF/views/bookstore/bsHeader.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/body.jsp"/><!--body의 내용을 바뀔 수 있기 떄문에 template안에 넣지 않는다. -->
+		<put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/bsFooter.jsp"/>    
+    </definition>
+</tiles-definitions>

@@ -17,7 +17,8 @@ public class AppConfig implements WebMvcConfigurer{
 		final TilesConfigurer configurer = new TilesConfigurer();
 		//해당 경로에 xml 설정 파일을 넣음
 		configurer.setDefinitions(new String[] {
-				"/WEB-INF/tiles-def/main.xml",
+				"/WEB-INF/tiles-def/bookstoreMain.xml",
+				"/WEB-INF/tiles-def/libMain.xml",
 				"/WEB-INF/tiles-def/EESAMSAOH.xml",
 				"/WEB-INF/tiles-def/favau.xml",
 				"/WEB-INF/tiles-def/jeongho.xml",
@@ -25,6 +26,7 @@ public class AppConfig implements WebMvcConfigurer{
 				"/WEB-INF/tiles-def/mona.xml",
 				"/WEB-INF/tiles-def/msb.xml",
 				"/WEB-INF/tiles-def/wjswkdrms.xml"
+				
 		});
 		return configurer;
 	}
