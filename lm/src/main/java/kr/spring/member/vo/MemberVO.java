@@ -52,6 +52,8 @@ public class MemberVO {
 	private String mem_salt;
 	private int mem_grade;
 	private String auto;
+	
+	/*
 	//store_member_home
 	@NotEmpty
 	private int home_num;
@@ -69,6 +71,7 @@ public class MemberVO {
 	private String home_cell;
 	@NotEmpty
 	private int home_status;
+	*/
 	
 	//@Pattern(regexp="^[A-Za-z0-9]{4,12}$")
 	
