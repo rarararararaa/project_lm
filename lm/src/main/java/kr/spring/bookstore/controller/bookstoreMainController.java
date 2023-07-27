@@ -18,5 +18,5 @@ public class bookstoreMainController {
 		return "bsMain";//타일스 설정의 식별자
 	}
 	
-	
+	//
 }
