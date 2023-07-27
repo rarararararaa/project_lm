@@ -14,6 +14,7 @@ CREATE SEQUENCE lm_member_manage_seq;
 --lm_member_detail--
 CREATE TABLE lm_member_detail(
     mem_num number(5) not null,
+    au_id varchar2(36) unique, --자동 로그인에 사용되는 식별값
     mem_name varchar2(30) not null,
     mem_passwd varchar2(256) not null,
     mem_cell varchar2(15) unique not null,

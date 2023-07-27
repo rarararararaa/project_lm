@@ -14,6 +14,7 @@ import kr.spring.member.vo.MemberVO;
 
 @Mapper
 public interface MemberMapper {
+	/*
 	//회원관리 - 일반회원
 	//회원번호 생성
 	@Select("SELECT spmember_seq.nextval FROM dual")
@@ -22,8 +23,10 @@ public interface MemberMapper {
 	@Insert("INSERT INTO spmember (mem_num,id,nick_name) VALUES (#{mem_num},#{id},#{nick_name})")
 	public void insertMember(MemberVO member);
 	public void insertMember_detail(MemberVO member);
+	*/
 	//ID를 이용한 회원정보 체크
-	public MemberVO selectCheckMember(String id);
+	public MemberVO selectCheckMember(String mem_id);
+	/*
 	//회원번호를 이용한 회원정보 구하기
 	@Select("SELECT * FROM spmember m JOIN spmember_detail d "
 			+ "ON m.mem_num=d.mem_num WHERE m.mem_num=#{mem_num}")
@@ -40,16 +43,16 @@ public interface MemberMapper {
 	public void deleteMember(Integer mem_num);
 	@Delete("DELETE FROM spmember_detail WHERE mem_num=#{mem_num}")
 	public void deleteMember_detail(Integer mem_num);
+	*/
 	//자동 로그인
-	@Update("UPDATE spmember_detail SET au_id=#{au_id} WHERE mem_num=#{mem_num}")
-	public void updateAu_id(
-	   @Param("au_id") String au_id, @Param("mem_num") int mem_num);
-	@Select("SELECT m.mem_num,m.id,m.auth,d.au_id,d.passwd,"
-		  + "m.nick_name,d.email FROM spmember m JOIN spmember_detail d "
-		  + "ON m.mem_num=d.mem_num WHERE d.au_id=#{au_id}")
-	public MemberVO selectAu_id(String au_id);
-	@Update("UPDATE spmember_detail SET au_id='' WHERE mem_num=#{mem_num}")
-	public void deleteAu_id(int mem_num);
+	@Update("UPDATE lm_member_detail SET mem_au_id=#{mem_au_id} WHERE mem_num=#{mem_num}")
+	public void updateMem_au_id(
+	   @Param("mem_au_id") String mem_au_id, @Param("mem_num") int mem_num);
+	@Select("SELECT m.mem_num, m.mem_id, m.mem_auth, d.mem_au_id, d.mem_passwd, d.mem_email FROM lm_member_manage m JOIN lm_member_detail d ON m.mem_num=d.mem_num WHERE d.au_id=#{au_id}")
+	public MemberVO selectMem_au_id(String mem_au_id);
+	@Update("UPDATE lm_member_detail SET mem_au_id='' WHERE mem_num=#{mem_num}")
+	public void deleteMem_au_id(int mem_num);
+	/*
 	//프로필 이미지 업데이트
 	@Update("UPDATE spmember_detail SET photo=#{photo},photo_name=#{photo_name} WHERE mem_num=#{mem_num}")
 	public void updateProfile(MemberVO member);
@@ -59,6 +62,7 @@ public interface MemberMapper {
 	public List<MemberVO> selectList(Map<String,Object> map);
 	@Update("UPDATE spmember SET auth=#{auth} WHERE mem_num=#{mem_num}")
 	public void updateByAdmin(MemberVO memberVO);
+	*/
 	
 }
 
