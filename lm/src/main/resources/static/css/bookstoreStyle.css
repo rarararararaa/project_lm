@@ -125,13 +125,13 @@ em {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 44px 44px;
-	background-image: url("/img/btn_anb_open.png");
+	background-image: url("/images/btn_anb_open.png");
 	transition: background 0.23s;
 }
 
 .anb_wrap.active .btn_anb {
 	background-size: 44px 44px;
-	background-image: url("/img/btn_anb_open_active.png");
+	background-image: url("/images/btn_anb_open_active.png");
 }
 
 .anb_wrap {
@@ -352,7 +352,7 @@ button[class^=btn_]:hover, a[class^=btn_]:hover {
 .btn_fold {
 	height: 13px;
 	width: 13px;
-	background-image: url("/img/ico_fold_menu_plus.png");
+	background-image: url("/images/ico_fold_menu_plus.png");
 	background-color: transparent;
 	background-size: 13px 13px;
 	background-repeat: no-repeat;
@@ -551,7 +551,7 @@ button[class^=btn_]:hover, a[class^=btn_]:hover {
 	background-position: 0 0;
 	background-repeat: no-repeat;
 	background-size: 48px 48px;
-	background-image: url("/img/img_mark_isms.png");
+	background-image: url("/images/img_mark_isms.png");
 }
 
 .mark_desc {
@@ -630,7 +630,7 @@ ul.service_mall_list, ul.customer_service_list, ul.user_menu_list {
 	background-position: 40px 5px;
 	background-repeat: no-repeat;
 	background-size: 180px;
-	background-image: url(../img/logo.png);
+	background-image: url(../images/logo.png);
 }
 
 .search_box {
@@ -662,7 +662,7 @@ ul.service_mall_list, ul.customer_service_list, ul.user_menu_list {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 18px 18px;
-	background-image: url(../img/search.png);
+	background-image: url(../images/search.png);
 }
 
 .ip_search {
@@ -772,7 +772,7 @@ span.search_select:has(.active) {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 15px;
-	background-image: url(../img/arrow.jpg);
+	background-image: url(../images/arrow.jpg);
 	z-index:100;
 	position:absolute;
 	transition: .3s; 	
@@ -808,7 +808,7 @@ span.search_select:has(.active) {
 	background-repeat: no-repeat;
 	background-position: 0 10px;
 	background-size: 32px;
-	background-image: url(../img/cart_alt.png);
+	background-image: url(../images/cart_alt.png);
 	cursor: pointer;
 }
 
@@ -818,7 +818,7 @@ span.search_select:has(.active) {
 	background-repeat: no-repeat;
 	background-position: 0 10px;
 	background-size: 36px;
-	background-image: url(../img/person_outline.png);
+	background-image: url(../images/person_outline.png);
 	cursor: pointer;
 }
 

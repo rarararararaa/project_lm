@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:getAsString name="libTitle" /></title>
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/style.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bookstoreStyle.css">
 </head>
 <body>
 	<div class="wrapper" id="mainDiv">

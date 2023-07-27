@@ -4,7 +4,7 @@
 		<div class="footer_inner">
 			<div class="logo_box">
 				<div class="logo_box">
-					<a class="logo_link"> <img alt="" src="${pageContext.request.contextPath}/img/lm_lib_logo.png">
+					<a class="logo_link"> <img alt="" src="${pageContext.request.contextPath}/images/lm_lib_logo.png">
 					</a>
 				</div>
 			</div>
