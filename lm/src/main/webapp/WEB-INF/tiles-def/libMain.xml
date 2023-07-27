@@ -6,7 +6,7 @@
 <tiles-definitions>
 	<!-- Library Main -->
     <definition name="libMain" template="/WEB-INF/views/library/libLayout.jsp">
-    	<put-attribute name="libTitle" value="Library Main"/>
+    	<put-attribute name="libTitle" value="LM 도서관"/>
     	<put-attribute name="libHeader" value="/WEB-INF/views/library/libHeader.jsp"/>
     	<put-attribute name="libBody" value="/WEB-INF/views/library/libBody.jsp"/>
     	<put-attribute name="libFooter" value="/WEB-INF/views/library/libFooter.jsp"/>                                        
