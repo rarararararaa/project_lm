@@ -129,6 +129,9 @@
 				<li class="gnb_item">
 					<a class="gnb_link">교보ONLY</a>
 				</li>
+				<li class="gnb_item">
+					<a class="gnb_link" href="${pageContext.request.contextPath}/bookstore/template/bsUsedMain.do">중고</a>
+				</li>
 			</ul>
 			<!-- 메뉴 -->
 			<!-- 할인혜택 / 출석 체크 -->

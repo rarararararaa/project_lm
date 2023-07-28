@@ -2,6 +2,7 @@ package kr.spring.bookstore.used.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,27 +26,29 @@ public class UsedController {
 		return new UsedVO();
 	}
 	
-	
-	
 	//jsp에서 RequestMapping 값 들어오면 걸어주기
-	@RequestMapping("/bookstoreUsed/usedMain.do")
-	public String getUsedMain() {
+	@RequestMapping("/bookstore/template/bsUsedMain.do")
+	public String getUsedMain(Model model) { //중고 판매 책 목록
 		return "usedMain"; //타일스 식별자
 	}
 	
+	@RequestMapping("/bookstore/used/usedMain.do")
+	public String getUsedMainClick(Model model) {
+		return "usedMain";
+	}
 	
-	@RequestMapping("/bookstoreUsed/usedNoticeForm.do")
-	public String getUsedNoticeForm() {
+	@RequestMapping("/bookstore/used/usedNoticeForm.do")
+	public String getUsedNoticeForm(Model model) { //중고 등록 알림
 		return "usedNoticeForm";
 	}
 	
-	@PostMapping("/bookstoreUsed/usedForm.do")
-	public String getUsedForm() {
-		return "usedForm";
+	@RequestMapping("/bookstore/used/usedBooksByUser.do")
+	public String getUsedBooksByUser(Model model) { //등록한 중고 상품
+		return "usedBooksByUser";
 	}
 	
-	@RequestMapping("/bookstoreUsed/usedSalesStatus.do")
-	public String getUsedSalesStatus() {
+	@RequestMapping("/bookstore/used/usedSalesStatus.do")
+	public String getUsedSalesStatus(Model model) { //중고 판매 상태
 		return "usedSalesStatus";
 	}
 	

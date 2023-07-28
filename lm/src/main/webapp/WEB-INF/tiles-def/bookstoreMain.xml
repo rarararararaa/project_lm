@@ -8,7 +8,7 @@
     <definition name="bsMain" template="/WEB-INF/views/bookstore/template/bsLayout.jsp">
     	<put-attribute name="bsTitle" value="LM 문고"/>
 		<put-attribute name="bsHeader" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
-		<put-attribute name="bsBody" value="/WEB-INF/views/bookstore/template/bsBody.jsp"/>
+		<!-- <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/template/bsBody.jsp"/> -->
 		<put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/>    
     </definition>
 </tiles-definitions>
