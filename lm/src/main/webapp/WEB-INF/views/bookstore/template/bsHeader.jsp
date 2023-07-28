@@ -16,7 +16,7 @@
 					<ul class="customer_service_list">
 						<li class="customer_service_item">회원가입</li>
 						<c:if test="${mem_id == null }">
-							<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do">로그인</a></li>
+							<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do?lo=1">로그인</a></li>
 						</c:if>
 						<c:if test="${mem_id != null }">
 							<li>

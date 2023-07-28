@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
@@ -174,9 +175,20 @@ a:hover {
 <div class="lib-header">
 	<div class="lib-header-topbox">
 		<div class="lib-header-topmenu">
+		<input type="hidden" id="id_check_tag" value="${mem_id}">
 			<ul>
 				<li><a href="#">회원가입</a></li>
-				<li><a href="#">로그인</a></li>
+				<c:if test="${mem_id == null }">
+					<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do?lo=2">로그인</a></li>
+				</c:if>
+				<c:if test="${mem_id != null }">
+					<li>
+						<strong>${mem_id}</strong>님 환영합니다. 
+					</li>
+					<li>
+						<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do">로그아웃</a>
+					</li>
+				</c:if>
 				<li><a href="#">고객센터</a></li>
 				<li><a href="#">서재</a></li>
 			</ul>

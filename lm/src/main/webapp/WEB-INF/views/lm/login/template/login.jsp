@@ -13,7 +13,9 @@
 	<div class="page-outer">
 		<div class="page-inner">
 			<h2 id="title">로그인</h2>
+			<!-- 쿼리스트링으로 받아온 값(lo=1 or lo=2)을 hidden 값으로 저장하여 최종 redirect 주소 지정 -->
 			<form:form modelAttribute="memberVO" action="loginMain.do" id="login" class="login-form">
+			<input type="hidden" name="lo" value="<%= request.getParameter("lo") %>" />
 			<form:errors element="div" cssClass="error-color"/>
 				<div class="page-input">
 					<div class="page-input-box">

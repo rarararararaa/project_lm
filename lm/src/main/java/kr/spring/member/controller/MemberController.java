@@ -3,6 +3,7 @@ package kr.spring.member.controller;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -47,6 +48,7 @@ public class MemberController {
 			                  BindingResult result,
 			                  HttpSession session,
 			                  Model model,
+			                  HttpServletRequest request,
 			                  HttpServletResponse response) {
 		log.debug("<<회원로그인>> : " + memberVO);
 		
@@ -80,7 +82,7 @@ public class MemberController {
 						//자동로그인 체크 식별값 생성
 						mem_au_id = UUID.randomUUID().toString();
 						log.debug("<<mem_au_id>> : " + mem_au_id);
-						memberService.updateAu_id(
+						memberService.updateMem_au_id(
 								mem_au_id, member.getMem_num());
 					}
 					
@@ -104,21 +106,42 @@ public class MemberController {
 				log.debug("<<mem_auth>> : " + member.getMem_auth());
 				log.debug("<<mem_au_id>> : " + member.getMem_au_id());
 				
-				if(member.getMem_auth() == 0) {
-					//탈퇴회원
-					return "redirect:/bookstore/template/bsMain.do";
-				}else if(member.getMem_auth() == 1) { //정지회원
-					return "redirect:/bookstore/template/bsMain.do";
-				}else if(member.getMem_auth() == 2){ //휴면회원
-					//아이디, 비밀번호 변경하게
-					return "redirect:/bookstore/template/bsMain.do";
-				}else if(member.getMem_auth() == 3){ //일반회원
-					return "redirect:/bookstore/template/bsMain.do";
-				}else if(member.getMem_auth() == 4){ //미인증 일반회원
-					//미인증 시 인증 알림창 띄우고 인증 페이지
-					return "redirect:/bookstore/template/bsMain.do";
-				}else if(member.getMem_auth() == 9){ //관리자
-					return "redirect:/bookstore/template/bsMain.do";
+				//hidden 값으로 받아온 로그인 홈페이지 데이터
+				int lo = Integer.parseInt(request.getParameter("lo"));
+				if(lo == 1) { //bs인 경우
+					if(member.getMem_auth() == 0) {
+						//탈퇴회원
+						return "redirect:/bookstore/template/bsMain.do";
+					}else if(member.getMem_auth() == 1) { //정지회원
+						return "redirect:/bookstore/template/bsMain.do";
+					}else if(member.getMem_auth() == 2){ //휴면회원
+						//아이디, 비밀번호 변경하게
+						return "redirect:/bookstore/template/bsMain.do";
+					}else if(member.getMem_auth() == 3){ //일반회원
+						return "redirect:/bookstore/template/bsMain.do";
+					}else if(member.getMem_auth() == 4){ //미인증 일반회원
+						//미인증 시 인증 알림창 띄우고 인증 페이지
+						return "redirect:/bookstore/template/bsMain.do";
+					}else if(member.getMem_auth() == 9){ //관리자
+						return "redirect:/bookstore/template/bsMain.do";
+					}
+				}else if(lo == 2) { //lib인 경우
+					if(member.getMem_auth() == 0) {
+						//탈퇴회원
+						return "redirect:/library/template/libMain.do";
+					}else if(member.getMem_auth() == 1) { //정지회원
+						return "redirect:/library/template/libMain.do";
+					}else if(member.getMem_auth() == 2){ //휴면회원
+						//아이디, 비밀번호 변경하게
+						return "redirect:/library/template/libMain.do";
+					}else if(member.getMem_auth() == 3){ //일반회원
+						return "redirect:/library/template/libMain.do";
+					}else if(member.getMem_auth() == 4){ //미인증 일반회원
+						//미인증 시 인증 알림창 띄우고 인증 페이지
+						return "redirect:/library/template/libMain.do";
+					}else if(member.getMem_auth() == 9){ //관리자
+						return "redirect:/library/template/libMain.do";
+					}
 				}
 			}
 			//인증 실패
