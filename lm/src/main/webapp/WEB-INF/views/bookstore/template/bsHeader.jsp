@@ -43,10 +43,10 @@
 				</div>
 				<ul>
 					<li>
-						<a href="${pageContext.request.contextPath}/bookstore/bsMain.do">LM 문고</a>
+						<a href="${pageContext.request.contextPath}/bookstore/template/bsMain.do">LM 문고</a>
 					</li>
 					<li>
-						<a href="${pageContext.request.contextPath}/library/libMain.do">LM 도서관</a>
+						<a href="${pageContext.request.contextPath}/library/template/libMain.do">LM 도서관</a>
 					</li>
 				</ul>
 				<ul class="user_menu_list">

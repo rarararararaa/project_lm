@@ -183,19 +183,19 @@ a:hover {
 		</div>
 	</div>
 	<div class="lib-header-midbox">
-		<div class="lib-main-logo"><a href="#"><img src="../images/lm_lib_logo.png"></a></div>
+		<div class="lib-main-logo"><a href="#"><img src="../../images/lm_lib_logo.png"></a></div>
 		<div class="lib-search">
 			<div class="lib-search-title">통합검색</div>
 			<div class="lib-text-box"><input type="text" class="search-text"></div>
-			<div class="lib-text-img"><a href="#"><img src="../images/search.png"></a></div>
+			<div class="lib-text-img"><a href="#"><img src="../../images/search.png"></a></div>
 		</div>
 		<div class="lib-move-main">
-			<div><a href="${pageContext.request.contextPath}/bookstore/bsMain.do">LM 문고</a></div>
-			<div><a href="${pageContext.request.contextPath}/library/libMain.do">LM 도서관</a></div>
+			<div><a href="${pageContext.request.contextPath}/bookstore/template/bsMain.do">LM 문고</a></div>
+			<div><a href="${pageContext.request.contextPath}/library/template/libMain.do">LM 도서관</a></div>
 		</div>
 		<div class="lib-main-icons">
-			<div class="lib-cart"><a href="#"><img src="../images/cart_alt.png"></a></div>
-			<div class="lib-person"><a href="#"><img src="../images/person_outline.png"></a></div>
+			<div class="lib-cart"><a href="#"><img src="../../images/cart_alt.png"></a></div>
+			<div class="lib-person"><a href="#"><img src="../../images/person_outline.png"></a></div>
 		</div>
 	</div>
 	<div class="library-header-botbox">

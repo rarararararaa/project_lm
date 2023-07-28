@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LibMainController {
 
 	
-	@RequestMapping("/library/libMain.do")
+	@RequestMapping("/library/template/libMain.do")
 	public String libMain(Model model) {
 		return "libMain"; //타일스 설정의 식별자
 	}

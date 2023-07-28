@@ -9,10 +9,10 @@ public class bookstoreMainController {
 
 	@RequestMapping("/")
 	public String getbsMain() {
-		return "redirect:/bookstore/bsMain.do";
+		return "redirect:/bookstore/template/bsMain.do";
 	}
 	
-	@RequestMapping("/bookstore/bsMain.do")
+	@RequestMapping("/bookstore/template/bsMain.do")
 	public String bsMain(Model model) {
 		return "bsMain"; //타일스 설정의 식별자
 	}

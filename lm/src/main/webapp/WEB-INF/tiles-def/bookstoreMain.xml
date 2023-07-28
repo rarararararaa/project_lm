@@ -5,10 +5,10 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="bsMain" template="/WEB-INF/views/bookstore/bsLayout.jsp">
+    <definition name="bsMain" template="/WEB-INF/views/bookstore/template/bsLayout.jsp">
     	<put-attribute name="bsTitle" value="LM 문고"/>
-		<put-attribute name="bsHeader" value="/WEB-INF/views/bookstore/bsHeader.jsp"/>
-		<put-attribute name="bsBody" value="/WEB-INF/views/bookstore/bsBody.jsp"/>
-		<put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/bsFooter.jsp"/>    
+		<put-attribute name="bsHeader" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
+		<put-attribute name="bsBody" value="/WEB-INF/views/bookstore/template/bsBody.jsp"/>
+		<put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/>    
     </definition>
 </tiles-definitions>
