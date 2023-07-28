@@ -48,7 +48,7 @@ public interface MemberMapper {
 	@Update("UPDATE lm_member_detail SET mem_au_id=#{mem_au_id} WHERE mem_num=#{mem_num}")
 	public void updateMem_au_id(
 	   @Param("mem_au_id") String mem_au_id, @Param("mem_num") int mem_num);
-	@Select("SELECT m.mem_num, m.mem_id, m.mem_auth, d.mem_au_id, d.mem_passwd, d.mem_email FROM lm_member_manage m JOIN lm_member_detail d ON m.mem_num=d.mem_num WHERE d.au_id=#{au_id}")
+	@Select("SELECT m.mem_num, m.mem_id, m.mem_auth, d.mem_au_id, d.mem_passwd, d.mem_email FROM lm_member_manage m JOIN lm_member_detail d ON m.mem_num=d.mem_num WHERE d.mem_au_id=#{mem_au_id}")
 	public MemberVO selectMem_au_id(String mem_au_id);
 	@Update("UPDATE lm_member_detail SET mem_au_id='' WHERE mem_num=#{mem_num}")
 	public void deleteMem_au_id(int mem_num);

@@ -38,7 +38,7 @@ public class MemberController {
 	//로그인 폼
 	@RequestMapping("/lm/member/login.do")
 	public String formLogin() {
-		return "member/login"; //타일스 설정의 식별자
+		return "lm/member/login"; //타일스 설정의 식별자
 	}
 	
 	//로그인 데이터 처리
@@ -102,13 +102,13 @@ public class MemberController {
 				log.debug("<<au_id>> : " + member.getMem_au_id());
 				
 				if(member.getMem_auth() == 0) {
-					
+					//탈퇴회원
 				}else if(member.getMem_auth() == 1) { //정지회원
 					
 				}else if(member.getMem_auth() == 2){ //휴면회원
-					
+					//아이디, 비밀번호 변경하게
 				}else if(member.getMem_auth() == 3){ //일반회원
-					return "redirect:/main/main.do";
+					return "redirect:/bookstore/bsMain.do";
 				}else if(member.getMem_auth() == 4){ //미인증 일반회원
 					//미인증 시 인증 알림창 띄우고 인증 페이지
 				}else if(member.getMem_auth() == 9){ //관리자
@@ -121,8 +121,10 @@ public class MemberController {
 			//인증 실패로 로그인폼 호출
 			if(member!=null && member.getMem_auth()==1) {
 				//정지회원 메시지 표시
+				//나중에 정지 이유 추가
 				result.reject("noAuthority");
 			}else {
+				//아이디,비밀번호 불일치
 				result.reject("invalidIdOrPassword");
 			}
 			

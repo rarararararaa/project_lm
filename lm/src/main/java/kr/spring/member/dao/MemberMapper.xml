@@ -29,15 +29,14 @@
 	                               resultType="memberVO">
 		SELECT 
 		  m.mem_num,
-		  m.id,
-		  m.auth,
-		  d.au_id,
-		  d.passwd,
-		  m.nick_name,
-		  d.email
-		FROM spmember m LEFT OUTER JOIN spmember_detail d
+		  m.mem_id,
+		  m.mem_auth,
+		  d.mem_au_id,
+		  d.mem_passwd,
+		  d.mem_email
+		FROM lm_member_manage m LEFT OUTER JOIN lm_member_detail d
 		ON m.mem_num=d.mem_num
-		WHERE m.id=#{id}	
+		WHERE m.mem_id=#{mem_id}	
 	</select>
 	
 	<!-- 회원정보수정 -->

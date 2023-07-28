@@ -14,18 +14,18 @@
 	<div class="page-outer">
 		<div class="page-inner">
 			<h2 id="title">로그인</h2>
-			<form:form modelAttribute="memberVO" action="login.do" id="member_login" class="login-form">
+			<form:form modelAttribute="memberVO" action="login.do" id="login" class="login-form">
 			<form:errors element="div" cssClass="error-color"/>
 				<div class="page-input">
 					<div class="page-input-box">
-						<form:input path="id" placeholder="아이디" cssClass="form-input" autocomplete="off"/>
-						<form:label path="id">아이디</form:label>
-						<form:errors path="id" element="div" cssClass="error-color"/>
+						<form:input path="mem_id" placeholder="아이디" cssClass="form-input" autocomplete="off"/>
+						<form:label path="mem_id">아이디</form:label>
+						<form:errors path="mem_id" element="div" cssClass="error-color"/>
 					</div>
 					<div class="page-input-box">
-						<form:password path="passwd" placeholder="비밀번호" cssClass="form-input"/>
-						<form:label path="passwd">비밀번호</form:label>
-						<form:errors path="passwd" element="div" cssClass="error-color"/>
+						<form:password path="mem_passwd" placeholder="비밀번호" cssClass="form-input"/>
+						<form:label path="mem_passwd">비밀번호</form:label>
+						<form:errors path="mem_passwd" element="div" cssClass="error-color"/>
 					</div>
 				</div>
 
