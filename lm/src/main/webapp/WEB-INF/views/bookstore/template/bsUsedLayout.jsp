@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title><tiles:getAsString name="usedTitle"/></title>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bookstoreStyle.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/used.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/used.css">
 </head>
 <body>
 	

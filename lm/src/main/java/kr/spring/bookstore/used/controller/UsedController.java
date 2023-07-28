@@ -52,5 +52,9 @@ public class UsedController {
 		return "usedSalesStatus";
 	}
 	
+	@RequestMapping("/bookstore/used/usedForm.do")
+	public String getUsedForm(Model model) {
+		return "usedForm";
+	}
 	
 }
