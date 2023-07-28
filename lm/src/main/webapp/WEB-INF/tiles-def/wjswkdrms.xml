@@ -7,26 +7,20 @@
 <tiles-definitions>
 	<!-- 아래 설정을 상황에 맞게 변형해서 사용하세요 -->
     <definition name="service" template="/WEB-INF/views/bookstore/template/bsServiceLayout.jsp">
-    	<put-attribute name="title" value="ServicePage"/>
+    	<put-attribute name="title" value="고객센터"/>
     	<put-attribute name="header" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
     	<put-attribute name="nav" value="/WEB-INF/views/bookstore/template/service_nav.jsp"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/main.jsp"/>
 	    <put-attribute name="footer" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/> 
     </definition> 
-	<!-- 
-    <definition name="myPage" 
-            template="/WEB-INF/views/template/layout_mypage.jsp">
-    	<put-attribute name="title" value="MyPage"/>
-    	<put-attribute name="header" 
-    	             value="/WEB-INF/views/template/header.jsp"/>
-    	<put-attribute name="nav"
-    	          value="/WEB-INF/views/template/mypage_nav.jsp"/>
-    	<put-attribute name="body"
-    	          value="/WEB-INF/views/member/memberView.jsp"/>
-    	<put-attribute name="footer"
-    	          value="/WEB-INF/views/template/footer.jsp"/>                                        
+	<definition name="announceList" extends="service">
+    	<put-attribute name="title" value="공지사항 목록"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/announceList.jsp"/>
     </definition>
- -->
+    <definition name="announceWrite" extends="service">
+    	<put-attribute name="title" value="공지사항 작성"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/announceWrite.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

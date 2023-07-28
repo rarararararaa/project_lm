@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bookstoreStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/used.css">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/service.css">
 </head>
 <body>
 
