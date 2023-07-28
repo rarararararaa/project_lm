@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lm/member/login.css">
 </head>
 <body>
 <!-- 로그인 폼 시작 -->
@@ -18,29 +18,26 @@
 			<form:errors element="div" cssClass="error-color"/>
 				<div class="page-input">
 					<div class="page-input-box">
-						<form:input path="mem_id" placeholder="아이디" cssClass="form-input" autocomplete="off"/>
-						<form:label path="mem_id">아이디</form:label>
+						<form:input path="mem_id" placeholder="아이디를 입력하세요." cssClass="form-input" />
 						<form:errors path="mem_id" element="div" cssClass="error-color"/>
 					</div>
 					<div class="page-input-box">
-						<form:password path="mem_passwd" placeholder="비밀번호" cssClass="form-input"/>
-						<form:label path="mem_passwd">비밀번호</form:label>
+						<form:password path="mem_passwd" placeholder="비밀번호를 입력하세요." cssClass="form-input" autocomplete="off"/>
 						<form:errors path="mem_passwd" element="div" cssClass="error-color"/>
 					</div>
 				</div>
 
 				<div>
-				<label for="auto"><input type="checkbox" name="auto" id="auto">로그인상태유지</label>
+				
 				</div>
 				<div class="page-button">
-					<div class="page-button-box">
-						<form:button class="button3">아이디 찾기</form:button>
-					</div>
+					<label for="auto"><input type="checkbox" name="auto" id="auto">로그인상태유지</label>
+					<form:button class="button1">아이디 찾기</form:button>
+					<form:button class="button2">비밀번호 찾기</form:button>
 				</div>
 				<div class="page-button2">
-					<div class="page-button_box">
-						<form:button class="button3">로그인</form:button>
-					</div>
+					<form:button class="button3">로그인</form:button>
+					<form:button class="button3">홈으로</form:button>
 				</div>
 			</form:form>
 		</div>
