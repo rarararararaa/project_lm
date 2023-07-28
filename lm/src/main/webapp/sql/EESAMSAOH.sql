@@ -522,7 +522,7 @@ CREATE TABLE LIB_EVENT_ADMIN (
     
 );
 
-CREATE TABLE BOARD_ANNOUNCE_ADMIN (
+CREATE TABLE BOARD_ANNOUNCE (
 	notice_num	number	NOT NULL,
 	notice_title	varchar2(300)	NOT NULL,
 	notice_content	varchar2(1000)	NOT NULL,
