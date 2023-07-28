@@ -75,17 +75,17 @@ public class MemberController {
 						      && memberVO.getAuto().equals("on");
 				if(autoLogin) {
 					//자동로그인 체크를 한 경우
-					String au_id = member.getMem_au_id();
-					if(au_id==null) {
+					String mem_au_id = member.getMem_au_id();
+					if(mem_au_id==null) {
 						//자동로그인 체크 식별값 생성
-						au_id = UUID.randomUUID().toString();
-						log.debug("<<au_id>> : " + au_id);
+						mem_au_id = UUID.randomUUID().toString();
+						log.debug("<<mem_au_id>> : " + mem_au_id);
 						memberService.updateAu_id(
-								au_id, member.getMem_num());
+								mem_au_id, member.getMem_num());
 					}
 					
 					//쿠키 생성
-					Cookie auto_cookie = new Cookie("au-log",au_id);
+					Cookie auto_cookie = new Cookie("mem_au-log",mem_au_id);
 					auto_cookie.setMaxAge(60*60*24*7);//쿠키 유효시간 1주일
 					auto_cookie.setPath("/");
 					
@@ -94,12 +94,15 @@ public class MemberController {
 				//===자동 로그인 체크 끝===
 				
 				//인증 성공, 로그인 처리
-				session.setAttribute("user", member);
+				//세션에 id, auth, num 적재
+				session.setAttribute("mem_id", member.getMem_id());
+				session.setAttribute("mem_auth", member.getMem_auth());
+				session.setAttribute("mem_num", member.getMem_num());
 				
 				log.debug("<<인증 성공>>");
-				log.debug("<<id>> : " + member.getMem_id());
-				log.debug("<<auth>> : " + member.getMem_auth());
-				log.debug("<<au_id>> : " + member.getMem_au_id());
+				log.debug("<<mem_id>> : " + member.getMem_id());
+				log.debug("<<mem_auth>> : " + member.getMem_auth());
+				log.debug("<<mem_au_id>> : " + member.getMem_au_id());
 				
 				if(member.getMem_auth() == 0) {
 					//탈퇴회원
