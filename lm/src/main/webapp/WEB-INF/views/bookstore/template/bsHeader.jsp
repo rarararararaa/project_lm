@@ -15,6 +15,7 @@
 				<input type="hidden" id="id_check_tag" value="${mem_id}">
 					<ul class="customer_service_list">
 						<li class="customer_service_item">회원가입</li>
+<<<<<<< HEAD
 						<c:if test="${mem_id == null }">
 							<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do">로그인</a></li>
 						</c:if>
@@ -27,6 +28,10 @@
 							</li>
 						</c:if>
 						<li class="customer_service_item">고객센터</li>
+=======
+						<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/member/login.do">로그인</a></li>
+						<li class="customer_service_item"><a href="${pageContext.request.contextPath}/bookstore/service/main.do">고객센터</a></li>
+>>>>>>> branch 'main' of https://github.com/favau/lm.git
 					</ul>
 				</div>
 			</div>
