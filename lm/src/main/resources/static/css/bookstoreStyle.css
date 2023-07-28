@@ -572,7 +572,7 @@ button[class^=btn_]:hover, a[class^=btn_]:hover {
 	border-bottom: 1px solid #eaeaea;
 }
 
-.wrapper .header_wrapper .service_mall .service_mall_inner {
+.header_wrapper .service_mall .service_mall_inner {
 	display: flex;
 	position: relative;
 	padding-left: 172px;

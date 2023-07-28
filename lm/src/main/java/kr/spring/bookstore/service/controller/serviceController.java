@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class serviceController {
 	@RequestMapping("/bookstore/service/main.do")
 	public String serviceMain() {
-		return "main";
+		return "service";
 	}
 }
