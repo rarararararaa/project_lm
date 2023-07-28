@@ -139,4 +139,24 @@ public class MemberController {
 			return formLogin();
 		}
 	}
+	/*=======================
+	 * 로그아웃
+	 *=======================*/
+	@RequestMapping("/lm/logout/template/logoutMain.do")
+	public String logout(HttpSession session,
+			        HttpServletResponse response) {
+		//로그아웃
+		session.invalidate();
+		
+		//===자동로그인 해제 시작===//
+		//클라이언트 쿠키 처리
+		Cookie auto_cookie = new Cookie("mem-au-log","");
+		auto_cookie.setMaxAge(0); //쿠키의 삭제
+		auto_cookie.setPath("/");
+		
+		response.addCookie(auto_cookie);
+		//===자동로그인 해제 끝===//
+		
+		return "redirect:/bookstore/template/bsMain.do";
+	}
 }

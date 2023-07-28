@@ -23,7 +23,7 @@
 								<strong>${mem_id}</strong>님 환영합니다. 
 							</li>
 							<li>
-								<a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a>
+								<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do">로그아웃</a>
 							</li>
 						</c:if>
 						<li class="customer_service_item">고객센터</li>
