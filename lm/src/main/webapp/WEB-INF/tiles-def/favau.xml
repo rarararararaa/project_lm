@@ -11,8 +11,3 @@
 	    <put-attribute name="body" value="/WEB-INF/views/lm/member/login.jsp"/>
     </definition> 
 </tiles-definitions>
-
-
-
-
-

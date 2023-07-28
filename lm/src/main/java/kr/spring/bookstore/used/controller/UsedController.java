@@ -6,15 +6,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.spring.bookstore.used.service.UsedService;
 import kr.spring.bookstore.used.vo.UsedVO;
 
 @Controller
 public class UsedController {
 	
-	//autowired 걸어주기
+	//서비스에 autowired 걸어주기
+	
 	/*
-	 * @Autowired private UsedVO usedvo;
+	 * @Autowired private UsedService usedService;
 	 */
+	 
 	
 	//VO 초기화
 	@ModelAttribute

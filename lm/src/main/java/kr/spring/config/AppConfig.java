@@ -19,13 +19,12 @@ public class AppConfig implements WebMvcConfigurer{
 		configurer.setDefinitions(new String[] {
 				"/WEB-INF/tiles-def/bookstoreMain.xml",
 				"/WEB-INF/tiles-def/libMain.xml",
-				"/WEB-INF/tiles-def/EESAMSAOH.xml",
-				"/WEB-INF/tiles-def/favau.xml",
 				"/WEB-INF/tiles-def/jeongho.xml",
 				"/WEB-INF/tiles-def/jihye.xml",
 				"/WEB-INF/tiles-def/mona.xml",
 				"/WEB-INF/tiles-def/msb.xml",
-				"/WEB-INF/tiles-def/wjswkdrms.xml"
+				"/WEB-INF/tiles-def/wjswkdrms.xml" 
+				
 		});
 		return configurer;
 	}
