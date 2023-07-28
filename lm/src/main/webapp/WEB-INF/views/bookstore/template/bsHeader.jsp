@@ -14,7 +14,7 @@
 				<div class="customer_service_box">
 					<ul class="customer_service_list">
 						<li class="customer_service_item">회원가입</li>
-						<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/member/login.do">로그인</a></li>
+						<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do">로그인</a></li>
 						<li class="customer_service_item">고객센터</li>
 					</ul>
 				</div>

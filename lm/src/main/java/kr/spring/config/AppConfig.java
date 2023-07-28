@@ -23,7 +23,8 @@ public class AppConfig implements WebMvcConfigurer{
 				"/WEB-INF/tiles-def/jihye.xml",
 				"/WEB-INF/tiles-def/mona.xml",
 				"/WEB-INF/tiles-def/msb.xml",
-				"/WEB-INF/tiles-def/wjswkdrms.xml" 
+				"/WEB-INF/tiles-def/wjswkdrms.xml",
+				"/WEB-INF/tiles-def/favau.xml" 
 				
 		});
 		return configurer;

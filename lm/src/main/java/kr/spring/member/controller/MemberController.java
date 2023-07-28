@@ -36,13 +36,13 @@ public class MemberController {
 	}
 	
 	//로그인 폼
-	@RequestMapping("/lm/member/login.do")
+	@RequestMapping("/lm/login/template/loginMain.do")
 	public String formLogin() {
-		return "lm/member/login"; //타일스 설정의 식별자
+		return "loginMain"; //타일스 설정의 식별자
 	}
 	
 	//로그인 데이터 처리
-	@PostMapping("/lm/member/login.do")
+	@PostMapping("/lm/login/template/loginMain.do")
 	public String submitLogin(@Valid MemberVO memberVO,
 			                  BindingResult result,
 			                  HttpSession session,
@@ -103,16 +103,19 @@ public class MemberController {
 				
 				if(member.getMem_auth() == 0) {
 					//탈퇴회원
+					return "redirect:/bookstore/template/bsMain.do";
 				}else if(member.getMem_auth() == 1) { //정지회원
-					
+					return "redirect:/bookstore/template/bsMain.do";
 				}else if(member.getMem_auth() == 2){ //휴면회원
 					//아이디, 비밀번호 변경하게
+					return "redirect:/bookstore/template/bsMain.do";
 				}else if(member.getMem_auth() == 3){ //일반회원
-					return "redirect:/bookstore/bsMain.do";
+					return "redirect:/bookstore/template/bsMain.do";
 				}else if(member.getMem_auth() == 4){ //미인증 일반회원
 					//미인증 시 인증 알림창 띄우고 인증 페이지
+					return "redirect:/bookstore/template/bsMain.do";
 				}else if(member.getMem_auth() == 9){ //관리자
-					return "redirect:/main/admin.do";
+					return "redirect:/bookstore/template/bsMain.do";
 				}
 			}
 			//인증 실패

@@ -6,8 +6,14 @@
 
 <tiles-definitions>
 	<!-- 아래 설정을 상황에 맞게 변형해서 사용하세요 -->
-    <definition name="login" extends="bsHeader">
-    	<put-attribute name="title" value="로그인"/>
-	    <put-attribute name="body" value="/WEB-INF/views/lm/member/login.jsp"/>
+    <definition name="loginMain" template="/WEB-INF/views/lm/login/template/loginLayout.jsp">
+    	<put-attribute name="loginTitle" value="로그인"/>
+    	<put-attribute name="bsHeader" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
+	    <put-attribute name="login" value="/WEB-INF/views/lm/login/template/login.jsp"/>
+	    <put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/>
     </definition> 
+    
+    <definition name="usedNoticeForm" extends="usedMain">
+    	<put-attribute name="usedBody" value="/WEB-INF/views/bookstore/used/usedNoticeForm.jsp"/>
+    </definition>
 </tiles-definitions>
