@@ -11,4 +11,11 @@
     	<put-attribute name="libBody" value="/WEB-INF/views/library/template/libBody.jsp"/>
     	<put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>                                        
     </definition>
+     <definition name="libAdmin" template="/WEB-INF/views/library/template/libLayout_admin.jsp">
+    	<put-attribute name="libTitle" value="LM 도서관(관리자페이지)"/>
+    	<put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
+ 		<put-attribute name="libNav" value="/WEB-INF/views/library/template/libAdmin_nav.jsp"/>
+    	<put-attribute name="libBody" value="/WEB-INF/views/library/template/libAdmin.jsp"/>
+    	<put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>                                        
+    </definition>
 </tiles-definitions>

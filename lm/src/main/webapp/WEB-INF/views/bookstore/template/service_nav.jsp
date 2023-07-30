@@ -5,16 +5,23 @@
 <div class="side-bar">
 	<ul>
 		<li>
-			<input type="button" class="menu-btn" value="비밀번호변경"
-			  onclick="location.href='${pageContext.request.contextPath}/member/changePassword.do'">
+			<input type="button" class="menu-btn" value="공지사항"
+			  onclick="location.href='${pageContext.request.contextPath}/bookstore/service/announceList.do'">
 		</li>
 		<li>
-			<input type="button" class="menu-btn" value="채팅"
+			<input type="button" class="menu-btn" value="자주 묻는 질문"
 			  onclick="location.href='${pageContext.request.contextPath}/talk/talkRoomWrite.do'">
 		</li>
 		<li>
-			<input type="button" class="menu-btn" value="회원탈퇴"
+			<input type="button" class="menu-btn" value="1:1문의"
 			  onclick="location.href='${pageContext.request.contextPath}/member/delete.do'">
+		</li>
+		<li class="call-center">
+			<span class="img-cover">[고객센터 이용안내]</span>
+			<img src="${pageContext.request.contextPath}/images/call.png" width="30"><br>
+			전화 상담 : 02-0000-0000<br>
+			e-mail : lmbs@lmbs.com<br>
+			평일 09:00 ~ 18:00 (12:00~13:00 점심시간)
 		</li>
 	</ul>
 </div>

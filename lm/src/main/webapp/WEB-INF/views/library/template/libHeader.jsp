@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+>>>>>>> branch 'main' of https://github.com/favau/lm.git
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
@@ -177,6 +181,7 @@ a:hover {
 		<div class="lib-header-topmenu">
 		<input type="hidden" id="id_check_tag" value="${mem_id}">
 			<ul>
+<<<<<<< HEAD
 				<li><a href="#">회원가입</a></li>
 				<c:if test="${mem_id == null }">
 					<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do?lo=2">로그인</a></li>
@@ -189,13 +194,42 @@ a:hover {
 						<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do">로그아웃</a>
 					</li>
 				</c:if>
+=======
+				<li>
+				<c:if test="${!empty user && user.auth == 3}">
+					<a href="#">MY페이지</a>
+				</c:if>
+				</li>
+				<li>
+				<c:if test="${!empty user}">
+					<a href="#">로그아웃</a>
+				</c:if>
+				</li>
+				<li>
+				<c:if test="${empty user}">
+					<a href="#">회원가입</a>
+					<a href="#">로그인</a>
+				</c:if>
+				</li>
+				<li>
+				<c:if test="${empty user || user.auth < 9}">
+					<a href="${pageContext.request.contextPath}/library/template/libMain.do">홈으로</a>
+				</c:if>
+				</li>
+				<li>
+				<%-- <c:if test="${!empty user && user.auth == 9}">
+					<a href="${pageContext.request.contextPath}/library/template/libAdmin.do">관리자페이지</a>
+				</c:if> --%>
+					<a href="${pageContext.request.contextPath}/library/template/libAdmin.do">관리자페이지</a>
+				</li>
+>>>>>>> branch 'main' of https://github.com/favau/lm.git
 				<li><a href="#">고객센터</a></li>
 				<li><a href="#">서재</a></li>
 			</ul>
 		</div>
 	</div>
 	<div class="lib-header-midbox">
-		<div class="lib-main-logo"><a href="#"><img src="../../images/lm_lib_logo.png"></a></div>
+		<div class="lib-main-logo"><a href="${pageContext.request.contextPath}/library/template/libMain.do"><img src="../../images/lm_lib_logo.png"></a></div>
 		<div class="lib-search">
 			<div class="lib-search-title">통합검색</div>
 			<div class="lib-text-box"><input type="text" class="search-text"></div>
