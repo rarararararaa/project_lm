@@ -19,13 +19,17 @@ public interface MemberMapper {
 	//시퀀스를 이용한 unique속성 mem_num 자동 생성
 	@Select("SELECT lm_member_manage_seq.nextval FROM dual")
 	public int selectMem_num();
+	@Select("SELECT store_member_home_seq.nextval FROM dual")
+	public int selectHome_num();
 	//회원가입 manage 입력
 	@Insert("INSERT INTO lm_member_manage (mem_num,mem_id,mem_auth,mem_reg_date) VALUES (#{mem_num},#{mem_id},4,SYSDATE)")
 	public void insertMember(MemberVO member);
+	@Insert("INSERT INTO store_member_home (home_num,mem_num,home_title,home_zipcode,home_address,home_address_detail,home_cell,home_name) VALUES (#{home_num},#{mem_num},#{home_title},#{home_zipcode},#{home_address},#{home_address_detail},#{mem_cell},#{mem_name})")
+	public void insertHome(MemberVO member);
 	public void insertMember_detail(MemberVO member);
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String mem_id);
-	/*
+	
 	//회원번호를 이용한 회원정보 구하기
 	@Select("SELECT * FROM spmember m JOIN spmember_detail d "
 			+ "ON m.mem_num=d.mem_num WHERE m.mem_num=#{mem_num}")
@@ -42,7 +46,7 @@ public interface MemberMapper {
 	public void deleteMember(Integer mem_num);
 	@Delete("DELETE FROM spmember_detail WHERE mem_num=#{mem_num}")
 	public void deleteMember_detail(Integer mem_num);
-	*/
+	
 	//자동 로그인
 	@Update("UPDATE lm_member_detail SET mem_au_id=#{mem_au_id} WHERE mem_num=#{mem_num}")
 	public void updateMem_au_id(

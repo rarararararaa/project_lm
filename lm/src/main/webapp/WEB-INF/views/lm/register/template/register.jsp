@@ -6,59 +6,69 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmId.js"></script>
 <body>
 <div class="page">
 	<div class="page-outer">
 		<div class="page-inner">
 			<h2>회원가입</h2>
-			<form:form modelAttribute="memberVO" action="registerMain.do" id="register" class="register-form">
+			<form:form modelAttribute="memberVO" action="registerMain.do" id="register-form" class="register-form">
 						<!-- 파라미터 세팅 -->
 			<% pageContext.setAttribute("lo",request.getParameter("lo")); %>
 			<!-- 쿼리스트링으로 받아온 값(lo=1 or lo=2)을 hidden 값으로 저장하여 최종 redirect 주소 지정 -->
 			<input type="hidden" name="lo" value="${lo}"/>
 				<div class="page-input">
-					<div class="page-input-box">
-						<form:input path="mem_id" placeholder="영문,숫자 4~12자" autocomplete="off"/>
-						<input type="button" id="confirmId" value="ID중복체크" class="default-btn">
+					<div class="page-input-box"> <!-- 아이디 입력 및 중복체크 -->
+						<form:input path="mem_id" placeholder="아이디를 입력하세요." />
+						<input type="button" id="confirmId" value="ID중복체크" 
+						class="input-style-check">
 						<span id="message_id"></span>
 						<form:errors path="mem_id" cssClass="error-color"/>
 					</div>	      
-					<div class="page-input-box">
-						<form:input path="mem_name"/>
+					<div class="text_announce"> <!-- 아이디 주의사항 -->
+        			</div>
+					<div class="text_announce"> <!-- 아이디 주의사항 -->
+          				<div class="input-notice"><strong>*6~15자의 영문 대소문자, 숫자만 사용 가능</strong></div>
+        			</div>
+					<div class="page-input-box"> <!-- 이름 입력 -->
+						<form:input path="mem_name" placeholder="이름을 입력하세요." />
 						<form:errors path="mem_name" cssClass="error-color"/>
 					</div>           
-					<div class="page-input-box">
-						<form:password path="mem_passwd" placeholder="영문,숫자 4~12자"/>
+					<div class="page-input-box"> <!-- 비밀번호 입력 -->
+						<form:password path="mem_passwd" placeholder="비밀번호를 입력하세요." />
+						<span id="message_passwd"></span>
 						<form:errors path="mem_passwd" cssClass="error-color"/>      
 					</div>
-					<div class="page-input-box">
-						<form:input path="mem_cell"/>
+					<div class="text_announce"> <!-- 비밀번호 주의사항 -->
+          				<div class="input-notice"><strong>*8~16자의 영문 대소문자, 숫자, 특수문자만 사용 가능</strong></div>
+        			</div>
+					<div class="page-input-box"> <!-- 전화번호 입력 -->
+						<form:input path="mem_cell" placeholder="전화번호를 입력하세요." />
 						<form:errors path="mem_cell" cssClass="error-color"/>      
 					</div>
-					<div class="page-input-box">
-						<form:input path="mem_email"/>
+					<div class="page-input-box"> <!-- 이메일 입력 -->
+						<form:input path="mem_email" placeholder="이메일을 입력하세요." />
 						<form:errors path="mem_email" cssClass="error-color"/>
 					</div>      
-					<div class="page-input-box">
-						<form:input path="mem_identify"/>
+					<div class="page-input-box"> <!-- 주민번호 입력 -->
+						<form:input path="mem_identify" placeholder="주민등록번호를 입력하세요." />
 						<form:errors path="mem_identify" cssClass="error-color"/>
 					</div>      
-					<div class="page-input-box">
-						<form:input path="home_title"/>
+					<div class="page-input-box"> <!-- 주소명 입력 -->
+						<form:input path="home_title" placeholder="주소지 임시." />
 						<form:errors path="home_title" cssClass="error-color"/>
 					</div>      
-					<div class="page-input-box">
-						<form:input path="home_zipcode"/>
-						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="default-btn">
-						<form:errors path="home_zipcode" cssClass="error-color"/>      
+					<div class="page-input-box"> <!-- 우편번호 입력 불가능-->
+						<form:input path="home_zipcode" placeholder="우편번호를 입력해주세요" readonly="true"/>
+						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="input-style-check">     
 					</div>
-					<div class="page-input-box">
-						<form:input path="home_address"/>      
+					<div class="page-input-box"> <!-- 주소 입력 불가능 -->
+						<form:input path="home_address" placeholder="주소를 입력해주세요" readonly="true"/>      
 					</div>
-					<div class="page-input-box">
-						<form:input path="home_address_detail"/>
+					<div class="page-input-box"> <!-- 상세주소 입력 -->
+						<form:input path="home_address_detail" placeholder="상세주소를 입력해주세요" />
 						<form:errors path="home_address_detail" cssClass="error-color"/>      
 					</div>
 			   </div>     
@@ -66,7 +76,7 @@
 			   	   <div class="page-button2">
 			   	    	<form:button class="button3">확인</form:button>
 			   	    	<c:if test="${lo == 1}">
-	      	        	<input type="button" value="홈으로" class="button4" onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
+	      	        	<input type="button" value="홈으로" class="btn-5" onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
 	      	        	</c:if>
 	      	        	<c:if test="${lo != 1}">
 	      	        	<input type="button" value="홈으로" class="button4" onclick="location.href='${pageContext.request.contextPath}/library/template/libMain.do'">
@@ -77,9 +87,9 @@
 		</div>
 	</div>
 </div>
-<!-- 회원가입 끝 -->
-<!-- 우편번호 검색 시작 -->
-<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+  	<!-- 내용 끝 -->
+	<!-- 우편번호 검색 시작 -->
+	<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
 <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 </div>
@@ -107,7 +117,7 @@
                 //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                     addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                } else { // 사용자가 지번 주소를 선택했을 경우(J).
                     addr = data.jibunAddress;
                 }
 
@@ -136,11 +146,11 @@
                 //(수정) }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode;
+                document.getElementById('home_zipcode').value = data.zonecode;
                 //(수정) + extraAddr를 추가해서 address1에 참고항목이 보여지도록 수정
-                document.getElementById("address1").value = addr + extraAddr;
+                document.getElementById("home_address").value = addr + extraAddr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("address2").focus();
+                document.getElementById("home_address_detail").focus();
 
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
@@ -175,4 +185,6 @@
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
     }
 </script>
+	<!-- 우편번호 검색 끝 -->
 </body>
+</html>

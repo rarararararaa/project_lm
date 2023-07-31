@@ -20,14 +20,14 @@ body{
     body{
       font-family : 'NEXON Lv1 Gothic OTF';
     }
-    .page{ /* 1차 1920px */
+    .page{ /* 1차 1620px */
       display:flex;
-      width:1920px;
+      width:1600px;
       height: 1300px;
       margin:0 auto;
     }
-    .page-outer{ /* 2차 1600px */
-      width:1600px;
+    .page-outer{ /* 2차 1200px */
+      width:1200px;
       height:1300px;
       display: flex;
       padding-top: 100px;
@@ -58,7 +58,7 @@ body{
       font-size: 13px;
       flex-direction:column;
     }
-    .page-input .page-input_box{ /* 입력창 내부 박스 크기 조절 */
+    .page-input .page-input-box{ /* 입력창 내부 박스 크기 조절 */
       display: inline-block;
       width: 80%;
       height: 54px;
@@ -74,7 +74,7 @@ body{
       padding: 0px 11px 1px 15px;
       border-radius: 4px;
     }
-    .page-input .page_input-box .input-style-check{ /* 중복 체크 박스 설정 */
+    .page-input .page-input-box .input-style-check{ /* 중복 체크 박스 설정 */
       width: 150px;
       height: 54px;
       font-size: 15px;
@@ -113,7 +113,7 @@ body{
       margin-left: 630px;
 
     }
-    .page-button .page-button_box .button1{ /* 버튼 설정 */
+    .page-button .page-button-box .button1{ /* 버튼 설정 */
       display: inline-block;
       width:75px;
       height: 25px;
@@ -177,3 +177,4 @@ body{
       cursor: pointer;
       border: 2px solid #E19B50;
     }
+    

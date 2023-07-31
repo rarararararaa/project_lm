@@ -102,7 +102,6 @@ public class MemberController {
 					response.addCookie(auto_cookie);
 				}
 				//===자동 로그인 체크 끝===
-				
 				//인증 성공, 로그인 처리
 				//세션에 id, auth, num 적재
 				session.setAttribute("mem_id", member.getMem_id());
@@ -175,7 +174,7 @@ public class MemberController {
 	 *=======================*/
 	@RequestMapping("/lm/logout/template/logoutMain.do")
 	public String logout(HttpSession session,
-					HttpServletRequest request,
+					@RequestParam int lo,
 			        HttpServletResponse response) {
 		//로그아웃
 		session.invalidate();
@@ -190,7 +189,6 @@ public class MemberController {
 		//===자동로그인 해제 끝===//
 		
 		//hidden 값으로 받아온 로그아웃 홈페이지 데이터
-		int lo = Integer.parseInt(request.getParameter("lo"));
 		if(lo == 1) { //bs인 경우
 			return "redirect:/bookstore/template/bsMain.do";
 		}else { //lib인 경우
@@ -202,19 +200,18 @@ public class MemberController {
 	 * 회원가입
 	 *=======================*/
 	//아이디 중복 체크
-	@RequestMapping("/member/confirmId.do")
+	@RequestMapping("/lm/register/template/confirmId.do")
 	@ResponseBody
 	public Map<String,String> confimId(@RequestParam String mem_id){
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@");
 		log.debug("<<아이디 중복 체크>> : " + mem_id);
-		
 		Map<String,String> mapAjax = new HashMap<String,String>();
-		
 		MemberVO member = memberService.selectCheckMember(mem_id);
 		if(member!=null) {
 			//아이디 중복
 			mapAjax.put("result", "idDuplicated");
 		}else {
-			if(!Pattern.matches("^[A-Za-z0-9]{4,12}$", mem_id)) {
+			if(!Pattern.matches("^[a-zA-Z0-9!@#$%^&*()_+=\\-{}\\[\\]:;\"'<>,.?/~`]{6,15}$", mem_id)) {
 				//패턴 불일치
 				mapAjax.put("result", "notMatchPattern");
 			}else {
@@ -227,15 +224,16 @@ public class MemberController {
 	//회원가입 폼 호출
 	@GetMapping("/lm/register/template/registerMain.do")
 	public String form() {
+		
 		return "registerMain";
 	}
 	
 	//회원가입 처리
 	@PostMapping("/lm/register/template/registerMain.do")
-	public String submit(@Valid MemberVO memberVO,HttpServletRequest request,
+	public String submit(@Valid MemberVO memberVO,@RequestParam int lo,
 			BindingResult result, Model model) {
 		log.debug("<<회원가입>> : " + memberVO);
-		
+		System.out.println("##################################");
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return form();
@@ -247,11 +245,12 @@ public class MemberController {
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
 		
 		//hidden 값으로 받아온 회원가입 홈페이지 데이터
-		int lo = Integer.parseInt(request.getParameter("lo"));
 		if(lo == 1) { //bs인 경우
-			return "redirect:/bookstore/template/bsMain.do";
+			return "lm/notice";
+			//return "redirect:/bookstore/template/bsMain.do";
 		}else { //lib인 경우
-			return "redirect:/library/template/libMain.do";
+			return "lm/notice";
+			//return "redirect:/library/template/libMain.do";
 		}
 		//return "common/notice";
 	}

@@ -1,6 +1,7 @@
 package kr.spring.member.service;
 
 import java.util.List;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,8 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public void insertMember(MemberVO member) {
-		member.setMem_num(memberMapper.selectMem_num());
+		member.setMem_num(memberMapper.selectMem_num()); //nextval
+		member.setHome_num(memberMapper.selectHome_num()); //nextval
 		memberMapper.insertMember(member);
 		memberMapper.insertMember_detail(member);
 	}
@@ -28,7 +30,7 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO selectCheckMember(String mem_id) {
 		return memberMapper.selectCheckMember(mem_id);
 	}
-/*
+
 	@Override
 	public MemberVO selectMember(Integer mem_num) {
 		return memberMapper.selectMember(mem_num);
@@ -85,7 +87,7 @@ public class MemberServiceImpl implements MemberService{
 	public void updateByAdmin(MemberVO memberVO) {
 		memberMapper.updateByAdmin(memberVO);
 	}
-*/
+
 
 	@Override
 	public MemberVO selectMember(Integer mem_num) {
@@ -149,6 +151,12 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void updateByAdmin(MemberVO memberVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertHome(MemberVO member) {
 		// TODO Auto-generated method stub
 		
 	}

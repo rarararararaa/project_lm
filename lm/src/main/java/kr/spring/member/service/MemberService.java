@@ -6,9 +6,10 @@ import java.util.Map;
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
-	//회원관리 - 일반회원
 	//회원가입
 	public void insertMember(MemberVO member);
+	//회원가입 - 주소지
+	public void insertHome(MemberVO member);
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String mem_id);
 	//회원번호를 이용한 회원정보 구하기
