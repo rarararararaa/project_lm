@@ -20,7 +20,7 @@
 						</c:if>
 						<c:if test="${mem_id != null }">
 							<li>
-								<strong>${mem_id}</strong>님 환영합니다. 
+								임시 / mem_num = <strong>${mem_num}</strong>, mem_id = <strong>${mem_id}</strong>, mem_auth = <strong>${mem_auth}</strong>
 							</li>
 							<li>
 								<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do?lo=1">로그아웃</a>
