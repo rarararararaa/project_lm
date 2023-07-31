@@ -99,7 +99,7 @@ public class UsedController {
 		mav.setViewName("selectProductNameByUsed");
 		mav.addObject("success",1);
 		mav.addObject("list",list);
-		return mav;
+		return mav; 
 	}
 	
 	//팝업 끝//////////////////////
