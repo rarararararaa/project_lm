@@ -17,7 +17,7 @@
 			  onclick="location.href='${pageContext.request.contextPath}/member/delete.do'">
 		</li>
 		<li class="call-center">
-			<span class="img-cover">[고객센터 이용안내]</span>
+			<span class="img-cover">고객센터 이용안내</span>
 			<img src="${pageContext.request.contextPath}/images/call.png" width="30"><br>
 			전화 상담 : 02-0000-0000<br>
 			e-mail : lmbs@lmbs.com<br>
