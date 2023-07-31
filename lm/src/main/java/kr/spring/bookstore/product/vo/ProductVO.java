@@ -12,7 +12,7 @@ import lombok.ToString;
 public class ProductVO {
 	
 	private int store_product_num;
-	private Long store_product_searchcategoryId;
+	private int store_product_searchcategoryId;
 	private String store_product_searchcategoryName;
 	private String store_product_isbn13;
 	private int store_product_stockstatus;
@@ -22,7 +22,7 @@ public class ProductVO {
 	private String store_product_pubdate;
 	private byte[] store_product_cover;
 	private String store_product_description;
-	private Long store_product_categoryid;
+	private int store_product_categoryid;
 	private String store_product_categoryname;
 	private int store_product_pricesales;
 	private int store_product_pricestandard;
