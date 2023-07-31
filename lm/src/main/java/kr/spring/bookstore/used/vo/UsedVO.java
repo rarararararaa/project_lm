@@ -23,4 +23,11 @@ public class UsedVO {
 	private String used_product_photo1;
 	private String used_product_photo2;
 	private int used_product_price;
+	private String store_product_name;
+	
+	private String store_product_cover;
+	private String store_product_title;
+	private String store_product_categoryname;
+	private String store_product_author;
+	private String store_product_publisher;
 }

@@ -1,3 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.spring.bookstore.used.dao.UsedMapper"></mapper>
+<mapper namespace="kr.spring.bookstore.used.dao.UsedMapper">
+	<!-- 중고 상품 등록 하기 -->
+	<insert id="insertUsedManage" parameterType="usedVO">
+		INSERT INTO STORE_USED_PRODUCT_MANAGE (
+			used_product_num,
+			store_product_num, 
+			mem_num,
+			used_product_status,
+			used_product_condition,
+			used_product_approve,
+			used_product_reg_date,
+			
+			used_product_hit
+		)
+		
+		VALUES (
+		store_used_product_manage_seq.nextval,
+		#{store_product_num},
+		#{mem_num},
+		#{used_product_status},
+		#{used_product_condition},
+		#{used_product_approve},
+		SYSDATE,
+		0
+		)	
+	</insert>
+	
+	
+	<insert id="insertUsedDetail" parameterType="usedVO">
+		INSERT INTO STORE_USED_PRODUCT_DETAIL (
+			used_product_num,
+			used_product_info, 
+			used_product_photo1,
+			used_product_photo2,
+			used_product_price
+		)
+		
+		VALUES (
+			#{used_product_num},
+			#{used_product_info},
+			#{used_product_photo1},
+			#{used_product_photo2},
+			#{used_product_price}
+		)	
+	</insert>
+	
+	<sql id="productSearchByUsed">
+		<where>
+			d.store_product_title LIKE '%' || #{keyword} || '%' 
+			or d.store_product_author LIKE '%' || #{keyword} || '%'
+		</where>
+	</sql>
+	
+	<select id="selectProductNameByUsed" parameterType="string" resultType="usedVO">
+		SELECT d.store_product_cover, 
+		d.store_product_title, 
+		d.store_product_categoryname, 
+		d.store_product_author, 
+		d.store_product_publisher 
+		FROM store_product_manage m LEFT JOIN store_product_detail d ON d.store_product_num = m.store_product_num
+		<include refid="productSearchByUsed"></include>
+	
+	</select>
+</mapper>
+

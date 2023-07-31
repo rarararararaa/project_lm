@@ -21,7 +21,7 @@
     	<put-attribute name="usedBody" value="/WEB-INF/views/bookstore/used/usedBooksByUser.jsp"/>
     </definition>
     <definition name="usedSalesStatus" extends="usedMain">
-    	<put-attribute name="usedBody" value="/WEB-INF/views/bookstore/used/usedNoticeForm.jsp"/>
+    	<put-attribute name="usedBody" value="/WEB-INF/views/bookstore/used/usedSalesStatus.jsp"/>
     </definition>
     
     <definition name="usedForm" extends="usedMain">
