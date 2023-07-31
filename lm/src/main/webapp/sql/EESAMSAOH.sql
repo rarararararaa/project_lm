@@ -531,8 +531,12 @@ CREATE TABLE BOARD_ANNOUNCE (
 	notice_reg_date	date	DEFAULT SYSDATE	NOT NULL,
 	notice_modify_date	date	NULL,
 	notice_filename	varchar2(300)	NULL,
+	notice_hit number NULL,
+	notice_ip varchar2 NOT NULL,
     CONSTRAINT PK_BOARD_ANNOUNCE_ADMIN PRIMARY KEY (notice_num)    
 );
+create sequence board_announce_seq;
+
 
 CREATE TABLE LIB_LOST_ITEM_ADMIN (
 	item_num	number	NOT NULL,
