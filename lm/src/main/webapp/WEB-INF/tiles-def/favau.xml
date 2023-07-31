@@ -8,9 +8,7 @@
 
     <definition name="loginMain" template="/WEB-INF/views/lm/login/template/loginLayout.jsp">
     	<put-attribute name="loginTitle" value="로그인"/>
-    	
     	<put-attribute name="login" value="/WEB-INF/views/lm/login/template/login.jsp"/>
-    	
     	<put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
         <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>
 		<put-attribute name="bsHeader" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
@@ -18,8 +16,14 @@
     </definition> 
     
     
-    <definition name="registerMain" extends="loginMain">
-    	<put-attribute name="login" value="/WEB-INF/views/lm/register/template/register.jsp"/>
-    </definition>
+    <definition name="registerMain" template="/WEB-INF/views/lm/register/template/registerLayout.jsp">
+    	<put-attribute name="registerTitle" value="회원가입"/>
+    	<put-attribute name="register" value="/WEB-INF/views/lm/register/template/register.jsp"/>
+    	<put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
+        <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>
+		<put-attribute name="bsHeader" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
+		<put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/>
+    </definition> 
+    
     
 </tiles-definitions>

@@ -20,7 +20,7 @@
 		<tiles:insertAttribute name="login"/>
 		<tiles:insertAttribute name="bsFooter" />
 	</c:if>		
-	<c:if test="${lo == 2}">
+	<c:if test="${lo != 1}">
 		<tiles:insertAttribute name="libHeader" />
 		<tiles:insertAttribute name="login"/>
 		<tiles:insertAttribute name="libFooter" />

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bookstoreStyle.css">
  <!-- lib css 추가 -->
 <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bookstoreStyle.css"> -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lm/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lm/register.css">
 </head>
 <body>
     <!-- 로그인 페이지 헤더/푸터 식별 용 1=bs, 2=lib-->
@@ -17,12 +17,12 @@
 
 	<c:if test="${lo == 1}">
 		<tiles:insertAttribute name="bsHeader" />
-		<tiles:insertAttribute name="login"/>
+		<tiles:insertAttribute name="register"/>
 		<tiles:insertAttribute name="bsFooter" />
 	</c:if>		
-	<c:if test="${lo == 2}">
+	<c:if test="${lo != 1}">
 		<tiles:insertAttribute name="libHeader" />
-		<tiles:insertAttribute name="login"/>
+		<tiles:insertAttribute name="register"/>
 		<tiles:insertAttribute name="libFooter" />
 	</c:if>		
 </body>

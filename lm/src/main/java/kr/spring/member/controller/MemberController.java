@@ -133,7 +133,7 @@ public class MemberController {
 					}else if(member.getMem_auth() == 9){ //관리자
 						return "redirect:/bookstore/template/bsMain.do";
 					}
-				}else if(lo == 2) { //lib인 경우
+				}else { //lib인 경우
 					if(member.getMem_auth() == 0) {
 						//탈퇴회원
 						return "redirect:/library/template/libMain.do";
@@ -227,12 +227,12 @@ public class MemberController {
 	//회원가입 폼 호출
 	@GetMapping("/lm/register/template/registerMain.do")
 	public String form() {
-		return "memberRegister";
+		return "registerMain";
 	}
 	
 	//회원가입 처리
 	@PostMapping("/lm/register/template/registerMain.do")
-	public String submit(@Valid MemberVO memberVO,
+	public String submit(@Valid MemberVO memberVO,HttpServletRequest request,
 			BindingResult result, Model model) {
 		log.debug("<<회원가입>> : " + memberVO);
 		
@@ -246,6 +246,13 @@ public class MemberController {
 		
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
 		
-		return "common/notice";
+		//hidden 값으로 받아온 회원가입 홈페이지 데이터
+		int lo = Integer.parseInt(request.getParameter("lo"));
+		if(lo == 1) { //bs인 경우
+			return "redirect:/bookstore/template/bsMain.do";
+		}else { //lib인 경우
+			return "redirect:/library/template/libMain.do";
+		}
+		//return "common/notice";
 	}
 }

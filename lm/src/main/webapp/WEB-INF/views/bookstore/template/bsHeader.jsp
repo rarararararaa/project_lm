@@ -14,7 +14,7 @@
 				<div class="customer_service_box">
 				<input type="hidden" id="id_check_tag" value="${mem_id}">
 					<ul class="customer_service_list">
-						<li class="customer_service_item">회원가입</li>
+						<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/register/template/registerMain.do?lo=1">회원가입</a></li>
 						<c:if test="${mem_id == null }">
 							<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do?lo=1">로그인</a></li>
 						</c:if>

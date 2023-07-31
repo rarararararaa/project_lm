@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,13 +35,18 @@
 				</div>
 				<div class="page-button">
 					<label for="auto"><input type="checkbox" name="auto" id="auto">로그인상태유지</label>
-					<input type="button" class="button1" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/lm/findId/template/findIdForm.do'">
-					<input type="button" class="button2" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/lm/findPw/template/findPwForm.do'">
+					<input type="button" class="button1" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/lm/findId/template/findIdMain.do'">
+					<input type="button" class="button2" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/lm/findPw/template/findPwMain.do'">
 				</div>
 				<div class="page-button2">
 					<form:button class="button3">로그인</form:button>
-					<input type="button" class="button3" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/lm/login/template/registerUserForm.do'">
-					<input type="button" class="button3" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
+					<input type="button" class="button3" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/lm/login/template/registerMain.do'">
+					<c:if test="${lo == 1}">
+						<input type="button" class="button3" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
+					</c:if>
+					<c:if test="${lo != 1}">
+						<input type="button" class="button3" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/library/template/libMain.do'">
+					</c:if>
 				</div>
 			</form:form>
 		</div>

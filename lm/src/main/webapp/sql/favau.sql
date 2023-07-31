@@ -14,7 +14,7 @@ CREATE SEQUENCE lm_member_manage_seq;
 --lm_member_detail--
 CREATE TABLE lm_member_detail(
     mem_num number(5) not null,
-    au_id varchar2(36) unique, --자동 로그인에 사용되는 식별값
+    mem_au_id varchar2(36) unique, --자동 로그인에 사용되는 식별값
     mem_name varchar2(30) not null,
     mem_passwd varchar2(256) not null,
     mem_cell varchar2(15) unique not null,
@@ -55,3 +55,16 @@ CREATE TABLE lib_event_user(
     constraint lib_event_user_fk2 foreign key (mem_num) references lm_member_manage (mem_num)
 );
 CREATE SEQUENCE lib_event_user_seq;
+
+--store_member_home--
+CREATE TABLE store_member_home(
+    home_num number(5) not null,
+    mem_num number(5) not null,
+    home_title varchar2(50) not null,
+    home_zipcode varchar2(6) not null,
+    home_address varchar2(150) not null,
+    home_address_detail varchar2(150) not null,
+    home_cell varchar2(15) not null,
+    constraint store_member_home_pk primary key (home_num),
+    constraint store_member_home_fk1 foreign key (mem_num) references lm_member_manage (mem_num)
+);

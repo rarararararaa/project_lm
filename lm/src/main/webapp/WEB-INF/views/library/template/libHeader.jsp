@@ -192,7 +192,7 @@ a:hover {
 				</li>
 				<li>
 				<c:if test="${mem_id == null }">
-					<a href="#">회원가입</a>
+					<a href="${pageContext.request.contextPath}/lm/register/template/registerMain.do?lo=2">회원가입</a>
 					<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do?lo=2">로그인</a></li>
 				</c:if>
 				</li>
