@@ -8,7 +8,7 @@ import kr.spring.bookstore.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j
+@Slf4j 
 public class ProductController {
 	@Autowired
 	private ProductService productService;

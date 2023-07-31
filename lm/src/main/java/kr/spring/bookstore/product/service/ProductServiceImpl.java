@@ -74,7 +74,7 @@ public class ProductServiceImpl implements ProductService{
 					int priceSales=0;
 					if((String)jsonObject.get("priceSales")!=null) {
 						priceSales=(int)j.get("priceSales");
-					}
+					} 
 					int priceStandard=0;
 					if((String)jsonObject.get("priceStandard")!=null) {
 						priceStandard=(int)j.get("priceStandard");
