@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-=======
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->>>>>>> branch 'main' of https://github.com/favau/lm.git
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
@@ -181,38 +177,27 @@ a:hover {
 		<div class="lib-header-topmenu">
 		<input type="hidden" id="id_check_tag" value="${mem_id}">
 			<ul>
-<<<<<<< HEAD
-				<li><a href="#">회원가입</a></li>
-				<c:if test="${mem_id == null }">
-					<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do?lo=2">로그인</a></li>
-				</c:if>
-				<c:if test="${mem_id != null }">
-					<li>
-						<strong>${mem_id}</strong>님 환영합니다. 
-					</li>
-					<li>
-						<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do">로그아웃</a>
-					</li>
-				</c:if>
-=======
 				<li>
-				<c:if test="${!empty user && user.auth == 3}">
+				<c:if test="${mem_id == null }">
 					<a href="#">MY페이지</a>
 				</c:if>
 				</li>
 				<li>
-				<c:if test="${!empty user}">
-					<a href="#">로그아웃</a>
+				<c:if test="${mem_id != null }">
+					<li>
+						<strong>${mem_id}</strong>님 환영합니다. 
+					</li>
+					<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do?lo=2">로그아웃</a>
 				</c:if>
 				</li>
 				<li>
-				<c:if test="${empty user}">
+				<c:if test="${mem_id == null }">
 					<a href="#">회원가입</a>
-					<a href="#">로그인</a>
+					<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do?lo=2">로그인</a></li>
 				</c:if>
 				</li>
 				<li>
-				<c:if test="${empty user || user.auth < 9}">
+				<c:if test="${mem_id == null }">
 					<a href="${pageContext.request.contextPath}/library/template/libMain.do">홈으로</a>
 				</c:if>
 				</li>
@@ -222,7 +207,6 @@ a:hover {
 				</c:if> --%>
 					<a href="${pageContext.request.contextPath}/library/template/libAdmin.do">관리자페이지</a>
 				</li>
->>>>>>> branch 'main' of https://github.com/favau/lm.git
 				<li><a href="#">고객센터</a></li>
 				<li><a href="#">서재</a></li>
 			</ul>

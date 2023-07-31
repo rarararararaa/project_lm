@@ -5,13 +5,21 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<!-- 아래 설정을 상황에 맞게 변형해서 사용하세요 -->
+
     <definition name="loginMain" template="/WEB-INF/views/lm/login/template/loginLayout.jsp">
     	<put-attribute name="loginTitle" value="로그인"/>
+    	
+    	<put-attribute name="login" value="/WEB-INF/views/lm/login/template/login.jsp"/>
+    	
     	<put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
-	    <put-attribute name="login" value="/WEB-INF/views/lm/login/template/login.jsp"/>
-        <put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/>
-
+        <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>
+		<put-attribute name="bsHeader" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
+		<put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/>
     </definition> 
+    
+    
+    <definition name="registerMain" extends="loginMain">
+    	<put-attribute name="login" value="/WEB-INF/views/lm/register/template/register.jsp"/>
+    </definition>
     
 </tiles-definitions>

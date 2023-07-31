@@ -14,16 +14,15 @@ import kr.spring.member.vo.MemberVO;
 
 @Mapper
 public interface MemberMapper {
-	/*
+	
 	//회원관리 - 일반회원
-	//회원번호 생성
-	@Select("SELECT spmember_seq.nextval FROM dual")
+	//시퀀스를 이용한 unique속성 mem_num 자동 생성
+	@Select("SELECT lm_member_manage_seq.nextval FROM dual")
 	public int selectMem_num();
-	//회원가입
-	@Insert("INSERT INTO spmember (mem_num,id,nick_name) VALUES (#{mem_num},#{id},#{nick_name})")
+	//회원가입 manage 입력
+	@Insert("INSERT INTO lm_member_manage (mem_num,mem_id,mem_auth,mem_reg_date) VALUES (#{mem_num},#{mem_id},4,SYSDATE)")
 	public void insertMember(MemberVO member);
 	public void insertMember_detail(MemberVO member);
-	*/
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String mem_id);
 	/*

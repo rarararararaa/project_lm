@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>회원가입</title>
 </head>
 <body>
 <!-- 로그인 폼 시작 -->
 <div class="page-main">
 	<div class="page-outer">
 		<div class="page-inner">
-			<h2 id="title">로그인</h2>
+			<h2 id="title">회원가입</h2>
 			<form:form modelAttribute="memberVO" action="loginMain.do" id="login" class="login-form">
 			<!-- 파라미터 세팅 -->
 			<% pageContext.setAttribute("lo",request.getParameter("lo")); %>

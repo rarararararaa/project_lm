@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><tiles:getAsString name="loginTitle"/></title>
+<title><tiles:getAsString name="registerTitle"/></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bookstoreStyle.css">
  <!-- lib css 추가 -->
 <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bookstoreStyle.css"> -->

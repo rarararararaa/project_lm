@@ -1,6 +1,9 @@
 package kr.spring.member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -36,7 +42,9 @@ public class MemberController {
 		return new MemberVO();
 	}
 	
-	//로그인 폼
+	/*=======================
+	 * 로그인
+	 *=======================*/
 	@RequestMapping("/lm/login/template/loginMain.do")
 	public String formLogin() {
 		return "loginMain"; //타일스 설정의 식별자
@@ -167,6 +175,7 @@ public class MemberController {
 	 *=======================*/
 	@RequestMapping("/lm/logout/template/logoutMain.do")
 	public String logout(HttpSession session,
+					HttpServletRequest request,
 			        HttpServletResponse response) {
 		//로그아웃
 		session.invalidate();
@@ -180,6 +189,63 @@ public class MemberController {
 		response.addCookie(auto_cookie);
 		//===자동로그인 해제 끝===//
 		
-		return "redirect:/bookstore/template/bsMain.do";
+		//hidden 값으로 받아온 로그아웃 홈페이지 데이터
+		int lo = Integer.parseInt(request.getParameter("lo"));
+		if(lo == 1) { //bs인 경우
+			return "redirect:/bookstore/template/bsMain.do";
+		}else { //lib인 경우
+			return "redirect:/library/template/libMain.do";
+		}
+	}
+	
+	/*=======================
+	 * 회원가입
+	 *=======================*/
+	//아이디 중복 체크
+	@RequestMapping("/member/confirmId.do")
+	@ResponseBody
+	public Map<String,String> confimId(@RequestParam String mem_id){
+		log.debug("<<아이디 중복 체크>> : " + mem_id);
+		
+		Map<String,String> mapAjax = new HashMap<String,String>();
+		
+		MemberVO member = memberService.selectCheckMember(mem_id);
+		if(member!=null) {
+			//아이디 중복
+			mapAjax.put("result", "idDuplicated");
+		}else {
+			if(!Pattern.matches("^[A-Za-z0-9]{4,12}$", mem_id)) {
+				//패턴 불일치
+				mapAjax.put("result", "notMatchPattern");
+			}else {
+				//패턴 일치하면서 아이디 미중복
+				mapAjax.put("result", "idNotFound");
+			}
+		}		
+		return mapAjax;
+	}
+	//회원가입 폼 호출
+	@GetMapping("/lm/register/template/registerMain.do")
+	public String form() {
+		return "memberRegister";
+	}
+	
+	//회원가입 처리
+	@PostMapping("/lm/register/template/registerMain.do")
+	public String submit(@Valid MemberVO memberVO,
+			BindingResult result, Model model) {
+		log.debug("<<회원가입>> : " + memberVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return form();
+		}
+		
+		//회원가입
+		memberService.insertMember(memberVO);
+		
+		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
+		
+		return "common/notice";
 	}
 }
