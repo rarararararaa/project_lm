@@ -1,0 +1,110 @@
+/*=====LM문고-결제=====*/
+
+/*=====공통=====*/
+.payment-main{
+	margin: 0 auto;
+	width: 1200px;
+	height: 768px;
+}
+.payment-title{
+	width: 100%;
+	height: 66px;
+	flex-shrink: 0;
+	font-size: 24pt;
+	font-weight: bold;
+}
+.animated{
+	opacity: 1;
+}
+hr{
+	border-color: #F4F4F4;
+}
+ul{
+	list-style: none;
+}
+
+/*=====장바구니=====*/
+.payment-allSelect{
+	width: 890px;
+	height: 200px;
+}
+.payment-allSelect #all{
+	width: 890px;
+	height: 60px;
+	background-color: #f7f7f7;
+	border-radius: 7px;
+	font-size: 12pt;
+}
+.payment-allSelect div input{
+	margin-top: 24px;
+	margin-left: 15px;
+}
+.payment-allSelect #select{
+	margin-top: 10px;
+	width: 890px;
+	height: 42px;
+}
+.payment-allSelect #select button{
+	width: 81px;
+	height: 35px;
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: 81px 35px;
+    background-color: white;
+	background-image: url("/images/Rectangle.png");
+	transition: background 0.23s;
+	border: none;
+	color: black;
+	font-weight: bold;
+}
+.active.book-select{
+	background-size: 81px 35px;
+	background-image: url("/images/Rectangle_active.png") !important;
+	color: white !important;
+	font-weight: bold;
+}
+.lm-all{
+	height: 64px;
+	margin-top: 10px;
+	border-bottom: 2px solid #F4F4F4;
+	border-top: 2px solid #F4F4F4;
+}
+/*상품 목록*/
+.payment-book{
+	min-height: 175px;
+}
+.payment-book td:first-child{
+	width: 44px;
+	vertical-align: top;
+}
+.payment-book td:nth-child(2){
+	display: flex;
+	width: 462px;
+}
+.payment-book td:nth-child(3) li:first-child{
+	width: 81px;
+	height: 35px;
+	text-align: center;
+	padding-bottom: 10px;
+}
+.payment-book td:last-child img{
+	text-align: center;
+	padding-bottom: 10px;
+}
+.payment-book img{
+	width: 83px;
+	height: 123px;
+}
+.pay-book-detail li:first-child{
+	padding-bottom: 17px;
+}
+.pay-book-detail li:not(:first-child){
+	padding-right: 5px;
+	float: left;
+}
+/*증감 버튼*/
+.MP-btn{
+	width: 25px !important;
+	height: 25px !important;
+}
+
