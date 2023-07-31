@@ -7,6 +7,7 @@
 <title><tiles:getAsString name="usedTitle"/></title>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bookstoreStyle.css">
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/used.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	

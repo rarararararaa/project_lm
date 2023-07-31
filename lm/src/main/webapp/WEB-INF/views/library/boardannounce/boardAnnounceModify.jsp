@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!-- 게시판 글 등록 시작 -->
+<!-- 게시판 글 수정 시작 -->
 <!-- include libraries (jquery,bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
@@ -14,20 +14,21 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-	<form:form modelAttribute="announceVO" action="announceWrite.do" id="register_form">
+	<h2>글수정</h2>
+	<form:form modelAttribute="boardAnnounceVO" action="update.do"
+	                               id="modify_form">
+	    <form:hidden path="notice_num"/>                           
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 		    <li>
-				<form:label path="board_title">제목</form:label>
-				<form:input path="board_title"/>
-				<form:errors path="board_title" cssClass="error-color"/>
+				<form:label path="notice_title">제목</form:label>
+				<form:input path="notice_title"/>
+				<form:errors path="notice_title" cssClass="error-color"/>
 			</li>
+			<li><b>내용</b></li>
 			<li>
-				<br><input type="file" name="filename"><br>
-			</li>
-			<li>
-				<form:textarea path="board_content"/>
-				<form:errors path="board_content" cssClass="error-color"/>
+				<form:textarea path="notice_content"/>
+				<form:errors path="notice_content" cssClass="error-color"/>
 				<script>
 					function MyCustomUploadAdapterPlugin(editor){
 						editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -35,7 +36,7 @@
 						}
 					}
 					
-					ClassicEditor.create(document.querySelector('#board_content'),{
+					ClassicEditor.create(document.querySelector('#notice_content'),{
 						           extraPlugins:[MyCustomUploadAdapterPlugin]
 					             })
 					             .then(editor => {
@@ -48,12 +49,13 @@
 			</li>
 		</ul>
 		<div class="align-center">
-			<form:button>전송</form:button>
-			<input type="button" value="목록">
+			<form:button>수정</form:button>
+			<input type="button" value="목록"
+			             onclick="location.href='list.do'">
 		</div>	                               
 	</form:form>
 </div>
-<!-- 게시판 글 등록 끝 -->
+<!-- 게시판 글 수정 끝 -->
 
 
 
