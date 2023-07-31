@@ -77,7 +77,7 @@ public class UsedController {
 	}
 	
 	//팝업창 영역 (팝업 띄우기)/////////
-	@RequestMapping("/bookstore/used/usedSearchProductPopup.do")
+	@GetMapping("/bookstore/used/usedSearchProductPopup.do")
 	public String popup() {
 		return "/bookstore/used/usedSearchProductPopup"; //pop업 띄우기
 	}
@@ -86,19 +86,23 @@ public class UsedController {
 	@GetMapping("/bookstore/used/selectProductNameByUsed.do")
 	public ModelAndView selectProducts(@RequestParam(value="keyword") String keyword, HttpSession session) {
 		Map<String,Object> map = new HashMap<String,Object>();
+		//맵 선언 후 keyword의 스트링은 keyword이다...
 		map.put("keyword", keyword);
-		
+		log.debug("<<검색 목록>> : " +keyword );
 		
 		
 		//list에 담자...
 		List<UsedVO> list = null;
-		list = usedService.selectProductNameByUsed(keyword);
+		
+		list = usedService.selectProductNameByUsed(map);
 		
 		//뿌리는거 (Model And View로 뿌리자)
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("selectProductNameByUsed");
+		mav.setViewName("/bookstore/used/usedSearchProductPopup");
+		log.debug("<<검색 결과>> : " +list);
 		mav.addObject("success",1);
 		mav.addObject("list",list);
+		
 		return mav; 
 	}
 	

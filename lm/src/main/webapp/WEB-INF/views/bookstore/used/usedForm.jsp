@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<style>
+ .find-books {
+ 	background-color: #f0f0f0;
+    
+ }
+</style>
+<script type="text/javascript">
+	$(function(){
+		$('.find-books').prop('disabled', true);
+	});
+</script>
 
 <div class="used-contents">
 	<span>책 등록하기</span>
@@ -7,19 +18,21 @@
 		<ul>
 			<li>
 				<!-- 책 찾기 -->
-				<form:label path="store_product_name" >책 이름</form:label>
-				<form:input path="store_product_name" />
+				<form:label path="store_product_title" >책 이름</form:label>
+				<form:input path="store_product_title" class="find-books"/>
 				<input type="button" onclick="execSearchProductcode()" value="책 찾기" class="used-default-btn">
 				<span id="message_product_name"></span>
-				<input type="hidden" value="${product_num}">
+				<input type="hidden" id="hidden_store_product_num" value="${store_product_num}">
 				<form:errors element="div" cssClass="error-color"/>
 			</li>
 			<li>
-				<!-- 책 상태 -->
-				<form:label path="used_product_condition" >책 상태</form:label>
-				<form:input path="used_product_condition" />
-				<span id="message_product_condition"></span>
-				<form:errors element="div" cssClass="error-color"/>
+				<div>책 상태 선택</div>
+				<select name="used_product_condition">
+					<option value="1">하</option>
+					<option value="2">중</option>
+					<option value="3">상</option>
+				</select>
+				
 			</li>
 			<li>
 				<!-- 책 사진1 -->
@@ -56,9 +69,10 @@
 </div>
 	<script type="text/javascript">
 		function execSearchProductcode() {
+			
 			var contextPath = "${pageContext.request.contextPath}";
 			var popupUrl = contextPath + "/bookstore/used/usedSearchProductPopup.do";
-			window.open(popupUrl, "_blank", "width=500, height=500");
+			var child = window.open(popupUrl, "_blank", "width=500, height=500");
 
 		};
 	</script>

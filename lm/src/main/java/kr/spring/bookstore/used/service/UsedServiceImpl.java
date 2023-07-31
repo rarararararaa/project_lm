@@ -72,9 +72,9 @@ public class UsedServiceImpl implements UsedService {
 
 	//ProductNum을 뱉어낸다.
 	@Override
-	public List<UsedVO> selectProductNameByUsed(String keyword) {
+	public List<UsedVO> selectProductNameByUsed(Map<String,Object> map) {
 		//list 형태로 검색된 책들을 뱉어내자
-		return usedMapper.selectProductNameByUsed(keyword);
+		return usedMapper.selectProductNameByUsed(map);
 	}
 
 

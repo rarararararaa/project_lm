@@ -14,7 +14,7 @@ public interface UsedService {
 	public int searchProductNum(String store_product_title);
 	
 	//pop업창에서 찾는 PorductNum
-	public List<UsedVO> selectProductNameByUsed(String keyword);
+	public List<UsedVO> selectProductNameByUsed(Map<String,Object> map);
 	//중고 책 List 로 반환
 	public List<UsedVO> selectUsedList(Map<String,Object> map);
 	

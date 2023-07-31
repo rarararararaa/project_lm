@@ -48,20 +48,18 @@
 	
 	<sql id="productSearchByUsed">
 		<where>
+		    <if test="keyword!=null and keyword!=''">
 			d.store_product_title LIKE '%' || #{keyword} || '%' 
 			or d.store_product_author LIKE '%' || #{keyword} || '%'
+			</if>
 		</where>
 	</sql>
 	
-	<select id="selectProductNameByUsed" parameterType="string" resultType="usedVO">
-		SELECT d.store_product_cover, 
-		d.store_product_title, 
-		d.store_product_categoryname, 
-		d.store_product_author, 
-		d.store_product_publisher 
-		FROM store_product_manage m LEFT JOIN store_product_detail d ON d.store_product_num = m.store_product_num
+	<select id="selectProductNameByUsed" parameterType="map" resultType="kr.spring.bookstore.used.vo.UsedVO">
+		SELECT m.store_product_num, d.store_product_cover, d.store_product_title, d.store_product_categoryname, 
+		d.store_product_author, d.store_product_publisher 
+		FROM store_product_manage m LEFT JOIN store_product_detail d ON d.store_product_num = m.store_product_num 
 		<include refid="productSearchByUsed"></include>
-	
 	</select>
 </mapper>
 

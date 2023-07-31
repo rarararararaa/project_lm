@@ -19,9 +19,7 @@ public interface UsedMapper {
 		public int searchProductNum(String store_product_title);
 		
 		//popup 창에서 찾는 select 창
-		
-		public List<UsedVO> selectProductNameByUsed(String keyword);
-		
+		public List<UsedVO> selectProductNameByUsed(Map<String,Object> map);
 		
 		
 		//RowCount
