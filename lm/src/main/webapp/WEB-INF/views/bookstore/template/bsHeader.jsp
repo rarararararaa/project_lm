@@ -26,7 +26,7 @@
 								<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do?lo=1">로그아웃</a>
 							</li>
 						</c:if>
-						<li class="customer_service_item">고객센터</li>
+						<li class="customer_service_item"><a href="${pageContext.request.contextPath}/bookstore/service/main.do">고객센터</a></li>
 					</ul>
 				</div>
 			</div>

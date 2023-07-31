@@ -14,19 +14,20 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-	<h2>글쓰기</h2>
-	<form:form action="write.do" id="register_form">
+	<form:form modelAttribute="announceVO" action="announceWrite.do" id="register_form">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 		    <li>
-				<form:label path="title">제목</form:label>
-				<form:input path="title"/>
-				<form:errors path="title" cssClass="error-color"/>
+				<form:label path="board_title">제목</form:label>
+				<form:input path="board_title"/>
+				<form:errors path="board_title" cssClass="error-color"/>
 			</li>
-			<li><b>내용</b></li>
 			<li>
-				<form:textarea path="content"/>
-				<form:errors path="content" cssClass="error-color"/>
+				<br><input type="file" name="filename"><br>
+			</li>
+			<li>
+				<form:textarea path="board_content"/>
+				<form:errors path="board_content" cssClass="error-color"/>
 				<script>
 					function MyCustomUploadAdapterPlugin(editor){
 						editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -34,7 +35,7 @@
 						}
 					}
 					
-					ClassicEditor.create(document.querySelector('#content'),{
+					ClassicEditor.create(document.querySelector('#board_content'),{
 						           extraPlugins:[MyCustomUploadAdapterPlugin]
 					             })
 					             .then(editor => {

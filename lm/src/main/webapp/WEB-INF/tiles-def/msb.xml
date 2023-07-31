@@ -5,11 +5,24 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<!-- 아래 설정을 상황에 맞게 변형해서 사용하세요 -->
-    <definition name="a1" extends="bsMain">
-    	<put-attribute name="title" value="SpringPage"/>
-	    <put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	<!-- 공지사항 글쓰기 -->
+	<definition name="boardAnnounceWrite" extends="libAdmin">
+    	<put-attribute name="libTitle" value="글쓰기"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceWrite.jsp"/>
+    </definition>
+    <definition name="boardAnnounceList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="게시판 목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceList.jsp"/>
     </definition> 
+    <definition name="boardAnnounceView" extends="libAdmin">
+    	<put-attribute name="libTitle" value="상세정보"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceView.jsp"/>
+    </definition>
+    <definition name="boardAnnounceModify" extends="libAdmin">
+    	<put-attribute name="libTitle" value="글 수정"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceModify.jsp"/>
+    </definition>
+    
 </tiles-definitions>
 
 

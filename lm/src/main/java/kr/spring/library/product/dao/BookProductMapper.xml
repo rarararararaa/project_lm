@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.library.product.dao.BookProductMapper">
+<insert id="insertLIB_P" parameterType="BookProductVO">
+	INSERT INTO lib_product_manage(
+		lib_product_isbn,
+		callNumber,
+		lib_product_class_no,
+		lib_product_bookname,
+		lib_product_authors,
+		lib_product_publisher,
+		lib_product_bookImageURL,
+		lib_product_publication_year,
+		lib_product_description,
+		lib_product_loanCnt,
+		lib_product_product_status
+	) VALUES (
+		#{lib_product_isbn},
+		#{callNumber},
+		#{lib_product_class_no},
+		#{lib_product_bookName},
+		#{lib_product_authors},
+		#{lib_product_pulisher},
+		#{lib_product_bookImageUrl},
+		#{lib_product_publicatoin_year},
+		#{lib_product_description},
+		#{lib_product_loanCnt},
+		#{lib_product_product_status}
+	)
+</insert>
+</mapper>

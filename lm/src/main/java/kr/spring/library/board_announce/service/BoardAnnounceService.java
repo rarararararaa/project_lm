@@ -3,6 +3,9 @@ package kr.spring.library.board_announce.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.library.board_announce.vo.BoardAnnounceVO;
 
 public interface BoardAnnounceService {
@@ -10,8 +13,9 @@ public interface BoardAnnounceService {
 	public List<BoardAnnounceVO> selectList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
 	public void insertBoardAnnounce(BoardAnnounceVO boardAnnounce);
-	public BoardAnnounceVO selectBoard(Integer notice_num);
-	public void updateBoard(BoardAnnounceVO boardAnnounce);
-	public void deleteBoard(Integer notice_num);
+	public BoardAnnounceVO selectBoardAnnounce(Integer notice_num);
+	public void updateHit(Integer notice_num);
+	public void updateBoardAnnounce(BoardAnnounceVO boardAnnounce);
+	public void deleteBoardAnnounce(Integer notice_num);
 	
 }
