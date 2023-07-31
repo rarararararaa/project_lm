@@ -16,17 +16,15 @@ public class BoardAnnounceServiceImpl implements BoardAnnounceService{
 
 	@Autowired
 	BoardAnnounceMapper boardAnnounceMapper;
-	
+
 	@Override
 	public List<BoardAnnounceVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardAnnounceMapper.selectList(map);
 	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardAnnounceMapper.selectRowCount(map);
 	}
 
 	@Override
@@ -35,21 +33,25 @@ public class BoardAnnounceServiceImpl implements BoardAnnounceService{
 	}
 
 	@Override
-	public BoardAnnounceVO selectBoard(Integer notice_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardAnnounceVO selectBoardAnnounce(Integer notice_num) {
+		return boardAnnounceMapper.selectBoardAnnounce(notice_num);
 	}
 
 	@Override
-	public void updateBoard(BoardAnnounceVO boardAnnounce) {
-		// TODO Auto-generated method stub
-		
+	public void updateBoardAnnounce(BoardAnnounceVO boardAnnounce) {
+		boardAnnounceMapper.updateBoardAnnounce(boardAnnounce);
 	}
 
 	@Override
-	public void deleteBoard(Integer notice_num) {
-		// TODO Auto-generated method stub
-		
+	public void deleteBoardAnnounce(Integer notice_num) {
+		boardAnnounceMapper.deleteBoardAnnounce(notice_num);
 	}
+
+	@Override
+	public void updateHit(Integer notice_num) {
+		boardAnnounceMapper.updateHit(notice_num);
+	}
+	
+	
 
 }

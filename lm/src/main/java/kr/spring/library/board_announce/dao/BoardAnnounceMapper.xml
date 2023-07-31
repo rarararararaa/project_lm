@@ -9,26 +9,82 @@
         notice_num,
         notice_title,
         notice_content,
-        notice_img,
-        notice_filename,
-        notice_category,
-        notice_reg_date,
-        notice_modify_date)
+        notice_ip,
+        notice_category)
       VALUES(
         board_announce_seq.nextval,
         #{notice_title},
         #{notice_content},
-        #{notice_img},
-        #{notice_filename},
-        #{notice_category},
-        #{notice_reg_date},
-        #{notice_modify_date})  
+        #{notice_ip},
+        #{notice_category})  
    </insert>
-	
-	
-	
-	
-	
-	
-	
+
+	<!-- 게시판 목록 -->
+	<sql id="boardAnnounceSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					b.notice_title LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					b.notice_content LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					b.notice_title LIKE '%' || #{keyword} || '%' or
+					b.notice_content LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<sql id="boardAnnounceOrder">
+		<if test="order == 1">
+			ORDER BY b.notice_num DESC
+		</if>
+	</sql>
+
+	<!-- 전체/검색 레코드수 -->
+	<select id="selectRowCount" parameterType="map"
+		resultType="integer">
+		SELECT
+		COUNT(*)
+		FROM board_announce b JOIN lm_member_manage m
+		ON b.mem_num = m.mem_num
+		<include refid="boardAnnounceSearch"></include>
+	</select>
+
+	<!-- 전체/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="boardAnnounceVO">
+		SELECT
+		*
+		FROM (SELECT
+		a.*,
+		rownum rnum
+		FROM(SELECT
+		b.notice_num,
+                   <![CDATA[
+                   REPLACE(REPLACE(b.notice_title, '<', '&lt;'), '>', '&gt;') notice_title,
+                   ]]>
+        b.notice_hit,
+        b.notice_category,
+        b.notice_reg_date,
+		FROM board_announce b
+		JOIN lm_member_manage m
+		ON b.mem_num = m.mem_num
+		<include refid="boardAnnounceSearch"></include>
+		<include refid="boardAnnounceOrder"></include>
+		)a)
+      <![CDATA[
+      WHERE rnum >= #{start} AND rnum <= #{end}
+      ]]>
+	</select>
+
+	<!-- 게시글 상세 -->
+	<select id="selectBoardAnnounce" parameterType="integer">
+		SELECT
+		*
+		FROM board_announce b JOIN lm_member_manage m USING(mem_num)
+		WHERE b.notice_num=#{notice_num}
+	</select>
+
 </mapper>
