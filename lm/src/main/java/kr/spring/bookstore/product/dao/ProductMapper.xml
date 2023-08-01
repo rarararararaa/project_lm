@@ -1,4 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.bookstore.product.dao.ProductMapper">
+	<!-- api 등록 -->
+	<insert id="insertStore_P" parameterType="ProductVO">
+		INSERT INTO STORE_PRODUCT_MANAGE(
+			STORE_PRODUCT_NUM,
+			STORE_PRODUCT_SEARCHCATEGORYID,
+			STORE_PRODUCT_ISBN13,
+			STORE_PRODUCT_STOCKSTATUS,
+			STORE_PRODUCT_SEARCHCATEGORYNAME
+		) VALUES (
+			#{store_product_num},
+			#{store_product_searchcategoryId},
+			#{store_product_isbn13},
+			#{store_product_stockstatus},
+			#{store_product_searchcategoryName}
+		)
+	</insert>
+	<insert id="insertStore_Pdetail" parameterType="ProductVO">
+		INSERT INTO STORE_PRODUCT_DETAIL(
+			STORE_PRODUCT_NUM,
+			store_product_title,
+			store_product_author,
+			store_product_pubdate,
+			store_product_cover,
+			store_product_description,
+			store_product_categoryid,
+			store_product_categoryname,
+			store_product_pricesales,
+			store_product_pricestandard,
+			store_product_publisher,
+			store_product_stock,
+			store_product_seriesId,
+			store_product_seriesName,
+			store_product_customerReviewRank,
+			store_product_ratingCount,
+			store_product_discount,
+			store_product_ratingScore,
+			store_product_status
+			 
+		) VALUES (
+			#{store_product_num},
+			#{store_product_title},
+			#{store_product_author},
+			#{store_product_pubdate},
+			#{store_product_cover},
+			#{store_product_description},
+			#{store_product_categoryid},
+			#{store_product_categoryname},
+			#{store_product_pricesales},
+			#{store_product_pricestandard},
+			#{store_product_publisher},
+			#{store_product_stock},
+			#{store_product_seriesId},
+			#{store_product_seriesName},
+			#{store_product_customerReviewRank},
+			#{store_product_ratingCount},
+			#{store_product_discount},
+			#{store_product_ratingScore},
+			#{store_product_status}
+			
+		)
+	</insert>
+	
+	<!-- 상품 상세 -->
+	<select id="selectProduct" parameterType="string">
+		SELECT
+		  * 
+		FROM STORE_PRODUCT_DETAIL d JOIN STORE_PRODUCT_MANAGE p USING(store_product_num)
+		WHERE store_product_isbn13=#{store_product_isbn13}	
+	</select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

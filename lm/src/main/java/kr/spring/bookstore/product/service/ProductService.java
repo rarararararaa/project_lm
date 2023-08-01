@@ -1,6 +1,8 @@
 package kr.spring.bookstore.product.service;
 
+import kr.spring.bookstore.product.vo.ProductVO;
+
 public interface ProductService {
-	//알라딘 api에서 데이터 추출 후 db연동
-	public void fetchDataFromApi();
+	//상품 상세
+	public ProductVO selectProduct(String store_product_isbn13);	
 }
