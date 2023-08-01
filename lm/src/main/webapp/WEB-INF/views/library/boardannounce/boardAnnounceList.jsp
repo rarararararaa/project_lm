@@ -15,7 +15,7 @@
 	});
 </script>
 <div class="page-main">
-	<h2>게시판 목록</h2>
+	<h2>공지사항 게시판 목록</h2>
 	<form action="list.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -38,6 +38,7 @@
 		<div class="align-right">
 			<select id="order" name="order">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신</option>
+				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
 			</select>
 			<script type="text/javascript">
 				$(function(){
@@ -46,10 +47,7 @@
 					});
 				});
 			</script>
-			<c:if test="${!empty user}">
-				<input type="button" value="글쓰기" 
-			                     onclick="location.href='write.do'">
-			</c:if>
+			<input type="button" value="글쓰기" onclick="location.href='write.do'">
 		</div>
 	</form>
 	<c:if test="${count == 0}">
@@ -63,7 +61,6 @@
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
-			<th>좋아요수</th>
 		</tr>
 		<c:forEach var="board_announce" items="${list}">
 		<tr>
@@ -71,7 +68,9 @@
 			<td width="400">
 				<a href="detail.do?notice_num=${board_announce.notice_num}">${board_announce.notice_title}</a>
 			</td>
+			<td class="align-center">관리자</td>
 			<td class="align-center">${board_announce.notice_reg_date}</td>
+			<td class="align-center">${board_announce.notice_hit}</td>
 		</tr>
 		</c:forEach>
 	</table>

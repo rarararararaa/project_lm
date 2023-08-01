@@ -3,9 +3,6 @@ package kr.spring.library.board_announce.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Update;
-
 import kr.spring.library.board_announce.vo.BoardAnnounceVO;
 
 public interface BoardAnnounceService {

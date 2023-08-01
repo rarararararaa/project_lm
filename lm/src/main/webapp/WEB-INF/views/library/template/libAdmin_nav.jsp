@@ -17,7 +17,7 @@
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="공지사항"
-			  onclick="location.href='${pageContext.request.contextPath}/library/boardannounce/write.do'">
+			  onclick="location.href='${pageContext.request.contextPath}/library/boardannounce/list.do'">
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="분실물"
