@@ -40,8 +40,8 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 	    try {
 	    		//알라딘 상품조회 url
 	    		URL apiUrl=new URL("http://www.aladin.co.kr/ttb/api/ItemList.aspx?"
-	    				+ "ttbkey="+ttbkey+"&QueryType=ItemNewAll&MaxResults=100&start=2&"
-	    				+ "SearchTarget=book&output=js&Version=20131101");
+	    				+ "ttbkey="+ttbkey+"&QueryType=ItemNewSpecial&MaxResults=100&start=100&"
+	    				+ "SearchTarget=foreign&output=js&Version=20131101");
 	    		conn=(HttpURLConnection)apiUrl.openConnection();
 	    		conn.setRequestMethod("GET");
 	    		conn.setRequestProperty("Content-type", "application/json; charset=utf-8");
@@ -58,17 +58,17 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 					JSONObject j = (JSONObject)docs.get(i);
 					list=new ArrayList<String>();
 					if(((String)j.get("isbn13")).trim().equals("")) continue;
-					if(((String)j.get("description")).trim().equals("")) continue;
 		    		String isbn13=(String)j.get("isbn13");
 					int searchcategoryId=Integer.parseInt(String.valueOf(jsonObject.get("searchCategoryId")));
 					int product_num=productMapper.selectStoreProductNum();
 					ProductVO product2=fetchData2FromApi(isbn13);
+					if(product2==null) continue;
 					ProductVO product=new ProductVO(
 							 product_num,
 							 searchcategoryId,
 							 (String)jsonObject.get("searchCategoryName"), 
 							 isbn13,
-							 1,product2.getStore_product_title() ,
+							 1,product2.getStore_product_title(),
 							 product2.getStore_product_author(), 
 							 product2.getStore_product_pubdate(),
 							 product2.getStore_product_cover(), 
@@ -116,16 +116,23 @@ public class ProductServiceapiImpl implements ProductServiceapi{
     		result=br.readLine();
     		JSONParser jsonParser=new JSONParser();
     		JSONObject jsonObject=(JSONObject)jsonParser.parse(result);
-    		//log.debug("jsonObject : "+jsonObject);
+    		log.debug("jsonObject : "+jsonObject);
 			JSONArray docs = (JSONArray)jsonObject.get("item");
-    		//log.debug("JSONArray : "+docs);
+    		log.debug("JSONArray : "+docs);
 			int jsonSize = docs.size();
 				for (int i = 0; i < jsonSize; i++) {
 					if(!((JSONObject)docs.get(i)).get("isbn13").equals(isbn13)) {
 						continue;
 					}
 					JSONObject j = (JSONObject)docs.get(i);
-					
+					String description=" ";
+					if(!((String)j.get("description")).trim().equals("")) {
+						description=(String)j.get("description");
+					}
+					String author=" ";
+					if(!((String)j.get("author")).trim().equals("")) {
+						author=(String)j.get("author");
+					}
 					int seriesId=0;
 					String seriesName="";
 					int ratingCount=0;
@@ -151,7 +158,7 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 					}
 					
 					String categoryName=" ";
-					if(((String)j.get("categoryName"))!=null) {
+					if(!((String)j.get("categoryName")).trim().equals("")) {
 						categoryName=(String)j.get("categoryName");
 					}
 					
@@ -170,10 +177,10 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 							 (String)jsonObject.get("searchCategoryName"), 
 							 (String)j.get("isbn13"),
 							 1, (String)j.get("title"),
-							 (String)j.get("author"), 
+							 author, 
 							 (String)j.get("pubDate"),
 							 cover, 
-							 (String)j.get("description"), 
+							 description, 
 							 categoryId,
 							 categoryName,
 							 priceSales,
@@ -187,7 +194,7 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 							 ratingScore,
 							 1);
 				}	 				
- 	
+				log.debug("product2 : "+product2);
 	    }catch(Exception e) {
 	    	e.printStackTrace();
 	    }finally {
