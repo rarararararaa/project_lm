@@ -21,55 +21,63 @@
 			<input type="hidden" name="lo" value="${lo}"/>
 				<div class="page-input">
 					<div class="page-input-box"> <!-- 아이디 입력 및 중복체크 -->
-						<form:input path="mem_id" placeholder="아이디를 입력하세요." />
+						<form:input path="mem_id" maxlength="15" placeholder="아이디를 입력하세요." />
 						<input type="button" id="confirmId" value="ID중복체크" 
 						class="input-style-check">
 						<span id="message_id"></span>
+						<span id="message_id_null"></span>
 						<form:errors path="mem_id" cssClass="error-color"/>
 					</div>	      
-					<div class="text_announce"> <!-- 아이디 주의사항 -->
-        			</div>
 					<div class="text_announce"> <!-- 아이디 주의사항 -->
           				<div class="input-notice"><strong>*6~15자의 영문 대소문자, 숫자만 사용 가능</strong></div>
         			</div>
 					<div class="page-input-box"> <!-- 이름 입력 -->
-						<form:input path="mem_name" placeholder="이름을 입력하세요." />
+						<form:input path="mem_name" maxlength="10" placeholder="이름을 입력하세요." />
+						<span id="message_name_null"></span>
 						<form:errors path="mem_name" cssClass="error-color"/>
 					</div>           
 					<div class="page-input-box"> <!-- 비밀번호 입력 -->
-						<form:password path="mem_passwd" placeholder="비밀번호를 입력하세요." />
+						<form:password path="mem_passwd" maxlength="20" placeholder="비밀번호를 입력하세요." />
 						<span id="message_passwd"></span>
 						<span id="message_passwd_status"></span>
+						<span id="message_passwd_null"></span>
 						<form:errors path="mem_passwd" cssClass="error-color"/>      
 					</div>
 					<div class="text_announce"> <!-- 비밀번호 주의사항 -->
-          				<div class="input-notice"><strong>*8~16자의 영문 대소문자, 숫자, 특수문자만 사용 가능</strong></div>
+          				<div class="input-notice"><strong>*8~20자의 영문 대소문자, 숫자, 특수문자만 사용 가능</strong></div>
         			</div>
 					<div class="page-input-box"> <!-- 전화번호 입력 -->
-						<form:input path="mem_cell" placeholder="전화번호를 입력하세요." />
+						<form:input path="mem_cell" maxlength="15" placeholder="전화번호를 입력하세요." />
+						<span id="message_cell_null"></span>
 						<form:errors path="mem_cell" cssClass="error-color"/>      
 					</div>
 					<div class="page-input-box"> <!-- 이메일 입력 -->
-						<form:input path="mem_email" placeholder="이메일을 입력하세요." />
+						<form:input path="mem_email" maxlength="50" placeholder="이메일을 입력하세요." />
+						<span id="message_email_null"></span>
 						<form:errors path="mem_email" cssClass="error-color"/>
 					</div>      
 					<div class="page-input-box"> <!-- 주민번호 입력 -->
-						<form:input path="mem_identify" placeholder="주민등록번호를 입력하세요." />
+						<form:input path="mem_identify" maxlength="14" placeholder="주민등록번호를 입력하세요." />
+						<span id="message_identify_null"></span>
 						<form:errors path="mem_identify" cssClass="error-color"/>
 					</div>      
-					<div class="page-input-box"> <!-- 주소명 입력 -->
-						<form:input path="home_title" placeholder="주소지 임시." />
+					<div class="page-input-box"> <!-- 주소지 별명 입력 -->
+						<form:input path="home_title" maxlength="50" placeholder="주소지 임시." />
+						<span id="message_title_null"></span>
 						<form:errors path="home_title" cssClass="error-color"/>
 					</div>      
 					<div class="page-input-box"> <!-- 우편번호 입력 불가능-->
-						<form:input path="home_zipcode" placeholder="우편번호를 입력해주세요" readonly="true"/>
+						<form:input path="home_zipcode" maxlength="6" placeholder="우편번호를 입력해주세요" readonly="true"/>
+						<span id="message_zipcode_null"></span>
 						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="input-style-check">     
 					</div>
 					<div class="page-input-box"> <!-- 주소 입력 불가능 -->
-						<form:input path="home_address" placeholder="주소를 입력해주세요" readonly="true"/>      
+						<span id="message_address_null"></span>
+						<form:input path="home_address" maxlength="150" placeholder="주소를 입력해주세요" readonly="true"/>      
 					</div>
 					<div class="page-input-box"> <!-- 상세주소 입력 -->
-						<form:input path="home_address_detail" placeholder="상세주소를 입력해주세요" />
+						<form:input path="home_address_detail" maxlength="150" placeholder="상세주소를 입력해주세요" />
+						<span id="message_address_detail_null"></span>
 						<form:errors path="home_address_detail" cssClass="error-color"/>      
 					</div>
 			   </div>     

@@ -36,64 +36,12 @@ public class MemberServiceImpl implements MemberService{
 	public String selectSalt(String mem_id) {
 		return memberMapper.selectSalt(mem_id);
 	}
-/*
-	@Override
-	public MemberVO selectMember(Integer mem_num) {
-		return memberMapper.selectMember(mem_num);
-	}
 
 	@Override
-	public void updateMember(MemberVO member) {
-		memberMapper.updateMember(member);
-		memberMapper.updateMember_detail(member);
+	public void insertHome(MemberVO member) {
+		// TODO Auto-generated method stub
+		
 	}
-
-	@Override
-	public void updatePassword(MemberVO member) {
-		memberMapper.updatePassword(member);
-	}
-
-	@Override
-	public void deleteMember(Integer mem_num) {
-		memberMapper.deleteMember(mem_num);
-		memberMapper.deleteMember_detail(mem_num);
-	}
-
-	@Override
-	public void updateAu_id(String mem_au_id, int mem_num) {
-		memberMapper.updateAu_id(mem_au_id, mem_num);
-	}
-
-	@Override
-	public MemberVO selectAu_id(String mem_au_id) {
-		return memberMapper.selectAu_id(mem_au_id);
-	}
-
-	@Override
-	public void deleteAu_id(int mem_num) {
-		memberMapper.deleteAu_id(mem_num);
-	}
-
-	@Override
-	public void updateProfile(MemberVO member) {
-		memberMapper.updateProfile(member);
-	}
-
-	@Override
-	public int selectRowCount(Map<String, Object> map) {
-		return memberMapper.selectRowCount(map);
-	}
-
-	@Override
-	public List<MemberVO> selectList(Map<String, Object> map) {
-		return memberMapper.selectList(map);
-	}
-
-	@Override
-	public void updateByAdmin(MemberVO memberVO) {
-		memberMapper.updateByAdmin(memberVO);
-	}
-
 
 	@Override
 	public MemberVO selectMember(Integer mem_num) {
@@ -101,17 +49,6 @@ public class MemberServiceImpl implements MemberService{
 		return null;
 	}
 
-	@Override
-	public void updateMember(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateMem_password(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void deleteMember(Integer mem_num) {
@@ -160,24 +97,10 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		
 	}
-
 	@Override
-	public void insertHome(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
-	*/
-
-	@Override
-	public void insertHome(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public MemberVO selectMember(Integer mem_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateLoginDate(Integer mem_num) {
+		//로그인 날짜 업데이트
+		memberMapper.updateLoginDate(mem_num);
 	}
 
 	@Override
@@ -188,54 +111,6 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void updateMem_password(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteMember(Integer mem_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateMem_au_id(String mem_au_id, int mem_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public MemberVO selectMem_au_id(String mem_au_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteMem_au_id(int mem_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateProfile(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<MemberVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateByAdmin(MemberVO memberVO) {
 		// TODO Auto-generated method stub
 		
 	}

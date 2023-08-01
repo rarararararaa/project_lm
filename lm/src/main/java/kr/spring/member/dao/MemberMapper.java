@@ -21,6 +21,9 @@ public interface MemberMapper {
 	public int selectMem_num();
 	@Select("SELECT store_member_home_seq.nextval FROM dual")
 	public int selectHome_num();
+	//로그인 시 최근 로그인 날짜 입력
+	@Update("UPDATE lm_member_detail SET mem_login_date = SYSDATE WHERE mem_num = #{mem_num}")
+	public void updateLoginDate(Integer mem_num);
 	//회원가입 manage 입력
 	@Insert("INSERT INTO lm_member_manage (mem_num,mem_id,mem_auth,mem_reg_date) VALUES (#{mem_num},#{mem_id},4,SYSDATE)")
 	public void insertMember(MemberVO member);

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,7 +79,6 @@ public class MemberController {
 			String mem_passwd = EncryptionPasswd.encryptionPasswd(salt,memberVO.getMem_passwd());
 			memberVO.setMem_passwd(mem_passwd);
 			
-			
 			member = memberService.selectCheckMember(
 					                    memberVO.getMem_id());
 			boolean check = false;
@@ -89,6 +89,7 @@ public class MemberController {
 						                memberVO.getMem_passwd());
 			}
 			if(check) {//인증 성공
+				
 				//===자동 로그인 체크 시작===
 				boolean autoLogin = 
 						memberVO.getAuto() != null 
@@ -112,7 +113,12 @@ public class MemberController {
 					response.addCookie(auto_cookie);
 				}
 				//===자동 로그인 체크 끝===
+				
 				//인증 성공, 로그인 처리
+				
+				//로그인 날짜 입력
+				memberService.updateLoginDate(member.getMem_num());
+				
 				//세션에 id, auth, num 적재
 				session.setAttribute("mem_id", member.getMem_id());
 				session.setAttribute("mem_auth", member.getMem_auth());
@@ -213,7 +219,6 @@ public class MemberController {
 	@RequestMapping("/lm/register/template/confirmId.do")
 	@ResponseBody
 	public Map<String,String> confimId(@RequestParam String mem_id){
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@");
 		log.debug("<<아이디 중복 체크>> : " + mem_id);
 		Map<String,String> mapAjax = new HashMap<String,String>();
 		MemberVO member = memberService.selectCheckMember(mem_id);
@@ -234,14 +239,12 @@ public class MemberController {
 	//회원가입 폼 호출
 	@GetMapping("/lm/register/template/registerMain.do")
 	public String form() {
-		
 		return "registerMain";
 	}
 	
 	//회원가입 처리
 	@PostMapping("/lm/register/template/registerMain.do")
-	public String submit(@Valid MemberVO memberVO,@RequestParam int lo,
-			BindingResult result, Model model) {
+	public String submit(@Valid MemberVO memberVO,@RequestParam int lo,BindingResult result, Model model) {
 		log.debug("<<회원가입>> : " + memberVO);
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
@@ -249,25 +252,22 @@ public class MemberController {
 		}
 		String passwd = memberVO.getMem_passwd();
 		
+		
+
 		//비밀번호 암호화 salt 생성
 		String salt = SaltGenerate.getSalt();
 		//입력받은 비밀번호 암호화 (salt + mem_passwd)
 		String mem_passwd = EncryptionPasswd.encryptionPasswd(salt,passwd);
-		
 		//VO에 salt와 SHA-256 passwd 적재
 		memberVO.setMem_salt(salt);
 		memberVO.setMem_passwd(mem_passwd);
 		//회원가입 manage, detail, home에 데이터 insert
 		memberService.insertMember(memberVO);
-		memberService.insertHome(memberVO);
-		
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
-		
-		//hidden 값으로 받아온 회원가입 홈페이지 데이터
-		if(lo == 1) { //bs인 경우
-			return "lm/notice?lo=1";
-		}else { //lib인 경우
-			return "lm/notice?lo=2";
+		if(lo==1) {
+			return "lm/notice_bs";
+		}else {
+			return "lm/notice_lib";
 		}
 	}
 }

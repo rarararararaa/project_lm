@@ -73,11 +73,11 @@ $(document).ready(function() {
 				} else {
 				  count4 = 0;
 				}
-				if (lengthCount >= 8 && lengthCount <= 10) {
+				if (lengthCount >= 8 && lengthCount <= 11) {
 				  count5 = 1;
-				} else if (lengthCount >= 11 && lengthCount <= 14) {
+				} else if (lengthCount >= 12 && lengthCount <= 15) {
 				  count5 = 2;
-				} else if (lengthCount >= 15) {
+				} else if (lengthCount >= 16) {
 				  count5 = 3;
 				} else {
 				  count5 = 0;
@@ -171,45 +171,58 @@ $(function(){
 		//공백 입력 방지
 		$('#register-form').submit(function(){
 			if($('#mem_id').val().trim()==''){
-				alert('아이디를 입력하세요');
-				$('mem_#id').val('').focus();
-				return false;
-			}
-			if($('mem_#passwd').val().trim()==''){
-				alert('비밀번호를 입력하세요');
-				$('mem_#passwd').val('').focus();
+				$('#message_id_null').css('color', 'red').text('아이디를 입력하세요.');
+				$('#mem_id').val('').focus();
 				return false;
 			}
 			if($('#mem_name').val().trim()==''){
-				alert('이름을 입력하세요');
+				$('#message_name_null').css('color', 'red').text('이름을 입력하세요.');
 				$('#mem_name').val('').focus();
 				return false;
 			}
+			if($('#mem_passwd').val().trim()==''){
+				$('#message_passwd_null').css('color', 'red').text('비밀번호를 입력하세요.');
+				$('#mem_passwd').val('').focus();
+				return false;
+			}
 			if($('#mem_cell').val().trim()==''){
-				alert('전화번호를 입력하세요');
+				$('#message_cell_null').css('color', 'red').text('전화번호를 입력하세요.');
 				$('#mem_cell').val('').focus();
 				return false;
 			}
-			if($('#mem_zipcode').val().trim()==''){
-				alert('우편번호를 입력하세요');
-				$('#mem_zipcode').val('').focus();
-				return false;
-			}
-			if($('#mem_address').val().trim()==''){
-				alert('주소를 입력하세요');
-				$('#mem_zipcode').val('').focus();
-				return false;
-			}
-			if($('#mem_address_detail').val().trim()==''){
-				alert('상세주소를 입력하세요');
-				$('#mem_address_detail').val('').focus();
+			if($('#mem_email').val().trim()==''){
+				$('#message_email_null').css('color', 'red').text('이메일을 입력하세요.');
+				$('#mem_email').val('').focus();
 				return false;
 			}
 			if($('#mem_identify').val().trim()==''){
-				alert('주민번호를 입력하세요');
+				$('#message_identify_null').css('color', 'red').text('주민번호를 입력하세요.');
 				$('#mem_identify').val('').focus();
 				return false;
 			}
+			if($('#home_title').val().trim()==''){
+				$('#message_title_null').css('color', 'red').text('주소지 별명을 입력하세요.');
+				$('#home_title').val('').focus();
+				return false;
+			}
+			if($('#home_zipcode').val().trim()==''){
+				$('#message_zipcode_null').css('color', 'red').text('우편번호를 입력하세요.');
+				$('#home_zipcode').val('').focus();
+				return false;
+			}
+			if($('#message_address_null').val().trim()==''){
+				$('#message_address_null').css('color', 'red').text('주소를 입력하세요.');
+				$('#message_address_null').val('').focus();
+				return false;
+			}
+			if($('#home_address_detail').val().trim()==''){
+				$('#message_address_detail_null').css('color', 'red').text('상세주소를 입력하세요.');
+				$('#home_address_detail').val('').focus();
+				return false;
+			}
+
+			
+
 			//잘못된 입력 방지
 			if(!/^[0-9\-]+$/.test($('#mem_cell').val())){
 				alert('전화번호는 숫자와 -만 입력 가능합니다.');

@@ -3,6 +3,8 @@ package kr.spring.member.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
+
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
@@ -10,6 +12,8 @@ public interface MemberService {
 	public void insertMember(MemberVO member);
 	//회원가입 - 주소지
 	public void insertHome(MemberVO member);
+	//로그인 시 최근 로그인 날짜 입력
+	public void updateLoginDate(Integer mem_num);
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String mem_id);
 	//SHA-256 비밀번호 구하기

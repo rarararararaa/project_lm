@@ -26,7 +26,7 @@
 			  onclick="location.href='${accessUrl}'">
 			</c:if>
 			<c:if test="${empty accessUrl}">
-			<input type="button" value="이동" onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
+				<input type="button" value="이동" onclick="location.href='${pageContext.request.contextPath}/library/template/libMain.do'">
 			</c:if>
 		</div>
 	</div>

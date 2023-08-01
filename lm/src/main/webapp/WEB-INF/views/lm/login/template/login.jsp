@@ -21,11 +21,11 @@
 			<form:errors element="div" cssClass="error-color"/>
 				<div class="page-input">
 					<div class="page-input-box">
-						<form:input path="mem_id" placeholder="아이디를 입력하세요." cssClass="form-input" />
+						<form:input path="mem_id" maxlength="15" placeholder="아이디를 입력하세요." cssClass="form-input" />
 						<form:errors path="mem_id" element="div" cssClass="error-color"/>
 					</div>
 					<div class="page-input-box">
-						<form:password path="mem_passwd" placeholder="비밀번호를 입력하세요." cssClass="form-input" autocomplete="off"/>
+						<form:password path="mem_passwd" maxlength="20" placeholder="비밀번호를 입력하세요." cssClass="form-input" autocomplete="off"/>
 						<form:errors path="mem_passwd" element="div" cssClass="error-color"/>
 					</div>
 				</div>
