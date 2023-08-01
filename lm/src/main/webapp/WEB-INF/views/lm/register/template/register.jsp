@@ -39,6 +39,7 @@
 					<div class="page-input-box"> <!-- 비밀번호 입력 -->
 						<form:password path="mem_passwd" placeholder="비밀번호를 입력하세요." />
 						<span id="message_passwd"></span>
+						<span id="message_passwd_status"></span>
 						<form:errors path="mem_passwd" cssClass="error-color"/>      
 					</div>
 					<div class="text_announce"> <!-- 비밀번호 주의사항 -->

@@ -12,6 +12,8 @@ public interface MemberService {
 	public void insertHome(MemberVO member);
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String mem_id);
+	//SHA-256 비밀번호 구하기
+	public String selectSalt(String mem_id);
 	//회원번호를 이용한 회원정보 구하기
 	public MemberVO selectMember(Integer mem_num);
 	//회원정보 수정

@@ -1,3 +1,111 @@
+//비밀번호 안전성 등급
+$(document).ready(function() { 
+	$('#mem_passwd').on('keydown', function() {
+
+		let count=0; 
+		let count1=0; 
+		let count2=0; 
+		let count3=0; 
+		let count4=0; 
+		let count5=0; 
+	
+		let mem_passwd = $('#mem_passwd').val();
+	    let upperCaseCount; //대문자
+	    let lowerCaseCount; //소문자
+	    let numberCount; //숫자
+	    let specialCharacterCount; //특수문자
+	    let lengthCount; //길이
+	    
+			if(mem_passwd.search(/[ㄱ-ㅎㅏ-ㅣ]/g)!=-1){ //한글 입력 시 알리문구 출력 및 초기화
+				$('#mem_passwd').val('').focus();
+				$('#message_passwd').css('color', 'red').text('영문 대소문자, 숫자만 사용 가능');
+				$('#message_passwd_status').css('color', 'red').text('');
+				return false;
+	    	}else{
+	    
+			    //입력된 문자열 처리
+				if(mem_passwd.search(/[A-Z]/g)!=-1){
+					upperCaseCount = mem_passwd.match(/[A-Z]/g).length;
+				}else{
+					upperCaseCount = 0;
+				}
+				if(mem_passwd.search(/[a-z]/g)!=-1){
+					lowerCaseCount = mem_passwd.match(/[a-z]/g).length;
+				}else{
+					lowerCaseCount = 0;
+				}
+				if(mem_passwd.search(/[0-9]/g)!=-1){
+					numberCount = mem_passwd.match(/[0-9]/g).length;
+				}else{
+					numberCount = 0;
+				}
+				if(mem_passwd.search(/[^A-Za-z0-9]/g)!=-1){
+					specialCharacterCount = mem_passwd.match(/[^A-Za-z0-9]/g).length;
+				}else{
+					specialCharacterCount = 0;
+				}
+				lengthCount = mem_passwd.length;
+				
+				//개수별 점수 배정
+				if (upperCaseCount == 1) {
+				  count1 = 1;
+				} else if (upperCaseCount >= 2) {
+				  count1 = 2;
+				} else {
+				  count1 = 0;
+				}
+				if (lowerCaseCount >= 1) {
+				  count2 = 1;
+				} else {
+				  count2 = 0;
+				}
+				if (numberCount == 1) {
+				  count3 = 1;
+				} else if (numberCount >= 2) {
+				  count3 = 2;
+				} else {
+				  count3 = 0;
+				}
+				if (specialCharacterCount == 1) {
+				  count4 = 1;
+				} else if (specialCharacterCount >= 2) {
+				  count4 = 2;
+				} else {
+				  count4 = 0;
+				}
+				if (lengthCount >= 8 && lengthCount <= 10) {
+				  count5 = 1;
+				} else if (lengthCount >= 11 && lengthCount <= 14) {
+				  count5 = 2;
+				} else if (lengthCount >= 15) {
+				  count5 = 3;
+				} else {
+				  count5 = 0;
+				}
+				count = count1 + count2 + count3 + count4 + count5;
+				
+				//점수와, 점수에 따른 등급 출력
+				if(count>=1 && count<=3){
+					$('#message_passwd').css('color', 'red').text(count);	
+					$('#message_passwd_status').css('color', 'red').text('취약');
+				}else if(count>=4 && count<=7){
+					$('#message_passwd').css('color', 'orange').text(count);
+					$('#message_passwd_status').css('color', 'orange').text('보통');
+				}else if(count>=8 && count<=9){
+					$('#message_passwd').css('color', 'green').text(count);
+					$('#message_passwd_status').css('color', 'green').text('강함');	
+				}else if(count==10){
+					$('#message_passwd').css('color', 'blue').text(count);
+					$('#message_passwd_status').css('color', 'blue').text('안전');
+				}
+				
+				return true;
+			}
+	}); 
+});
+
+
+
 $(function(){
 		//0:중복 체크 미실시, id 중복
 		//1:id 미중복
@@ -182,59 +290,3 @@ $(function(){
 });
 
 
-$(document).ready(function() {
-    let count=0;
-    let count1=0;
-    let count2=0;
-    let count3=0;
-    let count4=0;
-    let count5=0;
-  $('#mem_passwd').on('keyup', function(e) {
-
-    //키업 될 때 마다 카운트
-    let upperCaseCount = ($('#mem_passwd').val()).match(/[A-Z]/g).length;
-    let lowerCaseCount = ($('#mem_passwd').val()).match(/[a-z]/g).length;
-    let numberCount = ($('#mem_passwd').val()).match(/[0-9]/g).length;
-    let specialCharacterCount = ($('#mem_passwd').val()).match(/[^A-Za-z0-9]/g).length;
-    let lengthCount = ($('#mem_passwd').val()).length;
-
-    if (upperCaseCount == 1) {
-      count1 = 1;
-    } else if (upperCaseCount >= 2) {
-      count1 = 2;
-    } else {
-      count1 = 0;
-    }
-    if (lowerCaseCount >= 1) {
-      count2 = 1;
-    } else {
-      count2 = 0;
-    }
-    if (numberCount == 1) {
-      count3 = 1;
-    } else if (numberCount >= 2) {
-      count3 = 2;
-    } else {
-      count3 = 0;
-    }
-    if (specialCharacterCount == 1) {
-      count4 = 1;
-    } else if (specialCharacterCount >= 2) {
-      count4 = 2;
-    } else {
-      count4 = 0;
-    }
-    if (lengthCount >= 8 && lengthCount <= 10) {
-      count5 = 1;
-    } else if (lengthCount >= 11 && lengthCount <= 14) {
-      count5 = 2;
-    } else if (lengthCount >= 15 && lengthCount <= 18) {
-      count5 = 3;
-    } else {
-      count5 = 0;
-    }
-    count = count1 + count2 + count3 + count4 + count5;
-    $('#message_passwd').css('color', 'red').text(count);
-    return true;
-  });
-});

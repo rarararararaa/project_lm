@@ -4,24 +4,27 @@
 
 	<!-- 회원가입 - spmember_detail -->
 	<insert id="insertMember_detail" parameterType="memberVO">
-		INSERT INTO spmember_detail(
+		INSERT INTO lm_member_detail(
 		  mem_num,
-		  name,
-		  passwd,
-		  phone,
-		  email,
-		  zipcode,
-		  address1,
-		  address2)
+		  mem_name,
+		  mem_passwd,
+		  mem_cell,
+		  mem_email,
+		  mem_identify,
+		  mem_point,
+		  mem_salt,
+		  mem_grade)
 		VALUES(
 		  #{mem_num},
-		  #{name},
-		  #{passwd},
-		  #{phone},
-		  #{email},
-		  #{zipcode},
-		  #{address1},
-		  #{address2})
+		  #{mem_name},
+		  #{mem_passwd},
+		  #{mem_cell},
+		  #{mem_email},
+		  #{mem_identify},
+		  2000,
+		  #{mem_salt},
+		  0
+		  )
 	</insert>
 	
 	<!-- ID를 이용한 회원정보 체크 -->

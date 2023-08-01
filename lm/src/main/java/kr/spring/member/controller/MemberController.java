@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
+import kr.spring.util.EncryptionPasswd;
+import kr.spring.util.SaltGenerate;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -68,7 +70,15 @@ public class MemberController {
 		
 		//로그인 체크(id,비밀번호 일치 여부 체크)
 		MemberVO member = null;
+		
 		try {
+			// 1.mem_id를 이용해 mem_salt 추출
+			String salt = memberService.selectSalt(memberVO.getMem_id());
+			// 2.mem_salt와 입력받은 passswd를 이용해 암호화된 mem_passwd를 구함
+			String mem_passwd = EncryptionPasswd.encryptionPasswd(salt,memberVO.getMem_passwd());
+			memberVO.setMem_passwd(mem_passwd);
+			
+			
 			member = memberService.selectCheckMember(
 					                    memberVO.getMem_id());
 			boolean check = false;
@@ -233,25 +243,31 @@ public class MemberController {
 	public String submit(@Valid MemberVO memberVO,@RequestParam int lo,
 			BindingResult result, Model model) {
 		log.debug("<<회원가입>> : " + memberVO);
-		System.out.println("##################################");
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return form();
 		}
+		String passwd = memberVO.getMem_passwd();
 		
-		//회원가입
+		//비밀번호 암호화 salt 생성
+		String salt = SaltGenerate.getSalt();
+		//입력받은 비밀번호 암호화 (salt + mem_passwd)
+		String mem_passwd = EncryptionPasswd.encryptionPasswd(salt,passwd);
+		
+		//VO에 salt와 SHA-256 passwd 적재
+		memberVO.setMem_salt(salt);
+		memberVO.setMem_passwd(mem_passwd);
+		//회원가입 manage, detail, home에 데이터 insert
 		memberService.insertMember(memberVO);
+		memberService.insertHome(memberVO);
 		
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
 		
 		//hidden 값으로 받아온 회원가입 홈페이지 데이터
 		if(lo == 1) { //bs인 경우
-			return "lm/notice";
-			//return "redirect:/bookstore/template/bsMain.do";
+			return "lm/notice?lo=1";
 		}else { //lib인 경우
-			return "lm/notice";
-			//return "redirect:/library/template/libMain.do";
+			return "lm/notice?lo=2";
 		}
-		//return "common/notice";
 	}
 }
