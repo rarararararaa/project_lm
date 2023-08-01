@@ -50,8 +50,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>수정</form:button>
-			<input type="button" value="목록"
-			             onclick="location.href='list.do'">
+			<input type="button" value="목록" onclick="location.href='list.do'">
 		</div>	                               
 	</form:form>
 </div>
