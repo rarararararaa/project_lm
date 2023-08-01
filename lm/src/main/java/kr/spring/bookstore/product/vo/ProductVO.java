@@ -20,7 +20,7 @@ public class ProductVO {
 	private String store_product_title;
 	private String store_product_author;
 	private String store_product_pubdate;
-	private byte[] store_product_cover;
+	private String store_product_cover;
 	private String store_product_description;
 	private int store_product_categoryid;
 	private String store_product_categoryname;
