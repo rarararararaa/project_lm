@@ -5,7 +5,7 @@ CREATE TABLE BOARD_ANNOUNCE (
 	notice_category	number	NOT NULL,
 	notice_reg_date	date	DEFAULT SYSDATE	NOT NULL,
 	notice_modify_date	date	NULL,
-	notice_hit number NULL,
+	notice_hit number default 0 NOT NULL,
 	notice_ip varchar2 NOT NULL,
     CONSTRAINT PK_BOARD_ANNOUNCE_ADMIN PRIMARY KEY (notice_num)    
 );

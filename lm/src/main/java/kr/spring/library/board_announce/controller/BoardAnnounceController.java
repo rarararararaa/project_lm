@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.library.board_announce.service.BoardAnnounceService;
 import kr.spring.library.board_announce.vo.BoardAnnounceVO;
-import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -69,7 +68,7 @@ public class BoardAnnounceController {
 		}
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("boardList");
+		mav.setViewName("boardAnnounceList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
@@ -101,7 +100,7 @@ public class BoardAnnounceController {
 		// 글쓰기
 		boardAnnounceService.insertBoardAnnounce(boardAnnounceVO);
 
-		model.addAttribute("message", "글쓰기가 완료되었습니다.");
+		model.addAttribute("message", "공지사항 글 등록이 완료되었습니다.");
 		model.addAttribute("url", request.getContextPath() + "/library/boardannounce/list.do");
 
 		return "common/resultView";
@@ -114,7 +113,10 @@ public class BoardAnnounceController {
 	public ModelAndView getDetail(@RequestParam int notice_num) {
 		log.debug("<<글상세 - notice_num>> : " + notice_num);
 
+		// 해당 글의 조회수 증가
+		boardAnnounceService.updateHit(notice_num);
 		// 글상세
+		
 		BoardAnnounceVO boardAnnounce = boardAnnounceService.selectBoardAnnounce(notice_num);
 
 		// 제목에 태그를 허용하지 않음
@@ -149,6 +151,9 @@ public class BoardAnnounceController {
 			return "boardAnnounceModify";
 		}
 
+		//ip 셋팅
+		boardAnnounceVO.setNotice_ip(request.getRemoteAddr());
+				
 		//글 수정
 		boardAnnounceService.updateBoardAnnounce(boardAnnounceVO);
 
