@@ -61,7 +61,7 @@
 					</li>
 				</ul>
 				<ul class="user_menu_list">
-					<li class="user_menu_item"><a class="cart_icon"></a></li>
+					<li class="user_menu_item"><a class="cart_icon"  href="${pageContext.request.contextPath}/bookstore/payment/cart.do"></a></li>
 					<li class="user_menu_item"><a class="mypage_icon"></a></li>
 				</ul>
 			</div>
