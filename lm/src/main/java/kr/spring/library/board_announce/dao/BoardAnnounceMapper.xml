@@ -36,6 +36,15 @@
 			</if>
 		</where>
 	</sql>
+	
+	<sql id="boardAnnounceOrder">
+      <if test="order == 1">
+         ORDER BY notice_num DESC
+      </if>
+      <if test="order == 2">
+         ORDER BY notice_hit DESC
+      </if>
+   </sql>
 
 	<!-- 전체/검색 레코드수 -->
 	<select id="selectRowCount" parameterType="map"
@@ -63,7 +72,7 @@
 	        			notice_reg_date
 					FROM board_announce
 					<include refid="boardAnnounceSearch"></include>
-					ORDER BY notice_num DESC
+					<include refid="boardAnnounceOrder"></include>
 					)a)
       <![CDATA[
       WHERE rnum >= #{start} AND rnum <= #{end}

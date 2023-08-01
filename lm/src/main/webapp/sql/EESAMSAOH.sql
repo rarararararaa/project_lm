@@ -526,28 +526,27 @@ CREATE TABLE BOARD_ANNOUNCE (
 	notice_num	number	NOT NULL,
 	notice_title	varchar2(300)	NOT NULL,
 	notice_content	varchar2(1000)	NOT NULL,
-	notice_img	blob	NULL,
 	notice_category	number	NOT NULL,
 	notice_reg_date	date	DEFAULT SYSDATE	NOT NULL,
 	notice_modify_date	date	NULL,
-	notice_filename	varchar2(300)	NULL,
-	notice_hit number NULL,
+	notice_hit number default 0 NOT NULL,
 	notice_ip varchar2 NOT NULL,
     CONSTRAINT PK_BOARD_ANNOUNCE_ADMIN PRIMARY KEY (notice_num)    
 );
 create sequence board_announce_seq;
 
 
-CREATE TABLE LIB_LOST_ITEM_ADMIN (
+CREATE TABLE LIB_LOST_ITEM (
 	item_num	number	NOT NULL,
 	item_title	varchar2(30)	NOT NULL,
 	item_content	varchar2(1000)	NOT NULL,
 	item_reg_date	date	DEFAULT SYSDATE	NOT NULL,
-	item_image	blob	NULL,
+	item_modify_date date null,
 	item_status	number(1)	NOT NULL,
-	item_hit	number	NOT NULL,
+	item_hit	number default 0 NOT NULL,
     CONSTRAINT PK_LIB_LOST_ITEM_ADMIN PRIMARY KEY (item_num)    
 );
+create sequence lib_lost_item_seq;
 
 CREATE TABLE LIB_BOARD_ASK (
 	ask_num	number	NOT NULL,

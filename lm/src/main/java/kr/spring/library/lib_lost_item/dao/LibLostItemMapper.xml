@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kr.spring.library.lib_lost_item.dao.LibLostItemMapper">
+	
+	<!-- 글쓰기 -->
+   <insert id="insertLibLostItem" parameterType="libLostItemVO">
+      INSERT INTO lib_lost_item(
+        item_num,
+        item_title,
+        item_content,
+        item_status)
+      VALUES(
+        lib_lost_item_seq.nextval,
+        #{item_title},
+        #{item_content},
+        #{item_status})  
+   </insert>
+
+	<!-- 게시판 목록 -->
+	<sql id="LibLostItemSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					item_title LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					item_content LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					item_title LIKE '%' || #{keyword} || '%' or
+					item_content LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<sql id="libLostItemOrder">
+      <if test="order == 1">
+         ORDER BY item_num DESC
+      </if>
+      <if test="order == 2">
+         ORDER BY item_hit DESC
+      </if>
+   </sql>
+	
+	<!-- 전체/검색 레코드수 -->
+	<select id="selectRowCount" parameterType="map"
+		resultType="integer">
+		SELECT
+		COUNT(*)
+		FROM lib_lost_item
+		<include refid="LibLostItemSearch"></include>
+	</select>
+
+	<!-- 전체/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="libLostItemVO">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+						item_num,
+	                   <![CDATA[
+	                   REPLACE(REPLACE(item_title, '<', '&lt;'), '>', '&gt;') item_title,
+	                   ]]>
+	        			item_hit,
+	        			item_status,
+	        			item_reg_date
+					FROM lib_lost_item
+					<include refid="LibLostItemSearch"></include>
+					<include refid="libLostItemOrder"></include>
+					)a)
+      <![CDATA[
+      WHERE rnum >= #{start} AND rnum <= #{end}
+      ]]>
+	</select>
+
+	<!-- 게시글 상세 -->
+	<select id="selectLibLostItem" parameterType="integer">
+		SELECT
+		*
+		FROM lib_lost_item
+		WHERE item_num=#{item_num}
+	</select>
+
+</mapper>

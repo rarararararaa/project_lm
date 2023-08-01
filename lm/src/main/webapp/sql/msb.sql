@@ -12,16 +12,17 @@ CREATE TABLE BOARD_ANNOUNCE (
 create sequence board_announce_seq;
 
 
-CREATE TABLE LIB_LOST_ITEM_ADMIN (
+CREATE TABLE LIB_LOST_ITEM (
 	item_num	number	NOT NULL,
 	item_title	varchar2(30)	NOT NULL,
 	item_content	varchar2(1000)	NOT NULL,
 	item_reg_date	date	DEFAULT SYSDATE	NOT NULL,
-	item_image	blob	NULL,
+	item_modify_date date null,
 	item_status	number(1)	NOT NULL,
-	item_hit	number	NOT NULL,
+	item_hit	number default 0 NOT NULL,
     CONSTRAINT PK_LIB_LOST_ITEM_ADMIN PRIMARY KEY (item_num)    
 );
+create sequence lib_lost_item_seq;
 
 CREATE TABLE LIB_BOARD_ASK (
 	ask_num	number	NOT NULL,

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!-- 게시판 글 등록 시작 -->
+<!-- 공지사항 게시판 등록 시작 -->
 <!-- include libraries (jquery,bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
@@ -14,7 +14,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-	<h2>글쓰기</h2>
+	<h2>공지사항 등록</h2>
 	<form:form modelAttribute="boardAnnounceVO" action="write.do"
 	                               id="register_form">
 		<form:errors element="div" cssClass="error-color"/>
