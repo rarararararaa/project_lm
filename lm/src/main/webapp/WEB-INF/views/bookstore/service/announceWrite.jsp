@@ -48,7 +48,7 @@
 			</li>
 		</ul>
 		<div class="align-center">
-			<form:button>전송</form:button>
+			<form:button>작성</form:button>
 			<input type="button" value="목록">
 		</div>	                               
 	</form:form>

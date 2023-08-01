@@ -1,4 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.bookstore.service.dao.ServiceMapper">
+
+	<select id="selectAnnounceList" parameterType="map"
+	                          resultType="announceVO">
+		SELECT
+		   *
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM(SELECT
+		             board_num,
+		             <![CDATA[
+		             REPLACE(REPLACE(board_title,'<','&lt;'),'>','&gt;') board_title, 
+		             ]]>
+		             board_reg_date
+		           FROM LM_BOARD_ANNOUNCE
+		           ORDER BY board_reg_date desc 
+		           )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>	           
+	</select>
+	<!-- 전체/검색 레코드수 -->
+	<select id="selectRowCount" parameterType="map"
+	                             resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM LM_BOARD_ANNOUNCE
+	</select>
+	
+	<select id="selectFaqList" parameterType="map"
+	                          resultType="faqVO">
+		SELECT
+		   *
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM(SELECT
+		             faq_num,
+		             <![CDATA[
+		             REPLACE(REPLACE(board_title,'<','&lt;'),'>','&gt;') faq_title, 
+		             ]]>
+		             faq_reg_date
+		           FROM LM_BOARD_FAQ
+		           ORDER BY faq_reg_date desc 
+		           )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>	           
+	</select>
+	<!-- 전체/검색 레코드수 -->
+	<select id="selectRowCountFaq" parameterType="map"
+	                             resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM LM_BOARD_FAQ
+		WHERE faq_category=#{faq_category}
+	</select>
 </mapper>
