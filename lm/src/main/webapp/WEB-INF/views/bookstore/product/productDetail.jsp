@@ -10,11 +10,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/EESAMSAOH.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/js/productDetail.js"></script>
-<script type="text/javascript">
-$(function(){
-
-});
-</script>
 </head>
 <body>
 <div class="product-main">
@@ -39,6 +34,7 @@ $(function(){
 	</div>
 	<div class="purchase-wrap">
 		<div class="purchase-inner">
+		<form id="product_cart">
 			<div class="left-area">
 				<span class="prod-info-title"></span>
 				<span class="prod-info-price">
@@ -50,16 +46,21 @@ $(function(){
 				<div class="count-box">
 					<span>
 						<button class="decrease"></button>
-						<input type="number" value="1" autocomplete="off" readonly="readonly">
+						<input name="order_quantity" type="number" value="1" autocomplete="off" readonly="readonly">
 						<button class="increase"></button>
 					</span>
 				</div>
 				<div class="prod-button-box">
-					<button class="btn-line-gray"><span class="wish-ico"></span></button>
-					<button class="btn-lg cart-btn" data-itemnum="${product.store_product_num}">장바구니</button>
-					<button class="btn-lg">바로구매</button>
+						<input type="hidden" name="product_num" value="${product.store_product_num}">
+						<input type="hidden" name="product_price" value="${product.store_product_pricestandard}">
+						<input type="hidden" name="product_stock" value="${product.store_product_stock}">
+						<input type="hidden" name="product_title" value="${product.store_product_title}">
+						<button class="btn-line-gray"><span class="wish-ico"></span></button>
+						<button class="btn-lg cart-btn" id="cart_btn">장바구니</button>
+						<button class="btn-lg orderRightAway" id="orderRigthAway">바로구매</button>
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>

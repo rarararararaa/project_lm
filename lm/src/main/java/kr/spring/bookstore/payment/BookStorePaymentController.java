@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
@@ -33,7 +34,7 @@ public class BookStorePaymentController {
 	@PostMapping("/bookstore/payment/cart.do")
 	@ResponseBody
 	public Map<String,String> insertcartForm(HttpSession session, Model model, 
-			@Param(value = "order_quantity")int quantity, @Param(value = "product_num")int product_num) {
+			@RequestParam(value = "order_quantity")int quantity, @RequestParam(value = "product_num")int product_num) {
 		int mem_num = (Integer)session.getAttribute("mem_num");
 		BookStorePaymentCartVO vo = new BookStorePaymentCartVO();
 		vo.setMem_num(mem_num);
