@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -28,7 +29,7 @@ public class BookProductServiceImpl implements BookProductService {
 	final String AUTH_KEY = "1bed712dd9366b514c817d63f1af130792bf81b15715ac096d87c2d524c7ac25";
 	//도서관 번호
 	final String LIBCODE = "111314";
-
+	
 
 	@Override
 	public void getData() {
@@ -97,11 +98,11 @@ public class BookProductServiceImpl implements BookProductService {
 				 * if(callNumbers != null) { callNum = (JSONObject)callNumbers.get(1); bookCode
 				 * = (String)callNum.get("book_code")+String.valueOf(i); }
 				 */
-				BookProductVO book = new BookProductVO(bookCode, (String)doc.get("isbn13"),
+				BookProductVO book = new BookProductVO((String)doc.get("isbn13"),bookCode,
 						classno, (String)doc.get("bookname"), 
 						author, publisher,
-						null, photo, year,
-						(String)doc.get("class_nm"), 0, 1);
+						 year,
+						(String)doc.get("class_nm"), 0, 1, photo, null);
 				log.debug("<<API 등록 확인>> : "+book);
 				bookProductMapper.insertLIB_P(book);
 			}
@@ -113,5 +114,73 @@ public class BookProductServiceImpl implements BookProductService {
 	}
 
 
+	@Override
+	public BookProductVO selectDetailLIB_P(String callNumber) {
+		return bookProductMapper.selectDetailLIB_P(callNumber);
+	}
 
+
+	@Override
+	public List<BookProductVO> selectListLIB_P(String isbn) {
+		return bookProductMapper.selectListLIB_P(isbn);
+	}
+
+
+	@Override
+	public void updateLIB_P_description() {
+		//isbn 뽑기
+		String result = "";  
+		List<BookProductVO> list = bookProductMapper.getIsbn();
+		for(BookProductVO vo : list) {
+			log.debug("<<DetailData API>> : "+vo.getLib_product_isbn());
+			result = getDetailData(vo.getLib_product_isbn());
+			if(result != null) {
+				bookProductMapper.updateLIB_P_description(result, vo.getLib_product_isbn());
+			}
+			//log.debug("<<DetailData API>> : "+result);
+		}
+	}
+
+	@Override
+	public String getDetailData(String isbn) {
+		String result = "";
+		String result_detail = "도서 상세 정보가 없습니다.";
+		BufferedReader br = null; 
+		HttpURLConnection conn = null;
+		try {
+			URL url = new URL("http://data4library.kr/api/srchDtlList?authKey="+AUTH_KEY+"&isbn13="+isbn+"&format=json");//type : all [전체]
+			//log.debug("<<도서API URL확인>> : "+url);
+			conn = (HttpURLConnection)url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Content-type", "application/json");
+			
+			br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			
+			result = br.readLine();
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
+			JSONObject response = (JSONObject)jsonObject.get("response");//구조 확인 후 최상위 객체 이름 명시
+			//log.debug("<<test>> : "+response);
+			
+			//데이터의 상위 객체 [배열]
+			JSONArray detail = (JSONArray)response.get("detail");
+			
+			for(int i=0;i<detail.size();i++) {
+				//해당 데이터 객체
+				JSONObject getBook = (JSONObject)detail.get(i);
+				JSONObject book = (JSONObject)getBook.get("book");
+				//log.debug("<<도서 분류번호확인>> : "+doc.get("class_no"));
+				result_detail = (String)book.get("description");
+				if(result_detail.equals("")) {
+					result_detail = "도서 상세 정보가 없습니다.";
+				}
+				log.debug("<<detail 값>> : "+result_detail);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(br != null)try {br.close();} catch(IOException e) {}
+		}
+		return result_detail;
+	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,22 +32,71 @@
 		<form id="LM_payForm">
 		<table>
 		<!-- 반복문 -->
+			<c:forEach var="book" items="${book_list}" varStatus="status" begin="0">
+			<c:if test="${book.store_product_status == 1}">
 			<tr>
 				<td><input type="checkbox" value="2" class="LM-item"></td>
 				<td colspan="3"><!-- 장바구니 상품 내용 -->
-					<img alt="" src="${pageContext.request.contextPath}/images/noImage.png">
+					<img alt="" src="${book.store_product_cover}">
 					<div class="pay-book-detail">
 						<ul id="test">
-							<li>[국내도서]위기의 역사</li>
-							<li>10%</li>
-							<li>25,000원</li>
-							<li>(1,400p)</li>
+							<li>${book.store_product_title}</li>
+							<li>${book.store_product_discount}%</li>
+							<li>${book.store_product_pricestandard}원</li>
+							<li>(${book.store_product_pricestandard*point}P)</li>
 						</ul>
 					</div>
 				</td>
 				<td><!-- 삼품 개수 증감 -->
 					<ul>
-						<li>25,000원</li>
+						<li>${book.store_product_pricestandard}원</li>
+						<li>
+						<div class="MP">
+							<img class="MP-btn" src="${pageContext.request.contextPath}/images/minus.png" id="minus">
+							<span>${list["0"].cart_quantity}</span><%-- 수정 --%>
+							<img class="MP-btn" src="${pageContext.request.contextPath}/images/plus.png" id="plus">
+						</div>
+						</li>
+					</ul>
+				</td>
+				<td colspan="2"><!-- 배송 정보 -->
+					<p class="delivery-img">배송정보</p>
+					<p class="delivery-text">내일(7/25, 화)도착예정</p>
+				</td>
+			</tr>
+			</c:if>
+			</c:forEach>
+			<!-- 반복문 끝-->		
+		</table>
+		</form>
+	</div>
+	<div class="payment-usedBook">
+		<div class="payment-book" id="UesdBook">
+	<!-- LM 중고도서 리스트 -->
+		<div class="lm-all">
+			<input type="checkbox" value="11" id="UESD_select">중고 선택
+		</div>
+		<form id="USED_payForm">
+		<table>
+		<!-- 반복문 -->
+			<c:forEach var="book" items="${book_list}">
+			<c:if test="${book.store_product_status == 1}">
+			<tr>
+				<td><input type="checkbox" value="2" class="LM-item"></td>
+				<td colspan="3"><!-- 장바구니 상품 내용 -->
+					<img alt="" src="${book.store_product_cover}">
+					<div class="pay-book-detail">
+						<ul id="test">
+							<li>${book.store_product_title}</li>
+							<li>${book.store_product_discount}%</li>
+							<li>${book.store_product_pricestandard}원</li>
+							<li>(${book.store_product_pricestandard*point}P)</li>
+						</ul>
+					</div>
+				</td>
+				<td><!-- 삼품 개수 증감 -->
+					<ul>
+						<li>${book.store_product_pricestandard}원</li>
 						<li>
 						<div class="MP">
 							<img class="MP-btn" src="${pageContext.request.contextPath}/images/minus.png" id="minus">
@@ -61,81 +111,8 @@
 					<p class="delivery-text">내일(7/25, 화)도착예정</p>
 				</td>
 			</tr>
-			<!-- 반복문 끝-->		
-		</table>
-		</form>
-	</div>
-	<div class="payment-usedBook">
-		<div class="payment-book" id="UesdBook">
-	<!-- LM 중고도서 리스트 -->
-		<div class="lm-all">
-			<input type="checkbox" value="11" id="UESD_select">중고 선택
-		</div>
-		<form id="USED_payForm">
-		<table>
-		<!-- 반복문 -->
-			<tr>
-				<td><input type="checkbox" value="1" class="LM-item"></td>
-				<td colspan="3"><!-- 장바구니 상품 내용 -->
-					<img alt="" src="${pageContext.request.contextPath}/images/noImage.png">
-					<div class="pay-book-detail">
-						<ul>
-							<li>[국내도서]위기의 역사</li>
-							<li>10%</li>
-							<li>26,000원</li>
-							<li>(1,400p)</li>
-						</ul> 
-					</div>
-				</td>
-				<td><!-- 삼품 개수 증감 -->
-					<ul>
-						<li>25,000원</li>
-						<li>
-						<div class="MP">
-							<img class="MP-btn" src="${pageContext.request.contextPath}/images/minus.png" id="minus">
-							<span>1</span>
-							<img class="MP-btn" src="${pageContext.request.contextPath}/images/plus.png" id="plus">
-						</div>
-						</li>
-					</ul>
-				</td>
-				<td colspan="2"><!-- 배송 정보 -->
-					<p class="delivery-img">배송정보</p>
-					<p class="delivery-text">내일(7/25, 화)도착예정</p>
-				</td>
-			</tr>
-			<!-- 반복문 끝-->		
-			<!-- 반복문 -->
-			<tr>
-				<td><input type="checkbox" value="11" class="LM-item"></td>
-				<td colspan="3"><!-- 장바구니 상품 내용 -->
-					<img alt="" src="${pageContext.request.contextPath}/images/noImage.png">
-					<div class="pay-book-detail">
-						<ul>
-							<li>[국내도서]위기의 역사</li>
-							<li>10%</li>
-							<li>25,000원</li>
-							<li>(1,400p)</li>
-						</ul>
-					</div>
-				</td>
-				<td><!-- 삼품 개수 증감 -->
-					<ul>
-						<li>25,000원</li>
-						<li>
-						<div class="MP">
-							<img class="MP-btn" src="${pageContext.request.contextPath}/images/minus.png" id="minus">
-							<span>3</span>
-							<img class="MP-btn" src="${pageContext.request.contextPath}/images/plus.png" id="plus">
-						</div>
-						</li>
-					</ul>
-				</td>
-				<td colspan="2"><!-- 배송 정보 -->
-					<p class="delivery-img">배송정보</p>
-					<p class="delivery-text">내일(7/25, 화)도착예정</p>
-				</td>
-			</tr>
+			</c:if>
+			</c:forEach>
 			<!-- 반복문 끝-->		
 		</table>
 	</form>
