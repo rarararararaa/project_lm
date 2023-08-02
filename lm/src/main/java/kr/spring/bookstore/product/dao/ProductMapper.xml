@@ -68,7 +68,7 @@
 		SELECT
 		  * 
 		FROM STORE_PRODUCT_DETAIL d JOIN STORE_PRODUCT_MANAGE p USING(store_product_num)
-		WHERE store_product_isbn13=#{store_product_isbn13}	
+		WHERE store_product_isbn13=#{store_product_isbn13}
 	</select>
 </mapper>
 
