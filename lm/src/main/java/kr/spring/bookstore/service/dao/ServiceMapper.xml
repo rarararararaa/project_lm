@@ -40,10 +40,12 @@
 		      FROM(SELECT
 		             faq_num,
 		             <![CDATA[
-		             REPLACE(REPLACE(board_title,'<','&lt;'),'>','&gt;') faq_title, 
+		             REPLACE(REPLACE(faq_title,'<','&lt;'),'>','&gt;') faq_title, 
 		             ]]>
+		             faq_content,
 		             faq_reg_date
 		           FROM LM_BOARD_FAQ
+		           WHERE faq_category=#{faq_category}
 		           ORDER BY faq_reg_date desc 
 		           )a)
 		<![CDATA[

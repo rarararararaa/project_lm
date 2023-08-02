@@ -101,4 +101,9 @@ table.striped-table td{
 table.striped-table tr:nth-child(odd){
 	background-color:rgb(250,250,247);
 }
-
+.align-center{
+	text-align:center;
+}
+.align-right{
+	text-align:right;
+}

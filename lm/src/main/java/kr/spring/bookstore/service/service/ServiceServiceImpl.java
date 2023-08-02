@@ -45,13 +45,12 @@ public class ServiceServiceImpl implements ServiceService{
 
 	@Override
 	public List<FaqVO> selectFaqList(Map<String, Object> map) {
-		return null;
+		return serviceMapper.selectFaqList(map);
 	}
 
 	@Override
 	public int selectRowCountFaq(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return serviceMapper.selectRowCountFaq(map);
 	}
 
 }
