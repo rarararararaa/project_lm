@@ -1,18 +1,25 @@
 package kr.spring.bookstore.payment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.product.vo.ProductVO;
 import lombok.extern.slf4j.Slf4j;
+import retrofit2.http.GET;
 
 @Controller
 @Slf4j
@@ -25,9 +32,25 @@ public class BookStorePaymentController {
 	
 	@Autowired
 	BookStorePaymentService bookStorePaymentService;
-	
+	@PostMapping("/bookstore/payment/cart.do")
+	@ResponseBody
+	public Map<String,String> insertcartForm(HttpSession session, Model model, 
+			@Param(value = "order_quantity")int quantity, @Param(value = "product_num")int product_num) {
+		int mem_num = (Integer)session.getAttribute("mem_num");
+		BookStorePaymentCartVO vo = new BookStorePaymentCartVO();
+		vo.setMem_num(mem_num);
+		vo.setCart_quantity(quantity);
+		vo.setStore_product_num(product_num);
+		log.debug("<<cartInsert>> : "+vo);
+		bookStorePaymentService.insertCart(vo);
+		
+		Map<String, String> mapJson = new HashMap<String, String>();
+		mapJson.put("result", "success");
+		
+		return mapJson;
+	}
 	//장바구니  
-	@RequestMapping("/bookstore/payment/cart.do")
+	@GetMapping("/bookstore/payment/cart.do")
 	public String cartForm(HttpSession session, Model model) {
 		int mem_num = (Integer)session.getAttribute("mem_num");
 		int grade = (Integer)session.getAttribute("mem_grade");

@@ -32,7 +32,8 @@
 		<form id="LM_payForm">
 		<table>
 		<!-- 반복문 -->
-			<c:forEach var="book" items="${book_list}" varStatus="status" begin="0">
+		<c:forEach var="cart" items="${list}">
+			<c:forEach var="book" items="${book_list}">
 			<c:if test="${book.store_product_status == 1}">
 			<tr>
 				<td><input type="checkbox" value="2" class="LM-item"></td>
@@ -53,7 +54,7 @@
 						<li>
 						<div class="MP">
 							<img class="MP-btn" src="${pageContext.request.contextPath}/images/minus.png" id="minus">
-							<span>${list["0"].cart_quantity}</span><%-- 수정 --%>
+							<span>${cart.cart_quantity}</span><%-- 수정 --%>
 							<img class="MP-btn" src="${pageContext.request.contextPath}/images/plus.png" id="plus">
 						</div>
 						</li>
@@ -66,6 +67,7 @@
 			</tr>
 			</c:if>
 			</c:forEach>
+		</c:forEach>
 			<!-- 반복문 끝-->		
 		</table>
 		</form>
