@@ -8,12 +8,12 @@
 <title>회원가입</title>
 </head>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmId.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/registerControl.js"></script>
 <body>
 <div class="page">
 	<div class="page-outer">
 		<div class="page-inner">
-			<h2>회원가입</h2>
+			<h2 id="h2_1">회원가입</h2>
 			<form:form modelAttribute="memberVO" action="registerMain.do" id="register-form" class="register-form">
 						<!-- 파라미터 세팅 -->
 			<% pageContext.setAttribute("lo",request.getParameter("lo")); %>
@@ -21,7 +21,7 @@
 			<input type="hidden" name="lo" value="${lo}"/>
 				<div class="page-input">
 					<div class="page-input-box"> <!-- 아이디 입력 및 중복체크 -->
-						<form:input path="mem_id" maxlength="15" placeholder="아이디를 입력하세요." />
+						<form:input path="mem_id" maxlength="15" placeholder="*아이디를 입력하세요." />
 						<input type="button" id="confirmId" value="ID중복체크" 
 						class="input-style-check">
 						<span id="message_id"></span>
@@ -32,37 +32,41 @@
           				<div class="input-notice"><strong>*6~15자의 영문 대소문자, 숫자만 사용 가능</strong></div>
         			</div>
 					<div class="page-input-box"> <!-- 이름 입력 -->
-						<form:input path="mem_name" maxlength="10" placeholder="이름을 입력하세요." />
+						<form:input path="mem_name" maxlength="10" placeholder="*이름을 입력하세요." />
 						<span id="message_name_null"></span>
 						<form:errors path="mem_name" cssClass="error-color"/>
 					</div>           
 					<div class="page-input-box"> <!-- 비밀번호 입력 -->
-						<form:password path="mem_passwd" maxlength="20" placeholder="비밀번호를 입력하세요." />
+						<form:password path="mem_passwd" maxlength="20" placeholder="*비밀번호를 입력하세요." />
 						<span id="message_passwd"></span>
 						<span id="message_passwd_status"></span>
-						<span id="message_passwd_null"></span>
 						<form:errors path="mem_passwd" cssClass="error-color"/>      
 					</div>
 					<div class="text_announce"> <!-- 비밀번호 주의사항 -->
           				<div class="input-notice"><strong>*8~20자의 영문 대소문자, 숫자, 특수문자만 사용 가능</strong></div>
         			</div>
 					<div class="page-input-box"> <!-- 전화번호 입력 -->
-						<form:input path="mem_cell" maxlength="15" placeholder="전화번호를 입력하세요." />
+						<form:input path="mem_cell" maxlength="15" placeholder="*전화번호를 입력하세요." />
 						<span id="message_cell_null"></span>
 						<form:errors path="mem_cell" cssClass="error-color"/>      
 					</div>
 					<div class="page-input-box"> <!-- 이메일 입력 -->
-						<form:input path="mem_email" maxlength="50" placeholder="이메일을 입력하세요." />
+						<form:input path="mem_email" type="email" maxlength="50" placeholder="*이메일을 입력하세요." />
 						<span id="message_email_null"></span>
 						<form:errors path="mem_email" cssClass="error-color"/>
 					</div>      
 					<div class="page-input-box"> <!-- 주민번호 입력 -->
-						<form:input path="mem_identify" maxlength="14" placeholder="주민등록번호를 입력하세요." />
+						<div class="test">
+						<form:input path="mem_identify" id="identify_css" maxlength="6" placeholder="*주민등록번호 앞 6자리" />
+						<strong id="hi">-</strong>
+						<form:password path="mem_identify2" id="identify_css2" maxlength="7" placeholder="*주민등록번호 뒤 7자리"/>
+						</div>
 						<span id="message_identify_null"></span>
 						<form:errors path="mem_identify" cssClass="error-color"/>
-					</div>      
+					</div>
+					<h2 id="h2_2">주소지 입력(선택)</h2>
 					<div class="page-input-box"> <!-- 주소지 별명 입력 -->
-						<form:input path="home_title" maxlength="50" placeholder="주소지 임시." />
+						<form:input path="home_title" maxlength="50" placeholder="주소지 별명을 입력하세요." />
 						<span id="message_title_null"></span>
 						<form:errors path="home_title" cssClass="error-color"/>
 					</div>      

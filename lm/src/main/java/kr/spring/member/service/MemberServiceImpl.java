@@ -21,10 +21,15 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void insertMember(MemberVO member) {
 		member.setMem_num(memberMapper.selectMem_num()); //nextval
-		member.setHome_num(memberMapper.selectHome_num()); //nextval
 		memberMapper.insertMember(member);
+		//member_detail에 넣기 전 주민등록번호 합치기
+		member.setMem_identify(member.getMem_identify()+"-"+member.getMem_identify2());
 		memberMapper.insertMember_detail(member);
-		memberMapper.insertHome(member);
+		//선택사항인 주소 정보 입력 유무 판별
+		if(member.getHome_zipcode() != null) {
+			member.setHome_num(memberMapper.selectHome_num()); //nextval
+			memberMapper.insertHome(member);
+		}
 	}
 
 	@Override

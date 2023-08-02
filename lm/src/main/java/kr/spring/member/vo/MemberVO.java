@@ -43,6 +43,7 @@ public class MemberVO {
 	private String mem_email;
 	@NotEmpty
 	private String mem_identify;
+	private String mem_identify2;
 	private int mem_point;
 	private byte[] mem_photo;
 	//사진 파일명

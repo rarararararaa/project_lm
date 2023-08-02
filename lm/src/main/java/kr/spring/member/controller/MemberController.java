@@ -265,9 +265,9 @@ public class MemberController {
 		memberService.insertMember(memberVO);
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
 		if(lo==1) {
-			return "lm/notice_bs";
+			return "common/notice_bs";
 		}else {
-			return "lm/notice_lib";
+			return "common/notice_lib";
 		}
 	}
 }
