@@ -1,49 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/BsAttendanceStyle.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/BsAttendanceStyle.css">
 <!-- 출석 이벤트 페이지 -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/attendanceEvent.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/attendanceEvent.js"></script>
 <body>
-	<input type="hidden" value="${status.event_attendance_point_num}" id="event_attendance_point_num">
-	<div>
-		<div>
-			<h2>출석체크 이벤트</h2>
-			
-		</div>
-		<div>
-			<ul class="attendance-status">
-				<li class="stampCount">
-					<span>총 획득 도장</span>
-					<span id="attendance_count"></span>
-					<!-- ${count} -->
-				</li>
-				<li id="point_get1" class="noPoint">
-					<span>100</span>
-					<span>Point</span>
-				</li>
-				<li id="point_get2" class="noPoint">
-					<span>200</span>
-					<span>Point</span>
-				</li>
-				<li id="point_get3" class="noPoint">
-					<span>300</span>
-					<span>Point</span>
+	<input type="hidden" value="${status.event_attendance_point_num}"
+		id="event_attendance_point_num">
+	<div class="attendance-page">
+		<div class="atten-wi">
+			<div>
+				<h2>출석체크 이벤트</h2>
+
+			</div>
+			<div class="attenDiv2">
+				<ul class="attendance-status">
+					<li class="stampCount">
+						<span>도장</span>
+						<span id="attendance_count" class="span2"></span> <!-- ${count} -->
 					</li>
-			</ul>
-		</div>
-		<div>
-			<div class="calendar">
-				<div class="calendar-Th">
-					<span>일</span>
-					<span>월</span>
-					<span>화</span>
-					<span>수</span>
-					<span>목</span>
-					<span>금</span>
-					<span>토</span>
-				</div>
-				<div class="calendar-tb" id="calendar-tb"></div>
-			<script type="text/javascript">
+					<li id="point_get1" class="noPoint">
+						<span>Point</span>
+						<span class="span2">100</span>
+					</li>
+					<li id="point_get2" class="noPoint">
+						<span>Point</span>
+						<span class="span2">200</span>
+					</li>
+					<li id="point_get3" class="noPoint">
+						<span>Point</span>
+						<span class="span2">300</span>
+					</li>
+				</ul>
+			</div>
+			<div class="attenDiv3">
+				<div class="calBox">
+					<div class="calendar-Th">
+						<span class="day-item">일</span>
+						<span class="day-item">월</span> 
+						<span class="day-item">화</span> 
+						<span class="day-item">수</span> 
+						<span class="day-item">목</span>
+						<span class="day-item">금</span> 
+						<span class="day-item">토</span>
+					</div>
+					<div class="calendar-tb" id="calendar-tb"></div>
+					<script type="text/javascript">
 			
 				let now = new Date();
 				let currentYear = now.getYear();
@@ -106,14 +109,13 @@
 			
 			
 			</script>
-			
+
+				</div>
+			</div>
+			<div>
+				<input type="button" value="출석체크" id="attendanceCheck">
 			</div>
 		</div>
-		<div >
-			<input type="button" value="출석체크" id="attendanceCheck">
-		</div>
-
-
 	</div>
 </body>
 </html>
