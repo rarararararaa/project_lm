@@ -126,7 +126,7 @@
 					<a class="gnb_link">신상품</a>
 				</li>
 				<li class="gnb_item">
-					<a class="gnb_link">이벤트</a>
+					<a class="gnb_link"  href="${pageContext.request.contextPath}/bookstore/event/attendanceEvent.do">이벤트</a>
 				</li>
 				<li class="gnb_item">
 					<a class="gnb_link">사은품</a>
