@@ -19,6 +19,12 @@
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/bs_payment/cartMain.jsp"/>
     </definition> 
     
+    <!-- 장바구니 -->
+     <definition name="bookDetail" extends="libMain">
+    	<put-attribute name="title" value="도서상세"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/lib_book/LIB_bookDetail.jsp"/>
+    </definition>
+    
     
     <!-- LM 문고 결제 끝-->
 </tiles-definitions>

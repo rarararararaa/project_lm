@@ -123,6 +123,7 @@ public class MemberController {
 				session.setAttribute("mem_id", member.getMem_id());
 				session.setAttribute("mem_auth", member.getMem_auth());
 				session.setAttribute("mem_num", member.getMem_num());
+				session.setAttribute("mem_grade", member.getMem_grade());//최지혜 추가
 				
 				log.debug("<<인증 성공>>");
 				log.debug("<<mem_id>> : " + member.getMem_id());
@@ -265,9 +266,9 @@ public class MemberController {
 		memberService.insertMember(memberVO);
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
 		if(lo==1) {
-			return "lm/notice_bs";
+			return "common/notice_bs";
 		}else {
-			return "lm/notice_lib";
+			return "common/notice_lib";
 		}
 	}
 }

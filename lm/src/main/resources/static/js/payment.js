@@ -24,6 +24,7 @@ $(function(){
 			selectAllLM('#UesdBook', true);
 		}
 		allCheck();
+		totalPrice();
 	})
 	
 	//전체 체크
@@ -81,7 +82,7 @@ function changeNum(tag, num){
 //	let test = $(tag).closest('table').find('ul').children('li').eq(2).text(); 상품 가격
 //	alert(test);
 	let number =  parseInt(num);
-	let price = parseInt($(tag).closest('tr').find('ul').children('li').eq(2).text().slice(0,-1))*1000;//n번쨰 자식노드
+	let price = parseInt($(tag).closest('tr').find('ul').children('li').eq(2).text().slice(0,-1));//n번쨰 자식노드
 	//alert(price);
 	if($(tag).attr('id') == 'minus'){
 		number--;
@@ -102,7 +103,7 @@ function totalPrice(){
 	let total = 0;
 	let delivery = 3000;
 	$('.LM-item:checked').each(function(){
-		let price = parseInt($(this).closest('tr').find('ul').children('li').eq(2).text().slice(0,-1))*1000;
+		let price = parseInt($(this).closest('tr').find('ul').children('li').eq(2).text().slice(0,-1));
 		let num = parseInt($(this).closest('tr').children('td').eq(2).find('.MP').children('span').text());
 		//alert(price);
 		//alert(num);

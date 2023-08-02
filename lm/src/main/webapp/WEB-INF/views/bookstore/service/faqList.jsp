@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
 
+$(function(){
+	$('.answer').hide();
+	$('.question').click(function(){
+		$(this).find('.answer').toggle();
+	});
+});
+
+</script>
 <div class="page-main">
-	
+	<h2>자주 묻는 질문</h2>
 	<ul>
 		<li>
 		<select id="faq_category" name="faq_category">
@@ -22,9 +31,28 @@
 				<option value="7"
 					<c:if test="${param.faq_category == 7}">selected</c:if>>주문/결제</option>
 		</select>
+		<script type="text/javascript">
+				$(function(){
+					$('#faq_category').change(function(){
+						location.href='faqList.do?faq_category='+$('#faq_category').val();
+					});
+				});
+			</script>
 		</li>
-		<c:forEach items="list" var="faq">
-		<li><a href="#">${faq.faq_title}</a></li>
+		<c:if test="${count>0}">
+		<c:forEach var="faq" items="${list}">
+		<li>
+			<div class="question">
+				${faq.faq_title}
+				<div class="answer">${faq.faq_content}</div>
+			</div>
+		</li>
 		</c:forEach>
+		</c:if>
 	</ul>
+	<c:if test="${mem_auth==9}">
+	<div class="align-right">
+	<input type="button" value="글쓰기" onclick="location.href='faqWrite.do'">
+	</div>
+	</c:if>
 </div>

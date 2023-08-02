@@ -62,7 +62,7 @@ public class ServiceController {
 		PagingUtil page = 
 				new PagingUtil(
 						currentPage,count,20,10,
-						"list.do","&order="+order);
+						"announceList.do","&order="+order);
 		
 		List<AnnounceVO> list = null;
 		if(count > 0) {
@@ -155,5 +155,41 @@ public class ServiceController {
 				request.getContextPath()+"/bookstore/service/faqList.do");
 		
 		return "common/resultView";
+	}
+	@RequestMapping("/bookstore/service/faqList.do")
+	public ModelAndView selectFaq(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								  @RequestParam(value="order",defaultValue="1") int order,
+								  String faq_category){
+
+		Map<String,Object> map = 
+				new HashMap<String,Object>();
+		if(faq_category==null) {
+			faq_category="1";
+		}
+		map.put("faq_category", Integer.parseInt(faq_category));
+		log.debug("<<faq_category>> : " + Integer.parseInt(faq_category));
+		//전체/검색 레코드수
+		int count = serviceService.selectRowCountFaq(map);
+		log.debug("<<count>> : " + count);
+		count = 1;
+		PagingUtil page = 
+				new PagingUtil(
+						currentPage,count,20,10,
+						"faqList.do","&order="+order);
+		List<FaqVO> list = null;
+		if(count > 0) {
+			map.put("order",order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = serviceService.selectFaqList(map);			
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("faqList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		log.debug("<<list>> : " + list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 }

@@ -98,13 +98,32 @@ $(document).ready(function() {
 					$('#message_passwd').css('color', 'blue').text(count);
 					$('#message_passwd_status').css('color', 'blue').text('안전');
 				}
-				
 				return true;
 			}
 	}); 
 });
 
-
+//주민등록번호 앞자리 입력 후 뒷자리 이동
+$(document).ready(function() { 
+	$('#identify_css').on('keyup', function() {
+		let lengthCount;
+		let identify_css = $('#identify_css').val();
+		lengthCount = identify_css.length;
+		if(lengthCount==6){
+			$('#identify_css2').val('').focus();
+			//$('input[id="inputId2"]').val('-');
+		}
+	});
+});
+//전화번호 하이픈 추가
+$(document).ready(function() { 
+	$('#mem_cell').on('keyup', function() {
+	let lengthCount = $('#mem_cell').val().length;
+		if(lengthCount==2){
+		$('#mem_cell').val();
+		}
+	});
+});
 
 $(function(){
 		//0:중복 체크 미실시, id 중복
@@ -181,7 +200,8 @@ $(function(){
 				return false;
 			}
 			if($('#mem_passwd').val().trim()==''){
-				$('#message_passwd_null').css('color', 'red').text('비밀번호를 입력하세요.');
+				$('#message_passwd').css('color', 'red').text('비밀번호를 입력하세요.');
+				$('#message_passwd_status').css('color', 'red').text('');
 				$('#mem_passwd').val('').focus();
 				return false;
 			}
@@ -210,11 +230,6 @@ $(function(){
 				$('#home_zipcode').val('').focus();
 				return false;
 			}
-			if($('#message_address_null').val().trim()==''){
-				$('#message_address_null').css('color', 'red').text('주소를 입력하세요.');
-				$('#message_address_null').val('').focus();
-				return false;
-			}
 			if($('#home_address_detail').val().trim()==''){
 				$('#message_address_detail_null').css('color', 'red').text('상세주소를 입력하세요.');
 				$('#home_address_detail').val('').focus();
@@ -224,6 +239,16 @@ $(function(){
 			
 
 			//잘못된 입력 방지
+			if(!/^[a-zA-Z0-9]+$/.test($('#mem_id').val())){
+				$('#mem_id_null').css('color', 'red').text('아이디는 영문 대소문자와 숫자만 입력 가능합니다.');
+				$('#mem_id').val('').focus();
+				return false;
+			}
+			if(!/^[a-zA-Z가-힣]+$/.test($('#mem_name').val())){
+				alert('이름은 영어와 한글만 입력 가능합니다.');
+				$('#mem_name').val('').focus();
+				return false;
+			}
 			if(!/^[0-9\-]+$/.test($('#mem_cell').val())){
 				alert('전화번호는 숫자와 -만 입력 가능합니다.');
 				$('#mem_cell').val('').focus();
@@ -244,16 +269,12 @@ $(function(){
 				$('#mem_passwd').val('').focus();
 				return false;
 			}
-			if(!/^[0-9]+$/.test($('#mem_zipcode').val())){
-				alert('우편번호는 숫자만 입력 가능합니다.');
-				$('#mem_zipcode').val('').focus();
-				return false;
-			}
-			if(!/^(\d{2})(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/.test($('#mem_identify').val())){
+			/*
+			if(!/^[]+$/.test($('#mem_identify').val())){
 				alert('올바른 주민번호를 입력하세요.');
 				$('#mem_identify').val('').focus();
 				return false;
-			}
+			}*/
 		});
 		
 		//회원 정보 등록 유효성 체크

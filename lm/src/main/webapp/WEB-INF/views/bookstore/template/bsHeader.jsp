@@ -23,6 +23,9 @@
 								임시 / mem_num = <strong>${mem_num}</strong>, mem_id = <strong>${mem_id}</strong>, mem_auth = <strong>${mem_auth}</strong>
 							</li>
 							<li>
+								<a href="${pageContext.request.contextPath}/lm/mypage/template/myPageMain.do?lo=1">마이페이지</a>
+							</li>
+							<li>
 								<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do?lo=1">로그아웃</a>
 							</li>
 						</c:if>
@@ -126,7 +129,7 @@
 					<a class="gnb_link">신상품</a>
 				</li>
 				<li class="gnb_item">
-					<a class="gnb_link">이벤트</a>
+					<a class="gnb_link"  href="${pageContext.request.contextPath}/bookstore/event/attendanceEvent.do">이벤트</a>
 				</li>
 				<li class="gnb_item">
 					<a class="gnb_link">사은품</a>

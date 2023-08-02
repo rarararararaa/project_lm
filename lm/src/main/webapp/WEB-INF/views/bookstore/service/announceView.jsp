@@ -21,9 +21,11 @@
 	</div>
 	<hr size="1" width="100%">
 	<div class="align-right">
+		<c:if test="${mem_auth==9}">
 		<input type="button" value="수정"
 		 onclick="location.href='update.do?board_num=${board.board_num}'">
 		<input type="button" value="삭제" id="delete_btn">
+		</c:if>
 		<script type="text/javascript">
 			let delete_btn = document.getElementById('delete_btn');
 			delete_btn.onclick=function(){

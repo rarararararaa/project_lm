@@ -25,12 +25,17 @@ public class ProductController {
 		productServiceapi.fetchData1FromApi();
 	}
 	
+	/*==========================
+	 * 게시판 글상세
+	 *==========================*/	
 	@RequestMapping("/lm/productDetail.do")
 	public ModelAndView getDetail(@RequestParam(value="store_product_isbn13", required=false) String store_product_isbn13) {
-		log.debug("<<글상세 - board_num>> : " + store_product_isbn13);
+		log.debug("<<글상세 - isbn13>> : " + store_product_isbn13);
 		
 		//글상세 
 		ProductVO product= productService.selectProduct(store_product_isbn13);
+		log.debug("<<product>> : " + product);
+		
 		
 		return new ModelAndView("productDetail","product",product);
 	}

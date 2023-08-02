@@ -2,13 +2,15 @@ package kr.spring.bookstore.product.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter 
-@Setter
+@Setter 
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProductVO {
 	
 	private int store_product_num;

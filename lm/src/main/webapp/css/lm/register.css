@@ -62,9 +62,10 @@ body{
       display: inline-block;
       width: 80%;
       height: 54px;
-      margin: auto;
+      margin: 12px auto;
       text-align: left;
       margin-left:350px;
+      
     }
     .page-input .page-input-box input{ /* 입력창 설정 */
       width: 340px;
@@ -104,6 +105,10 @@ body{
       margin-top: 5px;
       margin-bottom: 5px;
       display:inline-block;
+    }
+    .align-center{
+    	margin-top:250px;
+    	margin-right:135px;
     }
     .page-button{ /* 버튼 외부 박스 크기 조절 */
       display:flex;
@@ -177,4 +182,47 @@ body{
       cursor: pointer;
       border: 2px solid #E19B50;
     }
+    .test{
+    	display:flex;
+    	height:55px;
+    	width:366px;
+    	border:1px solid black;
+    	border-radius:5px;
+    }
+
+    #identify_css{
+    display:inline-block;
+    	border:none;
+    	width:150px;
+    	margin-right:2px;
+    }
+    #hi{
+    	font-size:20px;
+    	transform: translate(0, 28%)
+    }
+    #identify_css2{
+    	display:inline-block;
+    	margin-left:2px;
+    	border:none;
+    	width:150px;
+    	
+    }
+    #h2_1{
+    	margin-left:470px;
+    }
+    #h2_2{
+    	margin-left:430px;
+    	margin-top:100px;
+    }
+    .input-notice{
+    	margin-left:350px;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     

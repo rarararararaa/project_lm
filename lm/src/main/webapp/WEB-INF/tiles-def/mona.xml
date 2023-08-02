@@ -6,9 +6,18 @@
 
 <tiles-definitions>
 	<!-- 아래 설정을 상황에 맞게 변형해서 사용하세요 -->
-    <definition name="a1" extends="bsMain">
+    <!-- <definition name="a1" extends="bsMain">
     	<put-attribute name="title" value="SpringPage"/>
-	    <put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	    <put-attribute name="bsbody" value="/WEB-INF/views/main/main.jsp"/>
+    </definition>  -->
+    
+    <definition name="bsEventWrite" extends="bsMain">
+    	<put-attribute name="bsTitle" value="이벤트 작성"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventWrite.jsp"/>
+    </definition> 
+    <definition name="attendanceEvent" extends="bsMain">
+    	<put-attribute name="bsTitle" value="이벤트 작성"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/attendanceEvent.jsp"/>
     </definition> 
 </tiles-definitions>
 

@@ -26,4 +26,12 @@
     </definition> 
     
     
+    <definition name="myPageMain" template="/WEB-INF/views/lm/mypage/template/myPageLayout.jsp">
+    	<put-attribute name="myPageTitle" value="마이페이지"/>
+    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/template/myPage.jsp"/>
+    	<put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
+        <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>
+		<put-attribute name="bsHeader" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
+		<put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/>
+    </definition>
 </tiles-definitions>

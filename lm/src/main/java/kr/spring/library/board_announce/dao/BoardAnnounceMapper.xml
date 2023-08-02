@@ -9,14 +9,12 @@
         notice_num,
         notice_title,
         notice_content,
-        notice_ip,
-        notice_category)
+        notice_ip)
       VALUES(
         board_announce_seq.nextval,
         #{notice_title},
         #{notice_content},
-        #{notice_ip},
-        #{notice_category})  
+        #{notice_ip})  
    </insert>
 
 	<!-- 게시판 목록 -->
@@ -68,7 +66,6 @@
 	                   REPLACE(REPLACE(notice_title, '<', '&lt;'), '>', '&gt;') notice_title,
 	                   ]]>
 	        			notice_hit,
-	        			notice_category,
 	        			notice_reg_date
 					FROM board_announce
 					<include refid="boardAnnounceSearch"></include>

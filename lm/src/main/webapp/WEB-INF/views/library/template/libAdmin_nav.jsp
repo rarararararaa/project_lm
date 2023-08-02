@@ -5,7 +5,7 @@
 	<ul>
 		<li>
 			<input type="button" class="menu-btn" value="회원관리"
-			  onclick="location.href='#'">
+			  onclick="location.href='${pageContext.request.contextPath}/library/member/admin_list.do'">
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="도서관리"

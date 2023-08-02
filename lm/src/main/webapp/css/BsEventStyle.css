@@ -1,0 +1,57 @@
+@charset "UTF-8";
+.event-form-main{
+	width:1000px;
+	margin: 100px auto;
+}
+.event-form{
+	padding: 50px 99px;
+	border: solid 1px #E9E9E9;
+	border-radius: 50px;
+}
+ul{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+label{
+	display: inline-block;
+	width: 130px;
+	vertical-align: top;	
+	
+}
+/* 공통 정렬
+------------------------*/
+.align-center{
+	text-align:center;
+}
+.align-right{
+	text-align:right;
+}
+
+.li-left > li{
+	display: inline-block;
+}
+
+.box2-left{
+	min-width:400px;
+}
+.box2-right{
+	width:240px;
+	
+}
+.box1-right{
+	width:650px;
+}
+
+#event_short_content{
+	height: 80px;
+}
+#event_content{
+	height: 300px;
+}
+textarea{
+	resize: none;
+}
+li{
+	margin: 5px 0;
+}
