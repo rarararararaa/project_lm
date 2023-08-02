@@ -13,13 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.product.vo.ProductVO;
 import lombok.extern.slf4j.Slf4j;
-import retrofit2.http.GET;
 
 @Controller
 @Slf4j
@@ -27,7 +25,7 @@ public class BookStorePaymentController {
 	
 	public static final String IMPORT_TOKEN_URL = "https://api.iamport.kr/users/getToken";
 	public static final String IMPORT_CANCEL_URL = "https://api.iamport.kr/payments/cancel";
-	public static final String KEY = "";
+	public static final String KEY = "";  
 	public static final String SECRET = "";
 	
 	@Autowired
