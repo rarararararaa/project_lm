@@ -21,6 +21,14 @@
     	<put-attribute name="title" value="공지사항 작성"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/announceWrite.jsp"/>
     </definition>
+    <definition name="announceView" extends="service">
+    	<put-attribute name="title" value="공지사항 상세"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/announceView.jsp"/>
+    </definition>
+    <definition name="faqWrite" extends="service">
+    	<put-attribute name="title" value="자주묻는질문 작성"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/faqWrite.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!-- 게시판 글 수정 시작 -->
+<!-- 공지사항 수정 시작 -->
 <!-- include libraries (jquery,bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
@@ -14,7 +14,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-	<h2>글수정</h2>
+	<h2>공지사항 수정</h2>
 	<form:form modelAttribute="boardAnnounceVO" action="update.do"
 	                               id="modify_form">
 	    <form:hidden path="notice_num"/>                           
@@ -50,12 +50,11 @@
 		</ul>
 		<div class="align-center">
 			<form:button>수정</form:button>
-			<input type="button" value="목록"
-			             onclick="location.href='list.do'">
+			<input type="button" value="목록" onclick="location.href='list.do'">
 		</div>	                               
 	</form:form>
 </div>
-<!-- 게시판 글 수정 끝 -->
+<!-- 공지사항 수정 끝 -->
 
 
 

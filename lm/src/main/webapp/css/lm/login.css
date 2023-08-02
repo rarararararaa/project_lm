@@ -2,11 +2,11 @@
 
 .page{
     display:flex;
-    width:1920px;
+    width:1600px;
     margin:0 auto;
 }
 .page-outer{ /* 전체 페이지 설정 */
-    width:1600px;
+    width:1200px;
     height:auto;
     display: flex;
     padding-top: 100px;

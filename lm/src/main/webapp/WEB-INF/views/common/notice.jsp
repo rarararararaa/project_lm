@@ -26,8 +26,15 @@
 			  onclick="location.href='${accessUrl}'">
 			</c:if>
 			<c:if test="${empty accessUrl}">
-			<input type="button" value="이동"
-			 onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+			<!-- 파라미터 세팅 -->
+			<% pageContext.setAttribute("lo",request.getParameter("lo")); %>
+			<!-- 쿼리스트링으로 받아온 값(lo=1 or lo=2)을 hidden 값으로 저장하여 최종 redirect 주소 지정 -->
+			<c:if test="${lo == 1}">
+				<input type="button" value="이동" onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
+			</c:if>
+			<c:if test="${lo != 1}">
+				<input type="button" value="이동" onclick="location.href='${pageContext.request.contextPath}/library/template/libMain.do'">
+			</c:if>
 			</c:if>
 		</div>
 	</div>

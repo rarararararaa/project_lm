@@ -15,7 +15,7 @@ public class BookStorePaymentController {
 	public static final String SECRET = "";
 	
 	//장바구니
-	@RequestMapping("/payment/cart.do")
+	@RequestMapping("/bookstore/payment/cart.do")
 	public String cartForm() {
 		
 		return "cart";

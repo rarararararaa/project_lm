@@ -5,22 +5,40 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<!-- 공지사항 글쓰기 -->
+	<!-- 공지사항 -->
 	<definition name="boardAnnounceWrite" extends="libAdmin">
-    	<put-attribute name="libTitle" value="글쓰기"/>
+    	<put-attribute name="libTitle" value="공지사항 작성"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceWrite.jsp"/>
     </definition>
     <definition name="boardAnnounceList" extends="libAdmin">
-    	<put-attribute name="libTitle" value="게시판 목록"/>
+    	<put-attribute name="libTitle" value="공지사항 게시판 목록"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceList.jsp"/>
     </definition> 
     <definition name="boardAnnounceView" extends="libAdmin">
-    	<put-attribute name="libTitle" value="상세정보"/>
+    	<put-attribute name="libTitle" value="공지사항 상세정보"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceView.jsp"/>
     </definition>
     <definition name="boardAnnounceModify" extends="libAdmin">
-    	<put-attribute name="libTitle" value="글 수정"/>
+    	<put-attribute name="libTitle" value="공지사항 수정"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceModify.jsp"/>
+    </definition>
+    
+    <!-- 분실물 -->
+	<definition name="libLostItemWrite" extends="libAdmin">
+    	<put-attribute name="libTitle" value="분실물 작성"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemWrite.jsp"/>
+    </definition>
+    <definition name="libLostItemList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="분실물 게시판 목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemList.jsp"/>
+    </definition> 
+    <definition name="libLostItemView" extends="libAdmin">
+    	<put-attribute name="libTitle" value="분실물 상세정보"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemView.jsp"/>
+    </definition>
+    <definition name="libLostItemModify" extends="libAdmin">
+    	<put-attribute name="libTitle" value="분실물 수정"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemModify.jsp"/>
     </definition>
     
 </tiles-definitions>

@@ -21,11 +21,11 @@
 			<form:errors element="div" cssClass="error-color"/>
 				<div class="page-input">
 					<div class="page-input-box">
-						<form:input path="mem_id" placeholder="아이디를 입력하세요." cssClass="form-input" />
+						<form:input path="mem_id" maxlength="15" placeholder="아이디를 입력하세요." cssClass="form-input" />
 						<form:errors path="mem_id" element="div" cssClass="error-color"/>
 					</div>
 					<div class="page-input-box">
-						<form:password path="mem_passwd" placeholder="비밀번호를 입력하세요." cssClass="form-input" autocomplete="off"/>
+						<form:password path="mem_passwd" maxlength="20" placeholder="비밀번호를 입력하세요." cssClass="form-input" autocomplete="off"/>
 						<form:errors path="mem_passwd" element="div" cssClass="error-color"/>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 				</div>
 				<div class="page-button2">
 					<form:button class="button3">로그인</form:button>
-					<input type="button" class="button3" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/lm/login/template/registerMain.do'">
+					<input type="button" class="button3" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/lm/register/template/registerMain.do'">
 					<c:if test="${lo == 1}">
 						<input type="button" class="button3" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
 					</c:if>

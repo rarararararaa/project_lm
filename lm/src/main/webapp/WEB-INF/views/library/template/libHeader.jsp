@@ -177,19 +177,17 @@ a:hover {
 		<div class="lib-header-topmenu">
 		<input type="hidden" id="id_check_tag" value="${mem_id}">
 			<ul>
+			<c:if test="${mem_id != null }">
 				<li>
-				<c:if test="${mem_id == null }">
-					<a href="#">MY페이지</a>
-				</c:if>
+					임시 / mem_num = <strong>${mem_num}</strong>, mem_id = <strong>${mem_id}</strong>, mem_auth = <strong>${mem_auth}</strong> 
 				</li>
 				<li>
-				<c:if test="${mem_id != null }">
-					<li>
-						<strong>${mem_id}</strong>님 환영합니다. 
-					</li>
+					<a href="#">마이페이지</a>
+				</li>
+				<li>
 					<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do?lo=2">로그아웃</a>
-				</c:if>
 				</li>
+				</c:if>
 				<li>
 				<c:if test="${mem_id == null }">
 					<a href="${pageContext.request.contextPath}/lm/register/template/registerMain.do?lo=2">회원가입</a>

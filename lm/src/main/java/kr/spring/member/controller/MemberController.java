@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
+import kr.spring.util.EncryptionPasswd;
+import kr.spring.util.SaltGenerate;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -68,7 +71,14 @@ public class MemberController {
 		
 		//로그인 체크(id,비밀번호 일치 여부 체크)
 		MemberVO member = null;
+		
 		try {
+			// 1.mem_id를 이용해 mem_salt 추출
+			String salt = memberService.selectSalt(memberVO.getMem_id());
+			// 2.mem_salt와 입력받은 passswd를 이용해 암호화된 mem_passwd를 구함
+			String mem_passwd = EncryptionPasswd.encryptionPasswd(salt,memberVO.getMem_passwd());
+			memberVO.setMem_passwd(mem_passwd);
+			
 			member = memberService.selectCheckMember(
 					                    memberVO.getMem_id());
 			boolean check = false;
@@ -79,6 +89,7 @@ public class MemberController {
 						                memberVO.getMem_passwd());
 			}
 			if(check) {//인증 성공
+				
 				//===자동 로그인 체크 시작===
 				boolean autoLogin = 
 						memberVO.getAuto() != null 
@@ -104,6 +115,10 @@ public class MemberController {
 				//===자동 로그인 체크 끝===
 				
 				//인증 성공, 로그인 처리
+				
+				//로그인 날짜 입력
+				memberService.updateLoginDate(member.getMem_num());
+				
 				//세션에 id, auth, num 적재
 				session.setAttribute("mem_id", member.getMem_id());
 				session.setAttribute("mem_auth", member.getMem_auth());
@@ -175,7 +190,7 @@ public class MemberController {
 	 *=======================*/
 	@RequestMapping("/lm/logout/template/logoutMain.do")
 	public String logout(HttpSession session,
-					HttpServletRequest request,
+					@RequestParam int lo,
 			        HttpServletResponse response) {
 		//로그아웃
 		session.invalidate();
@@ -190,7 +205,6 @@ public class MemberController {
 		//===자동로그인 해제 끝===//
 		
 		//hidden 값으로 받아온 로그아웃 홈페이지 데이터
-		int lo = Integer.parseInt(request.getParameter("lo"));
 		if(lo == 1) { //bs인 경우
 			return "redirect:/bookstore/template/bsMain.do";
 		}else { //lib인 경우
@@ -202,19 +216,17 @@ public class MemberController {
 	 * 회원가입
 	 *=======================*/
 	//아이디 중복 체크
-	@RequestMapping("/member/confirmId.do")
+	@RequestMapping("/lm/register/template/confirmId.do")
 	@ResponseBody
 	public Map<String,String> confimId(@RequestParam String mem_id){
 		log.debug("<<아이디 중복 체크>> : " + mem_id);
-		
 		Map<String,String> mapAjax = new HashMap<String,String>();
-		
 		MemberVO member = memberService.selectCheckMember(mem_id);
 		if(member!=null) {
 			//아이디 중복
 			mapAjax.put("result", "idDuplicated");
 		}else {
-			if(!Pattern.matches("^[A-Za-z0-9]{4,12}$", mem_id)) {
+			if(!Pattern.matches("^[a-zA-Z0-9!@#$%^&*()_+=\\-{}\\[\\]:;\"'<>,.?/~`]{6,15}$", mem_id)) {
 				//패턴 불일치
 				mapAjax.put("result", "notMatchPattern");
 			}else {
@@ -232,27 +244,30 @@ public class MemberController {
 	
 	//회원가입 처리
 	@PostMapping("/lm/register/template/registerMain.do")
-	public String submit(@Valid MemberVO memberVO,HttpServletRequest request,
-			BindingResult result, Model model) {
+	public String submit(@Valid MemberVO memberVO,@RequestParam int lo,BindingResult result, Model model) {
 		log.debug("<<회원가입>> : " + memberVO);
-		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return form();
 		}
+		String passwd = memberVO.getMem_passwd();
 		
-		//회원가입
+		
+
+		//비밀번호 암호화 salt 생성
+		String salt = SaltGenerate.getSalt();
+		//입력받은 비밀번호 암호화 (salt + mem_passwd)
+		String mem_passwd = EncryptionPasswd.encryptionPasswd(salt,passwd);
+		//VO에 salt와 SHA-256 passwd 적재
+		memberVO.setMem_salt(salt);
+		memberVO.setMem_passwd(mem_passwd);
+		//회원가입 manage, detail, home에 데이터 insert
 		memberService.insertMember(memberVO);
-		
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
-		
-		//hidden 값으로 받아온 회원가입 홈페이지 데이터
-		int lo = Integer.parseInt(request.getParameter("lo"));
-		if(lo == 1) { //bs인 경우
-			return "redirect:/bookstore/template/bsMain.do";
-		}else { //lib인 경우
-			return "redirect:/library/template/libMain.do";
+		if(lo==1) {
+			return "lm/notice_bs";
+		}else {
+			return "lm/notice_lib";
 		}
-		//return "common/notice";
 	}
 }

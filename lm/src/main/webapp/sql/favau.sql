@@ -65,6 +65,8 @@ CREATE TABLE store_member_home(
     home_address varchar2(150) not null,
     home_address_detail varchar2(150) not null,
     home_cell varchar2(15) not null,
+    home_name varchar2(30) not null,
     constraint store_member_home_pk primary key (home_num),
     constraint store_member_home_fk1 foreign key (mem_num) references lm_member_manage (mem_num)
 );
+CREATE sequence store_member_home_seq;

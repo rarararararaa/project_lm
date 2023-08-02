@@ -10,7 +10,7 @@
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="자주 묻는 질문"
-			  onclick="location.href='${pageContext.request.contextPath}/talk/talkRoomWrite.do'">
+			  onclick="location.href='${pageContext.request.contextPath}/bookstore/service/faqWrite.do'">
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="1:1문의"
