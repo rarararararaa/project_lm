@@ -2,29 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="used-contents">
 	<span>중고 판매 상품</span>
-		<div class="search-box-byUsed">
-			<div class="search-box-width">
-				<div class="search-title-byUsed">중고 등록 번호</div>
-				<div class="general-box">등록자</div>
-				<div class="general-box">책상태</div>
-				<div class="general-box">등록날짜</div>
-				<div class="general-box">조회 수</div>
-				<div class="general-box">가격</div>
-				<div class="general-box">조회수</div>
-			</div>
-			<c:forEach var="list" items="${list}">
-				<div class="search-box-width">
-					<div class="search-title-byUsed-result">${list.used_product_num}</div>
-					<div class="general-box" >${list.mem_num}</div>
-					<div class="general-box">${list.used_product_condition }</div>
-					<div class="general-box">${list.used_product_reg_date}</div>
-					<div class="general-box">${list.used_product_hit}</div>
-					<div class="general-box">${list.used_product_price }</div>
-					<div class="general-box">${list.used_product_info}</div>
-					
+	<div class="search-box-byUsed">
+		<c:forEach var="list" items="${list}">
+			<div class="used-all-contents-div-width">
+				<div class="used-all-contents-img">
+					<img src="${list.store_product_cover}">
 				</div>
-			</c:forEach>
-		</div>
+				<div class="used-all-contents-column">
+					<div class="used-all-contents-box" data-store_product_num="${list.store_product_num}">등록된 중고 : ${list.used_product_match_count}개</div>
+					<div class="used-all-contents-box">${list.store_product_title}</div>
+					<div class="used-all-contents-box">저자 : ${list.store_product_author} | 등록 날짜 : ${list.store_product_pubdate} | 출판사 : ${list.store_product_publisher} | 판매 가격 : ${list.store_product_pricesales}원</div>
+					<div class="used-all-contents-box">내용 : ${list.store_product_description }</div>
+					<div class="used-all-contents-box">후기 : X개 | 리뷰 점수 : X점</div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
 </div>
 
 

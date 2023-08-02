@@ -53,13 +53,34 @@ public class UsedController {
 	}
 
 	@RequestMapping("/bookstore/used/usedNoticeForm.do")
-	public String getUsedNoticeForm(Model model) { // 중고 등록 알림
-		return "usedNoticeForm";
+	public ModelAndView getUsedNoticeForm(HttpSession session) { // 중고 등록 알림
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("lo",1);
+			mav.setViewName("redirect:/lm/login/template/loginMain.do");
+			return mav;
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("usedNoticeForm");
+		return mav;
 	}
 
 	@RequestMapping("/bookstore/used/usedBooksByUser.do")
-	public String getUsedBooksByUser(Model model) { // 등록한 중고 상품
-		return "usedBooksByUser";
+	public ModelAndView getUsedBooksByUser(HttpSession session) { // 등록한 중고 상품
+		
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("lo",1);
+			mav.setViewName("redirect:/lm/login/template/loginMain.do");
+			return mav;
+		}
+		int mem_num = (Integer)session.getAttribute("mem_num");
+		List<UsedVO> list = usedService.selectUsedProductByMem(mem_num);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("usedBooksByUser");
+		
+		mav.addObject("list",list);
+		return mav;
 	}
 
 	@RequestMapping("/bookstore/used/usedSalesStatus.do")
@@ -68,8 +89,16 @@ public class UsedController {
 	}
 
 	@GetMapping("/bookstore/used/usedForm.do")
-	public String getUsedForm() {
-		return "usedForm";
+	public ModelAndView getUsedForm(HttpSession session) {
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("lo",1);
+			mav.setViewName("redirect:/lm/login/template/loginMain.do");
+			return mav;
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("usedForm");
+		return mav;
 	}
 	// 팝업창 영역 (팝업 띄우기)/////////
 	@GetMapping("/bookstore/used/usedSearchProductPopup.do")
@@ -80,11 +109,14 @@ public class UsedController {
 	// 팝업 서치 출력
 	@GetMapping("/bookstore/used/selectProductNameByUsed.do")
 	public ModelAndView selectProducts(@RequestParam(value = "keyword") String keyword, HttpSession session) {
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 맵 선언 후 keyword의 스트링은 keyword이다...
 		map.put("keyword", keyword);
 		log.debug("<<검색 목록>> : " + keyword);
-
+		int count = usedService.selectProductNameByUsedCount(map);
+		log.debug("<<검색 결과 갯수>> : " + count);
 		// list에 담자...
 		List<UsedVO> list = null;
 
@@ -96,6 +128,7 @@ public class UsedController {
 		log.debug("<<검색 결과>> : " + list);
 		mav.addObject("success", 1);
 		mav.addObject("list", list);
+		mav.addObject("count",count);
 		
 		return mav;
 	}

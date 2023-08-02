@@ -84,5 +84,16 @@ public class UsedServiceImpl implements UsedService {
 		usedMapper.insertUsedDetail(usedVO);
 	}
 
+	@Override
+	public List<UsedVO> selectUsedProductByMem(int mem_num) {
+		return usedMapper.selectUsedProductByMem(mem_num);
+	}
+
+	@Override
+	public int selectProductNameByUsedCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return usedMapper.selectProductNameByUsedCount(map);
+	}
+
 
 }

@@ -19,5 +19,13 @@
 		FROM store_product_manage m LEFT JOIN store_product_detail d ON d.store_product_num = m.store_product_num 
 		<include refid="productSearchByUsed"></include>
 	</select>
+	
+	<select id="selectProductNameByUsedCount" parameterType="map" resultType="Integer">
+		SELECT COUNT(*) FROM (SELECT m.store_product_num, d.store_product_cover, d.store_product_title, d.store_product_categoryname, 
+		d.store_product_author, d.store_product_publisher 
+		FROM store_product_manage m LEFT JOIN store_product_detail d ON d.store_product_num = m.store_product_num 
+		<include refid="productSearchByUsed"></include>
+		)
+	</select>
 </mapper>
 

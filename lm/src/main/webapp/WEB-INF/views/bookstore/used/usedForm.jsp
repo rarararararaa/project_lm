@@ -148,47 +148,44 @@ $(function(){
 			<li>
 				<div>책 상태 선택</div>
 				<select name="used_product_condition">
-					<option value="1">하</option>
-					<option value="2">중</option>
-					<option value="3">상</option>
+					<option value="1">하 (훼손 상태가 다소 있음)</option>
+					<option value="2">중 (훼손 상태가 적음)</option>
+					<option value="3">상 (훼손 상태가 거의 없음)</option>
 				</select>
 				
 			</li>
 			<li>
 				<!-- 책 사진1 -->
-				<img src="${pageContext.request.contextPath}/bookstore/used/usedPhoto1View.do" width="200" height="200" class="used-photo1">
-				<div class="used-image-upload" id="used_photo1_btn">
-					사진 1
-				</div>
+				
+				<img src="${pageContext.request.contextPath}/images/default_photo_used.png" width="300" height="300" class="used-photo1">
+				<div class="used-image-upload" id="used_photo1_btn"></div>
 				<div id="used_photo1_choice">
 					<input type="file" id="used_photo1_upload" accept="image/gif,image/png,image/jpeg" name="upload1">
 				</div>
 			</li>
 			<li>
 				<!-- 책 사진2 -->
-				<img src="${pageContext.request.contextPath}/bookstore/used/usedPhoto2View.do" width="200" height="200" class="used-photo2">
-				<div class="used-image-upload" id="used_photo2_btn">
-					사진 2
-				</div>
+				<img src="${pageContext.request.contextPath}/images/default_photo_used.png" width="300" height="300" class="used-photo2">
+				<div class="used-image-upload" id="used_photo2_btn"></div>
 				<div id="used_photo2_choice">
 					<input type="file" id="used_photo2_upload" accept="image/gif,image/png,image/jpeg" name="upload2">
 				</div>
 			</li>
 			<li>
 				<!-- 책 설명 -->
-				<form:label path="used_product_info" >책 설명</form:label>
-				<form:textarea path="used_product_info" />
+				<form:label path="used_product_info" >요청 사항 및 특이사항</form:label>
+				<form:textarea path="used_product_info" class="used-text-area"/>
 				<span id="message_used_product_info"></span>
 				<form:errors element="div" cssClass="error-color"/>
 			</li>
 			<li>
 				<!-- 기존 책 찾기 -->
 				<form:label path="used_product_price" >판매 희망 가격</form:label>
-				<form:input path="used_product_price" />
+				<form:input path="used_product_price" class="used-price" />
 				<span id="message_used_product_price"></span>
 				<form:errors element="div" cssClass="error-color"/>
 			</li>
-			<form:button class="used-default-btn">제출하기</form:button>
+			<form:button class="used-default-btn" id="used_submit">제출하기</form:button>
 		</ul>
 	</form:form>
 	
@@ -197,6 +194,6 @@ $(function(){
 		function execSearchProductcode() {
 			let contextPath = "${pageContext.request.contextPath}"; //팝업 열기
 			let popupUrl = contextPath + "/bookstore/used/usedSearchProductPopup.do";
-			let child = window.open(popupUrl, "_blank", "width=500, height=500");
+			let child = window.open(popupUrl, "_blank", "width=600, height=1000");
 		};
 	</script>

@@ -7,7 +7,7 @@
 		<a href="${pageContext.request.contextPath}/bookstore/used/usedNoticeForm.do">중고 등록</a>
 	</div>
 	<div>
-		<a href="${pageContext.request.contextPath}/bookstore/used/usedBooksByUser.do">등록한 중고 상품</a>
+		<a href="${pageContext.request.contextPath}/bookstore/used/usedBooksByUser.do">중고 등록 리스트</a>
 	</div>
 	<div>
 		<a href="${pageContext.request.contextPath}/bookstore/used/usedSalesStatus.do">중고 판매 상태</a>
