@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.bookstore.event.dao.BsEventMapper">
+	<!-- 글쓰기 -->
+	<insert id="insertEvent" parameterType="bsEventVO">
+		INSERT INTO store_event_board (
+			event_board_num,
+			store_product_num,
+			event_board_status,
+			event_board_category,
+			event_title,
+			event_short_content,
+			event_content,
+			event_reg_date,
+			event_date_start,
+			event_date_end
+			)
+		VALUES(
+			store_event_board_seq.nextval,
+			#{store_product_num},
+			#{event_board_status},
+			#{event_board_category},
+			#{event_title},
+			#{event_short_content},
+			#{event_content},
+			SYSDATE,
+			#{event_date_start},
+			#{event_date_end}
+		)
+	</insert>
+	<!-- 출석 개수 및 상태 조회 -->
+	<select id="selectAttendanceDetail" parameterType="Integer" resultType="bsAttendancePointVO">
+		SELECT 
+			event_attendance_point_num, 
+			mem_num, 
+			event_month, 
+			point_get1, 
+			point_get2, 
+			point_get3, 
+			attendance_count 
+		FROM store_event_attendance_point 
+		LEFT OUTER JOIN (SELECT
+							event_attendance_point_num,
+							COUNT(*) attendance_count
+					 	 FROM store_event_attendance 
+					 	 GROUP BY event_attendance_point_num) 
+		USING(event_attendance_point_num)
+		WHERE mem_num=#{mem_num} AND event_month=#{event_month} 
+		
+	</select>
+	
+	<!-- 출석 상세 리스트 -->
+	<select id="selectListAtendance" parameterType="bsAttendancePointVO" resultType="bsAttendanceVO">
+		SELECT
+			*
+		FROM store_event_attendance
+		WHERE event_attendance_point_num=#{event_attendance_point_num}
+	</select>
+	
+	
+	
+
+</mapper>

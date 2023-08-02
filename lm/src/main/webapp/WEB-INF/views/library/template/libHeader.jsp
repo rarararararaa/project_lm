@@ -182,7 +182,7 @@ a:hover {
 					임시 / mem_num = <strong>${mem_num}</strong>, mem_id = <strong>${mem_id}</strong>, mem_auth = <strong>${mem_auth}</strong> 
 				</li>
 				<li>
-					<a href="#">마이페이지</a>
+					<a href="${pageContext.request.contextPath}/lm/mypage/template/myPageMain.do?lo=1">마이페이지</a>
 				</li>
 				<li>
 					<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do?lo=2">로그아웃</a>

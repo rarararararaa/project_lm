@@ -14,6 +14,7 @@
 	<div class="page-outer">
 		<div class="page-inner">
 			<h2 id="h2_1">회원가입</h2>
+			예외처리 나중에 더 해야됨
 			<form:form modelAttribute="memberVO" action="registerMain.do" id="register-form" class="register-form">
 						<!-- 파라미터 세팅 -->
 			<% pageContext.setAttribute("lo",request.getParameter("lo")); %>
