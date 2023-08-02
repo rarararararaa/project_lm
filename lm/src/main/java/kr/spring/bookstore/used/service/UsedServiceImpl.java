@@ -41,9 +41,9 @@ public class UsedServiceImpl implements UsedService {
 	}
 	//Insert 끝
 	@Override
-	public UsedVO selectUsed(Integer user_num) {
+	public List<UsedVO> selectAllUsed() {
 		// TODO Auto-generated method stub
-		return null;
+		return usedMapper.selectAllUsed();
 	}
 
 	@Override
@@ -75,6 +75,13 @@ public class UsedServiceImpl implements UsedService {
 	public List<UsedVO> selectProductNameByUsed(Map<String,Object> map) {
 		//list 형태로 검색된 책들을 뱉어내자
 		return usedMapper.selectProductNameByUsed(map);
+	}
+
+	@Override
+	public void insertUsed(UsedVO usedVO) {
+		usedVO.setUsed_product_num(usedMapper.getUsed_product_num());
+		usedMapper.insertUsedManage(usedVO);
+		usedMapper.insertUsedDetail(usedVO);
 	}
 
 
