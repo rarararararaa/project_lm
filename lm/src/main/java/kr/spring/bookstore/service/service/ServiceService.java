@@ -19,6 +19,7 @@ public interface ServiceService {
 	
 	//자주묻는질문
 	public void insertFaq(FaqVO faqVO);
+	public void updateFaq(FaqVO faqVO);
 	//목록불러오기/검색
 	public List<FaqVO> selectFaqList(Map<String, Object> map);
 	public int selectRowCountFaq(Map<String,Object> map);

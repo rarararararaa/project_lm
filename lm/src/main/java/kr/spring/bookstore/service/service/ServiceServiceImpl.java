@@ -53,4 +53,9 @@ public class ServiceServiceImpl implements ServiceService{
 		return serviceMapper.selectRowCountFaq(map);
 	}
 
+	@Override
+	public void updateFaq(FaqVO faqVO) {
+		serviceMapper.updateFaq(faqVO);
+	}
+
 }

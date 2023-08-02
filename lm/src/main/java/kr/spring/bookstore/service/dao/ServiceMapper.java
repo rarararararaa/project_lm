@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.bookstore.service.vo.AnnounceVO;
 import kr.spring.bookstore.service.vo.FaqVO;
@@ -24,6 +25,8 @@ public interface ServiceMapper {
 	//작성
 	@Insert("INSERT INTO lm_board_faq (faq_num,faq_title,faq_content,faq_reg_date,faq_category) VALUES (lm_board_faq_seq.nextval,#{faq_title},#{faq_content},SYSDATE,#{faq_category})")
 	public void insertFaq(FaqVO faqVO);
+	@Update("UPDATE lm_board_faq SET faq_title=#{faq_title},faq_content=#{faq_content},faq_category=#{faq_category}")
+	public void updateFaq(FaqVO faqVO);
 	//목록불러오기/검색
 	public List<FaqVO> selectFaqList(Map<String, Object> map);
 	public int selectRowCountFaq(Map<String,Object> map);
