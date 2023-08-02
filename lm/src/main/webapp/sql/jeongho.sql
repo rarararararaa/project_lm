@@ -1,0 +1,1 @@
+CREATE SEQUENCE store_used_product_manage_seq;

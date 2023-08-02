@@ -28,6 +28,10 @@
     	<put-attribute name="usedBody" value="/WEB-INF/views/bookstore/used/usedForm.jsp" />
     </definition>
     
+    <definition name="resultView" extends="usedMain">
+    	<put-attribute name="usedBody" value="/WEB-INF/views/bookstore/common/resultView.jsp"/>
+    </definition>
+    
 </tiles-definitions>
 
 

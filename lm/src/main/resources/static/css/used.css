@@ -2,7 +2,7 @@
 	width:1200px;
 	margin:0 auto;
 	display:flex;
-	border:solid 1px blue;
+	
 }
 
 #used_nav_box {
@@ -10,21 +10,22 @@
 	height:300px;
 	display:flex;
 	text-align:center;
-	border:solid 1px green;
+	
 }
 
 #used_contents_box {
 	width:900px;
 	margin:0 auto;
-	border:solid 1px yellow;
+	
 }
 
 .used-book-nav {
 		width:200px;
 		display:flex;
-		flex-direction: column;
+		flex-direction:column;
 		justify-content:center;
 		align-items:center;
+		
 	}
 .used-book-nav div {
 		height:50px;
@@ -32,8 +33,13 @@
 		display:flex;
 		justify-content:center;
 		align-items:center;
-		border : 1px solid green;
-	}
+		border: 2px solid green;
+		
+}
+.used-book-nav div a {
+	text-decoration: none;
+	color:black;
+}
 	
 .used-contents {
 	margin-top : 50px;
@@ -42,6 +48,29 @@
 	align-items: center;
 }
 
+.used-contents span {
+	font-size : 25px;
+	padding:10px;
+}
+.used-contents select {
+	width:200px;
+	height:50px;
+	font-size:15px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	text-align:center;
+	
+}
+.used-contents label {
+	margin-bottom:5px;
+	margin-top:5px;
+	
+}
+
+.used-contents input {
+	padding:5px;
+}
 .used-info {
 	display:flex;
 	justify-content: center;
@@ -68,40 +97,117 @@
 }
 
 .used-a-button {
-	width : 100px;
-	height: 50px;
-	font-size : 20px;
-	border-radius: 25px;
-	background-color: black;
-	color:white;
+	width: 150px;
+    height: 54px;
+    font-size: 15px;
+    border: 1px solid black;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    background-color: #E19B50;
+    color: black;
+    cursor: pointer;
 	display:flex;
 	justify-content: center;
 	align-items:center;
 	text-decoration: none;
 	
 }
-.used-default-btn {
-	width : 100px;
-	height: 50px;
-	font-size : 20px;
-	border-radius: 10px;
-	background-color: black;
-	color:white;
+
+.file-upload-button {
+	/*업로드 버튼*/
+}
+.used-text-area {
+	width: 500px;
+    height: 300px;
+    font-size: 14px;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 0px 15px 0px 15px;
+    border-radius: 4px;
+}
+.used-contents .find-books {
+	width:200px;
+	height: 40px;
+    font-size: 14px;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 0px 15px 0 15px;
+    border-radius: 4px;
+}
+.used-contents .used-price {
+	width:200px;
+	height: 40px;
+    font-size: 14px;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 0px 15px 0px 15px;
+    border-radius: 4px;
+}
+.used-default-btn  {
+	width: 230px;
+    height: 54px;
+    font-size: 15px;
+    padding: 0px 15px 0 15px;
+    border-radius: 4px;
+    background-color: #E19B50;
+    color: black;
+    cursor: pointer;
 	display:flex;
 	justify-content: center;
 	align-items:center;
 	text-decoration: none;
+	margin-top:5px;
 }
 #used_form label {
 	font-size:20px;
 }
 
 #used_form li {
-	border:solid 1px red;
+	
 	list-style: none;
-	width:400px;
-	height:80px;
+	width:900px;
+	margin-bottom:20px;
 	display:flex;
+	flex-direction:column;
 	justify-content:center;
 	align-items:center;
 }
+
+#used_submit {
+	
+	margin:0 auto;
+}
+/*
+.used-form-img-div {
+	
+	display:flex;
+	flex-direction: row;
+}
+*/
+
+/* usedBody 영역*/
+.used-all-contents-div-width {
+	width : 900px;
+	height: 220px;
+	
+	display:flex;
+	
+}
+
+.used-all-contents-div-width img {
+	height:200px;
+	margin:0;
+}
+.used-all-contents-img {
+	width:150px;
+	height:200px;
+	margin-right:10px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.used-all-contents-box div {
+	padding : 1px;
+}
+.used-all-contents-column div {
+	padding : 5px;
+}
+
