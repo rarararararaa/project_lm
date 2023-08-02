@@ -20,7 +20,7 @@ a:hover{
 ------------------------*/
 #page_nav{
 	float:left;
-	width:25%;
+	width:15%;
 	min-height:530px;
 }
 #page_body{
@@ -33,13 +33,10 @@ a:hover{
 /* 페이지 기본 레이아웃
 ------------------------*/
 .page-main{
-	width:98%;
+	width:1200px;
 	margin:0 auto;
 }
-.page-one{
-	width:600px;
-	margin:0 auto;
-}
+
 /* 공통 메시지 및 버튼
 ------------------------*/
 .result-display{

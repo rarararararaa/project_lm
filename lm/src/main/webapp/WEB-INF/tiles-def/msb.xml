@@ -5,6 +5,16 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+	<!-- 회원목록 -->
+    <definition name="admin_memberList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="회원목록(관리자용)"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/member/admin_memberList.jsp"/>
+    </definition>
+    <definition name="admin_memberModify" extends="libAdmin">
+    	<put-attribute name="libTitle" value="회원권한수정(관리자용)"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/member/admin_memberModify.jsp"/>
+    </definition>
+
 	<!-- 공지사항 -->
 	<definition name="boardAnnounceWrite" extends="libAdmin">
     	<put-attribute name="libTitle" value="공지사항 작성"/>
@@ -40,6 +50,8 @@
     	<put-attribute name="libTitle" value="분실물 수정"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemModify.jsp"/>
     </definition>
+    
+    
     
 </tiles-definitions>
 
