@@ -3,6 +3,7 @@ package kr.spring.bookstore.event.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -14,15 +15,18 @@ import kr.spring.bookstore.event.vo.BsEventVO;
 
 public interface BsEventService {
 	//이벤트 글 목록
-	public List<BsEventVO> selectList(Map<String, Object> map);
-	public int selectRowCount(Map<String, Object> map);
+	public List<BsEventVO> selectEventList(Map<String, Object> map);
+	public int selectEventCount(Map<String, Object> map);
 	//이벤트 글 등록
 	public void insertEvent(BsEventVO event);
 	//이벤트 글 상세페이지
 	public BsEventVO selectEvent(Integer event_board_num);
 	//글 조회수
+	public void updateEventHit (Integer event_board_num);
 	//이벤트 글 수정
 	public void updateEvent(BsEventVO event);
+	//이벤트 글 삭제
+	public void deleteEventBoard(Integer event_board_num);
 
 
 	/* ---------------

@@ -59,7 +59,7 @@ ul {
 .attendance-status .stampCount {
 	position: relative;
     z-index: 2;
-    margin: 0 10px 0 0;
+    margin: 0 5px;
     padding-top: 11px;
     width: 70px;
     height: 70px;
@@ -72,7 +72,7 @@ ul {
 .attendance-status .noPoint {
 	position: relative;
     z-index: 2;
-    margin: 0 10px 0 0;
+    margin: 0 5px;
     padding-top: 11px;
     width: 70px;
     height: 70px;
@@ -137,7 +137,7 @@ ul {
 }
 
 .attendance-status{
-	width: 350px;
+	width: 335px;
 	margin: 0 auto;
 }
 .attenDiv2{

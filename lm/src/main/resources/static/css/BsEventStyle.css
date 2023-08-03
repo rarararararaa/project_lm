@@ -19,6 +19,9 @@ label{
 	vertical-align: top;	
 	
 }
+.error-color{
+	color:#ff0000;
+}
 /* 공통 정렬
 ------------------------*/
 .align-center{

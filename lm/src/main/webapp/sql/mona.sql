@@ -6,7 +6,7 @@ CREATE TABLE STORE_EVENT_BOARD (
 	event_board_category	number	NOT NULL,
 	event_title	varchar2(500)	NOT NULL,
 	event_short_content	varchar2(500)	NOT NULL,
-	event_content	varchar2(1000)	NOT NULL,
+	event_content	clob	NOT NULL,
 	event_img_small	blob	NOT NULL,
 	event_img_big	blob	NULL,
 	event_reg_date	date	NOT NULL,

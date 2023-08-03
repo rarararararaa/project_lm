@@ -21,15 +21,13 @@ public class BsEventServiceImpl implements BsEventService{
 	BsEventMapper bsEventMapper;
 	
 	@Override
-	public List<BsEventVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BsEventVO> selectEventList(Map<String, Object> map) {
+		return bsEventMapper.selectEventList(map);
 	}
 
 	@Override
-	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int selectEventCount(Map<String, Object> map) {
+		return bsEventMapper.selectEventCount(map);
 	}
 
 	@Override
@@ -121,6 +119,18 @@ public class BsEventServiceImpl implements BsEventService{
 		}else if(map.get("get3") != null) {
 			bsEventMapper.updateAttendancePointGet3(event_attendance_point_num);
 		}
+		
+	}
+
+	@Override
+	public void updateEventHit(Integer event_board_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteEventBoard(Integer event_board_num) {
+		// TODO Auto-generated method stub
 		
 	}
 
