@@ -29,19 +29,23 @@
 		<div class="lm-all" id="41084">
 			<input type="checkbox" value="11" id="LM_select">LM문고 선택
 		</div>
-		<form id="LM_payForm">
+		<form id="LM_payForm" class="LM-form">
 		<table>
 		<!-- 반복문 -->
 		<c:forEach var="cart" items="${list}">
+			<c:if test="${cart.store_product_status == 0}"><!-- 새 상품 : 0 -->
 			<c:forEach var="book" items="${book_list}">
-			<c:if test="${book.store_product_status == 1}">
-			<tr>
-				<td><input type="checkbox" value="2" class="LM-item"></td>
+			<c:if test="${book.store_product_num == cart.store_product_num}">
+			<tr id="작동">
+				<td><input type="checkbox" value="2" class="LM-item" name="check_LM"></td>
 				<td colspan="3"><!-- 장바구니 상품 내용 -->
-					<img alt="" src="${book.store_product_cover}">
+					<c:if test="${empty book.store_product_cover }">
+						<img alt="" src="${pageContext.request.contextPath}/images/noImage.png">
+					</c:if>
+						<img alt="" src="${book.store_product_cover}">
 					<div class="pay-book-detail">
 						<ul id="test">
-							<li>${book.store_product_title}</li>
+							<li data-num="${book.store_product_num}">${book.store_product_title}</li>
 							<li>${book.store_product_discount}%</li>
 							<li>${book.store_product_pricestandard}원</li>
 							<li>(${book.store_product_pricestandard*point}P)</li>
@@ -50,7 +54,7 @@
 				</td>
 				<td><!-- 삼품 개수 증감 -->
 					<ul>
-						<li>${book.store_product_pricestandard}원</li>
+						<li>${book.store_product_pricestandard * cart.cart_quantity}원</li>
 						<li>
 						<div class="MP">
 							<img class="MP-btn" src="${pageContext.request.contextPath}/images/minus.png" id="minus">
@@ -67,10 +71,14 @@
 			</tr>
 			</c:if>
 			</c:forEach>
+			</c:if>
 		</c:forEach>
 			<!-- 반복문 끝-->		
 		</table>
 		</form>
+		<div class="notCart-book" id="LM_NOT">
+			장바구니에 도서가 없습니다.
+		</div>
 	</div>
 	<div class="payment-usedBook">
 		<div class="payment-book" id="UesdBook">
@@ -80,16 +88,21 @@
 		</div>
 		<form id="USED_payForm">
 		<table>
-		<!-- 반복문 -->
+				<!-- 반복문 -->
+		<c:forEach var="cart" items="${list}">
+			<c:if test="${cart.store_product_status > 0}"><!-- 새 상품 : 0 -->
 			<c:forEach var="book" items="${book_list}">
-			<c:if test="${book.store_product_status == 1}">
+			<c:if test="${book.store_product_num == cart.store_product_num}">
 			<tr>
-				<td><input type="checkbox" value="2" class="LM-item"></td>
+				<td><input type="checkbox" value="3" class="LM-item"></td>
 				<td colspan="3"><!-- 장바구니 상품 내용 -->
-					<img alt="" src="${book.store_product_cover}">
+					<c:if test="${book.store_product_cover == null}">
+						<img alt="" src="${pageContext.request.contextPath}/images/noImage.png">
+					</c:if>
+						<img alt="" src="${book.store_product_cover}">
 					<div class="pay-book-detail">
 						<ul id="test">
-							<li>${book.store_product_title}</li>
+							<li data-num="${book.store_product_num}">${book.store_product_title}</li>
 							<li>${book.store_product_discount}%</li>
 							<li>${book.store_product_pricestandard}원</li>
 							<li>(${book.store_product_pricestandard*point}P)</li>
@@ -98,11 +111,11 @@
 				</td>
 				<td><!-- 삼품 개수 증감 -->
 					<ul>
-						<li>${book.store_product_pricestandard}원</li>
+						<li>${book.store_product_pricestandard * cart.cart_quantity}원</li>
 						<li>
 						<div class="MP">
 							<img class="MP-btn" src="${pageContext.request.contextPath}/images/minus.png" id="minus">
-							<span>1</span><%-- 수정 --%>
+							<span>${cart.cart_quantity}</span><%-- 수정 --%>
 							<img class="MP-btn" src="${pageContext.request.contextPath}/images/plus.png" id="plus">
 						</div>
 						</li>
@@ -115,9 +128,14 @@
 			</tr>
 			</c:if>
 			</c:forEach>
+			</c:if>
+		</c:forEach>
 			<!-- 반복문 끝-->		
 		</table>
 	</form>
+	<div class="notCart-book" id="USED_NOT">
+		장바구니에 도서가 없습니다.
+	</div>
 	</div>
 	</div>
 	</div><!-- 상품 리스트 -->
@@ -148,6 +166,7 @@
 			<input type="submit" value="주문하기" id="paySubmit">
 			</form>
 		</div>
+			<button onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'" class="cancel-btn">주문취소</button>
 	</div>
 </div>
 </body>

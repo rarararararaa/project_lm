@@ -2,6 +2,7 @@ package kr.spring.library.product.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -9,6 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 public class BookProductVO {
 	
 	private String lib_product_isbn; 
@@ -23,7 +25,7 @@ public class BookProductVO {
 	private int lib_product_product_status;//대출 상태
 	private String lib_product_bookImageUrl;//이미지	
 	private String lib_product_bookImageData;
-	
+	private String lib_product_detail;
 	
 
 }

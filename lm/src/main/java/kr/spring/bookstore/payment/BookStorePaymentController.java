@@ -34,7 +34,8 @@ public class BookStorePaymentController {
 	@PostMapping("/bookstore/payment/cart.do")
 	@ResponseBody
 	public Map<String,String> insertcartForm(HttpSession session, Model model, 
-			@RequestParam(value = "order_quantity")int quantity, @RequestParam(value = "product_num")int product_num) {
+			@RequestParam(value = "order_quantity")int quantity, @RequestParam(value = "product_num")int product_num
+			,@RequestParam(value = "store_product_status")int store_product_status) {
 		int mem_num = (Integer)session.getAttribute("mem_num");
 		BookStorePaymentCartVO vo = new BookStorePaymentCartVO();
 		vo.setMem_num(mem_num);

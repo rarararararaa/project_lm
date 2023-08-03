@@ -1,10 +1,13 @@
 /*=====LM문고-결제=====*/
-
+.payment-main-sidebar:after{
+	clear: both;
+} 
 /*=====공통=====*/
 .payment-main{
 	margin: 0 auto;
 	width: 1200px;
-	min-height: 768px;
+	min-height: 100%;
+	overflow: auto;
 }
 .payment-title{
 	width: 100%;
@@ -29,7 +32,8 @@ ul{
 /*=========장바구니===========*/
 /*장바구니 상품리스트*/
 .payment-main-itemList{
-	position: absolute;
+	float: left;
+	position: relative;
 	width: 890px;	
 	font-weight: bold;
 }
@@ -120,6 +124,12 @@ ul{
 .pay-book-detail li:last-child{
 	color: #A3A2A2;
 }
+/*상품이 없을 시*/
+.notCart-book{
+	font-weight: normal;
+    text-align: center;
+    padding-top: 38px;
+}
 /*증감 버튼*/
 .MP{
 	vertical-align: middle;
@@ -166,6 +176,8 @@ ul{
 }
 /*장바구니 사이드 바*/
 .payment-main-sidebar{
+	padding-top: 65px;
+	margin-right: 5px;
 	float: right;
 	width: 273px;
 	height:100%;
@@ -208,8 +220,23 @@ ul{
 	cursor: pointer;
 	background-color: #25296b;
 }
-
-
-
+/*취소하기 버튼*/
+.cancel-btn{
+	margin-top: 20px;
+	width: 273px;
+	height: 50px;
+	font-size: 16px;
+	font-weight: bold;
+	background-color: white;
+	border: 1px solid #c7c7c7;
+	border-radius: 10px;
+}
+.cancel-btn:hover{
+	cursor: pointer;
+	background-color: #e6e6e6;
+}
+.book-select:hover{
+	cursor: pointer;
+}
 
 

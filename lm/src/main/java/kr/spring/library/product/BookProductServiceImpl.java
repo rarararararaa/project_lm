@@ -102,7 +102,7 @@ public class BookProductServiceImpl implements BookProductService {
 						classno, (String)doc.get("bookname"), 
 						author, publisher,
 						 year,
-						(String)doc.get("class_nm"), 0, 1, photo, null);
+						(String)doc.get("class_nm"), 0, 1, photo, null, null);
 				log.debug("<<API 등록 확인>> : "+book);
 				bookProductMapper.insertLIB_P(book);
 			}

@@ -11,7 +11,7 @@ import kr.spring.bookstore.product.vo.ProductVO;
 
 @Mapper
 public interface BookStorePaymentCartMapper {
-	@Insert("insert into store_cart (mem_cart_num, mem_num, store_product_num, cart_quantity) values (em_cart_seq.nextval, #{mem_num}, #{store_product_num},#{cart_quantity})")
+	@Insert("insert into store_cart (mem_cart_num, mem_num, store_product_num, store_product_status, cart_quantity) values (em_cart_seq.nextval, #{mem_num}, #{store_product_num}, #{store_product_status},#{cart_quantity})")
 	public void insertCart(BookStorePaymentCartVO cartVO);
 	
 	@Select("select * from store_cart where mem_num = #{mem_num}")
