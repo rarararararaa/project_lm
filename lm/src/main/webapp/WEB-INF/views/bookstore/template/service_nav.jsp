@@ -23,6 +23,12 @@
 			e-mail : lmbs@lmbs.com<br>
 			평일 09:00 ~ 18:00 (12:00~13:00 점심시간)
 		</li>
+		<c:if test="${mem_auth==9}">
+		<li>
+			<input type="button" class="menu-btn" value="관리자 페이지"
+			  onclick="location.href='${pageContext.request.contextPath}/bookstore/adminMain.do'">
+		</li>
+		</c:if>
 	</ul>
 </div>
 <!-- service 메뉴 끝 -->
