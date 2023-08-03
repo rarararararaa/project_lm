@@ -6,14 +6,14 @@
 	<ul>
 		<li>
 			<input type="button" class="menu-btn" value="회원관리"
-			  onclick="location.href='${pageContext.request.contextPath}/bookstore/memberList.do'">
+			  onclick="location.href='${pageContext.request.contextPath}/bookstore/admin_list.do'">
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="상품관리"
-			  onclick="location.href='#'">
+			  onclick="location.href='${pageContext.request.contextPath}/bookstore/adminProductList.do'">
 		</li>
 		<li>
-			<input type="button" class="menu-btn" value="구매내역관리"
+			<input type="button" class="menu-btn" value="주문관리"
 			  onclick="location.href='#'">
 		</li>
 		<li>

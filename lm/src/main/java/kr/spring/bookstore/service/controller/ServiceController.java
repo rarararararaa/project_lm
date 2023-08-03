@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.bookstore.product.service.ProductService;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.service.service.ServiceService;
 import kr.spring.bookstore.service.vo.AnnounceVO;
 import kr.spring.bookstore.service.vo.FaqVO;
@@ -38,6 +40,9 @@ public class ServiceController {
 	
 	@Autowired
 	private MemberAdminService memberAdminService;
+	
+	@Autowired
+	private ProductService productService;
 
 	@ModelAttribute
 	public AnnounceVO initCommand() {
@@ -46,6 +51,14 @@ public class ServiceController {
 	@ModelAttribute
 	public FaqVO initCommand2() {
 		return new FaqVO();
+	}
+	@ModelAttribute
+	public MemberVO initCommand3() {
+		return new MemberVO();
+	}
+	@ModelAttribute
+	public ProductVO initCommand4() {
+		return new ProductVO();
 	}
 
 	@RequestMapping("/bookstore/service/main.do")
@@ -201,7 +214,7 @@ public class ServiceController {
 	public String main() {
 		return "bsadmin";
 	}
-	@RequestMapping("/bookstore/memberList.do")
+	@RequestMapping("/bookstore/admin_list.do")
 	public ModelAndView memberList(
 			@RequestParam(value="pageNum",
 			defaultValue="1") int currentPage,
@@ -230,6 +243,69 @@ public class ServiceController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("adminMemberList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+
+		return mav;
+	}
+	
+	@GetMapping("/bookstore/admin_update.do")
+	public String form(@RequestParam int mem_num,Model model) {
+		MemberVO memberVO = memberAdminService.selectMember(mem_num);
+		
+		log.debug("<<memberVO>> : " + memberVO);
+		model.addAttribute("memberVO", memberVO);
+		
+		return "adminMemberModify";
+	}
+	//전송된 데이터 처리
+	@PostMapping("/bookstore/admin_update.do")
+	public String submit(MemberVO memberVO, Model model,
+			         HttpServletRequest request) {
+		log.debug("<<관리자 회원권한 수정>> : " + memberVO);
+		
+		//회원권한 수정
+		memberAdminService.updateByAdmin(memberVO);
+		
+		//View에 표시할 메시지
+		model.addAttribute("message", "회원권한 수정 완료");
+		model.addAttribute("url", 
+				request.getContextPath()
+				+"/bookstore/member/admin_update.do?mem_num="+memberVO.getMem_num());
+		
+		return "common/resultView";
+	}
+	
+	@RequestMapping("/bookstore/adminProductList.do")
+	public ModelAndView productList(
+			@RequestParam(value="pageNum",
+			defaultValue="1") int currentPage,
+			String keyfield,String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+
+		//전체/검색 레코드수
+		int count = productService.selectRowCount(map);
+
+		log.debug("<<count>> : " + count);
+
+		//페이지 처리
+		PagingUtil page = 
+				new PagingUtil(keyfield,keyword,currentPage,
+						count,20,10,"adminProductList.do");
+
+		List<ProductVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+
+			list = productService.selectList(map);
+		}
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bsAdminProductList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
