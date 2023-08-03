@@ -17,6 +17,9 @@ public interface ProductMapper {
 	//알라딘 api에서 데이터 추출 후 db연동
 	public void fetchData1FromApi();
 	public void fetchData2FromApi(String isbn13);
+	//api 상품 수정
+	public void updateStore_P(ProductVO productVO);
+	public void updateStore_Pdetail(ProductVO productVO);
 	//책 번호 생성
 	@Select("SELECT STORE_PRODUCT_MANAGE_seq.nextval FROM dual")
 	public int selectStoreProductNum();	
@@ -28,7 +31,8 @@ public interface ProductMapper {
 	public int selectRowCount(Map<String,Object> map);
 	
 	//상품 상세
-	public ProductVO selectProduct(String store_product_isbn13);	
+	public ProductVO selectProduct(String store_product_isbn13);
+	
 	
 	//좋아요
 	@Select("SELECT * FROM STORE_MEMBER_ZZIM WHERE store_product_num=#{store_product_num} AND mem_num=#{mem_num}")

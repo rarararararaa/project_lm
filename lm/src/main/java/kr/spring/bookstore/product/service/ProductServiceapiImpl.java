@@ -40,8 +40,8 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 	    try {
 	    		//알라딘 상품조회 url
 	    		URL apiUrl=new URL("http://www.aladin.co.kr/ttb/api/ItemList.aspx?"
-	    				+ "ttbkey="+ttbkey+"&QueryType=ItemNewSpecial&MaxResults=100&start=100&"
-	    				+ "SearchTarget=foreign&output=js&Version=20131101");
+	    				+ "ttbkey="+ttbkey+"&QueryType=bestseller&MaxResults=100&start=100&"
+	    				+ "SearchTarget=book&output=js&Version=20131101");
 	    		conn=(HttpURLConnection)apiUrl.openConnection();
 	    		conn.setRequestMethod("GET");
 	    		conn.setRequestProperty("Content-type", "application/json; charset=utf-8");
@@ -88,6 +88,9 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 					if(productMapper.selectProduct(isbn13)==null) {
 						productMapper.insertStore_P(product);
 						productMapper.insertStore_Pdetail(product);
+					}else {
+						productMapper.updateStore_P(product);
+						productMapper.updateStore_Pdetail(product);
 					}
 					log.debug("product:"+product);
 				}
@@ -125,6 +128,11 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 						continue;
 					}
 					JSONObject j = (JSONObject)docs.get(i);
+					JSONObject subInfo=(JSONObject)j.get("subInfo");
+					log.debug("subInfo : "+subInfo);
+					JSONObject ratingInfo=(JSONObject)subInfo.get("ratingInfo");
+					log.debug("ratingInfo : "+ratingInfo);
+					
 					String description=" ";
 					if(!((String)j.get("description")).trim().equals("")) {
 						description=(String)j.get("description");
@@ -145,9 +153,8 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 						seriesName=(String)docs2.get("seriesName");
 					}
 					if(j.get("ratingInfo")!=null) { 
-						JSONObject docs3 =(JSONObject)j.get("ratingInfo");
-						ratingCount=Integer.parseInt(String.valueOf(docs3.get("ratingCount")));
-						ratingScore=Integer.parseInt(String.valueOf(docs3.get("ratingScore")));
+						ratingCount=Integer.parseInt(String.valueOf(ratingInfo.get("ratingCount")));
+						ratingScore=Integer.parseInt(String.valueOf(ratingInfo.get("ratingScore")));
 					}
 					
 					
@@ -192,7 +199,7 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 							 ratingCount,
 							 discount,
 							 ratingScore,
-							 1,0);
+							 0,0);
 				}	 				
 				log.debug("product2 : "+product2);
 	    }catch(Exception e) {

@@ -63,6 +63,38 @@
 		)
 	</insert>
 	
+	<!-- api 수정 -->	
+	<update id="updateStore_P" parameterType="ProductVO">
+		UPDATE STORE_PRODUCT_MANAGE SET
+			STORE_PRODUCT_SEARCHCATEGORYID=#{store_product_searchcategoryId},
+			STORE_PRODUCT_ISBN13=#{store_product_isbn13},
+			STORE_PRODUCT_STOCKSTATUS=#{store_product_stockstatus},
+			STORE_PRODUCT_SEARCHCATEGORYNAME=#{store_product_searchcategoryName}
+		WHERE STORE_PRODUCT_NUM=#{store_product_num}
+	</update>
+	<update id="updateStore_Pdetail" parameterType="ProductVO">
+		UPDATE STORE_PRODUCT_DETAIL SET
+			store_product_title=#{store_product_title},
+			store_product_author=#{store_product_author},
+			store_product_pubdate=#{store_product_pubdate},
+			store_product_cover=#{store_product_cover},
+			store_product_description=#{store_product_description},
+			store_product_categoryid=#{store_product_categoryid},
+			store_product_categoryname=#{store_product_categoryname},
+			store_product_pricesales=#{store_product_pricesales},
+			store_product_pricestandard=#{store_product_pricestandard},
+			store_product_publisher=#{store_product_publisher},
+			store_product_stock=#{store_product_stock},
+			store_product_seriesId=#{store_product_seriesId},
+			store_product_seriesName=#{store_product_seriesName},
+			store_product_customerReviewRank=#{store_product_customerReviewRank},
+			store_product_ratingCount=#{store_product_ratingCount},
+			store_product_discount=#{store_product_discount},
+			store_product_ratingScore=#{store_product_ratingScore},
+			store_product_status=#{store_product_status}
+		WHERE STORE_PRODUCT_NUM=#{store_product_num}			
+	</update>	
+	
 	<!-- 게시판 목록 -->
 	<sql id="productSearch">
 			<if test="keyword != null and keyword != ''">
