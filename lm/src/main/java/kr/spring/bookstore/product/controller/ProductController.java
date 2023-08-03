@@ -104,12 +104,15 @@ public class ProductController {
 		
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		if(user==null) {//로그인이 되지 않은 상태
+		int user=0;
+		if(session.getAttribute("mem_num")!=null) {
+			user = (Integer)session.getAttribute("mem_num");
+		}
+		if(user==0) {//로그인이 되지 않은 상태
 			mapJson.put("status", "noFav");
 		}else {
 			//로그인된 회원번호 셋팅
-			fav.setMem_num(user.getMem_num());
+			fav.setMem_num(user);
 			
 			ProductFavVO productFav = productService.selectFav(fav);
 			if(productFav!=null) {
@@ -118,6 +121,7 @@ public class ProductController {
 				mapJson.put("status","noFav");
 			}			
 		}
+		log.debug("<<게시판 좋아요 읽기 - status>> : " + mapJson.get("status"));
 		mapJson.put("count", productService.selectFavCount(
 				                   fav.getStore_product_num()));
 		return mapJson;

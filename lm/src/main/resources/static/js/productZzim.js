@@ -18,6 +18,7 @@ $(function(){
 	//찜 등록(삭제)이벤트 처리
 	$('#output_zzim').click(function(event){
 		event.preventDefault();
+		let content=document.getElementsByClassName("wish-ico")[0];
 		$.ajax({
 			url: '/lm/writeZzim.do',
 			type: 'post',
@@ -27,7 +28,7 @@ $(function(){
 				if(param.result == 'logout'){
 					alert('로그인 후 좋아요를 눌러주세요');
 				}else if(param.result == 'success'){
-					displayZzim(param);
+					content.classList.toggle("active");
 				}else{
 					alert('좋아요 표시 오류 발생');
 				}
@@ -42,9 +43,9 @@ $(function(){
 	function displayZzim(param){
 		let content=document.getElementsByClassName("wish-ico")[0];
 		if(param.status=='yesFav'){
-			content.classList.toggle("active");
+			content.classList.add("active");
 		}else if(param.status=='noFav'){
-			content.classList.toggle("active");
+			content.classList.remove("active");
 		}else{
 			alert('좋아요 표시 오류 발생');
 		}
