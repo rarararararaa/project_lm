@@ -15,14 +15,23 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
+
 //byte[]로 데이터를 반환하는 프로퍼티를 출력하게 되면 
 //데이터양이 많아서 느려지는 현상이 발생하기 때문에 
 //출력하지 않도록 제외시킴
-
+@Getter
+@Setter
 public class MyPageVO {
-	
+	public int mem_num;
+	public int mem_grade;
+	public int mem_point;
+	public int zzim_num;
+	public int review_num;
+	public int rep_num;
+	public int coupon_num;
+	public String mem_id;
+	public String mem_reg_date;
+	public String mem_modify_date;
 	
 }
 

@@ -39,6 +39,9 @@ public interface MemberMapper {
 	@Select("SELECT * FROM spmember m JOIN spmember_detail d "
 			+ "ON m.mem_num=d.mem_num WHERE m.mem_num=#{mem_num}")
 	public MemberVO selectMember(Integer mem_num);
+	//cell,name을 이용한 아이디 찾기
+	@Select("SELECT mem_id FROM lm_member_manage WHERE mem_num = (SELECT mem_num FROM lm_member_detail WHERE mem_cell = #{mem_cell} AND mem_name = #{mem_name})")
+	public String findId(MemberVO member);
 	//회원정보 수정
 	@Update("UPDATE spmember SET nick_name=#{nick_name} WHERE mem_num=#{mem_num}")
 	public void updateMember(MemberVO member);

@@ -94,6 +94,7 @@ hr{
 	width:60px;
 	height:60px;
 	padding-top:40px;
+	font-size:15px;
 }
 .content-reg-date{
 	display:inline-block;
@@ -111,8 +112,8 @@ hr{
 	display:inline-block;
 	width:280px;
 	height:50px;
-	padding-top:30px;
-	font-size:20px;
+	font-size:18px;
+	margin-top:40px;
 }
 .content-point{
 	display:inline-block;
@@ -120,7 +121,7 @@ hr{
 	height:50px;
 	margin-top:30px;
 	margin-bottom:40px;
-	font-size:20px;
+	font-size:18px;
 }
 .top-right-right-div{
 	display:flex;
