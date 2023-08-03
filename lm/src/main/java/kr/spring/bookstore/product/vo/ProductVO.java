@@ -38,5 +38,7 @@ public class ProductVO {
 	private int store_product_ratingScore;
 	private int store_product_status;
 	
+	private int cart_quantity; 
+	
 	
 }

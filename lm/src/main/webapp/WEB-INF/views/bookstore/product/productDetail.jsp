@@ -46,15 +46,15 @@
 				<div class="count-box">
 					<span>
 						<button class="decrease"></button>
-						<input name="order_quantity" type="number" value="1" autocomplete="off" readonly="readonly">
+						<input name="cart_quantity" type="number" value="1" autocomplete="off" readonly="readonly">
 						<button class="increase"></button>
 					</span>
 				</div>
 				<div class="prod-button-box">
-						<input type="hidden" name="product_num" value="${product.store_product_num}">
-						<input type="hidden" name="product_price" value="${product.store_product_pricestandard}">
-						<input type="hidden" name="product_stock" value="${product.store_product_stock}">
-						<input type="hidden" name="product_title" value="${product.store_product_title}">
+						<input type="hidden" name="store_product_num" value="${product.store_product_num}">
+						<input type="hidden" name="store_product_pricestandard" value="${product.store_product_pricestandard}">
+						<input type="hidden" name="store_product_stock" value="${product.store_product_stock}">
+						<input type="hidden" name="store_product_title" value="${product.store_product_title}">
 						<button class="btn-line-gray"><span class="wish-ico"></span></button>
 						<button class="btn-lg cart-btn" id="cart_btn">장바구니</button>
 						<button class="btn-lg orderRightAway" id="orderRigthAway">바로구매</button>
