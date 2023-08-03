@@ -3,8 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <div>
 	<c:forEach var="product" items="${product}">
+		<table>
 		<tr>
-			<td>${product.store_product_title}</td>
+			<td>
+				<a href="/lm/productDetail.do?store_product_isbn13=${product.store_product_isbn13}">
+				<img src="${product.store_product_cover}">
+				</a>
+			</td>
+			<td>
+				<a href="/lm/productDetail.do?store_product_isbn13=${product.store_product_isbn13}">
+				${product.store_product_title}</a>
+			</td>
 		</tr>
+		<tr>
+		</tr>
+		</table>
 	</c:forEach>
+	<div>${page}</div>
 </div>

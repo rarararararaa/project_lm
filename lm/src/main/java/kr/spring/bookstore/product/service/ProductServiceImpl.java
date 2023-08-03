@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.spring.bookstore.product.dao.ProductMapper;
+import kr.spring.bookstore.product.vo.ProductFavVO;
 import kr.spring.bookstore.product.vo.ProductVO;
 
 @Service
@@ -28,5 +29,26 @@ public class ProductServiceImpl implements ProductService{
 	public int selectRowCount(Map<String, Object> map) {
 		return productMapper.selectRowCount(map);
 	}
+
+	@Override
+	public ProductFavVO selectFav(ProductFavVO fav) {
+		return productMapper.selectFav(fav);
+	}
+
+	@Override
+	public int selectFavCount(Integer store_product_num) {
+		return productMapper.selectFavCount(store_product_num);
+	}
+
+	@Override
+	public void insertFav(ProductFavVO fav) {
+		productMapper.insertFav(fav);
+	}
+
+	@Override
+	public void deleteFav(Integer ZZIM_NUM) {
+		productMapper.deleteFav(ZZIM_NUM);
+	}
+
 
 }

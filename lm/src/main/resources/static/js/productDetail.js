@@ -11,10 +11,6 @@ $(function(){
 		changeNum($(this),num);
 	});
 	
-	//버튼 누를 시 장바구니로 submit
-	$('#cart_btn').click(function(){
-		submitCart();
-	});
 	
 	//바로구매 누를 시 결제 창으로 submit
 	$('#orderRightAway').click(function(){
@@ -45,7 +41,7 @@ function changeNum(tag,num){
 	
 	total+=(fixedprice*number);
 	$(tag).closest('.right-area').prev()
-							  .find('.prod-info-price').children().eq(1).text(total.toLocaleString("ko-KR")+" 원");
+							  .find('.prod-info-price').find('#total').text(total.toLocaleString()+' 원');
 	
 }
 

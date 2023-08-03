@@ -104,7 +104,7 @@
 		ON d.store_product_num=m.store_product_num
 		<where>
 			<include refid="productSearch"></include>
-			<include refid="searchCategoryId"></include>
+			<!-- <include refid="searchCategoryId"></include> -->
 		</where>
 	</select>
 	
@@ -132,7 +132,7 @@
 			  		ON d.store_product_num=m.store_product_num
 			  		<where>
 				  		<include refid="productSearch"></include>
-						<include refid="searchCategoryId"></include>
+<!-- 						<include refid="searchCategoryId"></include> -->
 			  		</where>
 			  		<include refid="productOrder"></include>
 			  		)a)
