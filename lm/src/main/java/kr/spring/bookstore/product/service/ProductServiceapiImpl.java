@@ -84,7 +84,7 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 							product2.getStore_product_ratingCount(),
 							 0,
 							 product2.getStore_product_ratingScore(),
-							 1);
+							 1,0);
 					if(productMapper.selectProduct(isbn13)==null) {
 						productMapper.insertStore_P(product);
 						productMapper.insertStore_Pdetail(product);
@@ -192,7 +192,7 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 							 ratingCount,
 							 discount,
 							 ratingScore,
-							 1);
+							 1,0);
 				}	 				
 				log.debug("product2 : "+product2);
 	    }catch(Exception e) {

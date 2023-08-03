@@ -65,8 +65,7 @@ function submitCart(){
 					if(param.result == 'logout'){
 						alert('로그인 후 사용하세요');
 					}else if(param.result == 'success'){
-						
-						location.href='../bookstore/payment/cart.do';
+						location.reload();
 					}else{
 						alert('장바구니 담기 오류');
 					}
