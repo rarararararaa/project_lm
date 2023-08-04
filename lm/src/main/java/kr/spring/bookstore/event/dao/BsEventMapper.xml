@@ -32,7 +32,7 @@
 			#{event_date_end}
 		)
 	</insert>
-	
+	<!--  -->
 	<update id="updateEvent" parameterType="bsEventVO">
 			UPDATE store_event_board
 			SET 
