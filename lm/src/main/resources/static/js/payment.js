@@ -82,6 +82,7 @@ $(function(){
 		console.log(form_data_LM);
 		console.log(form_data_USED);
 	})
+
 //주문하기 버튼 이벤트[submit] - cartInfo 
 $('#payForm').submit(function(event){
 	event.preventDefault;
@@ -105,14 +106,34 @@ $('#payForm').submit(function(event){
 		}
 	})
 	
-	 console.log(cartInfo);
+	ajaxOrder(cartInfo);
 	//let LM_payForm = $('#LM_payForm').serialize();
 	//console.log(LM_payForm);
 	})	
 })
 //*********함수************//
-function ajax(cartInfo){
-	
+function ajaxOrder(cartInfo){
+	 console.log(cartInfo);
+	$.ajax({
+		url: 'cartAction.do',
+		type:'post',
+		data:{
+			data:JSON.stringify(cartInfo)
+		},
+		dataType:'json',
+		success:function(param){
+			if(param.result == 'logout'){
+				alert('로그인 후 이용하세요');
+				location.href='/member/login.do';
+			}
+			else if(param.result == 'success'){
+				location.href='order.do';
+			}
+		},
+		error:function(){
+			alert('네트워크 오류')
+		}
+	})
 }
 //===============================함수[상품 개수 증감&가격]==================================//
 function changeNum(tag, num){
@@ -177,7 +198,7 @@ function totalPrice(){
 		if($('#LM_select').is(':checked') && $('#UESD_select').is(':checked')){
 			$('#allSelect').prop('checked',true);
 		}else{
-			$('#allSelect').prop('checked',false);t
+			$('#allSelect').prop('checked',false);
 		}
 		totalPrice();
 	}

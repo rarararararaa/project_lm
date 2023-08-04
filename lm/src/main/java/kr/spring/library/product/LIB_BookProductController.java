@@ -34,8 +34,8 @@ public class LIB_BookProductController {
 	//도서 상세
 	@GetMapping("/bookstore/lm/bookDetail.do")
 	public String cartForm(@RequestParam String callNum, Model model) {
-		log.debug("<<도서 상세>> : "+callNum);
 		BookProductVO book = bookProductService.selectDetailLIB_P(callNum);
+		log.debug("<<도서 상세>> : "+book);
 		//대출 도서 리스트
 		List<BookProductVO> list = bookProductService.selectListLIB_P(book.getLib_product_isbn());
 		//도서분류

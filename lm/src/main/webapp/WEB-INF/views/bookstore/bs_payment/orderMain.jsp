@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="payment-main">
-	<p class="payment-title">장바구니</p>
+	<p class="payment-title">주문/결제</p>
 	<div class="payment-main-itemList"><!-- 장바구니 상품리스트 -->
 	<div class="payment-allSelect">
 		<div id="all">
@@ -93,7 +93,7 @@
 			<c:if test="${cart.store_product_status > 0}"><!-- 새 상품 : 0 -->
 			<c:forEach var="book" items="${book_list}">
 			<c:if test="${book.store_product_num == cart.store_product_num}">
-			<tr id="웨이래">
+			<tr>
 				<td><input type="checkbox" value="3" class="LM-item"></td>
 				<td colspan="3"><!-- 장바구니 상품 내용 -->
 					<c:if test="${book.store_product_cover == null}">

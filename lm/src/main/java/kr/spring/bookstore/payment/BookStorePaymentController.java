@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.product.vo.ProductVO;
+import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @Slf4j
@@ -33,25 +35,47 @@ public class BookStorePaymentController {
 	BookStorePaymentService bookStorePaymentService;
 	@PostMapping("/bookstore/payment/cart.do")
 	@ResponseBody
-	public Map<String,String> insertcartForm(HttpSession session, Model model, 
-			@RequestParam(value = "order_quantity")int quantity, @RequestParam(value = "product_num")int product_num
-			,@RequestParam(value = "store_product_status")int store_product_status) {
+	public Map<String,String> insertcartForm(HttpSession session, Model model, ProductVO product) {
 		int mem_num = (Integer)session.getAttribute("mem_num");
-		BookStorePaymentCartVO vo = new BookStorePaymentCartVO();
-		vo.setMem_num(mem_num);
-		vo.setCart_quantity(quantity);
-		vo.setStore_product_num(product_num);
-		log.debug("<<cartInsert>> : "+vo);
-		bookStorePaymentService.insertCart(vo);
+		
+		List<BookStorePaymentCartVO> cart_db = bookStorePaymentService.selectCartList(mem_num);
+		boolean check = false;
+		int cart_quantity = 0;
+		for(BookStorePaymentCartVO vo : cart_db) {
+			log.debug("<<quantity>> : "+vo.getCart_quantity());
+			log.debug("<<product_q>> : "+product.getCart_quantity());
+			if(vo.getStore_product_num() == product.getStore_product_num()) {
+				check = true;
+				cart_quantity = vo.getCart_quantity();
+				break;
+			}
+		}
+		//중복 책 검사
+		if(check) {
+			int total = cart_quantity + product.getCart_quantity();
+			bookStorePaymentService.updateBookQuantity(total, product.getStore_product_num(),mem_num);
+		}else {
+			BookStorePaymentCartVO vo = new BookStorePaymentCartVO();
+			vo.setMem_num(mem_num);
+			vo.setCart_quantity(product.getCart_quantity());
+			vo.setStore_product_num(product.getStore_product_num());
+			log.debug("<<cartInsert>> : "+vo);
+			bookStorePaymentService.insertCart(vo);
+		}
 		
 		Map<String, String> mapJson = new HashMap<String, String>();
 		mapJson.put("result", "success");
 		
 		return mapJson;
 	}
-	//장바구니  
+	//======================장바구니FORM===========================//  
 	@GetMapping("/bookstore/payment/cart.do")
 	public String cartForm(HttpSession session, Model model) {
+		String mem_id = (String)session.getAttribute("mem_id");
+		log.debug("<<로그인 체크>> : "+mem_id);
+		if(mem_id == null) {
+			return "bsMain";
+		}
 		int mem_num = (Integer)session.getAttribute("mem_num");
 		int grade = (Integer)session.getAttribute("mem_grade");
 		double point = 0.01;
@@ -71,6 +95,62 @@ public class BookStorePaymentController {
 		log.debug("<<grade>>"+point);
 		return "cart";
 	}
+	//======================장바구니 > 결제 페이지===========================//  
+	@PostMapping("/bookstore/payment/cartAction.do")
+	@ResponseBody 
+	public Map<String, Object> actionCart(@RequestParam Map<String, Object> data, HttpSession session){
+		int mem_num = (Integer)session.getAttribute("mem_num");
+		String mem_id = (String)session.getAttribute("mem_id");
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		if(mem_id == null) {
+			mapJson.put("result", "logout");
+		}
+		log.debug("<<ACTION!>> : "+data.get("data"));
+		String test = (String)data.get("data");
+		try {
+			
+			JSONArray array = JSONArray.fromObject(test);
+			List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+			for(int i=0;i<array.size();i++) {
+				JSONObject obj = (JSONObject)array.get(i);
+				Map<String, String> re = new HashMap<String, String>();
+				
+				re.put("cart_quantity",(String)obj.get("cart_quantity"));
+				re.put("store_product_num", (String)obj.get("store_product_num"));
+				re.put("store_product_pricestandard", (String)obj.get("store_product_pricestandard"));
+				
+				list.add(re);
+			}
+			log.debug("<<fsjkdlkfjkals>> : "+list);
+			
+			mapJson.put("result", "success");
+			for(Map<String, String> map : list) {
+				BookStorePaymentCartVO vo = new BookStorePaymentCartVO();
+				vo.setCart_quantity(Integer.parseInt(map.get("cart_quantity")));
+				vo.setStore_product_num(Integer.parseInt(map.get("store_product_num")));
+				vo.setMem_num(mem_num);
+				log.debug("<<tlqkf>> : "+vo.getCart_quantity());
+				bookStorePaymentService.updateCart(vo);
+			}
+			//log.debug("<<되냐???????>>"+list);
+			
+			//List<ProductVO> list = data.get("data"); 
+		//log.debug("<<ACTION-list>> : "+list);
+				
+		} catch (Exception e) {  
+			e.printStackTrace(); 
+		}
+		
+		return mapJson;
+	}
+	
+	@GetMapping("/bookstore/payment/order.do")
+	public String orderForm() {
+		
+		return "order";
+	}
+	
+	
 	//멤버 등급에 따른 포인드 % 가져오기
 	public double getPoint(int grade) {
 		double point = 0.01;
@@ -81,5 +161,4 @@ public class BookStorePaymentController {
 		
 		return point;
 	}
-
 }
