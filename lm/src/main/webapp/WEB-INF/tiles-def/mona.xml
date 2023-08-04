@@ -14,6 +14,10 @@
     <definition name="bsEventWrite" extends="bsMain">
     	<put-attribute name="bsTitle" value="이벤트 작성"/>
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventWrite.jsp"/>
+    </definition>
+    <definition name="bsEventList" extends="bsMain">
+    	<put-attribute name="bsTitle" value="이벤트 리스트"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventList.jsp"/>
     </definition> 
     <definition name="attendanceEvent" extends="bsMain">
     	<put-attribute name="bsTitle" value="이벤트 작성"/>

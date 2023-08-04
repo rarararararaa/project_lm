@@ -9,6 +9,22 @@ body {
 	color: #000;
 }
 
+/* 찜 */
+span.wish-ico{
+	display:inline-block;
+	background-image: url(../images/heart.png);
+	width:12px;
+	height:12px;
+	background-size:12px 12px;	
+}
+span.wish-ico.active{
+	display:inline-block;
+	background-image: url(../images/heart_active.png);
+	width:12px;
+	height:12px;
+	background-size:12px 12px;		
+}
+
 /* 상품 수량 제어 */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {

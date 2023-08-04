@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 회원권한 수정 - 관리자 시작 -->
+<!-- 회원권한 수정 시작 -->
 <div class="page-main">
-	<h2>회원권한 수정(관리자용)</h2>
+	<h2>회원 권한 수정</h2>
 	<form:form modelAttribute="memberVO" action="admin_update.do"
 	             id="modify_form">
 	    <form:hidden path="mem_num"/>         
@@ -57,7 +57,7 @@
 		</div>          
 	</form:form>
 </div>
-<!-- 회원권한 수정 - 관리자 끝 -->
+<!-- 회원권한 수정 끝 -->
 
 
 

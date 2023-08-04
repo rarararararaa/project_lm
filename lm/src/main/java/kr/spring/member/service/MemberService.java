@@ -20,6 +20,11 @@ public interface MemberService {
 	public String selectSalt(String mem_id);
 	//회원번호를 이용한 회원정보 구하기
 	public MemberVO selectMember(Integer mem_num);
+	//cell,name을 이용한 아이디 찾기
+	public String findId(MemberVO member);
+	
+	
+	
 	//회원정보 수정
 	public void updateMember(MemberVO member);
 	//비밀번호 수정

@@ -24,24 +24,18 @@ import lombok.ToString;
 public class MemberVO {
 	//lm_member_manage, lm_member_detail
 	private int mem_num;
-	@NotEmpty
 	private String mem_id;
 	private String mem_au_id;
 	private int mem_auth;
 	private Date mem_reg_date;
 	private Date mem_exp_date;
 	private String mem_stop_reason;
-	@NotEmpty
 	private String mem_name;
-	@NotEmpty
 	private String mem_passwd;
 	@Size(min=9,max=15)
-	@NotEmpty
 	private String mem_cell;
 	@Email
-	@NotEmpty
 	private String mem_email;
-	@NotEmpty
 	private String mem_identify;
 	private String mem_identify2;
 	private int mem_point;

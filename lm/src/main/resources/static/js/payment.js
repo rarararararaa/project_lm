@@ -3,7 +3,17 @@ $(function(){
 	allCheck();
 	
 	totalPrice();
+	//장바구니에 상품이 있을 시 상품 없음 표시 제거
+	let LM_list = $('#LM_payForm').find('.LM-item').val();
+	if(LM_list != null){
+		$('#LM_NOT').addClass('hidden-place');
+	}
+	let USED_list = $('#USED_payForm').find('.LM-item').val();
+	if(USED_list != null){
+		$('#USED_NOT').addClass('hidden-place');
+	}
 	
+//===============================[전체/LM/중고 선택]==================================//
 	$('.book-select').on('click',function(){// 전체 LM문고 중고상품 버튼
 		//alert('왜 안됨');
 		$('.book-select').not($(this)).removeClass('active animated');
@@ -26,7 +36,7 @@ $(function(){
 		allCheck();
 		totalPrice();
 	})
-	
+//===============================체크 박스==================================//	
 	//전체 체크
 	$('#allSelect').change(function(){
 		//alert('we')
@@ -72,11 +82,84 @@ $(function(){
 		console.log(form_data_LM);
 		console.log(form_data_USED);
 	})
-	
-	
-})
-//===============================함수[LM/중고 선택]==================================//
 
+//주문하기 버튼 이벤트[submit] - cartInfo 
+$('#payForm').submit(function(event){
+	event.preventDefault;
+	let cartInfo = [];
+	let book_info = {};
+	$('table').find('input[type=checkbox]').each(function(index){
+		if($(this).is(':checked')){
+			//alert(index);
+			let tr = $(this).closest('tr');
+			let td = tr.children('td').eq(1).find('ul').children();
+			let td2 = tr.children('td').eq(2).find('ul').children();
+			//카트 상품 정보
+			book_info.store_product_num = td.eq(0).attr('data-num');
+			book_info.store_product_title = td.eq(0).text();//책 이름
+			book_info.store_product_pricestandard = td.eq(2).text(); //책 가격
+			book_info.cart_quantity = td2.eq(1).find('span').text(); //수량
+			
+			//console.log(book_info);
+			
+			cartInfo.push({...book_info});
+		}
+	})
+	
+	ajaxOrder(cartInfo);
+	//let LM_payForm = $('#LM_payForm').serialize();
+	//console.log(LM_payForm);
+	})	
+	
+//선탣한 도서 장바구니에서 삭제
+$('.del-btn').click(function(){
+	let store_product_num =  $(this).closest('tr').find('#test').children().eq(0).attr('data-num');
+	//alert(store_product_num);	
+	let check = confirm('해당 상품을 삭제하사겠습니까?');
+	if(check){
+		$.ajax({
+			url:'Cartdelete.do',
+			type:'post',
+			data:{store_product_num:store_product_num},
+			dataType:'json',
+			success: function(param){
+				if(param.result == 'logout'){
+					alert('로그인 후 이용할 수 있습니다.');
+				}else if(param.result == 'success'){
+					location.reload();
+				}
+			},
+			error: function(){
+				alert('네트워크 오류');
+			}
+		})
+	}
+})
+})//function() 끝
+//*********함수************//
+function ajaxOrder(cartInfo){
+	 console.log(cartInfo);
+	$.ajax({
+		url: 'cartAction.do',
+		type:'post',
+		data:{
+			data:JSON.stringify(cartInfo)
+		},
+		dataType:'json',
+		success:function(param){
+			if(param.result == 'logout'){
+				alert('로그인 후 이용하세요');
+				location.href='/member/login.do';
+			}
+			else if(param.result == 'success'){
+				location.href='order.do';
+			}
+		},
+		error:function(){
+			alert('네트워크 오류')
+		}
+	})
+}
 //===============================함수[상품 개수 증감&가격]==================================//
 function changeNum(tag, num){
 //	let test = $(tag).closest('table').find('ul').children('li').eq(2).text(); 상품 가격
@@ -140,7 +223,7 @@ function totalPrice(){
 		if($('#LM_select').is(':checked') && $('#UESD_select').is(':checked')){
 			$('#allSelect').prop('checked',true);
 		}else{
-			$('#allSelect').prop('checked',false);t
+			$('#allSelect').prop('checked',false);
 		}
 		totalPrice();
 	}

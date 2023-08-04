@@ -63,6 +63,116 @@
 		)
 	</insert>
 	
+	<!-- api 수정 -->	
+	<update id="updateStore_P" parameterType="ProductVO">
+		UPDATE STORE_PRODUCT_MANAGE SET
+			STORE_PRODUCT_SEARCHCATEGORYID=#{store_product_searchcategoryId},
+			STORE_PRODUCT_ISBN13=#{store_product_isbn13},
+			STORE_PRODUCT_STOCKSTATUS=#{store_product_stockstatus},
+			STORE_PRODUCT_SEARCHCATEGORYNAME=#{store_product_searchcategoryName}
+		WHERE STORE_PRODUCT_NUM=#{store_product_num}
+	</update>
+	<update id="updateStore_Pdetail" parameterType="ProductVO">
+		UPDATE STORE_PRODUCT_DETAIL SET
+			store_product_title=#{store_product_title},
+			store_product_author=#{store_product_author},
+			store_product_pubdate=#{store_product_pubdate},
+			store_product_cover=#{store_product_cover},
+			store_product_description=#{store_product_description},
+			store_product_categoryid=#{store_product_categoryid},
+			store_product_categoryname=#{store_product_categoryname},
+			store_product_pricesales=#{store_product_pricesales},
+			store_product_pricestandard=#{store_product_pricestandard},
+			store_product_publisher=#{store_product_publisher},
+			store_product_stock=#{store_product_stock},
+			store_product_seriesId=#{store_product_seriesId},
+			store_product_seriesName=#{store_product_seriesName},
+			store_product_customerReviewRank=#{store_product_customerReviewRank},
+			store_product_ratingCount=#{store_product_ratingCount},
+			store_product_discount=#{store_product_discount},
+			store_product_ratingScore=#{store_product_ratingScore},
+			store_product_status=#{store_product_status}
+		WHERE STORE_PRODUCT_NUM=#{store_product_num}			
+	</update>	
+	
+	<!-- 게시판 목록 -->
+	<sql id="productSearch">
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield==1">
+					b.title LIKE '%' || #{keyword} || '%' AND 
+				</if>
+				<if test="keyfield==2">
+					m.id LIKE '%' || #{keyword} || '%' or
+					m.nick_name LIKE '%' || #{keyword} || '%' AND 
+				</if>
+				<if test="keyfield==3">
+					b.content LIKE '%' || #{keyword} || '%' AND 
+				</if>
+				<if test="keyfield==4">
+					b.title LIKE '%' || #{keyword} || '%' or
+					b.content LIKE '%' || #{keyword} || '%' AND 
+				</if>
+			</if>
+	</sql>
+	
+	<!-- 나중에 판매량 추가 -->
+	<sql id="productOrder">
+		<if test="order==1">
+			ORDER BY d.store_product_num DESC
+		</if>
+		<if test="order==2">
+			ORDER BY d.stort_product_pricestandard DESC
+		</if>
+		<if test="order==3">
+			ORDER BY d.stort_product_pricestandard ASC
+		</if>
+	</sql>
+	
+	<!-- 전체/검색 레코드수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM store_product_detail d JOIN store_product_manage m
+		ON d.store_product_num=m.store_product_num
+		<where>
+			<include refid="productSearch"></include>
+			<!-- <include refid="searchCategoryId"></include> -->
+		</where>
+	</select>
+	
+	<!-- 국내도서/외국도서 -->
+	<sql id="searchCategoryId">
+		<if test="store_product_searchcategoryid==0">
+			m.store_product_searchcategoryid=0
+		</if>
+		<if test="store_product_searchcategoryid==1">
+			m.store_product_searchcategoryid=1
+		</if>
+	</sql>
+	
+	<!-- 전체/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="productVO">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+						*
+			  		FROM store_product_detail d
+			  		JOIN store_product_manage m
+			  		ON d.store_product_num=m.store_product_num
+			  		<where>
+				  		<include refid="productSearch"></include>
+<!-- 						<include refid="searchCategoryId"></include> -->
+			  		</where>
+			  		<include refid="productOrder"></include>
+			  		)a)
+		<![CDATA[
+		WHERE rnum>=#{start} AND rnum<=#{end}
+		]]>
+	</select>	
+	
 	<!-- 상품 상세 -->
 	<select id="selectProduct" parameterType="string">
 		SELECT

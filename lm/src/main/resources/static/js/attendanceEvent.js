@@ -52,15 +52,18 @@ $(function(){
 			
 			if(param.attendance.point_get1==1){
 				document.getElementById('point_get1').className = 'yesPoint';
+				alert('출석 도장 10개 획득 완료! 100Point가 지급되었습니다.');
 			}
 			if(param.attendance.point_get2==1){
 				document.getElementById('point_get2').className = 'yesPoint';
+				alert('출석 도장 20개 획득 완료! 200Point가 지급되었습니다.');
 			}
 			if(param.attendance.point_get3==1){
 				document.getElementById('point_get3').className = 'yesPoint';
+				alert('출석 한달 완주 성공! 300Point가 지급되었습니다.');
 			}
 		}else if(param.status == 'noCount'){
-			$('#attendance_count').text(' 개');
+			$('#attendance_count').text(' ');
 		}else{
 			alert('표시 오류 발생');
 		}

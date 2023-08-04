@@ -7,11 +7,11 @@
 <tiles-definitions>
 	<!-- 회원목록 -->
     <definition name="admin_memberList" extends="libAdmin">
-    	<put-attribute name="libTitle" value="회원목록(관리자용)"/>
+    	<put-attribute name="libTitle" value="회원목록"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/member/admin_memberList.jsp"/>
     </definition>
     <definition name="admin_memberModify" extends="libAdmin">
-    	<put-attribute name="libTitle" value="회원권한수정(관리자용)"/>
+    	<put-attribute name="libTitle" value="회원권한 수정"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/member/admin_memberModify.jsp"/>
     </definition>
 

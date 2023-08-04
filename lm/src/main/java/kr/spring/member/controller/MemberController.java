@@ -239,7 +239,7 @@ public class MemberController {
 	}
 	//회원가입 폼 호출
 	@GetMapping("/lm/register/template/registerMain.do")
-	public String form() {
+	public String registerForm() {
 		return "registerMain";
 	}
 	
@@ -249,7 +249,7 @@ public class MemberController {
 		log.debug("<<회원가입>> : " + memberVO);
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return form();
+			return registerForm();
 		}
 		String passwd = memberVO.getMem_passwd();
 		
@@ -265,6 +265,38 @@ public class MemberController {
 		//회원가입 manage, detail, home에 데이터 insert
 		memberService.insertMember(memberVO);
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
+		if(lo==1) {
+			return "common/notice_bs";
+		}else {
+			return "common/notice_lib";
+		}
+	}
+	
+	/*=======================
+	 * ID찾기
+	 *=======================*/
+	
+	//ID찾기 폼 호출
+	@GetMapping("/lm/findId/template/findIdMain.do")
+	public String findIdForm() {
+		return "findIdMain";
+	}
+	
+	//ID찾기 처리
+	@PostMapping("/lm/findId/template/findIdMain.do")
+	public String findId(@Valid MemberVO memberVO,@RequestParam int lo,BindingResult result, Model model) {
+		log.debug("<<ID찾기>> : " + memberVO);
+		
+		String mem_id = memberService.findId(memberVO);
+		
+		//존재하는 아이디 판별
+		if(mem_id != null) {
+			model.addAttribute("accessMsg", "아이디는 " +mem_id+" 입니다.");
+		}else {
+			model.addAttribute("accessMsg", "존재하는 아이디가 없습니다.");
+		}
+		
+		//리턴 헤더 지정
 		if(lo==1) {
 			return "common/notice_bs";
 		}else {

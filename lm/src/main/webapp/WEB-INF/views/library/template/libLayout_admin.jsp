@@ -15,7 +15,7 @@
 	<div id="main_header">
 		<tiles:insertAttribute name="libHeader"/>
 	</div>
-	<div class="side-height">
+	<div id="lib_admin_box" class="side-height">
 		<div id="page_nav">
 			<tiles:insertAttribute name="libNav"/>
 		</div>

@@ -32,4 +32,26 @@ public class BookStorePaymentServiceImpl implements BookStorePaymentService{
 		return bookStorePaymentCartMapper.selectDetailBook(store_product_num);
 	}
 
+	@Override
+	public void updateBookQuantity(int total, int store_product_num, int mem_num) {
+		bookStorePaymentCartMapper.updateBookQuantity(total, store_product_num, mem_num);
+	}
+
+	@Override
+	public void updateCart(BookStorePaymentCartVO cartVO) {
+		bookStorePaymentCartMapper.updateCart(cartVO);
+	}
+
+	@Override
+	public void deleteCart(int store_product_num, int mem_num) {
+		bookStorePaymentCartMapper.deleteCart(store_product_num, mem_num);
+	}
+
+	
+
+
+
+
+
+
 }

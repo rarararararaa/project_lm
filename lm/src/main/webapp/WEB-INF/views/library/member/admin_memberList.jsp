@@ -15,7 +15,7 @@
 	});
 </script>
 <div class="page-main">
-	<h2>회원목록(관리자용)</h2>
+	<h2>회원 목록</h2>
 	<form action="admin_list.do" id="search_form" method="get">
 		<ul class="search">
 			<li>

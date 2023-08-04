@@ -12,7 +12,7 @@
     	<put-attribute name="nav" value="/WEB-INF/views/bookstore/template/service_nav.jsp"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/main.jsp"/>
 	    <put-attribute name="footer" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/> 
-    </definition> 
+    </definition>
 	<definition name="announceList" extends="service">
     	<put-attribute name="title" value="공지사항 목록"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/announceList.jsp"/>
@@ -32,6 +32,26 @@
     <definition name="faqList" extends="service">
     	<put-attribute name="title" value="자주묻는질문 목록"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/faqList.jsp"/>
+    </definition>
+    
+    <definition name="bsadmin" template="/WEB-INF/views/bookstore/template/bsAdminLayout.jsp">
+    	<put-attribute name="title" value="고객센터"/>
+    	<put-attribute name="header" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/bookstore/template/admin_nav.jsp"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/admin/main.jsp"/>
+	    <put-attribute name="footer" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/> 
+    </definition>
+    <definition name="adminMemberList" extends="bsadmin">
+    	<put-attribute name="title" value="회원관리"/>
+	    <put-attribute name="body" value="/WEB-INF/views/library/member/admin_memberList.jsp"/>
+    </definition>
+     <definition name="adminMemberModify" extends="bsadmin">
+    	<put-attribute name="title" value="회원권한 수정"/>
+	    <put-attribute name="body" value="/WEB-INF/views/library/member/admin_memberModify.jsp"/>
+    </definition>
+    <definition name="bsAdminProductList" extends="bsadmin">
+    	<put-attribute name="title" value="회원관리"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/product/adminProductList.jsp"/>
     </definition>
 </tiles-definitions>
 

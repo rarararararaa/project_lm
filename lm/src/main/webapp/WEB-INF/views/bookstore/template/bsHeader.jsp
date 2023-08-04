@@ -23,10 +23,15 @@
 								임시 / mem_num = <strong>${mem_num}</strong>, mem_id = <strong>${mem_id}</strong>, mem_auth = <strong>${mem_auth}</strong>
 							</li>
 							<li>
-								<a href="${pageContext.request.contextPath}/lm/mypage/template/myPageMain.do?lo=1">마이페이지</a>
+								<a href="${pageContext.request.contextPath}/lm/mypage/main/myPageMain.do?lo=1">마이페이지</a>
 							</li>
 							<li>
 								<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do?lo=1">로그아웃</a>
+							</li>
+						</c:if>
+						<c:if test="${mem_auth == 9 }">
+							<li>
+								<a href="${pageContext.request.contextPath}/bookstore/adminMain.do">관리자페이지</a>
 							</li>
 						</c:if>
 						<li class="customer_service_item"><a href="${pageContext.request.contextPath}/bookstore/service/main.do">고객센터</a></li>
@@ -129,7 +134,7 @@
 					<a class="gnb_link">신상품</a>
 				</li>
 				<li class="gnb_item">
-					<a class="gnb_link"  href="${pageContext.request.contextPath}/bookstore/event/attendanceEvent.do">이벤트</a>
+					<a class="gnb_link"  href="${pageContext.request.contextPath}/bookstore/event/list.do">이벤트</a>
 				</li>
 				<li class="gnb_item">
 					<a class="gnb_link">사은품</a>

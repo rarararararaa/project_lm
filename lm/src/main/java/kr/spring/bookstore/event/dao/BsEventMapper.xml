@@ -11,6 +11,8 @@
 			event_title,
 			event_short_content,
 			event_content,
+			event_img_small,
+			event_img_big,
 			event_reg_date,
 			event_date_start,
 			event_date_end
@@ -23,11 +25,72 @@
 			#{event_title},
 			#{event_short_content},
 			#{event_content},
+			#{event_img_small},
+			#{event_img_big},
 			SYSDATE,
 			#{event_date_start},
 			#{event_date_end}
 		)
 	</insert>
+	
+	<!-- sql 태그와 include 태그를 이용해 SQL문 재사용 -->
+	<sql id="eventOrder">
+		<if test="order == 1">
+			WHERE event_board_status > #{event_board_status}
+		</if>
+		<if test="order == 2">
+			WHERE event_board_status=1
+		</if>
+		<if test="order == 3">
+			WHERE event_board_status=2
+		</if>
+	</sql>
+	<sql id="eventSearch">
+		<if test="keyword != null and keyword != ''">
+			<if test="keyfield == 1">
+				AND event_title LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 2">
+				AND event_short_content LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 3">
+				AND (event_title LIKE '%' || #{keyword} || '%' OR event_short_content LIKE '%' || #{keyword} || '%')
+			</if>
+		</if>
+	</sql>
+	
+	<!-- 전체/검색 레코드 수 -->
+	<select id="selectEventCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM store_event_board
+		<include refid="eventSearch"></include>
+	</select>
+	
+	<!-- 전체/검색 목록 -->
+	<select id="selectEventList" parameterType="map" resultType="bsEventVO">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+			  			*
+			  		FROM store_event_board
+			  		<include refid="eventOrder"></include>
+			  		<include refid="eventSearch"></include>
+			  		ORDER BY event_board_num DESC) a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	
+	
+	<!--  -->
+	
+	
+	
 	<!-- 출석 개수 및 상태 조회 -->
 	<select id="selectAttendanceDetail" parameterType="Integer" resultType="bsAttendancePointVO">
 		SELECT 

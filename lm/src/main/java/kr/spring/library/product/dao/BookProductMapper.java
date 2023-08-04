@@ -22,7 +22,7 @@ public interface BookProductMapper {
 	@Select("SELECT * FROM lib_product_manage")
 	public List<BookProductVO> getIsbn();
 	//상세 정보 수정
-	@Update("UPDATE lib_product_manage SET lib_product_description = #{lib_product_description} WHERE lib_product_isbn = #{lib_product_isbn}")
-	public void updateLIB_P_description(String lib_product_description, String lib_product_isbn);
+	@Update("UPDATE lib_product_manage SET lib_product_detail = #{lib_product_detail} WHERE lib_product_isbn = #{lib_product_isbn}")
+	public void updateLIB_P_description(String lib_product_detail, String lib_product_isbn);
 	
 }

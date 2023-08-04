@@ -35,8 +35,14 @@
 				</div>
 				<div class="page-button">
 					<label for="auto"><input type="checkbox" name="auto" id="auto">로그인상태유지</label>
-					<input type="button" class="button1" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/lm/findId/template/findIdMain.do'">
-					<input type="button" class="button2" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/lm/findPw/template/findPwMain.do'">
+					<c:if test="${lo == 1}">
+						<input type="button" class="button1" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/lm/findId/template/findIdMain.do?lo=1'">
+						<input type="button" class="button2" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/lm/findPw/template/findPwMain.do?lo=1'">
+					</c:if>
+					<c:if test="${lo != 1}">
+						<input type="button" class="button1" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/lm/findId/template/findIdMain.do?lo=1'">
+						<input type="button" class="button2" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/lm/findPw/template/findPwMain.do?lo=1'">
+					</c:if>
 				</div>
 				<div class="page-button2">
 					<form:button class="button3">로그인</form:button>

@@ -107,3 +107,23 @@ table.striped-table tr:nth-child(odd){
 .align-right{
 	text-align:right;
 }
+.question{
+	font-size:20pt;
+	padding:20px 20px 20px 20px;
+	background-color:#E1E1E1;
+	margin:10px;
+}
+.question:hover{
+	font-size:20pt;
+	padding:20px 20px 20px 20px;
+	margin:10px;
+	color:#4dac27;
+	transition:0.2s ease-out;
+}
+.answer{
+	background:#ffffff;
+	margin-top:10px;
+	padding:10px 10px 10px 30px;
+	font-size:10pt;
+	color:#000;
+}

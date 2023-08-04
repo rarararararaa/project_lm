@@ -11,15 +11,19 @@
 	    <put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
     </definition> 
     
-    <!-- LM 문고 결제 시작-->
-    
     <!-- 장바구니 -->
      <definition name="cart" extends="bsMain">
     	<put-attribute name="title" value="장바구니"/>
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/bs_payment/cartMain.jsp"/>
     </definition> 
+    <!-- 결제 페이지 -->
+     <definition name="order" extends="bsMain">
+    	<put-attribute name="title" value="결제 페이지"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/bs_payment/orderMain.jsp"/>
+    </definition> 
     
-    <!-- 장바구니 -->
+    
+    <!-- 도서관 도서 상세 -->
      <definition name="bookDetail" extends="libMain">
     	<put-attribute name="title" value="도서상세"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lib_book/LIB_bookDetail.jsp"/>
