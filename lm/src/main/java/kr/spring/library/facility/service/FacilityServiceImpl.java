@@ -22,14 +22,18 @@ public class FacilityServiceImpl implements FacilityService{
 
 	@Override
 	public List<FacilityVO> selectFacilityList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return facilityMapper.selectFacilityList(map);
 	}
 
 	@Override
 	public FacilityVO selectFacility(Integer facility_num) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int selectFacilityCount(Map<String, Object> map) {
+		return facilityMapper.selectFacilityCount(map);
 	}
 
 }
