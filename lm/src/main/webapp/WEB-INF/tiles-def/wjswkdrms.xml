@@ -53,6 +53,15 @@
     	<put-attribute name="title" value="회원관리"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/product/adminProductList.jsp"/>
     </definition>
+    
+    <definition name="insertFacility" extends="libMain">
+    	<put-attribute name="libTitle" value="시설추가"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/insertFacility.jsp"/>
+    </definition>
+    <definition name="facilityList" extends="libMain">
+    	<put-attribute name="libTitle" value="시설목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/facilityList.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

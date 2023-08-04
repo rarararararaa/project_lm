@@ -230,7 +230,7 @@ a:hover {
 		<div class="lib-header-menu">
 			<ul>
 				<li><a href="#">자료검색</a></li>
-				<li><a href="#">신청 참여</a></li>
+				<li><a href="${pageContext.request.contextPath}/library/facilityList.do">신청 참여</a></li>
 				<li><a href="#">시설이용</a></li>
 				<li><a href="#">도서관소개</a></li>
 			</ul>
