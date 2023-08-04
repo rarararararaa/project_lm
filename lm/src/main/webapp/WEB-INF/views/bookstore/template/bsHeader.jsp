@@ -29,6 +29,11 @@
 								<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do?lo=1">로그아웃</a>
 							</li>
 						</c:if>
+						<c:if test="${mem_auth == 9 }">
+							<li>
+								<a href="${pageContext.request.contextPath}/bookstore/adminMain.do">관리자페이지</a>
+							</li>
+						</c:if>
 						<li class="customer_service_item"><a href="${pageContext.request.contextPath}/bookstore/service/main.do">고객센터</a></li>
 					</ul>
 				</div>
