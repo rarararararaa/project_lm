@@ -26,7 +26,7 @@ public class BsEventVO {
 	private String event_content;		//이벤트 소개(상세페이지 출력)
 	private byte[] event_img_small;
 	private byte[] event_img_big;
-	private Date event_reg_date;			//이벤트 글 등록 날짜
+	private Date event_reg_date;			//이벤트 글 등록 날짜-
 	private Date event_modify_date;			//이벤트 글 수정 날짜
 	private String event_date_start;		//이벤트 시작날짜
 	private String event_date_end;			//이벤트 종료날짜

@@ -17,7 +17,7 @@
 <!-- include ckeditor js -->
 <script type="text/javascript" src="${pateContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pateContext.request.contextPath}/js/uploadAdapter.js"></script>
-<!-- 이벤트 글 수정 시작 -->
+<!-- 이벤트 글 수정 시작! -->
 <div class="event-form-main">
 	<form:form modelAttribute="bsEventVO" action="update.do" id="modify_form" class="event-form"
 	                          enctype="multipart/form-data">

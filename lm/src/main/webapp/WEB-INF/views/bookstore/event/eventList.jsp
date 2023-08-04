@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/BsEventList.css">
-<!-- 이벤트 글 list 시작-->
+<!-- 이벤트 글 list 시작!-->
 <div class="listPageMain">
 	<h2>EVENT</h2>
 	<div class="bann-con">

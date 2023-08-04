@@ -52,7 +52,7 @@ public interface BsEventMapper {
 	/* - 사용X 위에 수정코드
 	//출석 이벤트 - 포인트부여 상세정보
 	public BsAttendancePointVO selectAttendencePoint(@Param(value="mem_num") int mem_num, @Param(value="event_month") int event_month);
-	*/
+	ㅎ*/
 	
 	//출석 이벤트 - 출석 개수
 	@Select("SELECT COUNT(*) FROM store_event_attendance WHERE event_attendance_point_num=#{event_attendance_point_num}")
