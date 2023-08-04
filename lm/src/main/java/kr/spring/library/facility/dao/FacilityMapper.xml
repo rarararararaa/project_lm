@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.library.facility.dao.FacilityMapper">
+	<insert id="insertFacility" parameterType="facilityVO">
+		INSERT INTO lib_facility_order(
+		  facility_num,
+		  facility_name,
+		  facility_content,
+		  facility_image)
+		VALUES(
+		  #{facility_num},
+		  #{facility_name},
+		  #{facility_content},
+		  #{facility_image})
+	</insert>
+
+</mapper>
