@@ -151,7 +151,7 @@
 			<table id="payInfo">
 				<tr>
 					<td>상품 금액</td>
-					<td id="total">0원</td>
+					<td id="total" data-total = '0'>0원</td>
 				</tr>
 				<tr>
 					<td>배송비</td>

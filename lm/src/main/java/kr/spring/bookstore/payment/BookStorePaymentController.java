@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -91,9 +92,9 @@ public class BookStorePaymentController {
 		}
 		log.debug("<<cart>> : "+list);
 		log.debug("<<cart_book>> : "+book_list);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("book_list", book_list);
-		point = getPoint(grade);
 		model.addAttribute("point", point);
 		log.debug("<<grade>>"+point);
 		return "cart";
@@ -116,7 +117,8 @@ public class BookStorePaymentController {
 	//======================장바구니 > 결제 페이지===========================//  
 	@PostMapping("/bookstore/payment/cartAction.do")
 	@ResponseBody 
-	public Map<String, Object> actionCart(@RequestParam Map<String, Object> data, HttpSession session){
+	public Map<String, Object> actionCart(@RequestParam Map<String, Object> data, HttpSession session, int total){
+		log.debug("<<total>>"+total);
 		int mem_num = (Integer)session.getAttribute("mem_num");
 		String mem_id = (String)session.getAttribute("mem_id");
 		Map<String, Object> mapJson = new HashMap<String, Object>();
@@ -140,16 +142,22 @@ public class BookStorePaymentController {
 				list.add(re);
 			}
 			log.debug("<<fsjkdlkfjkals>> : "+list);
+			List<BookStorePaymentCartVO> cartList = new ArrayList<BookStorePaymentCartVO>();
 			
-			mapJson.put("result", "success");
 			for(Map<String, String> map : list) {
 				BookStorePaymentCartVO vo = new BookStorePaymentCartVO();
 				vo.setCart_quantity(Integer.parseInt(map.get("cart_quantity")));
 				vo.setStore_product_num(Integer.parseInt(map.get("store_product_num")));
 				vo.setMem_num(mem_num);
+				cartList.add(vo);
 				log.debug("<<tlqkf>> : "+vo.getCart_quantity());
+				log.debug("<<orderList>> : "+cartList);
 				bookStorePaymentService.updateCart(vo);
 			}
+			mapJson.put("result", "success");
+			orderForm(cartList, total);
+			//mapJson.put("cartList", cartList);
+			
 			//log.debug("<<되냐???????>>"+list);
 			
 			//List<ProductVO> list = data.get("data"); 
@@ -162,8 +170,10 @@ public class BookStorePaymentController {
 		return mapJson;
 	}
 	
-	@GetMapping("/bookstore/payment/order.do")
-	public String orderForm() {
+	
+	@RequestMapping("/bookstore/payment/order.do")
+	public String orderForm(@RequestParam List<BookStorePaymentCartVO> cart, int total) {
+		log.debug("<<됐으면 좋겠다>>"+cart);
 		
 		return "order";
 	}

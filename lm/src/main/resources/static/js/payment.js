@@ -105,8 +105,8 @@ $('#payForm').submit(function(event){
 			cartInfo.push({...book_info});
 		}
 	})
-	
-	ajaxOrder(cartInfo);
+	let total = $('#total').attr('data-total');
+	ajaxOrder(cartInfo, total);
 	//let LM_payForm = $('#LM_payForm').serialize();
 	//console.log(LM_payForm);
 	})	
@@ -137,13 +137,15 @@ $('.del-btn').click(function(){
 })
 })//function() 끝
 //*********함수************//
-function ajaxOrder(cartInfo){
-	 console.log(cartInfo);
+//===============================현재 카트 값 보내기=====================//
+function ajaxOrder(cartInfo, total){
+	 //console.log(cartInfo);
+
 	$.ajax({
 		url: 'cartAction.do',
 		type:'post',
 		data:{
-			data:JSON.stringify(cartInfo)
+			data:JSON.stringify(cartInfo),total
 		},
 		dataType:'json',
 		success:function(param){
@@ -152,14 +154,22 @@ function ajaxOrder(cartInfo){
 				location.href='/member/login.do';
 			}
 			else if(param.result == 'success'){
-				location.href='order.do';
+				console.log(total);
+				//orderForm(param.cartList,total);
+				//location.href='order.do';
 			}
 		},
 		error:function(){
 			alert('네트워크 오류')
 		}
-	})
+	})//
 }
+function orderForm(cartList,total){
+	console.log(cartList);
+	console.log(total);
+	$.post('order.do',{cart:cartList, total:total});
+}
+
 //===============================함수[상품 개수 증감&가격]==================================//
 function changeNum(tag, num){
 //	let test = $(tag).closest('table').find('ul').children('li').eq(2).text(); 상품 가격
@@ -191,6 +201,7 @@ function totalPrice(){
 		//alert(price);
 		//alert(num);
 		total += (price*num);
+		$('#total').attr('data-total',total);
 	})
 	if(total >= 50000){
 		delivery = 0;

@@ -24,7 +24,7 @@ public class BookProductVO {
 	private int lib_product_loanCnt;
 	private int lib_product_product_status;//대출 상태
 	private String lib_product_bookImageUrl;//이미지	
-	private String lib_product_bookImageData;
+	private String lib_product_bookImageData;//null값 안쓰는 거임
 	private String lib_product_detail;
 	
 

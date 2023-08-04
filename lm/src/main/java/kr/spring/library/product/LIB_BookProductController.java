@@ -32,7 +32,7 @@ public class LIB_BookProductController {
 	}
 	
 	//도서 상세
-	@GetMapping("/bookstore/lm/bookDetail.do")
+	@GetMapping("/library/lib_book/bookDetail.do")
 	public String cartForm(@RequestParam String callNum, Model model) {
 		BookProductVO book = bookProductService.selectDetailLIB_P(callNum);
 		log.debug("<<도서 상세>> : "+book);
