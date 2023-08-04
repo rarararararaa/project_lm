@@ -2,6 +2,7 @@ package kr.spring.library.product;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
 
 import kr.spring.library.product.vo.BookProductVO;
 
@@ -16,4 +17,7 @@ public interface BookProductService {
 	
 	//도서 상세 API 읽기
 	public String getDetailData(String isbn);
+	
+	//도서 검색
+	public List<BookProductVO> searchDetailLIB_P(String lib_product_bookname);	
 }

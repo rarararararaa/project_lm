@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.library.rent.dao.RentMapper">
+
+	<!-- 대출 등록 -->
+	<insert id="insertRentHistory" parameterType="RentVO">
+		INSERT INTO lib_history(
+			rent_num,
+			callNumber,
+			mem_num,
+			lib_product_status,
+			rent_reg_date,
+			return_reg_deadline,
+			return_reg_date)
+		VALUES (
+			LIB_HISTORY_SEQ.nextval,
+			#{callNumber},
+			#{mem_num},
+			#{lib_product_status},
+			#{rent_reg_date},
+			#{return_reg_deadline},
+			#{return_reg_date})
+	</insert>
+	
+	<!-- 대출 목록 -->
+</mapper>

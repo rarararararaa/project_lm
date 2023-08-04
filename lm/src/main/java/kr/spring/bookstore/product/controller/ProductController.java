@@ -40,7 +40,7 @@ public class ProductController {
 	/*==========================
 	 * 상품 리스트
 	 *==========================*/
-	@RequestMapping("/lm/productList.do")
+	@RequestMapping("/bookstore/product/productList.do")
 	public ModelAndView getList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 								@RequestParam(value="order",defaultValue="1") int order,
 								String keyfield,String keyword){
@@ -81,7 +81,7 @@ public class ProductController {
 	/*==========================
 	 * 상품 상세
 	 *==========================*/	
-	@GetMapping("/lm/productDetail.do")
+	@GetMapping("/bookstore/product/productDetail.do")
 	public ModelAndView getDetail(@RequestParam(value="store_product_isbn13", required=false) String store_product_isbn13) {
 		log.debug("<<글상세 - isbn13>> : " + store_product_isbn13);
 		
@@ -97,7 +97,7 @@ public class ProductController {
 	 * 상품 찜하기
 	 *==========================*/
 	//상품 찜 읽기
-	@RequestMapping("/lm/getZzim.do")
+	@RequestMapping("/bookstore/product/getZzim.do")
 	@ResponseBody
 	public Map<String,Object> getFav(ProductFavVO fav, HttpSession session){
 		log.debug("<<게시판 좋아요 읽기 - ProductFavVO>> : " + fav);
@@ -128,7 +128,7 @@ public class ProductController {
 	}
 	
 	//부모글 좋아요 등록/삭제
-	@RequestMapping("/lm/writeZzim.do")
+	@RequestMapping("/bookstore/product/writeZzim.do")
 	@ResponseBody
 	public Map<String,Object> writeFav(ProductFavVO fav,HttpSession session,@RequestParam int store_product_num){
 		log.debug("<<게시판 좋아요 등록/삭제 - ProductFavVO>> : " + fav);

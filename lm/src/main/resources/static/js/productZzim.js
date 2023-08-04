@@ -2,7 +2,7 @@ $(function(){
 	//찜 선택여부
 	function selectZzim(){
 		$.ajax({
-			url:'/lm/getZzim.do',
+			url:'/bookstore/product/getZzim.do',
 			type: 'post',
 			data:{store_product_num:$('#output_zzim').attr('data-num')},
 			dataType: 'json',
@@ -20,7 +20,7 @@ $(function(){
 		event.preventDefault();
 		let content=document.getElementsByClassName("wish-ico")[0];
 		$.ajax({
-			url: '/lm/writeZzim.do',
+			url: '/bookstore/product/writeZzim.do',
 			type: 'post',
 			data:{store_product_num:$('#output_zzim').attr('data-num')},
 			dataType: 'json',
