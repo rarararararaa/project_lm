@@ -42,6 +42,13 @@ public class BookStorePaymentServiceImpl implements BookStorePaymentService{
 		bookStorePaymentCartMapper.updateCart(cartVO);
 	}
 
+	@Override
+	public void deleteCart(int store_product_num, int mem_num) {
+		bookStorePaymentCartMapper.deleteCart(store_product_num, mem_num);
+	}
+
+	
+
 
 
 

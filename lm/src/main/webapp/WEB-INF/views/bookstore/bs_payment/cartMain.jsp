@@ -68,6 +68,9 @@
 					<p class="delivery-img">배송정보</p>
 					<p class="delivery-text">내일(7/25, 화)도착예정</p>
 				</td>
+				<td>
+					<img src="${pageContext.request.contextPath}/images/delete_btn.png" class="del-btn">
+				</td>
 			</tr>
 			</c:if>
 			</c:forEach>
@@ -124,6 +127,9 @@
 				<td colspan="2"><!-- 배송 정보 -->
 					<p class="delivery-img">배송정보</p>
 					<p class="delivery-text">내일(7/25, 화)도착예정</p>
+				</td>
+				<td>
+					<img src="${pageContext.request.contextPath}/images/delete_btn.png" class="del-btn">
 				</td>
 			</tr>
 			</c:if>

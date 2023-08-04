@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -96,6 +97,21 @@ public class BookStorePaymentController {
 		model.addAttribute("point", point);
 		log.debug("<<grade>>"+point);
 		return "cart";
+	}
+	//책 삭제
+	@RequestMapping("/bookstore/payment/Cartdelete.do")
+	@ResponseBody
+	public Map<String, Object> deleteCartBook(int store_product_num, HttpSession session){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		String mem_id = (String)session.getAttribute("mem_id");
+		log.debug("<<로그인 체크>> : "+mem_id);
+		if(mem_id == null) {
+			mapJson.put("result", "logout");
+		}
+		int mem_num = (Integer)session.getAttribute("mem_num");
+		bookStorePaymentService.deleteCart(store_product_num, mem_num);
+		mapJson.put("result", "success");
+		return mapJson;
 	}
 	//======================장바구니 > 결제 페이지===========================//  
 	@PostMapping("/bookstore/payment/cartAction.do")

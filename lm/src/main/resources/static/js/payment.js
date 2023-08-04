@@ -110,7 +110,32 @@ $('#payForm').submit(function(event){
 	//let LM_payForm = $('#LM_payForm').serialize();
 	//console.log(LM_payForm);
 	})	
+	
+//선탣한 도서 장바구니에서 삭제
+$('.del-btn').click(function(){
+	let store_product_num =  $(this).closest('tr').find('#test').children().eq(0).attr('data-num');
+	//alert(store_product_num);	
+	let check = confirm('해당 상품을 삭제하사겠습니까?');
+	if(check){
+		$.ajax({
+			url:'Cartdelete.do',
+			type:'post',
+			data:{store_product_num:store_product_num},
+			dataType:'json',
+			success: function(param){
+				if(param.result == 'logout'){
+					alert('로그인 후 이용할 수 있습니다.');
+				}else if(param.result == 'success'){
+					location.reload();
+				}
+			},
+			error: function(){
+				alert('네트워크 오류');
+			}
+		})
+	}
 })
+})//function() 끝
 //*********함수************//
 function ajaxOrder(cartInfo){
 	 console.log(cartInfo);

@@ -16,4 +16,6 @@ public interface BookStorePaymentService {
 	public void updateBookQuantity(int total, int store_product_num, int mem_num);
 	//장바구니 정보 업데이트
 	public void updateCart(BookStorePaymentCartVO cartVO);
+	
+	public void deleteCart(int store_product_num, int mem_num);
 }

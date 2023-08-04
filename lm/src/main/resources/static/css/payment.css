@@ -101,8 +101,21 @@ ul{
 	height: 35px;
 	padding-bottom: 10px;
 }
-.payment-book td:last-child{
+.payment-book td:nth-child(4){
 	padding-left: 40px;
+}
+.payment-book td:last-child{
+	vertical-align: top;
+	width: 50px;
+}
+.payment-book td:last-child img{
+	margin-top: 10px;
+	margin-left: 20px;
+	width: 20px;
+	height: 20px;
+}
+.del-btn:hover, .MP-btn{
+	cursor: pointer;
 }
 .payment-book img{
 	width: 83px;
