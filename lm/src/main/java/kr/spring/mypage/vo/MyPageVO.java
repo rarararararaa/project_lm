@@ -32,7 +32,13 @@ public class MyPageVO {
 	public String mem_id;
 	public String mem_reg_date;
 	public String mem_modify_date;
-	
+	public String mem_old_passwd;
+	public String mem_new_passwd;
+	public String mem_new_passwd2;
+	public String mem_new_email;
+	public String mem_confirm_email;
+	public String mem_old_cell;
+	public String mem_new_cell;
 }
 
 

@@ -123,7 +123,7 @@
     
     <definition name="pointInfoMain" extends="myPageMain">
     	<put-attribute name="myPageTitle" value="포인트 정보"/>
-    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/pointfnfo/pointInfo.jsp"/>
+    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/pointinfo/pointInfo.jsp"/>
     </definition>
     
     <definition name="gradeInfoMain" extends="myPageMain">

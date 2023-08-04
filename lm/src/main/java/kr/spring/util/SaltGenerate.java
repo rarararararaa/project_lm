@@ -4,7 +4,9 @@ import java.security.SecureRandom;
 
 public class SaltGenerate {
 	public static String getSalt() {
-		
+		/*=======================
+		 * 회원의 고유 salt값을 생성하는 유틸리티 메서드
+		 *=======================*/
 		//RAndom 객체 생성
 		SecureRandom rand = new SecureRandom();
 		byte[] salt = new byte[20];

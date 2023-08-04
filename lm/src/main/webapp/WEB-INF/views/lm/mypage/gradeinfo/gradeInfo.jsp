@@ -28,27 +28,43 @@
       </ul>
     </div>
     <div class="right-div">
-      <div class="list-name">
-        <h2> 주문 내역</h2>
-      </div>
-      	<div class="status">
-      		<div class="status-info" id="step1">입금/결제 완료</div>
-      		<div class="status-info" id="step2">배송중</div>
-      		<div class="status-info" id="step3">배송완료</div>
-      	</div>
-      	<hr id="status-hr">
-        <div class="title-list">
-           <div id="title-list1">주문 번호</div>
-           <div id="title-list2">상품정보</div>
-           <div id="title-list3">주문 금액(수량)</div>
-           <div id="title-list4">주문 일자</div>
-           <div id="title-list5">주문 상태</div>
+        <h2>등급 정보</h2>
+        <div class="list-first">
+        	<div class="photo">사진</div>
+        	<div class="list-first-data">
+        		<div class="list-first-data-detail">LV.${mem_grade} ${mem_grade_name}</div>
+        		<div class="list-first-data-detail">누적 구매 금액 : ${mem_order_price_str}</div>
+        		<div class="list-first-data-detail">현재 등급 점수 : ${mem_grade_point} 점</div>
+        		<div class="list-first-data-detail">누적 구매 금액은 실시간 반영이 아닌, 구매 확정을 기준으로 집계됩니다.</div>
+        	</div>
         </div>
-        <hr id="title-list-hr">
-        <div class="item-list">
-           <div class=""></div>
+        <h2>회원 등급 혜택</h2>
+        <div class="list-second">
+        	<div class="list-second-first">
+        		<div class="lsf">등급 점수</div>
+        		<div class="lsf">LV.0 Bronze</div>
+        		<div class="lsf">LV.1 Silver</div>
+        		<div class="lsf">LV.2 Gold</div>
+        		<div class="lsf">LV.3 Platinum</div>
+        		<div class="lsf">LV.4 Diamond</div>
+        	</div>
+        	<div class="list-second-second">
+        		<div class="lsf">구매 금액</div>
+        		<div class="lsf">0원 이상<br>100,000원 미만</div>
+        		<div class="lsf">100,000원 이상<br>500,000원 미만</div>
+        		<div class="lsf">500,000원 이상<br>1,500,000원 미만</div>
+        		<div class="lsf">1,500,000원 이상<br>3,000,000원 미만</div>
+        		<div class="lsf">3,000,000원 이상</div>
+        	</div>
+        	<div class="list-second-third">
+        		<div class="lsf">등급 적립</div>
+        		<div class="lsf">구매 금액의 0.5%</div>
+        		<div class="lsf">구매 금액의 1.0%</div>
+        		<div class="lsf">구매 금액의 1.5%</div>
+        		<div class="lsf">구매 금액의 2.0%</div>
+        		<div class="lsf">구매 금액의 3.0%</div>
+        	</div>
         </div>
-      <div class="align-center"></div>
     </div>
   </div>
 </body>

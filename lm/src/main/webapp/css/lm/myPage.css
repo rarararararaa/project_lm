@@ -37,6 +37,66 @@ hr{
 	margin:10px auto;
 	border:1px solid black;
 }
+.list-first{
+	display:flex;
+	width:900px;
+	height:300px;
+	margin-left:50px;
+	margin-top:50px;
+	margin-bottom:150px;
+	flex-direction:row;
+}
+.list-first .photo{
+	width:280px;
+	height:280px;
+	margin:10px auto;
+	border:1px solid black;
+}
+.list-first-data{
+	display:flex;
+	width:550px;
+	height:300px;
+	flex-direction:column;
+}
+.list-first-data-detail{
+	font-size:22px;
+	margin-top:26px;
+}
+.list-second{
+	display:flex;
+	width:900px;
+	height:300px;
+	margin-left:50px;
+	margin-top:50px;
+	margin-bottom:150px;
+	flex-direction:column;
+}
+.list-second-first{
+	display:flex;
+	width:900px;
+	height:40px;
+	flex-direction:row;
+	font-size:17px;
+}
+.list-second-second{
+	display:flex;
+	width:900px;
+	height:80px;
+	flex-direction:row;
+	font-size:17px;
+}
+.list-second-third{
+	display:flex;
+	width:900px;
+	height:80px;
+	flex-direction:row;
+	font-size:17px;	
+}
+.lsf{
+	display:flex;
+	border:1px solid gray;
+	width:150px;
+}
 .top-right-div{
 	display:flex;
 	width:900px;

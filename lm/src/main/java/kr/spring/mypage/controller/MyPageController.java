@@ -84,7 +84,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/asklist/askListMain.do")
 	public String askListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "askListMain";
 	}
 	/*=======================
 	 * 대출/반납내역
@@ -96,7 +96,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
 	public String checkOutReturnListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "checkOutReturnListMain";
 	}
 	/*=======================
 	 * 희망도서신청내역
@@ -108,7 +108,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/wantbooklist/wantBookListMain.do")
 	public String wantBookListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "wantBookListMain";
 	}
 	/*=======================
 	 * 프로그램신청내역
@@ -120,7 +120,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/programapplylist/programApplyListMain.do")
 	public String programApplyListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "programApplyListMain";
 	}
 	/*=======================
 	 * 책기증신청내역
@@ -132,7 +132,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/donatebooklist/donateBookListMain.do")
 	public String donateBookListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "donateBookListMain";
 	}
 	/*=======================
 	 * 시설이용신청내역
@@ -144,7 +144,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
 	public String facilityApplyListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "facilityApplyListMain";
 	}
 	/*=======================
 	 * 책예약내역
@@ -156,7 +156,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/bookreservationlist/bookReservationListMain.do")
 	public String bookReservationListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "bookReservationListMain";
 	}
 	/*=======================
 	 * 분실도서신고내역
@@ -168,7 +168,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/booklostlist/bookLostListMain.do")
 	public String bookLostListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "bookLostListMain";
 	}
 	/*=======================
 	 * 이벤트참여내역
@@ -180,7 +180,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/eventparticipatelist/eventParticipateListMain.do")
 	public String eventParticipateListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "eventParticipateListMain";
 	}
 	/*=======================
 	 * 중고서적등록내역
@@ -192,7 +192,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/usedbookapplylist/usedBookApplyListMain.do")
 	public String usedBookApplyListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "usedBookApplyListMain";
 	}
 	/*=======================
 	 * 찜한도서내역
@@ -204,7 +204,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/zzimbooklist/zzimBookListMain.do")
 	public String zzimBookListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "zzimBookListMain";
 	}
 	/*=======================
 	 * 도서후기
@@ -216,7 +216,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/bookwritelist/bookWriteListMain.do")
 	public String bookWriteListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "bookWriteListMain";
 	}
 	/*=======================
 	 * 독후감작성
@@ -228,7 +228,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/bookreportlist/bookReportListMain.do")
 	public String bookReportListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "bookReportListMain";
 	}
 	/*=======================
 	 * 보유쿠폰
@@ -240,19 +240,24 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/couponlist/couponListMain.do")
 	public String couponListHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		
+		return "couponListMain";
 	}
 	/*=======================
 	 * 회원정보수정
 	 *=======================*/
 	@RequestMapping("/lm/mypage/myedit/myEditMain.do")
-	public String myEdit() {
+	public String myEdit(@Valid MyPageVO mypageVO,Model model) {
+		model.addAttribute("mypageVO", mypageVO);
 		return "myEditMain"; //타일스 설정의 식별자
 	}
-	@GetMapping("/lm/mypage/myedit/myEditMain.do")
-	public String myEditHandle(@RequestParam int lo) {
-
-		return "myPageMain";
+	@PostMapping("/lm/mypage/myedit/myEditMain.do")
+	public String myEditHandle(@RequestParam int lo,BindingResult result, Model model,@Valid MyPageVO mypageVO) {
+		
+		//name,email,cell 가져오기
+		
+		
+		return "myEditMain";
 	}
 	/*=======================
 	 * 사용가능포인트정보
@@ -264,7 +269,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/pointinfo/pointInfoMain.do")
 	public String pointInfoHandle(@RequestParam int lo) {
 
-		return "myPageMain";
+		return "pointInfoMain";
 	}
 	/*=======================
 	 * 등급정보
@@ -274,8 +279,27 @@ public class MyPageController {
 		return "gradeInfoMain"; //타일스 설정의 식별자
 	}
 	@GetMapping("/lm/mypage/gradeinfo/gradeInfoMain.do")
-	public String gradeInfoHandle(@RequestParam int lo) {
+	public String gradeInfoHandle(@RequestParam int lo,Model model,HttpSession session) {
 
-		return "myPageMain";
+		//세션에 저장된 mem_num 저장
+		int mem_num = (int)session.getAttribute("mem_num");
+
+		//회원의 총 주문 금액
+		int mem_order_price=0;
+		//회원의 등급 점수
+		int mem_grade_point=0;
+		if(mypageService.getOrderPrice(mem_num) != null) { //int형은 null이 불가능하여 String으로 받은 후 int로 저장
+			mem_order_price = Integer.parseInt(mypageService.getOrderPrice(mem_num));
+			mem_grade_point = mem_order_price/100;
+		}
+		//천단위 , 처리
+		String mem_order_price_str = (mem_order_price+"").replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",")+" 원";
+		if(mem_order_price_str.equals("0 원")) {
+			mem_order_price_str = "구매 내역이 없습니다.";
+		}
+		model.addAttribute("mem_order_price_str",mem_order_price_str);
+		model.addAttribute("mem_grade_point",mem_grade_point);
+		
+		return "gradeInfoMain";
 	}
 }

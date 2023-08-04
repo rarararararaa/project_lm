@@ -7,7 +7,9 @@ public class EncryptionPasswd {
 	
 	//비밀번호를 암호화 (salt + mem_passwd)
 	public static String encryptionPasswd(String salt,String passwd) {
-		
+		/*=======================
+		 * SHA-256 방식으로 암호화하는 유틸리티 메서드 
+		 *=======================*/
 		String mem_passwd = "";
 		try {
 			//SHA256 알고리즘 객체체 생성

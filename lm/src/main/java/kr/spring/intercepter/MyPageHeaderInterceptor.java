@@ -38,7 +38,7 @@ public class MyPageHeaderInterceptor implements HandlerInterceptor{
 		//grade, point, modify_date list에 저장
 		list = mypageService.getDetailData(mem_num);
 		int mem_grade = list.get(0).mem_grade;
-		int mem_point = list.get(0).mem_point;
+		String mem_point = list.get(0).mem_point+"";
 		//YYYY-MM-DD
 		String mem_modify_date = list.get(0).mem_modify_date.substring(0,10);
 		String mem_reg_date = mypageService.getMemRegDate(mem_num).substring(0,10);
@@ -61,12 +61,12 @@ public class MyPageHeaderInterceptor implements HandlerInterceptor{
 			mem_grade_name = "Diamond";
 		}
 		
-		//회원의 총 주문 금액 (주문금액/100하여 point 처리)
+		//회원의 총 주문 금액 (주문금액/100 처리)
 		int mem_order_price=0;
 		if(mypageService.getOrderPrice(mem_num) != null) { //int형은 null이 불가능하여 String으로 받은 후 int로 저장
 			mem_order_price = Integer.parseInt(mypageService.getOrderPrice(mem_num))/100;	
 		}
-		
+
 		//다음 등급까지 남은 금액
 		String mem_grade_remain = "";
 		if(mem_order_price<1000) {
@@ -82,6 +82,7 @@ public class MyPageHeaderInterceptor implements HandlerInterceptor{
 		}
 		//천단위 , 처리
 		mem_grade_remain = mem_grade_remain.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+		mem_point = mem_point.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
 		//데이터 등록
 		request.setAttribute("mem_grade_name",mem_grade_name);
 		request.setAttribute("mem_grade_remain",mem_grade_remain);
