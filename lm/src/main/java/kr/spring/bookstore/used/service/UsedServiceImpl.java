@@ -47,9 +47,9 @@ public class UsedServiceImpl implements UsedService {
 	}
 
 	@Override
-	public void updateUsed(Integer used_product_num) {
-		// TODO Auto-generated method stub
-		
+	public void updateUsed(UsedVO usedVO) {
+		usedMapper.usedUpdateManage(usedVO);
+		usedMapper.usedUpdateDetail(usedVO);
 	}
 
 	@Override
@@ -93,6 +93,12 @@ public class UsedServiceImpl implements UsedService {
 	public int selectProductNameByUsedCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return usedMapper.selectProductNameByUsedCount(map);
+	}
+
+	@Override
+	public UsedVO selectUsedProductNumAndMemNum(int used_product_num, int mem_num) {
+		// 가져오자...
+		return usedMapper.selectUsedProductNumAndMemNum(used_product_num, mem_num);
 	}
 
 

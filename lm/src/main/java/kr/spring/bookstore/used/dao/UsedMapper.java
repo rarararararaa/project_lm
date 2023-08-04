@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.bookstore.used.vo.UsedVO;
 
@@ -20,10 +21,9 @@ public interface UsedMapper {
 		public List<UsedVO> selectAllUsed();
 		
 		
-		@Select("SELECT rs.* , sd.*, 100-(floor((used_product_price/store_product_pricestandard)*100)) AS devide_product_by_used "
-				+ " FROM store_product_detail sd JOIN "
-				+ "(SELECT * FROM store_used_product_manage m JOIN store_used_product_detail d ON m.used_product_num = d.used_product_num WHERE mem_num = #{mem_num} ) "
-				+ " rs ON rs.store_product_num = sd.store_product_num")
+		@Select("SELECT ud.*, sd.*, um.*, 100-(floor((used_product_price/store_product_pricestandard)*100)) AS devide_product_by_used FROM store_used_product_manage um "
+				+ "JOIN store_used_product_detail ud ON ud.used_product_num = um.used_product_num "
+				+ "JOIN store_product_detail sd ON sd.store_product_num = um.store_product_num WHERE um.mem_num = #{mem_num}")
 		public List<UsedVO> selectUsedProductByMem(int mem_num);
 		
 		
@@ -45,10 +45,19 @@ public interface UsedMapper {
 		//End of Popup
 		
 		//End of Submit
+		@Select("SELECT ud.*, sd.*, um.*, 100-(floor((used_product_price/store_product_pricestandard)*100)) AS devide_product_by_used FROM store_used_product_manage um "
+				+ "JOIN store_used_product_detail ud ON ud.used_product_num = um.used_product_num "
+				+ "JOIN store_product_detail sd ON sd.store_product_num = um.store_product_num WHERE um.used_product_num = #{used_product_num} AND um.mem_num = #{mem_num}")
+		public UsedVO selectUsedProductNumAndMemNum(int used_product_num, int mem_num);
 		
-		
-		
-		
+		@Update("UPDATE store_used_product_manage SET store_product_num = #{store_product_num}, "
+				+ "used_product_condition = #{used_product_condition},"
+				+ " used_product_reg_date = SYSDATE WHERE used_product_num = #{used_product_num}")
+		public void usedUpdateManage(UsedVO usedVO);
+		@Update("UPDATE store_used_product_detail SET used_product_info = #{used_product_info}, "
+				+ "used_product_photo1 = #{used_product_photo1}, used_product_photo2 = #{used_product_photo2}, "
+				+ "used_product_price = #{used_product_price} WHERE used_product_num = #{used_product_num}")
+		public void usedUpdateDetail(UsedVO usedVO);
 		//RowCount
 		public int selectUsedRowCount(Map<String,Object>map);
 		

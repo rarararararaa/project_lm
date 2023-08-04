@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
  .find-books {
  	background-color: #f0f0f0;
-    
  }
+ 
 </style>
 <script type="text/javascript">
 $(function(){ 
@@ -111,16 +111,17 @@ $(function(){
 
 <div class="used-contents">
 	<span>책 등록하기</span>
-	<form:form modelAttribute="usedVO" action="usedForm.do" id="used_form" enctype="multipart/form-data">
+	<form action="usedUpdateSubmit.do" id="used_form" method="post" enctype="multipart/form-data">
+		<input type="hidden" id="used_product_num" value="${usedVO.used_product_num}" name="used_product_num">
+		
 		<ul>
 			<li>
 				<!-- 책 찾기 -->
-				<form:label path="store_product_title" >책 이름</form:label>
-				<form:input path="store_product_title" class="find-books"/>
+				<label id="store_product_title">책이름</label>
+				<input type="text" id="store_product_title" class="find-books" value="${usedVO.store_product_description}">
 				<input type="button" onclick="execSearchProductcode()" value="책 찾기" class="used-default-btn">
-				<span id="message_product_name"></span>
-				<input type="hidden" id="hidden_store_product_num" value="" name="store_product_num">
-				<form:errors element="div" cssClass="error-color"/>
+				<input type="hidden" id="hidden_store_product_num" value="${usedVO.store_product_num}" name="store_product_num">
+				
 			</li>
 			<li>
 				<div>책 상태 선택</div>
@@ -132,17 +133,17 @@ $(function(){
 				
 			</li>
 			<li>
-				<!-- 책 사진1 -->
 				
-				<img src="${pageContext.request.contextPath}/images/default_photo_used.png" width="300" height="300" class="used-photo1">
+				
+				<img src="${pageContext.request.contextPath}/bookstore/used/photoView01.do?used_product_num=${usedVO.used_product_num}" width="300" height="300" class="used-photo1" name="used-photo1">
 				<div class="used-image-upload" id="used_photo1_btn"></div>
 				<div id="used_photo1_choice">
 					<input type="file" id="used_photo1_upload" accept="image/gif,image/png,image/jpeg" name="upload1">
 				</div>
 			</li>
 			<li>
-				<!-- 책 사진2 -->
-				<img src="${pageContext.request.contextPath}/images/default_photo_used.png" width="300" height="300" class="used-photo2">
+				<!-- 책 사진2 초기 값 search 필요-->
+				<img src="${pageContext.request.contextPath}/bookstore/used/photoView02.do?used_product_num=${usedVO.used_product_num}" width="300" height="300" class="used-photo2">
 				<div class="used-image-upload" id="used_photo2_btn"></div>
 				<div id="used_photo2_choice">
 					<input type="file" id="used_photo2_upload" accept="image/gif,image/png,image/jpeg" name="upload2">
@@ -150,21 +151,19 @@ $(function(){
 			</li>
 			<li>
 				<!-- 책 설명 -->
-				<form:label path="used_product_info" >요청 사항 및 특이사항</form:label>
-				<form:textarea path="used_product_info" class="used-text-area"/>
-				<span id="message_used_product_info"></span>
-				<form:errors element="div" cssClass="error-color"/>
+				<label id="used_product_info" >요청 사항 및 특이사항</label>
+				<textarea name="used_product_info" class="used-text-area">${usedVO.used_product_info}</textarea>
+				
 			</li>
 			<li>
 				<!-- 기존 책 찾기 -->
-				<form:label path="used_product_price" >판매 희망 가격</form:label>
-				<form:input path="used_product_price" class="used-price"/>
-				<span id="message_used_product_price"></span>
-				<form:errors element="div" cssClass="error-color"/>
+				<label id="used_product_price" >판매 희망 가격</label>
+				<input type="number" id="used_product_price" class="used-price" value="${usedVO.used_product_price}" name="used_product_price">
+				
 			</li>
-			<form:button class="used-default-btn" id="used_submit">제출하기</form:button>
 		</ul>
-	</form:form>
+			<input type="submit" class="used-default-btn" id="used_form" value="수정하기">
+	</form>
 	
 </div>
 	<script type="text/javascript">
