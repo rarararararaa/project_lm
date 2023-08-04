@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.product.vo.ProductVO;
-import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -70,11 +72,11 @@ public class BookStorePaymentController {
 	}
 	//======================장바구니FORM===========================//  
 	@GetMapping("/bookstore/payment/cart.do")
-	public String cartForm(HttpSession session, Model model) {
+	public String cartForm(HttpSession session, Model model, HttpServletRequest request) {
 		String mem_id = (String)session.getAttribute("mem_id");
 		log.debug("<<로그인 체크>> : "+mem_id);
 		if(mem_id == null) {
-			return "bsMain";
+			return "redirect:/lm/login/template/loginMain.do?lo=1";
 		}
 		int mem_num = (Integer)session.getAttribute("mem_num");
 		int grade = (Integer)session.getAttribute("mem_grade");
