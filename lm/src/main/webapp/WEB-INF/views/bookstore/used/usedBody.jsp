@@ -6,7 +6,9 @@
 		<c:forEach var="list" items="${list}">
 			<div class="used-all-contents-div-width">
 				<div class="used-all-contents-img">
-					<img src="${list.store_product_cover}">
+					<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${product.store_product_isbn13}">
+						<img src="${list.store_product_cover}">
+					</a>
 				</div>
 				<div class="used-all-contents-column">
 					<div class="used-all-contents-box" data-store_product_num="${list.store_product_num}">등록된 중고 : ${list.used_product_match_count}개</div>

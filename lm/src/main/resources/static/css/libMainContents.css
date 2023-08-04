@@ -1,0 +1,217 @@
+#used_div_box{
+	width:1200px;
+	margin:0 auto;
+	display:flex;
+	
+}
+
+#used_nav_box {
+	width:200px;
+	height:300px;
+	display:flex;
+	text-align:center;
+	
+}
+
+#used_contents_box {
+	width:900px;
+	margin:0 auto;
+	
+}
+
+.used-book-nav {
+		width:200px;
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		align-items:center;
+		
+	}
+.used-book-nav div {
+		height:50px;
+		width:200px;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		border: 2px solid green;
+		
+}
+.used-book-nav div a {
+	text-decoration: none;
+	color:black;
+}
+	
+.used-contents {
+	margin-top : 50px;
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.used-contents span {
+	font-size : 25px;
+	padding:10px;
+}
+.used-contents select {
+	width:200px;
+	height:50px;
+	font-size:15px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	text-align:center;
+	
+}
+.used-contents label {
+	margin-bottom:5px;
+	margin-top:5px;
+	
+}
+
+.used-contents input {
+	padding:5px;
+}
+.used-info {
+	display:flex;
+	justify-content: center;
+	margin-top: 50px;
+}
+
+.used-info div {
+	display:flex;
+	flex-direction: column;
+	align-items:center;
+	margin-left:25px;
+	margin-right:25px;
+	
+}
+
+.used-info div span {
+	margin-top : 20px;
+	font-size:18px;
+}
+
+.used-info img {
+	width:200px;
+	height:200px;
+}
+
+.used-a-button {
+	width: 150px;
+    height: 54px;
+    font-size: 15px;
+    border: 1px solid black;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    background-color: #E19B50;
+    color: black;
+    cursor: pointer;
+	display:flex;
+	justify-content: center;
+	align-items:center;
+	text-decoration: none;
+	
+}
+
+.file-upload-button {
+	/*업로드 버튼*/
+}
+.used-text-area {
+	width: 500px;
+    height: 300px;
+    font-size: 14px;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 0px 15px 0px 15px;
+    border-radius: 4px;
+}
+.used-contents .find-books {
+	width:200px;
+	height: 40px;
+    font-size: 14px;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 0px 15px 0 15px;
+    border-radius: 4px;
+}
+.used-contents .used-price {
+	width:200px;
+	height: 40px;
+    font-size: 14px;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 0px 15px 0px 15px;
+    border-radius: 4px;
+}
+.used-default-btn  {
+	width: 230px;
+    height: 54px;
+    font-size: 15px;
+    padding: 0px 15px 0 15px;
+    border-radius: 4px;
+    background-color: #E19B50;
+    color: black;
+    cursor: pointer;
+	display:flex;
+	justify-content: center;
+	align-items:center;
+	text-decoration: none;
+	margin-top:5px;
+}
+#used_form label {
+	font-size:20px;
+}
+
+#used_form li {
+	
+	list-style: none;
+	width:900px;
+	margin-bottom:20px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+}
+
+#used_submit {
+	
+	margin:0 auto;
+}
+/*
+.used-form-img-div {
+	
+	display:flex;
+	flex-direction: row;
+}
+*/
+
+/* usedBody 영역*/
+.used-all-contents-div-width {
+	width : 900px;
+	height: 220px;
+	display:flex;
+	border:solid 1px red;
+}
+
+.used-all-contents-div-width img {
+	height:200px;
+	margin:0;
+}
+.used-all-contents-img {
+	min-width:180px;
+	width:180px;
+	min-height:200px;
+	height:200px;
+
+	display:flex;
+	align-items:center;
+	justify-content:flex-start;
+	overflow: hidden;
+	
+}
+
+.used-all-contents-box div {
+	padding : 1px;
+}
+.used-all-contents-column div {
+	padding : 5px;
+	margin-left:10px;
+}
+

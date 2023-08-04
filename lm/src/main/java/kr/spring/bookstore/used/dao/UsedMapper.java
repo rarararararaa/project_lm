@@ -14,16 +14,19 @@ import kr.spring.bookstore.used.vo.UsedVO;
 public interface UsedMapper {
 		
 		//중고 책 List 로 반환
-		@Select("select COUNT(store_product_num) used_product_match_count, store_product_num, store_product_title, store_product_author,"
+		@Select("select * FROM store_product_manage RIGHT JOIN ("
+				+ "select COUNT(store_product_num) used_product_match_count, store_product_num, store_product_title, store_product_author,"
 				+ "store_product_pubdate, store_product_pricesales, store_product_cover, store_product_publisher, store_product_description "
 				+ "FROM store_product_detail RIGHT INNER JOIN (select * FROM store_used_product_detail d RIGHT JOIN store_used_product_manage m ON m.used_product_num = d.used_product_num) USING (store_product_num) GROUP BY store_product_num, store_product_title, "
-				+ "store_product_author, store_product_pubdate, store_product_pricesales, store_product_cover, store_product_publisher, store_product_description")
+				+ "store_product_author, store_product_pubdate, store_product_pricesales, store_product_cover, store_product_publisher, store_product_description"
+				+ ") USING (store_product_num)")
 		public List<UsedVO> selectAllUsed();
 		
 		
-		@Select("SELECT ud.*, sd.*, um.*, 100-(floor((used_product_price/store_product_pricestandard)*100)) AS devide_product_by_used FROM store_used_product_manage um "
+		@Select("SELECT sm.store_product_ISBN13 ,ud.*, sd.*, um.*, 100-(floor((used_product_price/store_product_pricestandard)*100)) AS devide_product_by_used FROM store_used_product_manage um "
 				+ "JOIN store_used_product_detail ud ON ud.used_product_num = um.used_product_num "
-				+ "JOIN store_product_detail sd ON sd.store_product_num = um.store_product_num WHERE um.mem_num = #{mem_num}")
+				+ "JOIN store_product_detail sd ON sd.store_product_num = um.store_product_num "
+				+ "JOIN store_product_manage sm ON sd.store_product_num = sm.store_product_num WHERE um.mem_num = #{mem_num}")
 		public List<UsedVO> selectUsedProductByMem(int mem_num);
 		
 		
@@ -60,8 +63,6 @@ public interface UsedMapper {
 		public void usedUpdateDetail(UsedVO usedVO);
 		//RowCount
 		public int selectUsedRowCount(Map<String,Object>map);
-		
-		
 		//중고 책 목록 반환
 		public UsedVO selectUsed(Integer user_num);
 		

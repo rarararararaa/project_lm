@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.tomcat.util.codec.binary.Base64;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.bookstore.used.service.UsedService;
 import kr.spring.bookstore.used.vo.UsedVO;
-import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,7 +45,7 @@ public class UsedController {
 		return new UsedVO();
 	}
 
-
+	
 	@RequestMapping("/bookstore/used/usedMain.do")
 	public ModelAndView getUsedMainClick() {
 		List<UsedVO> list = usedService.selectAllUsed();
@@ -105,7 +103,6 @@ public class UsedController {
 	// 팝업 서치 출력
 	@GetMapping("/bookstore/used/selectProductNameByUsed.do")
 	public ModelAndView selectProducts(@RequestParam(value = "keyword") String keyword, HttpSession session) {
-		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 맵 선언 후 keyword의 스트링은 keyword이다...
@@ -175,10 +172,10 @@ public class UsedController {
 	
 		
 		model.addAttribute("message", "글 등록 완료!");
-		model.addAttribute("url", request.getContextPath()+"/bookstore/used/usedBody.do");
+		model.addAttribute("url", request.getContextPath()+"/bookstore/used/usedBooksByUser.do");
 		
 
-		return "../common/resultView";
+		return "common/resultView";
 	}
 	
 	public void viewProfile01(UsedVO usedVO, HttpServletRequest request, Model model) {
@@ -307,11 +304,11 @@ public class UsedController {
 		usedService.updateUsed(usedVO);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("../common/resultView");
+		mav.setViewName("common/resultView");
 		
 
 		mav.addObject("message", "글 수정 완료!");
-		mav.addObject("url", request.getContextPath()+"/bookstore/used/usedBody.do");
+		mav.addObject("url", request.getContextPath()+"/bookstore/used/usedBooksByUser.do");
 		
 		return mav;
 	}
