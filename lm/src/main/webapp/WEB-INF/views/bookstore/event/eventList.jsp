@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/eventList.css">
+	href="${pageContext.request.contextPath}/css/BsEventList.css">
 <!-- 이벤트 글 list 시작-->
 <div class="listPageMain">
 	<h2>EVENT</h2>
@@ -54,34 +54,8 @@
 			</c:if>
 		</div>
 	</form>
-	<!-- 이벤트 검색 및 정렬 끝 -->
-	<!-- 
-	<c:if test="${fn:length(list)%2 == 1}">
-		<c:set var="rowCount" value="${(fn:length(list)/2)+1}"/>
-	</c:if>
-	<c:if test="${fn:length(list)%2 == 0}">
-		<c:set var="rowCount" value="${fn:length(list)/2}"/>
-	</c:if>
 	
-	<c:set var="inNum" value="0"/>
-	
-
-	<div class="event-list">
-	<c:forEach begin="1" end="${rowCount}" var="i">
-	<div class="event-row">
-		<c:forEach var="event" items="${list}" varStatus="status" 
-					begin="${inNum}" end="${fn:length(list) % 2 == 1 ? inNum : inNum + 1}" >
-			<div class="event-column">
-				<div class="event-simg"></div>
-				<div class="event-content"></div>
-			</div>
-			<c:set var="inNum" value="${status.index}"/>
-		</c:forEach>
-	</div>	
-	</c:forEach>
-	</div>
-	<c:set var="itemsPerRow" value="2" />-->
-
+	<c:set var="itemsPerRow" value="2" />
 	<c:set var="rowCount"
 		value="${(fn:length(list) + itemsPerRow - 1) / itemsPerRow}" />
 	<c:set var="inNum" value="0" />
@@ -93,8 +67,40 @@
 					begin="${inNum}"
 					end="${(fn:length(list) % 2) == 1 && inNum == (fn:length(list) -1) ? inNum : inNum+1}">
 					<div class="event-column col${status.index}">
-						<div class="event-simg"></div>
-						<div class="event-content"></div>
+
+						<div class="event-simg">
+						<a class="wid" href="update.do?event_board_num=${event.event_board_num}">
+							<img src="imageView.do?event_board_num=${event.event_board_num}&event_board_type=1" width="170" height="100">
+						</a>
+						</div>
+						
+						<div class="event-content">
+							<div class="event-status">
+								<ul>
+									<c:if test="${event.event_board_status == 2}">
+										<li class="status-ing">진행중</li>
+									</c:if>
+									<c:if test="${event.event_board_status == 3}">
+										<li class="status-end">종료</li>
+									</c:if>
+									
+									<c:if test="${event.event_board_category == 1}">
+										<li class="cate-quiz">퀴즈 이벤트</li>
+									</c:if>
+									<c:if test="${event.event_board_category == 2}">
+										<li class="cate-reply">댓글 이벤트</li>
+									</c:if>
+								</ul>
+							</div>
+							<a href="detail.do?event_board_num=${event.event_board_num}">
+							<div class="event-title">${event.event_title}</div>
+							<div class="event-short-content">${event.event_short_content}</div>
+							</a>
+							<div class="event-date">
+								기한: ${event.event_date_start} ~ ${event.event_date_end}
+							</div>
+						</div>
+						
 					</div>
 				</c:forEach>
 				<c:set var="inNum" value="${inNum + itemsPerRow}" />
@@ -102,21 +108,7 @@
 		</c:forEach>
 	</div>
 
-	<!-- 이벤트 List 출력 -->
-		<!-- for문으로 이벤트 리스트 반복 출력 -->
-	<!-- 
-	<div class="event-list">
-		<div class="event-row">
-			<div class="event-column">
-				<div class="event-simg"></div>
-				<div class="event-content"></div>
-			</div>
-			<div class="event-column">
-				<div class="event-simg"></div>
-				<div class="event-content"></div>
-			</div>
-		</div>
-	</div>-->
+	
 	
 	
 

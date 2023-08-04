@@ -71,10 +71,6 @@ public class BsEventController {
 			result.rejectValue("img_Small", "limitIploadSize", new Object[] {"5MB"}, null); 
 		}
 
-		//유효성 체크 결과 오류가 있으며 폼 호출
-		if(result.hasErrors()) {
-			return form();
-		}
 
 		//글쓰기
 		bsEventService.insertEvent(vo);
@@ -83,6 +79,35 @@ public class BsEventController {
 		model.addAttribute("url", 
 				request.getContextPath()+"/bookstore/event/adminlist.do");
 
+		return "common/resultView";
+	}
+	
+	//글 수정
+	//수정 폼 호출
+	@GetMapping("/bookstore/event/update.do")
+	public String formUpdate(@RequestParam int event_board_num, Model model) {
+		BsEventVO bsEventVO = bsEventService.selectEvent(event_board_num);
+		log.debug("<<글 수정 - bsEventVO>> : " + bsEventVO);
+		model.addAttribute("bsEventVO", bsEventVO);
+		return "bsEventModify";
+	}
+	//전달된 데이터 처리
+	@PostMapping("/bookstore/event/update.do")
+	public String submitUpdate(@Valid BsEventVO bsEventVO, BindingResult result, HttpServletRequest request, Model model) {
+		log.debug("<<글 수정버튼 클릭 - bsEventVO>> : " + bsEventVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "bsEventModify";
+		}
+		
+		//글 수정
+		bsEventService.updateEvent(bsEventVO);
+		
+		//View에 표시할 메시지
+		model.addAttribute("message", "글 수정 완료!");
+		model.addAttribute("url", request.getContextPath()+"/bookstore/event/adminlist.do");
+		
 		return "common/resultView";
 	}
 	
@@ -120,6 +145,25 @@ public class BsEventController {
 		mav.addObject("list", list);
 		mav.addObject("page", page);
 		
+		return mav;
+	}
+	
+	//이미지 출력
+	@RequestMapping("/bookstore/event/imageView.do")
+	public ModelAndView viewImage(@RequestParam int event_board_num,
+			                      @RequestParam int event_board_type) {
+		BsEventVO eventVO = bsEventService.selectEvent(event_board_num);
+		
+		log.debug("<<eventVO>>" + eventVO);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		if(event_board_type==1) {
+			mav.addObject("imageFile", eventVO.getEvent_img_small());
+			mav.addObject("filename", "bannerSmall.jpg");
+		}else if(event_board_type==2) {
+			mav.addObject("imageFile", eventVO.getEvent_img_big());
+			mav.addObject("filename", "bannerBig.jpg");
+		}
 		return mav;
 	}
 
