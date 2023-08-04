@@ -26,9 +26,10 @@ public class BsEventVO {
 	private String event_content;		//이벤트 소개(상세페이지 출력)
 	private byte[] event_img_small;
 	private byte[] event_img_big;
-	private Date event_reg_date;			//이벤트 글 등록 날짜
-	private Date event_date_start;		//이벤트 시작날짜
-	private Date event_date_end;			//이벤트 종료날짜
+	private Date event_reg_date;			//이벤트 글 등록 날짜-
+	private Date event_modify_date;			//이벤트 글 수정 날짜
+	private String event_date_start;		//이벤트 시작날짜
+	private String event_date_end;			//이벤트 종료날짜
 	private int event_hit;					//글 조회수
 	private String event_quiz_sel1;		//퀴즈 선택지1
 	private String event_quiz_sel2;		//퀴즈 선택지2
@@ -38,13 +39,9 @@ public class BsEventVO {
 	public void setUploadSmall(MultipartFile uploadSmall) throws IOException{
 		//MultipartFile -> byte[] 변환 | 변환해야 Mybatis가 blob 처리를 해준다.
 		setEvent_img_small(uploadSmall.getBytes());
-		//파일명 구하기
-		//setPhoto_name1(upload1.getOriginalFilename());
 	}
 	public void setUploadBig(MultipartFile uploadBig) throws IOException{
 		//MultipartFile -> byte[] 변환 | 변환해야 Mybatis가 blob 처리를 해준다.
 		setEvent_img_big(uploadBig.getBytes());
-		//파일명 구하기
-		//setPhoto_name1(upload1.getOriginalFilename());
 	}
 }

@@ -10,7 +10,7 @@
 				</div>
 				<div class="used-all-contents-column">
 					<div class="used-all-contents-box" data-store_product_num="${list.store_product_num}">책 이름 : ${list.store_product_title}</div>
-					<div class="used-all-contents-box">등록 날짜 : ${list.used_product_reg_date}</div>
+					<div class="used-all-contents-box">등록 날짜 : ${list.used_product_reg_date} | 중고 등록 번호 : ${list.used_product_num }</div>
 						
 					<div class="used-all-contents-box">
 						관리자 승인 여부 : 
@@ -36,6 +36,7 @@
 					</div>
 					<div class="used-all-contents-box">요청 사항 : ${list.used_product_info}</div>
 				</div>
+				<input type="button" class="default-btn" value="수정하기" onclick="location.href='${pageContext.request.contextPath}/bookstore/used/usedUpdate.do?used_product_num=${list.used_product_num}'">
 			</div>
 		</c:forEach>
 	</div>

@@ -53,7 +53,7 @@ function submitCart(){
 			let form_data = $(this).serialize();		
 			//서버와 통신
 			$.ajax({
-				url:'../bookstore/payment/cart.do',
+				url:'/bookstore/payment/cart.do',
 				type:'post',
 				data:form_data,
 				dataType:'json',
@@ -61,7 +61,12 @@ function submitCart(){
 					if(param.result == 'logout'){
 						alert('로그인 후 사용하세요');
 					}else if(param.result == 'success'){
-						location.reload();
+						let check=confirm('장바구니로 이동하시겠습니까?');
+						if(check){
+							location.href='/bookstore/payment/cart.do';
+						}else{
+							location.reload();
+						}
 					}else{
 						alert('장바구니 담기 오류');
 					}

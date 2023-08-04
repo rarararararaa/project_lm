@@ -27,7 +27,7 @@
     
     
     <definition name="findIdMain" template="/WEB-INF/views/lm/findId/template/findIdLayout.jsp">
-    	<put-attribute name="findIdTitle" value="마이페이지"/>
+    	<put-attribute name="findIdTitle" value="아이디 찾기"/>
     	<put-attribute name="findId" value="/WEB-INF/views/lm/findId/template/findId.jsp"/>
     	<put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
         <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>
@@ -36,7 +36,8 @@
     </definition>
     
     <definition name="myPageMain" template="/WEB-INF/views/lm/mypage/main/myPageLayout.jsp">
-    	<put-attribute name="myPageTitle" value="마이페이지"/>
+    	<put-attribute name="myPageTitle" value="주문 내역"/>
+    	<put-attribute name="myPageHeader" value="/WEB-INF/views/lm/mypage/header/myPageHeader.jsp"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/main/myPage.jsp"/>
     	<put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
         <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>
@@ -45,70 +46,94 @@
     </definition>
     
     
-    <definition name="askListMainMain" extends="myPageMain">
-    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/asklistmain/askList.jsp"/>
+    <definition name="askListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="문의 내역"/>
+    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/asklist/askList.jsp"/>
     </definition>
     
-    <definition name="checkOutReturnListMainMain" extends="myPageMain">
+    <definition name="checkOutReturnListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="대출/반납 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/checkoutreturnlist/checkOutReturnList.jsp"/>
     </definition>
     
     <definition name="wantBookListMain" extends="myPageMain">
-    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/wantBooklist/wantBookList.jsp"/>
+    	<put-attribute name="myPageTitle" value="희망 도서 신청 내역"/>
+    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/wantbooklist/wantBookList.jsp"/>
     </definition>
     
     <definition name="programApplyListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="프로그램 신청 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/programapplylist/programApplyList.jsp"/>
     </definition>
     
     <definition name="donateBookListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="책 기증 신청 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/donatebooklist/donateBookList.jsp"/>
     </definition>
     
     <definition name="facilityApplyListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="시설 이용 신청 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/facilityapplylist/facilityApplyList.jsp"/>
     </definition>
     
     <definition name="bookReservationListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="도서 예약 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/bookreservationlist/bookReservationList.jsp"/>
     </definition>
     
-    <definition name="gradeInfoMainMain" extends="myPageMain">
+    <definition name="gradeInfoMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="등급 정보"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/gradeinfo/gradeInfo.jsp"/>
     </definition>
     
     <definition name="bookLostListMain" extends="myPageMain">
+	    <put-attribute name="myPageTitle" value="분실 도서 신고 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/booklostlist/bookLostList.jsp"/>
     </definition>
     
     <definition name="eventParticipateListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="이벤트 참여 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/eventparticipatelist/eventParticipateList.jsp"/>
     </definition>
     
     <definition name="usedBookApplyListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="중고 도서 등록 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/usedbookapplylist/usedBookApplyList.jsp"/>
     </definition>
     
     <definition name="zzimBookListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="찜한 도서 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/zzimbooklist/zzimBookList.jsp"/>
     </definition>
     
     <definition name="bookWriteListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="도서 후기 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/bookwritelist/bookWriteList.jsp"/>
     </definition>
     
     <definition name="couponListMain" extends="myPageMain">
+	    <put-attribute name="myPageTitle" value="쿠폰 목록"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/couponlist/couponList.jsp"/>
     </definition>
     
     <definition name="myEditMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="내 정보 수정"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/myedit/myEdit.jsp"/>
     </definition>
+    
     <definition name="pointInfoMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="포인트 정보"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/pointfnfo/pointInfo.jsp"/>
     </definition>
+    
     <definition name="gradeInfoMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="등급 정보"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/gradeinfo/gradeInfo.jsp"/>
     </definition>
+    
+    <definition name="bookReportListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="독후감 작성"/>
+    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/bookreportlist/bookReportList.jsp"/>
+    </definition>    
     
 </tiles-definitions>

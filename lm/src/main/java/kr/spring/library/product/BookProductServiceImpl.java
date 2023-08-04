@@ -183,4 +183,10 @@ public class BookProductServiceImpl implements BookProductService {
 		}
 		return result_detail;
 	}
+
+
+	@Override
+	public List<BookProductVO> searchDetailLIB_P(String lib_product_bookname) {
+		return bookProductMapper.searchDetailLIB_P(lib_product_bookname);
+	}
 }

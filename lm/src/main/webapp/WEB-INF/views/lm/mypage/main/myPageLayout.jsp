@@ -17,11 +17,15 @@
 
 	<c:if test="${lo == 1}">
 		<tiles:insertAttribute name="bsHeader" />
+		<div id="whole">
+		<tiles:insertAttribute name="myPageHeader"/>
 		<tiles:insertAttribute name="myPage"/>
+		</div>
 		<tiles:insertAttribute name="bsFooter" />
 	</c:if>		
 	<c:if test="${lo != 1}">
 		<tiles:insertAttribute name="libHeader" />
+		<tiles:insertAttribute name="myPageHeader"/>
 		<tiles:insertAttribute name="myPage"/>
 		<tiles:insertAttribute name="libFooter" />
 	</c:if>		

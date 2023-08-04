@@ -6,12 +6,12 @@
 		<table>
 		<tr>
 			<td>
-				<a href="/lm/productDetail.do?store_product_isbn13=${product.store_product_isbn13}">
+				<a href="/bookstore/product/productDetail.do?store_product_isbn13=${product.store_product_isbn13}">
 				<img src="${product.store_product_cover}">
 				</a>
 			</td>
 			<td>
-				<a href="/lm/productDetail.do?store_product_isbn13=${product.store_product_isbn13}">
+				<a href="/bookstore/product/productDetail.do?store_product_isbn13=${product.store_product_isbn13}">
 				${product.store_product_title}</a>
 			</td>
 		</tr>

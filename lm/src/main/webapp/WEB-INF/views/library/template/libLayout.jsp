@@ -6,11 +6,17 @@
 <meta charset="UTF-8">
 <title><tiles:getAsString name="libTitle" /></title>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bookstoreStyle.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/libMainContents.css">
 </head>
 <body>
 	<div class="wrapper" id="mainDiv">
 		<tiles:insertAttribute name="libHeader" />
-		<tiles:insertAttribute name="libBody" />
+		<div id="used_div_box">
+			<div id="used_nav_box">네비게이터 및 서치 들어갈 곳</div>
+			<div id="used_contents_box">
+				<tiles:insertAttribute name="libBody" />
+			</div>
+		</div>
 		<tiles:insertAttribute name="libFooter" />
 	</div>
 </body>

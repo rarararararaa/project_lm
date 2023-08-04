@@ -196,12 +196,16 @@
 	margin:0;
 }
 .used-all-contents-img {
-	width:150px;
+	min-width:180px;
+	width:180px;
+	min-height:200px;
 	height:200px;
-	margin-right:10px;
+
 	display:flex;
 	align-items:center;
-	justify-content:center;
+	justify-content:flex-start;
+	overflow: hidden;
+	
 }
 
 .used-all-contents-box div {
@@ -209,5 +213,6 @@
 }
 .used-all-contents-column div {
 	padding : 5px;
+	margin-left:10px;
 }
 

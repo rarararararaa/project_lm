@@ -3,6 +3,8 @@ package kr.spring.bookstore.used.vo;
 import java.io.IOException;
 import java.sql.Date;
 
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
@@ -26,8 +28,11 @@ public class UsedVO {
 	
 	
 	private String used_product_info;
+	
 	private byte[] used_product_photo1;
+	
 	private byte[] used_product_photo2;
+	
 	private int used_product_price;
 	
 	//store product manage 영역
@@ -47,9 +52,13 @@ public class UsedVO {
 	private int used_product_match_count;
 	private String store_product_description;
 	
+	
 	//연산 작업
 	private int devide_product_by_used;
 	
+	//파일 처리 작업
+	private String store_product_photo1_name; //파일 1 처리
+	private String store_product_photo2_name; //파일 2 처리
 	//Blob 타입은 MultipartFile 로 바꿔주고 byte로 변환 시켜야 한다...
 	public void setUpload1(MultipartFile upload1) throws IOException {
 		used_product_photo1 = upload1.getBytes();

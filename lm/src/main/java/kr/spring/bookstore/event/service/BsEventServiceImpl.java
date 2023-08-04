@@ -37,14 +37,12 @@ public class BsEventServiceImpl implements BsEventService{
 
 	@Override
 	public BsEventVO selectEvent(Integer event_board_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return bsEventMapper.selectEvent(event_board_num);
 	}
 
 	@Override
 	public void updateEvent(BsEventVO event) {
-		// TODO Auto-generated method stub
-		
+		bsEventMapper.updateEvent(event);;
 	}
 	
 	//출석!!!!

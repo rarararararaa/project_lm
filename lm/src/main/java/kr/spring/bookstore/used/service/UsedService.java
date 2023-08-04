@@ -27,7 +27,7 @@ public interface UsedService {
 	//RowCount
 	public int selectUsedRowCount(Map<String,Object>map);
 	
-	
+
 	//중고 책 목록 전부 반환
 	public List<UsedVO> selectAllUsed();
 	
@@ -35,13 +35,15 @@ public interface UsedService {
 	public List<UsedVO> selectUsedProductByMem(int mem_num);
 	
 	//중고 책 수정하기
-	public void updateUsed(Integer used_product_num);
+	public void updateUsed(UsedVO usedVO);
 	
+
 	//중고 책 지우기
 	public void deleteUsed(Integer used_product_num);
 	
 	//중고 책 조회 수
 	public int updateHit(Integer used_product_num);
 	
+	public UsedVO selectUsedProductNumAndMemNum(int used_product_num, int mem_num);
 	
 }

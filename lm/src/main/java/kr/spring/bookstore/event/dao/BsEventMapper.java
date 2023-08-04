@@ -24,9 +24,10 @@ public interface BsEventMapper {
 	//이벤트 글 등록
 	public void insertEvent(BsEventVO event);
 	//이벤트 글 상세페이지
+	@Select("SELECT * FROM store_event_board WHERE event_board_num=#{event_board_num} ")
 	public BsEventVO selectEvent(Integer event_board_num);
 	//글 조회수
-	@Update("UPDATE store_event_board SET event_hit=evnet_hit+1 WHERE evenr_board_num=#{event_board_num}")
+	@Update("UPDATE store_event_board SET event_hit=evnet_hit+1 WHERE event_board_num=#{event_board_num}")
 	public void updateEventHit (Integer event_board_num);
 	//이벤트 글 수정
 	public void updateEvent(BsEventVO event);
@@ -51,7 +52,7 @@ public interface BsEventMapper {
 	/* - 사용X 위에 수정코드
 	//출석 이벤트 - 포인트부여 상세정보
 	public BsAttendancePointVO selectAttendencePoint(@Param(value="mem_num") int mem_num, @Param(value="event_month") int event_month);
-	*/
+	ㅎ*/
 	
 	//출석 이벤트 - 출석 개수
 	@Select("SELECT COUNT(*) FROM store_event_attendance WHERE event_attendance_point_num=#{event_attendance_point_num}")

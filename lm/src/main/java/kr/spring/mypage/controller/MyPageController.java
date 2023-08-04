@@ -81,12 +81,22 @@ public class MyPageController {
 	public String askList() {
 		return "askListMain"; //타일스 설정의 식별자
 	}
+	@GetMapping("/lm/mypage/asklist/askListMain.do")
+	public String askListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
+	}
 	/*=======================
 	 * 대출/반납내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
 	public String checkOutReturnList() {
 		return "checkOutReturnListMain"; //타일스 설정의 식별자
+	}
+	@GetMapping("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
+	public String checkOutReturnListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
 	}
 	/*=======================
 	 * 희망도서신청내역
@@ -95,12 +105,22 @@ public class MyPageController {
 	public String wantBookList() {
 		return "wantBookListMain"; //타일스 설정의 식별자
 	}
+	@GetMapping("/lm/mypage/wantbooklist/wantBookListMain.do")
+	public String wantBookListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
+	}
 	/*=======================
 	 * 프로그램신청내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/programapplylist/programApplyListMain.do")
 	public String programApplyList() {
 		return "programApplyListMain"; //타일스 설정의 식별자
+	}
+	@GetMapping("/lm/mypage/programapplylist/programApplyListMain.do")
+	public String programApplyListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
 	}
 	/*=======================
 	 * 책기증신청내역
@@ -109,12 +129,22 @@ public class MyPageController {
 	public String donateBookList() {
 		return "donateBookListMain"; //타일스 설정의 식별자
 	}
+	@GetMapping("/lm/mypage/donatebooklist/donateBookListMain.do")
+	public String donateBookListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
+	}
 	/*=======================
 	 * 시설이용신청내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
 	public String facilityApplyList() {
 		return "facilityApplyListMain"; //타일스 설정의 식별자
+	}
+	@GetMapping("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
+	public String facilityApplyListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
 	}
 	/*=======================
 	 * 책예약내역
@@ -123,12 +153,22 @@ public class MyPageController {
 	public String bookReservationList() {
 		return "bookReservationListMain"; //타일스 설정의 식별자
 	}
+	@GetMapping("/lm/mypage/bookreservationlist/bookReservationListMain.do")
+	public String bookReservationListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
+	}
 	/*=======================
 	 * 분실도서신고내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/booklostlist/bookLostListMain.do")
 	public String bookLostList() {
 		return "bookLostListMain"; //타일스 설정의 식별자
+	}
+	@GetMapping("/lm/mypage/booklostlist/bookLostListMain.do")
+	public String bookLostListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
 	}
 	/*=======================
 	 * 이벤트참여내역
@@ -137,12 +177,22 @@ public class MyPageController {
 	public String eventParticipateList() {
 		return "eventParticipateListMain"; //타일스 설정의 식별자
 	}
+	@GetMapping("/lm/mypage/eventparticipatelist/eventParticipateListMain.do")
+	public String eventParticipateListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
+	}
 	/*=======================
 	 * 중고서적등록내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/usedbookapplylist/usedBookApplyListMain.do")
 	public String usedBookApplyList() {
 		return "usedBookApplyListMain"; //타일스 설정의 식별자
+	}
+	@GetMapping("/lm/mypage/usedbookapplylist/usedBookApplyListMain.do")
+	public String usedBookApplyListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
 	}
 	/*=======================
 	 * 찜한도서내역
@@ -151,6 +201,11 @@ public class MyPageController {
 	public String zzimBookList() {
 		return "zzimBookListMain"; //타일스 설정의 식별자
 	}
+	@GetMapping("/lm/mypage/zzimbooklist/zzimBookListMain.do")
+	public String zzimBookListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
+	}
 	/*=======================
 	 * 도서후기
 	 *=======================*/
@@ -158,12 +213,22 @@ public class MyPageController {
 	public String bookWriteList() {
 		return "bookWriteListMain"; //타일스 설정의 식별자
 	}
+	@GetMapping("/lm/mypage/bookwritelist/bookWriteListMain.do")
+	public String bookWriteListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
+	}
 	/*=======================
 	 * 독후감작성
 	 *=======================*/
-	@RequestMapping("/lm/mypage/bookafterlist/bookAfterListMain.do")
-	public String bookAfterList() {
-		return "bookAfterListMain"; //타일스 설정의 식별자
+	@RequestMapping("/lm/mypage/bookreportlist/bookReportListMain.do")
+	public String bookReportList() {
+		return "bookReportListMain"; //타일스 설정의 식별자
+	}
+	@GetMapping("/lm/mypage/bookreportlist/bookReportListMain.do")
+	public String bookReportListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
 	}
 	/*=======================
 	 * 보유쿠폰
@@ -172,12 +237,22 @@ public class MyPageController {
 	public String couponList() {
 		return "couponListMain"; //타일스 설정의 식별자
 	}
+	@GetMapping("/lm/mypage/couponlist/couponListMain.do")
+	public String couponListHandle(@RequestParam int lo) {
+
+		return "myPageMain";
+	}
 	/*=======================
 	 * 회원정보수정
 	 *=======================*/
 	@RequestMapping("/lm/mypage/myedit/myEditMain.do")
 	public String myEdit() {
 		return "myEditMain"; //타일스 설정의 식별자
+	}
+	@GetMapping("/lm/mypage/myedit/myEditMain.do")
+	public String myEditHandle(@RequestParam int lo) {
+
+		return "myPageMain";
 	}
 	/*=======================
 	 * 사용가능포인트정보
@@ -186,11 +261,21 @@ public class MyPageController {
 	public String pointInfo() {
 		return "pointInfoMain"; //타일스 설정의 식별자
 	}
+	@GetMapping("/lm/mypage/pointinfo/pointInfoMain.do")
+	public String pointInfoHandle(@RequestParam int lo) {
+
+		return "myPageMain";
+	}
 	/*=======================
 	 * 등급정보
 	 *=======================*/
 	@RequestMapping("/lm/mypage/gradeinfo/gradeInfoMain.do")
 	public String gradeInfo() {
 		return "gradeInfoMain"; //타일스 설정의 식별자
+	}
+	@GetMapping("/lm/mypage/gradeinfo/gradeInfoMain.do")
+	public String gradeInfoHandle(@RequestParam int lo) {
+
+		return "myPageMain";
 	}
 }

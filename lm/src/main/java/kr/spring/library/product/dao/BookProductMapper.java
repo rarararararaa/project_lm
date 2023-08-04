@@ -25,4 +25,7 @@ public interface BookProductMapper {
 	@Update("UPDATE lib_product_manage SET lib_product_detail = #{lib_product_detail} WHERE lib_product_isbn = #{lib_product_isbn}")
 	public void updateLIB_P_description(String lib_product_detail, String lib_product_isbn);
 	
+	//도서 검색
+	@Select("SELECT * FROM lib_product_manage WHERE LIB_PRODUCT_BOOKNAME LIKE '%'||#{lib_product_bookname}||'%'")
+	public List<BookProductVO> searchDetailLIB_P(String lib_product_bookname);	
 }

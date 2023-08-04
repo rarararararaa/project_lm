@@ -32,6 +32,27 @@
 			#{event_date_end}
 		)
 	</insert>
+	<!--  ㅎ-->
+	<update id="updateEvent" parameterType="bsEventVO">
+			UPDATE store_event_board
+			SET 
+				store_product_num=#{store_product_num},
+				event_board_status=#{event_board_status},
+				event_board_category=#{event_board_category},
+				event_title=#{event_title},
+				event_short_content=#{event_short_content},
+				event_content=#{event_content},
+				<if test="event_img_small.length > 0">
+				event_img_small=#{event_img_small},
+				</if>
+				<if test="event_img_small.length > 0">
+				event_img_big=#{event_img_big},
+				</if>
+				event_modify_date=SYSDATE,
+				event_date_start=#{event_date_start},
+				event_date_end=#{event_date_end}
+			WHERE event_board_num=#{event_board_num}
+	</update>
 	
 	<!-- sql 태그와 include 태그를 이용해 SQL문 재사용 -->
 	<sql id="eventOrder">
@@ -39,10 +60,10 @@
 			WHERE event_board_status > #{event_board_status}
 		</if>
 		<if test="order == 2">
-			WHERE event_board_status=1
+			WHERE event_board_status=2
 		</if>
 		<if test="order == 3">
-			WHERE event_board_status=2
+			WHERE event_board_status=3
 		</if>
 	</sql>
 	<sql id="eventSearch">

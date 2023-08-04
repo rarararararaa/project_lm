@@ -10,17 +10,6 @@
 $(function(){ 
 	$('.find-books').prop('disabled', true); //product_title 비활성화 처리
 	
-
-	//used_photo1 처리
-	
-	//수정 버튼 이벤트 처리
-	/*
-	$('#photo_btn').click(function(){
-		$('#photo_choice').show();
-		$(this).hide();
-	});
-	*/
-	
 	//이미지 처리 시작 ~~~~~~~~~~~~~~~~~
 	//처음 화면에 보여지는 이미지 읽기
 	let used_photo1_path = $('.used-photo1').attr('src');
@@ -73,58 +62,46 @@ $(function(){
 			$('.used-photo2').attr('src',reader2.result);
 		};
 		
-	}); 
-	//파일 업로드 처리
-	/* 원래는 ajax 처리인데 실시간으로 올리는것이 아닌 DB로 올림..
-	$('#photo1_submit').click(function(){
-		//파일 업로드 취소 시 예외처리
-		if($('#upload').val()==''){
-			alert('파일을 선택하세요');
-			$('#upload').focus();
-			return;
+	});
+	/* 예시
+	$('#register_form').submit(function(){
+		if($('#id').val().trim()==''){
+			alert('아이디를 입력하세요');
+			$('#id').val('').focus();
+			return false;
+		}
+	*/
+	$('#used_submit').click(function(){
+		if($('#hidden_store_product_num').val()<=0 || $('#hidden_store_product_num').val() == '') {
+			alert('책 이름은 필수 항목입니다!!!');
+			return false;
 		}
 		
-		//서버에 파일 전송
+		if($('#used_photo1_upload').val().trim()=='') {
+			alert('사진 2개를 모두 업로드 해 주세요!!');
+			$('#used_photo1_upload').focus();
+			return false;
+		}
 		
-		let form_data = new FormData();
-		form_data.append('upload',my_photo);
+		if($('#used_photo2_upload').val().trim()==''){
+			alert('사진 2개를 모두 업로드 해 주세요!!');
+			$('#used_photo2_upload').focus();
+			return false;
+		}
+		if($('.used-text-area').val().trim() == '') {
+			alert('요청사항은 필수 항목입니다.!!!');
+			$('.used-text-area').focus();
+			return false;
+		}
 		
-		$.ajax({
-			url:'../member/updateMyPhoto.do',
-			type:'post',
-			data:form_data,
-			dataType:'json',
-			contentType:false,
-			processData:false,
-			success:function(param){
-				if(param.result == 'logout'){
-					alert('로그인 후 사용하세요');
-				}else if(param.result == 'success'){
-					alert('프로필 사진이 수정되었습니다.');
-					//교체된 이미지 저장
-					photo_path = $('.my-photo').attr('src');
-					$('#upload').val('');
-					$('#photo_choice').hide();
-					$('#photo_btn').show();
-				}
-			},
-			error:function(){
-				alert('네트워크 오류 발생');
-			}
-		});
-		
-	});//end of click
-	*/
 	
-	//취소 버튼 처리
-	/*
-	$('#photo1_reset').click(function(){
-		$('.used-photo1').attr('src',photo_path);
-		$('#upload').val('');
-		$('#photo_choice').hide();
-		$('#photo_btn').show();
-	});
-	*/
+		if($('.used_price').val().trim()=='' || $('#used_price').val().trim() <=0 ) {
+			alert('가격은 0원 이상 입력하세요!!!');
+			$('.used_price').val(0).focus();
+			return false;
+		}
+	})
+	
 });
 
 
@@ -181,7 +158,7 @@ $(function(){
 			<li>
 				<!-- 기존 책 찾기 -->
 				<form:label path="used_product_price" >판매 희망 가격</form:label>
-				<form:input path="used_product_price" class="used-price" />
+				<form:input path="used_product_price" class="used-price"/>
 				<span id="message_used_product_price"></span>
 				<form:errors element="div" cssClass="error-color"/>
 			</li>
@@ -195,5 +172,6 @@ $(function(){
 			let contextPath = "${pageContext.request.contextPath}"; //팝업 열기
 			let popupUrl = contextPath + "/bookstore/used/usedSearchProductPopup.do";
 			let child = window.open(popupUrl, "_blank", "width=600, height=1000");
+			
 		};
 	</script>

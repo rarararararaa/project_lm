@@ -53,7 +53,25 @@ public class AppConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		//MyPageHeaderInterceptor 설정
 		registry.addInterceptor(myPageHeader)
-			.addPathPatterns("/lm/mypage/main/myPageMain.do");
+		.addPathPatterns("/lm/mypage/main/myPageMain.do")
+		.addPathPatterns("/lm/mypage/asklist/askListMain.do")
+		.addPathPatterns("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
+		.addPathPatterns("/lm/mypage/wantbooklist/wantBookListMain.do")
+		.addPathPatterns("/lm/mypage/programapplylist/programApplyListMain.do")
+		.addPathPatterns("/lm/mypage/donatebooklist/donateBookListMain.do")
+		.addPathPatterns("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
+		.addPathPatterns("/lm/mypage/bookreservationlist/bookReservationListMain.do")
+		.addPathPatterns("/lm/mypage/booklostlist/bookLostListMain.do")
+		.addPathPatterns("/lm/mypage/eventparticipatelist/eventParticipateListMain.do")
+		.addPathPatterns("/lm/mypage/usedbookapplylist/usedBookApplyListMain.do")
+		.addPathPatterns("/lm/mypage/zzimbooklist/zzimBookListMain.do")
+		.addPathPatterns("/lm/mypage/zzimbooklist/zzimBookListMain.do")
+		.addPathPatterns("/lm/mypage/bookwritelist/bookWriteListMain.do")
+		.addPathPatterns("/lm/mypage/bookreportlist/bookReportListMain.do")
+		.addPathPatterns("/lm/mypage/couponlist/couponListMain.do")
+		.addPathPatterns("/lm/mypage/myedit/myEditMain.do")
+		.addPathPatterns("/lm/mypage/pointinfo/pointInfoMain.do")
+		.addPathPatterns("/lm/mypage/gradeinfo/gradeInfoMain.do");
 	}
 }
 

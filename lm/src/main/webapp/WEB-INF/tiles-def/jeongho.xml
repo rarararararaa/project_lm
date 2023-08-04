@@ -32,6 +32,10 @@
     	<put-attribute name="usedBody" value="/WEB-INF/views/bookstore/common/resultView.jsp"/>
     </definition>
     
+    <definition name="usedUpdate" extends="usedMain">
+    	<put-attribute name="usedBody" value="/WEB-INF/views/bookstore/used/usedUpdate.jsp"/>
+    </definition>
+    
 </tiles-definitions>
 
 
