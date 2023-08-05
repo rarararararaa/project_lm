@@ -6,16 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,6 +34,8 @@ public class BookStorePaymentController {
 	
 	@Autowired
 	BookStorePaymentService bookStorePaymentService;
+	
+	//API 책 추가
 	@PostMapping("/bookstore/payment/cart.do")
 	@ResponseBody
 	public Map<String,String> insertcartForm(HttpSession session, Model model, ProductVO product) {
@@ -75,6 +74,7 @@ public class BookStorePaymentController {
 	//======================장바구니FORM===========================//  
 	@GetMapping("/bookstore/payment/cart.do")
 	public String cartForm(HttpSession session, Model model, HttpServletRequest request) {
+		log.debug("<<세션 확인 >> : "+session.getAttribute("cartList"));
 		String mem_id = (String)session.getAttribute("mem_id");
 		log.debug("<<로그인 체크>> : "+mem_id);
 		if(mem_id == null) {
@@ -155,7 +155,8 @@ public class BookStorePaymentController {
 				bookStorePaymentService.updateCart(vo);
 			}
 			mapJson.put("result", "success");
-			orderForm(cartList, total);
+			session.setAttribute("cartList", cartList);
+			session.setAttribute("total", total);
 			//mapJson.put("cartList", cartList);
 			
 			//log.debug("<<되냐???????>>"+list);
@@ -170,11 +171,31 @@ public class BookStorePaymentController {
 		return mapJson;
 	}
 	
-	
+	//주문 페이지
 	@RequestMapping("/bookstore/payment/order.do")
-	public String orderForm(@RequestParam List<BookStorePaymentCartVO> cart, int total) {
-		log.debug("<<됐으면 좋겠다>>"+cart);
+	public String orderForm(HttpSession session, Model model) {
+		log.debug("<<세션 확인 order >> : "+session.getAttribute("cartList"));
+		String mem_id = (String)session.getAttribute("mem_id");
+		if(mem_id == null) {
+			return "redirect:/lm/login/template/loginMain.do?lo=1";
+		}		
+		int total = (int)session.getAttribute("total");
+		int mem_num = (int)session.getAttribute("mem_num");
+		int count = 0;
+		List<BookStorePaymentCartVO> list = (ArrayList)session.getAttribute("cartList");
+		List<ProductVO> book_list = new ArrayList<ProductVO>();
+		for(BookStorePaymentCartVO vo : list) {
+			ProductVO product = bookStorePaymentService.selectDetailBook(vo.getStore_product_num());
+			//log.debug("<<도서 상세 정보>> : "+product);
+			book_list.add(bookStorePaymentService.selectDetailBook(vo.getStore_product_num()));
+			count += vo.getCart_quantity();
+		}
+		log.debug("<<listCart 확인>> : "+book_list);
 		
+		model.addAttribute("total", total);
+		model.addAttribute("list", list);
+		model.addAttribute("book_list", book_list);
+		model.addAttribute("count", count);
 		return "order";
 	}
 	

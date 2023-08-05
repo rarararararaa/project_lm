@@ -156,18 +156,13 @@ function ajaxOrder(cartInfo, total){
 			else if(param.result == 'success'){
 				console.log(total);
 				//orderForm(param.cartList,total);
-				//location.href='order.do';
+				location.href='order.do';
 			}
 		},
 		error:function(){
 			alert('네트워크 오류')
 		}
 	})//
-}
-function orderForm(cartList,total){
-	console.log(cartList);
-	console.log(total);
-	$.post('order.do',{cart:cartList, total:total});
 }
 
 //===============================함수[상품 개수 증감&가격]==================================//

@@ -28,8 +28,25 @@ ul{
 .hidden-place{
 	display:none; 
 }
-
-/*=========장바구니===========*/
+.float-left{
+	float: left;
+}
+.both-clear{
+	clear: both;
+}
+button:hover, input:hover{
+	cursor: pointer;
+	background-color: #e6e6e6;
+}
+.text-center{
+	text-align: center;
+}
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+	  -webkit-appearance: none;
+	  margin: 0;
+}/*input number 옆 증감 버튼 없애기*/
+/*==============================장바구니===============================*/
 /*장바구니 상품리스트*/
 .payment-main-itemList{
 	float: left;
@@ -114,7 +131,7 @@ ul{
 	width: 20px;
 	height: 20px;
 }
-.del-btn:hover, .MP-btn{
+.del-btn:hover, .MP-btn:hover{
 	cursor: pointer;
 }
 .payment-book img{
@@ -233,6 +250,13 @@ ul{
 	cursor: pointer;
 	background-color: #25296b;
 }
+/*주문페이지 사이드 바*/
+.orderContent .payment-main-sidebar{
+	padding-top: 0;
+}
+.orderContent .sidebar-main{
+	height: 360px;
+}
 /*취소하기 버튼*/
 .cancel-btn{
 	margin-top: 20px;
@@ -248,8 +272,165 @@ ul{
 	cursor: pointer;
 	background-color: #e6e6e6;
 }
-.book-select:hover{
+.book-select:hover, #book_detail:hover{
 	cursor: pointer;
 }
+/*==============================결제 페이지===============================*/
+.myOrderInfo{
+	float: left;
+    position: relative;
+	width: 888px;
+}
+.myOrderInfo > div{
+	margin-bottom: 27px;
+}
+.myOrderInfo > div ul li:first-child{
+	font-weight: bold;
+}
+.delInput{
+    width: 100%;
+	border: 1px solid #c7c7c7;
+    border-radius: 10px;
+}
+.delInput ul:first{
+	margin: 25px 0 15px 0;
+}
+.del-hr{
+	border-color: #c7c7c7;
+}
+/*공통 ul li 공백*/
+.myOrderInfo ul:not(:nth-child(3)) li:nth-child(2) {
+    margin-left: 150px;
+}
+.delInput ul:first-child li:last-child {
+    margin-left: 150px;
+}
+/*배송 정보*/
+.delInput ul{
+	margin: 20px 0;
+}
+.delInput ul:first-child li:first-child{
+	font-size: 16px;
+	font-weight: bold;
+}
 
+.delInput ul:first-child li:nth-child(2){
+	margin-bottom: 10px;
+	color: #2B1DD6;
+	font-weight: 600;
+}
+#deli-btn, #deli-request{
+	width: 650px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #C3C3C3;
+	background: #FFF;
+	font-weight: 700;
+}
+#deli-change{
+	margin-left: 10px;
+	border-radius: 5px;
+	border: 1px solid #C3C3C3;
+	background: #FFF;
+	font-size: 12px;
+	font-weight: 700;
+}
+.delInput ul:nth-child(3) li:first-child{
+	color: #474C98;
+	font-size: 14px;
+	font-weight: 400;
+}
+.delInput ul:nth-child(3) li:last-child{
+	margin-top: -10px;
+	margin-left: 90px;	
+}
+.delInput ul:nth-child(3) p{
+	margin-bottom: 5px;
+}
+/*상품 정보*/
+.bookInfo{
+	min-height: 84px;
+    width: 100%;
+	border: 1px solid #c7c7c7;
+    border-radius: 10px;
+}
+.bookInfo p{
+	width: 600px;
+}
+.bookInfo ul li:first-child{
+	margin-top: 13px;
+}
+/*책 리스트*/
+.orderBookList{
+	margin-top: 10px;
+}
+.orderBookList tr{
+	height: 130px;
+}
+.orderBookList td:nth-child(2){
+	vertical-align: top;
+	width: 500px;
+}
+.orderBookList td:nth-child(3){
+	width: 70px;
+}
+.orderBookList td:last-child{
+	width: 100px;
+	font-weight: bold;
+	text-align:right;
+}
 
+.orderBookList ul li:first-child{
+	margin-bottom: 5px;
+}
+.orderBookList ul li:nth-child(2) {
+    margin-left: 0px !important;
+    margin-right: 10px;
+    color: #149200;
+}
+
+#book_detail{
+	margin: 10px 0 0 30px;
+	width: 20px;
+	height: 20px;
+}
+/*포인트*/
+.pointInfo input{
+	margin: 0 5px;
+	padding-right: 15px;
+	width: 400px;
+	height: 44px;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: right;
+	border-radius: 7px;
+	border: 1px solid #898989;
+	background: #FFFDFD;
+}
+.pointInfo label{
+	color: #474c98;
+	font-weight: bold;
+}
+#allPoint{
+	margin-left: 25px;
+	width: 92px;
+	height: 44px;
+	color: #474c98;
+	font-weight: bold;
+	border-radius: 7px;
+	border: 1.5px solid #474C98;
+	background: #FFF;
+}
+/*결제 수단*/
+.pay-type button{
+	margin-right: 30px;
+	width: 220px;
+	height: 44px;
+	border-radius: 7px;
+	border: 1px solid #474C98;
+	background-color: white;
+	color: #474C98;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+}
