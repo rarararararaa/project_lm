@@ -19,7 +19,7 @@
 	<input type="button" value="도서목록" onclick="location.href='admin_booklist.do'">
 	<input type="button" value="대출목록" onclick="location.href='admin_bookloanlist.do'">
 	<input type="button" value="희망도서" onclick="#">
-	<input type="button" value="신규등록" onclick="#">
+	<input type="button" value="신규등록" onclick="location.href='admin_write.do'">
 	
 	<form action="admin_bookloanlist.do" id="search_form" method="get">
 		<ul class="search">

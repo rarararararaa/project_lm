@@ -7,7 +7,7 @@
 		<tr>
 			<td>
 				<a href="/bookstore/product/productDetail.do?store_product_isbn13=${product.store_product_isbn13}">
-				<img src="${product.store_product_cover}">
+					<img src="${product.store_product_cover}">
 				</a>
 			</td>
 			<td>

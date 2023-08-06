@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!-- 도서 수정 시작 -->
+<!-- 신규도서 등록 시작 -->
 <!-- include libraries (jquery,bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
@@ -14,16 +14,20 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-	<h2>도서 수정</h2>
-	<form:form modelAttribute="bookProductVO" action="admin_update.do"
-	                               id="modify_form">
-	    <form:hidden path="callNumber"/>                           
+	<h2>신규등록</h2>
+	<input type="button" value="도서목록" onclick="location.href='admin_booklist.do'">
+	<input type="button" value="대출목록" onclick="location.href='admin_bookloanlist.do'">
+	<input type="button" value="희망도서" onclick="#">
+	<input type="button" value="신규등록" onclick="location.href='admin_write.do'">
+	
+	<form:form modelAttribute="bookProductAdminVO" action="admin_write.do"
+	                               id="register_form">
 		<form:errors element="div" cssClass="error-color"/>
-<ul>
+		<ul>
 			<li>
-				<label for="upload1">상품이미지1</label>
+				<label for="upload1">상품이미지</label>
 				<input type="file" name="upload1" id="upload1" accept="image/gif,image/png,image/jpeg">
-				<form:errors path="lib_product_bookImageURL" cssClass="error-color"/>
+				<form:errors path="lib_product_bookImageUrl_ar" cssClass="error-color"/>
 			</li>
 		    <li>
 				<form:label path="lib_product_isbn">상품식별번호</form:label>
@@ -93,10 +97,14 @@
 			</li>
 		</ul>
 		<div class="align-center">
-			<form:button>수정</form:button>
-			<input type="button" value="도서목록" onclick="location.href='admin_booklist.do'">
+			<form:button>신규등록</form:button>
+			<input type="button" value="도서목록"
+			             onclick="location.href='admin_booklist.do'">
 		</div>	                               
 	</form:form>
 </div>
-<!-- 도서 수정 끝 -->
+<!-- 신규도서 등록 끝 -->
+
+
+
 

@@ -9,6 +9,7 @@ CREATE TABLE BOARD_ANNOUNCE (
     CONSTRAINT PK_BOARD_ANNOUNCE_ADMIN PRIMARY KEY (notice_num)    
 );
 create sequence board_announce_seq;
+create sequence lib_product_manage_seq;
 
 
 CREATE TABLE LIB_LOST_ITEM (
