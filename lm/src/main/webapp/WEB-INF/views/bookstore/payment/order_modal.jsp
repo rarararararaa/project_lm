@@ -8,7 +8,7 @@
                 <div class="tit"><h2>배송지 등록</h2><img src="${ pageContext.request.contextPath }/images/modal-btn.png" onclick="fnHidePop('re_pwd')" class="modal-btn"></div>
                 <div class="con">
                 	<button class="deli-plus" onclick="fnShowPop('re_re_pwd')">배송지 추가</button>
-					<table>
+					<table>  
 						<tr>
 							<td>
 								<input type="checkbox" value="2" class="deli-default" name="check_deli"
