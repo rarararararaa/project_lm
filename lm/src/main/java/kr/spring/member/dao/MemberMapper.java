@@ -36,7 +36,7 @@ public interface MemberMapper {
 	@Select("SELECT mem_salt FROM lm_member_detail WHERE mem_num = (SELECT mem_num FROM lm_member_manage WHERE mem_id = #{mem_id})")
 	public String selectSalt(String mem_id);
 	//회원번호를 이용한 회원정보 구하기
-	@Select("SELECT * FROM spmember m JOIN spmember_detail d "
+	@Select("SELECT * FROM lm_member_manage m JOIN lm_member_detail d "
 			+ "ON m.mem_num=d.mem_num WHERE m.mem_num=#{mem_num}")
 	public MemberVO selectMember(Integer mem_num);
 	//cell,name을 이용한 아이디 찾기

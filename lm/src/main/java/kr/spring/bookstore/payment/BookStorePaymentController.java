@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.product.vo.ProductVO;
+import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -34,6 +36,8 @@ public class BookStorePaymentController {
 	
 	@Autowired
 	BookStorePaymentService bookStorePaymentService;
+	@Autowired
+	MemberService memberService;
 	
 	//API 책 추가
 	@PostMapping("/bookstore/payment/cart.do")
@@ -76,13 +80,13 @@ public class BookStorePaymentController {
 	public String cartForm(HttpSession session, Model model, HttpServletRequest request) {
 		log.debug("<<세션 확인 >> : "+session.getAttribute("cartList"));
 		String mem_id = (String)session.getAttribute("mem_id");
-		log.debug("<<로그인 체크>> : "+mem_id);
 		if(mem_id == null) {
 			return "redirect:/lm/login/template/loginMain.do?lo=1";
 		}
 		int mem_num = (Integer)session.getAttribute("mem_num");
 		int grade = (Integer)session.getAttribute("mem_grade");
-		double point = 0.01;
+		
+		double point = getPoint(grade);
 		List<BookStorePaymentCartVO> list = bookStorePaymentService.selectCartList(mem_num);
 		List<ProductVO> book_list = new ArrayList<ProductVO>();
 		for(BookStorePaymentCartVO vo : list) {
@@ -150,20 +154,12 @@ public class BookStorePaymentController {
 				vo.setStore_product_num(Integer.parseInt(map.get("store_product_num")));
 				vo.setMem_num(mem_num);
 				cartList.add(vo);
-				log.debug("<<tlqkf>> : "+vo.getCart_quantity());
 				log.debug("<<orderList>> : "+cartList);
 				bookStorePaymentService.updateCart(vo);
 			}
 			mapJson.put("result", "success");
 			session.setAttribute("cartList", cartList);
 			session.setAttribute("total", total);
-			//mapJson.put("cartList", cartList);
-			
-			//log.debug("<<되냐???????>>"+list);
-			
-			//List<ProductVO> list = data.get("data"); 
-		//log.debug("<<ACTION-list>> : "+list);
-				
 		} catch (Exception e) {  
 			e.printStackTrace(); 
 		}
@@ -179,34 +175,44 @@ public class BookStorePaymentController {
 		if(mem_id == null) {
 			return "redirect:/lm/login/template/loginMain.do?lo=1";
 		}		
-		int total = (int)session.getAttribute("total");
-		int mem_num = (int)session.getAttribute("mem_num");
+		int mem_num = (Integer)session.getAttribute("mem_num");
 		int count = 0;
 		List<BookStorePaymentCartVO> list = (ArrayList)session.getAttribute("cartList");
+		if(list == null) {//장바구니로 돌아가기
+			return "redirect:/bookstore/payment/cart.do";
+		}
 		List<ProductVO> book_list = new ArrayList<ProductVO>();
+		int total = (int)session.getAttribute("total");
 		for(BookStorePaymentCartVO vo : list) {
-			ProductVO product = bookStorePaymentService.selectDetailBook(vo.getStore_product_num());
 			//log.debug("<<도서 상세 정보>> : "+product);
 			book_list.add(bookStorePaymentService.selectDetailBook(vo.getStore_product_num()));
 			count += vo.getCart_quantity();
 		}
 		log.debug("<<listCart 확인>> : "+book_list);
 		
-		model.addAttribute("total", total);
+		MemberVO member = memberService.selectMember(mem_num);
+		log.debug("<<member 확인>>"+member);
+		
+		//상품 정보
 		model.addAttribute("list", list);
 		model.addAttribute("book_list", book_list);
 		model.addAttribute("count", count);
+		//금액 정보&회원 할인 정보
+		model.addAttribute("total", total);
+		model.addAttribute("mem", member);
+		//회원 배송 정보
+		
 		return "order";
 	}
 	
 	
 	//멤버 등급에 따른 포인드 % 가져오기
 	public double getPoint(int grade) {
-		double point = 0.01;
-		if(grade == 1 ) point = 0.1;
-		else if(grade == 2 ) point = 0.15;
-		else if(grade == 3 ) point = 0.2;
-		else if(grade == 4 ) point = 0.3;
+		double point = 0.005;
+		if(grade == 1 ) point = 0.01;
+		else if(grade == 2 ) point = 0.015;
+		else if(grade == 3 ) point = 0.02;
+		else if(grade == 4 ) point = 0.03;
 		
 		return point;
 	}

@@ -123,7 +123,7 @@ public class MemberController {
 				session.setAttribute("mem_id", member.getMem_id());
 				session.setAttribute("mem_auth", member.getMem_auth());
 				session.setAttribute("mem_num", member.getMem_num());
-				session.setAttribute("mem_grade", member.getMem_grade());//최지혜 추가
+				session.setAttribute("mem_grade", member.getMem_grade());//회원 등급
 				
 				log.debug("<<인증 성공>>");
 				log.debug("<<mem_id>> : " + member.getMem_id());

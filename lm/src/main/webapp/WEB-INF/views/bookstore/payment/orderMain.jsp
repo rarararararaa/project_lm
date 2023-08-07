@@ -32,7 +32,7 @@
 				<li>기본배송지</li>
 				<li>
 					<p>홍길동 / 010-1234-1234</p>
-					<c:if test="${empty member.home_default}">
+					<c:if test="${empty mem.home_address}">
 						설정된 배송지가 없습니다.
 					</c:if>
 					<button id="deli-change">변경</button>
@@ -102,8 +102,9 @@
 			<ul>
 				<li class="float-left">포인트</li>
 				<li>
-					<label for="mem_point">100</label>원
-					<input type="number" name="mem_point" id="mem_point" value="0">원
+					<label for="mem_point">${mem.mem_point}</label>원
+					<input type="number" name="mem_point" id="mem_point" value="0" max="${mem.mem_point}"
+					data-maxPoint="${mem.mem_point}">원
 					<button id="allPoint">전액사용</button>
 				</li>
 			</ul>
@@ -130,7 +131,10 @@
 				</tr>
 				<tr>
 					<td>배송비</td>
-					<td id="delivery">3,000원</td>
+					<td id="delivery">
+						<c:if test="${total >= 50000 }">0원</c:if>
+						<c:if test="${total < 50000 }"><fmt:formatNumber value="3000"/>원</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td>쿠폰/할인</td>
@@ -145,7 +149,14 @@
 			<table id="payAll">
 				<tr>
 					<th>결제 예정 금액</th>
-					<th id="due"><fmt:formatNumber value="${total}"/>원</th>
+					<th id="due">
+					<c:if test="${total < 50000 }">
+						<fmt:formatNumber value="${total + 3000}"/>원
+					</c:if>
+					<c:if test="${total >= 50000 }">
+						<fmt:formatNumber value="${total}"/>원
+					</c:if>
+					</th>
 				</tr>
 				<tr>
 					<td>적립예정 포인트</td>

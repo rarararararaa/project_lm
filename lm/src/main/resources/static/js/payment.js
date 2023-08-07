@@ -45,6 +45,7 @@ $(function(){
 		}else{
 			$('input[type=checkbox]').prop('checked',false);
 		}
+		totalPrice();
 	})
 	//LM문고 선택
 	$('#LM_select').change(function(){
@@ -73,19 +74,10 @@ $(function(){
 		changeNum($(this), num)
 	})
 	
-	
-	//======데이터 전송======//
-	$('#payForm').submit(function(event){
-		event.preventDefault();	
-		let form_data_LM = $('#LM_payForm').serialize();
-		let form_data_USED = $('#USED_payForm').serialize();
-		console.log(form_data_LM);
-		console.log(form_data_USED);
-	})
 
 //주문하기 버튼 이벤트[submit] - cartInfo 
 $('#payForm').submit(function(event){
-	event.preventDefault;
+	event.preventDefault();
 	let cartInfo = [];
 	let book_info = {};
 	$('table').find('input[type=checkbox]').each(function(index){
@@ -190,6 +182,7 @@ function changeNum(tag, num){
 function totalPrice(){
 	let total = 0;
 	let delivery = 3000;
+	let grade = $('#due_point').attr('data-point');
 	$('.LM-item:checked').each(function(){
 		let price = parseInt($(this).closest('tr').find('ul').children('li').eq(2).text().slice(0,-1));
 		let num = parseInt($(this).closest('tr').children('td').eq(2).find('.MP').children('span').text());
@@ -201,10 +194,11 @@ function totalPrice(){
 	if(total >= 50000){
 		delivery = 0;
 	}
+	$('#due').attr('data-due',total+delivery);
 	$('#total').text(total.toLocaleString("ko-KR")+"원");
 	$('#delivery').text(delivery.toLocaleString("ko-KR")+"원");
 	$('#due').text((total+delivery).toLocaleString("ko-KR")+"원");
-	$('#due_point').text(((total)/100).toLocaleString("ko-KR")+"원");
+	$('#due_point').text(((total)*grade).toLocaleString("ko-KR")+"원");
 }
 
 //===============================함수[checkbox]==================================//

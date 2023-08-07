@@ -96,7 +96,7 @@
 			<c:if test="${cart.store_product_status > 0}"><!-- 새 상품 : 0 -->
 			<c:forEach var="book" items="${book_list}">
 			<c:if test="${book.store_product_num == cart.store_product_num}">
-			<tr id="웨이래">
+			<tr>
 				<td><input type="checkbox" value="3" class="LM-item"></td>
 				<td colspan="3"><!-- 장바구니 상품 내용 -->
 					<c:if test="${book.store_product_cover == null}">
@@ -162,11 +162,11 @@
 			<table id="payAll">
 				<tr>
 					<th>결제 예정 금액</th>
-					<th id="due">0원</th>
+					<th id="due" data-due = '0'>0원</th>
 				</tr>
 				<tr>
 					<td>적립예정 포인트</td>
-					<td id="due_point">0원</td>
+					<td id="due_point" data-point="${point}">0원</td>
 				</tr>
 			</table>
 			<input type="submit" value="주문하기" id="paySubmit">
