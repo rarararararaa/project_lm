@@ -1,6 +1,9 @@
 package kr.spring.mypage.service;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.mypage.vo.MyPageVO;
 
 public interface MyPageService {
@@ -13,4 +16,13 @@ public interface MyPageService {
 	public int getRepNumCount(int mem_num);
 	public int getCouponNumCount(int mem_num);
 	public String getOrderPrice(int mem_num);
+	//내정보 수정
+	public MyPageVO getMyEdit(int mem_num); 
+	public String getSalt(int mem_num);
+	public void updatePasswd(MyPageVO mypageVO);
+	public void updateEmail(MyPageVO mypageVO);
+	public void updateCell(MyPageVO mypageVO);
+	public void updateAuth(MyPageVO mypageVO);
+	public int memberOutCheck(MyPageVO mypageVO);
+	public void memberOut(int mem_num);
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.library.bookproduct_admin.dao.BookProductAdminMapper;
-import kr.spring.library.bookproduct_admin.vo.BookProductAdminVO;
+import kr.spring.library.product.vo.BookProductVO;
 
 @Service
 @Transactional
@@ -18,17 +18,12 @@ public class BookProductAdminServiceImpl implements BookProductAdminService{
 	private BookProductAdminMapper bookProductAdminMapper;
 
 	@Override
-	public void insertBookProduct(BookProductAdminVO bookProductAdminVO) {
-		bookProductAdminMapper.insertBookProduct(bookProductAdminVO);
-	}
-
-	@Override
-	public BookProductAdminVO selectDetailBookProduct(String callNumber) {
+	public BookProductVO selectDetailBookProduct(String callNumber) {
 		return bookProductAdminMapper.selectDetailBookProduct(callNumber);
 	}
 
 	@Override
-	public List<BookProductAdminVO> selectBookProductList(Map<String, Object> map) {
+	public List<BookProductVO> selectBookProductList(Map<String, Object> map) {
 		return bookProductAdminMapper.selectBookProductList(map);
 	}
 
@@ -38,27 +33,18 @@ public class BookProductAdminServiceImpl implements BookProductAdminService{
 	}
 
 	@Override
-	public void updateBookProduct(BookProductAdminVO bookProductAdmin) {
-		bookProductAdminMapper.updateBookProduct(bookProductAdmin);
+	public void updateByBookProductAdmin(BookProductVO bookProductVO) {
+		bookProductAdminMapper.updateByBookProductAdmin(bookProductVO);
 	}
 
 	@Override
-	public void deleteBookProduct(String callNumber) {
-		bookProductAdminMapper.deleteBookProduct(callNumber);
+	public List<BookProductVO> selectListLoan(int lib_product_product_status) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void updateByBookProductAdmin(BookProductAdminVO bookProductAdminVO) {
-		bookProductAdminMapper.updateByBookProductAdmin(bookProductAdminVO);
-	}
-
-	@Override
-	public List<BookProductAdminVO> selectListLoan(int lib_product_product_status) {
-		return bookProductAdminMapper.selectListLoan(lib_product_product_status);
-	}
-
-	@Override
-	public List<BookProductAdminVO> selectLoanList(Map<String, Object> map) {
+	public List<BookProductVO> selectLoanList(Map<String, Object> map) {
 		return bookProductAdminMapper.selectLoanList(map);
 	}
 
@@ -66,4 +52,5 @@ public class BookProductAdminServiceImpl implements BookProductAdminService{
 	public void updateLoanCnt(Integer lib_product_loanCnt) {
 		bookProductAdminMapper.updateLoanCnt(lib_product_loanCnt);
 	}
+
 }

@@ -71,7 +71,8 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/lm/mypage/couponlist/couponListMain.do")
 		.addPathPatterns("/lm/mypage/myedit/myEditMain.do")
 		.addPathPatterns("/lm/mypage/pointinfo/pointInfoMain.do")
-		.addPathPatterns("/lm/mypage/gradeinfo/gradeInfoMain.do");
+		.addPathPatterns("/lm/mypage/gradeinfo/gradeInfoMain.do")
+		.addPathPatterns("/lm/mypage/memberout/memberOutMain.do");
 	}
 }
 

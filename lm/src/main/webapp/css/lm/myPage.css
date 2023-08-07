@@ -731,3 +731,21 @@ select.select {
 select.select::-ms-expand {
 	display: none;
 }
+.right-div-form{
+	display:flex;
+	width:950px;
+	height:700px;	
+}
+/* 내용 투명화 */
+#input-area-passwd{
+	display:none;
+}
+#input-area-email{
+	display:none;
+}
+#input-area-email2{
+	display:none;
+}
+#input-area-cell{
+	display:none;
+}

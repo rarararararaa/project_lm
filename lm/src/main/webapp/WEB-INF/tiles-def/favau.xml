@@ -136,4 +136,9 @@
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/bookreportlist/bookReportList.jsp"/>
     </definition>    
     
+    <definition name="memberOutMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="회원 탈퇴"/>
+    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/memberout/memberOut.jsp"/>
+    </definition>    
+    
 </tiles-definitions>

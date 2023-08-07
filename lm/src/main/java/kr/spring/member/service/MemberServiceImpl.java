@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService{
 		member.setMem_identify(member.getMem_identify()+"-"+member.getMem_identify2());
 		memberMapper.insertMember_detail(member);
 		//선택사항인 주소 정보 입력 유무 판별
-		if(member.getHome_zipcode() != null) {
+		if(!member.getHome_zipcode().equals("")) {
 			member.setHome_num(memberMapper.selectHome_num()); //nextval
 			memberMapper.insertHome(member);
 		}
