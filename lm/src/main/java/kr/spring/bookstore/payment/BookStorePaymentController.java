@@ -192,6 +192,8 @@ public class BookStorePaymentController {
 		
 		MemberVO member = memberService.selectMember(mem_num);
 		log.debug("<<member 확인>>"+member);
+		//배송정보
+		MemberVO home = memberService.homeDefault(mem_num);
 		
 		//상품 정보
 		model.addAttribute("list", list);
@@ -201,6 +203,7 @@ public class BookStorePaymentController {
 		model.addAttribute("total", total);
 		model.addAttribute("mem", member);
 		//회원 배송 정보
+		model.addAttribute("home", home);
 		
 		return "order";
 	}

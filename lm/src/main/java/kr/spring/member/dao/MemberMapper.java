@@ -74,7 +74,10 @@ public interface MemberMapper {
 	@Update("UPDATE spmember SET auth=#{auth} WHERE mem_num=#{mem_num}")
 	public void updateByAdmin(MemberVO memberVO);
 	*/
-	
+	//배송 관련
+	//회원번호와 기본 배송지 확인 번호로 기본 배공지 정보 가져오기
+	@Select("SELECT * FROM store_member_home WHERE mem_num=#{mem_num} AND home_default=0")
+	public MemberVO homeDefault(int mem_num);
 }
 
 

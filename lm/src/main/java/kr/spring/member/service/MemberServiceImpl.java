@@ -123,6 +123,13 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		
 	}
+//배송 관련
+
+	@Override
+	public MemberVO homeDefault(int mem_num) {
+		return memberMapper.homeDefault(mem_num);
+	}
+
 
 }
 
