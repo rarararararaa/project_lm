@@ -31,7 +31,7 @@ public interface MemberMapper {
 	@Insert("INSERT INTO store_member_home (home_num,mem_num,home_title,home_zipcode,home_address,home_address_detail,home_cell,home_name) VALUES (#{home_num},#{mem_num},#{home_title},#{home_zipcode},#{home_address},#{home_address_detail},#{mem_cell},#{mem_name})")
 	public void insertHome(MemberVO member);
 	//ID를 이용한 회원정보 체크
-	public MemberVO selectCheckMember(String mem_id);
+	public MemberVO selectCheckMember(String mem_id); 
 	//salt 가져오기
 	@Select("SELECT mem_salt FROM lm_member_detail WHERE mem_num = (SELECT mem_num FROM lm_member_manage WHERE mem_id = #{mem_id})")
 	public String selectSalt(String mem_id);
