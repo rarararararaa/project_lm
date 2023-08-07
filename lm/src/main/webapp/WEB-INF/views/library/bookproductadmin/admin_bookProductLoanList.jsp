@@ -19,7 +19,6 @@
 	<input type="button" value="도서목록" onclick="location.href='admin_booklist.do'">
 	<input type="button" value="대출목록" onclick="location.href='admin_bookloanlist.do'">
 	<input type="button" value="희망도서" onclick="#">
-	<input type="button" value="신규등록" onclick="location.href='admin_write.do'">
 	
 	<form action="admin_bookloanlist.do" id="search_form" method="get">
 		<ul class="search">
@@ -59,7 +58,7 @@
 		<tr class="align-center">
 			<td>${bookProduct.callNumber}</td>
 			<td>
-				<a href="admin_bookupdate.do?callNumber=${bookProduct.callNumber}">${bookProduct.lib_product_bookName}</a>
+				<a href="/library/lib_book/bookDetail.do?callNumber=${bookProduct.callNumber}">${bookProduct.lib_product_bookName}</a>
 			</td>
 			<td>
 				<c:if test="${bookProduct.lib_product_class_no == 0}">총류</c:if>

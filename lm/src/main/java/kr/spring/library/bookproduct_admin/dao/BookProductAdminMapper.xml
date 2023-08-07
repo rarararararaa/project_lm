@@ -2,35 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="kr.spring.library.bookproduct_admin.dao.BookProductAdminMapper">
-	
-	<!-- 신규도서등록 -->
-	<insert id="insertBookProduct" parameterType="BookProductAdminVO">
-	INSERT INTO lib_product_manage(
-		lib_product_isbn,
-		callNumber,
-		lib_product_class_no,
-		lib_product_bookname,
-		lib_product_authors,
-		lib_product_publisher,
-		lib_product_bookImageURL,
-		lib_product_publication_year,
-		lib_product_description,
-		lib_product_detail) 
-	VALUES (
-		#{lib_product_isbn},
-		#{callNumber},
-		#{lib_product_class_no},
-		#{lib_product_bookName},
-		#{lib_product_authors},
-		#{lib_product_pulisher},
-		#{lib_product_bookImageUrl},
-		#{lib_product_publicatoin_year},
-		#{lib_product_description},
-		#{lib_product_product_status},
-		#{lib_product_detail}
-		)
-	</insert>
-	
+
 	<!-- (검색가능하게) 관리자 도서목록 -->
 	<!-- sql태그와 includ태그를 이용해서 SQL문을 재사용 -->
 	<sql id="bookProductSearch">
@@ -60,7 +32,7 @@
 	
 	<!-- 전체 도서 전체/검색 목록 -->
 	<select id="selectBookProductList" parameterType="map"
-	                           resultType="BookProductAdminVO">
+	                           resultType="BookProductVO">
 		SELECT
 		  *
 		FROM (SELECT
@@ -77,7 +49,7 @@
 	</select>
 	<!-- 대출 도서 전체/검색 목록 -->
 	<select id="selectLoanList" parameterType="map"
-	                           resultType="bookProductAdminVO">
+	                           resultType="BookProductVO">
 		SELECT
 		  *
 		FROM (SELECT
