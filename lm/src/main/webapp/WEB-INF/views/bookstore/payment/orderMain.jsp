@@ -21,7 +21,7 @@
 			<ul>
 				<li class="float-left">배송지 정보</li>
 				<li>
-					기본 배송지를 등록해주세요.
+					기본 배송지를 등록해주세요.	
 				</li>
 				<li class="both-clear">
 					<button id="deli-btn">배송지 등록</button>
@@ -63,9 +63,9 @@
 					<tr>
 						<td>
 						<c:if test="${book.store_product_cover == ' '}">
-							<img alt="" src="${pageContext.request.contextPath}/images/noImage.png" width="85">
+							<img src="${pageContext.request.contextPath}/images/noImage.png" width="85">
 						</c:if>
-							<img alt="" src="${book.store_product_cover}">
+							<img src="${book.store_product_cover}">
 						</td>
 						<td>
 							<ul>
@@ -142,7 +142,7 @@
 				</tr>
 				<tr>
 					<td>포인트</td>
-					<td>0원</td>
+					<td id="side_point">0원</td>
 				</tr>
 			</table>
 			<hr size="2" noshade="noshade" color="#c7c7c7">
@@ -160,7 +160,7 @@
 				</tr>
 				<tr>
 					<td>적립예정 포인트</td>
-					<td id="due_point">0원</td>
+					<td id="due_point"><fmt:formatNumber value="${total * point}"/>원</td>
 				</tr>
 			</table>
 			<input type="submit" value="주문하기" id="paySubmit">

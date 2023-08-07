@@ -103,7 +103,7 @@ $('#payForm').submit(function(event){
 	//console.log(LM_payForm);
 	})	
 	
-//선탣한 도서 장바구니에서 삭제
+//선택한 도서 장바구니에서 삭제
 $('.del-btn').click(function(){
 	let store_product_num =  $(this).closest('tr').find('#test').children().eq(0).attr('data-num');
 	//alert(store_product_num);	
@@ -160,10 +160,8 @@ function ajaxOrder(cartInfo, total){
 //===============================함수[상품 개수 증감&가격]==================================//
 function changeNum(tag, num){
 //	let test = $(tag).closest('table').find('ul').children('li').eq(2).text(); 상품 가격
-//	alert(test);
 	let number =  parseInt(num);
 	let price = parseInt($(tag).closest('tr').find('ul').children('li').eq(2).text().slice(0,-1));//n번쨰 자식노드
-	//alert(price);
 	if($(tag).attr('id') == 'minus'){
 		number--;
 		if(number == 0){
@@ -186,8 +184,6 @@ function totalPrice(){
 	$('.LM-item:checked').each(function(){
 		let price = parseInt($(this).closest('tr').find('ul').children('li').eq(2).text().slice(0,-1));
 		let num = parseInt($(this).closest('tr').children('td').eq(2).find('.MP').children('span').text());
-		//alert(price);
-		//alert(num);
 		total += (price*num);
 		$('#total').attr('data-total',total);
 	})
@@ -205,7 +201,6 @@ function totalPrice(){
 
 //LM문고/중고거래 전체 선택
 	function selectAllLM(name, check){
-		//alert($(name).find('input[type="checkbox"]').val());
 		if(check){
 			$(name).find('input[type="checkbox"]').prop('checked',true);
 		}else{

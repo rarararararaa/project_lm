@@ -140,7 +140,7 @@ public class BookProductServiceImpl implements BookProductService {
 			//log.debug("<<DetailData API>> : "+result);
 		}
 	}
-
+	//API detail 업데이트
 	@Override
 	public String getDetailData(String isbn) {
 		String result = "";
