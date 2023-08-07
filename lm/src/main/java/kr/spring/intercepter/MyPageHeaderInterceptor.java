@@ -30,8 +30,10 @@ public class MyPageHeaderInterceptor implements HandlerInterceptor{
 		logger.debug("<<MyPageHeaderInterceptor 진입>>");
 		
 		HttpSession session = request.getSession();
-		//세션에 저장된 mem_num 저장
-		int mem_num = (int)session.getAttribute("mem_num");
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		if(mem_num == null) {
+			return true;
+		}else {
 		
 		List<MyPageVO> list = null;
 		
@@ -40,7 +42,12 @@ public class MyPageHeaderInterceptor implements HandlerInterceptor{
 		int mem_grade = list.get(0).mem_grade;
 		String mem_point = list.get(0).mem_point+"";
 		//YYYY-MM-DD
-		String mem_modify_date = list.get(0).mem_modify_date.substring(0,10);
+		String mem_modify_date = "";
+		if(list.get(0).mem_modify_date != null) {
+			mem_modify_date = list.get(0).mem_modify_date.substring(0,10);
+		}else {
+			mem_modify_date = "수정기록 없음";
+		}
 		String mem_reg_date = mypageService.getMemRegDate(mem_num).substring(0,10);
 		int zzim_num_count = mypageService.getZzimNumCount(mem_num);
 		int review_num_count = mypageService.getReviewNumCount(mem_num);
@@ -95,5 +102,6 @@ public class MyPageHeaderInterceptor implements HandlerInterceptor{
 		request.setAttribute("coupon_num_count",coupon_num_count);
 		
 		return true;
+		}
 	}
 }
