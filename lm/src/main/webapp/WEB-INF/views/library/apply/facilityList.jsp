@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/service.css">
 <div class="page-main">
 	<h2>시설 목록</h2>
 	<c:if test="${count == 0}">
@@ -8,15 +9,15 @@
 	</c:if>
 	<c:if test="${count > 0}">
 	
-	<ul>
+	<ul class="facility-list">
 		<li></li>
-		<li>시설명</li>
+		<li class="fac-name">시설명</li>
 		<li>예약가능</li>
 	</ul>
 	<c:forEach var="facility" items="${list}">
-	<ul>
+	<ul class="facility-list">
 		<li><img src="#"></li>
-		<li>${facility.facility_name}</li>
+		<li class="fac-name"><a href="facApplyWrite.do?facility_num=${facility.facility_num}">${facility.facility_name}</a></li>
 		<li>예약가능</li>
 	</ul>
 	</c:forEach>

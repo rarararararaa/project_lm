@@ -62,6 +62,10 @@
     	<put-attribute name="libTitle" value="시설목록"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/facilityList.jsp"/>
     </definition>
+    <definition name="facApplyWrite" extends="libMain">
+    	<put-attribute name="libTitle" value="시설목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/facilityApplyForm.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

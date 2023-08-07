@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.spring.library.facility.dao.FacilityMapper;
+import kr.spring.library.facility.vo.FacilityApplyVO;
 import kr.spring.library.facility.vo.FacilityVO;
 
 @Service
@@ -34,6 +35,23 @@ public class FacilityServiceImpl implements FacilityService{
 	@Override
 	public int selectFacilityCount(Map<String, Object> map) {
 		return facilityMapper.selectFacilityCount(map);
+	}
+
+	@Override
+	public void insertFacilityApply(FacilityApplyVO fac_apply) {
+		facilityMapper.insertFacilityApply(fac_apply);
+	}
+
+	@Override
+	public List<FacilityApplyVO> selectFacilityApplyList(Integer facility_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<FacilityApplyVO> selectFacilityApplyListByMem_num(Integer mem_num) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

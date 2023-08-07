@@ -60,4 +60,5 @@
 		FROM LM_BOARD_FAQ
 		WHERE faq_category=#{faq_category}
 	</select>
+	
 </mapper>

@@ -180,6 +180,13 @@
 		FROM STORE_PRODUCT_DETAIL d JOIN STORE_PRODUCT_MANAGE p USING(store_product_num)
 		WHERE store_product_isbn13=#{store_product_isbn13}
 	</select>
+	
+	
+	<!-- 임시) 상품 등록 -->
+	<insert id="insertProduct" parameterType="productVO">
+	
+	
+	</insert>
 </mapper>
 
 
