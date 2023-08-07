@@ -32,7 +32,6 @@ public class MemberVO {
 	private String mem_stop_reason;
 	private String mem_name;
 	private String mem_passwd;
-	@Size(min=9,max=15)
 	private String mem_cell;
 	@Email
 	private String mem_email;
