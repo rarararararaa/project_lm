@@ -169,9 +169,28 @@ a:hover {
 	width: 32px;
 	height: 32px;
 }
-
-
 </style>
+<script type="text/javascript">
+	$(function(){
+		
+		function performSearch() {
+			let keyword = $('.search-text').val();
+	        let url = "${pageContext.request.contextPath}";
+	        // 검색 페이지로 이동
+	        window.location.href = url+'libSearchMain.do?categoryNum=10&orderByNum=1&keyword='+keyword;
+	    }
+
+	    $('.lib-text-img').click(function(){
+	        performSearch();
+	    });
+
+	    $('.lib-text-img').keypress(function(event) {
+	        if (event.which === 13) {  // Enter 키의 keyCode는 13입니다.
+	            performSearch();
+	        }
+	    });
+	});
+</script>
 <div class="lib-header">
 	<div class="lib-header-topbox">
 		<div class="lib-header-topmenu">
