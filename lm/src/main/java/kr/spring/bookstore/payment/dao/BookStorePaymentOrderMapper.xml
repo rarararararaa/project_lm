@@ -9,10 +9,6 @@
 			 mem_num, 
 			 home_num, 
 			 order_total_price, 
-			 order_status, 
-			 order_date,
-			 order_notice,
-			 order_pay_status,
 			 payment_type,
 			 imp_uid)
 			 VALUES(
@@ -20,28 +16,23 @@
 			 	#{mem_num},
 			 	#{home_num},
 			 	#{order_total_price},
-			 	#{order_status},
-			 	#{order_date},
-			 	#{order_notice},
-			 	#{order_pay_status},
 			 	#{payment_type},
-			 	#{imp_uid}
+			 	#{IMP_UID}
 			 	)
 	</insert>
-	
 	<insert id="insertDetailOrder" parameterType="bookStorePaymentCartVO">
 		INSERT INTO store_order_detail(
 			order_detail_num,
 			order_num,
 			store_product_num,
 			order_product_price,
-			order_product_quantity,
+			cart_quantity
 		)VALUES(
-			store_order_detail_seq.next.val.
-			#{store_product_num},
+			store_order_detail_seq.nextval,
 			#{order_num},
+			#{store_product_num},
 			#{order_product_price},
-			#{order_product_quantity}
+			#{cart_quantity}
 		)
 	</insert>
 </mapper>

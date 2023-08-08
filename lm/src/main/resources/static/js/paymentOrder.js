@@ -126,7 +126,7 @@ function ajaxPaycomplete(rsp){
 		success:function(param){
 			if(param.result == 'success'){
 				alert('결제에 성공했습니다.');
-				location.hre='bsMain.do';
+				location.href='../template/bsMain.do';
 			}
 		},
 		error:function(){

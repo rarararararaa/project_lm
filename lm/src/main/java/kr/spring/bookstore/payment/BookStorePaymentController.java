@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.bookstore.payment.service.BookStorePaymentOrderService;
 import kr.spring.bookstore.payment.service.BookStorePaymentService;
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
@@ -38,6 +39,8 @@ public class BookStorePaymentController {
 	
 	@Autowired
 	BookStorePaymentService bookStorePaymentService;
+	@Autowired
+	BookStorePaymentOrderService bookStorePaymentOrderService; 
 	@Autowired
 	MemberService memberService;
 	
@@ -223,13 +226,26 @@ public class BookStorePaymentController {
 		org.json.JSONObject jObject = new org.json.JSONObject(orderInfo);
 		//boolean result = jObject.getBoolean("success");
 		List<BookStorePaymentCartVO> list = (ArrayList)session.getAttribute("cartList");
-		BookStorePaymentOrderVO order = null;
+		int total = (Integer)session.getAttribute("total");
+		BookStorePaymentOrderVO order = new BookStorePaymentOrderVO();
+		//데이터 뽑기
+		MemberVO mem_home = bookStorePaymentOrderService.selectHome(jObject.getInt("buyer_postcode"));
+		order.setHome_num(mem_home.getHome_num());
+		order.setMem_num(mem_home.getMem_num());
+		order.setOrder_total_price(total);
+		String type = jObject.getString("pg_provider");
+		int payment_type = 1;
+		if(type.equals("kakaopay")) {
+			payment_type = 2;
+		}
+		order.setPayment_type(payment_type);
+		order.setIMP_UID(jObject.getString("imp_uid"));
+		log.debug("<<result-order>> : "+order);
+		log.debug("<<result-cartList>> : "+list);
+		bookStorePaymentOrderService.insertOrder(order, list);
 		
-		//order.setHome_num(jObject.getString(""))
-		
-		log.debug("<<result>> : ");
-		
-		
+		session.removeAttribute("cartList");
+		session.removeAttribute("total");
 		Map<String, String> mapJson = new HashMap<String, String>();
 		mapJson.put("result", "success");
 		return mapJson;
