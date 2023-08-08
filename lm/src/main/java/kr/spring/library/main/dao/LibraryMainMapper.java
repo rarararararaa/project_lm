@@ -6,6 +6,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import kr.spring.library.board_announce.vo.BoardAnnounceVO;
+import kr.spring.library.lib_lost_item.vo.LibLostItemVO;
 import kr.spring.library.main.vo.LibraryMainVO;
 
 @Mapper
@@ -23,4 +25,15 @@ public interface LibraryMainMapper {
 	public List<LibraryMainVO> selectLibraryByCategoryAndOrderNum(Map<String,Object> map);
 	public int selectLibraryByCategoryAndOrderNumCount(Map<String,Object> map);
 	
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM ("
+			+ "SELECT notice_num, notice_title, notice_hit, notice_reg_date FROM board_announce ORDER BY notice_reg_date DESC"
+			+ ")a) WHERE rnum <= #{end}")
+	public List<BoardAnnounceVO> selectAnnounceList(int end);
+	
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM lib_lost_item )a) WHERE rnum <= #{end}")
+	public List<LibLostItemVO> selectLostList(int end);
+	
+	
+	@Select("SELECT SYSDATE FROM DUAL")
+	public String selectCurrentTime();
 }

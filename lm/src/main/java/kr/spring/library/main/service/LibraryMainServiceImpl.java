@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.library.board_announce.vo.BoardAnnounceVO;
+import kr.spring.library.lib_lost_item.vo.LibLostItemVO;
 import kr.spring.library.main.dao.LibraryMainMapper;
 import kr.spring.library.main.vo.LibraryMainVO;
 
@@ -38,6 +40,26 @@ public class LibraryMainServiceImpl implements LibraryMainService {
 		// TODO Auto-generated method stub
 		return libraryMainMapper.selectLibraryByCategoryAndOrderNumCount(map);
 	}
+
+	@Override
+	public List<BoardAnnounceVO> selectAnnounceList(int end) {
+		
+		return libraryMainMapper.selectAnnounceList(end);
+	}
+
+	@Override
+	public List<LibLostItemVO> selectLostList(int end) {
+		// TODO Auto-generated method stub
+		return libraryMainMapper.selectLostList(end);
+	}
+
+	@Override
+	public String selectCurrentTime() {
+		// TODO Auto-generated method stub
+		return libraryMainMapper.selectCurrentTime();
+	}
+	
+	
 	
 	
 

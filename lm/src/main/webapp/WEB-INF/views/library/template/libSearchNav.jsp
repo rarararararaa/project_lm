@@ -14,7 +14,7 @@
 <div class="used-book-nav">
 	<div class="lib-main-nav-filter-text">필터</div>
 	<div class="lib-main-nav-contents">
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=10&orderByNum=1&keyword=${resultSearch}">전체</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=10&orderByNum=1">전체</a>
 	</div>
 	<div class="lib-main-nav-contents">
 		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=0&orderByNum=1&keyword=${resultSearch}">총류 |&nbsp;</a>

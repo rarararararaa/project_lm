@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.library.board_announce.vo.BoardAnnounceVO;
+import kr.spring.library.lib_lost_item.vo.LibLostItemVO;
 import kr.spring.library.main.service.LibraryMainService;
 import kr.spring.library.main.vo.LibraryMainVO;
 import lombok.extern.slf4j.Slf4j;
@@ -35,19 +37,28 @@ public class LibMainController {
 	
 	
 	@GetMapping("/library/template/libMain.do")
-	public ModelAndView libMain(LibraryMainVO libraryMainVO, HttpServletRequest request, HttpSession session) {
+	public ModelAndView libMain(LibraryMainVO libraryMainVO,BoardAnnounceVO boardAnnounceVO, 
+			HttpServletRequest request, HttpSession session) {
 		
+		int end = 5;
 		
 		List<LibraryMainVO> list = null;
 		List<LibraryMainVO> navs = null;
+		List<BoardAnnounceVO> ann = null;
+		List<LibLostItemVO> lost = null;
 		list = libraryMainService.selectLibraryAllPorducts();
 		navs = libraryMainService.selectLibraryCategoryNav();
+		ann = libraryMainService.selectAnnounceList(end);
+		lost = libraryMainService.selectLostList(end);
+		String currentTime = libraryMainService.selectCurrentTime();
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("libMain");
 		mav.addObject("list",list);
 		mav.addObject("navs",navs);
-		
+		mav.addObject("ann",ann);
+		mav.addObject("lost",lost);
+		mav.addObject("currentTime",currentTime);
 		return mav; //타일스 설정의 식별자
 	}
 	
