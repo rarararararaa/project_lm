@@ -10,6 +10,7 @@ CREATE TABLE BOARD_ANNOUNCE (
 );
 create sequence board_announce_seq;
 create sequence lib_product_manage_seq;
+create sequence lib_book_apply_seq;
 
 
 CREATE TABLE LIB_LOST_ITEM (

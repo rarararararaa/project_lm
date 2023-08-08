@@ -21,10 +21,6 @@
     	<put-attribute name="libTitle" value="도서목록"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/bookproductadmin/admin_bookProductList.jsp"/>
     </definition>
-    <definition name="admin_bookProductLoanList" extends="libAdmin">
-    	<put-attribute name="libTitle" value="대출목록"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/bookproductadmin/admin_bookProductLoanList.jsp"/>
-    </definition>
 
 	<!-- 공지사항 -->
 	<definition name="boardAnnounceWrite" extends="libAdmin">
