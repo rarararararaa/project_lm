@@ -74,7 +74,7 @@
 						<td>
 							<ul>
 								<li>${book.store_product_title}</li>
-								<li class="float-left">${book.store_product_discount}%</li>
+								<li class="float-left orderListlitwo">${book.store_product_discount}%</li>
 								<li><fmt:formatNumber value="${book.store_product_pricestandard}"/>원</li>
 							</ul>
 						</td>

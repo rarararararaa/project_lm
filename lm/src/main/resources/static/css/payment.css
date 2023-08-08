@@ -51,6 +51,11 @@ input[type='number']::-webkit-inner-spin-button {
     overflow-y: hidden;
   	padding-right: 4.5px;
 }
+.orderListlitwo{
+	margin-left: 0 !important;
+	padding-right: 5px;
+	color: #149200;
+}
 
 /*==============================장바구니===============================*/
 /*장바구니 상품리스트*/
@@ -366,39 +371,40 @@ input[type='number']::-webkit-inner-spin-button {
 .bookInfo ul li:first-child{
 	margin-top: 13px;
 }
-/*책 리스트*/
+#book_detail{
+	margin: 15px 0 0 30px;
+	width: 25px;
+	height: 25px;
+}
 .orderBookList{
 	margin-top: 10px;
 }
 .orderBookList tr{
-	height: 130px;
+	height: 150px;
+}
+.orderBookList td:first-child{
+	width: 90px;
+}
+.orderBookList img{
+	width: 90px;
 }
 .orderBookList td:nth-child(2){
+	width: 440px;
 	vertical-align: top;
-	width: 500px;
+}
+.orderBookList td:nth-child(2) ul{
+	margin-left: 0;
+}
+.orderBookList td:nth-child(2) li:first-child{
+	margin-bottom: 10px;
 }
 .orderBookList td:nth-child(3){
-	width: 70px;
+	width: 130px;
+	text-align: center;
 }
 .orderBookList td:last-child{
-	width: 100px;
-	font-weight: bold;
-	text-align:right;
-}
-
-.orderBookList ul li:first-child{
-	margin-bottom: 5px;
-}
-.orderBookList ul li:nth-child(2) {
-    margin-left: 0px !important;
-    margin-right: 10px;
-    color: #149200;
-}
-
-#book_detail{
-	margin: 10px 0 0 30px;
-	width: 20px;
-	height: 20px;
+	width: 180px;
+	text-align: center;
 }
 /*포인트*/
 .pointInfo input{
@@ -440,134 +446,3 @@ input[type='number']::-webkit-inner-spin-button {
 	font-size: 16px;
 	font-weight: bold;
 }
-/*모달 창*/
-/*모달 배경*/
-.modal{
-		position:fixed;
-		width:100%;
-		height:100%;
-		top:0;
-		left:0;
-		bottom:0;
-		background-color:rgba(0,0,0,.6);
-		z-index: -1;
-		opacity:0;
-		transition:all 0.2s;
-		}
-.modal_container{
-	position: fixed;
-	overflow: hidden;
- 	top: 50%;
-  	left: 50%;
- 	transform: translate(-50%, -50%);
-	padding: 0 30px 30px 30px;
-	width: 460px;
-	height: 620px;
-	border-radius: 17px;
-	background: #FFF;
-	overflow-y:overlay;
-}
-.con table tr td:nth-child(3){
-    padding-left: 5px;
-}
-.m_content{
-	margin-top: 5px !important;
-}
-.tit{
-	display: flex;
-}
-.tit h2{
-	width: 400px;
-}
-.modal-btn{
-	margin: 20px 0 0 50px;
-	height: 20px;
-	width: 20px;
-}
-.con{
-	margin-top: 15px;
-}
-.deli-plus{
-	width: 460px;
-	height: 44px;
-	color: #474C98;
-	border-radius: 5px;
-	border: 1px solid #474C98;
-	background: #FFF;
-}
-.modify-deli{
-	color: #474C98;
-	border-radius: 5px;
-	border: 1px solid #474C98;
-	background: #FFF;
-    font-size: 12px;
-}
-.deliInfo li:first-child{
-	color: #474C98;
-	font-weight: 400;
-
-}
-.deliInfo li:not(:first-child) {
-	color: black !important;
-    margin-left: 0 !important;
-    font-weight: 400 !important;
-}
-/*배송지 추가 모달*/
-.deli-modal-con{
-	width: 460px;
-	height: 600px;
-}
-#deli_form ul{
-	padding-left: 0;
-	margin-top: 0;
-}
-#deli_form li{
-	margin-left:0;
-	width: 500px;
-	font-size: 14px !important;
-	color: black;
-	font-weight: normal !important;
-}
-#deli_form li:first-child{
-	margin-top: 10px;
-}
-#deli_form li{
-	margin-bottom: 20px;
-}
-#deli_form label + input{
-	margin-top: 10px;
-}
-.default-btn{
-	margin-bottom: 15px;
-}
-#recipient, #address1{
-	margin-bottom: 5px;
-}
-#deli_form td input:first-child{
-	margin-top: 10px;
-}
-#deli_form input[type="text"], input[type="button"]{
-	width: 460px;
-	padding: 10px 0;
-	color: #898989;
-	border-radius: 7px;
-	border: 1px solid #DBDBDB;
-	background: #FFF;
-}
-#deli_form input[type="text"]{
-	width: 428px;
-	font-size: 12px;
-	padding: 10px 15px;
-}
-#deli_submit{
-	margin: 40px 0 0 160px;
-	width: 140px;
-	height: 44px;
-	border-radius: 7px;
-	background: #5055B1;
-	color: #FFF;
-	font-size: 15px;
-}
-
-/*모달 창 띄웠을 경우*/
-.modal.on{opacity:1;z-index:999;}
