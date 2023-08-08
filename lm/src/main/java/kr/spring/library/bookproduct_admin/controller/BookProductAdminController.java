@@ -64,43 +64,4 @@ public class BookProductAdminController {
 
 		return mav;
 	}
-
-	/*=================================
-	 * 도서관리 - 대출목록
-	 *=================================*/
-	@RequestMapping("/library/bookproductadmin/admin_bookloanlist.do")
-	public ModelAndView getloanList(
-			@RequestParam(value="pageNum",
-			defaultValue="1") int currentPage,
-			String keyfield,String keyword) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
-
-		//전체/검색 레코드수
-		int count = bookProuctAdminService.selectRowCount(map);
-
-		log.debug("<<count>> : " + count);
-
-		//페이지 처리
-		PagingUtil page = 
-				new PagingUtil(keyfield,keyword,currentPage,
-						count,20,10,"admin_bookloanlist.do");
-
-		List<BookProductVO> list = null;
-		if(count > 0) {
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-
-			list = bookProuctAdminService.selectLoanList(map);
-		}
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin_bookProductLoanList");
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		mav.addObject("page", page.getPage());
-
-		return mav;
-	}
 }

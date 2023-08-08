@@ -47,23 +47,5 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>                                     
 	</select>
-	<!-- 대출 도서 전체/검색 목록 -->
-	<select id="selectLoanList" parameterType="map"
-	                           resultType="BookProductVO">
-		SELECT
-		  *
-		FROM (SELECT
-		        a.*,
-		        rownum rnum
-		      FROM (SELECT
-		              *
-		            FROM lib_product_manage
-		            WHERE lib_product_product_status=1
-		            <include refid="bookProductSearch"></include>
-		            ORDER BY callNumber DESC NULLS LAST)a)  
-		<![CDATA[
-		WHERE rnum >= #{start} AND rnum <= #{end}
-		]]>                                     
-	</select>
 	
 </mapper>

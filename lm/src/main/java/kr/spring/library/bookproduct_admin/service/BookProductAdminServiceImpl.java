@@ -32,25 +32,4 @@ public class BookProductAdminServiceImpl implements BookProductAdminService{
 		return bookProductAdminMapper.selectRowCount(map);
 	}
 
-	@Override
-	public void updateByBookProductAdmin(BookProductVO bookProductVO) {
-		bookProductAdminMapper.updateByBookProductAdmin(bookProductVO);
-	}
-
-	@Override
-	public List<BookProductVO> selectListLoan(int lib_product_product_status) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<BookProductVO> selectLoanList(Map<String, Object> map) {
-		return bookProductAdminMapper.selectLoanList(map);
-	}
-
-	@Override
-	public void updateLoanCnt(Integer lib_product_loanCnt) {
-		bookProductAdminMapper.updateLoanCnt(lib_product_loanCnt);
-	}
-
 }
