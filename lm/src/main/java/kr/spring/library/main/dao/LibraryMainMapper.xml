@@ -40,17 +40,12 @@
 				ORDER BY lib_product_publisher
 			</otherwise>
 		</choose>
-		
-		
 	</select>
 	
 	<select id="selectLibraryByCategoryAndOrderNumCount" parameterType="map" resultType="integer">
 		select COUNT(*) FROM (select * FROM lib_product_manage
 		<include refid="categoryNumSearch"></include>
-		)
-		<include refid="keywordSearch"></include>
-		
+		) <include refid="keywordSearch"></include>
 	</select>
 	
 </mapper>
-

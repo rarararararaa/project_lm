@@ -67,13 +67,20 @@ public class LibMainController {
 		//List<LibraryMainVO> list = null;
 		List<LibraryMainVO> navs = null;
 		List<LibraryMainVO> result = null;
+		
+		
 		//list = libraryMainService.selectLibraryAllPorducts();
 		navs = libraryMainService.selectLibraryCategoryNav();
 		map.put("keyword",keyword);
 		map.put("categoryNum",categoryNum);
 		map.put("orderByNum",orderByNum);
 		result = libraryMainService.selectLibraryByCategoryAndOrderNum(map);
-		
+		//300자 넘으면 ... 처리...
+		for(LibraryMainVO VO : result) {
+			if(VO.getLib_product_detail().length() >= 300) {
+				VO.setLib_product_detail(VO.getLib_product_detail().substring(0,300)+"...");
+			}
+		}
 		int totalCount = libraryMainService.selectLibraryByCategoryAndOrderNumCount(map);
 		int selectedCategoryNum = categoryNum;
 		ModelAndView mav = new ModelAndView();
