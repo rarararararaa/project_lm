@@ -1,45 +1,117 @@
 @charset "UTF-8";
-body {
-	font-size: 14px;
-	line-height: 1.4;
-	font-family: "Roboto", "Noto Sans KR", "PingFang SC",
-		"Apple SD Gothic Neo", "Microsoft YaHei UI", "Malgun Gothic",
-		sans-serif;
-	min-width: 1440px;
-	color: #000;
+/*---------- 상품 상세 ---------*/
+/* 가장 겉 */
+div.product-main {
+	width: 1200px;
+	min-height: 1000px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+div.content-wrap {
+	padding-top: 42px;
+}
+/* 상품 div 헤더 */
+div.content-header {
+	line-height: 42px;
+	text-align: center;
+	font-weight: 700;
+	font-size: 28px;
+}
+/* 상품 내용 */
+div.content {
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;	
+}
+div.prod-detail-content{
+	width: calc(100/3 * 100%);
+}
+div.content div.prod-detail-content:not(:first-child) {
+	margin-left: 80px;
+}
+/* 상품 리뷰 */
+.review-box {
+	border: 1px solid #eaeaea;
+	border-radius: 10px;
+	box-sizing: border-box;
+	padding: 16px 15px 22px;
+	text-align: center;
+}
+/* 상품 별점 */
+.star-ratings-fill {
+	--percent: calc(var(--rating) /10 * 100%);	
+    background: linear-gradient(90deg, #f5c842 var(--percent), #aaa9a9 var(--percent));	
+	position:relative;
+	color: transparent;
+	padding: 0;
+	z-index: 1;
+	display: flex;
+	overflow: hidden;
+	font-size: 20px;
+	background-clip: content-box;	
+    -webkit-background-clip: text;	
+	display:inline-block;
+}
+ 
+.review-score{
+	position:relative;
+	font-size: 20px;
+	line-height: 30px;
+	font-weight: 700;
+	color: #474c98;
+	color: #474c98;
+}
+/* 상품 사진 */
+div.prod-detail-content img {
+	width: 380px;
+}
+/* 상품 가격 */
+span.val{
+	font-size:24px;
+	font-weight:700;
+	line-height:36px;
+}
+span.unit{
+	line-height:36px;
+	font-size:24px;
+	font-weight:400;
 }
 
 /* 찜 */
-span.wish-ico{
-	display:inline-block;
+span.wish-ico {
+	display: inline-block;
 	background-image: url(../images/heart.png);
-	width:12px;
-	height:12px;
-	background-size:12px 12px;	
+	width: 12px;
+	height: 12px;
+	background-size: 12px 12px;
 }
-span.wish-ico.active{
-	display:inline-block;
+
+span.wish-ico.active {
+	display: inline-block;
 	background-image: url(../images/heart_active.png);
-	width:12px;
-	height:12px;
-	background-size:12px 12px;		
+	width: 12px;
+	height: 12px;
+	background-size: 12px 12px;
 }
 
 /* 상품 수량 제어 */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
 }
-button.decrease{
+
+button.decrease {
 	background-image: url(../images/down.png);
-	width:12px;
-	height:12px;
-	background-size:12px 12px;
+	width: 12px;
+	height: 12px;
+	background-size: 12px 12px;
 }
-button.increase{
+
+button.increase {
 	background-image: url(../images/up.png);
-	width:12px;
-	height:12px;
-	background-size:12px 12px;
+	width: 12px;
+	height: 12px;
+	background-size: 12px 12px;
 }

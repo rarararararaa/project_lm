@@ -18,11 +18,51 @@
 			<div></div>
 		</div>
 		<div class="content">
-			<div class="tab-list-wrap">
-				
+			<div class="prod-detail-content">
+				<div class="prod-author">${product.store_product_author}</div>
+				<div class="prod-pub">${product.store_product_publisher} · ${product.store_product_pubdate}</div>
+				<div >
+					<c:if test="${product.store_product_customerReviewRank!=0}">
+						${product.store_product_searchcategoryName} ${product.store_product_customerReviewRank}위
+					</c:if>
+				</div>
+				<div class="review-box">
+					<div class="star-ratings">
+						<div class="star-ratings-fill" style="--rating: ${product.store_product_ratingScore};">
+							<span>⭐</span>
+							<span>⭐</span>
+							<span>⭐</span>
+							<span>⭐</span>
+							<span>⭐</span>
+						</div>
+					</div>
+					<div>
+						<span class="review-score">
+							${product.store_product_ratingScore} 
+						</span>
+						<span class="review-count">
+							(${product.store_product_ratingCount}개의 리뷰)
+						</span>
+					</div>
+				</div>
 			</div>
 			<div class="prod-detail-content">
 				<img src="${product.store_product_cover}">
+			</div>
+			<div class="prod-detail-content">
+				<div class="prod-price">
+					<span>
+						<c:if test="${product.store_product_discount>0 }">
+							${product.store_product_discount} %
+						</c:if>
+					</span>
+					<span class="price">
+						<span class="val">
+							<fmt:formatNumber value="${product.store_product_pricestandard}"/>
+						</span>
+						<span class="unit"> 원</span>
+					</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -54,7 +94,7 @@
 						<input type="hidden" name="store_product_title" value="${product.store_product_title}">
 						<button class="btn-line-gray" id="output_zzim"  data-num="${product.store_product_num}"><span class="wish-ico"></span></button>
 						<button class="btn-lg cart-btn" id="cart_btn" onclick="submitCart()">장바구니</button>
-						<button class="btn-lg orderRightAway" id="orderRigthAway">바로구매</button>
+						<button class="btn-lg orderRightAway" id="orderRightAway">바로구매</button>
 				</div>
 			</div>
 			</form>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.library.rent.dao.ReservationMapper">
+
+	<!-- callNumber 추출 -->
+	<select id="selectCallNumberToReservation" parameterType="string" resultType="string">
+		SELECT 
+		    callNumber
+		FROM lib_product_manage
+		WHERE (SELECT 
+		        COUNT(*)
+		      FROM lib_reservation r
+		      LEFT OUTER JOIN lib_product_manage p USING(callNumber)
+		      WHERE r.reservation_status<![CDATA[<]]>2 GROUP BY callNumber)<![CDATA[<]]>3 AND lib_product_isbn=${lib_product_isbn}	
+	</select>	
+	<!-- 예약신청 -->
+	<insert id="insertReservation" parameterType="ReservationVO">
+		INSERT INTO lib_reservation(
+			reservation_num,
+			callNumber,
+			mem_num)
+		VALUES (
+			lib_reservation_seq.nextval,
+			#{callNumber},
+			#{mem_num})		
+	</insert>
+	<!-- 대출중인지 확인 -->
+	<select id="selectCheckRentStatus" parameterType="string">
+		SELECT 
+			count(*) 
+		FROM lib_history 
+		WHERE lib_product_status!=1 AND callNumber=#{callNumber}	
+	</select>
+	<!-- 예약권수 확인 -->
+	<select id="selectReservationCountByMem_num" parameterType="map" resultType="integer">
+		SELECT
+		    COUNT(*)
+		FROM lib_reservation r 
+		LEFT OUTER JOIN lm_member_manage m USING (mem_num)
+		WHERE mem_num=#{mem_num} AND reservation_status<![CDATA[<]]>2		
+	</select>
+	<!-- 한권당 예약인원수 확인 -->
+	<select id="selectReservationCountBycallNum" parameterType="map" resultType="integer">
+		SELECT
+		    COUNT(*)
+		FROM lib_reservation r 
+		LEFT OUTER JOIN lib_product_manage m USING (callNumber)
+		WHERE callNumber=#{callNumber} AND reservation_status<![CDATA[<]]>2		
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

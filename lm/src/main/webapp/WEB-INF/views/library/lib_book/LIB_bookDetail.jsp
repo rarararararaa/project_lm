@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/reservation.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LM_bookDetail.css">
@@ -65,7 +66,7 @@
 				</td>
 				<c:if test="${status.index == 0}">
 					<td rowspan="${fn:length(list)}">
-						<button class="book-btn">예약하기</button>
+						<button class="book-btn" data-num=${bookList.lib_product_isbn}>예약하기</button>
 					</td>
 				</c:if>
 			</tr>
