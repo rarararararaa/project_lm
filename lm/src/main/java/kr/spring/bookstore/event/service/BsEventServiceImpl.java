@@ -12,6 +12,7 @@ import kr.spring.bookstore.event.dao.BsEventMapper;
 import kr.spring.bookstore.event.vo.BsAttendancePointVO;
 import kr.spring.bookstore.event.vo.BsAttendanceVO;
 import kr.spring.bookstore.event.vo.BsEventVO;
+import kr.spring.bookstore.event.vo.BsQuizVO;
 import kr.spring.member.vo.MemberVO;
 
 @Service
@@ -75,6 +76,7 @@ public class BsEventServiceImpl implements BsEventService{
 	@Override
 	public void updateMemberPoint(Map<String, Object> map) {
 		// TODO Auto-generated method stub
+		/*
 		int mem_num = (Integer)map.get("mem_num");
 		int addPoint = (Integer)map.get("addPoint");
 		//포인트 조회
@@ -82,7 +84,7 @@ public class BsEventServiceImpl implements BsEventService{
 		int beforePoint = memVO.getMem_point();
 		int afterPoint = beforePoint + addPoint;
 		map.put("addPoint", afterPoint);
-		
+		*/
 		//포인트 업데이트
 		bsEventMapper.updateMemberPoint(map);
 		
@@ -130,6 +132,23 @@ public class BsEventServiceImpl implements BsEventService{
 	public void deleteEventBoard(Integer event_board_num) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String selectEventItemIsbn(Integer store_product_num) {
+		// TODO Auto-generated method stub
+		return bsEventMapper.selectEventItemIsbn(store_product_num);
+	}
+
+	@Override
+	public BsQuizVO selectQuizStatus(BsQuizVO quiz) {
+		// TODO Auto-generated method stub
+		return bsEventMapper.selectQuizStatus(quiz);
+	}
+
+	@Override
+	public void insetQuizStatus(BsQuizVO quiz) {
+		bsEventMapper.insetQuizStatus(quiz);
 	}
 
 	

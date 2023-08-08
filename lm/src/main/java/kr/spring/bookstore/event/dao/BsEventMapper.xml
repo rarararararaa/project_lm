@@ -15,7 +15,10 @@
 			event_img_big,
 			event_reg_date,
 			event_date_start,
-			event_date_end
+			event_date_end,
+			event_quiz_sel1,
+			event_quiz_sel2,
+			event_quiz_an
 			)
 		VALUES(
 			store_event_board_seq.nextval,
@@ -29,7 +32,10 @@
 			#{event_img_big},
 			SYSDATE,
 			#{event_date_start},
-			#{event_date_end}
+			#{event_date_end},
+			#{event_quiz_sel1},
+			#{event_quiz_sel2},
+			#{event_quiz_an}
 		)
 	</insert>
 	<!--  ㅎ-->
@@ -50,7 +56,10 @@
 				</if>
 				event_modify_date=SYSDATE,
 				event_date_start=#{event_date_start},
-				event_date_end=#{event_date_end}
+				event_date_end=#{event_date_end},
+				event_quiz_sel1=#{event_quiz_sel1},
+				event_quiz_sel2=#{event_quiz_sel2},
+				event_quiz_an=#{event_quiz_an}
 			WHERE event_board_num=#{event_board_num}
 	</update>
 	

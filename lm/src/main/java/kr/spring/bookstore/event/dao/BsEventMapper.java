@@ -14,6 +14,8 @@ import org.junit.runners.Parameterized.Parameters;
 import kr.spring.bookstore.event.vo.BsAttendancePointVO;
 import kr.spring.bookstore.event.vo.BsAttendanceVO;
 import kr.spring.bookstore.event.vo.BsEventVO;
+import kr.spring.bookstore.event.vo.BsQuizVO;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.member.vo.MemberVO;
 
 @Mapper
@@ -34,7 +36,9 @@ public interface BsEventMapper {
 	//이벤트 글 삭제
 	@Delete("DELETE FROM store_event_board WHERE event_board_num=#{event_board_num}")
 	public void deleteEventBoard(Integer event_board_num);
-	
+	//이벤트 연관상품 - isbn 불러오기
+	@Select("SELECT store_product_isbn13 FROM store_product_manage WHERE store_product_num=#{store_product_num}")
+	public String selectEventItemIsbn(Integer store_product_num);
 	
 	//출석 이벤트 - 출석 처리
 	@Insert("INSERT INTO store_event_attendance_point (event_attendance_point_num, mem_num, event_month) VALUES(store_event_attendance_point_seq.nextval, #{mem_num}, #{event_month})")
@@ -73,11 +77,21 @@ public interface BsEventMapper {
 	@Select("SELECT mem_num, mem_point FROM lm_member_detail WHERE mem_num=#{mem_num}")
 	public MemberVO selectMemberPoint(Integer mem_num);
 	//회원 포인트 추가(update)
-	@Update("UPDATE lm_member_detail SET mem_point=#{addPoint} WHERE mem_num=#{mem_num}")
+	//@Update("UPDATE lm_member_detail SET mem_point=#{addPoint} WHERE mem_num=#{mem_num}")
+	@Update("UPDATE lm_member_detail SET mem_point=mem_point+#{addPoint} WHERE mem_num=#{mem_num}")
 	public void updateMemberPoint(Map<String, Object> map);
 	
 	//출석 중복 검사
 	@Select("SELECT * FROM store_event_attendance WHERE mem_num=#{mem_num} AND TO_CHAR(event_attendance_date,'YYYY-MM-DD')=#{event_attendance_date}")
 	public BsAttendanceVO selectAttendanceCheck(Map<String, Object> map);
+	
+	
+	//퀴즈 이벤트
+	//퀴즈 이벤트 검색
+	@Select("SELECT * FROM store_event_quiz_status WHERE mem_num=#{mem_num} AND event_board_num=#{event_board_num}")
+	public BsQuizVO selectQuizStatus(BsQuizVO quiz);
+	//퀴즈 이벤트 insert
+	@Insert("INSERT INTO store_event_quiz_status (event_quiz_status_num, event_board_num, mem_num) VALUES (1, #{event_board_num}, #{mem_num})")
+	public void insetQuizStatus(BsQuizVO quiz);
 	
 }

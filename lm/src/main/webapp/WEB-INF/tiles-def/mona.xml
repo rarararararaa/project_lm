@@ -27,6 +27,22 @@
     	<put-attribute name="bsTitle" value="이벤트 수정"/>
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventModify.jsp"/>
     </definition>
+    <definition name="bsEventDetail" extends="bsMain">
+    	<put-attribute name="bsTitle" value="이벤트 상세페이지"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventDetail.jsp"/>
+    </definition>
+    <definition name="eventAnnounceList" extends="bsMain">
+    	<put-attribute name="bsTitle" value="당첨자 발표 리스트"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventAnnounceList.jsp"/>
+    </definition>
+    <definition name="eventAnnounceWrite" extends="bsMain">
+    	<put-attribute name="bsTitle" value="당첨자 발표 글쓰기"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventAnnounceWrite.jsp"/>
+    </definition>
+    <definition name="eventAnnounceView" extends="bsMain">
+    	<put-attribute name="bsTitle" value="당첨자 발표 글 상세페이지"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventAnnounceDetail.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

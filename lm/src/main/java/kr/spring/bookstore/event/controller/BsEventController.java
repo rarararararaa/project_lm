@@ -27,8 +27,12 @@ import kr.spring.bookstore.event.service.BsEventService;
 import kr.spring.bookstore.event.vo.BsAttendancePointVO;
 import kr.spring.bookstore.event.vo.BsAttendanceVO;
 import kr.spring.bookstore.event.vo.BsEventVO;
+import kr.spring.bookstore.event.vo.BsQuizVO;
+import kr.spring.bookstore.product.service.ProductService;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -36,6 +40,8 @@ import lombok.extern.slf4j.Slf4j;
 public class BsEventController {
 	@Autowired
 	private BsEventService bsEventService;
+	@Autowired
+	private ProductService productService;
 
 	/*========================
 	 * 자바빈(VO) 초기화
@@ -81,8 +87,9 @@ public class BsEventController {
 
 		return "common/resultView";
 	}
-	
-	//글 수정
+	/*========================
+	 * 게시판 글 수정
+	 *========================*/
 	//수정 폼 호출
 	@GetMapping("/bookstore/event/update.do")
 	public String formUpdate(@RequestParam int event_board_num, Model model) {
@@ -112,6 +119,37 @@ public class BsEventController {
 	}
 	
 	/*========================
+	 * 게시판 글 상세
+	 *========================*/
+	@RequestMapping("/bookstore/event/detail.do")
+	public ModelAndView getDetail(@RequestParam int event_board_num) {
+		log.debug("<<글 상세 - event_board_num>> : " + event_board_num);
+		
+		//글 조회수 증가
+		bsEventService.updateEventHit(event_board_num);
+		
+		//글 상세
+		BsEventVO event = bsEventService.selectEvent(event_board_num);
+		
+		//제목에 태그 불허용
+		event.setEvent_title(StringUtil.useNoHtml(event.getEvent_title()));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bsEventDetail");
+		
+		int store_product_num = event.getStore_product_num();
+		if(store_product_num != 0) {
+			String isbn = bsEventService.selectEventItemIsbn(store_product_num);
+			
+			ProductVO product = productService.selectProduct(isbn);
+			mav.addObject("product", product);
+			
+		}
+		mav.addObject("event", event);
+		return mav;
+	}
+	
+	/*========================
 	 * 이벤트 목록
 	 *========================*/
 	//이벤트 리스트 - 일반 사용자 조회용
@@ -128,7 +166,7 @@ public class BsEventController {
 		//전체/검색 레코드 수
 		int count = bsEventService.selectEventCount(map);
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, CurrentPage, count, 20, 10, "admin_list.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, CurrentPage, count, 20, 10, "list.do");
 				
 		List<BsEventVO> list = null;
 		if(count > 0) {
@@ -143,7 +181,7 @@ public class BsEventController {
 		mav.setViewName("bsEventList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
-		mav.addObject("page", page);
+		mav.addObject("page", page.getPage());
 		
 		return mav;
 	}
@@ -165,6 +203,49 @@ public class BsEventController {
 			mav.addObject("filename", "bannerBig.jpg");
 		}
 		return mav;
+	}
+	
+	//퀴즈 클릭
+	@RequestMapping("/bookstore/event/writeQuiz.do")
+	@ResponseBody
+	public Map<String, Object> writeQuiz(HttpSession session, HttpServletRequest request,
+										BsQuizVO quizVO, @RequestParam int event_board_num, @RequestParam int answer){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		Integer mem_num = (Integer) session.getAttribute("mem_num");
+		log.debug("<<mem_num>> : " + mem_num);
+		log.debug("<<event_board_num>> : " + event_board_num);
+		
+		if(mem_num == null) {
+			//로그인X
+			mapJson.put("status", "logOut");
+		}else {
+			//로그인 O
+			quizVO.setEvent_board_num(event_board_num);
+			quizVO.setMem_num(mem_num);
+			
+			BsQuizVO checkQuizVO = new BsQuizVO();
+			checkQuizVO = bsEventService.selectQuizStatus(quizVO);
+			if(checkQuizVO !=null) {
+				mapJson.put("status", "already");
+			}else {
+				BsEventVO event = bsEventService.selectEvent(event_board_num);
+				
+				if(event.getEvent_quiz_an() == answer) {
+					Map<String, Object> mapPoint = new HashMap<String, Object>();
+					mapPoint.put("mem_num", mem_num);
+					mapPoint.put("addPoint", 50);
+					bsEventService.updateMemberPoint(mapPoint);
+					
+					bsEventService.insetQuizStatus(quizVO);
+					
+					mapJson.put("status", "success");
+				}else {
+					mapJson.put("status", "wrongAnswer");
+					
+				}
+			}
+		}
+		return mapJson;
 	}
 
 
