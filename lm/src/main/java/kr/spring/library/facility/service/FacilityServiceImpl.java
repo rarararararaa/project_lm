@@ -28,8 +28,7 @@ public class FacilityServiceImpl implements FacilityService{
 
 	@Override
 	public FacilityVO selectFacility(Integer facility_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return facilityMapper.selectFacility(facility_num);
 	}
 
 	@Override

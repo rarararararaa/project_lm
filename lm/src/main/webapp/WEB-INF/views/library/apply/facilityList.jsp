@@ -16,7 +16,7 @@
 	</ul>
 	<c:forEach var="facility" items="${list}">
 	<ul class="facility-list">
-		<li><img src="imageView.do?facility_num=${facility.facility_num}" width="400" height="400"></li>
+		<li><img src="imageView.do?facility_num=${facility.facility_num}" width="200" height="200"></li>
 		<li class="fac-name"><a href="facApplyWrite.do?facility_num=${facility.facility_num}">${facility.facility_name}</a></li>
 		<li>예약가능</li>
 	</ul>

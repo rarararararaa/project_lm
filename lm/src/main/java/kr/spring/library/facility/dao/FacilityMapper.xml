@@ -6,12 +6,14 @@
 		  facility_num,
 		  facility_name,
 		  facility_content,
-		  facility_image)
+		  facility_image,
+		  facility_imagename)
 		VALUES(
 		  lib_facility_seq.nextval,
 		  #{facility_name},
 		  #{facility_content},
-		  #{facility_image})
+		  #{facility_image},
+		  #{facility_imagename})
 	</insert>
 	<select id="selectFacilityList" parameterType="map" resultType="facilityVO">
 		SELECT

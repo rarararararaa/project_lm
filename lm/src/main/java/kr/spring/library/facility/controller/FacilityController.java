@@ -72,7 +72,7 @@ public class FacilityController {
 		//View에 표시할 메시지
 		model.addAttribute("message", "시설 등록이 완료되었습니다.");
 		model.addAttribute("url", 
-				request.getContextPath()+"/apply/facilityList.do");
+				request.getContextPath()+"/library/facilityList.do");
 
 		return "common/resultView";
 	}
@@ -122,7 +122,7 @@ public class FacilityController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");
 		mav.addObject("imageFile", vo.getFacility_image());
-		mav.addObject("filename", vo.getFacility_name()+".jpg");
+		mav.addObject("filename", vo.getFacility_imagename());
 		return mav;
 	}
 	
