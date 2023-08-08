@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="page-main">
-	<form:form modelAttribute="facilityVO" action="insertFacility.do" id="register_form" enctype="multipart/form-data">
+	<form:form modelAttribute="donationVO" action="insertDonation.do" id="register_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 		    <li>

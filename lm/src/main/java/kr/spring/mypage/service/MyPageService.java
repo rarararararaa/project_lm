@@ -25,4 +25,6 @@ public interface MyPageService {
 	public void updateAuth(MyPageVO mypageVO);
 	public int memberOutCheck(MyPageVO mypageVO);
 	public void memberOut(int mem_num);
+	//회원정보수정 이미지 업로드
+	public void updatePhoto(MyPageVO mypageVO);
 }

@@ -1,7 +1,9 @@
 package kr.spring.member.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -253,8 +255,7 @@ public class MemberController {
 			return registerForm();
 		}
 		String passwd = memberVO.getMem_passwd();
-		
-
+	
 		//비밀번호 암호화 salt 생성
 		String salt = SaltGenerate.getSalt();
 		//입력받은 비밀번호 암호화 (salt + mem_passwd)
@@ -262,6 +263,8 @@ public class MemberController {
 		//VO에 salt와 SHA-256 passwd 적재
 		memberVO.setMem_salt(salt);
 		memberVO.setMem_passwd(mem_passwd);
+	
+		
 		//회원가입 manage, detail, home에 데이터 insert
 		memberService.insertMember(memberVO);
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");

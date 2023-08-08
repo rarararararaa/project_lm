@@ -65,7 +65,7 @@ public class MyPageServiceImpl implements MyPageService{
 	public void updateEmail(MyPageVO mypageVO) {
 		mypageMapper.updateEmail(mypageVO);
 	}
-
+	
 	@Override
 	public void updateCell(MyPageVO mypageVO) {
 		mypageMapper.updateCell(mypageVO);
@@ -75,6 +75,7 @@ public class MyPageServiceImpl implements MyPageService{
 	public void updateAuth(MyPageVO mypageVO) {
 		mypageMapper.updateAuth(mypageVO);
 	}
+	
 	@Override
 	public String getSalt(int mem_num) {
 		return mypageMapper.getSalt(mem_num);
@@ -87,11 +88,15 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	@Override
 	public void memberOut(int mem_num) {
-		
 		//manage에 탈퇴날쨔, 상태 업데이트
 		mypageMapper.memberOut(mem_num);
 		//회원 상세정보, 집주소 삭제
 		mypageMapper.memberOut_Home(mem_num);
 		mypageMapper.memberOut_Detail(mem_num);
+	}
+
+	@Override
+	public void updatePhoto(MyPageVO mypageVO) {
+		mypageMapper.updatePhoto(mypageVO);
 	}
 }

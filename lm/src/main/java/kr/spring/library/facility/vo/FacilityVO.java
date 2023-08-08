@@ -20,11 +20,15 @@ public class FacilityVO {
 	private String facility_name;
 	private String facility_content;
 	private byte[] facility_image;
+	private String facility_imagename;
 	
 	//업로드 파일 처리
 	public void setUpload1(MultipartFile upload1)
 			throws IOException{
 		//MultipartFile -> byte[] 변환
 		setFacility_image(upload1.getBytes());
+		setFacility_imagename(upload1.getOriginalFilename());
 	}
+	
+	
 }

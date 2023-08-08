@@ -6,12 +6,14 @@
 		  facility_num,
 		  facility_name,
 		  facility_content,
-		  facility_image)
+		  facility_image,
+		  facility_imagename)
 		VALUES(
 		  lib_facility_seq.nextval,
 		  #{facility_name},
 		  #{facility_content},
-		  #{facility_image})
+		  #{facility_image},
+		  #{facility_imagename})
 	</insert>
 	<select id="selectFacilityList" parameterType="map" resultType="facilityVO">
 		SELECT
@@ -33,4 +35,22 @@
 		   COUNT(*)
 		FROM lib_facility_admin
 	</select>
+	<insert id="insertFacilityApply" parameterType="facilityApplyVO">
+		INSERT INTO lib_facility_apply(
+		  facility_apply_num,
+		  facility_num,
+		  mem_num,
+		  facility_apply_reg_date,
+		  facility_apply_start,
+		  facility_apply_end
+		  )
+		VALUES(
+		  lib_facility_apply_seq.nextval,
+		  #{facility_num},
+		  #{mem_num},
+		  SYSDATE,
+		  TO_DATE(#{start},'YYYYMMDDHH24'),
+		  TO_DATE(#{end},'YYYYMMDDHH24'))
+	</insert>
+	
 </mapper>

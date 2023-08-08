@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import kr.spring.library.facility.vo.FacilityApplyVO;
 import kr.spring.library.facility.vo.FacilityVO;
 
 @Mapper
@@ -16,6 +17,13 @@ public interface FacilityMapper {
 	public List<FacilityVO> selectFacilityList(Map<String, Object> map);
 	public int selectFacilityCount(Map<String, Object> map);
 	//시설 번호로 시설 검색
+	@Select("SELECT * FROM lib_facility_admin WHERE facility_num=#{facility_num}")
 	public FacilityVO selectFacility(Integer facility_num);
 	
+	//시설 이용 신청 등록
+	public void insertFacilityApply(FacilityApplyVO fac_apply);
+	//시설별 신청 목록
+	public List<FacilityApplyVO> selectFacilityApplyList(Integer facility_num);
+	//사용자별 신청 목록
+	public List<FacilityApplyVO> selectFacilityApplyListByMem_num(Integer mem_num);
 }

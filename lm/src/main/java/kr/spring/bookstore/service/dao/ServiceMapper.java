@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.service.vo.AnnounceVO;
 import kr.spring.bookstore.service.vo.FaqVO;
 
@@ -30,4 +31,6 @@ public interface ServiceMapper {
 	//목록불러오기/검색
 	public List<FaqVO> selectFaqList(Map<String, Object> map);
 	public int selectRowCountFaq(Map<String,Object> map);
+	
+	
 }

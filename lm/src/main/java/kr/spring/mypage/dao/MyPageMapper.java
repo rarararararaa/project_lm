@@ -60,6 +60,8 @@ public interface MyPageMapper {
 	//탈퇴회원 detail 테이블 정보 삭제
 	@Delete("DELETE FROM lm_member_detail WHERE mem_num=#{mem_num}")
 	public void memberOut_Detail(int mem_num);
+	@Update("UPDATE lm_member_detail SET mem_photo = #{mem_photo} WHERE mem_num=#{mem_num}")
+	public void updatePhoto(MyPageVO mypageVO);
 }
 
 

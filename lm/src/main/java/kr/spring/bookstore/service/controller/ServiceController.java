@@ -160,8 +160,10 @@ public class ServiceController {
 								HttpServletRequest request,
 								Model model) {
 		log.debug("<<글 작성>> : " + faqVO);
+		
+		faqVO.setFaq_content(StringUtil.useBrNoHtml(faqVO.getFaq_content()));
 
-		//유효성 체크 결과 오류가 있으면 폼 호출
+		//유효성 체크 결과 오류가 있으면 폼 호출.
 		if(result.hasErrors()) {
 			return formFaq();
 		}

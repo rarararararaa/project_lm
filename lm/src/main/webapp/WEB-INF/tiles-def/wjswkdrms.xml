@@ -53,14 +53,28 @@
     	<put-attribute name="title" value="회원관리"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/product/adminProductList.jsp"/>
     </definition>
-    
-    <definition name="insertFacility" extends="libMain">
-    	<put-attribute name="libTitle" value="시설추가"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/insertFacility.jsp"/>
+    <definition name="libApplyMain" template="/WEB-INF/views/library/template/libApplyLayout.jsp">
+    	<put-attribute name="title" value="시설 목록"/>
+    	<put-attribute name="header" value="/WEB-INF/views/library/template/libHeader.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/library/template/libApplyNav.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/library/apply/facilityList.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/library/template/libFooter.jsp"/>                                        
     </definition>
-    <definition name="facilityList" extends="libMain">
-    	<put-attribute name="libTitle" value="시설목록"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/facilityList.jsp"/>
+    <definition name="insertFacility" extends="libApplyMain">
+    	<put-attribute name="title" value="시설추가"/>
+	    <put-attribute name="body" value="/WEB-INF/views/library/apply/insertFacility.jsp"/>
+    </definition>
+    <definition name="facilityList" extends="libApplyMain">
+    	<put-attribute name="title" value="시설목록"/>
+	    <put-attribute name="body" value="/WEB-INF/views/library/apply/facilityList.jsp"/>
+    </definition>
+    <definition name="facApplyWrite" extends="libApplyMain">
+    	<put-attribute name="title" value="시설목록"/>
+	    <put-attribute name="body" value="/WEB-INF/views/library/apply/facilityApplyForm.jsp"/>
+    </definition>
+    <definition name="bookDonationMain" extends="libApplyMain">
+    	<put-attribute name="title" value="기증 안내"/>
+	    <put-attribute name="body" value="/WEB-INF/views/library/apply/bookDonationMain.jsp"/>
     </definition>
 </tiles-definitions>
 

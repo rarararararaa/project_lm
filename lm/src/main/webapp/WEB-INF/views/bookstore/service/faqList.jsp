@@ -4,12 +4,12 @@
 <script type="text/javascript">
 
 $(function(){
+	$('.answer').val($(this).val().replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>'));
 	$('.answer').hide();
 	$('.question').click(function(){
 		$(this).find('.answer').toggle();
 	});
 });
-
 </script>
 <div class="page-main">
 	<h2>자주 묻는 질문</h2>
@@ -45,6 +45,7 @@ $(function(){
 			<div class="question">
 				Q. ${faq.faq_title}
 				<div class="answer">A. ${faq.faq_content}</div>
+				
 				<c:if test="${mem_auth==9}">
 					<input type="button" value="수정" onclick="location.href='faqModify.do?faq_num=${faq.faq_num}">
 				</c:if>
