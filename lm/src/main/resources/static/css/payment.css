@@ -46,6 +46,17 @@ input[type='number']::-webkit-inner-spin-button {
 	  -webkit-appearance: none;
 	  margin: 0;
 }/*input number 옆 증감 버튼 없애기*/
+.scroll{
+    position: static;
+    overflow-y: hidden;
+  	padding-right: 4.5px;
+}
+.orderListlitwo{
+	margin-left: 0 !important;
+	padding-right: 5px;
+	color: #149200;
+}
+
 /*==============================장바구니===============================*/
 /*장바구니 상품리스트*/
 .payment-main-itemList{
@@ -360,39 +371,40 @@ input[type='number']::-webkit-inner-spin-button {
 .bookInfo ul li:first-child{
 	margin-top: 13px;
 }
-/*책 리스트*/
+#book_detail{
+	margin: 15px 0 0 30px;
+	width: 25px;
+	height: 25px;
+}
 .orderBookList{
 	margin-top: 10px;
 }
 .orderBookList tr{
-	height: 130px;
+	height: 150px;
+}
+.orderBookList td:first-child{
+	width: 90px;
+}
+.orderBookList img{
+	width: 90px;
 }
 .orderBookList td:nth-child(2){
+	width: 440px;
 	vertical-align: top;
-	width: 500px;
+}
+.orderBookList td:nth-child(2) ul{
+	margin-left: 0;
+}
+.orderBookList td:nth-child(2) li:first-child{
+	margin-bottom: 10px;
 }
 .orderBookList td:nth-child(3){
-	width: 70px;
+	width: 130px;
+	text-align: center;
 }
 .orderBookList td:last-child{
-	width: 100px;
-	font-weight: bold;
-	text-align:right;
-}
-
-.orderBookList ul li:first-child{
-	margin-bottom: 5px;
-}
-.orderBookList ul li:nth-child(2) {
-    margin-left: 0px !important;
-    margin-right: 10px;
-    color: #149200;
-}
-
-#book_detail{
-	margin: 10px 0 0 30px;
-	width: 20px;
-	height: 20px;
+	width: 180px;
+	text-align: center;
 }
 /*포인트*/
 .pointInfo input{

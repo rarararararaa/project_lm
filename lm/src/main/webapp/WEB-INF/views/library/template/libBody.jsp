@@ -6,12 +6,10 @@
 		<c:forEach var="list" items="${list}">
 			<div class="used-all-contents-div-width">
 				<div class="used-all-contents-img">
-					<a href="${pageContext.request.contextPath}/library/lib_book/bookDetail.do?callNum=${list.callnumber}"><img src="${list.lib_product_bookimageurl}"></a>
+					<a href="${pageContext.request.contextPath}/library/lib_book/bookDetail.do?callNumber=${list.callnumber}"><img src="${list.lib_product_bookimageurl}"></a>
 				</div>
-
 				<div class="used-all-contents-column">
-					<div class="used-all-contents-box">${list.callnumber}</div>
-					<div class="used-all-contents-box">${list.lib_product_bookname }</div>
+					<div class="used-all-contents-box">책 제목 : ${list.lib_product_bookname }</div>
 					<div class="used-all-contents-box">저자 : ${list.lib_product_authors} | 출판사 : ${list.lib_product_publisher}</div>
 					<div class="used-all-contents-box">${list.lib_product_detail}</div>
 				</div>

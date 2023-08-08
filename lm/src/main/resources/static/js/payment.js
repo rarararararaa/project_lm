@@ -77,6 +77,11 @@ $(function(){
 
 //주문하기 버튼 이벤트[submit] - cartInfo 
 $('#payForm').submit(function(event){
+	let checked = $('.LM-item').closest('table').find('input[type=checkbox]:checked').length;
+	if(checked == 0){
+		alert('1 개이상의 상품을 선택하세요!');
+		return false;
+	}
 	event.preventDefault();
 	let cartInfo = [];
 	let book_info = {};
@@ -101,7 +106,8 @@ $('#payForm').submit(function(event){
 	ajaxOrder(cartInfo, total);
 	//let LM_payForm = $('#LM_payForm').serialize();
 	//console.log(LM_payForm);
-	})	
+	
+})	
 	
 //선택한 도서 장바구니에서 삭제
 $('.del-btn').click(function(){

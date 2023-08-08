@@ -21,4 +21,10 @@ public class LibraryMainVO {
 	private String lib_product_bookimageurl;//이미지	
 	private String lib_product_bookimagedata;
 	private String lib_product_detail;
+	
+	private String product_category_name; //함수를 통한 카테고리 네임
+	private int search_count; //searchCount 입니다.
+	private int orderByNum;
+	private int categoryNum;
+	private String keyword;
 }

@@ -1,0 +1,185 @@
+/*=====LM문고-결제=====*/
+.payment-main-sidebar:after{
+	clear: both;
+} 
+/*=====공통=====*/
+.payment-main{
+	margin: 0 auto;
+	width: 1200px;
+	min-height: 100%;
+	overflow: auto;
+}
+.payment-title{
+	width: 100%;
+	height: 66px;
+	flex-shrink: 0;
+	font-size: 24pt;
+	font-weight: bold;
+}
+.animated{
+	opacity: 1;
+}
+hr{
+	border-color: #F4F4F4;
+}
+ul{
+	list-style: none;
+}
+.hidden-place{
+	display:none; 
+}
+.float-left{
+	float: left;
+}
+.both-clear{
+	clear: both;
+}
+button:hover, input:hover{
+	cursor: pointer;
+	background-color: #e6e6e6;
+}
+.text-center{
+	text-align: center;
+}
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+	  -webkit-appearance: none;
+	  margin: 0;
+}/*input number 옆 증감 버튼 없애기*/
+.scroll{
+    position: static;
+    overflow-y: hidden;
+  	padding-right: 4.5px;
+}
+
+/*모달 창*/
+/*모달 배경*/
+.modal{
+		position:fixed;
+		width:100%;
+		height:100%;
+		top:0;
+		left:0;
+		bottom:0;
+		background-color:rgba(0,0,0,.6);
+		z-index: -1;
+		opacity:0;
+		transition:all 0.2s;
+		}
+.modal_container{
+	position: fixed;
+	overflow: hidden;
+ 	top: 50%;
+  	left: 50%;
+ 	transform: translate(-50%, -50%);
+	padding: 0 30px 30px 30px;
+	width: 460px;
+	height: 620px;
+	border-radius: 17px;
+	background: #FFF;
+	overflow-y:overlay;
+}
+.con table tr td:nth-child(3){
+    padding-left: 5px;
+}
+.m_content{
+	margin-top: 5px !important;
+}
+.tit{
+	display: flex;
+}
+.tit h2{
+	width: 400px;
+}
+.modal-btn{
+	margin: 20px 0 0 50px;
+	height: 20px;
+	width: 20px;
+}
+.con{
+	margin-top: 15px;
+}
+.deli-plus{
+	width: 460px;
+	height: 44px;
+	color: #474C98;
+	border-radius: 5px;
+	border: 1px solid #474C98;
+	background: #FFF;
+}
+.modify-deli{
+	color: #474C98;
+	border-radius: 5px;
+	border: 1px solid #474C98;
+	background: #FFF;
+    font-size: 12px;
+}
+.deliInfo li:first-child{
+	color: #474C98;
+	font-weight: 400;
+
+}
+.deliInfo li:not(:first-child) {
+	color: black !important;
+    margin-left: 0 !important;
+    font-weight: 400 !important;
+}
+/*배송지 추가 모달*/
+.deli-modal-con{
+	width: 460px;
+	height: 600px;
+}
+#deli_form ul{
+	padding-left: 0;
+	margin-top: 0;
+}
+#deli_form li{
+	margin-left:0;
+	width: 500px;
+	font-size: 14px !important;
+	color: black;
+	font-weight: normal !important;
+}
+#deli_form li:first-child{
+	margin-top: 10px;
+}
+#deli_form li{
+	margin-bottom: 20px;
+}
+#deli_form label + input{
+	margin-top: 10px;
+}
+.default-btn{
+	margin-bottom: 15px;
+}
+#recipient, #address1{
+	margin-bottom: 5px;
+}
+#deli_form td input:first-child{
+	margin-top: 10px;
+}
+#deli_form input[type="text"], input[type="button"]{
+	width: 460px;
+	padding: 10px 0;
+	color: #898989;
+	border-radius: 7px;
+	border: 1px solid #DBDBDB;
+	background: #FFF;
+}
+#deli_form input[type="text"]{
+	width: 428px;
+	font-size: 12px;
+	padding: 10px 15px;
+}
+#deli_submit{
+	margin: 40px 0 0 160px;
+	width: 140px;
+	height: 44px;
+	border-radius: 7px;
+	background: #5055B1;
+	color: #FFF;
+	font-size: 15px;
+}
+
+/*모달 창 띄웠을 경우*/
+.modal.on{opacity:1;z-index:999;}

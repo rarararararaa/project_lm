@@ -55,14 +55,26 @@ public class MyPageController {
 	 * 마이페이지
 	 *=======================*/
 	@RequestMapping("/lm/mypage/main/myPageMain.do")
-	public String formMyPage() {
+	public String formMyPage(HttpServletRequest request,Model model,@RequestParam int lo) {
+		HttpSession session = request.getSession();
+		//로그인 여부 체크
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		//로그인 안되어있을 시 로그인 화면으로 이동
+		if(mem_num==null) {
+			model.addAttribute("accessMsg", "먼저 로그인을 해주세요.");
+			if(lo==1) {
+				return "common/notice_bs";
+			}else {
+				return "common/notice_lib";
+			}
+		}
 		return "myPageMain"; //타일스 설정의 식별자
 	}
 	@GetMapping("/lm/mypage/main/myPageMain.do")
 	public String myPage(@Valid MyPageVO mypage,
 			@RequestParam int lo,BindingResult result,
-			Model model,HttpSession session) {
-		
+			Model model,HttpServletRequest request,MyPageVO mypageVO) {
+		log.debug("<<마이페이지>> : " + mypageVO);
 		//intercepter에서 마이페이지 공용 데이터 처리하여 SELECT SQL 실행 후 반환. AppConfig.java,MyPageHeaderInterceptor.java
 		//이후 주문내역 데이터 SELECT 하여 model에 addAttribute
 		//페이지 추가 시 appconfig에 추가 해줘야 함
@@ -246,18 +258,65 @@ public class MyPageController {
 	/*=======================
 	 * 회원정보수정
 	 *=======================*/
+	//수정 폼 호출
 	@RequestMapping("/lm/mypage/myedit/myEditMain.do")
-	public String myEdit(@Valid MyPageVO mypageVO,Model model) {
+	public String myEdit(@Valid MyPageVO mypageVO,HttpServletRequest request,@RequestParam int lo,Model model) {
+		HttpSession session = request.getSession();
+		//로그인 여부 체크
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		//로그인 안되어있을 시 로그인 화면으로 이동
+		if(mem_num==null) {
+			model.addAttribute("accessMsg", "먼저 로그인을 해주세요.");
+			if(lo==1) {
+				return "common/notice_bs";
+			}else {
+				return "common/notice_lib";
+			}
+		}
+		//name,email,cell 가져오기
+		mypageVO = mypageService.getMyEdit(mem_num);
 		model.addAttribute("mypageVO", mypageVO);
+		
 		return "myEditMain"; //타일스 설정의 식별자
 	}
 	@PostMapping("/lm/mypage/myedit/myEditMain.do")
-	public String myEditHandle(@RequestParam int lo,BindingResult result, Model model,@Valid MyPageVO mypageVO) {
-		
-		//name,email,cell 가져오기
-		
-		
-		return "myEditMain";
+	public String myEditHandle(@Valid MyPageVO mypageVO,@RequestParam int lo,BindingResult result, Model model,HttpServletRequest request) {
+		log.debug("<<회원정보수정>> : " + mypageVO);
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "myEditMain";
+		}
+		//mem_num 가져오기
+		HttpSession session = request.getSession();
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		//VO에 mem_num 등록
+		mypageVO.setMem_num(mem_num);
+		//비밀번호가 변경 시도 여부 체크
+		if(!mypageVO.getMem_new_passwd().equals("")) {
+			//저장되어있는 salt 값 가져오기
+			String salt = mypageService.getSalt(mem_num);
+			//입력받은 비밀번호 암호화 (salt + mem_passwd)
+			String mem_new_passwd = EncryptionPasswd.encryptionPasswd(salt,mypageVO.getMem_new_passwd());
+			//VO에 SHA-256 passwd로 업데이트
+			mypageVO.setMem_new_passwd(mem_new_passwd);
+		}
+		//입력된 회원정보만 수정
+		if(!mypageVO.getMem_new_passwd().equals("")) {
+			mypageService.updatePasswd(mypageVO);
+			model.addAttribute("accessMsg", "비밀번호 수정 완료.");
+		}
+		if(!mypageVO.getMem_new_email().equals("")) {
+			mypageService.updateEmail(mypageVO);
+			model.addAttribute("accessMsg", "이메일 수정 완료.");
+		}
+		if(!mypageVO.getMem_new_cell().equals("")) {
+			mypageService.updateCell(mypageVO);
+			//이메일 변경 시 미인증이므로 auth=4 변경
+			mypageService.updateAuth(mypageVO);
+			model.addAttribute("accessMsg", "전화번호 수정 완료.");
+		}
+		model.addAttribute("lo",lo);
+		return "common/notice_edit";
 	}
 	/*=======================
 	 * 사용가능포인트정보
@@ -279,10 +338,19 @@ public class MyPageController {
 		return "gradeInfoMain"; //타일스 설정의 식별자
 	}
 	@GetMapping("/lm/mypage/gradeinfo/gradeInfoMain.do")
-	public String gradeInfoHandle(@RequestParam int lo,Model model,HttpSession session) {
-
-		//세션에 저장된 mem_num 저장
-		int mem_num = (int)session.getAttribute("mem_num");
+	public String gradeInfoHandle(@RequestParam int lo,Model model,HttpSession session,MyPageVO mypageVO) {
+		log.debug("<<등급정보>> : " + mypageVO);
+		//로그인 여부 체크
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		//로그인 안되어있을 시 로그인 화면으로 이동
+		if(mem_num==null) {
+			model.addAttribute("accessMsg", "먼저 로그인을 해주세요.");
+			if(lo==1) {
+				return "common/notice_bs";
+			}else {
+				return "common/notice_lib";
+			}
+		}
 
 		//회원의 총 주문 금액
 		int mem_order_price=0;
@@ -302,4 +370,51 @@ public class MyPageController {
 		
 		return "gradeInfoMain";
 	}
+	/*=======================
+	 * 회원 탈퇴
+	 *=======================*/
+	@GetMapping("/lm/mypage/memberout/memberOutMain.do")
+	public String memberOut(MyPageVO mypageVO,HttpServletRequest request,Model model,@RequestParam int lo) {
+		HttpSession session = request.getSession();
+		//로그인 여부 체크
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		//로그인 안되어있을 시 로그인 화면으로 이동
+		if(mem_num==null) {
+			model.addAttribute("accessMsg", "먼저 로그인을 해주세요.");
+			if(lo==1) {
+				return "common/notice_bs";
+			}else {
+				return "common/notice_lib";
+			}
+		}
+		return "memberOutMain";
+	}
+	@PostMapping("/lm/mypage/memberout/memberOutMain.do")
+	public String memberOutHandle(@RequestParam int lo,MyPageVO mypageVO,HttpServletRequest request,Model model,BindingResult result) {
+		log.debug("<<회원탈퇴>> : " + mypageVO);
+		
+		HttpSession session = request.getSession();
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+
+		//저장되어있는 salt 값 가져오기
+		String salt = mypageService.getSalt(mem_num);
+		//입력받은 비밀번호 암호화 (salt + mem_passwd)
+		String mem_passwd = EncryptionPasswd.encryptionPasswd(salt,mypageVO.getMem_passwd());
+		//VO에 SHA-256 passwd로 업데이트
+		mypageVO.setMem_passwd(mem_passwd);
+		//입력받은 비밀번호, 아이디 체크 후 탈퇴
+		if(mypageService.memberOutCheck(mypageVO) == mem_num) {
+			//회원정보 삭제
+			mypageService.memberOut(mem_num);
+			//로그아웃
+			session.invalidate();
+		}
+		model.addAttribute("accessMsg", "회원 탈퇴 완료.");
+		if(lo==1) {
+			return "common/notice_lib";
+		}else {
+			return "common/notice_bs";
+		}
+	}
 }
+

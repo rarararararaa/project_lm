@@ -18,4 +18,13 @@
     	<put-attribute name="libBody" value="/WEB-INF/views/library/template/libAdmin.jsp"/>
     	<put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>                                        
     </definition>
+    
+    <definition name="libSearchMain" template="/WEB-INF/views/library/template/libSearchLayout.jsp">
+    	<put-attribute name="libTitle" value="LM 찾기"/>
+    	<put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
+    	<put-attribute name="libSearchNav" value="/WEB-INF/views/library/template/libSearchNav.jsp"/>
+    	<put-attribute name="libSearch" value="/WEB-INF/views/library/template/libSearch.jsp"/>
+    	<put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>                                        
+    </definition>
+    
 </tiles-definitions>

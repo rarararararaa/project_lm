@@ -627,7 +627,7 @@ ul.service_mall_list, ul.customer_service_list, ul.user_menu_list {
 .search_wrap .logo_box .logo_link {
 	display: block;
 	height: 100%;
-	background-position: 40px 5px;
+	background-position: 40px 30px;
 	background-repeat: no-repeat;
 	background-size: 180px;
 	background-image: url(../images/logo.png);
@@ -784,7 +784,6 @@ span.search_select:has(.active) {
 }
 
 /* 셀렉트 끝 */
-
 .user_menu_list {
 	position: absolute;
 	top: 31px;

@@ -7,9 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.min.css">
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/payment.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/js/paymentOrder.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 </head>
 <body>
 <div class="payment-main">
@@ -24,17 +26,19 @@
 					기본 배송지를 등록해주세요.	
 				</li>
 				<li class="both-clear">
-					<button id="deli-btn">배송지 등록</button>
+					<button id="deli-btn" onclick="fnShowPop('re_pwd')">배송지 등록</button>
+					<jsp:include page="order_modal.jsp"></jsp:include>
 				</li>
 			</ul>
 			<hr size="1" noshade="noshade" class="del-hr">
 			<ul>
 				<li>기본배송지</li>
 				<li>
-					<p>홍길동 / 010-1234-1234</p>
-					<c:if test="${empty mem.home_address}">
+					<p>${mem.mem_name } / ${mem.mem_cell}</p>
+					<c:if test="${empty home}">
 						설정된 배송지가 없습니다.
 					</c:if>
+					[${home.home_zipcode}] ${home.home_address} ${home_address_detail}
 					<button id="deli-change">변경</button>
 				</li>
 			</ul>
@@ -70,7 +74,7 @@
 						<td>
 							<ul>
 								<li>${book.store_product_title}</li>
-								<li class="float-left">${book.store_product_discount}%</li>
+								<li class="float-left orderListlitwo">${book.store_product_discount}%</li>
 								<li><fmt:formatNumber value="${book.store_product_pricestandard}"/>원</li>
 							</ul>
 						</td>
@@ -104,7 +108,7 @@
 				<li>
 					<label for="mem_point">${mem.mem_point}</label>원
 					<input type="number" name="mem_point" id="mem_point" value="0" max="${mem.mem_point}"
-					data-maxPoint="${mem.mem_point}">원
+					data-maxpoint="${mem.mem_point}">원
 					<button id="allPoint">전액사용</button>
 				</li>
 			</ul>
@@ -127,7 +131,7 @@
 			<table id="payInfo">
 				<tr>
 					<td>상품 금액</td>
-					<td id="total"><fmt:formatNumber value="${total}"/>원</td>
+					<td id="total" data-total="${total}"><fmt:formatNumber value="${total}"/>원</td>
 				</tr>
 				<tr>
 					<td>배송비</td>

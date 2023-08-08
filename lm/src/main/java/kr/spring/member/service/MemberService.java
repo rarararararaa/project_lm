@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import kr.spring.member.vo.MemberVO;
 
@@ -42,6 +43,10 @@ public interface MemberService {
 	public int selectRowCount(Map<String,Object> map);
 	public List<MemberVO> selectList(Map<String,Object> map);
 	public void updateByAdmin(MemberVO memberVO);
+	
+	//배송 관련
+	//회원번호와 기본 배송지 확인 번호로 기본 배공지 정보 가져오기
+	public MemberVO homeDefault(int mem_num);
 }
 
 

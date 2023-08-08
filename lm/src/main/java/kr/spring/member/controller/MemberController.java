@@ -88,6 +88,7 @@ public class MemberController {
 				check = member.isCheckedPassword(
 						                memberVO.getMem_passwd());
 			}
+			
 			if(check) {//인증 성공
 				
 				//===자동 로그인 체크 시작===
@@ -252,7 +253,6 @@ public class MemberController {
 			return registerForm();
 		}
 		String passwd = memberVO.getMem_passwd();
-		
 		
 
 		//비밀번호 암호화 salt 생성

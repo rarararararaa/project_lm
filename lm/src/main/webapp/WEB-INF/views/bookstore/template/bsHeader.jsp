@@ -3,6 +3,94 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/header.js"></script>
+<style>
+.search_wrap {
+	height: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.search_box {
+	width: 560px;
+	height: 48px;
+	border-radius: 25px;
+	display: flex;
+	align-items: center;
+	margin-left: 50px;
+	margin-right: 30px;
+}
+
+.search_box-title {
+	width: 135px;
+	height: 48px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.select-icon-img {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 54px;
+	width: 54px;
+}
+
+.search_box img {
+	height: 18px;
+	width: 18px;
+}
+
+.search-text {
+	height: 48px;
+	width: 370px;
+	background-color: inherit;
+	border: none;
+	outline: none;
+}
+
+.bs-move-main {
+	width: 200px;
+	height: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size:18px;
+}
+
+.bs-move-main div {
+	width: 100px;
+	text-align: center;
+}
+
+.bs-move-main ul {
+	margin: 0;
+	font-size: 25px;
+	height: 120px;
+	display: flex;
+	justify-content: center;
+	list-style-type: none;
+}
+
+.user_menu_list {
+	width: 150px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.user_menu_list ul {
+	width: 50px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+</style>
 	<div class="header_wrapper">
 		<div class="service_mall">
 			<div class="service_mall_inner">
@@ -60,14 +148,10 @@
 					</div>
 					<a class="btn_search"></a>
 				</div>
-				<ul>
-					<li>
-						<a href="${pageContext.request.contextPath}/bookstore/template/bsMain.do">LM 문고</a>
-					</li>
-					<li>
-						<a href="${pageContext.request.contextPath}/library/template/libMain.do">LM 도서관</a>
-					</li>
-				</ul>
+				<div class="bs-move-main">
+					<div class="bs-move-mainlink"><a href="${pageContext.request.contextPath}/bookstore/template/bsMain.do">LM문고</a></div>
+					<div class="bs-move-mainlink"><a href="${pageContext.request.contextPath}/library/template/libMain.do">LM도서관</a></div>
+				</div>
 				<ul class="user_menu_list">
 					<li class="user_menu_item"><a class="cart_icon"  href="${pageContext.request.contextPath}/bookstore/payment/cart.do"></a></li>
 					<li class="user_menu_item"><a class="mypage_icon"></a></li>
