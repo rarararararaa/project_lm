@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.bookstore.payment.service.BookStorePaymentService;
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
+import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -38,6 +40,7 @@ public class BookStorePaymentController {
 	BookStorePaymentService bookStorePaymentService;
 	@Autowired
 	MemberService memberService;
+	
 	
 	//API 책 추가
 	@PostMapping("/bookstore/payment/cart.do")
@@ -152,6 +155,8 @@ public class BookStorePaymentController {
 				BookStorePaymentCartVO vo = new BookStorePaymentCartVO();
 				vo.setCart_quantity(Integer.parseInt(map.get("cart_quantity")));
 				vo.setStore_product_num(Integer.parseInt(map.get("store_product_num")));
+				int price = Integer.parseInt(map.get("cart_quantity"))*Integer.parseInt(map.get("store_product_pricestandard").substring(0, map.get("store_product_pricestandard").length()-1));
+				vo.setOrder_product_price(price);
 				vo.setMem_num(mem_num);
 				cartList.add(vo);
 				log.debug("<<orderList>> : "+cartList);
@@ -168,7 +173,7 @@ public class BookStorePaymentController {
 	}
 	
 	//주문 페이지
-	@RequestMapping("/bookstore/payment/order.do")
+	@GetMapping("/bookstore/payment/order.do")
 	public String orderForm(HttpSession session, Model model) {
 		log.debug("<<세션 확인 order >> : "+session.getAttribute("cartList"));
 		String mem_id = (String)session.getAttribute("mem_id");
@@ -194,7 +199,8 @@ public class BookStorePaymentController {
 		log.debug("<<member 확인>>"+member);
 		//배송정보
 		MemberVO home = memberService.homeDefault(mem_num);
-		
+		//등급에 따른 포인트 정보
+		double point = getPoint(member.getMem_grade());
 		//상품 정보
 		model.addAttribute("list", list);
 		model.addAttribute("book_list", book_list);
@@ -202,12 +208,32 @@ public class BookStorePaymentController {
 		//금액 정보&회원 할인 정보
 		model.addAttribute("total", total);
 		model.addAttribute("mem", member);
+		model.addAttribute("point", point);
 		//회원 배송 정보
 		model.addAttribute("home", home);
 		
 		return "order";
 	}
-	
+	//주문 성공시 주문 내역 저장
+	@RequestMapping("/bookstore/payment/orderAction.do")
+	@ResponseBody
+	public Map<String, String> payBook(String orderInfo, HttpSession session) {
+		log.debug("<<결제 데이터 확인>> : "+orderInfo);
+		
+		org.json.JSONObject jObject = new org.json.JSONObject(orderInfo);
+		//boolean result = jObject.getBoolean("success");
+		List<BookStorePaymentCartVO> list = (ArrayList)session.getAttribute("cartList");
+		BookStorePaymentOrderVO order = null;
+		
+		//order.setHome_num(jObject.getString(""))
+		
+		log.debug("<<result>> : ");
+		
+		
+		Map<String, String> mapJson = new HashMap<String, String>();
+		mapJson.put("result", "success");
+		return mapJson;
+	}
 	
 	//멤버 등급에 따른 포인드 % 가져오기
 	public double getPoint(int grade) {

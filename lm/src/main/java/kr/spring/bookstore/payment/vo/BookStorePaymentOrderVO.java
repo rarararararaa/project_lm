@@ -2,11 +2,15 @@ package kr.spring.bookstore.payment.vo;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookStorePaymentOrderVO {
 	//order_manage
 	private int order_num;//주문번호
@@ -21,7 +25,8 @@ public class BookStorePaymentOrderVO {
 	private int IMP_UID;//결제 번호
 	
 	//order_detail-구매한 상품 각각의 정보
-	private int ordre_detail_num;
+	private int order_detail_num;
+	//order_num도 들어감
 	private int store_product_num;//상품 번호
 	private int order_product_price;
 	private int order_product_quantity;

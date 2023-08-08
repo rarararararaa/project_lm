@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kr.spring.bookstore.payment.dao.BookStorePaymentOrderMapper">
+	
+	<insert id="insertOrder" parameterType="bookStorePaymentOrderVO">
+		INSERT INTO store_order_manage
+			(order_num,
+			 mem_num, 
+			 home_num, 
+			 order_total_price, 
+			 order_status, 
+			 order_date,
+			 order_notice,
+			 order_pay_status,
+			 payment_type,
+			 imp_uid)
+			 VALUES(
+			 	#{order_num},
+			 	#{mem_num},
+			 	#{home_num},
+			 	#{order_total_price},
+			 	#{order_status},
+			 	#{order_date},
+			 	#{order_notice},
+			 	#{order_pay_status},
+			 	#{payment_type},
+			 	#{imp_uid}
+			 	)
+	</insert>
+	
+	<insert id="insertDetailOrder" parameterType="bookStorePaymentCartVO">
+		INSERT INTO store_order_detail(
+			order_detail_num,
+			order_num,
+			store_product_num,
+			order_product_price,
+			order_product_quantity,
+		)VALUES(
+			store_order_detail_seq.next.val.
+			#{store_product_num},
+			#{order_num},
+			#{order_product_price},
+			#{order_product_quantity}
+		)
+	</insert>
+</mapper>

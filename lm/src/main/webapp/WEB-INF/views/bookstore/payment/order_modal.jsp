@@ -2,13 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/payment-modal.css">
+<!-- 배송지 등록 모달 -->
 <div class="modal re_pwd" id="re_pwd">
         <div class="modal_container">
             <div class="m_content">
                 <div class="tit"><h2>배송지 등록</h2><img src="${ pageContext.request.contextPath }/images/modal-btn.png" onclick="fnHidePop('re_pwd')" class="modal-btn"></div>
                 <div class="con">
                 	<button class="deli-plus" onclick="fnShowPop('re_re_pwd')">배송지 추가</button>
+                	<c:if test="${empty home}">
+                		<div class="non-deliInfo">
+                			<img alt="" src="${pageContext.request.contextPath}/images/stop.png">
+	                		<p>등록된 배송지가 없습니다.</p>
+                		</div>
+                	</c:if>
+                	<c:if test="${!empty home}">
 					<table>  
+					<!-- 반복문 -->
 						<tr>
 							<td>
 								<input type="checkbox" value="2" class="deli-default" name="check_deli"
@@ -16,31 +25,25 @@
 							</td>
 							<td>
 								<ul class="deliInfo">
-									<li>기본 배송지</li>
+									<li>
+									<c:if test="${home.home_default == 0}">
+										기본 배송지
+									</c:if>
+									<c:if test="${home.home_default > 0 }">
+										일반 배송지
+									</c:if>
+									</li>
 									<li>${mem.mem_name }/${mem.mem_cell }</li>
 									<li>
-										[${home.home_zipcode}] ${home.home_address} ${home_address_detail}
+										[${home.home_zipcode}] ${home.home_address} ${home.home_address_detail}
 									</li>
 								</ul>
 							</td>
 							<td><button class="modify-deli">수정</button></td>
 						</tr>
-						<tr>
-							<td>
-								<input type="checkbox" value="2" class="deli-default" name="check_deli">
-							</td>
-							<td>
-								<ul class="deliInfo">
-									<li>기본 배송지</li>
-									<li>${mem.mem_name }/${mem.mem_cell }</li>
-									<li>
-										[${home.home_zipcode}] ${home.home_address} ${home_address_detail}
-									</li>
-								</ul>
-							</td>
-							<td><button class="modify-deli">수정</button></td>
-						</tr>
+					<!-- 반복문 -->						
 					</table>
+                	</c:if>
                 </div>
             </div>
         </div>
@@ -49,7 +52,7 @@
 <div class="modal re_pwd" id="re_re_pwd">
 	<div class="modal_container deli-modal-con">
 		<div class="m_content">
-			 <div class="tit"><h2>배송지 등록</h2><img src="${ pageContext.request.contextPath }/images/modal-btn.png" onclick="fnHidePop('re_re_pwd')" class="modal-btn"></div>
+			 <div class="tit"><h2>배송지 추가</h2><img src="${ pageContext.request.contextPath }/images/modal-btn.png" onclick="fnHidePop('re_re_pwd')" class="modal-btn"></div>
 			<hr size="1px" noshade="noshade" color="#DBDBDB">
 			<form action="insertDeli" method="post" id="deli_form">
 				<ul>
@@ -65,8 +68,8 @@
 					<li>
 						<p>주소</p>
 						<input type="button" onclick="execDaumPostcode()"
-				            value="우편번호 찾기" class="default-btn">
-						<input id="address1" name="address1" type="text"/>
+				            value="우편번호 찾기" class="default-btn" id="zipcode" data-zipcode="">
+						<input id="address1" name="address1" type="text" readonly="readonly"/>
 						<input id="address2" name="address2" type="text"/>
 					</li>
 				</ul>
@@ -134,9 +137,10 @@
                 //(수정) else {
                 //(수정)    document.getElementById("address2").value = '';
                 //(수정) }
-
+				//alert(addr + extraAddr);
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode;
+                var zipcode = document.getElementById("zipcode");
+                zipcode.setAttribute('data-zipcode', data.zonecode);
                 //(수정) + extraAddr를 추가해서 address1에 참고항목이 보여지도록 수정
                 document.getElementById("address1").value = addr + extraAddr;
                 // 커서를 상세주소 필드로 이동한다.

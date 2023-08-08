@@ -34,7 +34,7 @@ ul{
 .both-clear{
 	clear: both;
 }
-button:hover, input:hover{
+button:hover, input:hover, .modal-btn:hover{
 	cursor: pointer;
 	background-color: #e6e6e6;
 }
@@ -108,6 +108,7 @@ input[type='number']::-webkit-inner-spin-button {
 	background: #FFF;
 }
 .modify-deli{
+	width: 40px;
 	color: #474C98;
 	border-radius: 5px;
 	border: 1px solid #474C98;
@@ -180,6 +181,14 @@ input[type='number']::-webkit-inner-spin-button {
 	color: #FFF;
 	font-size: 15px;
 }
-
+/*저장된 배송 정보가 없을 때*/
+.non-deliInfo{
+	text-align: center;
+    margin-top: 30%;
+    font-size: 20px;
+}
+.non-deliInfo p{
+	margin-top: 5px;
+}
 /*모달 창 띄웠을 경우*/
 .modal.on{opacity:1;z-index:999;}
