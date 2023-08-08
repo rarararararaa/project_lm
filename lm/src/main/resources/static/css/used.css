@@ -216,3 +216,8 @@
 	margin-left:10px;
 }
 
+.flex-end-contents ul {
+	display:flex;
+	justify-content:flex-end;
+}
+

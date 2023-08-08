@@ -12,8 +12,11 @@
 	<div class="wrapper" id="mainDiv">
 		<tiles:insertAttribute name="libHeader" />
 		<div id="used_div_box">
+			<div id="used_nav_box">
+				<tiles:insertAttribute name="libSearchNav" />
+			</div>
 			<div id="used_contents_box">
-				<tiles:insertAttribute name="libBody" />
+				<tiles:insertAttribute name="libSearch" />
 			</div>
 		</div>
 		<tiles:insertAttribute name="libFooter" />

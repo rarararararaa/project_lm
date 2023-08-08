@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.library.main.service.LibraryMainService;
@@ -38,12 +39,15 @@ public class LibMainController {
 		
 		
 		List<LibraryMainVO> list = null;
-		
+		List<LibraryMainVO> navs = null;
 		list = libraryMainService.selectLibraryAllPorducts();
-		
+		navs = libraryMainService.selectLibraryCategoryNav();
 		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("libMain");
 		mav.addObject("list",list);
+		mav.addObject("navs",navs);
+		
 		return mav; //타일스 설정의 식별자
 	}
 	
@@ -52,4 +56,35 @@ public class LibMainController {
 		
 		return "libAdmin";//타일스 설정의 식별자
 	}
+	
+	@GetMapping("/library/template/libSearchMain.do") 
+	public ModelAndView searchMain(@RequestParam(name="categoryNum", defaultValue="10") int categoryNum,
+			@RequestParam(name="orderByNum", defaultValue="1") int orderByNum,
+			@RequestParam(name="keyword", defaultValue="") String keyword,
+			LibraryMainVO libraryMainVO, HttpServletRequest request, HttpSession session) {
+		Map<String,Object> map = new HashMap<>();
+		//Search가자..
+		//List<LibraryMainVO> list = null;
+		List<LibraryMainVO> navs = null;
+		List<LibraryMainVO> result = null;
+		//list = libraryMainService.selectLibraryAllPorducts();
+		navs = libraryMainService.selectLibraryCategoryNav();
+		map.put("keyword",keyword);
+		map.put("categoryNum",categoryNum);
+		map.put("orderByNum",orderByNum);
+		result = libraryMainService.selectLibraryByCategoryAndOrderNum(map);
+		
+		int totalCount = libraryMainService.selectLibraryByCategoryAndOrderNumCount(map);
+		int selectedCategoryNum = categoryNum;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("libSearchMain");
+		mav.addObject("list",result);
+		mav.addObject("navs",navs);
+		mav.addObject("totalCount",totalCount);
+		mav.addObject("selectedCategoryNum",selectedCategoryNum);
+		//mav.addObject("orderByNum",orderByNum);
+		log.debug("<<navs를 까보자>> : "+navs);
+		return mav;
+	}
+	
 }

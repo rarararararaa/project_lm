@@ -215,3 +215,14 @@
 	margin-left:10px;
 }
 
+.flex-end-contents {
+	width:900px;
+	display:flex;
+	justify-content:flex-end;
+}
+
+.flex-end-contents ul {
+	display:flex;
+	justify-content:flex-end;
+	list-style: none;
+}
