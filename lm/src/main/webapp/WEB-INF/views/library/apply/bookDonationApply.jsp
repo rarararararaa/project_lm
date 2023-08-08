@@ -2,24 +2,33 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="page-main">
-	<form:form modelAttribute="donationVO" action="insertDonation.do" id="register_form" enctype="multipart/form-data">
+	<form:form modelAttribute="donationVO" action="donationApply.do" id="register_form">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 		    <li>
-				<form:label path="facility_name">시설 이름</form:label>
-				<form:input path="facility_name"/>
-				<form:errors path="facility_name" cssClass="error-color"/>
+				<form:label path="donation_book_info">도서 정보</form:label>
+				<form:input path="donation_book_info"/>
+				<form:errors path="donation_book_info" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="facility_name">시설 설명</form:label>
-				<form:textarea path="facility_content"/>
-				<form:errors path="facility_content" cssClass="error-color"/>
+				<form:label path="donation_title">제목</form:label>
+				<form:input path="donation_title"/>
+				<form:errors path="donation_title" cssClass="error-color"/>
 			</li>
-			<li>	
-				<label for="upload1">시설 사진</label>
-				<input type="file" name="upload1" id="upload1"
-				              accept="image/gif,image/png,image/jpeg">
-			    <form:errors path="facility_image" cssClass="error-color"/>	              
+			<li>
+				<form:label path="donation_content">내용</form:label>
+				<form:textarea path="donation_content"/>
+				<form:errors path="donation_content" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:label path="donation_name">기증자 이름</form:label>
+				<form:input path="donation_name"/>
+				<form:errors path="donation_name" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:label path="donation_info">기증자 별명(이름 대신 공개되기 원하는 호칭이 있으면 적어주세요)</form:label>
+				<form:input path="donation_info"/>
+				<form:errors path="donation_info" cssClass="error-color"/>
 			</li>
 		</ul>
 		<div class="align-center">

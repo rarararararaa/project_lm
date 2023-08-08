@@ -26,5 +26,5 @@
 		<li>내용 및 삽화 등이 유해한 자료</li>
 		<li>기타 도서관에서 소장하기 부적합하다고 판단되는 자료</li>
 	</ul>
-	<input type="button" value="기증하기">
+	<input type="button" value="기증하기" onclick="location.href='donationApply.do'">
 </div>
