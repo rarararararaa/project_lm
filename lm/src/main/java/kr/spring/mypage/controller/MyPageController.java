@@ -1,5 +1,6 @@
 package kr.spring.mypage.controller;
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ import kr.spring.mypage.service.MyPageService;
 import kr.spring.mypage.vo.MyPageVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.EncryptionPasswd;
+import kr.spring.util.FileUtil;
 import kr.spring.util.SaltGenerate;
 import lombok.extern.slf4j.Slf4j;
 
@@ -275,8 +277,8 @@ public class MyPageController {
 		}
 		//name,email,cell 가져오기
 		mypageVO = mypageService.getMyEdit(mem_num);
+	
 		model.addAttribute("mypageVO", mypageVO);
-		
 		return "myEditMain"; //타일스 설정의 식별자
 	}
 	@PostMapping("/lm/mypage/myedit/myEditMain.do")
@@ -323,6 +325,39 @@ public class MyPageController {
 		return "common/notice_edit";
 	}
 	/*=======================
+	 * 사진 관련
+	 *=======================*/
+	@RequestMapping("/lm/mypage/myedit/photoView.do")
+	public String getProfile(HttpSession session,
+			                 HttpServletRequest request,
+			                 Model model,@RequestParam int mem_num) {
+		log.debug("<<photoView>> : " + mem_num);
+			MyPageVO mypageVO = mypageService.getPhoto(mem_num);
+			viewProfile(mypageVO,request,model);
+		return "imageView";
+
+	}
+	//프로필 사진 처리를 위한 공통 코드
+	public void viewProfile(MyPageVO mypageVO,
+			                HttpServletRequest request,
+			                Model model) {
+		if(mypageVO.getMem_photo()==null 
+				//|| memberVO.getPhoto_name()==null
+				) {
+			//기본 이미지 읽기
+			byte[] readbyte = FileUtil.getBytes(
+					      request.getServletContext().getRealPath(
+					    		                "/image_basic/basic1.png"));
+			model.addAttribute("imageFile", readbyte);
+			model.addAttribute("filename", "face.png");
+		}else {//업로드한 프로필 사진이 있는 경우
+			System.out.println("test");
+			model.addAttribute("imageFile", mypageVO.getMem_photo());
+		}
+	}
+	
+	
+	/*=======================
 	 * 사용가능포인트정보
 	 *=======================*/
 	@RequestMapping("/lm/mypage/pointinfo/pointInfoMain.do")
@@ -355,7 +390,6 @@ public class MyPageController {
 				return "common/notice_lib";
 			}
 		}
-
 		//회원의 총 주문 금액
 		int mem_order_price=0;
 		//회원의 등급 점수

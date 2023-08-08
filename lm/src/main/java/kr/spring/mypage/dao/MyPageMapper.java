@@ -1,5 +1,6 @@
 package kr.spring.mypage.dao;
 
+import java.sql.Blob;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +63,9 @@ public interface MyPageMapper {
 	public void memberOut_Detail(int mem_num);
 	@Update("UPDATE lm_member_detail SET mem_photo = #{mem_photo} WHERE mem_num=#{mem_num}")
 	public void updatePhoto(MyPageVO mypageVO);
+	//photo 유무 확인
+	@Select("SELECT * FROM lm_member_detail WHERE mem_num = #{mem_num}")
+	public MyPageVO getPhoto(int mem_num);
 }
 
 

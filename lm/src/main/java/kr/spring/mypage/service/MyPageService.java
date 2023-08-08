@@ -1,5 +1,6 @@
 package kr.spring.mypage.service;
 
+import java.sql.Blob;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Update;
@@ -27,4 +28,6 @@ public interface MyPageService {
 	public void memberOut(int mem_num);
 	//회원정보수정 이미지 업로드
 	public void updatePhoto(MyPageVO mypageVO);
+	//이미지 유무 확인
+	public MyPageVO getPhoto(int mem_num);
 }

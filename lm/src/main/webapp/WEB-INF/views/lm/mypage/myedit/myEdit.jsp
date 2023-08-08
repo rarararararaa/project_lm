@@ -68,19 +68,19 @@
 					<!-- 폼 시작 -->
 					<div class="photo-form">
 						<div class="view-photo">
-							<img
-								src="${pageContext.request.contextPath}/images/default_photo_used.png"
-								 class="view-photo">
+							<img src="${pageContext.request.contextPath}/lm/mypage/myedit/photoView.do?mem_num=${mem_num}" width="50" height="50"
+								class="view-photo">
 						</div>
-								<input type="button" onclick="ShowUploadPhoto();" value="사진 변경" id="upload-photo"
-								class="edit-button-photo">
+						<input type="button" onclick="ShowUploadPhoto();" value="사진 변경"
+							id="upload-photo" class="edit-button-photo">
 						<!-- 선택 버튼 클릭 시 활성화 -->
 						<div id=input-area-photo>
-							<input type="file" id="upload-photo-file" class="edit-button-photo" name="upload" accept="image/gif,image/png,image/jpeg">
-							<br>
-							<form:button class="edit-button">확인</form:button> <input type="button"
-								onclick="HideUploadPhoto();" value="취소" id="cancel-photo"
-								class="edit-button-photo">
+							<input type="file" id="upload-photo-file"
+								class="edit-button-photo" name="upload"
+								accept="image/gif,image/png,image/jpeg"> <br>
+							<form:button class="edit-button">확인</form:button>
+							<input type="button" onclick="HideUploadPhoto();" value="취소"
+								id="cancel-photo" class="edit-button-photo">
 						</div>
 						<!-- 끝 -->
 					</div>
@@ -108,14 +108,14 @@
 							<div class="input-area-form">
 								<div class="view-data-title2">신규 비밀번호</div>
 								<form:password path="mem_new_passwd" maxlength="20"
-									placeholder="신규 비밀번호 입력" class="input-button" id="pw2"/>
+									placeholder="신규 비밀번호 입력" class="input-button" id="pw2" />
 								<span id="message_new_passwd"></span> <span
 									id="message_new_passwd_status"></span>
 							</div>
 							<div class="input-area-form">
 								<div class="view-data-title2">신규 비밀번호 재입력</div>
 								<input type="password" id="nmew-passwd2" maxlength="20"
-									placeholder="신규 비밀번호 재입력" class="input-button" id="pw3"/>
+									placeholder="신규 비밀번호 재입력" class="input-button" id="pw3" />
 							</div>
 							<div class="input-area-form">
 								<form:button class="edit-button">확인</form:button>

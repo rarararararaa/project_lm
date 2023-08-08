@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.mypage.dao.MyPageMapper;
 import kr.spring.mypage.vo.MyPageVO;
+
+import java.sql.Blob;
 import java.util.List;
 
 @Service
@@ -98,5 +100,10 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public void updatePhoto(MyPageVO mypageVO) {
 		mypageMapper.updatePhoto(mypageVO);
+	}
+
+	@Override
+	public MyPageVO getPhoto(int mem_num) {
+		return mypageMapper.getPhoto(mem_num);
 	}
 }
