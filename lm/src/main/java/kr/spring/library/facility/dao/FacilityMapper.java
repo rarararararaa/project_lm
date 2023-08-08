@@ -17,6 +17,7 @@ public interface FacilityMapper {
 	public List<FacilityVO> selectFacilityList(Map<String, Object> map);
 	public int selectFacilityCount(Map<String, Object> map);
 	//시설 번호로 시설 검색
+	@Select("SELECT * FROM lib_facility_admin WHERE facility_num=#{facility_num}")
 	public FacilityVO selectFacility(Integer facility_num);
 	
 	//시설 이용 신청 등록

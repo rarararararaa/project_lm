@@ -113,7 +113,7 @@ public class FacilityController {
 	}
 	
 	//이미지 출력
-	@RequestMapping("/facility/imageView.do")
+	@RequestMapping("/library/imageView.do")
 	public ModelAndView viewImage(@RequestParam int facility_num) {
 
 		FacilityVO vo = 
@@ -121,9 +121,8 @@ public class FacilityController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");
-
 		mav.addObject("imageFile", vo.getFacility_image());
-
+		mav.addObject("filename", vo.getFacility_name()+".jpg");
 		return mav;
 	}
 	
