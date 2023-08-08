@@ -89,6 +89,7 @@ public class LibMainController {
 		mav.addObject("navs",navs);
 		mav.addObject("totalCount",totalCount);
 		mav.addObject("selectedCategoryNum",selectedCategoryNum);
+		mav.addObject("resultSearch",keyword);
 		//mav.addObject("orderByNum",orderByNum);
 		log.debug("<<navs를 까보자>> : "+navs);
 		return mav;

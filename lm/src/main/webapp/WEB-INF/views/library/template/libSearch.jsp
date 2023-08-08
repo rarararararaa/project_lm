@@ -2,15 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="used-contents">
+	<c:if test="${resultSearch != ''}">
+		<span>"${resultSearch}"에 대한 검색 결과</span>
+	</c:if>
+	
 	<div class="flex-end-contents">
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=${selectedCategoryNum}&orderByNum=1">날짜 순 |&nbsp;</a></li>
-			<li><a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=${selectedCategoryNum}&orderByNum=2">제목 순 |&nbsp;</a></li>
-			<li><a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=${selectedCategoryNum}&orderByNum=3">저자 순 |&nbsp;</a></li>
-			<li><a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=${selectedCategoryNum}&orderByNum=4">출판사 순</a></li>
+			<li><a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=${selectedCategoryNum}&orderByNum=1&keyword=${resultSearch}">날짜 순 |&nbsp;</a></li>
+			<li><a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=${selectedCategoryNum}&orderByNum=2&keyword=${resultSearch}">제목 순 |&nbsp;</a></li>
+			<li><a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=${selectedCategoryNum}&orderByNum=3&keyword=${resultSearch}">저자 순 |&nbsp;</a></li>
+			<li><a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=${selectedCategoryNum}&orderByNum=4&keyword=${resultSearch}">출판사 순</a></li>
 		</ul>
 	</div>
-	<span>메인 상품</span>
 	<div class="flex-start-box">책 갯수 : ${totalCount}</div>
 	<div class="search-box-byUsed">
 		<c:forEach var="list" items="${list}">

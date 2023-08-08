@@ -14,24 +14,24 @@
 <div class="used-book-nav">
 	<div class="lib-main-nav-filter-text">필터</div>
 	<div class="lib-main-nav-contents">
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=10&orderByNum=1">전체</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=10&orderByNum=1&keyword=${resultSearch}">전체</a>
 	</div>
 	<div class="lib-main-nav-contents">
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=0&orderByNum=1">총류 |&nbsp;</a>
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=1&orderByNum=1">철학 |&nbsp;</a>
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=2&orderByNum=1">종교</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=0&orderByNum=1&keyword=${resultSearch}">총류 |&nbsp;</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=1&orderByNum=1&keyword=${resultSearch}">철학 |&nbsp;</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=2&orderByNum=1&keyword=${resultSearch}">종교</a>
 	</div>
 	<div class="lib-main-nav-contents">
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=3&orderByNum=1">사회과학 |&nbsp;</a>
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=4&orderByNum=1">자연과학</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=3&orderByNum=1&keyword=${resultSearch}">사회과학 |&nbsp;</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=4&orderByNum=1&keyword=${resultSearch}">자연과학</a>
 	</div>
 	<div class="lib-main-nav-contents">
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=5&orderByNum=1">기술과학 |&nbsp;</a>
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=6&orderByNum=1">예술 |&nbsp;</a>
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=7&orderByNum=1">언어</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=5&orderByNum=1&keyword=${resultSearch}">기술과학 |&nbsp;</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=6&orderByNum=1&keyword=${resultSearch}">예술 |&nbsp;</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=7&orderByNum=1&keyword=${resultSearch}">언어</a>
 	</div>
 	<div class="lib-main-nav-contents">
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=8&orderByNum=1">문학 |&nbsp;</a>
-		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=9&orderByNum=1">역사</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=8&orderByNum=1&keyword=${resultSearch}">문학 |&nbsp;</a>
+		<a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?categoryNum=9&orderByNum=1&keyword=${resultSearch}">역사</a>
 	</div>
 </div>
