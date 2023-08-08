@@ -104,43 +104,77 @@ $(document).ready(function() {
 });
 
 
+//동적 버튼 설정
+function ShowUploadPhoto() {
+  document.getElementById("input-area-photo").style.display = "block";
+  document.getElementById("upload-photo").style.display = "none";
+  const element = document.querySelector('.photo-form');
+  element.style.height = '500px';
+}
+
+function HideUploadPhoto() {
+  document.getElementById("input-area-photo").style.display = "none";
+  document.getElementById("upload-photo").style.display = "block";
+  
+}
 
 function ShowChangePasswd() {
-  document.getElementById("input-area-passwd").style.display = "block";
+  document.getElementById("input-area-passwd").style.display = "flex";
   document.getElementById("change-passwd").style.display = "none";
+  const element = document.querySelector('.passwd-form');
+  element.style.height = '250px';
 }
 
 function hideChangePasswd() {
   document.getElementById("input-area-passwd").style.display = "none";
   document.getElementById("change-passwd").style.display = "block";
+  const element = document.querySelector('.passwd-form');
+  element.style.height = '100px';
+  $('#pw1').val('').focus();
+  $('#pw2').val('').focus();
+  $('#pw3').val('').focus();
 }
 
 function showConfirmEmail() {
   document.getElementById("input-area-email").style.display = "block";
   document.getElementById("confirm-email").style.display = "none";
+  document.getElementById("change-email").style.display = "none";
+  const element = document.querySelector('.email-form');
+  element.style.height = '300px';
 }
 
 function hideConfirmEmail() {
   document.getElementById("input-area-email").style.display = "none";
   document.getElementById("confirm-email").style.display = "block";
+  document.getElementById("change-email").style.display = "block";
+  const element = document.querySelector('.input-area-email');
+  element.style.height = '100px';
 }
 
 function showChangeEmail() {
   document.getElementById("input-area-email2").style.display = "block";
   document.getElementById("change-email").style.display = "none";
+  document.getElementById("confirm-email").style.display = "none";
 }
 
 function hideChangeEmail() {
   document.getElementById("input-area-email2").style.display = "none";
   document.getElementById("change-email").style.display = "block";
+  document.getElementById("confirm-email").style.display = "block";
 }
 
 function showChangecell() {
   document.getElementById("input-area-cell").style.display = "block";
   document.getElementById("change-cell").style.display = "none";
+    const element = document.querySelector('.cell-btn-form');
+  element.style.height = '300px';
 }
 
 function hideChangecell() {
   document.getElementById("input-area-cell").style.display = "none";
   document.getElementById("change-cell").style.display = "block";
+    const element = document.querySelector('.cell-btn-form');
+  element.style.height = '100px';
 }
+
+

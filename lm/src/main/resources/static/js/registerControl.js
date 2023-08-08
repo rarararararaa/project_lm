@@ -16,7 +16,7 @@ $(document).ready(function() {
 	    let specialCharacterCount; //특수문자
 	    let lengthCount; //길이
 	    
-			if(mem_passwd.search(/[ㄱ-ㅎㅏ-ㅣ]/g)!=-1){ //한글 입력 시 알리문구 출력 및 초기화
+			if(mem_passwd.search(/[ㄱ-ㅎㅏ-ㅣ]/g)!=-1){ //한글 입력 시 알림문구 출력 및 초기화
 				$('#mem_passwd').val('').focus();
 				$('#message_passwd').css('color', 'red').text('영문 대소문자, 숫자만 사용 가능');
 				$('#message_passwd_status').css('color', 'red').text('');

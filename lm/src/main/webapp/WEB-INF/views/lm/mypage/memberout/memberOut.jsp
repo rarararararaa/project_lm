@@ -65,7 +65,7 @@
 					<div class="">
 						<form:button>탈퇴</form:button>
 						<input type="button" value="취소"
-							onclick="location.href='myPageMain.do'">
+							onclick="location.href='${pageContext.request.contextPath}/lm/mypage/myedit/myEditMain.do?lo=${lo}'">
 					</div>
 				</div>
 			</div>

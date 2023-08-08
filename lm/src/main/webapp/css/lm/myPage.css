@@ -94,7 +94,6 @@ hr{
 }
 .lsf{
 	display:flex;
-	border:1px solid gray;
 	width:150px;
 }
 .top-right-div{
@@ -517,18 +516,6 @@ table.form-box {
 	transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
 }
 
-input[type="file"] {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	border: 0;
-	cursor: pointer;
-	display: none;
-}
-
 div.file-button {
 	margin-bottom: 20px;
 	background-image: url(../images/file_button.png);
@@ -734,7 +721,8 @@ select.select::-ms-expand {
 .right-div-form{
 	display:flex;
 	width:950px;
-	height:700px;	
+	height:700px;
+	flex-direction:column;
 }
 /* 내용 투명화 */
 #input-area-passwd{
@@ -748,4 +736,132 @@ select.select::-ms-expand {
 }
 #input-area-cell{
 	display:none;
+}
+#input-area-photo{
+	display:none;
+}
+input{
+	width:100px;
+	height:30px;
+}
+.photo-form{
+	width:1000px;
+	height:350px;
+}
+.view-photo{
+	width:280px;
+	height:280px;
+	border:1px solid black;
+}
+.edit-button{
+	width:100px;
+	height:35px;
+	margin-right:5px;
+}
+.edit-button-photo{
+	width:200px;
+	height:35px;
+	margin-right:5px;
+	margin-top:5px;
+}
+
+.input-button{
+	width:150px;
+	height:30px;
+	margin-top:5px;
+}
+.hr-edit{
+	width:1000px;
+}
+.id-form{
+	display:flex;
+	width:300px;
+	height:100px;
+	flex-direction:row;
+}
+.view-data{
+	width:100px;
+	height:50px;
+	font-size:18px;
+}
+.view-data-title{
+	width:100px;
+	height:50px;
+	font-size:18px;	
+}
+.view-data-title2{
+	width:200px;
+	height:50px;
+}
+.view-data-email{
+	width:250px;
+	height:50px;
+	font-size:18px;
+}
+.view-data-cell{
+	width:170px;
+	height:50px;
+	font-size:18px;
+}
+.passwd-form{
+	display:flex;
+	width:500px;
+	height:100px;
+	flex-direction:column;
+}
+.passwd-btn-form{
+	display:flex;
+	flex-direction:row;
+}
+#input-area-passwd{
+	flex-direction:column;
+}
+.input-area-form{
+	display:flex;
+	width:300px;
+	flex-direction:row;
+}
+.name-form{
+	display:flex;
+	width:300px;
+	height:100px;
+	flex-direction:row;
+}
+.email-form{
+	display:flex;
+	width:800px;
+	height:100px;
+	flex-direction:column;
+}
+.email-btn-form{
+	display:flex;
+	width:800px;
+	height:50px;
+	flex-direction:row;
+}
+#input-area-passwd{
+	width:500px;
+	height:5000px;
+}
+#email-tip{
+	margin-bottom:10px;
+}
+.cell-form{
+	display:flex;
+	width:800px;
+	height:100px;
+	flex-direction:column;
+}
+.cell-btn-form{
+	display:flex;
+	width:800px;
+	height:50px;
+	flex-direction:row;
+}
+.member-out{
+	display:block;
+	width:1000px;
+}
+.member-out input{
+	float:right;
 }

@@ -2,6 +2,7 @@ package kr.spring.mypage.vo;
 
 import java.io.IOException;
 
+
 import java.sql.Date;
 
 import javax.validation.constraints.Email;
@@ -21,6 +22,7 @@ import lombok.ToString;
 //출력하지 않도록 제외시킴
 @Getter
 @Setter
+@ToString(exclude = {"mem_photo"})
 public class MyPageVO {
 	public int mem_num;
 	public int mem_grade;
@@ -43,6 +45,12 @@ public class MyPageVO {
 	public String mem_email;
 	public String mem_cell;
 	public String mem_name;
+	
+	private byte[] mem_photo; //myEdit.jsp에서 입력받은 이미지 파일
+	//MultipartFile to byte
+	public void setUpload(MultipartFile upload) throws IOException {
+		setMem_photo(upload.getBytes());
+	}
 }
 
 

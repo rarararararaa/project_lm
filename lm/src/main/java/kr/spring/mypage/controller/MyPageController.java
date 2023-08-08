@@ -301,6 +301,10 @@ public class MyPageController {
 			mypageVO.setMem_new_passwd(mem_new_passwd);
 		}
 		//입력된 회원정보만 수정
+		if(mypageVO.getMem_photo().length!=0) {
+			mypageService.updatePhoto(mypageVO);
+			model.addAttribute("accessMsg", "이미지 등록 완료.");
+		}
 		if(!mypageVO.getMem_new_passwd().equals("")) {
 			mypageService.updatePasswd(mypageVO);
 			model.addAttribute("accessMsg", "비밀번호 수정 완료.");
