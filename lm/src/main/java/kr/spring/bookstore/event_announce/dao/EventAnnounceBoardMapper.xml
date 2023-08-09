@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kr.spring.bookstore.event_announce.dao.EventAnnounceBoardMapper">
+	
+	<!-- 글 작성 -->
+	<insert id="insertEventAnnounceBoard" parameterType="eventAnnounceBoardVO">
+		INSERT INTO store_event_announce_board(
+			event_announce_board_num,
+			title,
+			content)
+		VALUES(
+			store_event_announce_board_seq.nextval,
+			#{title},
+			#{content})
+	</insert> 
+	
+	<!-- 게시판 목록 -->
+	
+	<!-- 게시판 검색  -->
+	<sql id="boardSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					title LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					content LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					title LIKE '%' || #{keyword} || '%' or
+					content LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 전체/검색 레코드 수 -->
+	<select id="selectCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM store_event_announce_board
+		<include refid="boardSearch"></include>
+	</select>
+	
+	<!-- 전체/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="EventAnnounceBoardVO">
+		SELECT
+			*
+		FROM (SELECT 
+				a.*, 
+				rownum rnum 
+				FROM(SELECT 
+						event_announce_board_num,
+						<![CDATA[
+		             	REPLACE(REPLACE(title,'<','&lt;'),'>','&gt;') title, 
+		            	]]>
+		            	hit,
+		            	reg_date
+		        	FROM store_event_announce_board
+		        	<include refid="boardSearch"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+</mapper>

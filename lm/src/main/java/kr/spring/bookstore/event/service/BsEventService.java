@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Update;
 import kr.spring.bookstore.event.vo.BsAttendancePointVO;
 import kr.spring.bookstore.event.vo.BsAttendanceVO;
 import kr.spring.bookstore.event.vo.BsEventVO;
+import kr.spring.bookstore.event.vo.BsQuizVO;
 
 public interface BsEventService {
 	//이벤트 글 목록
@@ -27,6 +28,7 @@ public interface BsEventService {
 	public void updateEvent(BsEventVO event);
 	//이벤트 글 삭제
 	public void deleteEventBoard(Integer event_board_num);
+	public String selectEventItemIsbn(Integer store_product_num);
 
 
 	/* ---------------
@@ -61,6 +63,13 @@ public interface BsEventService {
 	//출석 중복 검사
 	public BsAttendanceVO selectAttendanceCheck(Map<String, Object> map);
 	
+	/* ---------------
+	 *  퀴즈 이벤트
+	 * ---------------- */
+	//퀴즈 이벤트 검색
+	public BsQuizVO selectQuizStatus(BsQuizVO quiz);
+	//퀴즈 이벤트 insert
+	public void insetQuizStatus(BsQuizVO quiz);
 	
 
 }

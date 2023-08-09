@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +20,7 @@ import kr.spring.library.product.vo.BookProductVO;
 import kr.spring.library.rent.service.RentService;
 import kr.spring.library.rent.vo.RentVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -32,14 +33,31 @@ public class RentController {
 	
 	//대출 리스트
 	@RequestMapping("/library/rent/rentHistoryList.do")
-	public ModelAndView getList() {
+	public ModelAndView getList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								String keyfield,String keyword,HttpSession session) {
 		Map<String, Object> map=new HashMap<String,Object>();
-		List<RentVO> list=null;
-		list=rentService.selectRentHistory(map);
-		
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);		
 		ModelAndView mav=new ModelAndView();
+		log.debug("<<currentPage>> : "+currentPage);
+		int count=rentService.selectRentRowCount(map);
+		PagingUtil page = 
+				new PagingUtil(keyfield,keyword,
+						currentPage,count,20,10,
+						"/library/rent/rentHistoryList.do",null);		
+		
+		List<RentVO> list=null;
+			if(count>0) {
+				map.put("start", page.getStartRow());
+				map.put("end", page.getEndRow());
+				
+				list = rentService.selectRentHistory(map);				
+			}
 		mav.setViewName("rentList");
 		mav.addObject("list",list);
+		mav.addObject("page", page.getPage());
+		mav.addObject("count", count);		
+		log.debug("<<count>> : "+count);
 		
 		return mav;
 	}
@@ -103,15 +121,48 @@ public class RentController {
 			mapJson.put("result", "logout");
 		}else {
 			//로그인 O인 경우
-			vo.setMem_num(user);
 			
-			rentService.insertRentHistory(vo);
+			//회원당 대출권수 확인
+			Map<String, Object> map=new HashMap<String, Object>();
+			map.put("mem_num", vo.getMem_num());
+			log.debug("<<mem_num>> : "+vo.getMem_num());
+			int count=rentService.selectRentCountByMem_num(map);
+			log.debug("<<rent_count>> : "+count);
+			String[] list;
+			list=vo.getCallNumber().split(",");
+			log.debug("<<list_length>> : "+list.length);
+			if((count+list.length)>3) {
+				mapJson.put("result", "overValue");
+			}else {
+				log.debug("<<total>> : "+(count+list.length));
+				for(String i:list) {
+					vo.setCallNumber(i);
+					rentService.insertRentHistory(vo);
+					log.debug("<<vo>> : "+vo);
+				}
+				mapJson.put("result", "success");
+			} 
 			
-			mapJson.put("result", "success");
 		}
 		
 		return mapJson;
 	}	
+	
+	//대출 반납
+	@RequestMapping("/library/rent/updateRentHistory.do")
+	public String returnBook(@RequestParam int rent_num,
+            				HttpSession session,
+							HttpServletRequest request,Model model){
+		
+		RentVO vo=rentService.selectRent(rent_num);
+		rentService.updateRentHistory(vo);
+		
+		//view에 표시할 메시지
+		model.addAttribute("message", "반납 완료!");
+		model.addAttribute("url", "/library/rent/rentHistoryList.do");
+		
+		return "common/resultView";
+	}
 	
 	
 }

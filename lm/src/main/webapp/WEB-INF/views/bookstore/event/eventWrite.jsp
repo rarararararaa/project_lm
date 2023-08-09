@@ -38,6 +38,7 @@
 						<form:select path="event_board_category">
 							<form:option value="1">댓글</form:option>
 							<form:option value="2">퀴즈</form:option>
+							<form:option value="3">사은품</form:option>
 						</form:select>
 					</li>
 				</ul>

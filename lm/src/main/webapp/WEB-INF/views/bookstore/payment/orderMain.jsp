@@ -9,6 +9,10 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.min.css">
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/payment.css">
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/js/paymentOrder.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
@@ -23,8 +27,14 @@
 			<ul>
 				<li class="float-left">배송지 정보</li>
 				<li>
+				<c:if test="${empty home}">
 					기본 배송지를 등록해주세요.	
+				</c:if>
+				<c:if test="${!empty home}">
+					배송지를 추가할 수 있습니다.
+				</c:if>
 				</li>
+				
 				<li class="both-clear">
 					<button id="deli-btn" onclick="fnShowPop('re_pwd')">배송지 등록</button>
 					<jsp:include page="order_modal.jsp"></jsp:include>
@@ -34,11 +44,15 @@
 			<ul>
 				<li>기본배송지</li>
 				<li>
-					<p>${mem.mem_name } / ${mem.mem_cell}</p>
+				<input type="hidden" id="memInfo" data-email="${mem.mem_email}" data-zipcode="${home.home_zipcode}"
+				data-address="${home.home_address} ${home.home_address_detail}">
+					<p data-cell="${mem.mem_cell}" id="cell">${mem.mem_name } / ${mem.mem_cell}</p>
 					<c:if test="${empty home}">
 						설정된 배송지가 없습니다.
 					</c:if>
-					[${home.home_zipcode}] ${home.home_address} ${home_address_detail}
+					<c:if test="${!empty home }">
+						[${home.home_zipcode}] ${home.home_address} ${home.home_address_detail}
+					</c:if>
 					<button id="deli-change">변경</button>
 				</li>
 			</ul>
@@ -56,7 +70,7 @@
 			<ul>
 				<li class="float-left">주문 상품</li>
 				<li style="display: flex;">
-					<p>총 ${ count }개</p>
+					<p id="count" data-count="${count}">총 ${ count }개</p>
 					<img src="${pageContext.request.contextPath}/images/order_book.png" id="book_detail">
 				</li>
 				<li class="book-list hidden-place">
@@ -69,11 +83,13 @@
 						<c:if test="${book.store_product_cover == ' '}">
 							<img src="${pageContext.request.contextPath}/images/noImage.png" width="85">
 						</c:if>
+						<c:if test="${book.store_product_cover != ' '}">
 							<img src="${book.store_product_cover}">
+						</c:if>
 						</td>
 						<td>
 							<ul>
-								<li>${book.store_product_title}</li>
+								<li class="title">${book.store_product_title}</li>
 								<li class="float-left orderListlitwo">${book.store_product_discount}%</li>
 								<li><fmt:formatNumber value="${book.store_product_pricestandard}"/>원</li>
 							</ul>
@@ -118,8 +134,8 @@
 			<ul>
 				<li class="float-left">결제수단</li>
 				<li>
-					<button id="cart">신용카드</button>
-					<button id="kakaoPay">카카오페이</button>
+					<button id="card" value="1" class="type-payment">신용카드</button>
+					<button id="kakaoPay" value="2" class="type-payment">카카오페이</button>
 				</li>
 			</ul>
 		</div>
@@ -153,7 +169,7 @@
 			<table id="payAll">
 				<tr>
 					<th>결제 예정 금액</th>
-					<th id="due">
+					<th id="due" data-total="${total}">
 					<c:if test="${total < 50000 }">
 						<fmt:formatNumber value="${total + 3000}"/>원
 					</c:if>
@@ -167,7 +183,7 @@
 					<td id="due_point"><fmt:formatNumber value="${total * point}"/>원</td>
 				</tr>
 			</table>
-			<input type="submit" value="주문하기" id="paySubmit">
+			<input type="submit" value="주문하기" id="paySubmit" data-type="" data-dueTotal="${total}">
 			</form>
 		</div>
 			<button onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'" class="cancel-btn">주문취소</button>
