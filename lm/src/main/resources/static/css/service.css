@@ -139,3 +139,32 @@ table.striped-table tr:nth-child(odd){
 .facility-list li.fac-name{
 	width:400px;
 }
+.view-category{
+	display:flex;
+	flex-wrap: wrap;
+}
+.view-category li{
+	display:block;
+	width:24%;
+	font-size:13pt;
+	text-align:center;
+	padding:20px 0;
+	border:solid 1px #5055b1;
+	margin-left:-1px;
+	margin-top:-1px;
+}
+.view-category li#category_first{
+	border-top-left-radius: 5px;
+}
+.view-category li#category_fourth{
+	border-top-right-radius: 5px;
+}
+.view-category li#category_fifth{
+	border-bottom-left-radius: 5px;
+}
+.view-category li#category_eightth{
+	border-bottom-right-radius: 5px;
+}
+.view-category li:hover{
+	color:#5055b1;
+}
