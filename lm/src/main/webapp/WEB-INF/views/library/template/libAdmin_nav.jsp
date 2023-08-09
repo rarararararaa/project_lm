@@ -9,7 +9,7 @@
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="도서관리"
-			  onclick="location.href='${pageContext.request.contextPath}/library/bookproductadmin/admin_booklist.do'">
+			  onclick="location.href='${pageContext.request.contextPath}/library/rent/rentHistoryList.do'">
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="기증승인"

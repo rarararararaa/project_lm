@@ -23,20 +23,13 @@
 </script>    
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/rent.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.min.css">
-<div>
-	<div>
-		<input type="button" id="opener" value="대출 등록">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/EESAMSAOH.css">
+<div class="product-main">
+	<h2 class="align-center">대출/반납 관리</h2>
+	<div class="button-box">
+		<input type="button" id="opener" value="대출 등록" class="small-button">
 	</div>
-	
-	<p>
-		대출 도서 : 
-		<span id="book_name"></span>
-		<span id="book_count"></span>
-	</p>
-	<p>
-		대출 회원 : 
-		<span id="member_name"></span>
-	</p>
+
 		<!-- 대출 등록 다이얼로그 시작 -->
 	<div id="dialog">
 		<form id="new_form">
@@ -71,11 +64,11 @@
 				<div class="button-box">					                          
 						<ul class="main-content">
 								<li>
-									<select name="keyfield">
-										<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>도서번호</option>
-										<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>회원ID</option>
-										<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>도서명</option>
-									</select>
+										<select name="keyfield" class="select">
+											<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>도서번호</option>
+											<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>회원ID</option>
+											<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>도서명</option>
+										</select>
 								</li>
 								<li>
 									<input type="search" size="16" 
@@ -100,39 +93,48 @@
 			<c:if test="${count > 0}">
 			<table class="form-box">
 				<tr>
-					<th class="row-title"><b>대출번호</b></th>
-					<th class="row-title"><b>도서번호</b></th>
-					<th class="row-title" colspan="2"><b>도서명</b></th>
-					<th class="row-title"><b>회원아이디</b></th>
-					<th class="row-title"><b>대출일</b></th>
-					<th class="row-title"><b>반납예정일</b></th>
-					<th class="row-title"><b>반납일</b></th>
-					<th class="row-title"><b>대출상태</b></th>
-					<th class="row-title"><b>연장여부</b></th>
+					<th class="row-title">대출번호</th>
+					<th class="row-title">도서번호</th>
+					<th class="row-title" colspan="4">도서명</th>
+					<th class="row-title">회원아이디</th>
+					<th class="row-title">대출일</th>
+					<th class="row-title">반납예정일</th>
+					<th class="row-title">반납일</th>
+					<th class="row-title">대출상태</th>
+					<th class="row-title">연장여부</th>
+					<th class="row-title">반납/연장</th>
 				</tr>
 				<c:forEach var="list" items="${list}">
 				<tr>
-					<td class="row-title">${list.mem_num}</td>
+					<td class="row-title"><b>${list.rent_num}</b></td>
 					<td class="row-title">
+						<b>
 						<a href="/library/lib_book/bookDetail.do?callNumber=${list.callNumber}">${list.callNumber}</a>
+						</b>
 					</td>
-					<td class="row-title">
+					<td class="row-content">
 						<a href="/library/lib_book/bookDetail.do?callNumber=${list.callNumber}">
 						<img src="${list.bookVO.lib_product_bookImageUrl }" width="100">
 						</a>
 					</td>
-					<td class="row-title">${list.bookVO.lib_product_bookName }</td>
-					<td class="row-title">${list.mem_id }</td>
-					<td class="row-title">${list.rent_reg_date }</td>
-					<td class="row-title">${list.return_reg_deadline }</td>
-					<td class="row-title">${list.return_reg_date }</td>
+					<td class="row-content" colspan="3">${list.bookVO.lib_product_bookName }</td>
+					<td class="row-content">${list.mem_id }</td>
+					<td class="row-content">${list.rent_reg_date }</td>
+					<td class="row-content">${list.return_reg_deadline }</td>
+					<td class="row-content">${list.return_reg_date }</td>
 					<td class="row-title">
+						<strong>
 						<c:if test="${list.lib_product_status >1}">
+						<div style="color:#cc0619;">
 							대출중
+						</div>	
 						</c:if>
 						<c:if test="${list.lib_product_status ==1}">
+						<div>
 							반납
+						</div>	
 						</c:if>
+						</strong>
 					</td>
 					<td class="row-title">
 						<c:if test="${list.lib_product_status ==3}">
@@ -142,12 +144,12 @@
 							X
 						</c:if>
 					</td>
-					<td>
+					<td class="row-title">
 						<c:if test="${list.lib_product_status >1}">
-							<input type="button" value="반납" onclick="location.href='/library/rent/updateRentHistory.do?rent_num=${list.rent_num}'">
+							<input class="sm-button" type="button" value="반납" onclick="location.href='/library/rent/updateRentHistory.do?rent_num=${list.rent_num}'">
 						</c:if>
 						<c:if test="${list.lib_product_status ==2}">
-							<input type="button" value="연장" onclick="location.href='/library/rent/updateRentDeadline.do?rent_num=${list.rent_num}'">
+							<input class="sm-button" type="button" value="연장" onclick="location.href='/library/rent/updateRentDeadline.do?rent_num=${list.rent_num}'">
 						</c:if>
 					</td>
 				</tr>

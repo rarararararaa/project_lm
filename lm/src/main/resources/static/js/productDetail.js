@@ -11,11 +11,7 @@ $(function(){
 		changeNum($(this),num);
 	});
 	
-	
-	//바로구매 누를 시 결제 창으로 submit
-	$('#orderRightAway').click(function(){
 		
-	});
 	
 
 });
@@ -25,9 +21,9 @@ function changeNum(tag,num){
 	let number=parseInt(num);
 	let total=0;
 	let fixedprice =parseInt($(tag).closest('.right-area').prev()
-							  .find('.prod-info-price').children().eq(0).text());
+							  .find('.prod-info-price').children().eq(0).val());
 					
-	if($(tag).attr('class')=='decrease'){
+	if($(tag).attr('id')=='decrease'){
 		if(number==1){
 			return false;
 		}

@@ -2,14 +2,15 @@
 /*---------- 상품 상세 ---------*/
 /* 가장 겉 */
 div.product-main {
-	width: 1200px;
+	width: 100%;
 	min-height: 1000px;
-	margin: 0 auto;
 	padding: 0;
 }
 
 div.content-wrap {
 	padding-top: 42px;
+	width:1200px;
+	margin: 0 auto;
 }
 /* 상품 div 헤더 */
 div.content-header {
@@ -81,15 +82,17 @@ span.unit{
 /* 찜 */
 span.wish-ico {
 	display: inline-block;
-	background-image: url(../images/heart.png);
+	background: url(../images/heart.png) no-repeat 100%;
     width: 20px;
     height: 20px;
-    margin-top: 12px;
-    background-size: 20px 20px;    
+    background-size: 20px 20px;   
+    margin:0 auto;
+    padding-top:30px; 
 }
 
 span.wish-ico.active {
-	background-image: url(../images/heart_active.png);
+	background: url(../images/heart_active.png) no-repeat 100%;
+    background-size: 20px 20px;   
 }
 
 /* 상품 수량 제어 */
@@ -98,19 +101,102 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	-webkit-appearance: none;
 	margin: 0;
 }
-
+span.adjust-box{
+	display:flex;
+}
+input[type="number"]{
+    width: 50px;
+    border:0;
+    height: 44px;
+    margin: 0;
+    padding: 1px 0 0 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    color: #000;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    text-align: center;
+    box-sizing: border-box;
+    vertical-align: top; 	
+}
 button.decrease {
-	background-image: url(../images/down.png);
-	width: 12px;
-	height: 12px;
+	background: url(../images/down.png) no-repeat 100%;
 	background-size: 12px 12px;
+	background-position: 65% 50%;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-radius: 6px 0 0 6px;	
+    position:relative;
 }
 
 button.increase {
-	background-image: url(../images/up.png);
-	width: 12px;
-	height: 12px;
+	background: url(../images/up.png) no-repeat 100%;
+	background-position: 40% 50%;
 	background-size: 12px 12px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 6px 6px 0;	
+    position:relative;
+}
+button.adjust{
+    display: block;
+    top: 0;
+    width: 34px;
+    height: 44px;
+    background-color: #fff;
+    box-sizing: border-box;
+    cursor: pointer;	
+}
+/* 상품 탭 영역 */
+div.tabs-area{
+    position: relative;
+    margin-bottom: 0;	
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-bottom: 1px solid #d5d5d5;
+    box-sizing: border-box;
+    height: 72px;
+}
+div.tabs-area div{
+	width:1200px;
+	margin:0 auto;
+	color:#767676;
+	font-size:16px;
+}
+ul.tabs{
+    display: inline-block;
+    flex: 1 1 auto;
+    position: relative;
+    padding: 0;
+    margin: 0 auto;
+    background-color: #fff;
+    box-sizing: border-box;	
+}
+li.tab_item{
+    position: relative;
+    height: 100%;
+    margin: 0;
+    padding: 0 30px;
+    float: left;
+    background: none;
+    box-sizing: border-box;
+}
+ul li{
+	list-style:none;
+}
+ul li a{
+	cursor:pointer;
+	text-decoration: none;
+	color:#767676;
+	font-weight:400;
 }
 /* 상품 구매 탭 */
 div.purchase-wrap{
@@ -161,21 +247,23 @@ div.right-area{
 div.prod-button-box{
     align-items:center;
     height:50px;
+    padding:0;
 }
 button.btn-line-gray{
+	margin-left:5px;
 	cursor:pointer;
     width: 50px;
     height: 50px;
     color: #fff;
     letter-spacing: -0.01em;
-    line-height: 42px;
     text-align: center;
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 6px;	
     padding:0;
 }
-button.btn-lg{
+input[type='submit'].btn-lg{
+    margin-left:5px;
     color: #474c98;
     border: 1px solid #5055b1;
     background: #fff;    
@@ -183,19 +271,131 @@ button.btn-lg{
 	cursor: pointer;
 	letter-spacing: -0.01em;
 	font-weight: 700;
-	margin: 0 10px;
 	min-width: 120px;
 	padding: 0 23px 1px;
 	border-radius: 6px;
-	height:50px;	
+	height:50px;
 }
-button.btn-lg:hover{
+
+input.btn-lg:hover{
     background: rgba(204, 204, 204,0.4);
 	transition: background-color 0.2s ease-out, border-color 0.2s ease-out;	
 }
+span#total{
+	font-weight:700;
+	font-size:20px;
+}
+/* 대출/반납 관리 */
+.content-box {
+	margin:0 auto;
+	margin-top: 20px;
+	border-top: 2px solid #000;
+}
+div.button-box {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 0;
+	align-items:center;
+}
+ul.main-content {
+	display: flex;
+	align-items:center;
+}
+form#search_form{
+	padding:0;
+}
+ul.main-content li {
+	list-style: none;
+}
+.small-button {
+	border: 1px solid #474c98;
+	background: #fff;
+	color: #474c98;
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 3px 0 0 3px;
+	min-width: 100px;
+	height: 25px;
+	padding: 0 23px 1px;
+	border-radius: 6px;
+}
 
+.small-button:hover {
+	background: rgba(204, 204, 204,0.4);
+	transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+.sm-button{
+	border: 1px solid #474c98;
+	background: #474c98;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 3px 0 0 3px;
+	min-width: 30px;
+	height: 25px;
+	padding: 0 23px 1px;
+	border-radius: 6px;	
+}
+.sm-button:hover{
+	background: rgba(71, 76, 152,0.4);
+	transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+select.select {
+	width: 100px;
+	height:27px;
+	border: 1px solid #999;
+	border-radius: 5px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-top:3px;
+	margin-right:5px;
+	padding-left:10px;
+	background: url('../images/arrow.jpg') no-repeat 90%;
+	background-size:15%;
+}
+select.select::-ms-expand {
+	display: none;
+}
 
-
-
-
-
+input#keyword{
+	width: 200px;
+	border: 1px solid #999;
+	border-radius: 5px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;	
+}
+h2.align-center{
+	margin:0 auto;
+	margin-top:30px;
+}
+table.form-box {
+	width: 100%;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #eaeaea;
+	box-sizing: border-box;
+	padding: 18px 0;
+}
+.row-title {
+	padding: 10px 12px;
+	line-height: 22px;
+	letter-spacing: -0.01em;
+	text-align: center;
+	vertical-align: top;
+	width:52px;
+}
+.row-content {
+	word-break:keep-all;	
+	padding: 10px 12px;
+	line-height: 22px;
+	letter-spacing: -0.01em;
+	text-align: left;
+	vertical-align: top;
+	font-weight: 500;
+}

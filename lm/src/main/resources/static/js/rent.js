@@ -3,12 +3,7 @@ $(function(){
 	let member_list=[];	//대출 회원 저장	
 	
 	//대출 도서 저장
-	//jQuery는 태그에 접근하면 배열로 인식한다. 0보다 크다 : 데이터가 있다, 뽑아올 수 있다는 뜻이다.
-	if($('#user').length > 0){	//채팅방 생성
-		member_list = [$('#user').attr('data-id')];
-	}else if($('#chat_member').length > 0){	//채팅
-		member_list = $('#chat_member').text().split(',');	//.split() : 배열로 반환한다.
-	}	
+
 	/* --------------------
 	 *	대출 도서 추가하기
 	 * -------------------- */
@@ -181,9 +176,6 @@ $(function(){
 					alert('로그인해야 사용할 수 있습니다.');
 				}else if(param.result == 'success'){
 					$('#dialog').dialog('close');	//다이얼로그 닫기
-					$('#book_name').text(book_list);	//대출 도서 표시
-					$('#book_count').text('('+book_list.length+'권)');	//대출 도서수 표시
-					$('#member_name').text(member_list);	//대출 회원 표시
 					alert('정상적으로 도서를 대출했습니다.');
 					location.reload();
 				}else if(param.result=='overValue'){
