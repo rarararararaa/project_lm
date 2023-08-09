@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.bookstore.used.service.UsedService;
 import kr.spring.bookstore.used.vo.UsedVO;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -47,12 +48,16 @@ public class UsedController {
 
 	
 	@RequestMapping("/bookstore/used/usedMain.do")
-	public ModelAndView getUsedMainClick() {
+	public ModelAndView getUsedMainClick(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage) {
 		List<UsedVO> list = usedService.selectAllUsed();
+		int count = usedService.selectAllUsedCount();
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 20, "usedMain.do");
+		
 		log.debug("<<중고 책 List 목록>> : " + list);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("usedMain");
 		mav.addObject("list",list);
+		mav.addObject("page", page.getPage());
 		return mav; // 타일스 식별자
 	}
 
@@ -70,21 +75,30 @@ public class UsedController {
 	}
 
 	@RequestMapping("/bookstore/used/usedBooksByUser.do")
-	public ModelAndView getUsedBooksByUser(HttpSession session) { // 등록한 중고 상품
-		
+	public ModelAndView getUsedBooksByUser(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpSession session) { // 등록한 중고 상품
+		Map<String,Object> map = new HashMap<>();
 		if(session.getAttribute("mem_num") == null) {
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("lo",1);
 			mav.setViewName("redirect:/lm/login/template/loginMain.do");
 			return mav;
 		}
+		
 		int mem_num = (Integer)session.getAttribute("mem_num");
-		List<UsedVO> list = usedService.selectUsedProductByMem(mem_num);
+		int count = usedService.selectUsedProductByMemCount(mem_num);
+		
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 20, "usedBooksByUser.do");
+		map.put("mem_num",mem_num);
+		map.put("start", page.getStartRow());
+		map.put("end", page.getEndRow());
+		List<UsedVO> list = usedService.selectUsedProductByMem(map);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("usedBooksByUser");
-		
+		mav.addObject("page",page.getPage());
 		mav.addObject("list",list);
+		mav.addObject("page",page.getPage());
 		return mav;
 	}
 
@@ -102,19 +116,21 @@ public class UsedController {
 
 	// 팝업 서치 출력
 	@GetMapping("/bookstore/used/selectProductNameByUsed.do")
-	public ModelAndView selectProducts(@RequestParam(value = "keyword") String keyword, HttpSession session) {
-		
+	public ModelAndView selectProducts(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+			@RequestParam(value = "keyword") String keyword, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		// 맵 선언 후 keyword의 스트링은 keyword이다...
+		
 		map.put("keyword", keyword);
+		
 		log.debug("<<검색 목록>> : " + keyword);
 		int count = usedService.selectProductNameByUsedCount(map);
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 20,"selectProductNameByUsed.do", "&keyword=" + keyword);
+		map.put("start", page.getStartRow());
+		map.put("end", page.getEndRow());
 		log.debug("<<검색 결과 갯수>> : " + count);
 		// list에 담자...
 		List<UsedVO> list = null;
-
 		list = usedService.selectProductNameByUsed(map);
-
 		// 뿌리는거 (Model And View로 뿌리자)
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/bookstore/used/usedSearchProductPopup");
@@ -122,7 +138,7 @@ public class UsedController {
 		mav.addObject("success", 1);
 		mav.addObject("list", list);
 		mav.addObject("count",count);
-		
+		mav.addObject("page",page.getPage());
 		return mav;
 	}
 
@@ -271,8 +287,6 @@ public class UsedController {
 	}
 	
 	
-
-    
 	//제출하기
 	@PostMapping("/bookstore/used/usedUpdateSubmit.do")
 	public ModelAndView getUsedModify(@ModelAttribute UsedVO usedVO, HttpServletRequest reqeust, HttpSession session, HttpServletRequest request) {

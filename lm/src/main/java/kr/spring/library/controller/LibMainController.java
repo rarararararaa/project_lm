@@ -22,6 +22,7 @@ import kr.spring.library.board_announce.vo.BoardAnnounceVO;
 import kr.spring.library.lib_lost_item.vo.LibLostItemVO;
 import kr.spring.library.main.service.LibraryMainService;
 import kr.spring.library.main.vo.LibraryMainVO;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -79,19 +80,26 @@ public class LibMainController {
 	public ModelAndView searchMain(@RequestParam(name="categoryNum", defaultValue="10") int categoryNum,
 			@RequestParam(name="orderByNum", defaultValue="1") int orderByNum,
 			@RequestParam(name="keyword", defaultValue="") String keyword,
+			@RequestParam(name="pageNum", defaultValue="1") int currentPage,
 			LibraryMainVO libraryMainVO, HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<>();
 		//Search가자..
 		//List<LibraryMainVO> list = null;
 		List<LibraryMainVO> navs = null;
 		List<LibraryMainVO> result = null;
-		
-		
-		//list = libraryMainService.selectLibraryAllPorducts();
-		navs = libraryMainService.selectLibraryCategoryNav();
 		map.put("keyword",keyword);
 		map.put("categoryNum",categoryNum);
+		int totalCount = libraryMainService.selectLibraryByCategoryAndOrderNumCount(map);
+		int selectedCategoryNum = categoryNum;
+		
+		PagingUtil page = new PagingUtil(currentPage, totalCount, 10, 20, "libSearchMain.do", "&keyword="+keyword+"&orderByNum="+orderByNum+"&categoryNum="+categoryNum);
+		//list = libraryMainService.selectLibraryAllPorducts();
+		navs = libraryMainService.selectLibraryCategoryNav();
+		
+		
 		map.put("orderByNum",orderByNum);
+		map.put("start", page.getStartRow());
+		map.put("end", page.getEndRow());
 		result = libraryMainService.selectLibraryByCategoryAndOrderNum(map);
 		//300자 넘으면 ... 처리...
 		for(LibraryMainVO VO : result) {
@@ -99,8 +107,7 @@ public class LibMainController {
 				VO.setLib_product_detail(VO.getLib_product_detail().substring(0,300)+"...");
 			}
 		}
-		int totalCount = libraryMainService.selectLibraryByCategoryAndOrderNumCount(map);
-		int selectedCategoryNum = categoryNum;
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("libSearchMain");
 		mav.addObject("list",result);
@@ -108,6 +115,7 @@ public class LibMainController {
 		mav.addObject("totalCount",totalCount);
 		mav.addObject("selectedCategoryNum",selectedCategoryNum);
 		mav.addObject("resultSearch",keyword);
+		mav.addObject("page",page.getPage());
 		//mav.addObject("orderByNum",orderByNum);
 		log.debug("<<navs를 까보자>> : "+navs);
 		return mav;

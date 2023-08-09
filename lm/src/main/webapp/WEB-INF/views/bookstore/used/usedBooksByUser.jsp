@@ -39,5 +39,6 @@
 				<input type="button" class="default-btn" value="수정하기" onclick="location.href='${pageContext.request.contextPath}/bookstore/used/usedUpdate.do?used_product_num=${list.used_product_num}'">
 			</div>
 		</c:forEach>
+		<div class="paging">${page}</div>
 	</div>
 </div>

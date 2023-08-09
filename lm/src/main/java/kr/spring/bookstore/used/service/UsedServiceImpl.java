@@ -42,10 +42,13 @@ public class UsedServiceImpl implements UsedService {
 	//Insert 끝
 	@Override
 	public List<UsedVO> selectAllUsed() {
-		// TODO Auto-generated method stub
 		return usedMapper.selectAllUsed();
 	}
-
+	@Override
+	public int selectAllUsedCount() {
+		return usedMapper.selectAllUsedCount();
+	}
+	
 	@Override
 	public void updateUsed(UsedVO usedVO) {
 		usedMapper.usedUpdateManage(usedVO);
@@ -85,8 +88,8 @@ public class UsedServiceImpl implements UsedService {
 	}
 
 	@Override
-	public List<UsedVO> selectUsedProductByMem(int mem_num) {
-		return usedMapper.selectUsedProductByMem(mem_num);
+	public List<UsedVO> selectUsedProductByMem(Map<String,Object> map) {
+		return usedMapper.selectUsedProductByMem(map);
 	}
 
 	@Override
@@ -100,6 +103,14 @@ public class UsedServiceImpl implements UsedService {
 		// 가져오자...
 		return usedMapper.selectUsedProductNumAndMemNum(used_product_num, mem_num);
 	}
+
+	@Override
+	public int selectUsedProductByMemCount(int mem_num) {
+		
+		return usedMapper.selectUsedProductByMemCount(mem_num);
+	}
+
+	
 
 
 }
