@@ -107,7 +107,7 @@ input[type='number']::-webkit-inner-spin-button {
 	border: 1px solid #474C98;
 	background: #FFF;
 }
-.modify-deli{
+.deli-btn{
 	width: 40px;
 	color: #474C98;
 	border-radius: 5px;
@@ -115,6 +115,12 @@ input[type='number']::-webkit-inner-spin-button {
 	background: #FFF;
     font-size: 12px;
 }
+#delete_deli{
+	margin-top: 5px;
+	background: gray;
+	color: white;
+}
+
 .deliInfo li:first-child{
 	color: #474C98;
 	font-weight: 400;

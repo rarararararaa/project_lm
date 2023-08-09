@@ -15,9 +15,11 @@
 	                		<p>등록된 배송지가 없습니다.</p>
                 		</div>
                 	</c:if>
-                	<c:if test="${!empty home}">
+                	<div>
+                	<c:if test="${!empty home_list}">
 					<table>  
 					<!-- 반복문 -->
+					<c:forEach var="home" items="${home_list}">
 						<tr>
 							<td>
 								<input type="checkbox" value="2" class="deli-default" name="check_deli"
@@ -33,17 +35,22 @@
 										일반 배송지
 									</c:if>
 									</li>
-									<li>${mem.mem_name }/${mem.mem_cell }</li>
+									<li>${home.home_name }/${mem.mem_cell }</li>
 									<li>
 										[${home.home_zipcode}] ${home.home_address} ${home.home_address_detail}
 									</li>
 								</ul>
 							</td>
-							<td><button class="modify-deli">수정</button></td>
+							<td style="text-align: right;">
+								<button class="deli-btn" id="modify_deli">수정</button>
+								<button class="deli-btn" id="delete_deli">삭제</button>
+							</td>
 						</tr>
+					</c:forEach>
 					<!-- 반복문 -->						
 					</table>
                 	</c:if>
+                	</div>
                 </div>
             </div>
         </div>
@@ -54,27 +61,28 @@
 		<div class="m_content">
 			 <div class="tit"><h2>배송지 추가</h2><img src="${ pageContext.request.contextPath }/images/modal-btn.png" onclick="fnHidePop('re_re_pwd')" class="modal-btn"></div>
 			<hr size="1px" noshade="noshade" color="#DBDBDB">
-			<form action="insertDeli" method="post" id="deli_form">
+			<form method="post" id="deli_form">
 				<ul>
 					<li>
 						<label for="deli_title">배송지명</label>
-						<input type="text" id="deli_title" name="deli_title" placeholder="최대 7자까지 자유롭게 입력가능">
+						<input type="text" id="deli_title" name="home_title" placeholder="최대 7자까지 자유롭게 입력가능">
 					</li>
 					<li>
 						<label for="recipient">받는 분</label>
-						<input type="text" id="recipient" name="recipient" placeholder="최대 7자까지 자유롭게 입력가능">
-						<input type="text" id="phone" name="phone" placeholder="휴대폰 번호를 -없이 입력해 주세요.">
+						<input type="text" id="recipient" name="mem_name" placeholder="최대 7자까지 자유롭게 입력가능">
+						<input type="text" id="phone" name="mem_cell" placeholder="휴대폰 번호를 -없이 입력해 주세요.">
 					</li>
 					<li>
 						<p>주소</p>
 						<input type="button" onclick="execDaumPostcode()"
 				            value="우편번호 찾기" class="default-btn" id="zipcode" data-zipcode="">
-						<input id="address1" name="address1" type="text" readonly="readonly"/>
-						<input id="address2" name="address2" type="text"/>
+				        <input type="hidden" name="home_zipcode" id="home_zipcode">
+						<input id="address1" name="home_address" type="text" readonly="readonly"/>
+						<input id="address2" name="home_address_detail" type="text"/>
 					</li>
 				</ul>
 				<div>
-					<input type="checkbox" value="0">기본 배송지로 설정
+					<input type="checkbox" name="home_default" value="0" id="home_default">기본 배송지로 설정
 				</div>
 					<input type="submit" value="저장" id="deli_submit">
 			</form>
@@ -139,8 +147,9 @@
                 //(수정) }
 				//alert(addr + extraAddr);
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                var zipcode = document.getElementById("zipcode");
-                zipcode.setAttribute('data-zipcode', data.zonecode);
+//                var zipcode = document.getElementById("zipcode");
+//                zipcode.setAttribute('data-zipcode', data.zonecode);
+                document.getElementById("home_zipcode").value = data.zonecode;
                 //(수정) + extraAddr를 추가해서 address1에 참고항목이 보여지도록 수정
                 document.getElementById("address1").value = addr + extraAddr;
                 // 커서를 상세주소 필드로 이동한다.

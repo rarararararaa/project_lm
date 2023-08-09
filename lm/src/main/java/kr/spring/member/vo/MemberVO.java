@@ -52,6 +52,7 @@ public class MemberVO {
 	private String home_address;
 	private String home_address_detail;
 	private String home_cell;
+	private String home_name;
 	private int home_default;
 	/*
 	//store_member_home

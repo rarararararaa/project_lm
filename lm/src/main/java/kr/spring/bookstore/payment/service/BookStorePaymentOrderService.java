@@ -14,4 +14,8 @@ public interface BookStorePaymentOrderService {
 	//배송 정보
 	//우편번호로 주소 찾기
 	public MemberVO selectHome(int home_zipcode);
+	//회원 번호로 주소 찾기
+	public List<MemberVO> selectMemHome(int mem_num);
+	//배송지 등록
+	public void insertHome(MemberVO memberVo);
 }

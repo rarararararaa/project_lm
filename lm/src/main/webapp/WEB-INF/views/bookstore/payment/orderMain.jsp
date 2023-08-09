@@ -180,7 +180,7 @@
 				</tr>
 				<tr>
 					<td>적립예정 포인트</td>
-					<td id="due_point"><fmt:formatNumber value="${total * point}"/>원</td>
+					<td id="due_point"><fmt:formatNumber value="${total * point}" maxFractionDigits="0"/>원</td>
 				</tr>
 			</table>
 			<input type="submit" value="주문하기" id="paySubmit" data-type="" data-dueTotal="${total}">

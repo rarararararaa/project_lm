@@ -200,7 +200,8 @@ function totalPrice(){
 	$('#total').text(total.toLocaleString("ko-KR")+"원");
 	$('#delivery').text(delivery.toLocaleString("ko-KR")+"원");
 	$('#due').text((total+delivery).toLocaleString("ko-KR")+"원");
-	$('#due_point').text(((total)*grade).toLocaleString("ko-KR")+"원");
+	let point = Math.round(total*grade);
+	$('#due_point').text(point.toLocaleString("ko-KR")+"원");
 }
 
 //===============================함수[checkbox]==================================//

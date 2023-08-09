@@ -36,7 +36,34 @@ $(function(){
 			$('#paySubmit').attr('data-type',$(this).val());
 		}
 	})
-	
+//==배송지 추가==//
+	$('#deli_form').submit(function(event){
+		
+		let form_data = $(this).serialize();
+		if(!$('#home_default').is(':checked')){
+			alert('선택안됨');
+			form_data += '&home_default=1';
+		}
+		console.log(form_data);
+		$.ajax({
+			url:'homeInsert.do',
+			type:'post',
+			data:form_data,
+			dataType:'json',
+			success:function(param){
+				alert('추가되었습니다.');
+				location.reload();
+				/*var url = "order.do";
+				$(".payment-main").load(url, function() { 
+            			$('#dialog').dialog('open');
+       			 });*/
+			},
+			error:function(){
+				
+			}
+		})
+		event.preventDefault();
+	})
 //==결제화면==//
 	$('#paySubmit').on('click',function(event){
 		event.preventDefault();
@@ -114,7 +141,6 @@ $(function(){
 })
 //=========================함수 시작==========================//
 function ajaxPaycomplete(rsp){
-
 	console.log(rsp);
 	$.ajax({
 		url:'orderAction.do',

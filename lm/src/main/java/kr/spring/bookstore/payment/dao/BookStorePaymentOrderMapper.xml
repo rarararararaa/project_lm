@@ -35,4 +35,5 @@
 			#{cart_quantity}
 		)
 	</insert>
+
 </mapper>

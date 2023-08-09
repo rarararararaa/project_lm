@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,12 +39,17 @@ public class BookStorePaymentController {
 	public static final String SECRET = "";
 	
 	@Autowired
-	BookStorePaymentService bookStorePaymentService;
+	private BookStorePaymentService bookStorePaymentService;
 	@Autowired
-	BookStorePaymentOrderService bookStorePaymentOrderService; 
+	private BookStorePaymentOrderService bookStorePaymentOrderService; 
 	@Autowired
-	MemberService memberService;
+	private MemberService memberService;
 	
+	//초기화
+	@ModelAttribute
+	public MemberVO initCommand() {
+		return new MemberVO();
+	}
 	
 	//API 책 추가
 	@PostMapping("/bookstore/payment/cart.do")
@@ -190,6 +196,10 @@ public class BookStorePaymentController {
 			return "redirect:/bookstore/payment/cart.do";
 		}
 		List<ProductVO> book_list = new ArrayList<ProductVO>();
+		//회원 배송지 정보
+		List<MemberVO> home_list = new ArrayList<MemberVO>();
+		home_list = bookStorePaymentOrderService.selectMemHome(mem_num);
+		//총 구매액
 		int total = (int)session.getAttribute("total");
 		for(BookStorePaymentCartVO vo : list) {
 			//log.debug("<<도서 상세 정보>> : "+product);
@@ -214,7 +224,8 @@ public class BookStorePaymentController {
 		model.addAttribute("point", point);
 		//회원 배송 정보
 		model.addAttribute("home", home);
-		
+		model.addAttribute("home_list", home_list);
+		//log.debug("<<배송지 리스트>> : "+home_list);
 		return "order";
 	}
 	//주문 성공시 주문 내역 저장
@@ -250,7 +261,23 @@ public class BookStorePaymentController {
 		mapJson.put("result", "success");
 		return mapJson;
 	}
-	
+	//배송지 등록
+	@PostMapping("/bookstore/payment/homeInsert.do")
+	@ResponseBody
+	public Map<String, String> insertHome(MemberVO memberVO, HttpSession session){
+		Map<String, String> mapJson = new HashMap<String, String>();
+		String mem_id = (String)session.getAttribute("mem_id");
+		if(mem_id == null) {
+			mapJson.put("result", "logout");
+			return mapJson;
+		}
+		int mem_num = (Integer)session.getAttribute("mem_num");
+		memberVO.setMem_num(mem_num);
+		log.debug("<<배송 정보>> : "+memberVO);
+		bookStorePaymentOrderService.insertHome(memberVO);
+		
+		return mapJson;
+	}
 	//멤버 등급에 따른 포인드 % 가져오기
 	public double getPoint(int grade) {
 		double point = 0.005;
