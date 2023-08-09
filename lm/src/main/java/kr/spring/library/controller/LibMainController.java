@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.library.board_announce.vo.BoardAnnounceVO;
@@ -50,7 +51,6 @@ public class LibMainController {
 		navs = libraryMainService.selectLibraryCategoryNav();
 		ann = libraryMainService.selectAnnounceList(end);
 		lost = libraryMainService.selectLostList(end);
-		String currentTime = libraryMainService.selectCurrentTime();
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("libMain");
@@ -58,8 +58,15 @@ public class LibMainController {
 		mav.addObject("navs",navs);
 		mav.addObject("ann",ann);
 		mav.addObject("lost",lost);
-		mav.addObject("currentTime",currentTime);
+		
 		return mav; //타일스 설정의 식별자
+	}
+	
+	@RequestMapping("/library/template/giveMeOneSec.do")
+	@ResponseBody
+	public String giveYouOneSec() {//시간 실시간 가져오기
+		String currentTime = libraryMainService.selectCurrentTime();
+		return currentTime;
 	}
 	
 	@RequestMapping("/library/template/libAdmin.do")
@@ -106,4 +113,78 @@ public class LibMainController {
 		return mav;
 	}
 	
+	@RequestMapping("/library/template/top5container.do")
+	@ResponseBody
+	public Map<String,Object> top5(LibraryMainVO libraryMainVO){
+		Map<String,Object> mapAjax = new HashMap<>();
+		int end = 5;
+		List<LibraryMainVO> list = null;
+		list = libraryMainService.selectLibraryAjaxTop5(end);
+		for(LibraryMainVO VO : list) {
+			if(VO.getLib_product_bookname().length() >= 15) {
+				VO.setLib_product_bookname(VO.getLib_product_bookname().substring(0,15)+"...");
+			}
+		}
+		for(LibraryMainVO VO : list) {
+			if(VO.getLib_product_authors().length() >= 15) {
+				VO.setLib_product_authors(VO.getLib_product_authors().substring(0,15)+"...");
+			}
+		}
+		mapAjax.put("top",list);
+		return mapAjax;
+	}
+	
+	@RequestMapping("/library/template/recommendbook.do")
+	@ResponseBody
+	public Map<String,Object> recommend(LibraryMainVO libraryMainVO){
+		Map<String,Object> mapAjax = new HashMap<>();
+		int end = 5;
+		List<LibraryMainVO> list = null;
+		list = libraryMainService.selectLibraryAjaxRecommend(end);
+		for(LibraryMainVO VO : list) {
+			if(VO.getLib_product_bookname().length() >= 15) {
+				VO.setLib_product_bookname(VO.getLib_product_bookname().substring(0,15)+"...");
+			}
+		}
+		for(LibraryMainVO VO : list) {
+			if(VO.getLib_product_authors().length() >= 15) {
+				VO.setLib_product_authors(VO.getLib_product_authors().substring(0,15)+"...");
+			}
+		}
+		mapAjax.put("recommend",list);
+		return mapAjax;
+	}
+	
+	@RequestMapping("/library/template/reviewbest.do")
+	@ResponseBody
+	public Map<String,Object> reviewbest(LibraryMainVO libraryMainVO){
+		Map<String,Object> mapAjax = new HashMap<>();
+		int end = 5;
+		List<LibraryMainVO> list = null;
+		
+		mapAjax.put("review",list);
+		return mapAjax;
+	}
+	
+	@RequestMapping("/library/template/newbook.do")
+	@ResponseBody
+	public Map<String,Object> newbook(LibraryMainVO libraryMainVO){
+		Map<String,Object> mapAjax = new HashMap<>();
+		int end = 5;
+		List<LibraryMainVO> list = null;
+		list = libraryMainService.selectLibraryAjaxNew(end);
+		for(LibraryMainVO VO : list) {
+			if(VO.getLib_product_bookname().length() >= 15) {
+				VO.setLib_product_bookname(VO.getLib_product_bookname().substring(0,15)+"...");
+			}
+		}
+		for(LibraryMainVO VO : list) {
+			if(VO.getLib_product_authors().length() >= 15) {
+				VO.setLib_product_authors(VO.getLib_product_authors().substring(0,15)+"...");
+			}
+		}
+		mapAjax.put("news",list);
+		
+		return mapAjax;
+	}
 }

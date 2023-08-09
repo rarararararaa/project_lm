@@ -31,9 +31,11 @@
 
 .library-recommend {
 	width: 1200px;
-	height: 400px;
-	border: solid 1px green;
+	height: 500px;
+	
 	display:flex;
+	flex-direction: column;
+	
 }
 
 .arrow-right {
@@ -75,6 +77,7 @@
 </style>
 <script type="text/javascript">
 $(function() {
+		/////////////////////////////광고 시작
 		//초기값 설정
 		let promotion_img_num = 1;
 		
@@ -89,12 +92,10 @@ $(function() {
 
 			$('#pro-0' + promotion_img_num).addClass('active');
 		}
-
-		setInterval(incrementPromotionImgNum, 4000);
-    	// 증가 시키기 끝
-    	
-    	//클릭 시 작동
-    	$('.arrow-right').click(function(){
+		//4초마다 함수 적용...
+		
+		
+		$('.arrow-right').click(function(){
     		$('#pro-0'+promotion_img_num).removeClass('active');
     		promotion_img_num++;
     		
@@ -116,22 +117,163 @@ $(function() {
     		
     		$('#pro-0'+promotion_img_num).addClass('active');
     	});
+		// 증가 시키기 끝
     	
+    	setInterval(incrementPromotionImgNum, 4000);
+		/////////////////////////////광고 끝
+		
+		/////////////////////////////실시간 시간 가져오기 시작
+    	function currentTimeForOneSec(){
+    		let ajaxUrl = '${pageContext.request.contextPath}/library/template/giveMeOneSec.do';
+				$.ajax({
+    		        url: ajaxUrl,
+    		        type: 'post',
+    		        success: function (param) {
+    		        	$('#currentTimeContainer').text(param);
+    		        },
+    		        error: function () {
+    		            alert('실패');
+    		        }
+    		    });
+    	}
+    	//1초마다 시간 가져오기...
+    	setInterval(currentTimeForOneSec,1000);
+    	//초기 값 가져오기
+    	currentTimeForOneSec();
+    	/////////////////////////////실시간 시간 가져오기 끝
     	
+    	/////////////////////////////추천 카테고리 시작
     	
-    	$('.ajax-active').append(' >');
-    	
+    	/*
     	$('#recommend-01, #recommend-02, #recommend-03, #recommend-04').click(function() {
             // Remove ajax-active class from all recommendation links
             $('.ajax-active').removeClass('ajax-active');
-
+			
             // Add ajax-active class to the clicked link
             $(this).addClass('ajax-active');
-
+			
             // Add ">" symbol to the clicked link
             $(this).append(' >');
             
         });
+    	*/
+    	
+    	
+    	$('#recommend-01').mouseenter(function(){
+    		let ajaxUrl = '${pageContext.request.contextPath}/library/template/top5container.do';
+    		$('#recommend-contents').empty();
+    		$('#recommend-title').empty();
+    		$.ajax({
+		        url: ajaxUrl,
+		        type: 'post',
+		        success: function (param) {
+		        	$('#recommend-title').append('대출 TOP5');
+		        	$(param.top).each(function (index, item) {
+		                let output = '<div class="library-ajax">';
+		                output += '<div class="library-ajax-contents">';
+		                output += '<a href="${pageContext.request.contextPath}/library/lib_book/bookDetail.do?callNumber='+item.callNumber +'">';
+		                output += '<img src="'+item.lib_product_bookimageurl+'">'
+		                output += '</a>';
+		               	output += '<span>' + item.lib_product_bookname + '</span>';
+		               	output += '<span> 발행 년도 : ' + item.lib_product_publication_year + '</span>';
+		               	output += '<span> 저자 : ' + item.lib_product_authors + '</span>';
+		                output += '<span> 출판사 : ' + item.lib_product_publisher+ '</span>';
+		               	output += '</div>';
+		                output += '</div>';
+		                $('#recommend-contents').append(output);
+		            });
+		        },
+		        error: function () {
+		            alert('실패');
+		        }
+		    });
+    	});
+    	
+    	$('#recommend-02').mouseenter(function(){
+    		let ajaxUrl = '${pageContext.request.contextPath}/library/template/recommendbook.do';
+    		$('#recommend-contents').empty();
+    		$('#recommend-title').empty();
+			$.ajax({
+		        url: ajaxUrl,
+		        type: 'post',
+		        success: function (param) {
+		        	$('#recommend-title').append('추천 도서');
+		        	$(param.recommend).each(function (index, item) {
+		                let output = '<div class="library-ajax">';
+		                output += '<div class="library-ajax-contents">';
+		                output += '<a href="${pageContext.request.contextPath}/library/lib_book/bookDetail.do?callNumber='+item.callNumber +'">';
+		                output += '<img src="'+item.lib_product_bookimageurl+'">'
+		                output += '</a>';
+		               	output += '<span>' + item.lib_product_bookname + '</span>';
+		               	output += '<span> 발행 년도 : ' + item.lib_product_publication_year + '</span>';
+		               	output += '<span> 저자 : ' + item.lib_product_authors + '</span>';
+		                output += '<span> 출판사 : ' + item.lib_product_publisher+ '</span>';
+		               	output += '</div>';
+		                output += '</div>';
+		                $('#recommend-contents').append(output);
+		            });
+		        },
+		        error: function () {
+		            alert('실패');
+		        }
+		    });
+    	})
+    	
+    	$('#recommend-03').mouseenter(function(){
+    		let ajaxUrl = '${pageContext.request.contextPath}/library/template/reviewbest.do';
+    		$('#recommend-contents').empty();
+    		$('#recommend-title').empty();
+    		$.ajax({
+		        url: ajaxUrl,
+		        type: 'post',
+		        success: function (param) {
+		        	$('#recommend-title').append('Best 독후감');
+		        	//$(param.news).each(function (index, item) {
+		                let output = '<div class="library-ajax">';
+		                output += '구현 중 입니다.'
+		                output += '</div>';
+		                $('#recommend-contents').append(output);
+		            //});
+		        },
+		        error: function () {
+		            alert('실패');
+		        }
+		    });
+    	});
+    	
+    	$('#recommend-04').mouseenter(function(){
+    		let ajaxUrl = '${pageContext.request.contextPath}/library/template/newbook.do';
+    		$('#recommend-contents').empty();
+    		$('#recommend-title').empty();
+			$.ajax({
+		        url: ajaxUrl,
+		        type: 'post',
+		        success: function (param) {
+		        	$('#recommend-title').append('신간 도서');
+		        	$(param.news).each(function (index, item) {
+		        		let output = '<div class="library-ajax">';
+		                output += '<div class="library-ajax-contents">';
+		                output += '<a href="${pageContext.request.contextPath}/library/lib_book/bookDetail.do?callNumber='+item.callNumber +'">';
+		                output += '<img src="'+item.lib_product_bookimageurl+'">'
+		                output += '</a>';
+		               	output += '<span>' + item.lib_product_bookname + '</span>';
+		               	output += '<span> 발행 년도 : ' + item.lib_product_publication_year + '</span>';
+		               	output += '<span> 저자 : ' + item.lib_product_authors + '</span>';
+		                output += '<span> 출판사 : ' + item.lib_product_publisher+ '</span>';
+		               	output += '</div>';
+		                output += '</div>';
+		                $('#recommend-contents').append(output);
+		            });
+		        },
+		        error: function () {
+		            alert('실패');
+		        	}
+		        	
+		    	});
+    		});
+    	
+    	
+    	$('#recommend-01').mouseenter();
 	});
 </script>
 <div class="used-contents">
@@ -150,7 +292,10 @@ $(function() {
 	</div>
 	<div class="working-time-box">
 		<div class="working-time-notice">
-			<img src="${pageContext.request.contextPath}/images/time-open1.png" width="30px" height="30px">&nbsp;현재 시간 : (${currentTime}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;도서관 운영시간 09:00 ~ 18:00(야간도서관 매주 수요일 18:00 ~ 21:00)
+			<img src="${pageContext.request.contextPath}/images/time-open1.png" width="30px" height="30px">&nbsp;현재 시간 : (
+			
+			<p id="currentTimeContainer"></p>
+			) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;도서관 운영시간 09:00 ~ 18:00 (야간도서관 매주 수요일 18:00 ~ 21:00)
 		</div>
 		<hr class="horizon-hr-1200">
 	</div>
@@ -187,37 +332,18 @@ $(function() {
 			</div>
 		</div>
 	</div>
-
+	<div class="library-recommend">
+		<div class="align-column">
+			<div class="ajax-active" id="recommend-01">대출 TOP 5</div>
+			<div id="recommend-02">추천 도서</div>
+			<div id="recommend-03">Best 독후감</div>
+			<div id="recommend-04">신간 도서</div>
+		</div>
+		<div id="recommend-title"></div>
+		<hr class="horizon-hr">
+		<div id="recommend-contents"></div>
+	</div>
 	<div class="library-facility-box">
 		<span>편의시설 들어갈 자리</span>
 	</div>
-	<div class="library-recommend">
-		<div class="align-column">
-			<a href="#" class="ajax-active" id="recommend-01">TOP 5</a>
-			<a href="#" id="recommend-02">추천 도서</a>
-			<a href="#" id="recommend-03">Best 독후감</a>
-			<a href="#" id="recommend-04">신간 도서</a>
-		</div>
-		
-		<div class="recommend-contents">
-		
-		</div>
-		
-	</div>
-	
-	<%-- <span>메인 상품</span>
-	<div class="search-box-byUsed">
-		<c:forEach var="list" items="${list}">
-			<div class="used-all-contents-div-width">
-				<div class="used-all-contents-img">
-					<a href="${pageContext.request.contextPath}/library/lib_book/bookDetail.do?callNumber=${list.callnumber}"><img src="${list.lib_product_bookimageurl}"></a>
-				</div>
-				<div class="used-all-contents-column">
-					<div class="used-all-contents-box">책 제목 : ${list.lib_product_bookname }</div>
-					<div class="used-all-contents-box">저자 : ${list.lib_product_authors} | 출판사 : ${list.lib_product_publisher}</div>
-					<div class="used-all-contents-box">${list.lib_product_detail}</div>
-				</div>
-			</div>
-		</c:forEach>
-	</div> --%>
 </div>

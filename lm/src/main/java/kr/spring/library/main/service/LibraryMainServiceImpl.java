@@ -58,6 +58,24 @@ public class LibraryMainServiceImpl implements LibraryMainService {
 		// TODO Auto-generated method stub
 		return libraryMainMapper.selectCurrentTime();
 	}
+
+	@Override
+	public List<LibraryMainVO> selectLibraryAjaxNew(int end) {
+		// TODO Auto-generated method stub
+		return libraryMainMapper.selectLibraryAjaxNew(end);
+	}
+
+	@Override
+	public List<LibraryMainVO> selectLibraryAjaxRecommend(int end) {
+		// TODO Auto-generated method stub
+		return libraryMainMapper.selectLibraryAjaxRecommend(end);
+	}
+
+	@Override
+	public List<LibraryMainVO> selectLibraryAjaxTop5(int end) {
+		// TODO Auto-generated method stub
+		return libraryMainMapper.selectLibraryAjaxTop5(end);
+	}
 	
 	
 	

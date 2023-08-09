@@ -321,19 +321,27 @@ table.striped-table th{
 	height:1px;
 	background-color:green;
 }
+
+#recommend-title {
+	display:flex;
+	justify-content: center;
+	align-items:center;
+	font-size:40px;
+	
+}
 .align-column {
 	width:1200px;
 	height:100px;
 	display:flex;
+	min-width:1200px;
 	justify-content:flex-start;
 	align-items:center;
 	font-size:20px;
 	
-	
-	
 }
 
-.align-column a {
+
+#recommend-01, #recommend-02, #recommend-03, #recommend-04 {
 	margin-left:30px;
 	display:flex;
 	width:180px;
@@ -341,10 +349,57 @@ table.striped-table th{
 	justify-content:center;
 	align-items:center;
 	
-	border:solid 3px green;
-	border-radius:25px;
+	border:solid 2px green;
+	border-radius:5px;
 	margin-top:5px;
 	margin-bottom:5px;
 	
+}
+
+#recommend-01:hover , #recommend-02:hover , #recommend-03:hover , #recommend-04:hover {
+	color:green;
+	cursor: pointer;
+}
+#recommend-contents {
+	width:1200px;
+	height:350px;
+	display:flex;
+	justify-content:center;
+	align-items: center;
 	
+}
+
+.recommend-contents {
+	width:1200px;
+	display:flex;
+	
+}
+
+.library-ajax {
+	max-width:250px;
+	width:250px;
+	height:350px;
+	display:flex;
+	justify-content:center;
+	align-items: center;
+}
+
+.library-ajax-contents {
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items: center;
+	
+	
+}
+
+.library-ajax-contents span {
+	font-size:15px;
+	padding:0;
+}
+.library-ajax-contents img {
+	min-height:200px;
+	max-width:250px;
+	height:200px;
+	max-height:200px;
 }

@@ -36,4 +36,21 @@ public interface LibraryMainMapper {
 	
 	@Select("SELECT SYSDATE FROM DUAL")
 	public String selectCurrentTime();
+	
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM lib_product_manage "
+			+ "ORDER BY lib_product_loancnt DESC )a) WHERE rnum <= #{end}")
+	public List<LibraryMainVO> selectLibraryAjaxTop5(int end);
+	
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM lib_product_manage "
+			+ "ORDER BY DBMS_RANDOM.RANDOM )a) WHERE rnum <= #{end}")
+	public List<LibraryMainVO> selectLibraryAjaxRecommend(int end);
+	
+	public List<LibraryMainVO> selectLibraryAjaxReviewBest(int end);
+	
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM lib_product_manage "
+			+ "ORDER BY lib_product_publication_year DESC)a) WHERE rnum <= #{end}")
+	public List<LibraryMainVO> selectLibraryAjaxNew(int end);
+	
+	
+	
 }

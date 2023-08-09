@@ -21,4 +21,8 @@ public interface LibraryMainService {
 	public List<LibLostItemVO> selectLostList(int end);
 	
 	public String selectCurrentTime();
+	
+	public List<LibraryMainVO> selectLibraryAjaxTop5(int end);
+	public List<LibraryMainVO> selectLibraryAjaxRecommend(int end);
+	public List<LibraryMainVO> selectLibraryAjaxNew(int end);
 }
