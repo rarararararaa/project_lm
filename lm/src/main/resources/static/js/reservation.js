@@ -12,6 +12,9 @@ $(function(){
 				}else if(param.result=='overValue'){
 					alert('최대 대출시 예약 불가합니다.');
 					location.reload();
+				}else if(param.result=='over1st'){
+					alert('이미 예약된 책입니다.');
+					location.reload();
 				}else if(param.result=='reservationLimit'){
 					alert('최대 예약권수는 3권입니다.');
 					location.reload();

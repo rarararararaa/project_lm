@@ -58,6 +58,15 @@
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemModify.jsp"/>
     </definition>
     
+    <!-- 기증목록 -->
+    <definition name="admin_donationList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="기증목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/donationadmin/admin_donationList.jsp"/>
+    </definition>
+    <definition name="admin_donationModify" extends="libAdmin">
+    	<put-attribute name="libTitle" value="기증상태 수정"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/donationadmin/admin_donationModify.jsp"/>
+    </definition>
     
     
 </tiles-definitions>

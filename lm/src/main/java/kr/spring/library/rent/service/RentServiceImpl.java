@@ -16,7 +16,7 @@ import kr.spring.member.vo.MemberVO;
 @Transactional
 public class RentServiceImpl implements RentService{
 	@Autowired
-	private RentMapper rentMapper;
+	private RentMapper rentMapper; 
 	@Autowired
 	private BookProductMapper bookMapper;
 	
@@ -55,6 +55,11 @@ public class RentServiceImpl implements RentService{
 	@Override
 	public RentVO selectRent(Integer rent_num) {
 		return rentMapper.selectRent(rent_num); 
+	}
+
+	@Override
+	public void updateRentDeadline(RentVO rentVO) {
+		rentMapper.updateRentDeadline(rentVO);
 	}
 
 }

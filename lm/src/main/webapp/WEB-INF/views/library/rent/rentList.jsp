@@ -138,8 +138,16 @@
 						<c:if test="${list.lib_product_status ==3}">
 							O
 						</c:if>
-						<c:if test="${list.lib_product_status <3}">
+						<c:if test="${list.lib_product_status ==2}">
 							X
+						</c:if>
+					</td>
+					<td>
+						<c:if test="${list.lib_product_status >1}">
+							<input type="button" value="반납" onclick="location.href='/library/rent/updateRentHistory.do?rent_num=${list.rent_num}'">
+						</c:if>
+						<c:if test="${list.lib_product_status ==2}">
+							<input type="button" value="연장" onclick="location.href='/library/rent/updateRentDeadline.do?rent_num=${list.rent_num}'">
 						</c:if>
 					</td>
 				</tr>
