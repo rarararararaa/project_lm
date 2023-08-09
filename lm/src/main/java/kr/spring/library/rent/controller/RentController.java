@@ -42,7 +42,7 @@ public class RentController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);		
 		ModelAndView mav=new ModelAndView();
-		log.debug("<<currentPage>> : "+currentPage);
+		log.debug("<<currentPage>> : "+currentPage); 
 		int count=rentService.selectRentRowCount(map);
 		PagingUtil page = 
 				new PagingUtil(keyfield,keyword,

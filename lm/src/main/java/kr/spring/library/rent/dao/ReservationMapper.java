@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import kr.spring.library.rent.vo.ReservationVO;
 
 @Mapper
-public interface ReservationMapper {
+public interface ReservationMapper { 
 	//isbn을 통해 책 추출
 	public List<String> selectCallNumberToReservation(String lib_product_isbn);	
 	//대출 예약 신청 -> 대출 가능한 도서일 경우 예약 불가 -> isbn으로 걸기

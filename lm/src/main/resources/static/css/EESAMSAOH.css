@@ -82,17 +82,14 @@ span.unit{
 span.wish-ico {
 	display: inline-block;
 	background-image: url(../images/heart.png);
-	width: 12px;
-	height: 12px;
-	background-size: 12px 12px;
+    width: 20px;
+    height: 20px;
+    margin-top: 12px;
+    background-size: 20px 20px;    
 }
 
 span.wish-ico.active {
-	display: inline-block;
 	background-image: url(../images/heart_active.png);
-	width: 12px;
-	height: 12px;
-	background-size: 12px 12px;
 }
 
 /* 상품 수량 제어 */
@@ -115,3 +112,90 @@ button.increase {
 	height: 12px;
 	background-size: 12px 12px;
 }
+/* 상품 구매 탭 */
+div.purchase-wrap{
+	position:fixed;
+	left:0;
+	bottom:0;
+	width:100%;
+	z-index:102;
+	height:94px;
+    border-top: 1px solid #ccc;
+    background-color:#fff;
+}
+div.purchase-inner{
+    align-items:center;
+	position: relative;
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    height:100%;	
+}
+form#product_cart{
+    display:flex;
+    align-items:center;
+    margin:0 auto;
+    width:100%;
+}
+div.left-area{
+    display: inline-block;
+    margin: 7px 30px 0 0;
+    font-size: 15px;
+    line-height: 23px;
+    letter-spacing: -0.01em;
+    vertical-align: top;	
+}
+div.right-area{
+    align-items:center;
+    display: inline-block;
+    font-size: 15px;
+    line-height: 23px;
+    letter-spacing: -0.01em;
+    vertical-align: top;	
+    flex-direction: row;
+    margin-left:auto;
+	display:flex;
+}
+div.prod-button-box{
+    align-items:center;
+    height:50px;
+}
+button.btn-line-gray{
+	cursor:pointer;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    letter-spacing: -0.01em;
+    line-height: 42px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;	
+    padding:0;
+}
+button.btn-lg{
+    color: #474c98;
+    border: 1px solid #5055b1;
+    background: #fff;    
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 0 10px;
+	min-width: 120px;
+	padding: 0 23px 1px;
+	border-radius: 6px;
+	height:50px;	
+}
+button.btn-lg:hover{
+    background: rgba(204, 204, 204,0.4);
+	transition: background-color 0.2s ease-out, border-color 0.2s ease-out;	
+}
+
+
+
+
+
+

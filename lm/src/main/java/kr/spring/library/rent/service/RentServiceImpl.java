@@ -16,7 +16,7 @@ import kr.spring.member.vo.MemberVO;
 @Transactional
 public class RentServiceImpl implements RentService{
 	@Autowired
-	private RentMapper rentMapper;
+	private RentMapper rentMapper; 
 	@Autowired
 	private BookProductMapper bookMapper;
 	

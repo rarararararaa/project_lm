@@ -15,7 +15,7 @@ import kr.spring.member.vo.MemberVO;
 public interface RentMapper {
 	//대출 등록
 	public void insertRentHistory(RentVO rentVO);
-	public void updateBookStatus(BookProductVO bookVO);
+	public void updateBookStatus(BookProductVO bookVO); 
 	//대출 반납
 	public void updateRentHistory(RentVO rentVO);
 	public void updateBookStatus2(BookProductVO bookVO);
