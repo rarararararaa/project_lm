@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.library.product.BookProductService;
 import kr.spring.library.product.vo.BookProductVO;
 import kr.spring.library.rent.service.RentService;
+import kr.spring.library.rent.service.ReservationService;
 import kr.spring.library.rent.vo.RentVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
@@ -30,6 +31,8 @@ public class RentController {
 	private RentService rentService;
 	@Autowired
 	private BookProductService bookProductService;
+	@Autowired
+	private ReservationService reservationService;
 	
 	//대출 리스트
 	@RequestMapping("/library/rent/rentHistoryList.do")
@@ -154,15 +157,69 @@ public class RentController {
             				HttpSession session,
 							HttpServletRequest request,Model model){
 		
-		RentVO vo=rentService.selectRent(rent_num);
-		rentService.updateRentHistory(vo);
+		if(session.getAttribute("mem_num")==null) {
+			//view에 표시할 메시지
+			model.addAttribute("message", "로그인 후 접근 가능합니다");
+			model.addAttribute("url", "/library/rent/rentHistoryList.do");
+			return "common/resultView";
+		}else {
+			Integer user_auth=(Integer)session.getAttribute("mem_auth");
+			if(user_auth!=9) {
+				model.addAttribute("message", "잘못된 접근입니다");
+				model.addAttribute("url", "/library/rent/rentHistoryList.do");
+				return "common/resultView";
+			}else {
+				RentVO vo=rentService.selectRent(rent_num);
+				rentService.updateRentHistory(vo);
+				
+				//view에 표시할 메시지
+				model.addAttribute("message", "반납 완료!");
+				model.addAttribute("url", "/library/rent/rentHistoryList.do");
+				return "common/resultView";
+			}
+		}
 		
-		//view에 표시할 메시지
-		model.addAttribute("message", "반납 완료!");
-		model.addAttribute("url", "/library/rent/rentHistoryList.do");
-		
-		return "common/resultView";
 	}
 	
+	//대출 연장
+	@RequestMapping("/library/rent/updateRentDeadline.do")
+	public String extendRent(@RequestParam int rent_num,HttpSession session,Model model) {
+		if(session.getAttribute("mem_num")==null) {
+			//view에 표시할 메시지
+			model.addAttribute("message", "로그인 후 접근 가능합니다");
+			model.addAttribute("url", "/library/rent/rentHistoryList.do");
+			return "common/resultView";
+		}else {
+				RentVO vo=rentService.selectRent(rent_num);
+				Map<String, Object> map=new HashMap<String, Object>();
+				map.put("callNumber", vo.getCallNumber());
+				if(reservationService.selectReservationCountByISBN(map)>0) {
+					model.addAttribute("message", "예약자가 있어 연장이 불가능합니다.");
+					model.addAttribute("url", "/library/rent/rentHistoryList.do");
+					return "common/resultView";					
+				}
+				
+				rentService.updateRentDeadline(vo);
+				//view에 표시할 메시지
+				model.addAttribute("message", "연장 완료!");
+				model.addAttribute("url", "/library/rent/rentHistoryList.do");
+				return "common/resultView";
+		}		
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

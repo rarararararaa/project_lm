@@ -8,7 +8,7 @@ import kr.spring.library.rent.vo.ReservationVO;
 
 public interface ReservationService {
 	//isbn을 통해 책 추출
-	public String selectCallNumberToReservation(String lib_product_isbn);		
+	public List<String> selectCallNumberToReservation(String lib_product_isbn);		
 	//대출 예약 신청 -> 대출 가능한 도서일 경우 예약 불가
 	public void insertReservation(ReservationVO reservationVO);
 	//기한 내 대출 시 대출 완료로 업데이트
@@ -17,8 +17,8 @@ public interface ReservationService {
 	public void updateReservation3(ReservationVO reservationVO);		
 	//예약 권수 확인 (최대 3권)
 	public int selectReservationCountByMem_num(Map<String, Object> map);	
-	//예약 인원수 확인 -> 최대 3인
-	public int selectReservationCountBycallNum(Map<String, Object> map);	
+	//예약 인원수 확인 -> 최대 1인
+	public int selectReservationCountByISBN(Map<String, Object> map);	
 	//대출 중인지 확인
 	public boolean selectCheckRentStatus(String callNumber);	
 	

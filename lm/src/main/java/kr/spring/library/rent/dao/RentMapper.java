@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.library.product.vo.BookProductVO;
 import kr.spring.library.rent.vo.RentVO;
@@ -27,7 +28,9 @@ public interface RentMapper {
 	public int selectRentRowCount(Map<String, Object> map);
 	//대출 권수 체크
 	public int selectRentCountByMem_num(Map<String, Object> map);
-	//대출 연장 -> 예약 후
+	//대출 연장 -> 예약하면 대출 연장 불가->reservationService 연계
+	@Update("UPDATE lib_history SET return_reg_deadline=#{return_reg_deadline}+7,lib_product_status=3 WHERE rent_num=#{rent_num}")
+	public void updateRentDeadline(RentVO rentVO);
 	 
 	//회원 검색
 	@Select("SELECT * FROM lm_member_manage WHERE mem_id LIKE '%'||#{mem_id}||'%'")

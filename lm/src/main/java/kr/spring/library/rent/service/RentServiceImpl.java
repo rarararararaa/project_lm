@@ -57,4 +57,9 @@ public class RentServiceImpl implements RentService{
 		return rentMapper.selectRent(rent_num); 
 	}
 
+	@Override
+	public void updateRentDeadline(RentVO rentVO) {
+		rentMapper.updateRentDeadline(rentVO);
+	}
+
 }

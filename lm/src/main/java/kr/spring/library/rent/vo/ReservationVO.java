@@ -4,12 +4,14 @@ import java.sql.Date;
 
 import kr.spring.library.product.vo.BookProductVO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class ReservationVO {
 	private int reservation_num;
 	private String callNumber;
