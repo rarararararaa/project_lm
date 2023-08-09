@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
-.eventpage-div{
-	width: 1200px;
-	margin: 50px auto;
-	padding: 10px 50px;
+.eventpage-main{
+	width: 950px;
+	min-height: 1000px;
+	margin: 25px auto;
+	padding: 0 50px;
 }
 
 /* 공통 정렬

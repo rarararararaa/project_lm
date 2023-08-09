@@ -13,6 +13,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import kr.spring.bookstore.event.vo.BsAttendancePointVO;
 import kr.spring.bookstore.event.vo.BsAttendanceVO;
+import kr.spring.bookstore.event.vo.BsEventReplyVO;
 import kr.spring.bookstore.event.vo.BsEventVO;
 import kr.spring.bookstore.event.vo.BsQuizVO;
 import kr.spring.bookstore.product.vo.ProductVO;
@@ -91,7 +92,27 @@ public interface BsEventMapper {
 	@Select("SELECT * FROM store_event_quiz_status WHERE mem_num=#{mem_num} AND event_board_num=#{event_board_num}")
 	public BsQuizVO selectQuizStatus(BsQuizVO quiz);
 	//퀴즈 이벤트 insert
-	@Insert("INSERT INTO store_event_quiz_status (event_quiz_status_num, event_board_num, mem_num) VALUES (1, #{event_board_num}, #{mem_num})")
+	@Insert("INSERT INTO store_event_quiz_status (event_quiz_status_num, event_board_num, mem_num) VALUES (store_event_quiz_status_seq.nextval, #{event_board_num}, #{mem_num})")
 	public void insetQuizStatus(BsQuizVO quiz);
+	
+	//댓글
+	//댓글 목록 - o
+	public List<BsEventReplyVO> selecListReply(Map<String, Object> map);
+	//댓글 개수 - o
+	@Select("SELECT COUNT(*) FROM store_event_board_reply WHERE event_board_num=#{event_board_num}")
+	public int selectRowCountReply(Map<String,Object> map);
+	//특정 댓글 선택 - o
+	@Select("SELECT * FROM store_event_board_reply WHERE reply_num=#{reply_num}")
+	public BsEventReplyVO selectReply(Integer reply_num);
+	//댓글 작성 - o
+	public void insertReply(BsEventReplyVO eventReply);
+	//댓글 수정
+	@Update("UPDATE store_event_board_reply SET reply_content=#{reply_content}, reply_modify_date=SYSDATE WHERE reply_num=#{reply_num}")
+	public void updateReply(BsEventReplyVO eventReply);
+	//댓글 삭제
+	@Delete("DELETE FROM store_event_board_reply WHERE reply_num=#{reply_num}")
+	public void deleteReply(Integer reply_num);
+	//부모글 삭제시 댓글이 존재하면 부모글 삭제 전 댓글 삭제
+	
 	
 }

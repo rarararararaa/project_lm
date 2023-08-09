@@ -28,6 +28,7 @@ CREATE TABLE STORE_EVENT_BOARD_REPLY (
 	event_board_num	number	NOT NULL,
 	mem_num	number	NOT NULL,
 	reply_date	date	DEFAULT SYSDATE	NOT NULL,
+	reply_modify_date date,
 	reply_content	varchar2(3000)	NOT NULL,
     CONSTRAINT PK_STORE_EVENT_BOARD_REPLY PRIMARY KEY (reply_num) ,
     CONSTRAINT FK_STORE_EVENT_BOARD_REPLY_1 FOREIGN KEY (event_board_num)
@@ -35,6 +36,7 @@ CREATE TABLE STORE_EVENT_BOARD_REPLY (
     CONSTRAINT FK_STORE_EVENT_BOARD_REPLY_2 FOREIGN KEY (mem_num)
                                             REFERENCES lm_member_manage(mem_num)                                            
 );
+create sequence STORE_EVENT_BOARD_REPLY_seq;
 -- 문고 이벤트(퀴즈) 기록
 CREATE TABLE STORE_EVENT_QUIZ_STATUS (
 	event_quiz_status_num	number	NOT NULL,
@@ -74,3 +76,28 @@ CREATE TABLE STORE_EVENT_ATTENDANCE_POINT (
                                             REFERENCES lm_member_manage(mem_num)       
 );
 create sequence store_event_attendance_point_seq;
+
+-- 문고 이벤트(퀴즈) 기록
+CREATE TABLE STORE_EVENT_QUIZ_STATUS (
+	event_quiz_status_num	number	NOT NULL,
+	event_board_num	number	NOT NULL,
+	mem_num	number	NOT NULL,
+    CONSTRAINT PK_STORE_EVENT_QUIZ_STATUS PRIMARY KEY (event_quiz_status_num),
+    CONSTRAINT FK_STORE_EVENT_QUIZ_STATUS_1 FOREIGN KEY (event_board_num)
+                                            REFERENCES store_event_board(event_board_num),
+    CONSTRAINT FK_STORE_EVENT_QUIZ_STATUS_2 FOREIGN KEY (mem_num)
+                                            REFERENCES lm_member_manage(mem_num)                                         
+);
+create sequence store_event_quiz_status_seq;
+
+-- 문고 이벤트 당첨자 발표 게시판 테이블
+create table store_event_announce_board (
+	event_announce_board_num number,
+	title varchar2(90) not null,
+ 	content clob not null,
+ 	hit number(8) default 0 not null,
+ 	reg_date date default sysdate not null,
+ 	modify_date date,
+	constraint store_event_announce_board_pk primary key (event_announce_board_num)
+);
+create sequence store_event_announce_board_seq;

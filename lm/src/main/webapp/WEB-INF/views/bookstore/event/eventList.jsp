@@ -12,7 +12,7 @@
 			<a href="${pageContext.request.contextPath}/bookstore/event/attendanceEvent.do"><img src="${pageContext.request.contextPath}/images/attendanceEvent_banner.jpg"></a>
 		</div>
 		<div class="bann">
-			<a  href="${pageContext.request.contextPath}/bookstore/event/eventAnnounceList.do">당첨자 발표</a>
+			<a  href="${pageContext.request.contextPath}/bookstore/event/eventAnnounceList.do"><img src="${pageContext.request.contextPath}/images/winBanner.jpg" width="140"></a>
 		</div>
 	</div>
 	<!-- 이벤트 검색 및 정렬 시작 -->
@@ -115,6 +115,11 @@
 			<hr size="1" width=" 95%" color="#E9E9E9">
 		</c:forEach>
 	</div>
-	
+	<div class="align-right">
+		<c:if test="${mem_auth == 9}">
+			<input type="button" value="글쓰기"
+				onclick="location.href='write.do'">
+		</c:if>
+	</div>
 	<div class="align-center">${page}</div>
 </div>

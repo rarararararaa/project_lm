@@ -4,7 +4,7 @@
 	href="${pageContext.request.contextPath}/css/BsAttendanceStyle.css">
 <!-- 출석 이벤트 페이지 -->
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/attendanceEvent.js"></script>
+	src="${pageContext.request.contextPath}/js/bs.Event.attendance.js"></script>
 <body>
 	<input type="hidden" value="${status.event_attendance_point_num}"
 		id="event_attendance_point_num">

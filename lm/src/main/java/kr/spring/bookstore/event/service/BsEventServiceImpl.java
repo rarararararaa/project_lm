@@ -3,6 +3,7 @@ package kr.spring.bookstore.event.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.bookstore.event.dao.BsEventMapper;
 import kr.spring.bookstore.event.vo.BsAttendancePointVO;
 import kr.spring.bookstore.event.vo.BsAttendanceVO;
+import kr.spring.bookstore.event.vo.BsEventReplyVO;
 import kr.spring.bookstore.event.vo.BsEventVO;
 import kr.spring.bookstore.event.vo.BsQuizVO;
 import kr.spring.member.vo.MemberVO;
@@ -149,6 +151,40 @@ public class BsEventServiceImpl implements BsEventService{
 	@Override
 	public void insetQuizStatus(BsQuizVO quiz) {
 		bsEventMapper.insetQuizStatus(quiz);
+	}
+	
+	/*댓글 관련!!*/
+	@Override
+	public List<BsEventReplyVO> selecListReply(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return bsEventMapper.selecListReply(map);
+	}
+
+	@Override
+	public int selectRowCountReply(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return bsEventMapper.selectRowCountReply(map);
+	}
+
+	@Override
+	public BsEventReplyVO selectReply(Integer reply_num) {
+		// TODO Auto-generated method stub
+		return bsEventMapper.selectReply(reply_num);
+	}
+
+	@Override
+	public void insertReply(BsEventReplyVO eventReply) {
+		bsEventMapper.insertReply(eventReply);
+	}
+
+	@Override
+	public void updateReply(BsEventReplyVO eventReply) {
+		bsEventMapper.updateReply(eventReply);
+	}
+
+	@Override
+	public void deleteReply(Integer reply_num) {
+		bsEventMapper.deleteReply(reply_num);
 	}
 
 	
