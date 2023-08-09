@@ -327,7 +327,7 @@ table.striped-table th{
 	justify-content: center;
 	align-items:center;
 	font-size:40px;
-	
+	height:30px;
 }
 .align-column {
 	width:1200px;
