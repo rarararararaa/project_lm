@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/checkedTime.js"></script>
 <div class="page-main">
 	<form id="date" action="facApplyWrite.do" method="post">
 		날짜
@@ -22,16 +23,14 @@
 			</c:forEach>
 		</select>
 		시간
-		<select name="start" id="start">
-			<c:forEach var="i" begin="9" end="18">
-			<option value="${i}">${i}:00</option>
-			</c:forEach>
-		</select>
-		<select name="end" id="end" >
-			<c:forEach var="i" begin="9" end="18">
-			<option value="${i}">${i}:00</option>
-			</c:forEach>
-		</select>
+		<br>
+		<c:forEach var="i" begin="9" end="18">
+		<label for="${i}">${i}:00</label>
+		<input type="checkbox" value="${i}" name="time" id="${i}">
+		<br>
+		</c:forEach>
+		<input type="text" value="0" name="start" id="start" readonly maxlength="5" size="5">시~
+		<input type="text" value="0" name="end" id="end" readonly maxlength="5" size="5">시
 		<input type="submit" value="신청">
 		<input type="button" value="목록">
 	</form>
