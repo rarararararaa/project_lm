@@ -177,7 +177,7 @@ a:hover {
 			let keyword = $('.search-text').val();
 	        let url = "${pageContext.request.contextPath}";
 	        // 검색 페이지로 이동
-	        window.location.href = url+'libSearchMain.do?categoryNum=10&orderByNum=1&keyword='+keyword;
+	        window.location.href = url+'/library/template/libSearchMain.do?categoryNum=10&orderByNum=1&keyword='+keyword;
 	    }
 
 	    $('.lib-text-img').click(function(){

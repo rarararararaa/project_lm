@@ -336,15 +336,15 @@ table.striped-table th{
 	min-width:1200px;
 	justify-content:flex-start;
 	align-items:center;
-	font-size:20px;
+	font-size:15px;
 	
 }
 
 
 #recommend-01, #recommend-02, #recommend-03, #recommend-04 {
-	margin-left:30px;
+	margin-left:20px;
 	display:flex;
-	width:180px;
+	width:100px;
 	height:40px;
 	justify-content:center;
 	align-items:center;

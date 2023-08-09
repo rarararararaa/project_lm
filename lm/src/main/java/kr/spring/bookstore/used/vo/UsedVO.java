@@ -51,7 +51,7 @@ public class UsedVO {
 	private String store_product_publisher; //출판사
 	private int used_product_match_count;
 	private String store_product_description;
-	
+	private String store_product_isbn13;
 	
 	//연산 작업
 	private int devide_product_by_used;

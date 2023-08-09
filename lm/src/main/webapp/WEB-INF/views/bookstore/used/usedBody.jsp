@@ -6,7 +6,7 @@
 		<c:forEach var="list" items="${list}">
 			<div class="used-all-contents-div-width">
 				<div class="used-all-contents-img">
-					<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${product.store_product_isbn13}">
+					<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${list.store_product_isbn13}">
 						<img src="${list.store_product_cover}">
 					</a>
 				</div>
