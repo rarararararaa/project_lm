@@ -179,7 +179,9 @@ $(function(){
 					alert('정상적으로 도서를 대출했습니다.');
 					location.reload();
 				}else if(param.result=='overValue'){
-					alert('대출은 최대 3권까지만 가능합니다');
+					alert('대출은 최대 3권까지만 가능합니다.');
+				}else if(param.result=='alreadyRent'){
+					alert('이미 대출중인 도서입니다.');
 				}else{
 					alert('도서 대출 오류 발생');
 				}

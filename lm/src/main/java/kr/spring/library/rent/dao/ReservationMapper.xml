@@ -29,6 +29,12 @@
 		FROM lib_product_manage 
 		WHERE lib_product_product_status=1 AND callNumber=#{callNumber}	
 	</select>
+	<select id="selectCheckRentStatus2" parameterType="string">
+		SELECT 
+			count(*) 
+		FROM lib_product_manage 
+		WHERE lib_product_product_status=0 AND lib_product_isbn=#{lib_product_isbn}	
+	</select>
 	<!-- 예약권수 확인 -->
 	<select id="selectReservationCountByMem_num" parameterType="map" resultType="integer">
 		SELECT
@@ -46,18 +52,15 @@
 		WHERE r.lib_product_isbn = #{lib_product_isbn} AND reservation_status<![CDATA[<]]>2
 	</select>
 	
-	<!-- 1순의 예약자 상태 변경 -->
-<!-- 	<update id="updateConfirmReservation" parameterType="ReservationVO">
-		UPDATE 
-			lib_reservation
-		SET reservation_status = 1
-		WHERE callNumber = #{callNumber}
-		AND reservation_submit_date = (
-		    SELECT MIN(reservation_submit_date)
-		    FROM lib_reservation
-		    WHERE callNumber = #{callNumber}
-		)  
-	</update> -->
+	<!-- 예약 상세 불러오기 -->
+	<select id="selectReservationDetail" parameterType="map" resultType="reservationVO">
+		SELECT 
+		    * 
+		FROM lib_reservation 
+		WHERE lib_product_isbn=#{lib_product_isbn}
+		AND reservation_status=0
+	</select>
+
 </mapper>
 
 

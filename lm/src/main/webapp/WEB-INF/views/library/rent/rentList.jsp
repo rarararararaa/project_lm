@@ -26,6 +26,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/EESAMSAOH.css">
 <div class="product-main">
 	<h2 class="align-center">대출/반납 관리</h2>
+		<input class="small-button" type="button" value="도서목록" onclick="location.href='/library/bookproductadmin/admin_booklist.do'">
+		<input class="small-button" type="button" value="대출목록" onclick="location.href='/library/rent/rentHistoryList.do'">
+		<input class="small-button" type="button" value="희망도서" onclick="#">
 	<div class="button-box">
 		<input type="button" id="opener" value="대출 등록" class="small-button">
 	</div>
@@ -117,7 +120,11 @@
 						<img src="${list.bookVO.lib_product_bookImageUrl }" width="100">
 						</a>
 					</td>
-					<td class="row-content" colspan="3">${list.bookVO.lib_product_bookName }</td>
+					<td class="row-content" colspan="3">
+						<a href="/library/lib_book/bookDetail.do?callNumber=${list.callNumber}">
+							${list.bookVO.lib_product_bookName }
+						</a>
+					</td>
 					<td class="row-content">${list.mem_id }</td>
 					<td class="row-content">${list.rent_reg_date }</td>
 					<td class="row-content">${list.return_reg_deadline }</td>

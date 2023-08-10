@@ -20,8 +20,14 @@ public interface ReservationService {
 	//예약 인원수 확인 -> 최대 1인
 	public int selectReservationCountByISBN(Map<String, Object> map);	
 	//대출 중인지 확인
-	public boolean selectCheckRentStatus(String callNumber);	
+	public boolean selectCheckRentStatus(String callNumber);
+	public boolean selectCheckRentStatus2(String lib_product_isbn);
+	//예약 대기인 예약 상세 불러오기
+	public ReservationVO selectReservationDetail(Map<String, Object> map);	
 	
 	//예약리스트
 	public List<ReservationVO> selectReservationList(Map<String, Object> map);
+	//자동화 -> 전체 예약 체크
+	public List<ReservationVO> selectAllReservation();
+	
 }

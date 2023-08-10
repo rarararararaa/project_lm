@@ -20,6 +20,7 @@ import kr.spring.library.product.vo.BookProductVO;
 import kr.spring.library.rent.service.RentService;
 import kr.spring.library.rent.service.ReservationService;
 import kr.spring.library.rent.vo.RentVO;
+import kr.spring.library.rent.vo.ReservationVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -140,6 +141,11 @@ public class RentController {
 				log.debug("<<total>> : "+(count+list.length));
 				for(String i:list) {
 					vo.setCallNumber(i);
+					//대출중인 도서인지 확인
+					if(reservationService.selectCheckRentStatus(i)) {//대출중
+						mapJson.put("result", "alreadyRent");
+						return mapJson;
+					}
 					rentService.insertRentHistory(vo);
 					log.debug("<<vo>> : "+vo);
 				}
@@ -156,7 +162,7 @@ public class RentController {
 	public String returnBook(@RequestParam int rent_num,
             				HttpSession session,
 							HttpServletRequest request,Model model){
-		
+		Map<String, Object> map=new HashMap<String, Object>();
 		if(session.getAttribute("mem_num")==null) {
 			//view에 표시할 메시지
 			model.addAttribute("message", "로그인 후 접근 가능합니다");
@@ -170,12 +176,20 @@ public class RentController {
 				return "common/resultView";
 			}else {
 				RentVO vo=rentService.selectRent(rent_num);
+				vo.setBookVO(rentService.selectBook(vo.getCallNumber()));
+				log.debug("<<BookVO>> : "+vo.getBookVO());
 				rentService.updateRentHistory(vo);
-				
+				map.put("lib_product_isbn", vo.getBookVO().getLib_product_isbn());
+				//예약자 있는 지 확인
+				if(reservationService.selectReservationCountByISBN(map)!=0) {
+					ReservationVO reservationVO=reservationService.selectReservationDetail(map);
+					reservationService.updateReservation(reservationVO);
+				}
 				//view에 표시할 메시지
 				model.addAttribute("message", "반납 완료!");
 				model.addAttribute("url", "/library/rent/rentHistoryList.do");
 				return "common/resultView";
+				
 			}
 		}
 		

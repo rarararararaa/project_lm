@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.library.product.dao.BookProductMapper;
+import kr.spring.library.product.vo.BookProductVO;
 import kr.spring.library.rent.dao.RentMapper;
 import kr.spring.library.rent.vo.RentVO;
 import kr.spring.member.vo.MemberVO;
@@ -30,6 +31,7 @@ public class RentServiceImpl implements RentService{
 	public void updateRentHistory(RentVO rentVO) {
 		rentMapper.updateRentHistory(rentVO);
 		rentMapper.updateBookStatus2(bookMapper.selectDetailLIB_P(rentVO.getCallNumber()));
+		
 	}
 
 	@Override
@@ -60,6 +62,16 @@ public class RentServiceImpl implements RentService{
 	@Override
 	public void updateRentDeadline(RentVO rentVO) {
 		rentMapper.updateRentDeadline(rentVO);
+	}
+
+	@Override
+	public List<RentVO> selectAllRent() {
+		return rentMapper.selectAllRent();
+	}
+
+	@Override
+	public BookProductVO selectBook(String callNumber) {
+		return rentMapper.selectBook(callNumber);
 	}
 
 }

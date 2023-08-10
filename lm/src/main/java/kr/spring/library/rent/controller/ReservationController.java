@@ -1,6 +1,5 @@
 package kr.spring.library.rent.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.spring.library.product.BookProductService;
 import kr.spring.library.rent.service.RentService;
 import kr.spring.library.rent.service.ReservationService;
+import kr.spring.library.rent.vo.RentVO;
 import kr.spring.library.rent.vo.ReservationVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -84,5 +85,18 @@ public class ReservationController {
 		} 
 		log.debug("<<mapJson>> : "+mapJson);
 		return mapJson;
-	}	
+	}
+	
+	/*
+	 * @Scheduled(cron="* 0/10 * * * *") public void testSchedule(){
+	 * List<ReservationVO> list=reservationService.selectAllReservation();
+	 * Map<String, Object> map=new HashMap<String, Object>(); if(list!=null) {//예약
+	 * 대기인 책들 존재 for(ReservationVO reservationVO:list) {
+	 * if(reservationService.selectCheckRentStatus2(reservationVO.getBookVO().
+	 * getLib_product_isbn())){ //반납된 책 //알림주기 //예약확정으로 바꾸기 } //대출중인 책 return; }
+	 * }else { return; }
+	 * 
+	 * }
+	 */
+	
 }

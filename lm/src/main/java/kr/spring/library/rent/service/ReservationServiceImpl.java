@@ -21,20 +21,12 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public void insertReservation(ReservationVO reservationVO) {
 		reservationMapper.insertReservation(reservationVO);
-		//reservationMapper.updateConfirmReservation(reservationVO);
 	}
 
 	@Override
 	public void updateReservation(ReservationVO reservationVO) {
-		RentVO rentVO=new RentVO();
-		rentVO.setMem_num(reservationVO.getMem_num());
-		rentVO.setCallNumber(reservationVO.getCallNumber());
-		//대출테이블
-		rentMapper.insertRentHistory(rentVO);
-		//예약테이블
 		reservationMapper.updateReservation(reservationVO);
-		//예약1순위
-		//reservationMapper.updateConfirmReservation(reservationVO);
+
 	}
 
 	@Override
@@ -65,6 +57,21 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public List<String> selectCallNumberToReservation(String lib_product_isbn) {
 		return reservationMapper.selectCallNumberToReservation(lib_product_isbn);
+	}
+
+	@Override
+	public List<ReservationVO> selectAllReservation() {
+		return reservationMapper.selectAllReservation();
+	}
+
+	@Override
+	public boolean selectCheckRentStatus2(String lib_product_isbn) {
+		return reservationMapper.selectCheckRentStatus2(lib_product_isbn);
+	}
+
+	@Override
+	public ReservationVO selectReservationDetail(Map<String, Object> map) {
+		return reservationMapper.selectReservationDetail(map);
 	}
 
 
