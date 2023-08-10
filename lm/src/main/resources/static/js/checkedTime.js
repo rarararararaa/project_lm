@@ -9,6 +9,13 @@ $(function(){
 	$("select[name=month] option[value='"+month+"']").prop("selected", true);
 	$("select[name=date] option[value='"+date+"']").prop("selected", true);
 	
+	timeCheck();
+		
+
+	$('#date').on('change',function(){
+		timeCheck();
+	});
+	
 	$('input[name="time"]').on('click',function(){
 		let checked = document.querySelectorAll('input[name="time"]:checked');
 		
@@ -40,8 +47,49 @@ $(function(){
 		$('input[name="time"]').prop('checked', false);
 		
 		for(let i = $('#start').val();Number(i)<$('#end').val();i++){
+			if($("#"+i).is(".unchecked") === true){
+				alert('hello');
+				return;
+			}
 			$("#"+i).prop('checked', true);
 		}
 	});
-	
+		function timeCheck(){
+		let sdate = $('#yearSelect').val();
+		if($('#monthSelect').val()<10){
+			sdate += '0' + $('#monthSelect').val();
+		}else{
+			sdate += $('#monthSelect').val();
+		}
+		if($('#dateSelect').val()<10){
+			sdate += '0' + $('#dateSelect').val();
+		}else{
+			sdate += $('#dateSelect').val();
+		}
+		
+		for(let i = 9; i < 18;i++){
+			$('#'+i).removeClass("unckecked");
+		}
+		$.ajax({
+			url:'../library/timeCheck.do',
+			type:'post',
+			data:{date:sdate},
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('로그인해야 사용할 수 있습니다.');
+					return;
+				}else if(param.result == 'success'){
+					$(param.list).each(function(index,item){
+						$('#'+item).addClass("unckecked");
+					})
+				}else{
+					alert('예약현황 불러오기 오류 발생');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	}
 });

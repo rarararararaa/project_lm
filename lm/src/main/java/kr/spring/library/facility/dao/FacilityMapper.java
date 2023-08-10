@@ -1,6 +1,5 @@
 package kr.spring.library.facility.dao;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +28,6 @@ public interface FacilityMapper {
 	public List<FacilityApplyVO> selectFacilityApplyListByMem_num(Integer mem_num);
 	
 	//당일 시설 사용 시간 체크
-	@Select("select to_char(facility_apply_start,'HH24:MI:SS') start,to_char(facility_apply_end,'HH24:MI:SS') end FROM lib_facility_apply WHERE facility_apply_start LIKE #{date}")
-	public FacilityApplyVO selectFacilityApplyListByDate(Date date);
+	@Select("select facility_apply_start, facility_apply_end FROM lib_facility_apply WHERE facility_apply_start LIKE to_date(#{date},'YYYYMMDD')")
+	public List<FacilityApplyVO> selectFacilityApplyListByDate(String date);
 }

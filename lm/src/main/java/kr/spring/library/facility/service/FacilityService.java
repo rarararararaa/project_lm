@@ -23,5 +23,5 @@ public interface FacilityService {
 	//사용자별 신청 목록
 	public List<FacilityApplyVO> selectFacilityApplyListByMem_num(Integer mem_num);
 	
-	public FacilityApplyVO selectFacilityApplyListByDate(Date date);
+	public List<FacilityApplyVO> selectFacilityApplyListByDate(String date);
 }

@@ -55,7 +55,7 @@ public class FacilityServiceImpl implements FacilityService{
 	}
 
 	@Override
-	public FacilityApplyVO selectFacilityApplyListByDate(Date date) {
+	public List<FacilityApplyVO> selectFacilityApplyListByDate(String date) {
 		return facilityMapper.selectFacilityApplyListByDate(date);
 	}
 

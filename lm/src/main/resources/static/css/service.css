@@ -168,3 +168,22 @@ table.striped-table tr:nth-child(odd){
 .view-category li:hover{
 	color:#5055b1;
 }
+.hidecheck{
+	display:none;
+}
+.viewcheck{
+	display:inline-block;
+	padding:20px 0;
+	width:200px;
+	font-size:13pt;
+	text-align:center;
+	border:1px solid #ccc;
+}
+input[type="checkbox"]:checked+label {
+  	background-color: #80ff80;
+  	border:1px solid #80ff80;
+}
+.unckecked+label{
+	background-color: #ccc;
+	pointer-events: none;
+}
