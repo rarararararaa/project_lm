@@ -49,7 +49,7 @@ $(function(){
 						output += ' <input type="button" data-num="'+item.reply_num+'" value="수정" class="modify-btn">';
 						output += ' <input type="button" data-num="'+item.reply_num+'" value="삭제" class="delete-btn">';
 					}
-					output += '<hr size="1" noshade>';
+					output += '<hr size="1" noshade >';
 					output += '</div>';
 					output += '</div>';
 					

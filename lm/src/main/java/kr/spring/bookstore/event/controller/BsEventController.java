@@ -105,7 +105,7 @@ public class BsEventController {
 		if(result.hasErrors()) {
 			return "bsEventModify";
 		}
-		
+		log.debug("date"+bsEventVO.getEvent_date_end());
 		//글 수정
 		bsEventService.updateEvent(bsEventVO);
 		

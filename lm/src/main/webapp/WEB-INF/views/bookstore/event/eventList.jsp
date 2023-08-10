@@ -73,7 +73,7 @@
 					<div class="event-column col${status.index}">
 
 						<div class="event-simg">
-						<a class="wid" href="update.do?event_board_num=${event.event_board_num}">
+						<a class="wid" href="detail.do?event_board_num=${event.event_board_num}">
 							<img src="imageView.do?event_board_num=${event.event_board_num}&event_board_type=1" width="170" height="100">
 						</a>
 						</div>
@@ -99,10 +99,10 @@
 									</c:if>
 								</ul>
 							</div>
-							<a href="detail.do?event_board_num=${event.event_board_num}">
-							<div class="event-title">${event.event_title}</div>
+							
+							<div class="event-title">
+								<a href="detail.do?event_board_num=${event.event_board_num}">${event.event_title}</a></div>
 							<div class="event-short-content">${event.event_short_content}</div>
-							</a>
 							<div class="event-date">
 								기한: ${event.event_date_start} ~ ${event.event_date_end}
 							</div>

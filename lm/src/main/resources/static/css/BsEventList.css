@@ -69,6 +69,26 @@
 	margin-left: 5px;
 	background-color: white;
 }
+.event-title{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: bold;
+}
+.event-title a:link{
+	text-decoration: none;
+}
+
+.event-title a:visited, a:active{
+	color: black;
+}
+.event-title a:hover{
+	text-decoration: underline;
+	color: #5055B1;
+}
+.event-short-content{
+	cursor: default;
+}
 .event-column:nth-child(1){
 	margin-left: 15px;
 	margin-right: 10px;
@@ -120,6 +140,7 @@ a.wid{
 	border: solid 1px #E9E9E9;
 }
 
+
 /* 이벤트 페이지 상세*/
 .page-main{
 	width: 1200px;
@@ -147,6 +168,16 @@ ul.search li{
 	margin: 25px auto;
 }
 .img_big{
+	text-align: center;
+	margin: 50px;
+}
+.hr-gr{
+	
+	width: 80%;
+}
+.content-out{
+	width: 750px;
+	margin: 50px auto;
 	text-align: center;
 }
 .quiz-select{
@@ -187,4 +218,42 @@ ul.search li{
 .detail-info{
 	padding: 0;
 	margin: 0;
+}
+.sub-item hr, .hr-gr{
+	height: 0.5px;
+	background: #E9E9E9;
+	border: 0;
+}
+#re_form .rep-div{
+	width: 1000px;
+	margin: 30px auto;
+	display: flex;
+	flex-direction: row;
+}
+.rep-div .re-textarea{
+	width:900px;
+}
+.rep-div .re-submit-btn{
+	width: 100px;
+}
+#re_form .rep-div .re-textarea textarea{
+	width: 890px;
+	height: 80px;
+	resize: none;
+}
+#re_form .rep-div .re-submit-btn input{
+	width: 100px;
+	height: 85px;
+	color: white;
+	font-size: 18pt;
+	font-weight: bold;
+	background-color: #5055B1;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+#re_form .rep-div .re-submit-btn input:disabled {
+	background-color: #E9E9E9;
+	cursor: default;
 }

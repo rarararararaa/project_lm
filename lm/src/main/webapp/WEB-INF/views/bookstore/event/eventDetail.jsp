@@ -8,6 +8,39 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bs.Event.quiz.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bs.Event.reply.js"></script>
 
+<script>
+    // 현재 날짜를 가져오는 함수
+    function getCurrentDate() {
+        var currentDate = new Date();
+        return currentDate;
+    }
+
+    // 이벤트 종료 날짜를 가져오는 함수 (가정: "yyyy-MM-dd" 형식)
+    function getEventEndDate() {
+        var eventEndDate = new Date("${event.event_date_end}");
+        return eventEndDate;
+    }
+
+    // 페이지 로드 시 실행되는 함수
+    function checkEventDate() {
+        var currentDate = getCurrentDate();
+        var eventEndDate = getEventEndDate();
+
+        // 날짜 비교
+        if (currentDate > eventEndDate) {
+            // 이벤트 종료 날짜가 현재 날짜보다 이전인 경우 textarea를 비활성화
+            var replyTextarea = document.getElementById("reply_content");
+            replyTextarea.value = "이벤트가 종료되어 댓글 작성이 불가능합니다.";
+            document.getElementById("reply_content").disabled = true;
+            document.getElementById("re_btn").disabled = true;
+        }
+    }
+    
+    // 페이지 로드 시 날짜 비교 함수 호출
+    window.onload = checkEventDate;
+</script>
+
+
 <div class="detailPageMain">
 	<h2>${event.event_title}</h2>
 	<input type="hidden" name="event_board_category" value="${event.event_board_category}" id="event_board_category">
@@ -32,11 +65,12 @@
 		<!-- 첨부 이미지 -->
 		<c:if test="${event.event_img_big != null}">
 		<div class="img_big">
-			<img src="imageView.do?event_board_num=${event.event_board_num}&event_board_type=2" >
+			<img src="imageView.do?event_board_num=${event.event_board_num}&event_board_type=2" width="800">
 		</div>
+		<hr size="1" noshade="noshade" class="hr-gr">
 		</c:if>
 		<!-- content 부분 -->
-		<b>${event.event_content}</b>
+		<div class="content-out">${event.event_content}</div> 
 	</div>
 	
 	<!-- 퀴즈 선택지 부분 -->
@@ -85,16 +119,23 @@
 		<span class="re-title">댓글 달기</span>
 		<form id="re_form">
 			<input type="hidden" name="event_board_num" value="${event.event_board_num}" id="event_board_num">
-			<textarea rows="3" cols="50" name="reply_content" id="reply_content" class="rep-content"
-			  <c:if test="${empty mem_num}">disabled="disabled"</c:if>
-			  ><c:if test="${empty mem_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>                                               
+			<div class="rep-div">
+				<div class="re-textarea">
+				<textarea rows="3" cols="50" name="reply_content" id="reply_content" class="rep-content"
+			  	<c:if test="${empty mem_num}">disabled="disabled"</c:if>
+			  	><c:if test="${empty mem_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
+			  	</div>
+			  	
+			  	<div id="re_second" class="align-right re-submit-btn">
+					<input type="submit" id="re_btn"<c:if test="${empty mem_num}">disabled="disabled"</c:if> value="댓글">
+				</div>
+			</div>
+			                                               
 			<c:if test="${!empty mem_num}">
 			<div id="re_first">
 				<span class="letter-count">300/300</span>
 			</div>
-			<div id="re_second" class="align-right">
-				<input type="submit" value="전송">
-			</div>
+			
 			</c:if>
 		</form>
 	</div>
@@ -112,7 +153,7 @@
 	
 	<div class="align-right">
 		<c:if test="${!empty mem_num && mem_auth== 9}">
-			<input type="button" value="수정" onclick="location.href='update.do?board_num=${board.board_num}'">
+			<input type="button" value="수정" onclick="location.href='update.do?event_board_num=${event.event_board_num}'">
 			<input type="button" value="삭제" id="delete_btn">
 			<script type="text/javascript">
 				let delete_btn = document.getElementById('delete_btn');
