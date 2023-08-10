@@ -17,13 +17,6 @@
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/product/productDetail.jsp"/>
     </definition> 
     
-    <!-- 대출 리스트 -->
-    <definition name="rentList" extends="libAdmin"> 
-    	<put-attribute name="libTitle" value="SpringPage"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/rent/rentList.jsp"/>
-    </definition> 
-    
-    
 </tiles-definitions>
 
 
