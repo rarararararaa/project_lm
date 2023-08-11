@@ -5,12 +5,17 @@ import java.util.List;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.member.vo.MemberVO;
 
 public interface BookStorePaymentOrderService {
 	//주문 테이블 추가
 	public void insertOrder(BookStorePaymentOrderVO bookStorePaymentOrderVO, List<BookStorePaymentCartVO> cartInfo);
 	
+	//주문 정보
+	public BookStorePaymentOrderVO selectOrder(int order_num);
+	//주문 상세 정보
+	public List<BookStorePaymentOrderVO> listOrder(int order_num);
 	//배송 정보
 	//우편번호로 주소 찾기
 	public MemberVO selectHome(int home_num);
@@ -26,4 +31,7 @@ public interface BookStorePaymentOrderService {
 	public void deleteHome(int home_num);
 	//기본배송지 바꾸기
 	public void updateNormal(int home_num, MemberVO mem);
+	
+	//도서 번호로 검색
+	public ProductVO selectProductNum(int product_num);
 }

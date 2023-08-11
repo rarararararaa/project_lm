@@ -21,6 +21,12 @@
     	<put-attribute name="title" value="결제 페이지"/>
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/payment/orderMain.jsp"/>
     </definition> 
+    <!-- LM 문고 결제 끝-->
+     <!-- 영수증 페이지 -->
+     <definition name="receipt" extends="bsMain">
+    	<put-attribute name="title" value="영수증"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/payment/receipt.jsp"/>
+    </definition> 
     
     
     <!-- 도서관 도서 상세 -->
@@ -30,7 +36,6 @@
     </definition>
     
     
-    <!-- LM 문고 결제 끝-->
 </tiles-definitions>
 
 

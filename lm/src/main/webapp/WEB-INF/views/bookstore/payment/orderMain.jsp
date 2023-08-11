@@ -63,7 +63,12 @@
 			<ul>
 				<li class="float-left">배송 요청사항</li>
 				<li>
-					<button id="deli-request">배송 요청사항 메시지</button>
+					<select id="deli-request">
+						<option value="-">배송 메세지를 선택해 주세요.</option>
+						<option value="부재시 경비실에 맡겨주세요.">부재시 경비실에 맡겨주세요.</option>
+						<option value="부재시 문앞에 놓아주세요.">부재시 문앞에 놓아주세요.</option>
+						<option value="배송전에 연락주세요.">배송전에 연락주세요.</option>
+					</select>
 				</li>
 			</ul>
 		</div>

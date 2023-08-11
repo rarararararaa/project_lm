@@ -9,6 +9,7 @@
 			 mem_num, 
 			 home_num, 
 			 order_total_price, 
+			 order_notice,
 			 payment_type,
 			 imp_uid)
 			 VALUES(
@@ -16,6 +17,7 @@
 			 	#{mem_num},
 			 	#{home_num},
 			 	#{order_total_price},
+			 	#{order_notice},
 			 	#{payment_type},
 			 	#{IMP_UID}
 			 	)

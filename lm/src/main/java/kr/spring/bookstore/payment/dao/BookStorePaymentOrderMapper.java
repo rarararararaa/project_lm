@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.member.vo.MemberVO;
 
 @Mapper
@@ -20,6 +21,13 @@ public interface BookStorePaymentOrderMapper {
 	//주문 테이블 추가
 	public void insertOrder(BookStorePaymentOrderVO bookStorePaymentOrderVO);
 	public void insertDetailOrder(BookStorePaymentCartVO bookStorePaymentCartVO);
+	
+	//주문 정보
+	@Select("SELECT * FROM store_order_manage WHERE order_num = #{order_num}")
+	public BookStorePaymentOrderVO selectOrder(int order_num);
+	//주문 상세 정보
+	@Select("SELECT * FROM store_order_detail WHERE order_num = #{order_num}")
+	public List<BookStorePaymentOrderVO> listOrder(int order_num);
 	
 	//배송 정보
 	//home_num로 주소 찾기
@@ -47,4 +55,8 @@ public interface BookStorePaymentOrderMapper {
 	//배송지 삭제
 	@Delete("DELETE FROM store_member_home WHERE home_num = #{home_num}")
 	public void deleteHome(int home_num);
+
+	//도서 번호 검색
+	@Select("SELECT * FROM store_product_detail WHERE store_product_num = #{product_num}")
+	public ProductVO selectProductNum(int product_num);
 }

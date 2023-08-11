@@ -1,0 +1,67 @@
+/*공통*/
+.payment-main{
+	margin: 0 auto;
+	width: 1200px;
+	min-height: 100%;
+	overflow: auto;
+}
+.align-right{
+	text-align: right;	
+}
+table{
+	margin: 20px 0;
+	width: 100%;
+	font-size: 15px;
+	border-collapse: collapse;
+}
+table td{
+	width: 50%;
+}
+.font-gray{
+	color: #989898;
+}
+tr{
+	height: 50px;
+}
+table tr:nth-child(3), table tr:nth-child(5){
+	border-bottom: 1px solid #BCBCBC;
+}
+/*영수증 내용*/
+.receipt-title{
+	font-size: 40px;
+    font-weight: 500;
+    text-align: center;
+}
+.receipt-content{
+	margin: 10px auto;
+	width: 438px;
+	height: 723px;
+	background-image: url("/images/receipt.png");
+	background-size: 438px 723px;
+	background-repeat: no-repeat;
+}
+.content{
+	padding: 30px 40px;
+}
+.sub-title{
+	width: 358px;
+	height: 134px;
+	border-bottom: 1px dashed #181818;
+}
+.sub-title p{
+	margin: 0;
+	font-weight: 400;
+}
+.sub-title p:first-child{
+	font-size: 20px;
+}
+.sub-title p:nth-child(2){
+	font-size: 40px;
+}
+.sub-title p:last-child{
+	text-align: right;
+	font-size: 20px;
+}
+.sub-content{
+	border-bottom: 1px dashed #181818;
+}

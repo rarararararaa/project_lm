@@ -22,6 +22,7 @@ import kr.spring.bookstore.payment.service.BookStorePaymentOrderService;
 import kr.spring.bookstore.payment.service.BookStorePaymentService;
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
+import kr.spring.bookstore.product.service.ProductService;
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -232,8 +233,9 @@ public class BookStorePaymentController {
 	//주문 성공시 주문 내역 저장
 	@RequestMapping("/bookstore/payment/orderAction.do")
 	@ResponseBody
-	public Map<String, String> payBook(String orderInfo, HttpSession session) {
+	public Map<String, Object> payBook(String orderInfo, HttpSession session, String notice) {
 		log.debug("<<결제 데이터 확인>> : "+orderInfo);
+		log.debug("<<배송시 요청사항>> : "+notice);
 		int mem_num = (Integer)session.getAttribute("mem_num");		
 		org.json.JSONObject jObject = new org.json.JSONObject(orderInfo);
 		//boolean result = jObject.getBoolean("success");
@@ -245,6 +247,8 @@ public class BookStorePaymentController {
 		order.setHome_num(mem_home.getHome_num());
 		order.setMem_num(mem_home.getMem_num());
 		order.setOrder_total_price(total);
+		order.setOrder_notice(notice);
+		
 		String type = jObject.getString("pg_provider");
 		int payment_type = 1;
 		if(type.equals("kakaopay")) {
@@ -258,8 +262,9 @@ public class BookStorePaymentController {
 		
 		session.removeAttribute("cartList");
 		session.removeAttribute("total");
-		Map<String, String> mapJson = new HashMap<String, String>();
+		Map<String, Object> mapJson = new HashMap<String, Object>();
 		mapJson.put("result", "success");
+		mapJson.put("order", order);
 		return mapJson;
 	}
 	//배송지 수정
@@ -367,6 +372,32 @@ public class BookStorePaymentController {
 		mapJson.put("result", "success");
 		mapJson.put("home_list", home_list);
 		return mapJson;
+	}
+	//영수증 페이지 보여주기
+	@RequestMapping("/bookstore/payment/receipt.do")
+	public String showReceipt(int order_num, HttpSession session, Model model) {
+		log.debug("<<영수증 페이지>> : "+order_num);
+		BookStorePaymentOrderVO order = bookStorePaymentOrderService.selectOrder(order_num);
+		//책 정보
+		List<BookStorePaymentOrderVO> list = bookStorePaymentOrderService.listOrder(order_num);
+		String book_name = "";
+		int product_num = list.get(0).getStore_product_num();
+		ProductVO vo = bookStorePaymentOrderService.selectProductNum(product_num);
+		if(list.size()>1) {
+			int length = vo.getStore_product_title().length();
+			int cut = 5;
+			if( length <= 5) {
+				cut = length-1;
+			}
+			book_name = vo.getStore_product_title().substring(0, cut)+"외 "+(list.size()-1)+"권";
+		}else {
+			book_name = vo.getStore_product_title();
+		}
+		MemberVO homeInfo = bookStorePaymentOrderService.selectHome(order.getHome_num());
+		model.addAttribute("order", order);
+		model.addAttribute("book_name", book_name);
+		model.addAttribute("homeInfo", homeInfo);
+		return "receipt";
 	}
 	//멤버 등급에 따른 포인드 % 가져오기
 	public double getPoint(int grade) {

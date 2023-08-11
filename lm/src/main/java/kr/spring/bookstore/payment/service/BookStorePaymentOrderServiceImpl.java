@@ -2,6 +2,8 @@ package kr.spring.bookstore.payment.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import kr.spring.bookstore.payment.dao.BookStorePaymentCartMapper;
 import kr.spring.bookstore.payment.dao.BookStorePaymentOrderMapper;
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -23,10 +26,11 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 	BookStorePaymentCartMapper	bookStorePaymentCartMapper;
 	@Autowired
 	MemberService memberService;
-	
+	//주문 테이블 저장
 	@Override
 	public void insertOrder(BookStorePaymentOrderVO bookStorePaymentOrderVO, List<BookStorePaymentCartVO> cartInfo) {
 		int order_num = bookStorePaymentOrderMapper.selectOrder_num();
+		
 		bookStorePaymentOrderVO.setOrder_num(order_num);
 		bookStorePaymentOrderMapper.insertOrder(bookStorePaymentOrderVO);
 		
@@ -78,6 +82,18 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 	public void updateNormal(int home_num, MemberVO mem) {
 		bookStorePaymentOrderMapper.updateDefault(mem);
 		bookStorePaymentOrderMapper.updateNormal(home_num);
+	}
+	@Override
+	public BookStorePaymentOrderVO selectOrder(int order_num) {
+		return bookStorePaymentOrderMapper.selectOrder(order_num);
+	}
+	@Override
+	public List<BookStorePaymentOrderVO> listOrder(int order_num) {
+		return bookStorePaymentOrderMapper.listOrder(order_num);
+	}
+	@Override
+	public ProductVO selectProductNum(int product_num) {
+		return bookStorePaymentOrderMapper.selectProductNum(product_num);
 	} 
 	
 	

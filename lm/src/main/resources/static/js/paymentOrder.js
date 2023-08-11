@@ -347,18 +347,22 @@ function deliList(list){
 }
 //결제 처리 
 function ajaxPaycomplete(rsp){
+	let notice = $('#deli-request').val();
 	console.log(rsp);
 	$.ajax({
 		url:'orderAction.do',
 		type:'post',
 		data:{
-			orderInfo:JSON.stringify(rsp)
+			orderInfo:JSON.stringify(rsp),
+			notice:notice
 			},
 		dataType:'json',
 		success:function(param){
 			if(param.result == 'success'){
+				let order = param.order;
+				console.log(order.order_num);
 				alert('결제에 성공했습니다.');
-				location.href='../template/bsMain.do';
+				location.href='receipt.do?order_num='+order.order_num;
 			}
 		},
 		error:function(){
