@@ -66,8 +66,17 @@ public interface MyPageMapper {
 	//photo 유무 확인
 	@Select("SELECT * FROM lm_member_detail WHERE mem_num = #{mem_num}")
 	public MyPageVO getPhoto(int mem_num);
+	//회원정보 수정일 수정
+	@Update("UPDATE lm_member_detail SET mem_modify_date = SYSDATE WHERE mem_num = #{mem_num}")
+	public void updateModifyDate(MyPageVO mypageVO);
+		
+	//주문내역 가져오기 store_order_manage, store_order_detail, store_product_detail
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT c.store_product_title,d.order_total_price, d.order_status, d.order_date, d.order_num FROM\r\n"
+			+ "			(SELECT LISTAGG(a.store_product_title, ', ') AS store_product_title, b.order_num FROM (SELECT m.mem_num,d.store_product_num,d.order_num FROM store_order_manage m INNER JOIN store_order_detail d ON m.order_num = d.order_num) b\r\n"
+			+ "			INNER JOIN store_product_detail a ON b.store_product_num = a.store_product_num GROUP BY order_num) c INNER JOIN store_order_manage d ON c.order_num = d.order_num\r\n"
+			+ "			WHERE mem_num = #{mem_num}  ORDER BY order_num DESC)a) WHERE rnum >= #{start} AND rnum <= #{end}")
+	public List<MyPageVO> getOrderList(Map<String,Object> map);
+	//개시글 개수
+	@Select("SELECT COUNT(*) FROM store_order_manage")
+	public int selectRowCountOrderList(Map<String,Object> map);
 }
-
-
-
-

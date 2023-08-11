@@ -178,3 +178,32 @@ function hideChangecell() {
 }
 
 
+$(function(){ 
+	//이미지 처리 시작 ~~~~~~~~~~~~~~~~~
+	//처음 화면에 보여지는 이미지 읽기
+	let used_photo1_path = $('.used-photo1').attr('src');
+	//let my_photo; //업로드하고자 선택한 이미지 저장
+	let used_photo1;
+	$('#used_photo1_upload').change(function(){
+		used_photo1 = this.files[0];
+		if(!used_photo1){
+			$('.used-photo1').attr('src',used_photo1_path);
+			return;
+		}
+		
+		if(used_photo1.size > 1024* 1024){
+			alert(Math.round(used_photo1.size/1024) + 'kbytes(1024kbytes까지만 업로드 가능)');
+			$('.used-photo1').attr('src',used_photo1_path);
+			$(this).val('');
+			return;
+		}
+		
+		//이미지 미리보기 처리
+		let reader1 = new FileReader();
+		reader1.readAsDataURL(used_photo1);
+		reader1.onload=function(){
+			$('.used-photo1').attr('src',reader1.result);
+		};
+		
+	}); 
+});

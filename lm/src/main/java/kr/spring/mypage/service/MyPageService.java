@@ -2,6 +2,7 @@ package kr.spring.mypage.service;
 
 import java.sql.Blob;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Update;
 
@@ -30,4 +31,12 @@ public interface MyPageService {
 	public void updatePhoto(MyPageVO mypageVO);
 	//이미지 유무 확인
 	public MyPageVO getPhoto(int mem_num);
+	//회원정보 수정일 수정
+	public void updateModifyDate(MyPageVO mypageVO);
+	//주문내역
+	public List<MyPageVO> getOrderList(Map<String,Object> map);
+	//개시글 개수
+	public int selectRowCountOrderList(Map<String,Object> map);
+	
+	
 }

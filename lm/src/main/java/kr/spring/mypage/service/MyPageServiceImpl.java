@@ -9,6 +9,7 @@ import kr.spring.mypage.vo.MyPageVO;
 
 import java.sql.Blob;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -105,5 +106,20 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public MyPageVO getPhoto(int mem_num) {
 		return mypageMapper.getPhoto(mem_num);
+	}
+
+	@Override
+	public List<MyPageVO> getOrderList(Map<String,Object> map) {
+		return mypageMapper.getOrderList(map);
+	}
+
+	@Override
+	public int selectRowCountOrderList(Map<String, Object> map) {
+		return mypageMapper.selectRowCountOrderList(map);
+	}
+
+	@Override
+	public void updateModifyDate(MyPageVO mypageVO) {
+		mypageMapper.updateModifyDate(mypageVO);
 	}
 }

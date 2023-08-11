@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
 <!DOCTYPE html>
 <html>
@@ -68,8 +69,7 @@
 					<!-- 폼 시작 -->
 					<div class="photo-form">
 						<div class="view-photo">
-							<img src="${pageContext.request.contextPath}/lm/mypage/myedit/photoView.do?mem_num=${mem_num}" width="50" height="50"
-								class="view-photo">
+							<img src="${pageContext.request.contextPath}/lm/mypage/myedit/photoView.do?mem_num=${mem_num}" class="view-photo">
 						</div>
 						<input type="button" onclick="ShowUploadPhoto();" value="사진 변경"
 							id="upload-photo" class="edit-button-photo">

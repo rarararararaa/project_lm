@@ -306,13 +306,6 @@ ul.list {
 	margin-right:20px;
 	color:gray;
 }
-.title-list div{ /*상품 타이틀 전체 설정*/
-	display:inline-block;
-}
-/* 상품 정보 단일 설정*/
-.title-list { 
-	
-}
 #status-hr{ /*내용 hr태그*/
 	display:inline-block;
 	border-bottom : 2px solid black;
@@ -864,4 +857,64 @@ input{
 }
 .member-out input{
 	float:right;
+}
+/* 마이페이지 주문내역 설정 */
+.title-list { 
+	display:flex;
+	width:970px;
+}
+.item-list{
+	display:flex;
+	width:970px;
+	height:70px;
+}
+#t-mypage-num{
+	display:inline-block;
+	width:70px;
+	text-align:center;
+}
+#t-mypage-title{
+	display:inline-block;
+	width:430px;
+	text-align:center;
+}
+#t-mypage-price{
+	display:inline-block;
+	width:150px;
+	text-align:center;
+}
+#t-mypage-date{
+	display:inline-block;
+	width:170px;
+	text-align:center;
+}
+#t-mypage-status{
+	display:inline-block;
+	width:150px;
+	text-align:center;
+}
+#c-mypage-num{
+	display:inline-block;
+	width:70px;
+	text-align:center;
+}
+#c-mypage-title{
+	display:inline-block;
+	width:430px;
+	text-align:center;
+}
+#c-mypage-price{
+	display:inline-block;
+	width:150px;
+	text-align:center;
+}
+#c-mypage-date{
+	display:inline-block;
+	width:170px;
+	text-align:center;
+}
+#c-mypage-status{
+	display:inline-block;
+	width:150px;
+	text-align:center;
 }

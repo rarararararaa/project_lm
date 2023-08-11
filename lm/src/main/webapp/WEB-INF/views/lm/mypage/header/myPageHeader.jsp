@@ -7,7 +7,8 @@
 <div class="whole">
   <div class="top-div">
   	<div class="top-left-div">
-  		<div class="photo">사진
+  		<div class="photo">
+  		<img src="${pageContext.request.contextPath}/lm/mypage/myedit/photoView.do?mem_num=${mem_num}" class="view-photo">
   		</div>
   	</div>
   	

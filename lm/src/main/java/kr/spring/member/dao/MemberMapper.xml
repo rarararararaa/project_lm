@@ -13,7 +13,8 @@
 		  mem_identify,
 		  mem_point,
 		  mem_salt,
-		  mem_grade)
+		  mem_grade,
+		  mem_photo)
 		VALUES(
 		  #{mem_num},
 		  #{mem_name},
@@ -23,7 +24,8 @@
 		  #{mem_identify},
 		  2000,
 		  #{mem_salt},
-		  0
+		  0,
+		  #{mem_photo}
 		  )
 	</insert>
 	

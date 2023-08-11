@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.library.board_announce.vo.BoardAnnounceVO;
+import kr.spring.library.lib_lost_item.vo.LibLostItemVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.mypage.service.MyPageService;
@@ -35,6 +36,7 @@ import kr.spring.mypage.vo.MyPageVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.EncryptionPasswd;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PagingUtil;
 import kr.spring.util.SaltGenerate;
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,41 +55,60 @@ public class MyPageController {
 		return new MyPageVO();
 	}
 	
+	//intercepter에서 마이페이지 공용 데이터 처리하여 SELECT SQL 실행 후 반환. AppConfig.java,MyPageHeaderInterceptor.java
+	//페이지 추가 시 appconfig에 추가 해줘야 함
+	
 	/*=======================
-	 * 마이페이지
+	 * 마이페이지 + 주문내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/main/myPageMain.do")
-	public String formMyPage(HttpServletRequest request,Model model,@RequestParam int lo) {
+	public ModelAndView formMyPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
-		//로그인 여부 체크
-		Integer mem_num = (Integer)session.getAttribute("mem_num");
-		//로그인 안되어있을 시 로그인 화면으로 이동
-		if(mem_num==null) {
-			model.addAttribute("accessMsg", "먼저 로그인을 해주세요.");
-			if(lo==1) {
-				return "common/notice_bs";
-			}else {
-				return "common/notice_lib";
+
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+		
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountOrderList(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "myPageMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//주문내역 가져오기
+			list = mypageService.getOrderList(map);
+		}
+		//제목 길이가 길면 잘라내고 .. 추가
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getStore_product_title().length() >= 90) {
+				String new_title = list.get(i).getStore_product_title().substring(0, 85)+"..";
+				list.get(i).setStore_product_title(new_title);
 			}
 		}
-		return "myPageMain"; //타일스 설정의 식별자
+		//금액 천단위 , 처리
+		for (int i = 0; i < list.size(); i++) {
+			String price = list.get(i).getOrder_total_price();
+			price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+			list.get(i).setOrder_total_price(price);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myPageMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
-	@GetMapping("/lm/mypage/main/myPageMain.do")
-	public String myPage(@Valid MyPageVO mypage,
-			@RequestParam int lo,BindingResult result,
-			Model model,HttpServletRequest request,MyPageVO mypageVO) {
-		log.debug("<<마이페이지>> : " + mypageVO);
-		//intercepter에서 마이페이지 공용 데이터 처리하여 SELECT SQL 실행 후 반환. AppConfig.java,MyPageHeaderInterceptor.java
-		//이후 주문내역 데이터 SELECT 하여 model에 addAttribute
-		//페이지 추가 시 appconfig에 추가 해줘야 함
-		
-		//model을 이용한 파라미터 세팅
-		//model.addAttribute("",null);
-		
-
-		return "myPageMain";
-	}
-	
 	/*=======================
 	 * 문의내역
 	 *=======================*/
@@ -277,7 +298,6 @@ public class MyPageController {
 		}
 		//name,email,cell 가져오기
 		mypageVO = mypageService.getMyEdit(mem_num);
-	
 		model.addAttribute("mypageVO", mypageVO);
 		return "myEditMain"; //타일스 설정의 식별자
 	}
@@ -302,24 +322,33 @@ public class MyPageController {
 			//VO에 SHA-256 passwd로 업데이트
 			mypageVO.setMem_new_passwd(mem_new_passwd);
 		}
+		boolean check = false;
 		//입력된 회원정보만 수정
 		if(mypageVO.getMem_photo().length!=0) {
 			mypageService.updatePhoto(mypageVO);
 			model.addAttribute("accessMsg", "이미지 등록 완료.");
+			check = true;
 		}
 		if(!mypageVO.getMem_new_passwd().equals("")) {
 			mypageService.updatePasswd(mypageVO);
 			model.addAttribute("accessMsg", "비밀번호 수정 완료.");
+			check = true;
 		}
 		if(!mypageVO.getMem_new_email().equals("")) {
 			mypageService.updateEmail(mypageVO);
 			model.addAttribute("accessMsg", "이메일 수정 완료.");
+			check = true;
 		}
 		if(!mypageVO.getMem_new_cell().equals("")) {
 			mypageService.updateCell(mypageVO);
 			//이메일 변경 시 미인증이므로 auth=4 변경
 			mypageService.updateAuth(mypageVO);
 			model.addAttribute("accessMsg", "전화번호 수정 완료.");
+			check = true;
+		}
+		//개인정보가 수정되었으면 modify_date 수정
+		if(check) {
+			mypageService.updateModifyDate(mypageVO);
 		}
 		model.addAttribute("lo",lo);
 		return "common/notice_edit";
@@ -335,7 +364,8 @@ public class MyPageController {
 			MyPageVO mypageVO = mypageService.getPhoto(mem_num);
 			viewProfile(mypageVO,request,model);
 		return "imageView";
-
+		//<img src="${pageContext.request.contextPath}/lm/mypage/myedit/photoView.do?mem_num=${mem_num}" class="view-photo" width="500" height="500">
+		//형태로 이미지 사용 가능
 	}
 	//프로필 사진 처리를 위한 공통 코드
 	public void viewProfile(MyPageVO mypageVO,
@@ -347,16 +377,14 @@ public class MyPageController {
 			//기본 이미지 읽기
 			byte[] readbyte = FileUtil.getBytes(
 					      request.getServletContext().getRealPath(
-					    		                "/image_basic/basic1.png"));
+					    		                "/image_basic/basic3.png"));
 			model.addAttribute("imageFile", readbyte);
-			model.addAttribute("filename", "face.png");
+			model.addAttribute("filename", "lm_photo.png");
 		}else {//업로드한 프로필 사진이 있는 경우
-			System.out.println("test");
 			model.addAttribute("imageFile", mypageVO.getMem_photo());
+			model.addAttribute("filename", "lm_photo.png");
 		}
 	}
-	
-	
 	/*=======================
 	 * 사용가능포인트정보
 	 *=======================*/

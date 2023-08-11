@@ -3,6 +3,7 @@ package kr.spring.mypage.vo;
 import java.io.IOException;
 
 
+
 import java.sql.Date;
 
 import javax.validation.constraints.Email;
@@ -27,7 +28,7 @@ public class MyPageVO {
 	public int mem_num;
 	public int mem_grade;
 	public int mem_point;
-	public int zzim_num;
+	public int zzim_num; 
 	public int review_num;
 	public int rep_num;
 	public int coupon_num;
@@ -45,17 +46,16 @@ public class MyPageVO {
 	public String mem_email;
 	public String mem_cell;
 	public String mem_name;
+	public String store_product_title;
+	public String order_total_price;
+	public int order_status;
+	public String order_date;
+	public int order_num;
+	
 	
 	private byte[] mem_photo; //myEdit.jsp에서 입력받은 이미지 파일
-	//MultipartFile to byte
+	//MultipartFile to byte 이미지 처리 
 	public void setUpload(MultipartFile upload) throws IOException {
 		setMem_photo(upload.getBytes());
 	}
 }
-
-
-
-
-
-
-

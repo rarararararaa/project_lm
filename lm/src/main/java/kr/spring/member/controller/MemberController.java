@@ -27,8 +27,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.mypage.controller.MyPageController;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.EncryptionPasswd;
+import kr.spring.util.FileUtil;
 import kr.spring.util.SaltGenerate;
 import lombok.extern.slf4j.Slf4j;
 
@@ -248,14 +250,13 @@ public class MemberController {
 	
 	//회원가입 처리
 	@PostMapping("/lm/register/template/registerMain.do")
-	public String submit(@Valid MemberVO memberVO,@RequestParam int lo,BindingResult result, Model model) {
+	public String submit(@Valid MemberVO memberVO,@RequestParam int lo,BindingResult result,HttpServletRequest request,Model model) {
 		log.debug("<<회원가입>> : " + memberVO);
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return registerForm();
 		}
 		String passwd = memberVO.getMem_passwd();
-	
 		//비밀번호 암호화 salt 생성
 		String salt = SaltGenerate.getSalt();
 		//입력받은 비밀번호 암호화 (salt + mem_passwd)
@@ -264,6 +265,12 @@ public class MemberController {
 		memberVO.setMem_salt(salt);
 		memberVO.setMem_passwd(mem_passwd);
 	
+		//회원가입시 기본 프로필 사진 지정
+		int rand = (int)Math.random()*7+1;//1~7까지의 난수
+		byte[] readbyte = FileUtil.getBytes(
+			      request.getServletContext().getRealPath(
+			    		                "/image_basic/basic"+rand+".png"));
+		memberVO.setMem_photo(readbyte);
 		
 		//회원가입 manage, detail, home에 데이터 insert
 		memberService.insertMember(memberVO);
