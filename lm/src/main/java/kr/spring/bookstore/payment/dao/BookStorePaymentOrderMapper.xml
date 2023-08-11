@@ -35,5 +35,15 @@
 			#{cart_quantity}
 		)
 	</insert>
-
+	<update id="updateHome" parameterType="memberVO">
+		UPDATE store_member_home SET 
+			home_title = #{home_title},
+			home_zipcode = #{home_zipcode},
+			home_address = #{home_address},
+			home_address_detail = #{home_address_detail},
+			home_cell = #{mem_cell},
+			home_name = #{mem_name},
+			home_default = #{home_default}
+		WHERE home_num = #{home_num}
+	</update>
 </mapper>

@@ -7,7 +7,6 @@
 	margin: 0 auto;
 	width: 1200px;
 	min-height: 100%;
-	overflow: auto;
 }
 .payment-title{
 	width: 100%;
@@ -51,7 +50,12 @@ input[type='number']::-webkit-inner-spin-button {
     overflow-y: hidden;
   	padding-right: 4.5px;
 }
-
+.de-home{
+	margin-top: 10px;
+}
+.default-color{
+	color: #579847 !important;
+}
 /*모달 창*/
 /*모달 배경*/
 .modal{
@@ -136,24 +140,25 @@ input[type='number']::-webkit-inner-spin-button {
 	width: 460px;
 	height: 600px;
 }
-#deli_form ul{
+.deli-form ul{
 	padding-left: 0;
 	margin-top: 0;
 }
-#deli_form li{
+.deli-form li{
 	margin-left:0;
 	width: 500px;
 	font-size: 14px !important;
 	color: black;
 	font-weight: normal !important;
 }
-#deli_form li:first-child{
+.deli-form li:first-child{
 	margin-top: 10px;
 }
-#deli_form li{
+.deli-form li{
+	margin-left: 0px !important;
 	margin-bottom: 20px;
 }
-#deli_form label + input{
+.deli-form label + input{
 	margin-top: 10px;
 }
 .default-btn{
@@ -162,10 +167,10 @@ input[type='number']::-webkit-inner-spin-button {
 #recipient, #address1{
 	margin-bottom: 5px;
 }
-#deli_form td input:first-child{
+.deli-form td input:first-child{
 	margin-top: 10px;
 }
-#deli_form input[type="text"], input[type="button"]{
+.deli-form input[type="text"], input[type="button"]{
 	width: 460px;
 	padding: 10px 0;
 	color: #898989;
@@ -173,13 +178,13 @@ input[type='number']::-webkit-inner-spin-button {
 	border: 1px solid #DBDBDB;
 	background: #FFF;
 }
-#deli_form input[type="text"]{
+.deli-form input[type="text"]{
 	width: 428px;
 	font-size: 12px;
 	padding: 10px 15px;
 }
 #deli_submit{
-	margin: 40px 0 0 160px;
+	margin: 35px 0 0 160px;
 	width: 140px;
 	height: 44px;
 	border-radius: 7px;

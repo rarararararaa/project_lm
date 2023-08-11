@@ -211,7 +211,7 @@ public class BookStorePaymentController {
 		MemberVO member = memberService.selectMember(mem_num);
 		log.debug("<<member 확인>>"+member);
 		//배송정보
-		MemberVO home = memberService.homeDefault(mem_num);
+		MemberVO home = bookStorePaymentOrderService.selectDefaultHome(mem_num);
 		//등급에 따른 포인트 정보
 		double point = getPoint(member.getMem_grade());
 		//상품 정보
@@ -224,6 +224,7 @@ public class BookStorePaymentController {
 		model.addAttribute("point", point);
 		//회원 배송 정보
 		model.addAttribute("home", home);
+		log.debug("<<기본 배송지>> : "+home);	
 		model.addAttribute("home_list", home_list);
 		//log.debug("<<배송지 리스트>> : "+home_list);
 		return "order";
@@ -233,14 +234,14 @@ public class BookStorePaymentController {
 	@ResponseBody
 	public Map<String, String> payBook(String orderInfo, HttpSession session) {
 		log.debug("<<결제 데이터 확인>> : "+orderInfo);
-		
+		int mem_num = (Integer)session.getAttribute("mem_num");		
 		org.json.JSONObject jObject = new org.json.JSONObject(orderInfo);
 		//boolean result = jObject.getBoolean("success");
 		List<BookStorePaymentCartVO> list = (ArrayList)session.getAttribute("cartList");
 		int total = (Integer)session.getAttribute("total");
 		BookStorePaymentOrderVO order = new BookStorePaymentOrderVO();
 		//데이터 뽑기
-		MemberVO mem_home = bookStorePaymentOrderService.selectHome(jObject.getInt("buyer_postcode"));
+		MemberVO mem_home = bookStorePaymentOrderService.selectDefaultHome(mem_num);
 		order.setHome_num(mem_home.getHome_num());
 		order.setMem_num(mem_home.getMem_num());
 		order.setOrder_total_price(total);
@@ -261,11 +262,54 @@ public class BookStorePaymentController {
 		mapJson.put("result", "success");
 		return mapJson;
 	}
+	//배송지 수정
+	//폼
+	@GetMapping("/bookstore/payment/homeModify.do")
+	@ResponseBody
+	public Map<String, Object> modifyForm(int home_num, HttpSession session){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		String mem_id = (String)session.getAttribute("mem_id");
+		if(mem_id == null) {
+			mapJson.put("result", "logout");
+			return mapJson;
+		}
+		MemberVO homeInfo = bookStorePaymentOrderService.selectHome(home_num);
+		log.debug("<<배송 정보 수정>> : "+homeInfo);
+		mapJson.put("homeInfo", homeInfo);
+		mapJson.put("result", "success");
+		return mapJson;
+	}
+	//동작
+	@PostMapping("/bookstore/payment/homeModify.do")
+	@ResponseBody
+	public Map<String, Object> modifyAction(MemberVO memberVO, HttpSession session){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		String mem_id = (String)session.getAttribute("mem_id");
+		if(mem_id == null) {
+			mapJson.put("result", "logout");
+			return mapJson;
+		}
+		int mem_num = (Integer)session.getAttribute("mem_num");
+		log.debug("<<수정 Action>> : "+memberVO);
+		//기본 배송지로 설정한 주소 등록 시
+		memberVO.setMem_num(mem_num);
+		bookStorePaymentOrderService.updateHome(memberVO);
+		if(memberVO.getHome_default() == 0) {
+			mapJson.put("default", memberVO);
+		}
+		//회원 배송지 정보
+		List<MemberVO> home_list = new ArrayList<MemberVO>();
+		home_list = bookStorePaymentOrderService.selectMemHome(mem_num);
+		log.debug("<<수정 ACTION - home_list>> : "+home_list);
+		mapJson.put("result", "success");
+		mapJson.put("home_list", home_list);
+		return mapJson;
+	}
 	//배송지 등록
 	@PostMapping("/bookstore/payment/homeInsert.do")
 	@ResponseBody
-	public Map<String, String> insertHome(MemberVO memberVO, HttpSession session){
-		Map<String, String> mapJson = new HashMap<String, String>();
+	public Map<String, Object> insertHome(MemberVO memberVO, HttpSession session){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
 		String mem_id = (String)session.getAttribute("mem_id");
 		if(mem_id == null) {
 			mapJson.put("result", "logout");
@@ -275,7 +319,53 @@ public class BookStorePaymentController {
 		memberVO.setMem_num(mem_num);
 		log.debug("<<배송 정보>> : "+memberVO);
 		bookStorePaymentOrderService.insertHome(memberVO);
-		
+		//회원 배송지 정보
+		List<MemberVO> home_list = new ArrayList<MemberVO>();
+		home_list = bookStorePaymentOrderService.selectMemHome(mem_num);
+		//기본 배송지로 설정한 주소 등록 시
+		if(memberVO.getHome_default() == 0) {
+			mapJson.put("default", memberVO);
+		}
+			
+		mapJson.put("result", "success");
+		mapJson.put("home_list", home_list);
+		return mapJson;
+	}
+	//배송지 삭제
+	@RequestMapping("/bookstore/payment/homeDelete.do")
+	@ResponseBody
+	public Map<String, Object> deleteHome(int home_num, HttpSession session, Model model) {
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		String mem_id = (String)session.getAttribute("mem_id");
+		if(mem_id == null) {
+			mapJson.put("result", "logout");
+			return mapJson;
+		}		
+		int mem_num = (Integer)session.getAttribute("mem_num");
+		bookStorePaymentOrderService.deleteHome(home_num);
+		//회원 배송지 정보
+		List<MemberVO> home_list = new ArrayList<MemberVO>();
+		home_list = bookStorePaymentOrderService.selectMemHome(mem_num);
+		mapJson.put("result", "success");
+		mapJson.put("home_list", home_list);
+		return mapJson;
+	}
+	//기본 배송지 업데이트
+	@RequestMapping("/bookstore/payment/defaultChange.do")
+	@ResponseBody
+	public Map<String, Object> ChangeDefault(Integer home_num, HttpSession session){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		log.debug("<<>> : "+home_num);
+		int mem_num = (Integer)session.getAttribute("mem_num");
+		MemberVO memberVO = memberService.selectMember(mem_num);
+		memberVO.setMem_num(mem_num);
+		bookStorePaymentOrderService.updateNormal(home_num, memberVO);
+		//회원 배송지 정보
+		List<MemberVO> home_list = new ArrayList<MemberVO>();
+		home_list = bookStorePaymentOrderService.selectMemHome(mem_num);	
+		log.debug("<<기본 배송지 업데이트>> : "+home_list);
+		mapJson.put("result", "success");
+		mapJson.put("home_list", home_list);
 		return mapJson;
 	}
 	//멤버 등급에 따른 포인드 % 가져오기

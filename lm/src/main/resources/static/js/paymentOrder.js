@@ -19,7 +19,15 @@ $(function(){
 	$('#mem_point').on('keydown keyup',function(key){
 		let total = $('#total').attr('data-total');
 		let point = parseInt($(this).val());
-		overPoint(point);
+		overPoint(point); 
+		if(!((key.keyCode > 95 && key.keyCode < 106) || (key.keyCode > 47 && key.keyCode < 58)  || key.keyCode == 8)){
+			return false;
+		}
+		if($(this).val().trim() == ''){
+			$(this).val(0);
+			$('#side_point').text(0+'원');
+			return false;
+		}
 		if(key.keyCode == 13){
 			overPoint(point);
 		}
@@ -36,12 +44,122 @@ $(function(){
 			$('#paySubmit').attr('data-type',$(this).val());
 		}
 	})
+//배송지 선택
+	$('#deli_submit').click(function(){
+		//선택한 주소의 home_num
+		let zipcode = $('.deli-default:checked').closest('tr').find('.deliInfo').children('li').eq(2).text().trim().substring(1,6);
+		let memInfo = $('.deli-default:checked').closest('tr').find('.deliInfo').children('li').eq(1).text().trim();
+		let deliInfo = $('.deli-default:checked').closest('tr').find('.deliInfo').children('li').eq(2).text().trim();
+		//기본 배송지 설정 여부
+		let check = $('#home_default').is(':checked');
+		let origin_default = $('.deli-default:checked').attr('data-default');
+		if(check && origin_default == 0){
+			alert('기본 배송지로 등록된 배송지 입니다.');
+			return;
+		}else if(check){
+			let home_num = parseInt($('.deli-default:checked').val());
+			$.ajax({
+				url:'defaultChange.do',
+				type:'get',
+				data:{home_num:home_num},
+				dataType:'json',
+				success:function(param){
+					if(param.result == 'success'){
+						alert('등록되었습니다.');
+						$('#deli_table').empty();
+						deliList(param.home_list);
+					}
+				},
+				error:function(){
+					alert('네트워크 오류');
+				}
+			})
+		}
+		$('#memInfo').attr('data-zipcode',zipcode);
+		$('#cell').text(memInfo);
+		$('#default_deli').text(deliInfo);
+		fnHidePop('re_pwd');
+		//defaultMain();
+		
+	})
+//==배송지 수정 폼==//
+	$('#deli_table').on('click','.modify-btn',function(){
+		let home_num = $(this).attr('data-homenum');
+		//alert(home_num);
+		$.ajax({
+			url:'homeModify.do',
+			type:'get',
+			data:{home_num:home_num},
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('로그인 후 이용할 수 있습니다.');
+				}else if(param.result == 'success'){
+					let Info = param.homeInfo;
+					let modify_div = $('.deli-modal-con');
+					//배송점보 보여줒기
+					$(modify_div).find('#deli_title').val(Info.home_title);
+					$(modify_div).find('#recipient').val(Info.home_name);
+					$(modify_div).find('#recipient').attr('data-num',Info.home_num);
+					$(modify_div).find('#phone').val(Info.home_cell);
+					$(modify_div).find('#home_zipcode').val(Info.home_zipcode);
+					$(modify_div).find('#address1').val(Info.home_address);
+					$(modify_div).find('#address2').val(Info.home_address_detail);
+					if(Info.home_default == 0){
+						$(modify_div).find('#home_default').prop('checked',true);
+					}else{
+						$(modify_div).find('#home_default').prop('checked',false);
+					}
+				}
+			},
+			error:function(){
+				alert('네트워크 오류');
+			}
+		})
+	})
+//==배송지 수정action==//
+	$('#modify_form').submit(function(event){
+		let form_data = $(this).serialize();
+		let homenum = $('.deli-modal-con').find('#recipient').attr('data-num');
+		if(!$('#home_default').is(':checked')){
+			form_data += '&home_default=1';
+		}
+		form_data += '&home_num='+homenum;
+		$.ajax({
+			url:'homeModify.do',
+			type:'post',
+			data:form_data,
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('로그인 후 이용가능합니다.');
+				}else if(param.result == 'success'){
+					alert('수정되었습니다.');
+					$('#deli_table').empty();
+					console.log(param.home_list);
+					deliList(param.home_list);
+					$("#re_mo_pwd").removeClass("on");
+					let newHome = param.default;
+					if(newHome != null){
+						defaultMain(newHome);
+					}
+					$('#deli_form')[0].reset();
+					fnHidePop('re_pwd');
+				}else{
+					alert('수정 action 오류');
+				}
+			},
+			error:function(){
+				
+			}
+		})
+		event.preventDefault();
+	})
 //==배송지 추가==//
 	$('#deli_form').submit(function(event){
 		
 		let form_data = $(this).serialize();
 		if(!$('#home_default').is(':checked')){
-			alert('선택안됨');
 			form_data += '&home_default=1';
 		}
 		console.log(form_data);
@@ -51,18 +169,60 @@ $(function(){
 			data:form_data,
 			dataType:'json',
 			success:function(param){
-				alert('추가되었습니다.');
-				location.reload();
-				/*var url = "order.do";
-				$(".payment-main").load(url, function() { 
-            			$('#dialog').dialog('open');
-       			 });*/
+				if(param.result == 'logout'){
+					alert('로그인 후 이용가능합니다.');
+				}else if(param.result == 'success'){
+					$('#deli_table').empty();
+					deliList(param.home_list);
+					$("#re_re_pwd").removeClass("on");
+					alert('추가되었습니다.');
+					let newHome = param.default;
+					if(newHome != null){
+						defaultMain(newHome);
+					}
+					$('#deli_form')[0].reset();
+					fnHidePop('re_pwd');
+				}
 			},
 			error:function(){
 				
 			}
 		})
 		event.preventDefault();
+	})
+//==배송지 삭제==//
+	$('#deli_table').on('click','.delete-btn',function(){
+		let check = confirm('선택한 주소를 삭제하시겠습니까?');
+		if(check){
+		let  home_num = $(this).attr('data-homenum');
+		$.ajax({
+			url:'homeDelete.do',
+			type:'get',
+			data:{home_num:home_num},
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('로그인 후 이용할 수 있습니다.')
+				}else if(param.result == 'success'){
+					$('#deli_table').empty();
+					let output = '';
+					if(param.home_list == null){
+						output += '<div class="non-deliInfo">';
+						output += '<img alt="" src="${pageContext.request.contextPath}/images/stop.png">';
+						output += '<p>등록된 배송지가 없습니다.</p>';
+						output += '</div>';
+						$('#deli_table').append(output);
+					}else{
+						deliList(param.home_list);
+					}
+				}else{
+					alert('배송지 삭제 오류');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류');
+			}
+		})
+		}
 	})
 //==결제화면==//
 	$('#paySubmit').on('click',function(event){
@@ -140,6 +300,52 @@ $(function(){
 	})
 })
 //=========================함수 시작==========================//
+//기본 주소 변경-부모 화면 갱신
+function defaultMain(newHome){
+	//data속성 값 변경시 두 번째 인자에 값 입력
+	$('#memInfo').attr('data-zipcode',newHome.home_zipcode);
+	$('#memInfo').attr('data-address',newHome.home_address+newHome.home_address_detail);
+	//부모창 기본 배송지 변경
+	$('#cell').attr('data-cell',newHome.mem_cell);
+	$('#cell').text(newHome.mem_name+' / '+newHome.mem_cell);
+	$('#default_deli').text('['+newHome.home_zipcode+']'+newHome.home_address+' '+newHome.home_address_detail);
+}
+
+//삭제&추가 후 리스트 화면 갱신
+function deliList(list){
+	console.log(list);
+	let output = '';
+	$(list).each(function(index, item){
+		output += '<tr>';
+		output += '<td>';
+		if(item.home_default == 0){//기본 배송지 일떄
+			output += '<input type="radio" value="'+item.home_num+'" class="deli-default" name="check_deli" checked=checked"  data-default = "'+item.home_default+'">';
+		}else{
+			output += '<input type="radio" value="'+item.home_num+'" class="deli-default" name="check_deli" data-default = "'+item.home_default+'">';
+		}
+		output += '</td>';//첫 번째 열
+		output += '<td>';
+		output += '<ul class="deliInfo">';
+		if(item.home_default == 0){//기본 배송지 일떄
+			output += '<li class="default-color">기본 배송지</li>';
+		}else{
+			output += '<li>일반 배송지</li>';
+		}
+		output += '<li>'+item.home_name+'/'+item.home_cell+'</li>';
+		output += '<li> ['+item.home_zipcode+']/'+item.home_address+item.home_address_detail+'</li>';
+		output += '</ul>';
+		output += '</td>';//두 번쨰 열
+		output += '<td style="text-align: right;" width="70">';//'뒤에 \넣으면 문자로 인식
+		output += '<button class="deli-btn modify-btn" id="modify_deli" onclick="fnShowPop(\'re_mo_pwd\')" data-homenum="'+item.home_num+'">수정</button>';
+		if(item.home_default > 0){//일반 배송지 일떄
+			output += '<button class="deli-btn delete-btn" id="delete_deli" data-homenum="'+item.home_num+'">삭제</button>';
+		}
+		output += '</td>';//세 번째 열
+		output += '</tr>';
+	})
+	$('#deli_table').append(output);
+}
+//결제 처리 
 function ajaxPaycomplete(rsp){
 	console.log(rsp);
 	$.ajax({
@@ -200,10 +406,11 @@ function fnShowPop(sGetName){
  
 function fnHidePop(sGetName){
     $("#"+ sGetName).removeClass("on");
-		if(sGetName == 're_pwd'){
+	if(sGetName == 're_pwd'){
 		document.body.classList.remove("scroll");
 	}else{
 		$('re_pwd').removeClass("scroll");
 		 closeDaumPostcode();
+		$('#deli_form')[0].reset();
 	}
 }

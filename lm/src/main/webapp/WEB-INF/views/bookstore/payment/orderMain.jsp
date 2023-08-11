@@ -46,14 +46,16 @@
 				<li>
 				<input type="hidden" id="memInfo" data-email="${mem.mem_email}" data-zipcode="${home.home_zipcode}"
 				data-address="${home.home_address} ${home.home_address_detail}">
-					<p data-cell="${mem.mem_cell}" id="cell">${mem.mem_name } / ${mem.mem_cell}</p>
+					<p data-cell="${home.home_cell}" id="cell">${home.home_name } / ${home.home_cell}</p>
 					<c:if test="${empty home}">
 						설정된 배송지가 없습니다.
 					</c:if>
 					<c:if test="${!empty home }">
-						[${home.home_zipcode}] ${home.home_address} ${home.home_address_detail}
+						<span id="default_deli">
+							[${home.home_zipcode}] ${home.home_address} ${home.home_address_detail}
+						</span>
 					</c:if>
-					<button id="deli-change">변경</button>
+					<button id="deli-change" onclick="fnShowPop('re_pwd')">변경</button>
 				</li>
 			</ul>
 			<hr size="1" noshade="noshade" class="del-hr both-clear">
@@ -124,7 +126,7 @@
 				<li>
 					<label for="mem_point">${mem.mem_point}</label>원
 					<input type="number" name="mem_point" id="mem_point" value="0" max="${mem.mem_point}"
-					data-maxpoint="${mem.mem_point}">원
+					data-maxpoint="${mem.mem_point}" min="0">원
 					<button id="allPoint">전액사용</button>
 				</li>
 			</ul>

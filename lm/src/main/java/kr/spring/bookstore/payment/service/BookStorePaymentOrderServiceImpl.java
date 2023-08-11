@@ -40,8 +40,8 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 	}
 //배송지 관련
 	@Override
-	public MemberVO selectHome(int home_zipcode) {
-		return bookStorePaymentOrderMapper.selectHome(home_zipcode);
+	public MemberVO selectHome(int home_num) {
+		return bookStorePaymentOrderMapper.selectHome(home_num);
 	}
 
 	@Override
@@ -57,6 +57,27 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 			bookStorePaymentOrderMapper.updateDefault(member);
 		}
 		bookStorePaymentOrderMapper.insertHome(memberVo);
+	}
+	@Override
+	public void deleteHome(int home_num) {
+		bookStorePaymentOrderMapper.deleteHome(home_num);;
+	}
+	@Override
+	public MemberVO selectDefaultHome(int mem_num) {
+		return bookStorePaymentOrderMapper.selectDefaultHome(mem_num);
+	}
+	@Override
+	public void updateHome(MemberVO memberVO) {
+		if(memberVO.getHome_default() == 0) {
+			MemberVO member = memberService.homeDefault(memberVO.getMem_num());
+			bookStorePaymentOrderMapper.updateDefault(member);
+		}
+		bookStorePaymentOrderMapper.updateHome(memberVO);
+	}
+	@Override
+	public void updateNormal(int home_num, MemberVO mem) {
+		bookStorePaymentOrderMapper.updateDefault(mem);
+		bookStorePaymentOrderMapper.updateNormal(home_num);
 	} 
 	
 	
