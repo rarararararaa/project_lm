@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.bookstore.review.dao.ReviewMapper">
+	<select id="selectReviewCheck" parameterType="map">
+		SELECT 
+		    COUNT(*) 
+		FROM lm_review 
+		WHERE order_detail_num=(SELECT 
+		                            order_detail_num 
+		                        FROM store_order_detail d
+		                       	RIGHT OUTER JOIN STORE_ORDER_MANAGE m
+								USING(ORDER_NUM) 
+		                        WHERE store_product_num=#{store_product_num} AND m.mem_num=#{mem_num})	
+	</select>
+	<select id="selectOrderVO" parameterType="map" resultType="BookStorePaymentOrderVO">
+		SELECT 
+		    * 
+		FROM store_order_detail d
+		RIGHT OUTER JOIN STORE_ORDER_MANAGE m
+		USING(ORDER_NUM)
+		WHERE store_product_num=#{store_product_num} and m.mem_num=#{mem_num}
+	</select>
+	<select id="selectOrderDetail" parameterType="BookStorePaymentOrderVO" resultType="OrderDetailVO">
+		SELECT 
+		    * 
+		FROM store_order_detail 
+		WHERE store_product_num=#{store_product_num} and order_num=#{order_num}	
+	</select>
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview" parameterType="reviewVO">
+		INSERT INTO lm_review(
+			review_num,
+			order_detail_num,
+			mem_num,
+			review_content,
+			review_rating,
+			review_image
+		)
+		VALUES(
+			lm_review_seq.nextval,
+			#{order_detail_num},
+			#{mem_num},
+			#{review_content},
+			#{review_rating},
+			#{review_image}
+		)
+	</insert>
+</mapper>

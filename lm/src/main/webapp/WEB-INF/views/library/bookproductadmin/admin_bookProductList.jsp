@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/EESAMSAOH.css">
 <!-- 도서관리 -도서목록 시작 -->
 <script type="text/javascript">
 	$(function(){
@@ -16,11 +17,12 @@
 </script>
 <div class="page-main">
 	<h2>도서 목록</h2>
-	<input type="button" value="도서목록" onclick="location.href='admin_booklist.do'">
-	<input type="button" value="대출목록" onclick="location.href='/library/rent/rentHistoryList.do'">
-	<input type="button" value="희망도서" onclick="#">
+	<input type="button" class="small-button" value="도서목록" onclick="location.href='admin_booklist.do'">
+	<input type="button" class="small-button" value="대출목록" onclick="location.href='/library/rent/rentHistoryList.do'">
+	<input type="button" class="small-button" value="희망도서" onclick="#">
 	
 	<form action="admin_booklist.do" id="search_form" method="get">
+		<div class="button-box">
 		<ul class="search">
 			<li>
 				<select name="keyfield">
@@ -34,11 +36,10 @@
 				                     value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="조회">
-				<input type="button" value="도서목록" 
-				   onclick="location.href='admin_booklist.do'">
+				<input type="submit" value="조회"  class="small-button">
 			</li>
 		</ul>
+		</div>
 	</form>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 도서정보가 없습니다.</div>
