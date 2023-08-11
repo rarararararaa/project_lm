@@ -211,7 +211,7 @@ $(function(){
 		</div>
 		<hr>
 		<div class="second-box">
-			<div class="workers">
+			<!-- <div class="workers">
 				<img src="/videos/pjh.jpg">
 				<span>박정호</span>
 			</div>
@@ -238,7 +238,7 @@ $(function(){
 			<div class="workers">
 				<img src="/videos/a.jpg">
 				<span>김정은</span>
-			</div>
+			</div> -->
 		</div>
 		<div class="third-box">
 			

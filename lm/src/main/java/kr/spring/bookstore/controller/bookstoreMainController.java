@@ -20,9 +20,10 @@ public class bookstoreMainController {
 
 	@RequestMapping("/")
 	public String getbsMain() {
-		return "redirect:/bookstore/template/bsMain.do";
+		return "redirect:/library/template/testpage.do";
 	}
-
+	
+	
 	@RequestMapping("/bookstore/template/bsMain.do")
 	public String main(Model model) {
 		//최신 등록 상품 읽어오기
