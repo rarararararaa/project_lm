@@ -15,7 +15,10 @@
 			event_img_big,
 			event_reg_date,
 			event_date_start,
-			event_date_end
+			event_date_end,
+			event_quiz_sel1,
+			event_quiz_sel2,
+			event_quiz_an
 			)
 		VALUES(
 			store_event_board_seq.nextval,
@@ -29,7 +32,10 @@
 			#{event_img_big},
 			SYSDATE,
 			#{event_date_start},
-			#{event_date_end}
+			#{event_date_end},
+			#{event_quiz_sel1},
+			#{event_quiz_sel2},
+			#{event_quiz_an}
 		)
 	</insert>
 	<!--  ㅎ-->
@@ -50,7 +56,10 @@
 				</if>
 				event_modify_date=SYSDATE,
 				event_date_start=#{event_date_start},
-				event_date_end=#{event_date_end}
+				event_date_end=#{event_date_end},
+				event_quiz_sel1=#{event_quiz_sel1},
+				event_quiz_sel2=#{event_quiz_sel2},
+				event_quiz_an=#{event_quiz_an}
 			WHERE event_board_num=#{event_board_num}
 	</update>
 	
@@ -141,6 +150,46 @@
 		WHERE event_attendance_point_num=#{event_attendance_point_num}
 	</select>
 	
+	<!-- 댓글 -->
+	<!-- 댓글 작성 -->
+	<insert id="insertReply" parameterType="bsEventReplyVO">
+		INSERT INTO store_event_board_reply (
+			reply_num,
+			event_board_num,
+			mem_num,
+			reply_content)
+		VALUES (
+			STORE_EVENT_BOARD_REPLY_SEQ.nextval,
+			#{event_board_num},
+			#{mem_num},
+			#{reply_content})
+	</insert>
+	
+	<!-- 댓글 목록 -->
+	<select id="selecListReply" parameterType="map" resultType="bsEventReplyVO">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum 
+			  FROM (SELECT
+			  			reply_num,
+			  			event_board_num,
+			  			mem_num,
+			  			reply_date,
+			  			reply_modify_date,
+			  			<![CDATA[
+			  			REPLACE(REPLACE(reply_content,'<','&lt;'),'>','&gt;') reply_content,
+			  			]]>
+			  			mem_id 
+			  		FROM store_event_board_reply
+			  		JOIN lm_member_manage USING (mem_num)
+			  		WHERE event_board_num=#{event_board_num}
+			  		ORDER BY reply_num DESC) a)
+		<![CDATA[
+		WHERE rnum >= ${start} AND rnum <= #{end}
+		]]>	
+	</select>
 	
 	
 

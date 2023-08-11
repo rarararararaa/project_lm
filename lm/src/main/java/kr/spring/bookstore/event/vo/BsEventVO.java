@@ -33,7 +33,7 @@ public class BsEventVO {
 	private int event_hit;					//글 조회수
 	private String event_quiz_sel1;		//퀴즈 선택지1
 	private String event_quiz_sel2;		//퀴즈 선택지2
-	private String event_quiz_an;		//퀴즈 정답
+	private int event_quiz_an;		//퀴즈 정답
 	
 	//업로드 파일 처리
 	public void setUploadSmall(MultipartFile uploadSmall) throws IOException{

@@ -13,7 +13,7 @@
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="기증승인"
-			  onclick="location.href='#'">
+			  onclick="location.href='${pageContext.request.contextPath}/library/donationadmin/admin_donationlist.do'">
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="공지사항"
@@ -25,10 +25,6 @@
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="1:1문의"
-			  onclick="location.href='#'">
-		</li>
-		<li>
-			<input type="button" class="menu-btn" value="이벤트"
 			  onclick="location.href='#'">
 		</li>
 		<li>
@@ -46,8 +42,3 @@
 	</ul>
 </div>
 <!-- Admin 메뉴 끝 -->
-
-
-
-
-

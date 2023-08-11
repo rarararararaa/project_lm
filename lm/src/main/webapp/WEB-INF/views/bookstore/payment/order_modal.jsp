@@ -2,46 +2,61 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/payment-modal.css">
+<!-- 배송지 등록 모달 -->
 <div class="modal re_pwd" id="re_pwd">
         <div class="modal_container">
             <div class="m_content">
                 <div class="tit"><h2>배송지 등록</h2><img src="${ pageContext.request.contextPath }/images/modal-btn.png" onclick="fnHidePop('re_pwd')" class="modal-btn"></div>
                 <div class="con">
                 	<button class="deli-plus" onclick="fnShowPop('re_re_pwd')">배송지 추가</button>
-					<table>  
+                <!-- 배송지 목록 시작 -->
+                	<div id="deli_list">
+                	<c:if test="${empty home}">
+                		<div class="non-deliInfo">
+                			<img alt="" src="${pageContext.request.contextPath}/images/stop.png">
+	                		<p>등록된 배송지가 없습니다.</p>
+                		</div>
+                	</c:if>
+                	<c:if test="${!empty home_list}">
+					<table id="deli_table">  
+					<!-- 반복문 -->
+					<c:forEach var="home" items="${home_list}">
 						<tr>
 							<td>
-								<input type="checkbox" value="2" class="deli-default" name="check_deli"
-								<c:if test="${home.home_default == 0}">checked="checked"</c:if>>
+								<input type="radio" value="${home.home_num}" class="deli-default" name="check_deli"
+								<c:if test="${home.home_default == 0}">checked="checked"</c:if> data-default = "${home.home_default}">
 							</td>
 							<td>
 								<ul class="deliInfo">
-									<li>기본 배송지</li>
-									<li>${mem.mem_name }/${mem.mem_cell }</li>
+									<c:if test="${home.home_default == 0}">
+										<li class="default-color">기본 배송지</li>
+									</c:if>
+									<c:if test="${home.home_default > 0 }">
+										<li>일반 배송지</li>
+									</c:if>
+									<li>${home.home_name }/${mem.mem_cell }</li>
 									<li>
-										[${home.home_zipcode}] ${home.home_address} ${home_address_detail}
+										[${home.home_zipcode}] ${home.home_address} ${home.home_address_detail}
 									</li>
 								</ul>
 							</td>
-							<td><button class="modify-deli">수정</button></td>
-						</tr>
-						<tr>
-							<td>
-								<input type="checkbox" value="2" class="deli-default" name="check_deli">
+							<td style="text-align: right;"  width="70">
+								<button class="deli-btn modify-btn" id="modify_deli" onclick="fnShowPop('re_mo_pwd')" data-homenum="${home.home_num}">수정</button>
+								<c:if test="${home.home_default > 0}">
+									<button class="deli-btn delete-btn" id="delete_deli" data-homenum="${home.home_num}">삭제</button>
+								</c:if>
 							</td>
-							<td>
-								<ul class="deliInfo">
-									<li>기본 배송지</li>
-									<li>${mem.mem_name }/${mem.mem_cell }</li>
-									<li>
-										[${home.home_zipcode}] ${home.home_address} ${home_address_detail}
-									</li>
-								</ul>
-							</td>
-							<td><button class="modify-deli">수정</button></td>
 						</tr>
+					</c:forEach>
+					<!-- 반복문 -->						
 					</table>
-                </div>
+                	</c:if>
+                	</div>
+                	<div class="de">
+					<input type="checkbox" name="home_default" value="0" id="home_default" class="de-home">기본 배송지로 설정
+					</div>
+					<input type="button" value="선택" id="deli_submit">
+                </div><!-- end of con -->
             </div>
         </div>
    </div>
@@ -49,29 +64,64 @@
 <div class="modal re_pwd" id="re_re_pwd">
 	<div class="modal_container deli-modal-con">
 		<div class="m_content">
-			 <div class="tit"><h2>배송지 등록</h2><img src="${ pageContext.request.contextPath }/images/modal-btn.png" onclick="fnHidePop('re_re_pwd')" class="modal-btn"></div>
+			 <div class="tit"><h2>배송지 추가</h2><img src="${ pageContext.request.contextPath }/images/modal-btn.png" onclick="fnHidePop('re_re_pwd')" class="modal-btn"></div>
 			<hr size="1px" noshade="noshade" color="#DBDBDB">
-			<form action="insertDeli" method="post" id="deli_form">
+			<form method="post" id="deli_form" class="deli-form">
 				<ul>
 					<li>
 						<label for="deli_title">배송지명</label>
-						<input type="text" id="deli_title" name="deli_title" placeholder="최대 7자까지 자유롭게 입력가능">
+						<input type="text" id="deli_title" name="home_title" placeholder="최대 7자까지 자유롭게 입력가능" maxlength="7">
 					</li>
 					<li>
 						<label for="recipient">받는 분</label>
-						<input type="text" id="recipient" name="recipient" placeholder="최대 7자까지 자유롭게 입력가능">
-						<input type="text" id="phone" name="phone" placeholder="휴대폰 번호를 -없이 입력해 주세요.">
+						<input type="text" id="recipient" name="mem_name" placeholder="최대 7자까지 자유롭게 입력가능" maxlength="7">
+						<input type="text" id="phone" name="mem_cell" placeholder="휴대폰 번호를 -없이 입력해 주세요." maxlength="11">
 					</li>
 					<li>
 						<p>주소</p>
-						<input type="button" onclick="execDaumPostcode()"
-				            value="우편번호 찾기" class="default-btn">
-						<input id="address1" name="address1" type="text"/>
-						<input id="address2" name="address2" type="text"/>
+						<input type="button" onclick="execDaumPostcode(0)"
+				            value="우편번호 찾기" class="default-btn" id="zipcode" data-zipcode="" data-test="1">
+				        <input type="hidden" name="home_zipcode" id="home_zipcode">
+						<input id="address1" name="home_address" type="text" readonly="readonly"/>
+						<input id="address2" name="home_address_detail" type="text" maxlength="10"/>
 					</li>
 				</ul>
 				<div>
-					<input type="checkbox" value="0">기본 배송지로 설정
+					<input type="checkbox" name="home_default" value="0" id="home_default">기본 배송지로 설정
+				</div>
+					<input type="submit" value="저장" id="deli_submit">
+			</form>
+		</div>
+	</div>
+</div>
+ <!-- 배송지 수정 모달 -->
+<div class="modal re_pwd" id="re_mo_pwd">
+	<div class="modal_container deli-modal-con">
+		<div class="m_content">
+			 <div class="tit"><h2>배송지 수정</h2><img src="${ pageContext.request.contextPath }/images/modal-btn.png" onclick="fnHidePop('re_mo_pwd')" class="modal-btn"></div>
+			<hr size="1px" noshade="noshade" color="#DBDBDB">
+			<form method="post" id="modify_form" class="deli-form">
+				<ul>
+					<li>
+						<label for="deli_title">배송지명</label>
+						<input type="text" id="deli_title" name="home_title" placeholder="최대 7자까지 자유롭게 입력가능" maxlength="7">
+					</li>
+					<li>
+						<label for="recipient">받는 분</label>
+						<input type="text" id="recipient" name="mem_name" placeholder="최대 7자까지 자유롭게 입력가능" maxlength="7" data-num=>
+						<input type="text" id="phone" name="mem_cell" placeholder="휴대폰 번호를 -없이 입력해 주세요." maxlength="11">
+					</li>
+					<li>
+						<p>주소</p>
+						<input type="button" onclick="execDaumPostcode(1)"
+				            value="우편번호 찾기" class="default-btn" id="zipcode">
+				        <input type="hidden" name="home_zipcode" id="home_zipcode">
+						<input id="address1" name="home_address" type="text" readonly="readonly"/>
+						<input id="address2" name="home_address_detail" type="text" maxlength="10"/>
+					</li>
+				</ul>
+				<div>
+					<input type="checkbox" name="home_default" value="0" id="home_default">기본 배송지로 설정
 				</div>
 					<input type="submit" value="저장" id="deli_submit">
 			</form>
@@ -94,11 +144,10 @@
         element_layer.style.display = 'none';
     }
 
-    function execDaumPostcode() {
+    function execDaumPostcode(type) {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var addr = ''; // 주소 변수
@@ -134,13 +183,28 @@
                 //(수정) else {
                 //(수정)    document.getElementById("address2").value = '';
                 //(수정) }
-
+				//alert(addr + extraAddr);
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode;
+//                var zipcode = document.getElementById("zipcode");
+//                zipcode.setAttribute('data-zipcode', data.zonecode);
+				if(type == 0){
+					$('#deli_form').find('#home_zipcode').attr('value',data.zonecode);
+					$('#deli_form').find('#address1').attr('value',addr + extraAddr);
+					$('#deli_form').find('#address2').focus();
+/* 	                document.getElementById("home_zipcode").value = data.zonecode;
+	                document.getElementById("address1").value = addr + extraAddr;
+	                document.getElementById("address2").focus(); */
+					
+				}else{
+					$('#modify_form').find('#home_zipcode').attr('value',data.zonecode);
+					$('#modify_form').find('#address1').val(addr + extraAddr);
+					$('#modify_form').find('#address2').focus();
+				}
+								
+                let modify = $('#modify_form').find('#home_zipcode').val();
+                let insert = $('#deli_form').find('#home_zipcode').val();
                 //(수정) + extraAddr를 추가해서 address1에 참고항목이 보여지도록 수정
-                document.getElementById("address1").value = addr + extraAddr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("address2").focus();
 
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)

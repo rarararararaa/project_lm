@@ -1,4 +1,4 @@
-package kr.spring.bookstore.payment;
+package kr.spring.bookstore.payment.service;
 
 import java.util.List;
 

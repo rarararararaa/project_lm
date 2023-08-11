@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class LibraryMainVO {
 	private String lib_product_isbn; 
-	private String callnumber;//도서 청구 번호 primary key
+	private String callNumber;//도서 청구 번호 primary key
 	private int lib_product_class_no;//주제 분류
 	private String lib_product_bookname;//도서 이름
 	private String lib_product_authors;//작가

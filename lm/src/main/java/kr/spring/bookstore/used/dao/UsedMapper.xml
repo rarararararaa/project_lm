@@ -14,10 +14,12 @@
 	</sql>
 	
 	<select id="selectProductNameByUsed" parameterType="map" resultType="kr.spring.bookstore.used.vo.UsedVO">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(
 		SELECT m.store_product_num, d.store_product_cover, d.store_product_title, d.store_product_categoryname, 
 		d.store_product_author, d.store_product_publisher 
 		FROM store_product_manage m LEFT JOIN store_product_detail d ON d.store_product_num = m.store_product_num 
 		<include refid="productSearchByUsed"></include>
+		)a) <![CDATA[ WHERE rnum >= #{start} AND rnum <= #{end} ]]>
 	</select>
 	
 	<select id="selectProductNameByUsedCount" parameterType="map" resultType="Integer">

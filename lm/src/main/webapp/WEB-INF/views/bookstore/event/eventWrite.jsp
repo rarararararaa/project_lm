@@ -2,8 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/BsEventStyle.css">
-
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/datepicker.css">
+
 <style>
 .ck.ck-editor{
 	display: inline-block;
@@ -15,9 +17,12 @@
 </style>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- include ckeditor js -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${pateContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pateContext.request.contextPath}/js/uploadAdapter.js"></script>
+<script type="text/javascript" src="${pateContext.request.contextPath}/js/bs.Event.Form.js"></script>
 <!-- 이벤트 글 등록 시작! -->
+
 <div class="event-form-main">
 	<form:form modelAttribute="bsEventVO" action="write.do" id="register_form" class="event-form"
 	                          enctype="multipart/form-data">
@@ -38,6 +43,7 @@
 						<form:select path="event_board_category">
 							<form:option value="1">댓글</form:option>
 							<form:option value="2">퀴즈</form:option>
+							<form:option value="3">사은품</form:option>
 						</form:select>
 					</li>
 				</ul>
@@ -80,11 +86,11 @@
 				<ul class="li-left">
 					<li class="box2-left">
 						<form:label path="event_date_start">시작일</form:label>
-						<form:input type="date" path="event_date_start"/>
+						<form:input type="text" path="event_date_start"/>
 					</li>
 					<li>
 						<form:label path="event_date_end">종료일</form:label>
-						<form:input type="date" path="event_date_end"/>
+						<form:input type="text" path="event_date_end"/>
 					</li>
 				</ul>
 				</li>
@@ -112,7 +118,7 @@
 			</ul>
 		</div>
 		<hr size="1" noshade>
-		<div class="event_form_div4">
+		<div class="event_form_div4" id="event_form_div4" style="display: none;">
 			<ul>
 				<li>
 				<ul class="li-left">

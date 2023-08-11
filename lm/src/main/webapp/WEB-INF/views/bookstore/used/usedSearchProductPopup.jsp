@@ -137,5 +137,6 @@
 			</c:forEach>
 		</table>
 	</c:if>
+	<div class="paging">${page}</div>
 </body>
 </html>

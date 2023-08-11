@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -166,7 +167,7 @@
 				</tr>
 				<tr>
 					<td>적립예정 포인트</td>
-					<td id="due_point" data-point="${point}">0원</td>
+					<td id="due_point" data-point="${point}"><fmt:formatNumber maxFractionDigits="0" value="${total * point}"/>원</td>
 				</tr>
 			</table>
 			<input type="submit" value="주문하기" id="paySubmit">

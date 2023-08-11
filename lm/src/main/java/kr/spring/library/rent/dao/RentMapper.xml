@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.library.rent.dao.RentMapper">
-
+	<resultMap type="rentVO" id="rentMap">
+		<result property="bookVO.lib_product_bookName" column="lib_product_bookName"/>
+		<result property="bookVO.lib_product_bookImageUrl" column="lib_product_bookImageUrl"/>
+	</resultMap>
 	<!-- 대출 등록 -->
 	<insert id="insertRentHistory" parameterType="RentVO">
 		INSERT INTO lib_history(
@@ -9,18 +12,100 @@
 			callNumber,
 			mem_num,
 			lib_product_status,
-			rent_reg_date,
-			return_reg_deadline,
-			return_reg_date)
+			return_reg_deadline)
 		VALUES (
 			LIB_HISTORY_SEQ.nextval,
 			#{callNumber},
 			#{mem_num},
-			#{lib_product_status},
-			#{rent_reg_date},
-			#{return_reg_deadline},
-			#{return_reg_date})
+			2,
+			(SELECT 
+				to_date(SYSDATE)+7 
+			 FROM dual))
 	</insert>
+	<!-- 도서 상세에서 대출 상태 변경 -->
+	<update id="updateBookStatus" parameterType="BookProductVO">
+		UPDATE 
+			LIB_PRODUCT_MANAGE
+		SET
+			lib_product_product_status=1,
+			lib_product_loanCnt=lib_product_loanCnt+1
+		WHERE callNumber=#{callNumber}		
+	</update>
 	
 	<!-- 대출 목록 -->
+	<sql id="rentSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					callNumber LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					m.mem_id LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					p.lib_product_bookName LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>	
+
+	<!-- 전체/검색 레코드수 -->
+	<select id="selectRentRowCount" parameterType="map"
+	                             resultType="integer">
+		SELECT
+		    COUNT(*)
+		FROM lib_history h 
+		LEFT OUTER JOIN lm_member_manage m USING (mem_num)
+		LEFT OUTER JOIN lib_product_manage p USING (callNumber)
+		<include refid="rentSearch"></include>
+	</select>
+	
+	<!-- 전체/검색 목록 --> 
+	<select id="selectRentHistory" parameterType="map"
+	                          resultMap="rentMap">
+		SELECT
+		    *
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM (SELECT
+		                *
+		            FROM lib_history h
+		            LEFT OUTER JOIN lm_member_manage m USING (mem_num)
+		            LEFT OUTER JOIN lib_product_manage p USING (callNumber)
+		            <include refid="rentSearch"></include>
+		            ORDER BY rent_num DESC
+		            )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>		            
+	</select>		
+	
+	<!-- 대출 권수 확인 -->
+	<select id="selectRentCountByMem_num" parameterType="map" resultType="integer">
+		SELECT
+		    COUNT(*)
+		FROM lib_history h 
+		LEFT OUTER JOIN lm_member_manage m USING (mem_num)
+		LEFT OUTER JOIN lib_product_manage p USING (callNumber)
+		WHERE mem_num=#{mem_num} AND lib_product_status>1	
+	</select>
+	
+	<!-- 대출 반납 -->
+	<update id="updateRentHistory" parameterType="RentVO">
+		UPDATE 
+			lib_history
+		SET
+			lib_product_status=1,
+			return_reg_date=SYSDATE
+		WHERE rent_num=#{rent_num}
+	</update>
+	<!-- 반납시 상세 정보 수정 -->
+	<update id="updateBookStatus2" parameterType="BookProductVO">
+		UPDATE 
+			LIB_PRODUCT_MANAGE
+		SET
+			lib_product_product_status=0
+		WHERE callNumber=#{callNumber}		
+	</update>
 </mapper>

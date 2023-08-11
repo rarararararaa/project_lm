@@ -30,10 +30,12 @@ public interface UsedService {
 
 	//중고 책 목록 전부 반환
 	public List<UsedVO> selectAllUsed();
+	//중고 책 목록 전부 반환 카운트
+	public int selectAllUsedCount();
 	
 	//중고 책 멤버로 가져 오기
-	public List<UsedVO> selectUsedProductByMem(int mem_num);
-	
+	public List<UsedVO> selectUsedProductByMem(Map<String,Object> map);
+	public int selectUsedProductByMemCount(int mem_num);
 	//중고 책 수정하기
 	public void updateUsed(UsedVO usedVO);
 	

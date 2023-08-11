@@ -1,5 +1,6 @@
 package kr.spring.library.facility.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +52,11 @@ public class FacilityServiceImpl implements FacilityService{
 	public List<FacilityApplyVO> selectFacilityApplyListByMem_num(Integer mem_num) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<FacilityApplyVO> selectFacilityApplyListByDate(String date) {
+		return facilityMapper.selectFacilityApplyListByDate(date);
 	}
 
 }

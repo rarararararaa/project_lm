@@ -7,7 +7,6 @@
 	margin: 0 auto;
 	width: 1200px;
 	min-height: 100%;
-	overflow: auto;
 }
 .payment-title{
 	width: 100%;
@@ -34,7 +33,7 @@ ul{
 .both-clear{
 	clear: both;
 }
-button:hover, input:hover{
+button:hover, input:hover, .modal-btn:hover{
 	cursor: pointer;
 	background-color: #e6e6e6;
 }
@@ -51,7 +50,12 @@ input[type='number']::-webkit-inner-spin-button {
     overflow-y: hidden;
   	padding-right: 4.5px;
 }
-
+.de-home{
+	margin-top: 10px;
+}
+.default-color{
+	color: #579847 !important;
+}
 /*모달 창*/
 /*모달 배경*/
 .modal{
@@ -107,13 +111,20 @@ input[type='number']::-webkit-inner-spin-button {
 	border: 1px solid #474C98;
 	background: #FFF;
 }
-.modify-deli{
+.deli-btn{
+	width: 40px;
 	color: #474C98;
 	border-radius: 5px;
 	border: 1px solid #474C98;
 	background: #FFF;
     font-size: 12px;
 }
+#delete_deli{
+	margin-top: 5px;
+	background: gray;
+	color: white;
+}
+
 .deliInfo li:first-child{
 	color: #474C98;
 	font-weight: 400;
@@ -129,24 +140,25 @@ input[type='number']::-webkit-inner-spin-button {
 	width: 460px;
 	height: 600px;
 }
-#deli_form ul{
+.deli-form ul{
 	padding-left: 0;
 	margin-top: 0;
 }
-#deli_form li{
+.deli-form li{
 	margin-left:0;
 	width: 500px;
 	font-size: 14px !important;
 	color: black;
 	font-weight: normal !important;
 }
-#deli_form li:first-child{
+.deli-form li:first-child{
 	margin-top: 10px;
 }
-#deli_form li{
+.deli-form li{
+	margin-left: 0px !important;
 	margin-bottom: 20px;
 }
-#deli_form label + input{
+.deli-form label + input{
 	margin-top: 10px;
 }
 .default-btn{
@@ -155,10 +167,10 @@ input[type='number']::-webkit-inner-spin-button {
 #recipient, #address1{
 	margin-bottom: 5px;
 }
-#deli_form td input:first-child{
+.deli-form td input:first-child{
 	margin-top: 10px;
 }
-#deli_form input[type="text"], input[type="button"]{
+.deli-form input[type="text"], input[type="button"]{
 	width: 460px;
 	padding: 10px 0;
 	color: #898989;
@@ -166,13 +178,13 @@ input[type='number']::-webkit-inner-spin-button {
 	border: 1px solid #DBDBDB;
 	background: #FFF;
 }
-#deli_form input[type="text"]{
+.deli-form input[type="text"]{
 	width: 428px;
 	font-size: 12px;
 	padding: 10px 15px;
 }
 #deli_submit{
-	margin: 40px 0 0 160px;
+	margin: 35px 0 0 160px;
 	width: 140px;
 	height: 44px;
 	border-radius: 7px;
@@ -180,6 +192,14 @@ input[type='number']::-webkit-inner-spin-button {
 	color: #FFF;
 	font-size: 15px;
 }
-
+/*저장된 배송 정보가 없을 때*/
+.non-deliInfo{
+	text-align: center;
+    margin-top: 30%;
+    font-size: 20px;
+}
+.non-deliInfo p{
+	margin-top: 5px;
+}
 /*모달 창 띄웠을 경우*/
 .modal.on{opacity:1;z-index:999;}

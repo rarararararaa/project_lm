@@ -11,7 +11,9 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.bookstore.event.vo.BsAttendancePointVO;
 import kr.spring.bookstore.event.vo.BsAttendanceVO;
+import kr.spring.bookstore.event.vo.BsEventReplyVO;
 import kr.spring.bookstore.event.vo.BsEventVO;
+import kr.spring.bookstore.event.vo.BsQuizVO;
 
 public interface BsEventService {
 	//이벤트 글 목록
@@ -27,6 +29,7 @@ public interface BsEventService {
 	public void updateEvent(BsEventVO event);
 	//이벤트 글 삭제
 	public void deleteEventBoard(Integer event_board_num);
+	public String selectEventItemIsbn(Integer store_product_num);
 
 
 	/* ---------------
@@ -61,6 +64,31 @@ public interface BsEventService {
 	//출석 중복 검사
 	public BsAttendanceVO selectAttendanceCheck(Map<String, Object> map);
 	
+	/* ---------------
+	 *  퀴즈 이벤트
+	 * ---------------- */
+	//퀴즈 이벤트 검색
+	public BsQuizVO selectQuizStatus(BsQuizVO quiz);
+	//퀴즈 이벤트 insert
+	public void insetQuizStatus(BsQuizVO quiz);
 	
+	
+	/* ---------------
+	 *  댓글
+	 * --------------- */
+	//댓글
+	//댓글 목록 - o
+	public List<BsEventReplyVO> selecListReply(Map<String, Object> map);
+	//댓글 개수 - o
+	public int selectRowCountReply(Map<String,Object> map);
+	//특정 댓글 선택 - o
+	public BsEventReplyVO selectReply(Integer reply_num);
+	//댓글 작성 - o
+	public void insertReply(BsEventReplyVO eventReply);
+	//댓글 수정
+	public void updateReply(BsEventReplyVO eventReply);
+	//댓글 삭제
+	public void deleteReply(Integer reply_num);
+	//부모글 삭제시 댓글이 존재하면 부모글 삭제 전 댓글 삭제
 
 }

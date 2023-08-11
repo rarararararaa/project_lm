@@ -2,6 +2,7 @@ package kr.spring.bookstore.event.controller;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,13 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-//import kr.spring.board.vo.BoardFavVO;
 import kr.spring.bookstore.event.service.BsEventService;
-import kr.spring.bookstore.event.vo.BsAttendancePointVO;
-import kr.spring.bookstore.event.vo.BsAttendanceVO;
+import kr.spring.bookstore.event.vo.BsEventReplyVO;
 import kr.spring.bookstore.event.vo.BsEventVO;
-import kr.spring.member.vo.MemberVO;
+import kr.spring.bookstore.event.vo.BsQuizVO;
+import kr.spring.bookstore.product.service.ProductService;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.util.PagingUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -36,6 +38,8 @@ import lombok.extern.slf4j.Slf4j;
 public class BsEventController {
 	@Autowired
 	private BsEventService bsEventService;
+	@Autowired
+	private ProductService productService;
 
 	/*========================
 	 * 자바빈(VO) 초기화
@@ -81,8 +85,9 @@ public class BsEventController {
 
 		return "common/resultView";
 	}
-	
-	//글 수정
+	/*========================
+	 * 게시판 글 수정
+	 *========================*/
 	//수정 폼 호출
 	@GetMapping("/bookstore/event/update.do")
 	public String formUpdate(@RequestParam int event_board_num, Model model) {
@@ -100,7 +105,7 @@ public class BsEventController {
 		if(result.hasErrors()) {
 			return "bsEventModify";
 		}
-		
+		log.debug("date"+bsEventVO.getEvent_date_end());
 		//글 수정
 		bsEventService.updateEvent(bsEventVO);
 		
@@ -109,6 +114,37 @@ public class BsEventController {
 		model.addAttribute("url", request.getContextPath()+"/bookstore/event/adminlist.do");
 		
 		return "common/resultView";
+	}
+	
+	/*========================
+	 * 게시판 글 상세
+	 *========================*/
+	@RequestMapping("/bookstore/event/detail.do")
+	public ModelAndView getDetail(@RequestParam int event_board_num) {
+		log.debug("<<글 상세 - event_board_num>> : " + event_board_num);
+		
+		//글 조회수 증가
+		bsEventService.updateEventHit(event_board_num);
+		
+		//글 상세
+		BsEventVO event = bsEventService.selectEvent(event_board_num);
+		
+		//제목에 태그 불허용
+		event.setEvent_title(StringUtil.useNoHtml(event.getEvent_title()));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bsEventDetail");
+		
+		int store_product_num = event.getStore_product_num();
+		if(store_product_num != 0) {
+			String isbn = bsEventService.selectEventItemIsbn(store_product_num);
+			
+			ProductVO product = productService.selectProduct(isbn);
+			mav.addObject("product", product);
+			
+		}
+		mav.addObject("event", event);
+		return mav;
 	}
 	
 	/*========================
@@ -128,7 +164,7 @@ public class BsEventController {
 		//전체/검색 레코드 수
 		int count = bsEventService.selectEventCount(map);
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, CurrentPage, count, 20, 10, "admin_list.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, CurrentPage, count, 20, 10, "list.do");
 				
 		List<BsEventVO> list = null;
 		if(count > 0) {
@@ -143,7 +179,7 @@ public class BsEventController {
 		mav.setViewName("bsEventList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
-		mav.addObject("page", page);
+		mav.addObject("page", page.getPage());
 		
 		return mav;
 	}
@@ -166,7 +202,170 @@ public class BsEventController {
 		}
 		return mav;
 	}
+	
+	//퀴즈 클릭
+	@RequestMapping("/bookstore/event/writeQuiz.do")
+	@ResponseBody
+	public Map<String, Object> writeQuiz(HttpSession session, HttpServletRequest request,
+										BsQuizVO quizVO, @RequestParam int event_board_num, @RequestParam int answer){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		Integer mem_num = (Integer) session.getAttribute("mem_num");
+		log.debug("<<mem_num>> : " + mem_num);
+		log.debug("<<event_board_num>> : " + event_board_num);
+		
+		if(mem_num == null) {
+			//로그인X
+			mapJson.put("status", "logOut");
+		}else {
+			//로그인 O
+			quizVO.setEvent_board_num(event_board_num);
+			quizVO.setMem_num(mem_num);
+			
+			BsQuizVO checkQuizVO = new BsQuizVO();
+			checkQuizVO = bsEventService.selectQuizStatus(quizVO);
+			if(checkQuizVO !=null) {
+				mapJson.put("status", "already");
+			}else {
+				BsEventVO event = bsEventService.selectEvent(event_board_num);
+				
+				if(event.getEvent_quiz_an() == answer) {
+					Map<String, Object> mapPoint = new HashMap<String, Object>();
+					mapPoint.put("mem_num", mem_num);
+					mapPoint.put("addPoint", 50);
+					bsEventService.updateMemberPoint(mapPoint);
+					
+					bsEventService.insetQuizStatus(quizVO);
+					
+					mapJson.put("status", "success");
+				}else {
+					mapJson.put("status", "wrongAnswer");
+					
+				}
+			}
+		}
+		return mapJson;
+	}
+	
+	/*========================
+	 * 댓글 등록
+	 *========================*/
+	@RequestMapping("/bookstore/event/writeReply.do")
+	@ResponseBody
+	public Map<String, String> writeReply(BsEventReplyVO eventReplyVO,
+										  HttpSession session, HttpServletRequest request){
+		log.debug("<<댓글 등록>> : " + eventReplyVO);
 
-
-
+		Map<String,String> mapJson = new HashMap<String,String>();
+		Integer mem_num = (Integer) session.getAttribute("mem_num");
+		
+		if(mem_num == null) {//로그인이 되지 않은 경우
+			mapJson.put("result", "logout");
+		}else {
+			//회원번호 등록
+			eventReplyVO.setMem_num(mem_num);
+			//댓글 등록
+			bsEventService.insertReply(eventReplyVO);
+			mapJson.put("result", "success");
+		}
+		return mapJson;
+	}
+	
+	/*========================
+	 * 댓글 목록
+	 *========================*/
+	@RequestMapping("/bookstore/event/listReply.do")
+	@ResponseBody
+	public Map<String,Object> getList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+									  @RequestParam(value="rowCount", defaultValue="10") int rowCount,
+									  @RequestParam int event_board_num,
+									  HttpSession session){
+		log.debug("<<currentPage>> : " + currentPage);
+		log.debug("<<event_board_num>> : " + event_board_num);
+		
+		Map<String,Object> map =  new HashMap<String,Object>();
+		map.put("event_board_num", event_board_num);
+		
+		Integer mem_num = (Integer) session.getAttribute("mem_num");
+		
+		//전체 레코드수
+		int count = bsEventService.selectRowCountReply(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(currentPage, count,rowCount,1,null);
+		
+		List<BsEventReplyVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			list = bsEventService.selecListReply(map);
+		}else {
+			list = Collections.emptyList();
+		}
+		
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		mapJson.put("count",count);
+		mapJson.put("list", list);
+		
+		//====로그인 한 회원정보 셋팅====
+		if(mem_num != null) {
+			mapJson.put("mem_num", mem_num);
+		}
+		
+		return mapJson;
+	}
+	
+	/*========================
+	 * 댓글 삭제
+	 *========================*/
+	@RequestMapping("/bookstore/event/deleteReply.do")
+	@ResponseBody
+	public Map<String,String> deleteReply(@RequestParam int reply_num, HttpSession session){
+		log.debug("<<re_num>> : " + reply_num);
+		
+		Map<String,String> mapJson = new HashMap<String,String>();
+		Integer mem_num = (Integer) session.getAttribute("mem_num");
+		
+		BsEventReplyVO db_reply = bsEventService.selectReply(reply_num);
+		if(mem_num == null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result", "logout");
+		}else if(mem_num!=null && mem_num == db_reply.getMem_num()) {
+			//로그인한 회원번호와 작성자 회원번호 일치
+			bsEventService.deleteReply(reply_num);
+			mapJson.put("result", "success");
+		}else {
+			//로그인한 회원번호와 작성자 회원번호 불일치
+			mapJson.put("result", "wrongAccess");
+		}
+		return mapJson;
+	}
+	
+	/*========================
+	 * 댓글 수정
+	 *========================*/
+	@RequestMapping("/bookstore/event/updateReply.do")
+	@ResponseBody
+	public Map<String,String> modifyReply(BsEventReplyVO eventReplyVO,
+										  HttpSession session,HttpServletRequest request){
+		log.debug("<<BsEventReplyVO>> : " + eventReplyVO);
+		
+		Map<String,String> mapJson = new HashMap<String,String>();
+		Integer mem_num = (Integer) session.getAttribute("mem_num");
+		
+		BsEventReplyVO db_reply = bsEventService.selectReply(eventReplyVO.getReply_num());
+		if(mem_num==null) {//로그인이 되지 않은 경우
+			mapJson.put("result", "logout");
+		}else if(mem_num != null && mem_num ==db_reply.getMem_num()) {
+			//로그인 회원번호와 작성자 회원번호가 일치
+		
+			//댓글 수정
+			bsEventService.updateReply(eventReplyVO);
+			mapJson.put("result", "success");
+		}else {
+			//로그인 회원번호와 작성자 회원번호가 불일치
+			mapJson.put("result", "wrongAccess");
+		}
+		
+		return mapJson;
+	}
 }

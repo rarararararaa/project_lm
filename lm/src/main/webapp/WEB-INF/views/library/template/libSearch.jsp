@@ -19,7 +19,7 @@
 		<c:forEach var="list" items="${list}">
 			<div class="used-all-contents-div-width">
 				<div class="used-all-contents-img">
-					<a href="${pageContext.request.contextPath}/library/lib_book/bookDetail.do?callNumber=${list.callnumber}"><img src="${list.lib_product_bookimageurl}"></a>
+					<a href="${pageContext.request.contextPath}/library/lib_book/bookDetail.do?callNumber=${list.callNumber}"><img src="${list.lib_product_bookimageurl}"></a>
 				</div>
 				<div class="used-all-contents-column">
 					<div class="used-all-contents-box">책 제목 : ${list.lib_product_bookname}</div>
@@ -29,5 +29,6 @@
 				</div>
 			</div>
 		</c:forEach>
+		<div class="paging">${page}</div>
 	</div>
 </div>

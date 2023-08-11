@@ -1,5 +1,6 @@
 package kr.spring.library.facility.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,4 +22,6 @@ public interface FacilityService {
 	public List<FacilityApplyVO> selectFacilityApplyList(Integer facility_num);
 	//사용자별 신청 목록
 	public List<FacilityApplyVO> selectFacilityApplyListByMem_num(Integer mem_num);
+	
+	public List<FacilityApplyVO> selectFacilityApplyListByDate(String date);
 }

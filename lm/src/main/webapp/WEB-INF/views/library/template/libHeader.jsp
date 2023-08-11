@@ -10,7 +10,7 @@ body {
 .lib-header {
 	margin: 0 auto;
 	width: 1200px;
-	border-bottom: 1px solid #eaeaea
+	
 }
 
 a {
@@ -53,7 +53,7 @@ a:hover {
 	width: 560px;
 	height: 48px;
 	border-radius: 25px;
-	border: 1px solid red;
+	border: 2px solid green;
 	display: flex;
 	align-items: center;
 	margin-left: 50px;
@@ -177,14 +177,14 @@ a:hover {
 			let keyword = $('.search-text').val();
 	        let url = "${pageContext.request.contextPath}";
 	        // 검색 페이지로 이동
-	        window.location.href = url+'libSearchMain.do?categoryNum=10&orderByNum=1&keyword='+keyword;
+	        window.location.href = url+'/library/template/libSearchMain.do?categoryNum=10&orderByNum=1&keyword='+keyword;
 	    }
 
 	    $('.lib-text-img').click(function(){
 	        performSearch();
 	    });
 
-	    $('.lib-text-img').keypress(function(event) {
+	    $('.search-text').keypress(function(event) {
 	        if (event.which === 13) {  // Enter 키의 keyCode는 13입니다.
 	            performSearch();
 	        }

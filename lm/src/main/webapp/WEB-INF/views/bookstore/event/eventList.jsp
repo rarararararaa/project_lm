@@ -11,13 +11,16 @@
 		<div class="attendB">
 			<a href="${pageContext.request.contextPath}/bookstore/event/attendanceEvent.do"><img src="${pageContext.request.contextPath}/images/attendanceEvent_banner.jpg"></a>
 		</div>
-		<div class="bann">당첨자 발표</div>
+		<div class="bann">
+			<a  href="${pageContext.request.contextPath}/bookstore/event/eventAnnounceList.do"><img src="${pageContext.request.contextPath}/images/winBanner.jpg" width="140"></a>
+		</div>
 	</div>
 	<!-- 이벤트 검색 및 정렬 시작 -->
-	<b>${fn:length(list)}</b>
+	<!-- <b>${fn:length(list)}</b> -->
 	
 	<form action="list.do" id="search_form" method="get">
-		<ul class="search">
+		<div class="align-right">
+		<ul class="search" >
 			<li>
 				<select name="keyfield" id="keyfield">
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
@@ -35,6 +38,7 @@
 				    onclick="location.href='list.do'">
 			</li>
 		</ul>
+		</div>
 		<div class="align-right">
 			<select id="order" name="order">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>전체보기</option>
@@ -54,12 +58,12 @@
 			</c:if>
 		</div>
 	</form>
-	
+	<hr size="1" width="100%">
 	<c:set var="itemsPerRow" value="2" />
 	<c:set var="rowCount"
 		value="${(fn:length(list) + itemsPerRow - 1) / itemsPerRow}" />
 	<c:set var="inNum" value="0" />
-
+	
 	<div class="event-list">
 		<c:forEach var="row" begin="1" end="${rowCount}">
 			<div class="event-row">
@@ -69,7 +73,7 @@
 					<div class="event-column col${status.index}">
 
 						<div class="event-simg">
-						<a class="wid" href="update.do?event_board_num=${event.event_board_num}">
+						<a class="wid" href="detail.do?event_board_num=${event.event_board_num}">
 							<img src="imageView.do?event_board_num=${event.event_board_num}&event_board_type=1" width="170" height="100">
 						</a>
 						</div>
@@ -85,17 +89,20 @@
 									</c:if>
 									
 									<c:if test="${event.event_board_category == 1}">
-										<li class="cate-quiz">퀴즈 이벤트</li>
+										<li class="cate-quiz">댓글</li>
 									</c:if>
 									<c:if test="${event.event_board_category == 2}">
-										<li class="cate-reply">댓글 이벤트</li>
+										<li class="cate-reply">퀴즈</li>
+									</c:if>
+									<c:if test="${event.event_board_category == 3}">
+										<li class="cate-reply">사은품</li>
 									</c:if>
 								</ul>
 							</div>
-							<a href="detail.do?event_board_num=${event.event_board_num}">
-							<div class="event-title">${event.event_title}</div>
+							
+							<div class="event-title">
+								<a href="detail.do?event_board_num=${event.event_board_num}">${event.event_title}</a></div>
 							<div class="event-short-content">${event.event_short_content}</div>
-							</a>
 							<div class="event-date">
 								기한: ${event.event_date_start} ~ ${event.event_date_end}
 							</div>
@@ -105,11 +112,14 @@
 				</c:forEach>
 				<c:set var="inNum" value="${inNum + itemsPerRow}" />
 			</div>
+			<hr size="1" width=" 95%" color="#E9E9E9">
 		</c:forEach>
 	</div>
-
-	
-	
-	
-
+	<div class="align-right">
+		<c:if test="${mem_auth == 9}">
+			<input type="button" value="글쓰기"
+				onclick="location.href='write.do'">
+		</c:if>
+	</div>
+	<div class="align-center">${page}</div>
 </div>

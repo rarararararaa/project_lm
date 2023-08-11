@@ -26,4 +26,8 @@ public interface FacilityMapper {
 	public List<FacilityApplyVO> selectFacilityApplyList(Integer facility_num);
 	//사용자별 신청 목록
 	public List<FacilityApplyVO> selectFacilityApplyListByMem_num(Integer mem_num);
+	
+	//당일 시설 사용 시간 체크
+	@Select("select facility_apply_start, facility_apply_end FROM lib_facility_apply WHERE facility_apply_start LIKE to_date(#{date},'YYYYMMDD')")
+	public List<FacilityApplyVO> selectFacilityApplyListByDate(String date);
 }

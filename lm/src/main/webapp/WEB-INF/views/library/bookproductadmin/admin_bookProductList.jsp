@@ -17,7 +17,7 @@
 <div class="page-main">
 	<h2>도서 목록</h2>
 	<input type="button" value="도서목록" onclick="location.href='admin_booklist.do'">
-	<input type="button" value="대출목록" onclick="#">
+	<input type="button" value="대출목록" onclick="location.href='/library/rent/rentHistoryList.do'">
 	<input type="button" value="희망도서" onclick="#">
 	
 	<form action="admin_booklist.do" id="search_form" method="get">

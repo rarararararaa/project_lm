@@ -1,5 +1,7 @@
 package kr.spring.library.facility.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.library.facility.service.FacilityService;
@@ -174,5 +177,32 @@ public class FacilityController {
 				request.getContextPath()+"/library/facilityList.do");
 		
 		return "common/resultView";
+	}
+	
+	@RequestMapping("/library/timeCheck.do")
+	@ResponseBody
+	public Map<String, Object> timeCheck(String date){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		List<FacilityApplyVO> list;
+		log.debug("<<date>>"+date);
+		list = facilityService.selectFacilityApplyListByDate(date);
+		log.debug("<<list>>"+list);
+		List<Integer> timeList = new ArrayList<Integer>();
+		for(FacilityApplyVO apply : list) {
+			SimpleDateFormat fmt=new SimpleDateFormat("HH"); 
+			int start = Integer.parseInt(fmt.format( apply.getFacility_apply_start()));
+			int end = Integer.parseInt(fmt.format( apply.getFacility_apply_end()));
+			log.debug("<<start>>"+start);
+			log.debug("<<end>>"+end);
+			for(int i = start;i<end;i++) {
+				timeList.add(i);
+				log.debug("<<i>>"+timeList);
+			}
+		}
+		
+		mapJson.put("list", timeList);
+		mapJson.put("result", "success");
+		
+		return mapJson;
 	}
 }

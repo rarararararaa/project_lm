@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 메인페이지</title>
+<style type="text/css">
+</style>
 </head>
 <body>
-관리자 페이지 메인
+
 </body>
 </html>

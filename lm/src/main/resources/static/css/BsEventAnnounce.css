@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+.eventpage-main{
+	width: 950px;
+	min-height: 1000px;
+	margin: 25px auto;
+	padding: 0 50px;
+}
+
+/* 공통 정렬
+------------------------*/
+.align-center{
+	text-align:center;
+}
+.align-right{
+	text-align:right;
+}
+/* 공통 등록, 수정 폼
+------------------------*/
+form{
+	width:600px;
+	margin:0 auto;
+	border:1px solid #000;
+	padding:10px 10px 30px 10px;
+}
+form ul li{
+	clear:both;
+}
+form ul li label{
+	width:100px;
+	float:left;
+}
+ul{
+	list-style:none;
+}
+input{
+	margin-top:4px;
+	padding:5px;
+}
+input[type="text"],input[type="password"],input[type="email"]{
+	width:350px;
+}
+button[type="submit"]{
+	height:31px;
+}
+/* 공통 목록
+------------------------*/
+form#search_form{
+	width:98%;
+	padding-bottom:0;
+	border:none;
+}
+ul.search{
+	width:380px;
+	list-style:none;
+	padding:0;
+	margin:0 auto;
+}
+ul.search li{
+	margin:0 0 9px 0;
+	padding:0;
+	display:inline;
+}
+ul.search li select{
+	height:30px;
+}
+.list-space{
+	width:700px;
+	margin:10px auto;
+}
+table.basic-table{
+	width:100%;
+	margin:7px 0;
+	border:1px solid #000;
+	border-collapse:collapse;
+}
+table.basic-table td, table.basic-table th{
+	border:1px solid #000;
+	padding:5px;
+}
+table.striped-table{
+	border:1px #FFF solid;
+	font-size:15px;
+	width:100%;
+	border-collapse:collapse;
+	margin:7px 0;
+}
+table.striped-table td, table.striped-table th{
+	padding:.7em .5em;
+	vertical-align:middle;
+}
+table.striped-table th{
+	font-weight:bold;
+	background:#E1E1E1;
+}
+table.striped-table td{
+	border-bottom:1px solid rgba(0,0,0,.1);
+}
+table.striped-table tr:nth-child(odd){
+	background-color:rgb(250,250,247);
+}
+.detail-content{
+	min-height: 200px;
+	margin: 10px 10px;
+}
