@@ -137,7 +137,7 @@ $(function() {
     		    });
     	}
     	//1초마다 시간 가져오기...
-    	setInterval(currentTimeForOneSec,1000);
+    	//setInterval(currentTimeForOneSec,1000);
     	//초기 값 가져오기
     	currentTimeForOneSec();
     	/////////////////////////////실시간 시간 가져오기 끝
@@ -276,6 +276,7 @@ $(function() {
     	$('#recommend-01').mouseenter();
 	});
 </script>
+<a href="${pageContext.request.contextPath}/library/template/testpage.do">Test Page</a>
 <div class="used-contents">
 	<div class="promotion-box" id="promotion_docker">
 		<div class="arrow-right">

@@ -195,4 +195,9 @@ public class LibMainController {
 		
 		return mapAjax;
 	}
+	
+	@RequestMapping("/library/template/testpage.do")
+	public String getTestPage() {
+		return "/library/template/testPage";
+	}
 }
