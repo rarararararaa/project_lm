@@ -80,6 +80,10 @@
     	<put-attribute name="title" value="기증 안내"/>
 	    <put-attribute name="body" value="/WEB-INF/views/library/apply/bookDonationApply.jsp"/>
     </definition>
+    <definition name="insertProgram" extends="libApplyMain">
+    	<put-attribute name="title" value="프로그램 추가"/>
+	    <put-attribute name="body" value="/WEB-INF/views/library/apply/insertProgram.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

@@ -39,6 +39,11 @@ $(function(){
 </script>
 <div class="page-main">
 	<h2>자주 묻는 질문</h2>
+	<c:if test="${mem_auth==9}">
+	<div class="align-right">
+	<input type="button" value="글쓰기" onclick="location.href='faqWrite.do'">
+	</div>
+	</c:if>
 	<ul class="view-category" id="view_category">
 		<li id="category_first" <c:if test="${param.faq_category==1}">style="font-weight:bold;"</c:if>>배송</li>
 		<li id="category_second" <c:if test="${param.faq_category==2}">style="font-weight:bold;"</c:if>>취소/교환</li>
@@ -65,9 +70,5 @@ $(function(){
 		</c:forEach>
 		</c:if>
 	</ul>
-	<c:if test="${mem_auth==9}">
-	<div class="align-right">
-	<input type="button" value="글쓰기" onclick="location.href='faqWrite.do'">
-	</div>
-	</c:if>
+	
 </div>

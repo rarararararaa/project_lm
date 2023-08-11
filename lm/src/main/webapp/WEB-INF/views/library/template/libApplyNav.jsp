@@ -21,7 +21,7 @@
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="프로그램"
-			  onclick="location.href='#'">
+			  onclick="location.href='${pageContext.request.contextPath}/library/insertProgram.do'">
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="분실물"

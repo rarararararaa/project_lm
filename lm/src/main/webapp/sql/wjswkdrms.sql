@@ -51,3 +51,24 @@ CREATE TABLE LM_BOARD_FAQ (
     CONSTRAINT PK_LM_BOARD_FAQ PRIMARY KEY (faq_num)        
 
 );
+
+CREATE TABLE LIB_PROGRAM_ADMIN (
+	program_num	number	NOT NULL,
+	program_title	varchar2(300)	NOT NULL,
+	program_content	clob	NOT NULL,
+	program_reg_date	date	DEFAULT SYSDATE	NOT NULL,
+	program_admit	number	NOT NULL,
+	program_hit	number	NOT NULL,
+    CONSTRAINT PK_LIB_PROGRAM_ADMIN PRIMARY KEY (program_num)    
+);
+create sequence lib_program_seq;
+CREATE TABLE LIB_PROGRAM_TIMES(
+	program_num number,
+	program_times_num number,
+	program_start date not null,
+	program_end date not null,
+	CONSTRAINT PK_LIB_PROGRAM_TIMES PRIMARY KEY (program_times_num),
+	CONSTRAINT FK_LIB_PROGRAM_TIMES FOREIGN KEY (program_num)    
+                                REFERENCES LIB_PROGRAM_ADMIN(program_num)
+);
+create sequence lib_program_times_seq;

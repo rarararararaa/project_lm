@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FacilityController {
 	
 	@Autowired
-	FacilityService facilityService;
+	private FacilityService facilityService;
 	
 	@ModelAttribute
 	public FacilityVO initCommand() {

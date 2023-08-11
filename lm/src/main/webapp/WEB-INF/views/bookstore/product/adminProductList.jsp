@@ -53,16 +53,13 @@
 			<td class="align-center">${product.store_product_stock}</td>
 			<td class="align-center">${product.store_product_pubdate}</td>
 			<td class="align-center">
-			<c:if test="${product.store_product_stockstatus==0}">표시</c:if>
-			<c:if test="${product.store_product_stockstatus==1}">미표시</c:if>
+			<c:if test="${product.store_product_stockstatus==0}">미표시</c:if>
+			<c:if test="${product.store_product_stockstatus==1}">표시</c:if>
 			<c:if test="${product.store_product_stockstatus==2}">품절</c:if>
 			</td>
 		</tr>
 		</c:forEach>
 	</table>
 	<div class="align-center">${page}</div>
-	</c:if>
-	<c:if test="${mem_auth==9}">
-	<input type="button" value="글쓰기" onclick="location.href='announceWrite.do'">
 	</c:if>
 </div>

@@ -9,7 +9,7 @@
 		날짜
 		<input type="hidden" id="facility_num" name="facility_num" value="${facility_num}">
 		<select name="year" id="yearSelect">
-			<c:forEach var="i" begin="2023" end="2024">
+			<c:forEach var="i" begin="2023" end="2033">
 			<option value="${i}">${i}년</option>
 			</c:forEach>
 		</select>
@@ -23,7 +23,6 @@
 			<option value="${i}">${i}일</option>
 			</c:forEach>
 		</select>
-		시간
 		<br>
 		<c:forEach var="i" begin="9" end="17">
 		<input type="checkbox" value="${i}" name="time" id="${i}" class="hidecheck">

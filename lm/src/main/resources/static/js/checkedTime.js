@@ -24,10 +24,10 @@ $(function(){
 				$('#start').val($(this).val());
 				$('#end').val(Number($(this).val())+1);
 			}else{
-				if(Number($(this).val())> Number($('#end').val())){
-					$('#end').val(Number($(this).val())+1)
+				if(Number($(this).val())+1> Number($('#end').val())){
+					$('#end').val(Number($(this).val())+1);
 				}else{
-					$('#start').val($(this).val())
+					$('#start').val($(this).val());
 				}
 			}
 		}else{
@@ -47,14 +47,10 @@ $(function(){
 		$('input[name="time"]').prop('checked', false);
 		
 		for(let i = $('#start').val();Number(i)<$('#end').val();i++){
-			if($("#"+i).is(".unchecked") === true){
-				alert('hello');
-				return;
-			}
 			$("#"+i).prop('checked', true);
 		}
 	});
-		function timeCheck(){
+	function timeCheck(){
 		let sdate = $('#yearSelect').val();
 		if($('#monthSelect').val()<10){
 			sdate += '0' + $('#monthSelect').val();
@@ -82,6 +78,7 @@ $(function(){
 				}else if(param.result == 'success'){
 					$(param.list).each(function(index,item){
 						$('#'+item).addClass("unckecked");
+						$('#'+item).attr("disabled", true);
 					})
 				}else{
 					alert('예약현황 불러오기 오류 발생');
