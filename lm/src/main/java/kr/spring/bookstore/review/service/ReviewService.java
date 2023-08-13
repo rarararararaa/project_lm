@@ -9,11 +9,11 @@ import kr.spring.bookstore.service.vo.OrderDetailVO;
 
 public interface ReviewService {
 	//구매한 사람인지 체크
-	public OrderDetailVO selectOrderDetail(BookStorePaymentOrderVO orderVO);
+	public List<OrderDetailVO> selectOrderDetail(Map<String, Object> map);
 	//주문내역 불러오기
 	public List<BookStorePaymentOrderVO> selectOrderVO(Map<String, Object> map);
 	//이미 작성한 구매 내역건인지 체크
-	public boolean selectReviewCheck(Map<String, Object> map);
+	public List<ReviewVO> selectReviewCheck(Map<String, Object> map);
 	//리뷰 리스트
 	public List<ReviewVO> selectReviewList(Map<String, Object> map);
 	//리뷰 작성
@@ -28,4 +28,6 @@ public interface ReviewService {
 	public void updateReview(ReviewVO reviewVO);
 	//리뷰 삭제
 	public void deleteReview(Integer review_num);
+	//리뷰
+	public ReviewVO selectReview(int review_num);	
 }

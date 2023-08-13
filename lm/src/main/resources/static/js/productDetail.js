@@ -20,10 +20,10 @@ $(function(){
 			success:function(param){
 				if(param.result == 'logout'){
 					alert('로그인 후 사용하세요');
-				}else if(param.result == 'noOrder'){
-					alert('구매한 도서만 리뷰 작성 가능합니다.');
+					location.reload();
 				}else if(param.result == 'reviewAlready'){
 					alert('리뷰는 구매당 한 건만 가능합니다.');
+					location.reload();
 				}else if(param.result == 'success'){
 					//리뷰 등록 UI호출
 					$('#dialog').dialog('open');
@@ -53,26 +53,8 @@ $(function(){
 	});	
 	
 	//리뷰 등록
-	$("#review_button").on('click',function(){
-		let form_data = $('#new_form').serialize();		
-		$.ajax({
-			url:'/bookstore/review/reviewWrite.do',
-			type:'post',
-			data:form_data,
-			dataType:'json',
-			success:function(param){
-				if(param.result=='success'){
-					alert('댓글 등록 완료');
-					initForm();
-					$('#dialog').dialog('close');	//다이얼로그 닫기
-				}else{
-					alert('댓글 등록 오류');
-				}
-			},
-			error:function(){
-				alert('네트워크 오류 발생');
-			}		
-		});		
+	$("#review_button").on('click',function(event){
+		$('#new_form').submit();
 	});
 });
 //썸네일 함수

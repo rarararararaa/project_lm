@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,10 +20,12 @@ import kr.spring.bookstore.product.service.ProductService;
 import kr.spring.bookstore.product.service.ProductServiceapi;
 import kr.spring.bookstore.product.vo.ProductFavVO;
 import kr.spring.bookstore.product.vo.ProductVO;
+import kr.spring.bookstore.review.service.ReviewService;
+import kr.spring.bookstore.review.vo.ReviewVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.FileUtil;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
-import retrofit2.http.GET;
 
 @Controller
 @Slf4j 
@@ -30,6 +34,8 @@ public class ProductController {
 	private ProductServiceapi productServiceapi;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	
 	@RequestMapping("/lm/product.do")
@@ -82,17 +88,71 @@ public class ProductController {
 	 * 상품 상세
 	 *==========================*/	
 	@GetMapping("/bookstore/product/productDetail.do")
-	public ModelAndView getDetail(@RequestParam(value="store_product_isbn13", required=false) String store_product_isbn13) {
+	public ModelAndView getDetail(@RequestParam(value="store_product_isbn13", required=false) String store_product_isbn13,
+			@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+			@RequestParam(value="order",defaultValue="1") int order) {
 		log.debug("<<글상세 - isbn13>> : " + store_product_isbn13);
 		
 		//상품 상세 
 		ProductVO product= productService.selectProduct(store_product_isbn13);
 		log.debug("<<product>> : " + product);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("store_product_num", product.getStore_product_num());
 		
+		//전체/검색 레코드수
+		int count = reviewService.selectReviewCount(map);
 		
-		return new ModelAndView("productDetail","product",product);
+		log.debug("<<count>> : " + count);
+		
+		//페이지 처리
+		PagingUtil page = 
+		new PagingUtil(null,null,
+			currentPage,count,20,10,
+			"productDetail.do","&order="+order);
+		
+		List<ReviewVO> review= null;
+		if(count > 0) {
+			map.put("order",order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			review = reviewService.selectReviewList(map);			
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("productDetail");
+		mav.addObject("product", product);
+		mav.addObject("count", count);
+		mav.addObject("review", review);
+		mav.addObject("page", page.getPage());
+		log.debug("<<mav>> : "+mav);
+		return mav;
 	}
 	
+	//이미지 출력
+	@RequestMapping("/bookstore/product/imageView.do")
+	public String viewImage(@RequestParam int review_num, HttpServletRequest request, Model model) {
+		ReviewVO reviewVO = reviewService.selectReview(review_num);
+		
+		log.debug("<<reviewVO>>" + reviewVO);
+		ModelAndView mav = new ModelAndView();
+		viewReview(reviewVO, request, model);
+		return "imageView";
+	}
+
+	//프로필 사진 처리를 위한 공통 코드
+	public void viewReview(ReviewVO reviewVO,
+			                HttpServletRequest request,
+			                Model model) {
+		if(reviewVO==null || reviewVO.getReview_image()==null) {
+			//기본 이미지 읽기
+			byte[] readbyte = null;
+			model.addAttribute("imageFile", null);
+			model.addAttribute("filename", " ");
+		}else {//업로드한 프로필 사진이 있는 경우
+			model.addAttribute("imageFile", reviewVO.getReview_image());
+			model.addAttribute("filename", "review_image.jpg");
+		}
+	}	
 	/*==========================
 	 * 상품 찜하기
 	 *==========================*/

@@ -11,12 +11,14 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.service.vo.OrderDetailVO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(exclude= {"review_image"})
+@ToString(exclude = {"review_image"})
+@NoArgsConstructor
 public class ReviewVO {
 	private int review_num;
 	private int order_detail_num;
@@ -30,10 +32,9 @@ public class ReviewVO {
 	
 	private OrderDetailVO orderdetailVO;
 	private ProductVO productVO;
-	
 	//업로드 파일 처리
-	public void setReview_image2(MultipartFile review_image2) throws IOException{
+	public void setUpload(MultipartFile upload) throws IOException{
 		//MultipartFile -> byte[] 변환 | 변환해야 Mybatis가 blob 처리를 해준다.
-		setReview_image(review_image2.getBytes());
-	}
+		setReview_image(upload.getBytes());
+	}	
 }

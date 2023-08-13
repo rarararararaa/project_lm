@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.review.service.ReviewService;
 import kr.spring.bookstore.review.vo.ReviewVO;
-import kr.spring.member.vo.MemberVO;
+import kr.spring.bookstore.service.vo.OrderDetailVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -29,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
+	
 
 	//리뷰 폼 초기화
 	@ModelAttribute
@@ -46,46 +46,52 @@ public class ReviewController {
 		Map<String, Object> mapJson=new HashMap<String, Object>();
 		mapJson.put("mem_num", session.getAttribute("mem_num"));
 		mapJson.put("store_product_num", store_product_num);
-		List<BookStorePaymentOrderVO> list=reviewService.selectOrderVO(mapJson);
-		if(list.size()!=0) {
-			for(BookStorePaymentOrderVO i:list) {
-				//if(reviewService.selectOrderDetail(i)==null) {
-					mapJson.put("result", "noOrder");
-					return mapJson;
-				}
-				if(reviewService.selectReviewCheck(mapJson)) {
-					mapJson.put("result", "reviewAlready");
-					return mapJson;
-				}
-				log.debug("<<mapJson>> : "+mapJson);
-			}
-			mapJson.put("result", "success");
-			log.debug("<<mapJson>> : "+mapJson);
+		List<OrderDetailVO> list=reviewService.selectOrderDetail(mapJson);
+		if(list.size()==0) {
+			mapJson.put("result", "reviewAlready");
 			return mapJson;
-		/*
-		 * mapJson.put("result", "noOrder"); return mapJson;
-		 */
-	}
-	
-	@RequestMapping("/bookstore/review/reviewWrite.do")
-	@ResponseBody
-	public Map<String, Object> reviewSubmit(@Valid ReviewVO reviewVO,
-			             BindingResult result,
-			             HttpServletRequest request,
-			             HttpSession session
-			             ) {
-		Map<String, Object> mapJson=new HashMap<String, Object>();
-		//유효성 체크 결과 오류가 있으며 폼 호출
-		if(result.hasErrors()) {
+		}else {
+			mapJson.put("result", "success");
+			return mapJson;
+			
 		}
+	}	
+	
+	// 리뷰 작성
+	@RequestMapping("/bookstore/review/reviewWrite.do")
+	public String reviewWrite(@Valid ReviewVO reviewVO, BindingResult result, Model model,
+			HttpServletRequest request, HttpSession session,
+						@RequestParam(value="store_product_isbn13", required=false) String store_product_isbn13,
+						@RequestParam int store_product_num) {
 		
-		reviewVO.setMem_num((Integer)session.getAttribute("mem_num"));
-		log.debug("<<reviewVO : >>"+reviewVO);
-		//글쓰기
-		reviewService.insertReview(reviewVO);
-		mapJson.put("result","success");
-		return mapJson; 
+		//상품 이미지 유효성 체크 //MultipartFile -> byte[]로 변환한 경우 파일을 업로드 하지 않으면 byte[]는 생성되고 length는 0이다. 
+		if(reviewVO.getReview_image().length == 0) {
+			result.rejectValue("review_image", "required"); 
+		}
+
+		Map<String, Object> map=new HashMap<String, Object>();
+		//용량체크 - byte[] 이므로 용량 체크 가능 
+		if(reviewVO.getReview_image().length >= 5*1024*1024) { //5 MB // 자바빈의 필드명, 에러 코드, 에러문구에 전달할 값, 기본 오류(에러) 문구
+			result.rejectValue("review_image", "limitIploadSize", new Object[] {"5MB"}, null); 
+		}
+	    
+	    int mem_num=(Integer)session.getAttribute("mem_num");
+	    reviewVO.setMem_num(mem_num);
+	    map.put("mem_num", mem_num);
+		map.put("store_product_num", store_product_num);
+		List<OrderDetailVO> list=reviewService.selectOrderDetail(map);
+		for(OrderDetailVO i:list) {
+				reviewVO.setOrderdetailVO(i);
+				reviewVO.setOrder_detail_num(reviewVO.getOrderdetailVO().getOrder_detail_num());
+				reviewService.insertReview(reviewVO);
+				break;
+		}	 
+	    model.addAttribute("message", "댓글 등록 완료");
+	    model.addAttribute("url",request.getContextPath()+"/bookstore/product/productDetail.do?store_product_isbn13="+store_product_isbn13);
+	 
+	    return "common/resultView";
 	}
+
 }
 
 

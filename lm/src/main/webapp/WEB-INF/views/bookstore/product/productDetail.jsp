@@ -100,7 +100,8 @@
 						 		data-num="${product.store_product_num}">
 					<!-- 리뷰 등록 다이얼로그 시작 -->
 					<div id="dialog">
-						<form id="new_form">
+						<form id="new_form" enctype="multipart/form-data" action="/bookstore/review/reviewWrite.do" method="post">
+							<input type="hidden" name="store_product_isbn13" value="${product.store_product_isbn13}">
 							<input type="hidden" name="store_product_num" value="${product.store_product_num}">
 							<ul>
 								<li>
@@ -110,7 +111,7 @@
 									<img src="${product.store_product_cover}" width="70">
 								</li>
 								<li>
-									<fieldset class="rate" >
+									<fieldset class="review_rating" >
 		                                <input type="radio" id="rating10" name="review_rating" value="10"><label for="rating10" title="5점">⭐</label>
 		                                <input type="radio" id="rating9" name="review_rating" value="9"><label class="half" for="rating9" title="4.5점">⭐</label>
 		                                <input type="radio" id="rating8" name="review_rating" value="8"><label for="rating8" title="4점">⭐</label>
@@ -124,20 +125,20 @@
 	                           		</fieldset>
 								</li>
 								<li>
-									<textarea rows="3" cols="50" name="review_content"></textarea>
+									<textarea rows="3" cols="50" name="review_content" id="review_content"></textarea>
 								</li>
 								<li>
 									<label for="review_image">
 										<div class="file-button"></div>
 									</label>
 									<div id="image_container"></div>
-									<input type="file" name="review_image2" id="review_image" 
-									accept="image/gif,image/png,image/jpeg" onchange="setThumbnail(event);"> 									
+									<input type="file" name="upload" id="review_image"
+									accept="image/gif,image/png,image/jpeg" onchange="setThumbnail();"> 									
 								</li>
 							</ul>
 							
 							<div class="align-center">
-								<input id="review_button" type="button" class="sm-button" value="리뷰 등록">
+								<input id="review_button" type="button" class="sm-button review_submit_btn" value="리뷰 등록">
 							</div>
 						</form>
 					</div>
@@ -215,7 +216,6 @@
 							</div>
 							<div>0</div>
 						</div>					
-																				
 					</div>					
 					<div>
 					</div>
@@ -223,6 +223,11 @@
 				<div>
 					<div class="tabs-area">
 						<div>
+							<c:forEach var="review" items="${review}">
+								<input type="hidden" value="${review.review_num }" name="review_num">
+								<img src="${pageContext.request.contextPath}/bookstore/product/imageView.do?review_num=${review.review_num}" width="94" height="94">							
+							 	${review.review_content}
+							</c:forEach>
 						</div>
 						<div>
 						</div>

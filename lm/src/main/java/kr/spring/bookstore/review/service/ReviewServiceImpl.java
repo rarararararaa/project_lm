@@ -18,18 +18,18 @@ public class ReviewServiceImpl implements ReviewService{
 	
 
 	@Override
-	public boolean selectReviewCheck(Map<String, Object> map) {
+	public List<ReviewVO> selectReviewCheck(Map<String, Object> map) {
 		return reviewMapper.selectReviewCheck(map);
 	}
 
 	@Override
 	public List<ReviewVO> selectReviewList(Map<String, Object> map) {
-		return null;
+		return reviewMapper.selectReviewList(map);
 	}
 
 	@Override
 	public void insertReview(ReviewVO reviewVO) {
-		
+		reviewMapper.insertReview(reviewVO);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public int selectReviewCount(Map<String, Object> map) {
-		return 0;
+		return reviewMapper.selectReviewCount(map);
 	}
 
 	@Override
@@ -53,13 +53,18 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public OrderDetailVO selectOrderDetail(BookStorePaymentOrderVO orderVO) {
-		return reviewMapper.selectOrderDetail(orderVO);
+	public List<OrderDetailVO> selectOrderDetail(Map<String, Object> map) {
+		return reviewMapper.selectOrderDetail(map);
 	}
 
 	@Override
 	public List<BookStorePaymentOrderVO> selectOrderVO(Map<String, Object> map) {
 		return reviewMapper.selectOrderVO(map);
+	}
+
+	@Override
+	public ReviewVO selectReview(int review_num) {
+		return reviewMapper.selectReview(review_num);
 	}
 
 }
