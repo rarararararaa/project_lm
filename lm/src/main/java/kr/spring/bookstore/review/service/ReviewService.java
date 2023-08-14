@@ -20,10 +20,14 @@ public interface ReviewService {
 	public void insertReview(ReviewVO reviewVO);
 	//포인트 부여
 	
+	//별점당 리뷰 개수
+	public int selectReviewCountBetween(Map<String, Object> map);
+	
 	//별점 상품에 업데이트
-	public void updateProductRating();
+	public void updateProductRating(Map<String,Object> map);	
 	//상품당 리뷰 개수 -> 상품에도 업데이트
 	public int selectReviewCount(Map<String,Object> map);
+	public void updateProductReviewCount(Map<String,Object> map);
 	//리뷰 수정
 	public void updateReview(ReviewVO reviewVO);
 	//리뷰 삭제

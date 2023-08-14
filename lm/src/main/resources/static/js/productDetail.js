@@ -209,7 +209,27 @@ function submitOrder(){
 
 }
 
-
+//첫번째 모달-배송 추가
+function fnShowPop(sGetName){
+    var $layer = $("#"+ sGetName);
+    $layer.addClass("on");
+	if(sGetName == 're_pwd'){
+		document.body.classList.add("scroll");
+	}else{
+		$('re_pwd').addClass("scroll");
+	}
+}
+ 
+function fnHidePop(sGetName){
+    $("#"+ sGetName).removeClass("on");
+	if(sGetName == 're_pwd'){
+		document.body.classList.remove("scroll");
+	}else{
+		$('re_pwd').removeClass("scroll");
+		 closeDaumPostcode();
+		$('#deli_form')[0].reset();
+	}
+}
 
 
 

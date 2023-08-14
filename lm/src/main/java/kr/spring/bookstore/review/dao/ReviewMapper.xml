@@ -51,7 +51,6 @@
 			#{review_image}
 		)
 	</insert>
-	
 	<!-- 댓글 목록 -->
 	<select id="selectReviewList" parameterType="map" resultType="kr.spring.bookstore.review.vo.ReviewVO">
 		SELECT
@@ -69,7 +68,7 @@
 	</select>
 	
 	<!-- 리뷰 갯수 -->
-	<select id="selectReviewCount" >
+	<select id="selectReviewCount" parameterType="map" resultType="integer">
 		SELECT
 			COUNT(*)
 		FROM lm_review r
@@ -77,4 +76,44 @@
 		USING (ORDER_Detail_num)
 		WHERE d.store_product_num=#{store_product_num}
 	</select>
+	
+	<!-- 별점당 리뷰 개수 -->
+	<select id="selectReviewCountBetween" parameterType="map" resultType="integer">
+		SELECT 
+		    COUNT(*) 
+		FROM lm_review r
+		LEFT OUTER JOIN store_order_detail d USING (order_detail_num) 
+		WHERE (review_rating BETWEEN #{start} AND #{end}) AND store_product_num=#{store_product_num}
+	</select>
+	
+	<!-- 상품에 별점 업데이트 -->
+	<select id="selectUpdateProductRating" parameterType="map" resultType="float">
+		SELECT 
+		    (
+		        (p.STORE_PRODUCT_RATINGSCORE * p.STORE_PRODUCT_RATINGCOUNT + SUM(r.review_rating)) 
+		        / (p.STORE_PRODUCT_RATINGCOUNT + COUNT(r.review_rating))
+		    ) AS calculated_rating 
+		FROM store_product_detail p
+		LEFT JOIN store_order_detail d ON p.store_product_num = d.store_product_num
+		LEFT JOIN lm_review r ON d.order_detail_num = r.order_detail_num
+		WHERE p.store_product_num = #{store_product_num}
+		GROUP BY p.STORE_PRODUCT_RATINGSCORE, p.STORE_PRODUCT_RATINGCOUNT	
+	</select>
+	<update id="updateProductRating" parameterType="map">
+		UPDATE store_product_detail
+		SET STORE_PRODUCT_RATINGSCORE=#{store_product_ratingscore}
+		WHERE store_product_num = #{store_product_num}
+	</update>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+

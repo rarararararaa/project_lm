@@ -553,3 +553,53 @@ table.form-box {
 	vertical-align: top;
 	font-weight: 500;
 }
+/* 모달 */
+/*모달 창 띄웠을 경우*/
+div#re_pwd{
+	position:fixed;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	bottom:0;
+	background-color:rgba(0,0,0,.6);
+	z-index: -1;
+	opacity:0;
+	transition:all 0.2s;	
+}
+#re_pwd.on{opacity:1;z-index:999;}
+.modal_container{
+	position: fixed;
+	overflow: hidden;
+ 	top: 50%;
+  	left: 50%;
+ 	transform: translate(-50%, -50%);
+	padding: 0 30px 30px 30px;
+	width: 460px;
+	border-radius: 17px;
+	background: #FFF;
+	overflow-y:overlay;
+}
+.scroll{
+    position: static;
+    overflow-y: hidden;
+  	padding-right: 4.5px;
+}
+.modal-btn{
+	margin: 16px 0 0 453px;
+	height: 20px;
+	width: 20px;
+}
+form#new_form{
+	margin:0 auto;
+}
+ul.modal-ul{
+	padding:0;
+}
+ul.modal-ul li:not(:last-child){
+	padding-bottom:10px;
+}
+li.review-rating{
+	margin-left:auto;
+	display:flex;
+}

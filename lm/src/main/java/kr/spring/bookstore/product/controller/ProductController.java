@@ -101,10 +101,9 @@ public class ProductController {
 		map.put("store_product_num", product.getStore_product_num());
 		List<UsedVO> list=productService.selectUsedNum(product.getStore_product_num());
 		log.debug("<<list>> : " + list);
-		
+
 		//전체/검색 레코드수
 		int count = reviewService.selectReviewCount(map);
-		
 		log.debug("<<count>> : " + count);
 		
 		//페이지 처리
@@ -115,10 +114,12 @@ public class ProductController {
 		
 		List<ReviewVO> review= null;
 		if(count > 0) {
+			map.put("count", count);
 			map.put("order",order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			
+			reviewService.updateProductRating(map);
 			review = reviewService.selectReviewList(map);			
 		}
 		ModelAndView mav = new ModelAndView();

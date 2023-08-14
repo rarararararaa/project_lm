@@ -1,5 +1,6 @@
 package kr.spring.bookstore.review.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,12 +31,9 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public void insertReview(ReviewVO reviewVO) {
 		reviewMapper.insertReview(reviewVO);
-	}
-
-	@Override
-	public void updateProductRating() {
 		
 	}
+
 
 	@Override
 	public int selectReviewCount(Map<String, Object> map) {
@@ -65,6 +63,25 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public ReviewVO selectReview(int review_num) {
 		return reviewMapper.selectReview(review_num);
+	}
+
+	@Override
+	public int selectReviewCountBetween(Map<String, Object> map) {
+		return reviewMapper.selectReviewCountBetween(map);
+	}
+
+	@Override
+	public void updateProductRating(Map<String, Object> map) {
+		Map<String, Object> map2=new HashMap<String, Object>();
+		map2.put("store_product_num", map.get("store_product_num"));
+		map2.put("store_product_ratingscore", reviewMapper.selectUpdateProductRating(map));
+		
+		reviewMapper.updateProductRating(map2);
+	}
+
+	@Override
+	public void updateProductReviewCount(Map<String, Object> map) {
+		reviewMapper.updateProductReviewCount(map);
 	}
 
 }

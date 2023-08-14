@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.review.vo.ReviewVO;
@@ -23,9 +24,14 @@ public interface ReviewMapper {
 	//리뷰 작성
 	public void insertReview(ReviewVO reviewVO);
 	//별점 상품에 업데이트
-	public void updateProductRating();
+	public float selectUpdateProductRating(Map<String,Object> map);
+	public void updateProductRating(Map<String,Object> map);
 	//상품당 리뷰 개수 -> 상품에도 업데이트
 	public int selectReviewCount(Map<String,Object> map);
+	@Update("UPDATE store_product_detail SET store_product_ratingcount=#{count}+store_product_ratingcount WHERE store_product_num=#{store_product_num}")
+	public void updateProductReviewCount(Map<String,Object> map);
+	//별점당 리뷰 개수
+	public int selectReviewCountBetween(Map<String, Object> map);
 	//리뷰
 	@Select("SELECT * FROM lm_review WHERE review_num=#{review_num}")
 	public ReviewVO selectReview(int review_num);

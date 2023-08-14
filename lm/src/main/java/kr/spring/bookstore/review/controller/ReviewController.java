@@ -86,10 +86,14 @@ public class ReviewController {
 	    reviewVO.setMem_id(member.getMem_id());
 		map.put("store_product_num", store_product_num);
 		List<OrderDetailVO> list=reviewService.selectOrderDetail(map);
+		int count=1;
+		map.put("count", count);
 		for(OrderDetailVO i:list) {
 				reviewVO.setOrderdetailVO(i);
 				reviewVO.setOrder_detail_num(reviewVO.getOrderdetailVO().getOrder_detail_num());
+				log.debug("<<reviewVO : >>"+reviewVO);
 				reviewService.insertReview(reviewVO);
+				reviewService.updateProductReviewCount(map);
 				break;
 		}	 
 	    model.addAttribute("message", "댓글 등록 완료");
@@ -97,7 +101,8 @@ public class ReviewController {
 	 
 	    return "common/resultView";
 	}
-
+	
+	
 }
 
 
