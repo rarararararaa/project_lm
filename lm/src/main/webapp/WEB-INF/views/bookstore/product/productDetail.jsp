@@ -92,6 +92,7 @@
 					<c:forEach var="list" items="${list}">
 					<form id="used_product">
 						<input type="hidden" name="used_product_num" value="${list.used_product_num }">
+						<input type="hidden" name="store_product_num" value="${product.store_product_num }">
 						<input type="hidden" name="store_product_status" value="1">
 						<div>
 							<img src="${pageContext.request.contextPath}/bookstore/used/photoView01.do?used_product_num=${list.used_product_num}"
