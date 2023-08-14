@@ -154,7 +154,7 @@ button.adjust{
     cursor: pointer;	
 }
 /* 상품 상세 설명 부분 */
-div.content-wrap div.left-area{
+div.left-area{
     width: calc(100% - 330px - 56px);
 }
 div#scrollProdClaim+div.right-area{
@@ -298,15 +298,23 @@ span.del{
     cursor:pointer;
     right: 0;
     z-index:1;
-    
 }    
+div.review-header{
+	display:flex;
+}
+div.review-content-wrap{
+	display:flex;
+}
+div.review-header div.right-area{
+	margin-left:auto;
+}
 /* 상품 탭 영역 */
 div.tabs-area{
+	display:flex;
     position: relative;
     margin-bottom: 0;	
     width: 100%;
     margin: 0 auto;
-    display: flex;
     align-items: center;
     flex-direction: row;
     margin-bottom: 30px;
@@ -315,15 +323,11 @@ div.tabs-area{
     box-sizing: border-box;
     height: 72px;
 }
-div.tabs-area div{
-	width:1200px;
-	margin:0 auto;
+ul.tabs{
 	color:#767676;
 	font-size:16px;
-}
-ul.tabs{
     display: inline-block;
-    flex: 1 1 auto;
+    width:1200px;
     position: relative;
     padding: 0;
     margin: 0 auto;

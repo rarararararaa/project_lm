@@ -22,6 +22,7 @@ import kr.spring.bookstore.product.vo.ProductFavVO;
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.review.service.ReviewService;
 import kr.spring.bookstore.review.vo.ReviewVO;
+import kr.spring.bookstore.used.vo.UsedVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PagingUtil;
@@ -98,6 +99,8 @@ public class ProductController {
 		log.debug("<<product>> : " + product);
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("store_product_num", product.getStore_product_num());
+		List<UsedVO> list=productService.selectUsedNum(product.getStore_product_num());
+		log.debug("<<list>> : " + list);
 		
 		//전체/검색 레코드수
 		int count = reviewService.selectReviewCount(map);
@@ -123,6 +126,7 @@ public class ProductController {
 		mav.addObject("product", product);
 		mav.addObject("count", count);
 		mav.addObject("review", review);
+		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
 		log.debug("<<mav>> : "+mav);
 		return mav;

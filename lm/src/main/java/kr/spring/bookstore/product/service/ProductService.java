@@ -5,11 +5,14 @@ import java.util.Map;
 
 import kr.spring.bookstore.product.vo.ProductFavVO;
 import kr.spring.bookstore.product.vo.ProductVO;
+import kr.spring.bookstore.used.vo.UsedVO;
 
 public interface ProductService {
 	//상품리스트
 	public List<ProductVO> selectList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);	
+	//상품 번호로 중고 상품 번호 리스트
+	public List<UsedVO> selectUsedNum(int store_product_num);	
 	//상품 상세
 	public ProductVO selectProduct(String store_product_isbn13);	
 	

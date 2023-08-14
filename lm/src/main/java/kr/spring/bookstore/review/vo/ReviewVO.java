@@ -32,6 +32,8 @@ public class ReviewVO {
 	
 	private OrderDetailVO orderdetailVO;
 	private ProductVO productVO;
+	private String mem_id;	
+	
 	//업로드 파일 처리
 	public void setUpload(MultipartFile upload) throws IOException{
 		//MultipartFile -> byte[] 변환 | 변환해야 Mybatis가 blob 처리를 해준다.

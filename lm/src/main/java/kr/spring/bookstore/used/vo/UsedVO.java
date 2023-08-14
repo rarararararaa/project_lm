@@ -13,7 +13,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"used_product_photo1","used_product_photo2"})
 public class UsedVO {
 	private int used_product_num;
 	private int store_product_num;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.spring.bookstore.product.dao.ProductMapper;
 import kr.spring.bookstore.product.vo.ProductFavVO;
 import kr.spring.bookstore.product.vo.ProductVO;
+import kr.spring.bookstore.used.vo.UsedVO;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -48,6 +49,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void deleteFav(Integer ZZIM_NUM) {
 		productMapper.deleteFav(ZZIM_NUM);
+	}
+
+	@Override
+	public List<UsedVO> selectUsedNum(int store_product_num) {
+		return productMapper.selectUsedNum(store_product_num);
 	}
 
 

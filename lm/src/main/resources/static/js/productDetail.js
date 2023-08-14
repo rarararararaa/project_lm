@@ -113,35 +113,61 @@ function changeNum(tag,num){
 
 //submit
 function submitCart(){
-			//기본 이벤트 제거
-			event.preventDefault();			
-			let form_data = $('#product_cart').serialize();		
-			//서버와 통신
-			$.ajax({
-				url:'/bookstore/payment/cart.do',
-				type:'post',
-				data:form_data,
-				dataType:'json',
-				success:function(param){
-					if(param.result == 'logout'){
-						alert('로그인 후 사용하세요');
-					}else if(param.result == 'success'){
-						let check=confirm('장바구니로 이동하시겠습니까?');
-						if(check){
-							location.href='/bookstore/payment/cart.do';
-						}else{
-							location.reload();
-						}
-					}else{
-						alert('장바구니 담기 오류');
-					}
-				},
-				error:function(){
-					alert('네트워크 오류 발생');
+	let form_data = $('#product_cart').serialize();		
+	//서버와 통신
+	$.ajax({
+		url:'/bookstore/payment/cart.do',
+		type:'post',
+		data:form_data,
+		dataType:'json',
+		success:function(param){
+			if(param.result == 'logout'){
+				alert('로그인 후 사용하세요');
+			}else if(param.result == 'success'){
+				let check=confirm('장바구니로 이동하시겠습니까?');
+				if(check){
+					location.href='/bookstore/payment/cart.do';
+				}else{
+					location.reload();
 				}
-			});
+			}else{
+				alert('장바구니 담기 오류');
+			}
+		},
+		error:function(){
+			alert('네트워크 오류 발생');
+		}
+	});
 }
 
+//중고 장바구니
+function submitUsedProduct(){
+	let form_data = $('#used_product').serialize();		
+	//서버와 통신
+	$.ajax({
+		url:'/bookstore/payment/cart.do',
+		type:'post',
+		data:form_data,
+		dataType:'json',
+		success:function(param){
+			if(param.result == 'logout'){
+				alert('로그인 후 사용하세요');
+			}else if(param.result == 'success'){
+				let check=confirm('장바구니로 이동하시겠습니까?');
+				if(check){
+					location.href='/bookstore/payment/cart.do';
+				}else{
+					location.reload();
+				}
+			}else{
+				alert('장바구니 담기 오류');
+			}
+		},
+		error:function(){
+			alert('네트워크 오류 발생');
+		}
+	});	
+}			
 
 function submitOrder(){
 	let total=0;
@@ -180,7 +206,6 @@ function submitOrder(){
 				}
 			});
 
-			
 
 }
 

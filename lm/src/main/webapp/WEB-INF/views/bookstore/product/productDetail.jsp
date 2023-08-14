@@ -76,19 +76,32 @@
 		</div>
 	</div>
 	<div class="tabs-area">
-		<div>
-			<ul class="tabs">
-				<li class="tab_item"><a href="#scrollProdInfo">상품정보</a></li>
-				<li class="tab_item"><a href="#scrollProdReview">리뷰 (${product.store_product_ratingCount})</a></li>
-				<li class="tab_item"><a href="#scrollProdClaim">교환/반품/품절</a></li>
-			</ul>
-		</div>
+		<ul class="tabs">
+			<li class="tab_item"><a href="#scrollProdInfo">상품정보</a></li>
+			<li class="tab_item"><a href="#scrollProdReview">리뷰 (${product.store_product_ratingCount})</a></li>
+			<li class="tab_item"><a href="#scrollProdClaim">교환/반품/품절</a></li>
+		</ul>
 	</div>
 	<div class="content-wrap">
 		<div class="left-area">
 			<div id="scrollProdInfo">
 				<div>
 					<h2>책 소개</h2>
+				</div>
+				<div class="used-product">
+					<c:forEach var="list" items="${list}">
+					<form id="used_product">
+						<input type="hidden" name="used_product_num" value="${list.used_product_num }">
+						<input type="hidden" name="store_product_status" value="1">
+						<div>
+							<img src="${pageContext.request.contextPath}/bookstore/used/photoView01.do?used_product_num=${list.used_product_num}"
+								 width="94px">
+						</div>
+						<div>
+							<input type="button" value="장바구니" onclick="submitUsedProduct();">
+						</div>
+					</form>	
+					</c:forEach>
 				</div>
 			</div>
 			<div id="scrollProdReview">
@@ -221,12 +234,34 @@
 					</div>
 				</div>
 				<div>
-					<div class="tabs-area">
-						<div>
+					<div class="review-area">
+						<div class="tabs-wrap">
 							<c:forEach var="review" items="${review}">
 								<input type="hidden" value="${review.review_num }" name="review_num">
-								<img src="${pageContext.request.contextPath}/bookstore/product/imageView.do?review_num=${review.review_num}" width="94" height="94">							
-							 	${review.review_content}
+								<div class="review-header">
+									<div class="left-area">
+										${review.mem_id} / ${review.review_reg_date }
+									</div>
+									<div class="right-area">
+										<div class="star-ratings">
+											<div class="star-ratings-fill" style="--rating: ${review.review_rating};">
+												<span>⭐</span>
+												<span>⭐</span>
+												<span>⭐</span>
+												<span>⭐</span>
+												<span>⭐</span>
+											</div>
+										</div>												
+									</div>
+								</div>
+								<div class="review-content-wrap">
+									<div class="left-area">
+									 	${review.review_content}
+									</div>
+									<div class="right-area">
+										<img src="${pageContext.request.contextPath}/bookstore/product/imageView.do?review_num=${review.review_num}" width="64" height="64">							
+									</div>
+								</div>
 							</c:forEach>
 						</div>
 						<div>
@@ -314,6 +349,7 @@
 						<input type="hidden" name="store_product_pricestandard" value="${product.store_product_pricestandard}">
 						<input type="hidden" name="store_product_stock" value="${product.store_product_stock}">
 						<input type="hidden" name="store_product_title" value="${product.store_product_title}">
+						
 				<div class="prod-button-box">
 						<button class="btn-line-gray" id="output_zzim"  data-num="${product.store_product_num}"><span class="wish-ico"></span></button>
 				</div>

@@ -114,6 +114,16 @@
 				</if>
 			</if>
 	</sql>
+
+	<!-- 중고 -->
+	<select id="selectUsedNum" parameterType="integer" resultType="usedVO">
+		SELECT 
+			* 
+		FROM store_product_detail 
+		RIGHT OUTER JOIN store_used_product_manage USING(store_product_num)
+		RIGHT OUTER JOIN store_used_product_detail USING(used_product_num)
+		WHERE store_product_num=#{store_product_num}	
+	</select>
 	
 	<!-- 나중에 판매량 추가 -->
 	<sql id="productOrder">

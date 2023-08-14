@@ -21,6 +21,8 @@ import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.review.service.ReviewService;
 import kr.spring.bookstore.review.vo.ReviewVO;
 import kr.spring.bookstore.service.vo.OrderDetailVO;
+import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -28,7 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
-	
+	@Autowired
+	private MemberService memberService;
 
 	//리뷰 폼 초기화
 	@ModelAttribute
@@ -75,9 +78,12 @@ public class ReviewController {
 			result.rejectValue("review_image", "limitIploadSize", new Object[] {"5MB"}, null); 
 		}
 	    
-	    int mem_num=(Integer)session.getAttribute("mem_num");
+	    Integer mem_num=(Integer)session.getAttribute("mem_num");
+	    MemberVO member=memberService.selectMember(mem_num);
+	    log.debug("<<memberVO : >>"+member);
 	    reviewVO.setMem_num(mem_num);
 	    map.put("mem_num", mem_num);
+	    reviewVO.setMem_id(member.getMem_id());
 		map.put("store_product_num", store_product_num);
 		List<OrderDetailVO> list=reviewService.selectOrderDetail(map);
 		for(OrderDetailVO i:list) {
