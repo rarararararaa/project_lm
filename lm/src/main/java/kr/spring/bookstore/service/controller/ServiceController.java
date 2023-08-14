@@ -23,8 +23,11 @@ import kr.spring.bookstore.product.service.ProductService;
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.service.service.ServiceService;
 import kr.spring.bookstore.service.vo.AnnounceVO;
+import kr.spring.bookstore.service.vo.AnswerVO;
 import kr.spring.bookstore.service.vo.FaqVO;
+import kr.spring.bookstore.service.vo.AskVO;
 import kr.spring.library.board_announce.controller.BoardAnnounceController;
+import kr.spring.library.facility.vo.FacilityVO;
 import kr.spring.library.memberadmin.service.MemberAdminService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
@@ -60,7 +63,14 @@ public class ServiceController {
 	public ProductVO initCommand4() {
 		return new ProductVO();
 	}
-
+	@ModelAttribute
+	public AskVO initCommand5() {
+		return new AskVO();
+	}
+	@ModelAttribute
+	public AnswerVO initCommand6() {
+		return new AnswerVO();
+	}
 	@RequestMapping("/bookstore/service/main.do")
 	public String serviceMain() {
 		return "service";
@@ -118,8 +128,7 @@ public class ServiceController {
 		//제목에 태그를 허용하지 않음
 		board.setBoard_title(StringUtil.useNoHtml(board.getBoard_title()));
 		
-		//CKEditor를 사용하지 않을 경우 내용에 태그 불허
-		//board.setContent(StringUtil.useBrNoHtml(board.getContent()));
+
 		                         //뷰 이름    속성명   속성값
 		return new ModelAndView("announceView","board",board);
 	}
@@ -312,6 +321,100 @@ public class ServiceController {
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
 
+		return mav;
+	}
+	//문의하기 메인
+	@RequestMapping("/bookstore/service/mainDesk.do")
+	public ModelAndView mainDesk(HttpSession session) {
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		Integer mem_auth = (Integer)session.getAttribute("mem_auth");
+		
+		List<AskVO> list = null;
+		
+		if(mem_num!=null) {
+			if(mem_auth==9) {
+				list = serviceService.selectAskList();
+			}else {
+				list = serviceService.selectAskListByMem_num(mem_num);
+			}
+		}
+		return new ModelAndView("mainDesk","list",list);
+	}
+	@GetMapping("/bookstore/service/askWrite.do")
+	public String askWrite() {
+		return "askWrite";
+	}
+	@PostMapping("/bookstore/service/askWrite.do")
+	public String askInsert(AskVO askVO, Model model,HttpServletRequest request,HttpSession session) {
+		log.debug("<<askVO>> : " + askVO);
+		
+		askVO.setMem_num((Integer)session.getAttribute("mem_num"));
+		
+		serviceService.insertAsk(askVO);
+		
+		model.addAttribute("message", "1:1 문의가 접수되었습니다.");
+		model.addAttribute("url", "mainDesk.do");
+		
+		return "common/resultView";
+	}
+	@GetMapping("/bookstore/service/answerWrite.do")
+	public String answerWrite(@RequestParam int ask_num,Model model) {
+		AskVO ask = serviceService.selectAsk(ask_num);
+		
+		log.debug("<<ask>> : " + ask);
+		
+		model.addAttribute("ask", ask);
+		
+		return "answerWrite";
+	}
+	//이미지 출력
+	@RequestMapping("/bookstore/service/askImageView.do")
+	public ModelAndView viewImageAsk(@RequestParam int ask_num) {
+
+		AskVO vo = 
+				serviceService.selectAsk(ask_num);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile", vo.getAsk_image());
+		mav.addObject("filename", vo.getAsk_imagename());
+		return mav;
+	}
+	@PostMapping("/bookstore/service/answerWrite.do")
+	public String answerInsert(AnswerVO answer, HttpSession session,Model model) {
+		log.debug("<<AnswerVO>> : " + answer);
+		
+		answer.setMem_num((Integer)session.getAttribute("mem_num"));
+		
+		serviceService.insertAnswer(answer);
+		
+		model.addAttribute("message", "답변 작성이 완료되었습니다.");
+		model.addAttribute("url", "mainDesk.do");
+		
+		return "common/resultView";
+	}
+	
+	@RequestMapping("/bookstore/service/answerDetail.do")
+	public ModelAndView answerDetail(@RequestParam int ask_num,HttpSession session) {
+		AnswerVO answerVO = serviceService.selectAnswer(ask_num);
+		AskVO askVO = serviceService.selectAsk(ask_num);
+		
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(mem_num!=askVO.getMem_num()) {
+			mav.setViewName("common/resultView");
+			mav.addObject("message","회원정보가 일치 하지 않습니다.");
+			mav.addObject("url", "mainDesk.do");
+			
+			return mav;
+		}
+		
+		mav.setViewName("answerDetail");
+		mav.addObject("answerVO",answerVO);
+		mav.addObject("askVO",askVO);
+		
 		return mav;
 	}
 }

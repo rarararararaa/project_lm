@@ -14,7 +14,7 @@
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="1:1문의"
-			  onclick="location.href='${pageContext.request.contextPath}/member/delete.do'">
+			  onclick="location.href='${pageContext.request.contextPath}/bookstore/service/mainDesk.do'">
 		</li>
 		<li class="call-center">
 			<span class="img-cover">고객센터 이용안내</span>

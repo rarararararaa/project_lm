@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.bookstore.service.dao.ServiceMapper;
 import kr.spring.bookstore.service.vo.AnnounceVO;
+import kr.spring.bookstore.service.vo.AnswerVO;
+import kr.spring.bookstore.service.vo.AskVO;
 import kr.spring.bookstore.service.vo.FaqVO;
 
 @Service
@@ -56,6 +58,37 @@ public class ServiceServiceImpl implements ServiceService{
 	@Override
 	public void updateFaq(FaqVO faqVO) {
 		serviceMapper.updateFaq(faqVO);
+	}
+
+	@Override
+	public void insertAsk(AskVO askVO) {
+		serviceMapper.insertAsk(askVO);
+	}
+
+	@Override
+	public List<AskVO> selectAskListByMem_num(Integer mem_num) {
+		return serviceMapper.selectAskListByMem_num(mem_num);
+	}
+
+	@Override
+	public List<AskVO> selectAskList() {
+		return serviceMapper.selectAskList();
+	}
+
+	@Override
+	public AskVO selectAsk(Integer ask_num) {
+		return serviceMapper.selectAsk(ask_num);
+	}
+
+	@Override
+	public void insertAnswer(AnswerVO answerVO) {
+		serviceMapper.updateAskStatus(answerVO.getAsk_num());
+		serviceMapper.insertAnswer(answerVO);
+	}
+
+	@Override
+	public AnswerVO selectAnswer(Integer ask_num) {
+		return serviceMapper.selectAnswer(ask_num);
 	}
 
 }

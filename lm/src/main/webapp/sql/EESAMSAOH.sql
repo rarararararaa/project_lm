@@ -174,44 +174,7 @@ CREATE TABLE STORE_ORDER_DETAIL (
     )   
 );
 
-CREATE TABLE LM_BOARD_ANNOUNCE (
-	board_num	NUMBER	NOT NULL,
-	board_title	varchar2(300)	NOT NULL,
-	board_content	clob	NOT NULL,
-	board_reg_date	DATE 	DEFAULT SYSDATE	NOT NULL,
-	board_modify_date	DATE	NULL,
-	board_filename	varchar2(300)	NULL,
-    CONSTRAINT PK_LM_BOARD_ANNOUNCE PRIMARY KEY (board_num)        
-);
 
-
-
-CREATE TABLE LM_BOARD_ASK (
-	ask_num	number	NOT NULL,
-	mem_num	number	NOT NULL,
-	ask_title	varchar2(300)	NOT NULL,
-	ask_content	varchar2(1000)	NOT NULL,
-	ask_category	number	NOT NULL,
-	ask_reg_date	date	DEFAULT SYSDATE	NOT NULL,
-	ask_image	blob	NULL,
-    CONSTRAINT PK_LM_BOARD_ASK PRIMARY KEY (ask_num),
-    CONSTRAINT FK_LM_BOARD_ASK_1 FOREIGN KEY (mem_num)    
-                                 REFERENCES lm_member_manage(mem_num)
-);
-
-CREATE TABLE LM_BOARD_ANSWER (
-	answer_num	number	NOT NULL,
-	ask_num	number	NOT NULL,
-	mem_num	number	NOT NULL,
-	answer_content	varchar2(1000)	NOT NULL,
-	answer_reg_date	date	DEFAULT SYSDATE	NOT NULL,
-	answer_image	blob	NULL,
-    CONSTRAINT PK_LM_BOARD_ANSWER PRIMARY KEY (answer_num)    ,
-    CONSTRAINT FK_LM_BOARD_ANSWER_1 FOREIGN KEY (mem_num)    
-                                 REFERENCES lm_member_manage(mem_num),
-    CONSTRAINT FK_LM_BOARD_ANSWER_2 FOREIGN KEY (ask_num)    
-                                 REFERENCES lm_board_ask(ask_num)                                 
-);
 
 CREATE TABLE LM_REVIEW (
 	review_num	number	NOT NULL,

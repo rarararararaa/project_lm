@@ -33,6 +33,22 @@
     	<put-attribute name="title" value="자주묻는질문 목록"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/faqList.jsp"/>
     </definition>
+    <definition name="mainDesk" extends="service">
+    	<put-attribute name="title" value="1:1문의사항"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/deskMain.jsp"/>
+    </definition>
+    <definition name="askWrite" extends="service">
+    	<put-attribute name="title" value="1:1문의작성"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/askWrite.jsp"/>
+    </definition>
+    <definition name="answerWrite" extends="service">
+    	<put-attribute name="title" value="1:1문의답변"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/answerWrite.jsp"/>
+    </definition>
+    <definition name="answerDetail" extends="service">
+    	<put-attribute name="title" value="1:1문의답변"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/answerDetail.jsp"/>
+    </definition>
     
     <definition name="bsadmin" template="/WEB-INF/views/bookstore/template/bsAdminLayout.jsp">
     	<put-attribute name="title" value="고객센터"/>

@@ -60,5 +60,45 @@
 		FROM LM_BOARD_FAQ
 		WHERE faq_category=#{faq_category}
 	</select>
+	<insert id="insertAsk" parameterType="askVO">
+		INSERT INTO lm_board_ask(
+		  ask_num,
+		  mem_num,
+		  ask_title,
+		  ask_content,
+		  ask_category,
+		  ask_reg_date,
+		  ask_image,
+		  ask_imagename,
+		  ask_status) 
+		VALUES(
+		  lm_board_ask_seq.nextval,
+		  #{mem_num},
+		  #{ask_title},
+		  #{ask_content},
+		  #{ask_category},
+		  SYSDATE,
+		  #{ask_image},
+		  #{ask_imagename},
+		  0)
+	</insert>
 	
+	<insert id="insertAnswer" parameterType="answerVO">
+		INSERT INTO lm_board_answer(
+		  answer_num,
+		  ask_num,
+		  mem_num,
+		  answer_content,
+		  answer_reg_date,
+		  answer_image,
+		  answer_imagename) 
+		VALUES(
+		  lm_board_answer_seq.nextval,
+		  #{ask_num},
+		  #{mem_num},
+		  #{answer_content},
+		  SYSDATE,
+		  #{answer_image},
+		  #{answer_imagename})
+	</insert>
 </mapper>
