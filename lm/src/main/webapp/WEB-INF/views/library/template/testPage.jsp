@@ -9,7 +9,9 @@ body {
 	padding: 0px;
 	margin: 0px;
 }
-
+.title-box {
+	color:white;
+}
 .video-box {
 	width: 100%;
 	height: 100vh;
@@ -39,7 +41,7 @@ video {
 	height: 90vh; 
 	font-size : 50px;
 	display: inline-block;
-	background: rgba(255, 255, 255, 0.9);
+	background: rgba(0, 0, 0, 0.9);
 	padding: 10px;
 	animation: fadein 3s;
 	-webkit-animation: fadein 3s;
@@ -126,31 +128,29 @@ hr {
 .second-box {
 	width:100%;
 	height:70vh;
-	border:solid 1px red;
-	display:flex;
-	justify-content:center;
-	align-items:center;
-}
-
-.second-box .workers {
-	border:solid 1px red;
-	width:13%;
-	height:50%;
-	padding:50px;
 	display:flex;
 	flex-direction:column;
-	justify-content:center;
 	align-items:center;
 }
-
-.workers span {
-	padding:10px;
-	font-size:30px;
+.lists {
+	
 }
-
-.workers img {
+.lists ul{
+	display:flex;
+	justify-content:flex-start;
 	width:100%;
+	list-style:none;
+	font-size:30px;
+	border:solid 1px red;
 }
+
+.lists ul li {
+	color:white;
+	margin-left:50px;
+	margin-right: 50px;
+	
+}
+
 
 /* 이미지 및 이름 가운데 정렬 */
 .third-box {
@@ -172,25 +172,79 @@ hr {
     margin-bottom: 20px;
 }
 
-/* 나머지 워커들 숨기는 애니메이션 */
-.workers {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 1;
-    transition: opacity 0.5s;
+.result-int span{
+	font-size:25px;
+	padding:20px;
 }
 
-.workers.hidden {
-    opacity: 0;
-    pointer-events: none;
+.result-int p {
+	font-size:18px;
+	padding:20px;
+}
+
+.result-int {
+	width:1400px;
+	background-color:white;
+	color:black;
+	border-radius:25px;
+	display:flex;
+	justify-content: center;
+	
+}
+span {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+
+span img {
+	width:200px;
+	height:200px;
+	padding:30px;
+}
+#main-result {
+	
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	
-})
+	$('#introduce').click(function(){
+		$('#main-result').empty();
+		let output = '<div class="result-int">';
+	    output += '<p>LM 그룹은 이과와 문과를 합친 학습을 지원하는 학원으로, LM 문고와 LM 도서관으로 구성되어 있습니다.<br><br>';
+	    output += 'LM 문고는 다양한 분야의 책을 판매하는 온라인 플랫폼으로, 독서를 촉진하고 지식을 널리 퍼뜨리기 위해 노력하고 있습니다. 여기서는 최신 도서부터 고전까지 폭넓은 선택지를 제공하여 사용자가 자신의 관심사와 요구에 맞는 도서를 찾을 수 있습니다.<br><br>';
+		output += '반면 LM 도서관은 독서 문화를 촉진하며, 사용자들에게 책을 빌려주는 서비스를 제공합니다. 다양한 장르와 주제의 도서들을 빌려가며 지식 습득을 지원하고,';
+		output += '학습 환경을 개선하기 위해 공간 예약과 공공 서비스를 제공합니다. 그렇게 함으로써 지식을 공유하고, 사람들의 학습과 자기계발을 지원하며, 사회 전반에 긍정적인 영향을 미치는 것을 목표로 하고 있습니다.<br><br>';
+		output += 'LM 그룹은 다양한 도서와 자료를 통해 개인의 호기심과 교양을 향상시키는 데 기여하며, 지식과 정보의 접근성을 높이는 역할을 수행하고 있습니다. 이와 함께 LM 도서관은 학습 공간을 제공하여 사용자들이 소통하고 협력하며 지식을 나누는 커뮤니티의 역할도 수행하고 있습니다.</p>';
+	    output += '</div>';
+		$('#main-result').append(output);
+	});
+	
+	$('#devstack').click(function(){
+		$('#main-result').empty();
+		let output = '<div class="result-int">';
+	    output += '<span>';
+	    output += '<img src="${pageContext.request.contextPath}/images/front_end_logo.png">';
+	    output += 'HTML, CSS<br> JavaScript, jQuery</span>';
+	    output += '<span>';
+	    output += '<img src="${pageContext.request.contextPath}/images/mybatis_logo.png">';
+	    output += 'Spring MyBatis</span>';
+	    output += '<span>';
+	    output += '<img src="${pageContext.request.contextPath}/images/oracle_xe_logo.svg">';
+	    output += 'RDBMS Oracle XE</span>';
+	    output += '<span>';
+	    output += '<img src="${pageContext.request.contextPath}/images/spring_logo.svg">';
+	    output += 'Spring Boot<br>FrameWork</span>';
+	    
+	    output += '</div>';
+		$('#main-result').append(output);
+	});
+	
+	
+});
+
 </script>
 </head>
 <body>
@@ -211,34 +265,17 @@ $(function(){
 		</div>
 		<hr>
 		<div class="second-box">
-			<!-- <div class="workers">
-				<img src="/videos/pjh.jpg">
-				<span>박정호</span>
+			<div class="lists">
+				<ul>
+					<li id="introduce">회사 소개</li>
+					<li id="devstack">기술 스택</li>
+					<li id="primaryvalue">가치 목표</li>
+					<li id="workers">프로젝트 담당</li>
+				</ul>
 			</div>
-			<div class="workers">
-				<img src="/videos/a.jpg">
-				<span>김정연</span>
-			</div>
-			<div class="workers">
-				<img src="/videos/a.jpg">
-				<span>전장근</span>
-			</div>
-			<div class="workers">
-				<img src="/videos/a.jpg">
-				<span>문슬범</span>
-			</div>
-			<div class="workers">
-				<img src="/videos/a.jpg">
-				<span>김체은</span>
-			</div>
-			<div class="workers">
-				<img src="/videos/a.jpg">
-				<span>최지혜</span>
-			</div>
-			<div class="workers">
-				<img src="/videos/a.jpg">
-				<span>김정은</span>
-			</div> -->
+			<div id="main-result"></div>
+			
+			
 		</div>
 		<div class="third-box">
 			

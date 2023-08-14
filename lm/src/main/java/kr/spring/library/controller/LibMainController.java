@@ -81,6 +81,7 @@ public class LibMainController {
 			@RequestParam(name="orderByNum", defaultValue="1") int orderByNum,
 			@RequestParam(name="keyword", defaultValue="") String keyword,
 			@RequestParam(name="pageNum", defaultValue="1") int currentPage,
+			@RequestParam(name="rnumNum", defaultValue="10") int rnumNum,
 			LibraryMainVO libraryMainVO, HttpServletRequest request, HttpSession session) {
 		Map<String,Object> map = new HashMap<>();
 		//Search가자..
@@ -91,8 +92,8 @@ public class LibMainController {
 		map.put("categoryNum",categoryNum);
 		int totalCount = libraryMainService.selectLibraryByCategoryAndOrderNumCount(map);
 		int selectedCategoryNum = categoryNum;
-		
-		PagingUtil page = new PagingUtil(currentPage, totalCount, 10, 20, "libSearchMain.do", "&keyword="+keyword+"&orderByNum="+orderByNum+"&categoryNum="+categoryNum);
+		int rnum = rnumNum;
+		PagingUtil page = new PagingUtil(currentPage, totalCount, rnum, 20, "libSearchMain.do", "&keyword="+keyword+"&orderByNum="+orderByNum+"&categoryNum="+categoryNum);
 		//list = libraryMainService.selectLibraryAllPorducts();
 		navs = libraryMainService.selectLibraryCategoryNav();
 		
@@ -116,6 +117,7 @@ public class LibMainController {
 		mav.addObject("selectedCategoryNum",selectedCategoryNum);
 		mav.addObject("resultSearch",keyword);
 		mav.addObject("page",page.getPage());
+		mav.addObject("rnumNum",rnum);
 		//mav.addObject("orderByNum",orderByNum);
 		log.debug("<<navs를 까보자>> : "+navs);
 		return mav;
