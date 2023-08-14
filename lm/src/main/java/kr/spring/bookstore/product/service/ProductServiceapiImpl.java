@@ -86,7 +86,7 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 								product2.getStore_product_ratingCount(),
 								0,
 								product2.getStore_product_ratingScore(),
-								1,0);
+								1,0,0,0,0);
 						productMapper.insertStore_P(product);
 						productMapper.insertStore_Pdetail(product);
 						log.debug("product:"+product);
@@ -112,7 +112,7 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 								product2.getStore_product_ratingCount(),
 								0,
 								product2.getStore_product_ratingScore(),
-								1,0);
+								1,0,0,0,0);
 						
 						productMapper.updateStore_P(product);
 						productMapper.updateStore_Pdetail(product);
@@ -229,7 +229,7 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 							 ratingCount,
 							 discount,
 							 ratingScore,
-							 0,0);
+							 0,0,0,0,0);
 				}	 				
 				log.debug("product2 : "+product2);
 	    }catch(Exception e) {

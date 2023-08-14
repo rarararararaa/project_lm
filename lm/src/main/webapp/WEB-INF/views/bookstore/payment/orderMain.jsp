@@ -82,27 +82,41 @@
 				</li>
 				<li class="book-list hidden-place">
 				<table class="orderBookList">
+				<!-- 반복문 -->
 				<c:forEach var="cart" items="${list}">
 				<c:forEach var="book" items="${book_list}">
-				<c:if test="${book.store_product_num == cart.store_product_num}">
+				<c:if test="${book.store_product_num == cart.store_product_num && (cart.used_product_num == book.used_product_num) }">
 					<tr>
 						<td>
 						<c:if test="${book.store_product_cover == ' '}">
+							<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">
 							<img src="${pageContext.request.contextPath}/images/noImage.png" width="85">
+							</a>
 						</c:if>
 						<c:if test="${book.store_product_cover != ' '}">
+							<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">
 							<img src="${book.store_product_cover}">
+							</a>
 						</c:if>
 						</td>
 						<td>
 							<ul>
-								<li class="title">${book.store_product_title}</li>
+								<li class="title">${book.store_product_title}
+								<c:if test="${cart.used_product_num > 0 }">[중고]</c:if>
+								</li>
 								<li class="float-left orderListlitwo">${book.store_product_discount}%</li>
 								<li><fmt:formatNumber value="${book.store_product_pricestandard}"/>원</li>
 							</ul>
 						</td>
 						<td  class="clear-both">${cart.cart_quantity}개</td>
-						<td><fmt:formatNumber value="${book.store_product_pricestandard * cart.cart_quantity}"/>원</td>
+						<td>
+						<c:if test="${cart.used_product_num > 0}">
+							<fmt:formatNumber value="${book.used_product_price}"/>원
+						</c:if>
+						<c:if test="${cart.used_product_num == 0}">
+							<fmt:formatNumber value="${book.store_product_pricestandard * cart.cart_quantity}"/>원
+						</c:if>
+						</td>
 					</tr>
 				</c:if>
 				</c:forEach>				
@@ -188,9 +202,9 @@
 				<tr>
 					<td>적립예정 포인트</td>
 					<td id="due_point"><fmt:formatNumber value="${total * point}" maxFractionDigits="0"/>원</td>
-				</tr>
 			</table>
-			<input type="submit" value="주문하기" id="paySubmit" data-type="" data-dueTotal="${total}">
+			<input type="submit" value="주문하기" id="paySubmit" data-type="" 
+			data-dueTotal=" <c:if test="${total < 50000 }">${total+3000}</c:if> <c:if test="${total >= 50000 }">${total}</c:if>">
 			</form>
 		</div>
 			<button onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'" class="cancel-btn">주문취소</button>

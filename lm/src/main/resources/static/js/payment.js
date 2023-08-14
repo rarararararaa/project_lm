@@ -1,4 +1,6 @@
 $(function(){
+	//구매 가능 상품 확인
+	
 	//전체 선택 확인
 	allCheck();
 	
@@ -87,19 +89,27 @@ $('#payForm').submit(function(event){
 	let book_info = {};
 	$('table').find('input[type=checkbox]').each(function(index){
 		if($(this).is(':checked')){
+			if($(this).attr('disabled') == null){
 			//alert(index);
 			let tr = $(this).closest('tr');
 			let td = tr.children('td').eq(1).find('ul').children();
 			let td2 = tr.children('td').eq(2).find('ul').children();
 			//카트 상품 정보
+			let used = td.eq(0).attr('data-used');
+			
 			book_info.store_product_num = td.eq(0).attr('data-num');
+			if(used == null){
+				used = '0';		
+			}
+			book_info.used_product_num = used;
 			book_info.store_product_title = td.eq(0).text();//책 이름
 			book_info.store_product_pricestandard = td.eq(2).text(); //책 가격
 			book_info.cart_quantity = td2.eq(1).find('span').text(); //수량
 			
-			//console.log(book_info);
+			console.log(book_info);
 			
 			cartInfo.push({...book_info});
+			}
 		}
 	})
 	let total = $('#total').attr('data-total');
@@ -111,14 +121,14 @@ $('#payForm').submit(function(event){
 	
 //선택한 도서 장바구니에서 삭제
 $('.del-btn').click(function(){
-	let store_product_num =  $(this).closest('tr').find('#test').children().eq(0).attr('data-num');
-	//alert(store_product_num);	
+	let mem_cart_num =  $(this).attr('data-num');
+	//alert(mem_cart_num);	
 	let check = confirm('해당 상품을 삭제하사겠습니까?');
 	if(check){
 		$.ajax({
 			url:'Cartdelete.do',
 			type:'post',
-			data:{store_product_num:store_product_num},
+			data:{mem_cart_num:mem_cart_num},
 			dataType:'json',
 			success: function(param){
 				if(param.result == 'logout'){
@@ -188,10 +198,20 @@ function totalPrice(){
 	let delivery = 3000;
 	let grade = $('#due_point').attr('data-point');
 	$('.LM-item:checked').each(function(){
-		let price = parseInt($(this).closest('tr').find('ul').children('li').eq(2).text().slice(0,-1));
-		let num = parseInt($(this).closest('tr').children('td').eq(2).find('.MP').children('span').text());
+		let used = $(this).closest('form').attr('id');
+		let price = 0;
+		let num = 0;
+		if($(this).attr('disabled') == null){
+			if(used == 'USED_payForm'){
+				price = $(this).closest('tr').find('ul').children('li').eq(2).attr('data-price');
+				num = 1;
+			}else{
+				price = parseInt($(this).closest('tr').find('ul').children('li').eq(2).text().slice(0,-1));
+				num = parseInt($(this).closest('tr').children('td').eq(2).find('.MP').children('span').text());
+			}
 		total += (price*num);
 		$('#total').attr('data-total',total);
+		}
 	})
 	if(total >= 50000){
 		delivery = 0;

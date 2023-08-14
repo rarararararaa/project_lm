@@ -152,6 +152,8 @@ function submitUsedProduct(){
 		success:function(param){
 			if(param.result == 'logout'){
 				alert('로그인 후 사용하세요');
+			}else if(param.result == 'existBook'){
+				alert('장바구니에 이미 담겨있습니다.');
 			}else if(param.result == 'success'){
 				let check=confirm('장바구니로 이동하시겠습니까?');
 				if(check){

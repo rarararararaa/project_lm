@@ -56,7 +56,16 @@ input[type='number']::-webkit-inner-spin-button {
 	padding-right: 5px;
 	color: #149200;
 }
-
+a{
+	text-decoration: none;
+}
+a:visited{
+	color: black;
+}
+.disabled, .disabled a{
+	color: gray !important;
+    text-decoration: line-through;
+}
 /*==============================장바구니===============================*/
 /*장바구니 상품리스트*/
 .payment-main-itemList{

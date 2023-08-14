@@ -1,5 +1,6 @@
 package kr.spring.bookstore.product.vo;
 
+import kr.spring.bookstore.used.vo.UsedVO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,7 @@ public class ProductVO {
 	private int store_product_status;
 	
 	private int cart_quantity; 
-	
-	
+	private int used_product_num;
+	private int used_product_price;
+	private int used_product_status;
 }

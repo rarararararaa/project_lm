@@ -39,7 +39,11 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 			vo.setOrder_num(order_num);
 			//도서 상세 등록 후 해당 도서 장바구니에서 삭제
 			bookStorePaymentOrderMapper.insertDetailOrder(vo);
-			bookStorePaymentCartMapper.deleteCart(vo.getStore_product_num(), vo.getMem_num());
+			bookStorePaymentCartMapper.deleteCart(vo.getMem_cart_num());
+			if(vo.getUsed_product_num() != 0) {
+				bookStorePaymentOrderMapper.updateUsed(vo.getUsed_product_num());
+			}
+			bookStorePaymentOrderMapper.updateProduct(vo.getStore_product_status());
 		}
 	}
 //배송지 관련

@@ -36,17 +36,18 @@
 		<c:forEach var="cart" items="${list}">
 			<c:if test="${cart.store_product_status == 0}"><!-- 새 상품 : 0 -->
 			<c:forEach var="book" items="${book_list}">
-			<c:if test="${book.store_product_num == cart.store_product_num}">
+			<c:if test="${book.store_product_num == cart.store_product_num && book.store_product_stockstatus < 2
+			&& book.used_product_num == cart.used_product_num }">
 			<tr id="작동">
 				<td><input type="checkbox" value="2" class="LM-item" name="check_LM"></td>
 				<td colspan="3"><!-- 장바구니 상품 내용 -->
 					<c:if test="${empty book.store_product_cover }">
-						<img alt="" src="${pageContext.request.contextPath}/images/noImage.png">
+						<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}"><img src="${pageContext.request.contextPath}/images/noImage.png"></a>
 					</c:if>
-						<img alt="" src="${book.store_product_cover}">
+						<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}"><img src="${book.store_product_cover}"></a>
 					<div class="pay-book-detail">
 						<ul id="test">
-							<li data-num="${book.store_product_num}">${book.store_product_title}</li>
+							<li data-num="${book.store_product_num}"><a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">${book.store_product_title}</a></li>
 							<li>${book.store_product_discount}%</li>
 							<li>${book.store_product_pricestandard}원</li>
 							<li>(${book.store_product_pricestandard*point}P)</li>
@@ -70,7 +71,7 @@
 					<p class="delivery-text">내일(7/25, 화)도착예정</p>
 				</td>
 				<td>
-					<img src="${pageContext.request.contextPath}/images/delete_btn.png" class="del-btn">
+					<img src="${pageContext.request.contextPath}/images/delete_btn.png" class="del-btn" data-num="${cart.mem_cart_num}">
 				</td>
 			</tr>
 			</c:if>
@@ -94,33 +95,42 @@
 		<table>
 				<!-- 반복문 -->
 		<c:forEach var="cart" items="${list}">
-			<c:if test="${cart.store_product_status > 0}"><!-- 새 상품 : 0 -->
+			<c:if test="${cart.store_product_status == 1 && cart.used_product_num > 0}"><!-- 새 상품 : 0 -->
 			<c:forEach var="book" items="${book_list}">
-			<c:if test="${book.store_product_num == cart.store_product_num}">
-			<tr>
-				<td><input type="checkbox" value="3" class="LM-item"></td>
+			<c:if test="${book.used_product_num == cart.used_product_num}">
+			<tr <c:if test="${book.used_product_status == 0 }">class="disabled"</c:if>>
+				<td>
+					<input type="checkbox" value="3" class="LM-item" id="status"
+					<c:if test="${book.used_product_status == 0 }">disabled checked="false"</c:if>>
+				</td>
 				<td colspan="3"><!-- 장바구니 상품 내용 -->
 					<c:if test="${book.store_product_cover == null}">
+					<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">
 						<img alt="" src="${pageContext.request.contextPath}/images/noImage.png">
+					</a>
 					</c:if>
+					<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">
 						<img alt="" src="${book.store_product_cover}">
+					</a>
 					<div class="pay-book-detail">
 						<ul id="test">
-							<li data-num="${book.store_product_num}">${book.store_product_title}</li>
+							<li data-num="${book.store_product_num}" data-used="${book.used_product_num}">
+							<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">
+								${book.store_product_title}
+								<c:if test="${book.used_product_status == 0 }"><span style="color: red;">품절</span></c:if>
+							</a>
+							</li>
 							<li>${book.store_product_discount}%</li>
-							<li>${book.store_product_pricestandard}원</li>
-							<li>(${book.store_product_pricestandard*point}P)</li>
+							<li data-price = "${book.used_product_price}">${book.store_product_pricestandard}원</li>
 						</ul>
 					</div>
 				</td>
 				<td><!-- 삼품 개수 증감 -->
 					<ul>
-						<li>${book.store_product_pricestandard * cart.cart_quantity}원</li>
+						<li><fmt:formatNumber value="${book.used_product_price * cart.cart_quantity}"/>원</li>
 						<li>
 						<div class="MP">
-							<img class="MP-btn" src="${pageContext.request.contextPath}/images/minus.png" id="minus">
 							<span>${cart.cart_quantity}</span><%-- 수정 --%>
-							<img class="MP-btn" src="${pageContext.request.contextPath}/images/plus.png" id="plus">
 						</div>
 						</li>
 					</ul>
@@ -130,7 +140,7 @@
 					<p class="delivery-text">내일(7/25, 화)도착예정</p>
 				</td>
 				<td>
-					<img src="${pageContext.request.contextPath}/images/delete_btn.png" class="del-btn">
+					<img src="${pageContext.request.contextPath}/images/delete_btn.png" class="del-btn" data-num="${cart.mem_cart_num}">
 				</td>
 			</tr>
 			</c:if>

@@ -59,4 +59,11 @@ public interface BookStorePaymentOrderMapper {
 	//도서 번호 검색
 	@Select("SELECT * FROM store_product_detail WHERE store_product_num = #{product_num}")
 	public ProductVO selectProductNum(int product_num);
+	
+	//주문 후 중고 status 값 바꾸기
+	@Update("UPDATE store_used_product_manage SET used_product_status = 0 WHERE used_product_num = #{used_product_num}")
+	public void updateUsed(int used_product_num);
+	//구매 후 수량 변경
+	@Update("UPDATE store_product_detail SET store_product_stock = store_product_stock-1 WHERE store_product_num = #{store_product_num}")
+	public void updateProduct(int store_product_num);
 }

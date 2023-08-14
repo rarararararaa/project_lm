@@ -16,8 +16,11 @@ public class BookStorePaymentCartVO {
 	private int store_product_num;//상품 번호
 	private int cart_quantity;
 	private int store_product_status;
+	private int used_product_num;
+	
 	
 	private int order_product_price;//구매 금액
 	private int order_num;
 	private ProductVO productVO;
+	
 }

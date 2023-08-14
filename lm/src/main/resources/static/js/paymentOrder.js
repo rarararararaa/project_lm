@@ -254,7 +254,7 @@ $(function(){
 	if(count > 1){
 		name = $('.title:first').text().substring(0,8)+'...외 '+(count-1)+'종';
 	}
-	let total = $('#due').attr('data-total');
+	let total = $('#paySubmit').attr('data-dueTotal');
 	let cell = $('#cell').attr('data-cell');
 	let email = $('#memInfo').attr('data-email');
 	let zipcode = $('#memInfo').attr('data-zipcode');
@@ -269,7 +269,7 @@ $(function(){
                 pay_method : pay_method,
                 merchant_uid: "IMP"+makeMerchantUid, //주문번호
                 name : name,
-                amount : 1,
+                amount : total,
                 buyer_email : email,
                 buyer_name : 'LM문고',
                 buyer_tel : cell,
@@ -370,7 +370,7 @@ function ajaxPaycomplete(rsp){
 		}
 	})
 }
-//가지고 있는 포인트 포다 많이 입력할 시 현재 가지고 있는 최대 포인트로 입력&사이드바 포인트 바꾸기
+//가지고 있는 포인트 보다 많이 입력할 시 현재 가지고 있는 최대 포인트로 입력&사이드바 포인트 바꾸기
 function overPoint(point){
 	let maxpoint = $('#mem_point').attr('data-maxPoint');
 	if(point >= maxpoint){
