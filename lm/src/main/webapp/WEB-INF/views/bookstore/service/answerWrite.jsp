@@ -31,10 +31,10 @@ $(function(){
 	<form:form modelAttribute="answerVO" action="answerWrite.do" id="register_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
 		<form:hidden path="ask_num" value="${ask.ask_num}"/>
-		<ul>
+		<ul class="form-default">
 			<li>
 				<form:label path="answer_content">내용</form:label>
-				<form:textarea path="answer_content"/>
+				<form:textarea path="answer_content" class="input-textarea"/>
 				<form:errors path="answer_content" cssClass="error-color"/>
 			</li>
 			<li>

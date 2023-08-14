@@ -16,17 +16,17 @@
 <div class="page-main">
 	<form:form modelAttribute="announceVO" action="announceWrite.do" id="register_form">
 		<form:errors element="div" cssClass="error-color"/>
-		<ul>
+		<ul class="form-default">
 		    <li>
 				<form:label path="board_title">제목</form:label>
-				<form:input path="board_title"/>
+				<form:input path="board_title" class="input-box" placeholder="제목을 입력하세요."/>
 				<form:errors path="board_title" cssClass="error-color"/>
 			</li>
 			<li>
 				<br><input type="file" name="filename"><br>
 			</li>
 			<li>
-				<form:textarea path="board_content"/>
+				<form:textarea path="board_content" class="input-textarea"/>
 				<form:errors path="board_content" cssClass="error-color"/>
 				<script>
 					function MyCustomUploadAdapterPlugin(editor){

@@ -8,7 +8,7 @@
 	<h2>문의하기-작성</h2>
 	<form:form modelAttribute="askVO" action="askWrite.do" id="register_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
-		<ul>
+		<ul class="form-default">
 			<li>
 				<label for="ask_category"></label>
 				<select id="ask_category" name="ask_category">
@@ -22,13 +22,11 @@
 				</select>
 			</li>
 		    <li>
-				<form:label path="ask_title">제목</form:label>
-				<form:input path="ask_title"/>
+				<form:input path="ask_title" class="input-box" placeholder="제목을 입력하세요."/>
 				<form:errors path="ask_title" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="ask_content">내용</form:label>
-				<form:textarea path="ask_content"/>
+				<form:textarea path="ask_content" class="input-textarea" placeholder="내용을 입력하세요."/>
 				<form:errors path="ask_content" cssClass="error-color"/>
 			</li>
 			<li>	

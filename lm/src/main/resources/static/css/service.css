@@ -187,3 +187,47 @@ input[type="checkbox"]:checked+label {
 	background-color: #ccc;
 	pointer-events: none;
 }
+.detail{
+	padding:20px;
+}
+.detail li{
+	padding:10px;
+	font-size:14pt;
+}
+.detail li.title{
+	font-weight:700;
+	font-size:20pt;
+}
+.input-box{
+	display: block;
+    width: 100%;
+    min-height: 40px;
+    padding: 11px 12px 10px;
+    border: 1px solid #5055b1;
+    box-sizing: border-box;
+    overflow: hidden;
+    resize: none;
+    word-break: break-all;
+    font-size: 15px;
+    letter-spacing: -.23px;
+    line-height: 17px;
+    outline: none;
+}
+.input-textarea{
+	display: block;
+    width: 100%;
+    min-height: 400px;
+    padding: 11px 12px 10px;
+    border: 1px solid #5055b1;
+    box-sizing: border-box;
+    overflow: hidden;
+    resize: none;
+    word-break: break-all;
+    font-size: 15px;
+    letter-spacing: -.23px;
+    line-height: 17px;
+    outline: none;
+}
+.form-default li{
+	margin:10px;
+}
