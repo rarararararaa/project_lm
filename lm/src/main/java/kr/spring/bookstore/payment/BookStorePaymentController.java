@@ -30,6 +30,7 @@ import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import okhttp3.internal.http2.Header;
 
 @Controller
 @Slf4j
@@ -96,19 +97,40 @@ public class BookStorePaymentController {
 	}
 	//======================API 관련===========================//  
 	//Token 값 발급
-	@RequestMapping("/bookstore/payment/token.do")
 	public String tokenTest() {
+		String token = "";
 		try {
-			String token = bookStorePaymentService.getToken();
-			log.debug("<<토큰 받기 성공!!>>"+token);
-			String IMP_UID = "imp_459027051419";
-			bookStorePaymentService.paymentInfo(token, IMP_UID);
+			token = bookStorePaymentService.getToken();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "payment";//결제 취소로 보내줘야 함
+		return token;//결제 취소로 보내줘야 함
 	}
-	
+	//주문 취소
+	@RequestMapping("/bookstore/payment/cancelPay.do")
+	@ResponseBody
+	public Map<String, Object> cancelPay(int order_num){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		try {
+			String token = tokenTest();
+			if(token == null) {
+				throw new Exception();
+			}
+			//주문 정보 가져오기
+			String IMP_UID = bookStorePaymentOrderService.selectImp_uid(order_num);
+			String reason = "단순 변심";
+			int amount = bookStorePaymentService.paymentInfo(token, IMP_UID);
+			bookStorePaymentService.cancelPay(token, IMP_UID, amount,reason);
+			//주문 취소 정보 추가
+			bookStorePaymentOrderService.updateCancelInfo(order_num, reason);
+			mapJson.put("result", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mapJson.put("result", "errorCancel");
+		}
+		
+		return mapJson;
+	}
 	//======================장바구니FORM===========================//  
 	@GetMapping("/bookstore/payment/cart.do")
 	public String cartForm(HttpSession session, Model model, HttpServletRequest request) {
@@ -182,6 +204,7 @@ public class BookStorePaymentController {
 				JSONObject obj = (JSONObject)array.get(i);
 				Map<String, String> re = new HashMap<String, String>();
 				
+				re.put("mem_cart_num", (String)obj.get("mem_cart_num"));
 				re.put("used_product_num", (String)obj.get("used_product_num"));
 				re.put("cart_quantity",(String)obj.get("cart_quantity"));
 				re.put("store_product_num", (String)obj.get("store_product_num"));
@@ -194,12 +217,14 @@ public class BookStorePaymentController {
 			
 			for(Map<String, String> map : list) {
 				BookStorePaymentCartVO vo = new BookStorePaymentCartVO();
+				vo.setMem_cart_num(Integer.parseInt(map.get("mem_cart_num")));
 				vo.setUsed_product_num(Integer.parseInt(map.get("used_product_num")));
 				vo.setCart_quantity(Integer.parseInt(map.get("cart_quantity")));
 				vo.setStore_product_num(Integer.parseInt(map.get("store_product_num")));
 				int price = Integer.parseInt(map.get("cart_quantity"))*Integer.parseInt(map.get("store_product_pricestandard").substring(0, map.get("store_product_pricestandard").length()-1));
 				vo.setOrder_product_price(price);
 				vo.setMem_num(mem_num);
+				
 				cartList.add(vo);
 				log.debug("<<orderList>> : "+cartList);
 				bookStorePaymentService.updateCart(vo);
@@ -280,13 +305,14 @@ public class BookStorePaymentController {
 		org.json.JSONObject jObject = new org.json.JSONObject(orderInfo);
 		//boolean result = jObject.getBoolean("success");
 		List<BookStorePaymentCartVO> list = (ArrayList)session.getAttribute("cartList");
+		log.debug("<<주문완료 - cartList>> : "+list);
 		int total = (Integer)session.getAttribute("total");
 		BookStorePaymentOrderVO order = new BookStorePaymentOrderVO();
 		//데이터 뽑기
 		MemberVO mem_home = bookStorePaymentOrderService.selectDefaultHome(mem_num);
 		order.setHome_num(mem_home.getHome_num());
 		order.setMem_num(mem_home.getMem_num());
-		order.setOrder_total_price(total);
+		order.setOrder_total_price(jObject.getInt("paid_amount"));
 		order.setOrder_notice(notice);
 		
 		String type = jObject.getString("pg_provider");
@@ -400,7 +426,6 @@ public class BookStorePaymentController {
 	@ResponseBody
 	public Map<String, Object> ChangeDefault(Integer home_num, HttpSession session){
 		Map<String, Object> mapJson = new HashMap<String, Object>();
-		log.debug("<<>> : "+home_num);
 		int mem_num = (Integer)session.getAttribute("mem_num");
 		MemberVO memberVO = memberService.selectMember(mem_num);
 		memberVO.setMem_num(mem_num);
@@ -439,6 +464,7 @@ public class BookStorePaymentController {
 		model.addAttribute("homeInfo", homeInfo);
 		return "receipt";
 	}
+
 	//멤버 등급에 따른 포인드 % 가져오기
 	public double getPoint(int grade) {
 		double point = 0.005;

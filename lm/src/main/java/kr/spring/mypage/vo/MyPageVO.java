@@ -71,7 +71,7 @@ public class MyPageVO {
 	public String store_product_author;
 	public String store_product_publisher;
 	public String store_product_cover;
-	
+	public int order_pay_status;
 	
 	private byte[] mem_photo; //myEdit.jsp에서 입력받은 이미지 파일
 	//MultipartFile to byte 이미지 처리 

@@ -96,11 +96,12 @@ $('#payForm').submit(function(event){
 			let td2 = tr.children('td').eq(2).find('ul').children();
 			//카트 상품 정보
 			let used = td.eq(0).attr('data-used');
-			
+			let cart = td.eq(0).attr('data-cartnum');
 			book_info.store_product_num = td.eq(0).attr('data-num');
 			if(used == null){
 				used = '0';		
 			}
+			book_info.mem_cart_num = cart;
 			book_info.used_product_num = used;
 			book_info.store_product_title = td.eq(0).text();//책 이름
 			book_info.store_product_pricestandard = td.eq(2).text(); //책 가격

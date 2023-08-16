@@ -34,4 +34,9 @@ public interface BookStorePaymentOrderService {
 	
 	//도서 번호로 검색
 	public ProductVO selectProductNum(int product_num);
+	
+	//주문 번호로 imp_uid를 가져오기
+	public String selectImp_uid(int order_num);
+	//주문 취소후 주문상태와 취소 메시지 넣기
+	public void updateCancelInfo(int order_num, String cancel_notice);
 }

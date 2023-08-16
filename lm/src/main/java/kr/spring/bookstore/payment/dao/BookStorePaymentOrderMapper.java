@@ -66,4 +66,12 @@ public interface BookStorePaymentOrderMapper {
 	//구매 후 수량 변경
 	@Update("UPDATE store_product_detail SET store_product_stock = store_product_stock-1 WHERE store_product_num = #{store_product_num}")
 	public void updateProduct(int store_product_num);
+	
+	//주문 번호로 imp_uid를 가져오기
+	@Select("SELECT imp_uid FROM store_order_manage WHERE order_num = #{order_num}")
+	public String selectImp_uid(int order_num);
+	//주문 취소후 주문상태와 취소 메시지 넣기
+	@Update("UPDATE store_order_manage SET order_pay_status = 0,cancel_notice = #{cancel_notice} WHERE order_num = #{order_num}")
+	public void updateCancelInfo(int order_num, String cancel_notice);
+	
 }

@@ -98,6 +98,16 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 	@Override
 	public ProductVO selectProductNum(int product_num) {
 		return bookStorePaymentOrderMapper.selectProductNum(product_num);
+	}
+	//==================주문 취소==========================//
+	//imp_uid 값 구하기
+	@Override
+	public String selectImp_uid(int order_num) {
+		return bookStorePaymentOrderMapper.selectImp_uid(order_num);
+	}
+	@Override
+	public void updateCancelInfo(int order_num, String cancel_notice) {
+		bookStorePaymentOrderMapper.updateCancelInfo(order_num, cancel_notice);
 	} 
 	
 	

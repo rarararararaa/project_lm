@@ -71,7 +71,7 @@ public interface MyPageMapper {
 	public void updateModifyDate(MyPageVO mypageVO);
 		
 	//주문내역 가져오기 store_order_manage, store_order_detail, store_product_detail
-	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT c.store_product_title,d.order_total_price, d.order_status, d.order_date, d.order_num FROM"
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT c.store_product_title,d.order_total_price, d.order_status, d.order_date, d.order_num, d.order_pay_status FROM"
 			+ "			(SELECT LISTAGG(a.store_product_title, ', ') AS store_product_title, b.order_num FROM (SELECT m.mem_num,d.store_product_num,d.order_num FROM store_order_manage m INNER JOIN store_order_detail d ON m.order_num = d.order_num) b"
 			+ "			INNER JOIN store_product_detail a ON b.store_product_num = a.store_product_num GROUP BY order_num) c INNER JOIN store_order_manage d ON c.order_num = d.order_num"
 			+ "			WHERE mem_num = #{mem_num}  ORDER BY order_num DESC)a) WHERE rnum >= #{start} AND rnum <= #{end}")

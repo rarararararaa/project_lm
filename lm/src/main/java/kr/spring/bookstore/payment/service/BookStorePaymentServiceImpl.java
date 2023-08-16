@@ -24,7 +24,7 @@ import kr.spring.bookstore.payment.dao.BookStorePaymentCartMapper;
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.used.vo.UsedVO;
-import lombok.ToString;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -37,11 +37,11 @@ public class BookStorePaymentServiceImpl implements BookStorePaymentService{
 	@Value("${imp_secret}")
 	private String imp_secret;
 	
-	@ToString
+	@Data
 	private class Response{
 		private PaymentInfo response;
 	}
-	@ToString
+	@Data
 	private class PaymentInfo{
 		private int amount;
 	}
@@ -80,7 +80,7 @@ public class BookStorePaymentServiceImpl implements BookStorePaymentService{
 	}
 
 	
-
+//토큰 값 받아오기
 	@Override
 	public String getToken() throws IOException {
 		log.debug("<<KEY 값 : >>"+imp_key);
@@ -146,14 +146,43 @@ public class BookStorePaymentServiceImpl implements BookStorePaymentService{
 		br.close();
 		conn.disconnect();
 		
-		return 0;
+		return response.getResponse().getAmount();
 	}
 
 	//결제 취소하기
 	@Override
-	public void cancelPay(String token, String IMP_UID, int amount) {
-		// TODO Auto-generated method stub
+	public void cancelPay(String token, String IMP_UID, int amount,String reason)throws IOException {
+		log.debug("<<토큰 받기 성공!!>> : "+token);
+		log.debug("<<주문 정보 가져오기 성공 !!>> : "+amount);
 		
+		HttpsURLConnection conn = null;
+		URL url = new URL("https://api.iamport.kr/payments/cancel");//주문 취소 API주소 > io예외처리 
+		conn = (HttpsURLConnection)url.openConnection(); //주소 연결
+		
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Content-type", "application/json");
+		conn.setRequestProperty("Authorization", token);
+		
+		conn.setDoOutput(true);
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("reason", reason);
+		json.addProperty("imp_uid", IMP_UID);
+		json.addProperty("amount", amount);
+		json.addProperty("checksum", amount);//가격 체크
+		// Request Body에 Data를 담기위해 OutputStream 객체를 생성. // 데이터를 reqestbody에 담아서 서버로 보냄
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+		bw.write(json.toString());//버퍼에 있는 값 출력
+		bw.flush();//남아있는 값 전부 출력
+		bw.close();//스트림을 닫음
+		//서버로 부터의 응답을 읽음
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
+		Gson gson = new Gson();//json 구조의 직렬화 된 데이터를 java 객체로 역직렬화 해주는 라이브러리 (직렬화도 해줌)
+		//이게 뭐야============추가로 설명 작성=====================//
+		String response = gson.fromJson(br.readLine(), Map.class).get("response").toString();
+		log.debug("<<결제 취소 응답>> : "+response);
+		br.close();
+		conn.disconnect();
 	}
 
 	@Override

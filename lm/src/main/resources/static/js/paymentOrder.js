@@ -250,9 +250,16 @@ $(function(){
 	}
 	//결제 정보
 	let count = $('#count').attr('data-count');
-	let name = $('.title').text();
+	let name = $('.title').text().trim();
 	if(count > 1){
-		name = $('.title:first').text().substring(0,8)+'...외 '+(count-1)+'종';
+		let length = $('.title:first').text().trim().length;
+		console.log('길이 :'+length);
+		if(length < 5){
+			length = 2;
+		}else{
+			length = length - 3;
+		}
+		name = $('.title:first').text().trim().substring(0,length)+'...외 '+(count-1)+'종';
 	}
 	let total = $('#paySubmit').attr('data-dueTotal');
 	let cell = $('#cell').attr('data-cell');

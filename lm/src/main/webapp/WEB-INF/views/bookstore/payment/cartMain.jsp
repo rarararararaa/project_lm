@@ -47,7 +47,7 @@
 						<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}"><img src="${book.store_product_cover}"></a>
 					<div class="pay-book-detail">
 						<ul id="test">
-							<li data-num="${book.store_product_num}"><a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">${book.store_product_title}</a></li>
+							<li data-num="${book.store_product_num}"  data-cartnum="${cart.mem_cart_num}"><a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">${book.store_product_title}</a></li>
 							<li>${book.store_product_discount}%</li>
 							<li>${book.store_product_pricestandard}원</li>
 							<li>(${book.store_product_pricestandard*point}P)</li>
@@ -114,7 +114,7 @@
 					</a>
 					<div class="pay-book-detail">
 						<ul id="test">
-							<li data-num="${book.store_product_num}" data-used="${book.used_product_num}">
+							<li data-num="${book.store_product_num}" data-used="${book.used_product_num}" data-cartnum="${cart.mem_cart_num}">
 							<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">
 								${book.store_product_title}
 								<c:if test="${book.used_product_status == 0 }"><span style="color: red;">품절</span></c:if>

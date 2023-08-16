@@ -29,5 +29,5 @@ public interface BookStorePaymentService {
 	//결제 정보 불러오기
 	public int paymentInfo(String token, String IMP_UID) throws IOException;
 	//결제 취소하기
-	public void cancelPay(String token, String IMP_UID, int amount);
+	public void cancelPay(String token, String IMP_UID, int amount, String reason) throws IOException;
 }

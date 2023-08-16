@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 </head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/js/Myorder.js"></script>
 <body>
 	<!-- 파라미터 세팅 -->
 	<%
@@ -76,8 +78,13 @@
 					<div id="c-mypage-title"><a href="${pageContext.request.contextPath}/lm/mypage/orderlist/orderListMain.do?lo=${lo}&order_num=${list.order_num}">${list.store_product_title}</a></div>
 					<div id="c-mypage-price">${list.order_total_price}</div>
 					<div id="c-mypage-date">${list.order_date}</div>
-					<c:if test="${list.order_status == 0}">
-						<div id="c-mypage-status">주문 완료</div>
+					<c:if test="${list.order_pay_status == 0}">
+						<span style="color: red">주문 취소</span>
+					</c:if>
+					<c:if test="${list.order_status == 0 && list.order_pay_status == 1}">
+						<div id="c-mypage-status">주문 완료
+						<button name="order_num" value="${list.order_num}" class="cancelPay">주문 취소</button>
+						</div>
 					</c:if>
 					<c:if test="${list.order_status == 1}">
 						<div id="c-mypage-status">배송 중</div>
