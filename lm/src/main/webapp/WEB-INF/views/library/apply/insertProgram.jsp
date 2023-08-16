@@ -82,13 +82,13 @@
 			</li>
 			<li>
 			진행 시간:
-			<select name="startTime" id="timeSelect">
+			<select name="start" id="timeSelect">
 				<c:forEach var="i" begin="1" end="24">
 				<option value="${i}">${i}시</option>
 				</c:forEach>
 			</select>
 			~
-			<select name="endTime" id="timeSelect">
+			<select name="end" id="timeSelect">
 				<c:forEach var="i" begin="1" end="24">
 				<option value="${i}">${i}시</option>
 				</c:forEach>

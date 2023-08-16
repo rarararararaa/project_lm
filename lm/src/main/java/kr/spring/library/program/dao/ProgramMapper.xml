@@ -1,4 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.library.program.dao.ProgramMapper">
+
+<insert id="insertProgram" parameterType="programVO">
+	INSERT INTO lib_program_admin (
+	  program_num,
+	  program_title,
+	  program_reg_date,
+	  program_admit,
+	  program_hit,
+	  program_content) 
+	VALUES (
+	  #{program_num},
+	  #{program_title},
+	  SYSDATE,
+	  #{program_admit},
+	  #{program_hit},
+	  #{program_content})
+</insert>
+
+<insert id="insertProgramTimes" parameterType="programTimesVO">
+	INSERT INTO lib_program_times(
+	  program_num,
+	  program_times_num,
+	  program_start,
+	  program_end,
+	  program_admit)
+	VALUES(
+	  #{program_num},
+	  lib_program_times_seq.nextval,
+	  #{program_start},
+	  #{program_end},
+	  #{program_admit})
+</insert>
+
+<select id="selectProgramStatus" parameterType="integer" resultType="integer">
+	SELECT CASE
+		<![CDATA[
+		WHEN SYSDATE < (SELECT MIN(program_start) FROM lib_program_times WHERE program_num=#{program_num}) THEN 0
+		WHEN SYSDATE > (SELECT MAX(program_end) FROM lib_program_times WHERE program_num=#{program_num}) THEN 1
+		]]>
+		ELSE 2
+		END AS status
+	FROM dual
+</select>
+
+<select id="selectProgramList" parameterType="map" resultType="programVO">
+	SELECT
+		   *
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM(SELECT
+		             *
+		           FROM lib_program_admin
+		           ORDER BY program_reg_date desc 
+		           )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+</select>
+<select id="selectRowCount" parameterType="map"
+	                             resultType="integer">
+	SELECT
+	  COUNT(*)
+	FROM lib_program_admin
+</select>
 </mapper>

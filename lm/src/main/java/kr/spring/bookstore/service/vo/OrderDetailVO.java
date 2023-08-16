@@ -14,4 +14,5 @@ public class OrderDetailVO {
 	private int order_product_price;
 	private int cart_quantity;
 	private String product_name;
+	private int mem_num;
 }

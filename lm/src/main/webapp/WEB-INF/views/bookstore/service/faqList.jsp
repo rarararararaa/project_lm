@@ -40,7 +40,7 @@ $(function(){
 <div class="page-main">
 	<h2>자주 묻는 질문</h2>
 	<c:if test="${mem_auth==9}">
-	<div class="align-right">
+	<div >
 	<input type="button" value="글쓰기" onclick="location.href='faqWrite.do'">
 	</div>
 	</c:if>

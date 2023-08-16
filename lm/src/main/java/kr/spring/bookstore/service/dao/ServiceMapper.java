@@ -13,6 +13,7 @@ import kr.spring.bookstore.service.vo.AnnounceVO;
 import kr.spring.bookstore.service.vo.AnswerVO;
 import kr.spring.bookstore.service.vo.AskVO;
 import kr.spring.bookstore.service.vo.FaqVO;
+import kr.spring.bookstore.service.vo.OrderDetailVO;
 
 @Mapper
 public interface ServiceMapper {
@@ -54,4 +55,7 @@ public interface ServiceMapper {
 	//답변 보기
 	@Select("SELECT * FROM lm_board_answer WHERE ask_num=#{ask_num}")
 	public AnswerVO selectAnswer(Integer ask_num);
+	
+	//주문 목록 구하기 개같은거 
+	public List<OrderDetailVO> orderList();
 }

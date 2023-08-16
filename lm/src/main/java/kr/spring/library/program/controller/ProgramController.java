@@ -1,5 +1,12 @@
 package kr.spring.library.program.controller;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -11,10 +18,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.library.program.service.ProgramService;
 import kr.spring.library.program.vo.ProgramTimesVO;
 import kr.spring.library.program.vo.ProgramVO;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -46,22 +57,73 @@ public class ProgramController {
 		log.debug("<<programVO>> : " + programVO);
 		
 		if(result.hasErrors()) {
-			return programForm();
+			
+			return "insertProgram";
 		}
 		
-		if(programVO.getStartMonth().length()== 1) {
-			programVO.setStartMonth("0" + programVO.getStartMonth());
+		Calendar start = Calendar.getInstance();
+		Calendar end = Calendar.getInstance();
+		start.set(Calendar.YEAR, programVO.getStartYear());
+		start.set(Calendar.MONTH, programVO.getStartMonth());
+		start.set(Calendar.DATE, programVO.getStartDate());
+		end.set(Calendar.YEAR,programVO.getEndYear());
+		end.set(Calendar.MONTH,programVO.getEndMonth());
+		end.set(Calendar.DATE,programVO.getEndDate());
+		if(start.after(end)) {
+			return "insertProgram";
 		}
-		if(programVO.getStartDate().length()== 1) {
-			programVO.setStartDate("0" + programVO.getStartDate());
+		List<ProgramTimesVO> timeList = new ArrayList<ProgramTimesVO>();
+		end.set(Calendar.HOUR, programVO.getEnd());
+		while(!start.after(end)) {
+			ProgramTimesVO times = new ProgramTimesVO();
+			times.setProgram_admit(programVO.getProgram_admit());
+			start.set(Calendar.HOUR, programVO.getStart());
+			times.setProgram_start(new Date(start.getTimeInMillis()));
+			start.set(Calendar.HOUR, programVO.getEnd());
+			times.setProgram_end(new Date(start.getTimeInMillis()));
+			start.add(Calendar.DATE, 1);
+			timeList.add(times);
 		}
-		if(programVO.getEndMonth().length()== 1) {
-			programVO.setEndMonth("0" + programVO.getEndMonth());
-		}
-		if(programVO.getEndDate().length()== 1) {
-			programVO.setEndDate("0" + programVO.getEndDate());
+		programService.insertProgram(programVO, timeList);
+		
+		model.addAttribute("message", "프로그램을 추가하였습니다");
+		model.addAttribute("url", request.getContextPath()+"/library/programList.do");
+		
+		
+		return "common/resultView";
+	}
+	
+	@RequestMapping("/library/programList.do")
+	public ModelAndView programList(@RequestParam(value="pageNum",
+										defaultValue="1") int currentPage,
+									@RequestParam(value="order",
+										defaultValue="1") int order) {
+		Map<String,Object> map = 
+				new HashMap<String,Object>();
+		
+		int count = programService.selectRowCount();
+		
+		log.debug("<<count>> : " + count);
+		PagingUtil page = 
+				new PagingUtil(
+						currentPage,count,20,10,
+						"announceList.do","&order="+order);
+		
+		List<ProgramVO> list = null;
+		if(count > 0) {
+			map.put("order",order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = programService.selectProgramList(map);			
 		}
 		
-		return "";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("programList");
+		mav.addObject("list", list);
+		mav.addObject("count", count);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 }

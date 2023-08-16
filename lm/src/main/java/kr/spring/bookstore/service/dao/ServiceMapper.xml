@@ -101,4 +101,11 @@
 		  #{answer_image},
 		  #{answer_imagename})
 	</insert>
+	
+	<select id="orderList">
+		SELECT
+		  *
+		FROM lm_order_detail d JOIN lm_order_manage m
+		USING(order_num)
+	</select>
 </mapper>
