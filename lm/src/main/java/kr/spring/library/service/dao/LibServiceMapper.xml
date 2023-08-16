@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.library.service.dao.LibServiceMapper">
+
+	<insert id="insertBoardAsk" parameterType="boardAskVO">
+		INSERT INTO lib_board_ask(
+		  ask_num,
+		  mem_num,
+		  ask_title,
+		  ask_content,
+		  ask_reg_date,
+		  ask_image,
+		  ask_imagename,
+		  ask_status) 
+		VALUES(
+		  lib_board_ask_seq.nextval,
+		  #{mem_num},
+		  #{ask_title},
+		  #{ask_content},
+		  SYSDATE,
+		  #{ask_image},
+		  #{ask_imagename},
+		  0)
+	</insert>
+	
+	<insert id="insertBoardAnswer" parameterType="boardAnswerVO">
+		INSERT INTO lib_board_answer(
+		  answer_num,
+		  ask_num,
+		  mem_num,
+		  answer_content,
+		  answer_reg_date,
+		  answer_image,
+		  answer_imagename) 
+		VALUES(
+		  lib_board_answer_seq.nextval,
+		  #{ask_num},
+		  #{mem_num},
+		  #{answer_content},
+		  SYSDATE,
+		  #{answer_image},
+		  #{answer_imagename})
+	</insert>
+	
+</mapper>
