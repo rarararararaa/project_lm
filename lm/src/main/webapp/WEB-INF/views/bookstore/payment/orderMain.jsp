@@ -101,8 +101,7 @@
 						</td>
 						<td>
 							<ul>
-								<li class="title">${book.store_product_title}
-								<c:if test="${cart.used_product_num > 0 }">[중고]</c:if>
+								<li class="title">${book.store_product_title}<c:if test="${cart.used_product_num > 0 }">[중고]</c:if>
 								</li>
 								<li class="float-left orderListlitwo">${book.store_product_discount}%</li>
 								<li><fmt:formatNumber value="${book.store_product_pricestandard}"/>원</li>

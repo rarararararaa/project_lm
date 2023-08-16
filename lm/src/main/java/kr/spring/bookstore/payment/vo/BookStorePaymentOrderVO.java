@@ -32,4 +32,6 @@ public class BookStorePaymentOrderVO {
 	private int store_product_num;//상품 번호
 	private int order_product_price;
 	private int order_product_quantity;
+	private int used_product_num;
+
 }

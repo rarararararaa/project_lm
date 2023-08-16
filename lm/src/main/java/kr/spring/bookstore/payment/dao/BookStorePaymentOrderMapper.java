@@ -61,11 +61,16 @@ public interface BookStorePaymentOrderMapper {
 	public ProductVO selectProductNum(int product_num);
 	
 	//주문 후 중고 status 값 바꾸기
-	@Update("UPDATE store_used_product_manage SET used_product_status = 0 WHERE used_product_num = #{used_product_num}")
-	public void updateUsed(int used_product_num);
-	//구매 후 수량 변경
+	@Update("UPDATE store_used_product_manage SET used_product_status = #{num} WHERE used_product_num = #{used_product_num}")
+	public void updateUsed(int num, int used_product_num);
+	//구매 후 수량 변경-감소
 	@Update("UPDATE store_product_detail SET store_product_stock = store_product_stock-1 WHERE store_product_num = #{store_product_num}")
 	public void updateProduct(int store_product_num);
+	//구매 후 수량 변경-증가
+	@Update("UPDATE store_product_detail SET store_product_stock = store_product_stock+1 WHERE store_product_num = #{store_product_num}")
+	public void updateProductPlus(int store_product_num);
+	
+	
 	
 	//주문 번호로 imp_uid를 가져오기
 	@Select("SELECT imp_uid FROM store_order_manage WHERE order_num = #{order_num}")

@@ -123,6 +123,9 @@ public class BookStorePaymentController {
 			bookStorePaymentService.cancelPay(token, IMP_UID, amount,reason);
 			//주문 취소 정보 추가
 			bookStorePaymentOrderService.updateCancelInfo(order_num, reason);
+			//재고 변경
+			List<BookStorePaymentOrderVO> list = bookStorePaymentOrderService.listOrder(order_num);
+			bookStorePaymentOrderService.updateQuantity(list);
 			mapJson.put("result", "success");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -217,8 +220,10 @@ public class BookStorePaymentController {
 			
 			for(Map<String, String> map : list) {
 				BookStorePaymentCartVO vo = new BookStorePaymentCartVO();
+				if(map.get("mem_cart_num")!=null) {
 				vo.setMem_cart_num(Integer.parseInt(map.get("mem_cart_num")));
 				vo.setUsed_product_num(Integer.parseInt(map.get("used_product_num")));
+				}
 				vo.setCart_quantity(Integer.parseInt(map.get("cart_quantity")));
 				vo.setStore_product_num(Integer.parseInt(map.get("store_product_num")));
 				int price = Integer.parseInt(map.get("cart_quantity"))*Integer.parseInt(map.get("store_product_pricestandard").substring(0, map.get("store_product_pricestandard").length()-1));
@@ -333,6 +338,7 @@ public class BookStorePaymentController {
 		mapJson.put("order", order);
 		return mapJson;
 	}
+
 	//배송지 수정
 	//폼
 	@GetMapping("/bookstore/payment/homeModify.do")

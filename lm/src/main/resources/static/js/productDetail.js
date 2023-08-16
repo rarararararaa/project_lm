@@ -180,7 +180,13 @@ function submitOrder(){
 			event.preventDefault();
 						
 			let cartInfo=[];
-			cartInfo.push($('#product_cart').serialize());
+			let book_info = {};
+			book_info.cart_quantity = $('#number').val();
+			book_info.store_product_pricestandard = $('#price').val();
+			book_info.store_product_num = $('#product').val();
+
+			cartInfo.push({...book_info});
+			console.log(cartInfo); 
 			//서버와 통신
 			$.ajax({
 				url:'/bookstore/payment/cartAction.do',
@@ -195,7 +201,7 @@ function submitOrder(){
 					}else if(param.result == 'success'){
 						let check=confirm('결제창으로 이동하시겠습니까?');
 						if(check){
-							location.href='/bookstore/payment/cartAction.do';
+							location.href='order.do';
 						}else{
 							location.reload();
 						}

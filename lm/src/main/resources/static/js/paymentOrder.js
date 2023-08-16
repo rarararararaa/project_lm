@@ -283,10 +283,9 @@ $(function(){
                 buyer_addr : address,
                 buyer_postcode : zipcode
             }, function (rsp) { //callback
+				console.log(rsp.success);
 					//rsp.imp_uid 값으로 결제 단건조뢰 API를 호출하여 결제결과를 판단합니다.
                 if (rsp.success) {
-					console.log(typeof rsp);
-					console.log(rsp);
 					ajaxPaycomplete(rsp);
                 } else {
 					alert('결제 취소')

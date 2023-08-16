@@ -16,6 +16,8 @@ public interface BookStorePaymentOrderService {
 	public BookStorePaymentOrderVO selectOrder(int order_num);
 	//주문 상세 정보
 	public List<BookStorePaymentOrderVO> listOrder(int order_num);
+	//주문 취소 후 재고 변경
+	public void updateQuantity(List<BookStorePaymentOrderVO> order);
 	//배송 정보
 	//우편번호로 주소 찾기
 	public MemberVO selectHome(int home_num);

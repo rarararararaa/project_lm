@@ -2,8 +2,6 @@ package kr.spring.bookstore.payment.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +10,6 @@ import kr.spring.bookstore.payment.dao.BookStorePaymentOrderMapper;
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.product.vo.ProductVO;
-import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
@@ -41,11 +38,14 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 			bookStorePaymentOrderMapper.insertDetailOrder(vo);
 			bookStorePaymentCartMapper.deleteCart(vo.getMem_cart_num());
 			if(vo.getUsed_product_num() != 0) {
-				bookStorePaymentOrderMapper.updateUsed(vo.getUsed_product_num());
+				bookStorePaymentOrderMapper.updateUsed(0,vo.getUsed_product_num());
+				continue;
 			}
 			bookStorePaymentOrderMapper.updateProduct(vo.getStore_product_status());
 		}
 	}
+	
+
 //배송지 관련
 	@Override
 	public MemberVO selectHome(int home_num) {
@@ -108,8 +108,16 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 	@Override
 	public void updateCancelInfo(int order_num, String cancel_notice) {
 		bookStorePaymentOrderMapper.updateCancelInfo(order_num, cancel_notice);
+	}
+	@Override
+	public void updateQuantity(List<BookStorePaymentOrderVO> order) {
+		for(BookStorePaymentOrderVO vo : order) {
+			if(vo.getUsed_product_num() != 0) {
+				bookStorePaymentOrderMapper.updateUsed(1, vo.getUsed_product_num());
+				continue;
+			}
+			bookStorePaymentOrderMapper.updateProductPlus(vo.getStore_product_num());
+		}
 	} 
-	
-	
 
 }
