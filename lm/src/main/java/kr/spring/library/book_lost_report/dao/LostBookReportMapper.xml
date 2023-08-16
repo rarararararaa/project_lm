@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kr.spring.library.book_lost_report.dao.LostBookReportMapper">
+	
+	<select id="selectlistRentInfo" parameterType="int" resultType="rentVO">
+		SELECT
+		   lh.*,
+		   lpm.lib_product_bookName product_bookName,
+		   lpm.lib_product_isbn, 
+           NVL(spd.store_product_priceStandard, 15000) product_price
+		FROM
+    	   LIB_HISTORY lh
+		JOIN
+    	   LIB_PRODUCT_MANAGE lpm ON lh.callNumber = lpm.callNumber
+        LEFT JOIN
+    	   STORE_PRODUCT_MANAGE spm ON lpm.lib_product_isbn = spm.store_product_ISBN13
+    	LEFT JOIN
+    	   STORE_PRODUCT_DETAIL spd ON spm.store_product_num = spd.store_product_num
+    	WHERE
+    	   lh.mem_num = #{mem_num} and lib_product_status=2 
+	</select>
+	
+	<select id="selectMemberInfo" parameterType="int" resultType="memberVO">
+		SELECT 
+		  m.mem_num,
+		  m.mem_id,
+		  d.mem_name,
+		  d.mem_cell,
+		  d.mem_email
+		FROM lm_member_manage m LEFT OUTER JOIN lm_member_detail d
+		ON m.mem_num=d.mem_num
+		WHERE m.mem_num=#{mem_num}	
+	</select>
+	
+	<insert id="insertBookLostReport" parameterType="lostBookReportVO">
+		INSERT INTO lib_book_lost_report 
+			(lost_report_num,
+			 callNumber,
+			 mem_num,
+			 rent_num,
+			 store_product_pricesales,
+			 lost_payment_status,
+			 lost_payment_type,
+			 IMP_UID) 
+		VALUES 
+			(#{lost_report_num},
+			 #{callNumber},
+			 #{mem_num},
+			 #{rent_num},
+			 #{store_product_pricesales},
+			 1,	
+			 #{lost_payment_type},
+			 #{IMP_UID})
+	</insert>
+	
+	<select id="selectLostBookInfo" parameterType="int" resultType="lostBookReportVO">
+		SELECT
+			lbr.*,
+			lpm.lib_product_bookName product_bookName
+		FROM
+			lib_book_lost_report lbr
+		JOIN LIB_PRODUCT_MANAGE lpm ON lbr.callNumber = lpm.callNumber
+		WHERE
+			lost_report_num=#{lost_report_num}
+	</select>
+</mapper>

@@ -20,11 +20,12 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/BsEventAnnounce.css">
 
-<!-- 게시판 글 등록 시작 -->
+<!-- 게시판 글 수정 시작 -->
 <div class="event-announce-page">
 	<div class="eventannounce-div">
 	<h2>당첨자 발표 페이지 글 작성</h2>
 	<form:form modelAttribute="eventAnnounceBoardVO" action="eventAnnounceWrite.do" id="register_form">
+	<form:hidden path="event_announce_board_num"/>
 	<ul>
 		<li>
 			<form:label path="title">제목</form:label>
@@ -60,4 +61,4 @@
 	</form:form>
 	</div>
 </div>
-<!-- 게시판 글 등록 끝 -->   
+<!-- 게시판 글 수정 끝 -->   

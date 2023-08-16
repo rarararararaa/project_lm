@@ -23,4 +23,9 @@ public class RentVO {
 	
 	private BookProductVO bookVO;
 	private String mem_id;
+	
+	//분실도서에서 사용
+	private int product_price;	//도서 정가
+	private String product_bookName;//도서 이름
+	private String lib_product_isbn;
 }

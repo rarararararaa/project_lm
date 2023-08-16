@@ -116,33 +116,34 @@
 	<c:if test="${event.event_board_category == 1 }">
 	<!-- 댓글 UI 시작 -->
 	<div id="reply_div">
-		<span class="re-title">댓글 달기</span>
 		<form id="re_form">
 			<input type="hidden" name="event_board_num" value="${event.event_board_num}" id="event_board_num">
 			<div class="rep-div">
-				<div class="re-textarea">
-				<textarea rows="3" cols="50" name="reply_content" id="reply_content" class="rep-content"
-			  	<c:if test="${empty mem_num}">disabled="disabled"</c:if>
-			  	><c:if test="${empty mem_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
+				<div class="reply-box-f">
+					<div class="re-textarea">
+					<textarea rows="3" cols="50" name="reply_content" id="reply_content" class="rep-content"
+			  		<c:if test="${empty mem_num}">disabled="disabled"</c:if>
+			  		><c:if test="${empty mem_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
+			  		</div>
+			  		
+			  		<c:if test="${!empty mem_num}">
+					<div id="re_first">
+						<span class="letter-count">300/300</span>
+					</div>
+			</c:if>
 			  	</div>
 			  	
 			  	<div id="re_second" class="align-right re-submit-btn">
 					<input type="submit" id="re_btn"<c:if test="${empty mem_num}">disabled="disabled"</c:if> value="댓글">
 				</div>
 			</div>
-			                                               
-			<c:if test="${!empty mem_num}">
-			<div id="re_first">
-				<span class="letter-count">300/300</span>
-			</div>
-			
-			</c:if>
 		</form>
 	</div>
+	<hr size="1" noshade="noshade">
 	<!-- 댓글 목록 출력 -->
 	<div id="output"></div>
 	<div class="paging-button" style="display:none;">
-		<input type="button" value="더보기">
+		<input type="button" value="댓글 더보기">
 	</div>
 	<div id="loading" style="display:none;">
 		<img src="${pageContext.request.contextPath}/images/loading.gif" width="100" height="100">
@@ -160,7 +161,7 @@
 				delete_btn.onclick=function(){
 					let choice = confirm('삭제하시겠습니까?');
 					if(choice){
-						location.replace('delete.do?board_num=${board.board_num}');
+						location.replace('delete.do?event_board_num=${event.event_board_num}');
 					}
 				};
 			</script>             

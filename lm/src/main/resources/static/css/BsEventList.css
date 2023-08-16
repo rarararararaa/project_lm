@@ -230,6 +230,14 @@ ul.search li{
 	display: flex;
 	flex-direction: row;
 }
+.reply-box-f{
+	display: flex;
+	flex-direction: column;
+}
+#re_first{
+	text-align: right;
+}
+
 .rep-div .re-textarea{
 	width:900px;
 }
@@ -256,4 +264,21 @@ ul.search li{
 #re_form .rep-div .re-submit-btn input:disabled {
 	background-color: #E9E9E9;
 	cursor: default;
+}
+
+.paging-button input{
+	display: inline-block;
+	width: 1100px;
+	height: 100px;
+	text-align: center;
+	background-color: #E9E9E9;
+	border: none;
+	font-weight: bold;
+	font-size: 22px;
+	color: white;
+}
+
+.paging-button{
+	margin-top: 10px;
+	margin-bottom: 50px;
 }

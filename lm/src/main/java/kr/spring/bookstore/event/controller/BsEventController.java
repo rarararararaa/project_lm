@@ -148,6 +148,20 @@ public class BsEventController {
 	}
 	
 	/*========================
+	 * 게시판 글 삭제
+	 *========================*/
+	@RequestMapping("/bookstore/event/delete.do")
+	public String submitDelete(@RequestParam int event_board_num) {
+		log.debug("<<글삭제 - event_board_num>> : " + event_board_num);
+		
+		//삭제
+		bsEventService.deleteEventBoard(event_board_num);
+		
+		return "redirect:/bookstore/event/list.do";
+	}
+	
+	
+	/*========================
 	 * 이벤트 목록
 	 *========================*/
 	//이벤트 리스트 - 일반 사용자 조회용

@@ -1,0 +1,171 @@
+.lost-form-page {
+  width: 1000px;
+  margin: 50px auto;
+}
+.text-box{
+	margin: 20px 5px;
+}
+.rent-list{
+	border: solid 1px #E9E9E9;
+	border-radius: 15px;
+	padding: 15px 50px 35px 50px;
+	margin-bottom: 50px;
+}
+
+.check{
+	border: solid 1px #E9E9E9;
+	border-radius: 15px;
+	padding: 15px 50px 35px 50px;
+}
+
+.text-box span{
+	display: inline-block;
+}
+.te-title{
+	font-weight:bold;
+	font-size: 22px;
+}
+.te-subtitle{
+	color: red;
+	font-weight:bold;
+	font-size: 12px;	
+}
+
+.rent-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rent-list table th,
+.rent-list table td {
+  border: 1px solid #dfdfdf;
+  padding: 10px;
+}
+
+.rent-list table th {
+  background-color: #f5f5f5;
+}
+
+.book-name {
+  cursor: pointer;
+}
+
+.book-name:hover {
+  background-color: #f0f0f0;
+}
+.check {
+  display: none;
+}
+td span{
+	display: inline-block;
+}
+.al-c{
+	text-align: center;
+}
+
+.radio-selBox {
+  margin-bottom: 10px;
+}
+
+.radio-selBox input[type="radio"] {
+  display: none;
+}
+
+.radio-selBox input[type="radio"]+span {
+  display: inline-block;
+  font-weight:bold;
+  width: 220px;
+  padding: 15px 10px;
+  border: 1px solid #dfdfdf;
+  background-color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.radio-selBox input[type="radio"]:checked+span {
+  background-color: #113a6b;
+  color: #ffffff;
+}
+
+/*~~~~~~*/
+.select-book table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.select-book table th,
+.select-book table td {
+  border: 1px solid #dfdfdf;
+  padding: 10px;
+}
+
+.select-book table th {
+  background-color: #f5f5f5;
+}
+
+.select-book table td {
+  text-align: center;
+}
+
+.sel-book-ISBN {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.sel-book-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sel-book-price {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.mem-info ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-left: 20px;
+}
+.mem-info ul li span{
+	display: inline-block;
+}
+span.li-left{
+	width: 70px;
+	text-align: center;
+	line-height: 20px; 
+}
+
+.align-center{
+	text-align:center;
+}
+.pay-btn{
+	display: flex;
+	flex-direction: row;
+	margin: 20px auto;
+	justify-content: center
+}
+
+.price-text{
+	font-weight: bold;
+	font-size: 22px;
+	width: 250px;
+	margin-right: 5px;
+	vertical-align: middle;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+#lostSubmit {
+	width: 250px;
+	padding: 15px 10px;
+	font-weight:bold;
+	border: 1px solid #dfdfdf;
+	border-radius: 10px;
+	background-color: #113a6b;
+	color: #ffffff;
+	text-align: center;
+	cursor: pointer;
+}

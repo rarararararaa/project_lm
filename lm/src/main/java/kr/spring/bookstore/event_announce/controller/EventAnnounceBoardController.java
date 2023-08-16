@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.bookstore.event.vo.BsEventVO;
 import kr.spring.bookstore.event_announce.service.EventAnnounceBoardService;
 import kr.spring.bookstore.event_announce.vo.EventAnnounceBoardVO;
 import kr.spring.util.PagingUtil;
@@ -129,4 +130,49 @@ public class EventAnnounceBoardController {
 		//뷰 이름		  속성명	  속성값
 		return new ModelAndView("eventAnnounceView", "announceBoard", announceBoard);
 	}
+	
+	/*========================
+	 * 게시판 글 수정
+	 *========================*/
+	//수정 폼 호출
+	@GetMapping("/bookstore/event/eventAnnounceUpdate.do")
+	public String formUpdate(@RequestParam int event_announce_board_num, Model model) {
+		EventAnnounceBoardVO eventAnnounceVO = eventAnnounceService.selectEventAnnounceBoard(event_announce_board_num);
+		log.debug("<<글 수정 - eventAnnounceVO>> : " + eventAnnounceVO);
+		model.addAttribute("eventAnnounceBoardVO", eventAnnounceVO);
+		return "eventAnnounceModify";
+	}
+	@RequestMapping("/bookstore/event/eventAnnounceUpdate.do")
+	public String submitUpdate(@Valid EventAnnounceBoardVO eventAnnounceVO, BindingResult result, HttpServletRequest request, Model model) {
+		log.debug("<<글 수정버튼 클릭 - bsEventVO>> : " + eventAnnounceVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "eventAnnounceModify";
+		}
+		//글 수정
+		eventAnnounceService.updateEventAnnouceBoard(eventAnnounceVO);		
+		//View에 표시할 메시지
+		model.addAttribute("message", "글 수정 완료!");
+		model.addAttribute("url", request.getContextPath()+"/bookstore/event/eventAnnounceList.do");
+		
+		return "common/resultView";
+	}
+	
+	/*========================
+	 * 게시판 글 삭제
+	 *========================*/
+	
+	//전달된 데이터 처리
+	@RequestMapping("/bookstore/event/eventAnnounceDelete.do")
+	public String submitDelete(@RequestParam int event_announce_board_num) {
+		log.debug("<<글삭제 - event_announce_board_num>> : " + event_announce_board_num);
+		
+		//삭제
+		eventAnnounceService.deleteEventAnnounceBoard(event_announce_board_num);
+		
+		return "redirect:/bookstore/event/eventAnnounceList.do";
+	}
+	
+	
 }

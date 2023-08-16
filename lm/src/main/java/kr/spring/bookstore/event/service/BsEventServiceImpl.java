@@ -126,14 +126,12 @@ public class BsEventServiceImpl implements BsEventService{
 
 	@Override
 	public void updateEventHit(Integer event_board_num) {
-		// TODO Auto-generated method stub
-		
+		bsEventMapper.updateEventHit(event_board_num);
 	}
 
 	@Override
 	public void deleteEventBoard(Integer event_board_num) {
-		// TODO Auto-generated method stub
-		
+		bsEventMapper.deleteEventBoard(event_board_num);
 	}
 
 	@Override

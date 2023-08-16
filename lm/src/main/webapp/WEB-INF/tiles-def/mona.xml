@@ -43,6 +43,20 @@
     	<put-attribute name="bsTitle" value="당첨자 발표 글 상세페이지"/>
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventAnnounceDetail.jsp"/>
     </definition>
+    
+    <!-- 도서관 도서 분실 신고 페이지 -->
+    <definition name="bookLostInfo" extends="libMain">
+    	<put-attribute name="title" value="도서 분실 신고 안내"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostInfo.jsp"/>
+    </definition>
+    <definition name="bookLostReport" extends="libMain">
+    	<put-attribute name="title" value="도서 분실 신고"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostReport.jsp"/>
+    </definition>
+    <definition name="bookLostCheck" extends="libMain">
+    	<put-attribute name="title" value="도서 분실 결제확인"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostCheck.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

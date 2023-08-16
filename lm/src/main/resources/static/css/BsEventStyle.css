@@ -1,8 +1,11 @@
 @charset "UTF-8";
-.event-form-main{
+.event-form-main {
 	width:1000px;
 	margin: 100px auto;
 }
+
+
+
 .event-form{
 	padding: 50px 99px;
 	border: solid 1px #E9E9E9;

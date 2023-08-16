@@ -27,5 +27,6 @@ public class BookProductVO {
 	private String lib_product_bookImageData;//null값 안쓰는 거임
 	private String lib_product_detail;
 	
+	
 
 }

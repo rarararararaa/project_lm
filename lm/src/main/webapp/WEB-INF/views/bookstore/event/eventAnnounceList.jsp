@@ -17,7 +17,7 @@
 	});
 </script>
 
-<div class="eventpage-main">
+<div class="eventannouncepage-main">
 	<h2>당첨자 발표</h2>
 	<div class="eventpage-div">
 	<form action="announceList.do" id="search_form" method="get">

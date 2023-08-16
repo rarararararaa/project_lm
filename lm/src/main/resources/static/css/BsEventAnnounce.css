@@ -1,11 +1,21 @@
 @charset "UTF-8";
 
-.eventpage-main{
-	width: 950px;
-	min-height: 1000px;
-	margin: 25px auto;
-	padding: 0 50px;
+.event-announce-page{
+	width:1000px;
+	margin: 100px auto;
 }
+
+.eventannouncepage-main{
+	width: 980px;
+	margin: 30px auto;
+}
+.eventannounce-div{
+	padding: 50px 99px;
+	border: solid 1px #E9E9E9;
+	border-radius: 50px;
+}
+
+
 
 /* 공통 정렬
 ------------------------*/
@@ -17,32 +27,35 @@
 }
 /* 공통 등록, 수정 폼
 ------------------------*/
-form{
-	width:600px;
-	margin:0 auto;
-	border:1px solid #000;
-	padding:10px 10px 30px 10px;
-}
-form ul li{
-	clear:both;
-}
-form ul li label{
-	width:100px;
-	float:left;
-}
+
 ul{
-	list-style:none;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.eventannounce-div li label{
+	display: inline-block;
+	width: 130px;
+	vertical-align: top;	
+	
+}
+.eventannounce-div ul li input{
+	width:635px;
+}
+.eventannounce-div ul li{
+	margin: 5px 0;
 }
 input{
 	margin-top:4px;
 	padding:5px;
 }
-input[type="text"],input[type="password"],input[type="email"]{
-	width:350px;
-}
+
 button[type="submit"]{
 	height:31px;
 }
+
+
+
 /* 공통 목록
 ------------------------*/
 form#search_form{
@@ -102,4 +115,21 @@ table.striped-table tr:nth-child(odd){
 .detail-content{
 	min-height: 200px;
 	margin: 10px 10px;
+}
+
+/*상세 페이지 css*/
+
+.eventpage-div ul{
+	margin: 0;
+	padding: 0;
+}
+
+.detail-content table {
+    border-collapse: collapse;
+}
+.detail-content table, .detail-content td {
+    border: 1px solid black;
+}
+.detail-content table td{
+	padding: 2px 4px;
 }

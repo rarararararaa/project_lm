@@ -28,8 +28,7 @@ public class EventAnnounceBoardServiceImpl implements EventAnnounceBoardService{
 
 	@Override
 	public void deleteEventAnnounceBoard(Integer event_announce_board_num) {
-		// TODO Auto-generated method stub
-		
+		announceBoardMapper.deleteEventAnnounceBoard(event_announce_board_num);
 	}
 
 	@Override

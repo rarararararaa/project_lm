@@ -10,6 +10,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import kr.spring.intercepter.BsLoginCheckInterceptor;
 import kr.spring.intercepter.MyPageHeaderInterceptor;
+import kr.spring.intercepter.BsAdminCheckInterceptor;
 
 //자바 코드 기반 설정 클래스
 @Configuration
@@ -17,6 +18,7 @@ public class AppConfig implements WebMvcConfigurer{
 	
 	private MyPageHeaderInterceptor myPageHeader;
 	private BsLoginCheckInterceptor bsLoginCheck;
+	private BsAdminCheckInterceptor bsAdminCheck;
 	
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
@@ -55,6 +57,12 @@ public class AppConfig implements WebMvcConfigurer{
 		bsLoginCheck = new BsLoginCheckInterceptor();
 		return bsLoginCheck;
 	}
+	
+	@Bean
+	public BsAdminCheckInterceptor interceptor3() {
+		bsAdminCheck = new BsAdminCheckInterceptor();
+		return bsAdminCheck;
+	}
 	//마이페이지 헤더 경로 설정
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -84,6 +92,11 @@ public class AppConfig implements WebMvcConfigurer{
 		
 		registry.addInterceptor(bsLoginCheck)
 				.addPathPatterns("/bookstore/service/askWrite.do");
+		
+		registry.addInterceptor(bsAdminCheck)
+		.addPathPatterns("/bookstore/event/write.do")
+		.addPathPatterns("/bookstore/event/update.do")
+		.addPathPatterns("/bookstore/event/eventAnnounceWrite.do");
 	}
 }
 

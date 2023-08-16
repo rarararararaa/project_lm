@@ -101,3 +101,25 @@ create table store_event_announce_board (
 	constraint store_event_announce_board_pk primary key (event_announce_board_num)
 );
 create sequence store_event_announce_board_seq;
+
+-- 분실 도서 신고
+CREATE TABLE LIB_BOOK_LOST_REPORT (
+	lost_report_num	NUMBER NOT NULL,
+	callNumber	varchar2(10)	NOT NULL,
+	mem_num	number(5)	NOT NULL,
+	rent_num	number	NOT NULL,
+	store_product_pricesales	number	NOT NULL,
+	lost_reg_date	DATE	DEFAULT SYSDATE	NOT NULL,
+	lost_payment_status number NOT NULL,
+	lost_payment_type number NOT NULL,
+	imp_uid varchar(20) NOT NULL,
+    CONSTRAINT PK_LIB_BOOK_LOST_REPORT PRIMARY KEY (lost_report_num),
+    CONSTRAINT FK_LIB_BOOK_LOST_REPORT_1 FOREIGN KEY (mem_num)
+                                            REFERENCES lm_member_manage(mem_num),
+    CONSTRAINT FK_LIB_BOOK_LOST_REPORT_2 FOREIGN KEY (callNumber)
+                                            REFERENCES lib_product_manage(callNumber) ,
+    CONSTRAINT FK_LIB_BOOK_LOST_REPORT_3 FOREIGN KEY (rent_num)
+                                            REFERENCES LIB_HISTORY(rent_num)                                           
+);
+
+create sequence lib_book_lost_report_seq;

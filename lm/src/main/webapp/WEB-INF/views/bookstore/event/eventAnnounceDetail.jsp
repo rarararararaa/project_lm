@@ -6,7 +6,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/BsEventAnnounce.css">
 
-<div class="page-main">
+<div class="eventannouncepage-main">
 	<div class="eventpage-div">
 	<h2>${announceBoard.title}</h2>
 	<ul class="detail-info">
@@ -27,20 +27,20 @@
 	<div class="align-right">
 		<c:if test="${!empty mem_num && mem_auth == 9}">
 		<input type="button" value="수정"
-		 onclick="location.href='update.do?board_num=${board.board_num}'">
+		 onclick="location.href='eventAnnounceUpdate.do?event_announce_board_num=${announceBoard.event_announce_board_num}'">
 		<input type="button" value="삭제" id="delete_btn">
 		<script type="text/javascript">
 			let delete_btn = document.getElementById('delete_btn');
 			delete_btn.onclick=function(){
 				let choice = confirm('삭제하시겠습니까?');
 				if(choice){
-					location.replace('delete.do?board_num=${board.board_num}');
+					location.replace('eventAnnounceDelete.do?event_announce_board_num=${announceBoard.event_announce_board_num}');
 				}
 			};
 		</script>             
 		</c:if>
 		<input type="button" value="목록"
-		          onclick="location.href='list.do'">
+		          onclick="location.href='eventAnnounceList.do'">
 	</div>
 	</div>
 </div>

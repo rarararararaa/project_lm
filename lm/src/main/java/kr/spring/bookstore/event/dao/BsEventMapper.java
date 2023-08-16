@@ -30,7 +30,7 @@ public interface BsEventMapper {
 	@Select("SELECT * FROM store_event_board WHERE event_board_num=#{event_board_num} ")
 	public BsEventVO selectEvent(Integer event_board_num);
 	//글 조회수
-	@Update("UPDATE store_event_board SET event_hit=evnet_hit+1 WHERE event_board_num=#{event_board_num}")
+	@Update("UPDATE store_event_board SET event_hit=event_hit+1 WHERE event_board_num=#{event_board_num}")
 	public void updateEventHit (Integer event_board_num);
 	//이벤트 글 수정
 	public void updateEvent(BsEventVO event);
