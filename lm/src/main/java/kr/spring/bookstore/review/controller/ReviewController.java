@@ -21,6 +21,7 @@ import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.review.service.ReviewService;
 import kr.spring.bookstore.review.vo.ReviewVO;
 import kr.spring.bookstore.service.vo.OrderDetailVO;
+import kr.spring.lm.point.vo.PointVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
@@ -82,18 +83,22 @@ public class ReviewController {
 	    MemberVO member=memberService.selectMember(mem_num);
 	    log.debug("<<memberVO : >>"+member);
 	    reviewVO.setMem_num(mem_num);
+	    PointVO pointVO=new PointVO();
+	    pointVO.setMem_num(mem_num);
+	    pointVO.setPoint_reason("리뷰 작성");
+	    reviewVO.setPointVO(pointVO);
 	    map.put("mem_num", mem_num);
 	    reviewVO.setMem_id(member.getMem_id());
 		map.put("store_product_num", store_product_num);
 		List<OrderDetailVO> list=reviewService.selectOrderDetail(map);
-		int count=1;
-		map.put("count", count);
+		reviewVO.setProductVO(reviewService.selectProductVO(store_product_num));
+		log.debug("<<productVO : >>"+reviewService.selectProductVO(store_product_num));
+		
 		for(OrderDetailVO i:list) {
 				reviewVO.setOrderdetailVO(i);
 				reviewVO.setOrder_detail_num(reviewVO.getOrderdetailVO().getOrder_detail_num());
 				log.debug("<<reviewVO : >>"+reviewVO);
 				reviewService.insertReview(reviewVO);
-				reviewService.updateProductReviewCount(map);
 				break;
 		}	 
 	    model.addAttribute("message", "댓글 등록 완료");

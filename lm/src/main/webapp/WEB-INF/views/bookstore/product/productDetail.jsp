@@ -78,28 +78,13 @@
 				<div>
 					<h2>책 소개</h2>
 				</div>
-				<div class="used-product">
-					<c:forEach var="list" items="${list}">
-					<form id="used_product">
-						<input type="hidden" name="used_product_num" value="${list.used_product_num }">
-						<input type="hidden" name="store_product_num" value="${product.store_product_num }">
-						<input type="hidden" name="store_product_status" value="1">
-						<div>
-							<img src="${pageContext.request.contextPath}/bookstore/used/photoView01.do?used_product_num=${list.used_product_num}"
-								 width="94px">
-						</div>
-						<div>
-							<input type="button" value="장바구니" onclick="submitUsedProduct();">
-						</div>
-					</form>	
-					</c:forEach>
-				</div>
+
 			</div>
 			<div id="scrollProdReview">
 				<div class="first">
 					<h2>리뷰</h2>
 					<div class="right-area">
-						<span>* 구매 후 리뷰 작성 시, e교환권 200원 적립 </span>
+						<span>* 구매 후 리뷰 작성 시, e교환권 150원 적립 </span>
 						 <input id="review" type="button" class="sm-button review" value="리뷰 작성" 
 						 		data-num="${product.store_product_num}" onclick="fnShowPop('re_pwd')">
 					<!-- 리뷰 등록 다이얼로그 시작 -->
@@ -116,20 +101,64 @@
 									<li class="review-rating">
 										<img src="${product.store_product_cover}" width="70">
 										<fieldset class="review_rating" >
-			                                <input type="radio" id="rating10" name="review_rating" value="10"><label for="rating10" title="5점">⭐</label>
-			                                <input type="radio" id="rating9" name="review_rating" value="9"><label class="half" for="rating9" title="4.5점">⭐</label>
-			                                <input type="radio" id="rating8" name="review_rating" value="8"><label for="rating8" title="4점">⭐</label>
-			                                <input type="radio" id="rating7" name="review_rating" value="7"><label class="half" for="rating7" title="3.5점">⭐</label>
-			                                <input type="radio" id="rating6" name="review_rating" value="6"><label for="rating6" title="3점">⭐</label>
-			                                <input type="radio" id="rating5" name="review_rating" value="5"><label class="half" for="rating5" title="2.5점">⭐</label>
-			                                <input type="radio" id="rating4" name="review_rating" value="4"><label for="rating4" title="2점">⭐</label>
-			                                <input type="radio" id="rating3" name="review_rating" value="3"><label class="half" for="rating3" title="1.5점">⭐</label>
-			                                <input type="radio" id="rating2" name="review_rating" value="2"><label for="rating2" title="1점">⭐</label>
-			                                <input type="radio" id="rating1" name="review_rating" value="1"><label class="half" for="rating1" title="0.5점">⭐</label>
+										<div class="starpoint_box">
+			                                <label class="label_star" for="rating1" title="0.5점">
+			                                	<span class="blind">
+			                                	</span>
+			                                </label>
+			                                <label class="label_star" for="rating2" title="1점">
+			                                	<span class="blind">
+			                                	</span>
+			                                </label>
+			                                <label class="label_star" for="rating3" title="1.5점">
+			                                	<span class="blind">
+			                                	</span>
+			                                </label>
+			                                <label class="label_star" for="rating4" title="2점">
+			                                	<span class="blind">
+			                                	</span>
+			                                </label>
+			                                <label class="label_star" for="rating5" title="2.5점">
+			                                	<span class="blind">
+			                                	</span>
+			                                </label>
+			                                <label class="label_star" for="rating6" title="3점">
+			                                	<span class="blind">
+			                                	</span>
+			                                </label>
+			                                <label class="label_star" for="rating7" title="3.5점">
+			                                	<span class="blind">
+			                                	</span>
+			                                </label>
+			                                <label class="label_star" for="rating8" title="4점">
+			                                	<span class="blind">
+			                                	</span>
+			                                </label>
+			                                <label class="label_star" for="rating9" title="4.5점">
+			                                	<span class="blind">
+			                                	</span>
+			                                </label>
+			                                <label class="label_star" for="rating10" title="5점">
+			                                	<span class="blind">
+			                                	</span>
+			                                </label>
+				                            <input type="radio" id="rating1" name="review_rating" class="star_radio" value="1">
+				                            <input type="radio" id="rating2" name="review_rating" class="star_radio" value="2">
+			                                <input type="radio" id="rating3" name="review_rating" class="star_radio" value="3">
+											<input type="radio" id="rating4" name="review_rating" class="star_radio" value="4">
+				                            <input type="radio" id="rating5" name="review_rating" class="star_radio" value="5">
+				                            <input type="radio" id="rating6" name="review_rating" class="star_radio" value="6">
+				                            <input type="radio" id="rating7" name="review_rating" class="star_radio" value="7">
+				                            <input type="radio" id="rating8" name="review_rating" class="star_radio" value="8">
+			                                <input type="radio" id="rating9" name="review_rating" class="star_radio" value="9">
+			                                <input type="radio" id="rating10" name="review_rating" class="star_radio" value="10">
+			                                <span class="starpoint_bg"></span>
+		                           		</div>
+										<textarea rows="3" cols="50" name="review_content" id="review_content"
+												  style="resize:none;" placeholder="후기를 작성해주세요."></textarea>
 		                           		</fieldset>
 									</li>
 									<li>
-										<textarea rows="3" cols="50" name="review_content" id="review_content"></textarea>
 									</li>
 									<li>
 										<label for="review_image">
@@ -312,6 +341,31 @@
 			</div>
 		</div>
 		<div class="right-area">
+			<div>
+				<h2>중고책</h2>
+				<div class="used-product">
+					<c:forEach var="list" items="${list}">
+					<form id="used_product">
+						<input type="hidden" name="used_product_num" value="${list.used_product_num }">
+						<input type="hidden" name="store_product_num" value="${product.store_product_num }">
+						<input type="hidden" name="store_product_status" value="1">
+						<div>
+							<img src="${product.store_product_cover}"width="94px">
+							<c:if test="${list.used_product_condition ==1}">
+								<b>상</b>
+							</c:if>
+							<c:if test="${list.used_product_condition ==2}">
+								<b>중</b>
+							</c:if>
+							<c:if test="${list.used_product_condition ==3}">
+								<b>하</b>
+							</c:if>
+							<input type="button" class="sm-button" value="장바구니" onclick="submitUsedProduct();">
+						</div>
+					</form>	
+					</c:forEach>
+				</div>
+			</div>		
 			<div>이벤트</div>
 			<div>추천 도서</div>
 		</div>

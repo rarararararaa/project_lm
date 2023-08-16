@@ -8,14 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.review.dao.ReviewMapper;
 import kr.spring.bookstore.review.vo.ReviewVO;
 import kr.spring.bookstore.service.vo.OrderDetailVO;
+import kr.spring.lm.point.dao.PointMapper;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	private ReviewMapper reviewMapper;
+	@Autowired
+	private PointMapper pointMapper;
 	
 
 	@Override
@@ -31,7 +35,9 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public void insertReview(ReviewVO reviewVO) {
 		reviewMapper.insertReview(reviewVO);
-		
+		reviewMapper.updateMemberPoint(reviewVO.getMem_num());
+		reviewMapper.updateProductReviewCount(reviewVO.getProductVO());
+		pointMapper.insertReviewPoint(reviewVO.getPointVO());
 	}
 
 
@@ -80,8 +86,9 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void updateProductReviewCount(Map<String, Object> map) {
-		reviewMapper.updateProductReviewCount(map);
+	public ProductVO selectProductVO(int store_product_num) {
+		return reviewMapper.selectProductVO(store_product_num);
 	}
+
 
 }

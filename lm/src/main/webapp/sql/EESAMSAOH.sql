@@ -534,3 +534,16 @@ CREATE TABLE LIB_SCHEDULE_ADMIN (
 ALTER TABLE STORE_PRODUCT_MANAGE ADD CONSTRAINT STORE_PRODUCT_MANAGE_uk UNIQUE (STORE_PRODUCT_ISBN13);
 
 
+CREATE TABLE lm_point(
+	point_num NUMBER NOT NULL,
+	mem_num NUMBER NOT NULL,
+	point_value NUMBER NOT NULL,
+	point_date DATE NOT NULL,
+	point_reason VARCHAR2(50) NOT NULL,
+	point_status NUMBER(1) NOT NULL,
+    CONSTRAINT PK_lm_point PRIMARY KEY (point_num),
+    CONSTRAINT FK_lm_point_1 FOREIGN KEY (mem_num)
+							REFERENCES lm_member_manage(mem_num)
+);
+
+CREATE SEQUENCE lm_point_seq;

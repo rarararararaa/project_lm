@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.lm.point.dao.PointMapper">
+	<insert id="insertReviewPoint" parameterType="kr.spring.bookstore.review.vo.ReviewVO">
+		INSERT INTO LM_POINT(
+			point_num,
+			mem_num,
+			point_value,
+			point_date,
+			point_reason,
+			point_status
+		)
+		VALUES(
+			lm_point_seq.nextval,
+			#{mem_num},
+			150,
+			SYSDATE,
+			#{point_reason},
+			1
+		)
+	</insert>
+</mapper>
