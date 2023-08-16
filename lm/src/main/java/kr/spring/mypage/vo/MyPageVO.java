@@ -71,6 +71,15 @@ public class MyPageVO {
 	public String store_product_author;
 	public String store_product_publisher;
 	public String store_product_cover;
+	public String store_product_isbn13;
+	public String home_title;
+	public String home_zipcode;
+	public String home_address;
+	public String home_address_detail;
+	public String home_cell;
+	public String home_name;
+	public String order_notice;
+	public int payment_type;
 	public int order_pay_status;
 	
 	private byte[] mem_photo; //myEdit.jsp에서 입력받은 이미지 파일

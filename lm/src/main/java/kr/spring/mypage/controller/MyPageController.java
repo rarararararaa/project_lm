@@ -115,8 +115,10 @@ public class MyPageController {
 	@RequestMapping("/lm/mypage/orderlist/orderListMain.do")
 	public ModelAndView formMyPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,@RequestParam int order_num,String keyfield, String keyword,
-			@RequestParam(value = "order", defaultValue = "1") int order) {
-
+			@RequestParam(value = "order", defaultValue = "1") int order, @Valid MyPageVO mypageVO) {
+		
+		HttpSession session = request.getSession();
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -138,14 +140,9 @@ public class MyPageController {
 			//주문내역 가져오기
 			list = mypageService.getOrderListDetail(map);
 		}
+		//배송지, 결제 정보
+		mypageVO = mypageService.getHomeOrderList(order_num,mem_num);
 		/*
-		//제목 길이가 길면 잘라내고 .. 추가
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getStore_product_title().length() >= 90) {
-				String new_title = list.get(i).getStore_product_title().substring(0, 85)+"..";
-				list.get(i).setStore_product_title(new_title);
-			}
-		}
 		//금액 천단위 , 처리
 		for (int i = 0; i < list.size(); i++) {
 			String price = list.get(i).getOrder_total_price();
@@ -157,6 +154,7 @@ public class MyPageController {
 		mav.setViewName("orderListMain");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
+		mav.addObject("mypageVO", mypageVO);
 		mav.addObject("page", page.getPage());
 		return mav;
 	}

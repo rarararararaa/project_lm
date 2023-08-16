@@ -69,7 +69,9 @@ public interface MyPageMapper {
 	//회원정보 수정일 수정
 	@Update("UPDATE lm_member_detail SET mem_modify_date = SYSDATE WHERE mem_num = #{mem_num}")
 	public void updateModifyDate(MyPageVO mypageVO);
-		
+	//배송지, 결제 정보
+	@Select("SELECT * FROM store_order_manage a INNER JOIN store_member_home b ON a.home_num = b.home_num WHERE order_num = #{order_num} AND a.mem_num = #{mem_num}")
+	public MyPageVO getHomeOrderList(int order_num,int mem_num);
 	//주문내역 가져오기 store_order_manage, store_order_detail, store_product_detail
 	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT c.store_product_title,d.order_total_price, d.order_status, d.order_date, d.order_num, d.order_pay_status FROM"
 			+ "			(SELECT LISTAGG(a.store_product_title, ', ') AS store_product_title, b.order_num FROM (SELECT m.mem_num,d.store_product_num,d.order_num FROM store_order_manage m INNER JOIN store_order_detail d ON m.order_num = d.order_num) b"
@@ -81,7 +83,7 @@ public interface MyPageMapper {
 	
 	//주문내역 상세 가져오기
 	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM ("
-			+ "SELECT a.*,b.store_product_title,b.store_product_author,b.store_product_publisher,b.store_product_cover FROM store_order_detail a INNER JOIN store_product_detail b ON a.store_product_num = b.store_product_num WHERE order_num=#{order_num} ORDER BY order_num DESC"
+			+ "SELECT c.*,d.store_product_isbn13 FROM (SELECT a.*,b.store_product_title,b.store_product_author,b.store_product_cover,b.store_product_publisher FROM store_order_detail a INNER JOIN store_product_detail b ON a.store_product_num = b.store_product_num) c INNER JOIN store_product_manage d ON c.store_product_num = d.store_product_num WHERE order_num=#{order_num} order by order_num DESC "
 			+ ")a) WHERE rnum >= #{start} AND rnum <= #{end}")
 	public List<MyPageVO> getOrderListDetail(Map<String,Object> map);
 	@Select("SELECT COUNT(*) FROM store_order_detail WHERE order_num=#{order_num}")

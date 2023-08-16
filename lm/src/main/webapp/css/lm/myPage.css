@@ -879,21 +879,18 @@ input{
   background-size: cover;
   border:none;
 }
+.cancelPay{
+	background-color:lighthgray;
+	border-radius:3px;
+	border:1px solid black;
+	width:80px;
+	margin:0 auto;
+}
 .show-detail{
 	display:none;
 	margin:0 auto;
 	margin-top:-30px;
 	margin-bottom:30px;
-}
-/* 마이페이지 주문내역 설정 */
-.title-list { 
-	display:flex;
-	width:970px;
-}
-.item-list{
-	display:flex;
-	width:970px;
-	height:70px;
 }
 #item-list2{
 	display:flex;
@@ -907,6 +904,39 @@ input{
 	height:120px;
 	flex-direction:column;
 	margin-left:10px;
+}
+.bottom-div{
+	display:flex;
+	width:970px;
+	height:250px;
+	flex-direction:row;
+	margin-top:50px;
+	margin-bottom:50px;
+}
+.order-form{
+	display:flex;
+	width:300px;
+	height:250px;
+	flex-direction:column;
+	margin:0 auto;
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+}
+.order-form-info{
+	display:inline;
+	width:290px;
+	margin-left:5px;
+	margin-bottom:3px;
+}
+/* 마이페이지 주문내역 설정 */
+.title-list { 
+	display:flex;
+	width:970px;
+}
+.item-list{
+	display:flex;
+	width:970px;
+	height:70px;
 }
 #t-mypage-num{
 	display:inline-block;
@@ -954,7 +984,8 @@ input{
 	text-align:center;
 }
 #c-mypage-status{
-	display:inline-block;
+	display:flex;
+	flex-direction:column;
 	width:150px;
 	text-align:center;
 }

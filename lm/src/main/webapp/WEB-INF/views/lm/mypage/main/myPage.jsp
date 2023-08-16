@@ -79,7 +79,7 @@
 					<div id="c-mypage-price">${list.order_total_price}</div>
 					<div id="c-mypage-date">${list.order_date}</div>
 					<c:if test="${list.order_pay_status == 0}">
-						<span style="color: red">주문 취소</span>
+						<span id="t-mypage-status" style="color: red">주문 취소</span>
 					</c:if>
 					<c:if test="${list.order_status == 0 && list.order_pay_status == 1}">
 						<div id="c-mypage-status">주문 완료

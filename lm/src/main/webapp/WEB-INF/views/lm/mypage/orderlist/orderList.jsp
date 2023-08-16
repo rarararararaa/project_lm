@@ -54,7 +54,7 @@
 		</div>
 		<div class="right-div">
 			<div class="list-name">
-				<h2>프로그램 신청 내역</h2>
+				<h2>주문 내역 상세 정보</h2>
 			</div>
 			<div class="status">
 				<div class="status-info" id="step1">미확인</div>
@@ -70,11 +70,17 @@
 			<hr id="title-list-hr">
 			<c:forEach var="list" items="${list}">
 				<div id="item-list2">
-					<div class="view-photo2"><a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=9791193150108"
-						<img src="${list.store_product_cover}" class="view-photo2">
+					<div class="view-photo2">
+						<a
+							href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${list.store_product_isbn13}">
+							<img src="${list.store_product_cover}" class="view-photo2">
+						</a>
 					</div>
 					<div id="item-list-detail">
-						<div id="c-program-content">제목 : ${list.store_product_title}</div>
+						<div id="c-program-content">
+							제목 : <a
+								href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${list.store_product_isbn13}">${list.store_product_title}</a>
+						</div>
 						<div id="c-program-content">글쓴이 :
 							${list.store_product_author}</div>
 						<div id="c-program-content">출판사 :
@@ -84,6 +90,56 @@
 					<div id="c-program-date">${list.order_product_quantity}</div>
 				</div>
 			</c:forEach>
+			<div class="bottom-div">
+				<div class="order-form">
+					<h3>배송지 정보</h3>
+					<div class="order-form-info">배송지 이름 : ${mypageVO.home_title}</div>
+					<div class="order-form-info">우편번호 : ${mypageVO.home_zipcode}</div>
+					<div class="order-form-info">주소 : ${mypageVO.home_address}</div>
+					<div class="order-form-info">상세주소 :
+						${mypageVO.home_address_detail}</div>
+					<div class="order-form-info">전화번호 : ${mypageVO.home_cell}</div>
+					<div class="order-form-info">수령인 : ${mypageVO.home_name}</div>
+				</div>
+				<div class="order-form">
+					<h3>최종 결제 정보</h3>
+					<div class="order-form-info">총 주문 금액 :
+						${mypageVO.order_total_price}</div>
+					<c:if test="${mypageVO.order_pay_status==1}">
+						<div class="order-form-info">총 결제 금액 :
+							${mypageVO.order_total_price}</div>
+					</c:if>
+					<c:if test="${mypageVO.order_pay_status==0}">
+						<div class="order-form-info">결제 취소 금액 :
+							${mypageVO.order_total_price}</div>
+					</c:if>
+					<div class="order-form-info">상품 구매 날짜 :
+						${mypageVO.order_date}</div>
+					<div class="order-form-info">배송 요청 사항 :
+						${mypageVO.order_notice}</div>
+					<c:if test="${mypageVO.order_pay_status==0}">
+						<div class="order-form-info">결제 상태 : 주문 취소</div>
+					</c:if>
+					<c:if test="${mypageVO.order_pay_status==1}">
+						<div class="order-form-info">결제 상태 : 결제 완료</div>
+					</c:if>
+					<c:if test="${mypageVO.payment_type==1}">
+						<div class="order-form-info">결제 방법 : 신용카드 결제</div>
+					</c:if>
+					<c:if test="${mypageVO.payment_type==2}">
+						<div class="order-form-info">결제 방법 : 카카오페이 결제</div>
+					</c:if>
+					<c:if test="${mypageVO.payment_type==0}">
+						<div class="order-form-info">상품 배송 상태 : 주문 완료</div>
+					</c:if>
+					<c:if test="${mypageVO.payment_type==1}">
+						<div class="order-form-info">상품 배송 상태 : 배송 중</div>
+					</c:if>
+					<c:if test="${mypageVO.payment_type==2}">
+						<div class="order-form-info">상품 배송 상태 : 배송 완료</div>
+					</c:if>
+				</div>
+			</div>
 			<div class="align-center">${page}</div>
 		</div>
 	</div>

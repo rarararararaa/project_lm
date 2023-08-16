@@ -172,5 +172,10 @@ public class MyPageServiceImpl implements MyPageService{
 	public int selectRowCountProgramList(Map<String, Object> map) {
 		return mypageMapper.selectRowCountProgramList(map);
 	}
+
+	@Override
+	public MyPageVO getHomeOrderList(int order_num,int mem_num) {
+		return mypageMapper.getHomeOrderList(order_num,mem_num);
+	}
 	
 }

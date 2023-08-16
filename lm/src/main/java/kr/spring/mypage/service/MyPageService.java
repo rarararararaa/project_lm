@@ -33,6 +33,8 @@ public interface MyPageService {
 	public MyPageVO getPhoto(int mem_num);
 	//회원정보 수정일 수정
 	public void updateModifyDate(MyPageVO mypageVO);
+	//배송지,결제 정보
+	public MyPageVO getHomeOrderList(int order_num,int mem_num);
 
 	//주문내역
 	public List<MyPageVO> getOrderList(Map<String,Object> map);
