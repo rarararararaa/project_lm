@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.service.vo.OrderDetailVO;
+import kr.spring.lm.point.vo.PointVO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,7 +33,8 @@ public class ReviewVO {
 	
 	private OrderDetailVO orderdetailVO;
 	private ProductVO productVO;
-	private String mem_id;	
+	private PointVO pointVO;
+	private String mem_id;
 	
 	//업로드 파일 처리
 	public void setUpload(MultipartFile upload) throws IOException{

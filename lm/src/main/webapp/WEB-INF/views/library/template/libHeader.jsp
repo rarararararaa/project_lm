@@ -219,12 +219,11 @@ a:hover {
 				</c:if>
 				</li>
 				<li>
-				<%-- <c:if test="${!empty user && user.auth == 9}">
+				<c:if test="${mem_auth == 9}">
 					<a href="${pageContext.request.contextPath}/library/template/libAdmin.do">관리자페이지</a>
-				</c:if> --%>
-					<a href="${pageContext.request.contextPath}/library/template/libAdmin.do">관리자페이지</a>
+				</c:if>
 				</li>
-				<li><a href="#">고객센터</a></li>
+				<li><a href="${pageContext.request.contextPath}/library/service/main.do">고객센터</a></li>
 				<li><a href="#">서재</a></li>
 			</ul>
 		</div>

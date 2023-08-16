@@ -1,3 +1,6 @@
+create sequence lib_product_manage_seq;
+create sequence lib_book_apply_seq;
+
 CREATE TABLE BOARD_ANNOUNCE (
 	notice_num	number	NOT NULL,
 	notice_title	varchar2(300)	NOT NULL,
@@ -9,9 +12,6 @@ CREATE TABLE BOARD_ANNOUNCE (
     CONSTRAINT PK_BOARD_ANNOUNCE_ADMIN PRIMARY KEY (notice_num)    
 );
 create sequence board_announce_seq;
-create sequence lib_product_manage_seq;
-create sequence lib_book_apply_seq;
-
 
 CREATE TABLE LIB_LOST_ITEM (
 	item_num	number	NOT NULL,
@@ -27,30 +27,36 @@ create sequence lib_lost_item_seq;
 
 CREATE TABLE LIB_BOARD_ASK (
 	ask_num	number	NOT NULL,
-	mem_num	number(5)	NOT NULL,
-	ask_title	varchar2(300)	NOT NULL,
-	ask_content	varchar2(1000)	NOT NULL,
-	ask_category	number	NOT NULL,
-	ask_reg_date	date	DEFAULT SYSDATE	NOT NULL,
-	ask_image	blob	NULL,
+	mem_num number(5) NOT NULL,
+	ask_title varchar2(300)	NOT NULL,
+	ask_content clob NOT NULL,
+	ask_reg_date date DEFAULT SYSDATE NOT NULL,
+	ask_modify_date	date NULL,
+	ask_image blob NULL,
+	ask_image_name varchar2(100) NULL,
+	ask_status number(5) DEFAULT 0 NOT NULL
     CONSTRAINT PK_LIB_BOARD_ASK PRIMARY KEY (ask_num),
-  CONSTRAINT FK_LIB_BOARD_ASK_1 FOREIGN KEY (mem_num)    
-                                REFERENCES lm_member_manage(mem_num)     
+  	CONSTRAINT FK_LIB_BOARD_ASK_1 FOREIGN KEY (mem_num)    
+                                REFERENCES lm_member_manage(mem_num)
 );
+create sequence lib_board_ask_seq;
 
-CREATE TABLE BOARD_ANSWER_ADMIN (
+
+CREATE TABLE LIB_BOARD_ANSWER (
 	answer_num	number	NOT NULL,
 	ask_num	number	NOT NULL,
 	mem_num	number(5)	NOT NULL,
 	answer_content	varchar2(1000)	NOT NULL,
-	answer_reg_date	date	DEFAULT SYSDATE	NOT NULL,
-	answer_image	blob	NULL,
-    CONSTRAINT PK_BOARD_ANSWER_ADMIN PRIMARY KEY (answer_num),
-  CONSTRAINT FK_BOARD_ANSWER_ADMIN_1 FOREIGN KEY (mem_num)    
-                                REFERENCES lm_member_manage(mem_num)     ,
-  CONSTRAINT FK_BOARD_ANSWER_ADMIN_2 FOREIGN KEY (ask_num)    
-                                REFERENCES lib_board_ask(ask_num)                                
+	answer_reg_date	date DEFAULT SYSDATE NOT NULL,
+	answer_modify_date	date NULL,
+    CONSTRAINT LIB_BOARD_ANSWER_PK PRIMARY KEY (answer_num),
+  	CONSTRAINT LIB_BOARD_ANSWER_FK1 FOREIGN KEY (mem_num)    
+                                REFERENCES lm_member_manage(mem_num),
+ 	CONSTRAINT LIB_BOARD_ANSWER_FK2 FOREIGN KEY (ask_num)    
+                                REFERENCES lib_board_ask(ask_num),
 );
+create sequence lib_board_answer_seq;
+
 
 CREATE TABLE LIB_SCHEDULE_ADMIN (
 	schedule_num	NUMBER	NOT NULL,

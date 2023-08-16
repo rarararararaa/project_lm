@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.review.vo.ReviewVO;
 import kr.spring.bookstore.service.vo.OrderDetailVO;
 
@@ -23,13 +24,16 @@ public interface ReviewMapper {
 	public List<ReviewVO> selectReviewList(Map<String, Object> map);
 	//리뷰 작성
 	public void insertReview(ReviewVO reviewVO);
+	//포인트 입금
+	@Update("UPDATE lm_member_detail SET mem_point=mem_point+150 WHERE mem_num=#{mem_num}")
+	public void updateMemberPoint(int mem_num);
 	//별점 상품에 업데이트
 	public float selectUpdateProductRating(Map<String,Object> map);
 	public void updateProductRating(Map<String,Object> map);
 	//상품당 리뷰 개수 -> 상품에도 업데이트
 	public int selectReviewCount(Map<String,Object> map);
-	@Update("UPDATE store_product_detail SET store_product_ratingcount=#{count}+store_product_ratingcount WHERE store_product_num=#{store_product_num}")
-	public void updateProductReviewCount(Map<String,Object> map);
+	@Update("UPDATE store_product_detail SET store_product_ratingcount=1+store_product_ratingcount WHERE store_product_num=#{store_product_num}")
+	public void updateProductReviewCount(ProductVO productVO);
 	//별점당 리뷰 개수
 	public int selectReviewCountBetween(Map<String, Object> map);
 	//리뷰
@@ -39,5 +43,8 @@ public interface ReviewMapper {
 	public void updateReview(ReviewVO reviewVO);
 	//리뷰 삭제
 	public void deleteReview(Integer review_num);
+	//상품 VO
+	@Select("SELECT * FROM store_product_detail WHERE store_product_num=#{store_product_num}")
+	public ProductVO selectProductVO(int store_product_num);
 	
 }
