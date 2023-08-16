@@ -62,7 +62,7 @@ public class MyPageController {
 	 * 마이페이지 + 주문내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/main/myPageMain.do")
-	public ModelAndView formMyPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+	public ModelAndView myPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
@@ -110,52 +110,220 @@ public class MyPageController {
 		return mav;
 	}
 	/*=======================
-	 * 문의내역
+	 * 주문 내역 상세
+	 *=======================*/
+	@RequestMapping("/lm/mypage/orderlist/orderListMain.do")
+	public ModelAndView formMyPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,@RequestParam int order_num,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("order_num",order_num);
+		
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountOrderListDetail(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "orderListMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//주문내역 가져오기
+			list = mypageService.getOrderListDetail(map);
+		}
+		/*
+		//제목 길이가 길면 잘라내고 .. 추가
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getStore_product_title().length() >= 90) {
+				String new_title = list.get(i).getStore_product_title().substring(0, 85)+"..";
+				list.get(i).setStore_product_title(new_title);
+			}
+		}
+		//금액 천단위 , 처리
+		for (int i = 0; i < list.size(); i++) {
+			String price = list.get(i).getOrder_total_price();
+			price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+			list.get(i).setOrder_total_price(price);
+		}
+		*/
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("orderListMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
+	}
+	/*=======================
+	 * 문의 내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/asklist/askListMain.do")
-	public String askList() {
-		return "askListMain"; //타일스 설정의 식별자
-	}
-	@GetMapping("/lm/mypage/asklist/askListMain.do")
-	public String askListHandle(@RequestParam int lo) {
+	public ModelAndView askList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+		HttpSession session = request.getSession();
 
-		return "askListMain";
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+		
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountAskList(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "askListMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//주문내역 가져오기
+			list = mypageService.getAskList(map);
+		}
+		//제목 길이가 길면 잘라내고 .. 추가
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getStore_product_title().length() >= 90) {
+				String new_title = list.get(i).getStore_product_title().substring(0, 85)+"..";
+				list.get(i).setStore_product_title(new_title);
+			}
+		}
+		//금액 천단위 , 처리
+		for (int i = 0; i < list.size(); i++) {
+			String price = list.get(i).getOrder_total_price();
+			price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+			list.get(i).setOrder_total_price(price);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myPageMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 	/*=======================
 	 * 대출/반납내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
-	public String checkOutReturnList() {
-		return "checkOutReturnListMain"; //타일스 설정의 식별자
-	}
-	@GetMapping("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
-	public String checkOutReturnListHandle(@RequestParam int lo) {
+	public ModelAndView checkOutReturnList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+		HttpSession session = request.getSession();
 
-		return "checkOutReturnListMain";
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+		
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountCheckList(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "checkOutReturnListMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//주문내역 가져오기
+			list = mypageService.getCheckList(map);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("checkOutReturnListMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 	/*=======================
 	 * 희망도서신청내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/wantbooklist/wantBookListMain.do")
-	public String wantBookList() {
-		return "wantBookListMain"; //타일스 설정의 식별자
-	}
-	@GetMapping("/lm/mypage/wantbooklist/wantBookListMain.do")
-	public String wantBookListHandle(@RequestParam int lo) {
+	public ModelAndView wantBookList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+		HttpSession session = request.getSession();
 
-		return "wantBookListMain";
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+		
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountWantBookList(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "wantBookListMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//주문내역 가져오기
+			list = mypageService.getWantBookList(map);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("wantBookListMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 	/*=======================
 	 * 프로그램신청내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/programapplylist/programApplyListMain.do")
-	public String programApplyList() {
-		return "programApplyListMain"; //타일스 설정의 식별자
-	}
-	@GetMapping("/lm/mypage/programapplylist/programApplyListMain.do")
-	public String programApplyListHandle(@RequestParam int lo) {
+	public ModelAndView programApplyList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+		HttpSession session = request.getSession();
 
-		return "programApplyListMain";
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+		
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountProgramList(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "programApplyListMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//주문내역 가져오기
+			list = mypageService.getProgramList(map);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("programApplyListMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 	/*=======================
 	 * 책기증신청내역

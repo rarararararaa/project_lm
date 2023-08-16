@@ -33,10 +33,30 @@ public interface MyPageService {
 	public MyPageVO getPhoto(int mem_num);
 	//회원정보 수정일 수정
 	public void updateModifyDate(MyPageVO mypageVO);
+
 	//주문내역
 	public List<MyPageVO> getOrderList(Map<String,Object> map);
-	//개시글 개수
 	public int selectRowCountOrderList(Map<String,Object> map);
 	
+	//주문내역 상세
+	public List<MyPageVO> getOrderListDetail(Map<String,Object> map);
+	public int selectRowCountOrderListDetail(Map<String,Object> map);
+
+	//문의내역
+	public List<MyPageVO> getAskList(Map<String,Object> map);
+	public int selectRowCountAskList(Map<String,Object> map);
 	
+	//대출/반납내역
+	public List<MyPageVO> getCheckList(Map<String,Object> map);
+	public int selectRowCountCheckList(Map<String,Object> map);
+	
+	//희망도서신청내역
+	public List<MyPageVO> getWantBookList(Map<String,Object> map);
+	public int selectRowCountWantBookList(Map<String,Object> map);
+	
+	//프로그램신청내역
+	public List<MyPageVO> getProgramList(Map<String,Object> map);
+	public int selectRowCountProgramList(Map<String,Object> map);
+
+
 }

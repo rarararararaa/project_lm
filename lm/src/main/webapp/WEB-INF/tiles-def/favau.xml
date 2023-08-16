@@ -141,4 +141,9 @@
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/memberout/memberOut.jsp"/>
     </definition>    
     
+    <definition name="orderListMain" extends="myPageMain">
+    	<put-attribute name="myPageTitle" value="주문 상세 목록"/>
+    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/orderlist/orderList.jsp"/>
+    </definition>    
+    
 </tiles-definitions>

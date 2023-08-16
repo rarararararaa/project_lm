@@ -65,15 +65,15 @@
 			<div class="title-list">
 				<div id="t-mypage-num">주문 번호</div>
 				<div id="t-mypage-title">상품정보</div>
-				<div id="t-mypage-price">주문 금액(수량)</div>
+				<div id="t-mypage-price">총 주문 금액</div>
 				<div id="t-mypage-date">주문 일자</div>
 				<div id="t-mypage-status">주문 상태</div>
 			</div>
 			<hr id="title-list-hr">
 			<c:forEach var="list" items="${list}">
 				<div class="item-list">
-					<div id="c-mypage-num">${list.order_num}</div>
-					<div id="c-mypage-title">${list.store_product_title}</div>
+					<div id="c-mypage-num"><a href="${pageContext.request.contextPath}/lm/mypage/orderlist/orderListMain.do?lo=${lo}&order_num=${list.order_num}">${list.order_num}</a></div>
+					<div id="c-mypage-title"><a href="${pageContext.request.contextPath}/lm/mypage/orderlist/orderListMain.do?lo=${lo}&order_num=${list.order_num}">${list.store_product_title}</a></div>
 					<div id="c-mypage-price">${list.order_total_price}</div>
 					<div id="c-mypage-date">${list.order_date}</div>
 					<c:if test="${list.order_status == 0}">

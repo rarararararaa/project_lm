@@ -7,8 +7,6 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/showDetail.js"></script>
 	<!-- 파라미터 세팅 -->
 	<%
 	pageContext.setAttribute("lo", request.getParameter("lo"));
@@ -56,7 +54,7 @@
 		</div>
 		<div class="right-div">
 			<div class="list-name">
-				<h2>희망도서 신청 내역</h2>
+				<h2>프로그램 신청 내역</h2>
 			</div>
 			<div class="status">
 				<div class="status-info" id="step1">미확인</div>
@@ -65,33 +63,26 @@
 			</div>
 			<hr id="status-hr">
 			<div class="title-list">
-				<div id="t-want-num">신청 번호</div>
-				<div id="t-want-title">신청 제목(내용)</div>
-				<div id="t-want-date">등록 날짜</div>
-				<div id="t-want-status">확인 상태</div>
-				<div id="t-want-void"></div>
+				<div id="t-program-num">상품 정보</div>
+				<div id="t-program-content">금액</div>
+				<div id="t-program-date">구매 수량</div>
 			</div>
 			<hr id="title-list-hr">
-			<c:forEach var="list" items="${list}" varStatus="status">
-				<div class="item-list">
-					<div id="c-want-num">${list.book_apply_num}</div>
-					<div id="c-want-title">${list.book_apply_title}</div>
-					<div id="c-want-date">${list.book_apply_reg_date}</div>
-					<c:if test="${list.book_apply_status == 0}">
-						<div id="c-want-status">미확인</div>
-					</c:if>
-					<c:if test="${list.book_apply_status == 1}">
-						<div id="c-want-status">확인 완료</div>
-					</c:if>
-					<c:if test="${list.book_apply_status == 2}">
-						<div id="c-want-status">등록 완료</div>
-					</c:if>
-					<input type="button" id="button-more-info-${status.count}"  class="button-more-info" onclick="ShowDetail(${status.count})">
-					<input type="button" id="button-more-info-close-${status.count}" class="button-more-info-close" onclick="HideDetail(${status.count})">
+			<c:forEach var="list" items="${list}">
+				<div id="item-list2">
+					<div class="view-photo2"><a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=9791193150108"
+						<img src="${list.store_product_cover}" class="view-photo2">
+					</div>
+					<div id="item-list-detail">
+						<div id="c-program-content">제목 : ${list.store_product_title}</div>
+						<div id="c-program-content">글쓴이 :
+							${list.store_product_author}</div>
+						<div id="c-program-content">출판사 :
+							${list.store_product_publisher}</div>
+					</div>
+					<div id="c-program-content">${list.order_product_price}</div>
+					<div id="c-program-date">${list.order_product_quantity}</div>
 				</div>
-				<!-- 버튼 클릭 시 활성화 시작 -->
-				<div id="show-detail-${status.count}" class="show-detail">${list.book_apply_content}</div>
-				<!-- 버튼 클릭 시 활성화 끝 -->
 			</c:forEach>
 			<div class="align-center">${page}</div>
 		</div>

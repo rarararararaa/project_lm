@@ -79,7 +79,8 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/lm/mypage/myedit/myEditMain.do")
 		.addPathPatterns("/lm/mypage/pointinfo/pointInfoMain.do")
 		.addPathPatterns("/lm/mypage/gradeinfo/gradeInfoMain.do")
-		.addPathPatterns("/lm/mypage/memberout/memberOutMain.do");
+		.addPathPatterns("/lm/mypage/memberout/memberOutMain.do")
+		.addPathPatterns("/lm/mypage/orderlist/orderListMain.do");
 		
 		registry.addInterceptor(bsLoginCheck)
 				.addPathPatterns("/bookstore/service/askWrite.do");

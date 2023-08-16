@@ -746,6 +746,11 @@ input{
 	height:280px;
 	border:1px solid black;
 }
+.view-photo2{
+	width:120px;
+	height:120px;
+	border:1px solid black;
+}
 .edit-button{
 	width:100px;
 	height:35px;
@@ -858,6 +863,28 @@ input{
 .member-out input{
 	float:right;
 }
+.button-more-info {
+  display:block;
+  background: url("https://cdn.icon-icons.com/icons2/1883/PNG/512/downarrow_120663.png") no-repeat;
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  border:none;
+}
+.button-more-info-close {
+  display:none;
+  background: url("https://cdn.icon-icons.com/icons2/1883/PNG/512/caretsymbol_120671.png") no-repeat;
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  border:none;
+}
+.show-detail{
+	display:none;
+	margin:0 auto;
+	margin-top:-30px;
+	margin-bottom:30px;
+}
 /* 마이페이지 주문내역 설정 */
 .title-list { 
 	display:flex;
@@ -867,6 +894,19 @@ input{
 	display:flex;
 	width:970px;
 	height:70px;
+}
+#item-list2{
+	display:flex;
+	width:970px;
+	height:120px;
+	margin-bottom:20px;
+}
+#item-list-detail{
+	display:flex;
+	width:300px;
+	height:120px;
+	flex-direction:column;
+	margin-left:10px;
 }
 #t-mypage-num{
 	display:inline-block;
@@ -918,3 +958,112 @@ input{
 	width:150px;
 	text-align:center;
 }
+
+/* 마이페이지 대출/반납 설정 */
+#t-check-num{
+	display:inline-block;
+	width:70px;
+	text-align:center;
+}
+#t-check-title{
+	display:inline-block;
+	width:350px;
+	text-align:center;
+}
+#t-check-date1{
+	display:inline-block;
+	width:140px;
+	text-align:center;
+}
+#t-check-date2{
+	display:inline-block;
+	width:140px;
+	text-align:center;
+}
+#t-check-date3{
+	display:inline-block;
+	width:140px;
+	text-align:center;
+}
+#t-check-status{
+	display:inline-block;
+	width:130px;
+	text-align:center;
+}
+#c-check-num{
+	display:inline-block;
+	width:70px;
+	text-align:center;
+}
+#c-check-title{
+	display:inline-block;
+	width:350px;
+	text-align:center;
+}
+#c-check-date1{
+	display:inline-block;
+	width:140px;
+	text-align:center;
+}
+#c-check-date2{
+	display:inline-block;
+	width:140px;
+	text-align:center;
+}
+#c-check-date3{
+	display:inline-block;
+	width:140px;
+	text-align:center;
+}
+#c-check-status{
+	display:inline-block;
+	width:130px;
+	text-align:center;
+}
+
+/* 희망도서신청내역 설정 */
+#t-want-num{
+	display:inline-block;
+	width:70px;
+	text-align:center;
+}
+#t-want-title{
+	display:inline-block;
+	width:600px;
+	text-align:center;
+}
+#t-want-date{
+	display:inline-block;
+	width:150px;
+	text-align:center;
+}
+#t-want-status{
+	display:inline-block;
+	width:100px;
+	text-align:center;
+}
+#t-want-void{
+	display:inline-block;
+	width:50px;
+	text-align:center;
+}
+#c-want-num{
+	display:inline-block;
+	width:70px;
+	text-align:center;
+}
+#c-want-title{
+	display:inline-block;
+	width:600px;
+	text-align:center;
+}
+#c-want-date{
+	display:inline-block;
+	width:150px;
+	text-align:center;
+}
+#c-want-status{
+	display:inline-block;
+	width:100px;
+	text-align:center;
+} 

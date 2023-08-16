@@ -51,6 +51,26 @@ public class MyPageVO {
 	public int order_status;
 	public String order_date;
 	public int order_num;
+	public int rent_num;
+	public int callNumber;
+	public int lib_product_status;
+	public String rent_reg_date;
+	public String return_reg_deadline;
+	public String return_reg_date;
+	public String lib_product_bookname;
+	public int book_apply_num;
+	public String book_apply_title;
+	public String book_apply_content;
+	public String book_apply_reg_date;
+	public int book_apply_status;
+	public int order_detail_num;
+	public int store_product_num;
+	public int order_product_quantity;
+	public int cart_quantity;
+	public int order_product_price;
+	public String store_product_author;
+	public String store_product_publisher;
+	public String store_product_cover;
 	
 	
 	private byte[] mem_photo; //myEdit.jsp에서 입력받은 이미지 파일

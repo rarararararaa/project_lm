@@ -107,7 +107,12 @@ public class MyPageServiceImpl implements MyPageService{
 	public MyPageVO getPhoto(int mem_num) {
 		return mypageMapper.getPhoto(mem_num);
 	}
-
+	
+	@Override
+	public void updateModifyDate(MyPageVO mypageVO) {
+		mypageMapper.updateModifyDate(mypageVO);
+	}
+	
 	@Override
 	public List<MyPageVO> getOrderList(Map<String,Object> map) {
 		return mypageMapper.getOrderList(map);
@@ -117,9 +122,55 @@ public class MyPageServiceImpl implements MyPageService{
 	public int selectRowCountOrderList(Map<String, Object> map) {
 		return mypageMapper.selectRowCountOrderList(map);
 	}
+	
+	@Override
+	public List<MyPageVO> getOrderListDetail(Map<String,Object> map) {
+		return mypageMapper.getOrderListDetail(map);
+	}
 
 	@Override
-	public void updateModifyDate(MyPageVO mypageVO) {
-		mypageMapper.updateModifyDate(mypageVO);
+	public int selectRowCountOrderListDetail(Map<String, Object> map) {
+		return mypageMapper.selectRowCountOrderListDetail(map);
 	}
+	
+	@Override
+	public List<MyPageVO> getAskList(Map<String,Object> map) {
+		return mypageMapper.getAskList(map);
+	}
+
+	@Override
+	public int selectRowCountAskList(Map<String, Object> map) {
+		return mypageMapper.selectRowCountAskList(map);
+	}
+	
+	@Override
+	public List<MyPageVO> getCheckList(Map<String,Object> map) {
+		return mypageMapper.getCheckList(map);
+	}
+
+	@Override
+	public int selectRowCountCheckList(Map<String, Object> map) {
+		return mypageMapper.selectRowCountCheckList(map);
+	}
+	
+	@Override
+	public List<MyPageVO> getWantBookList(Map<String,Object> map) {
+		return mypageMapper.getWantBookList(map);
+	}
+
+	@Override
+	public int selectRowCountWantBookList(Map<String, Object> map) {
+		return mypageMapper.selectRowCountWantBookList(map);
+	}
+
+	@Override
+	public List<MyPageVO> getProgramList(Map<String,Object> map) {
+		return mypageMapper.getProgramList(map);
+	}
+
+	@Override
+	public int selectRowCountProgramList(Map<String, Object> map) {
+		return mypageMapper.selectRowCountProgramList(map);
+	}
+	
 }

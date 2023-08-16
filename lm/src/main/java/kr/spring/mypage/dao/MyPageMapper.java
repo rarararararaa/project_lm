@@ -71,12 +71,51 @@ public interface MyPageMapper {
 	public void updateModifyDate(MyPageVO mypageVO);
 		
 	//주문내역 가져오기 store_order_manage, store_order_detail, store_product_detail
-	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT c.store_product_title,d.order_total_price, d.order_status, d.order_date, d.order_num FROM\r\n"
-			+ "			(SELECT LISTAGG(a.store_product_title, ', ') AS store_product_title, b.order_num FROM (SELECT m.mem_num,d.store_product_num,d.order_num FROM store_order_manage m INNER JOIN store_order_detail d ON m.order_num = d.order_num) b\r\n"
-			+ "			INNER JOIN store_product_detail a ON b.store_product_num = a.store_product_num GROUP BY order_num) c INNER JOIN store_order_manage d ON c.order_num = d.order_num\r\n"
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT c.store_product_title,d.order_total_price, d.order_status, d.order_date, d.order_num FROM"
+			+ "			(SELECT LISTAGG(a.store_product_title, ', ') AS store_product_title, b.order_num FROM (SELECT m.mem_num,d.store_product_num,d.order_num FROM store_order_manage m INNER JOIN store_order_detail d ON m.order_num = d.order_num) b"
+			+ "			INNER JOIN store_product_detail a ON b.store_product_num = a.store_product_num GROUP BY order_num) c INNER JOIN store_order_manage d ON c.order_num = d.order_num"
 			+ "			WHERE mem_num = #{mem_num}  ORDER BY order_num DESC)a) WHERE rnum >= #{start} AND rnum <= #{end}")
 	public List<MyPageVO> getOrderList(Map<String,Object> map);
-	//개시글 개수
 	@Select("SELECT COUNT(*) FROM store_order_manage")
 	public int selectRowCountOrderList(Map<String,Object> map);
+	
+	//주문내역 상세 가져오기
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM ("
+			+ "SELECT a.*,b.store_product_title,b.store_product_author,b.store_product_publisher,b.store_product_cover FROM store_order_detail a INNER JOIN store_product_detail b ON a.store_product_num = b.store_product_num WHERE order_num=#{order_num} ORDER BY order_num DESC"
+			+ ")a) WHERE rnum >= #{start} AND rnum <= #{end}")
+	public List<MyPageVO> getOrderListDetail(Map<String,Object> map);
+	@Select("SELECT COUNT(*) FROM store_order_detail WHERE order_num=#{order_num}")
+	public int selectRowCountOrderListDetail(Map<String,Object> map);
+	
+	//문의내역 가져오기
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT ask_num,ask_title,ask_content,ask_reg_date,ask_image,ask_image_name FROM lib_board_ask WHERE mem_num=#{mem_num} ORDER BY ask_num DESC)a) WHERE rnum >= #{start} AND rnum <= #{end}")
+	public List<MyPageVO> getAskList(Map<String,Object> map);
+	@Select("SELECT COUNT(*) FROM lib_board_ask WHERE mem_num = #{mem_num}")
+	public int selectRowCountAskList(Map<String,Object> map);
+
+	//대출/반납내역 가져오기
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM ("
+			+ "SELECT a.*,b.lib_product_bookname,b.lib_product_isbn FROM lib_history a INNER JOIN lib_product_manage b ON a.callNumber = b.callNumber WHERE a.mem_num = #{mem_num}"
+			+ ")a) WHERE rnum >= #{start} AND rnum <= #{end}")
+	public List<MyPageVO> getCheckList(Map<String,Object> map);
+	@Select("SELECT COUNT(*) FROM lib_history WHERE mem_num = #{mem_num}")
+	public int selectRowCountCheckList(Map<String,Object> map);
+	
+	//희망도서신청내역 가져오기
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM ("
+			+ "SELECT * FROM lib_book_apply WHERE mem_num = #{mem_num}"
+			+ ")a) WHERE rnum >= #{start} AND rnum <= #{end}")
+	public List<MyPageVO> getWantBookList(Map<String,Object> map);
+	@Select("SELECT COUNT(*) FROM lib_book_apply WHERE mem_num=#{mem_num}")
+	public int selectRowCountWantBookList(Map<String,Object> map);
+	
+	//프로그램신청내역 가져오기
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM ("
+			+ "SELECT * FROM lib_program_apply_user a INNER JOIN lib_program_admin b ON a.program_num = b.program_num WHERE mem_num=#{mem_num}"
+			+ ")a) WHERE rnum >= #{start} AND rnum <= #{end}")
+	public List<MyPageVO> getProgramList(Map<String,Object> map);
+	@Select("SELECT COUNT(*) FROM lib_program_apply_user WHERE mem_num=#{mem_num}")
+	public int selectRowCountProgramList(Map<String,Object> map);
 }
+
+
