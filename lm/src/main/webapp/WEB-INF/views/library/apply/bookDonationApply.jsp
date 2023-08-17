@@ -6,28 +6,23 @@
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 		    <li>
-				<form:label path="donation_book_info">도서 정보</form:label>
-				<form:input path="donation_book_info"/>
+				<form:input path="donation_book_info" class="input-box" placeholder="도서 정보를 입력해 주세요."/>
 				<form:errors path="donation_book_info" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="donation_title">제목</form:label>
-				<form:input path="donation_title"/>
+				<form:input path="donation_title" class="input-box" placeholder="제목을 입력해 주세요."/>
 				<form:errors path="donation_title" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="donation_content">내용</form:label>
-				<form:textarea path="donation_content"/>
+				<form:textarea path="donation_content" class="input-textarea" placeholder="내용을 입력해 주세요."/>
 				<form:errors path="donation_content" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="donation_name">기증자 이름</form:label>
-				<form:input path="donation_name"/>
+				<form:input path="donation_name" class="input-box" placeholder="기증자 이름을 입력해 주세요."/>
 				<form:errors path="donation_name" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="donation_info">기증자 별명(이름 대신 공개되기 원하는 호칭이 있으면 적어주세요)</form:label>
-				<form:input path="donation_info"/>
+				<form:input path="donation_info" class="input-box" placeholder="기증자 별명(이름 대신 공개되기 원하는 호칭이 있으면 적어주세요)"/>
 				<form:errors path="donation_info" cssClass="error-color"/>
 			</li>
 		</ul>
