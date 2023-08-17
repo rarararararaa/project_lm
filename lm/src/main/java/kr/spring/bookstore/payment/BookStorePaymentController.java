@@ -10,14 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 
 import kr.spring.bookstore.payment.service.BookStorePaymentOrderService;
 import kr.spring.bookstore.payment.service.BookStorePaymentService;
@@ -28,6 +36,7 @@ import kr.spring.bookstore.used.vo.UsedVO;
 import kr.spring.lm.point.vo.PointVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -304,6 +313,25 @@ public class BookStorePaymentController {
 		model.addAttribute("home_list", home_list);
 		//log.debug("<<배송지 리스트>> : "+home_list);
 		return "order";
+	}
+	//결제 검증
+	@Value("${imp_key}")
+	private String imp_key;
+	@Value("${imp_secret}")
+	private String imp_secret;
+
+	@RestController
+	@RequiredArgsConstructor
+	@RequestMapping("/verifyIamport")
+	private class VeriyController{
+		private IamportClient api = new IamportClient(imp_key, imp_secret);
+		
+		@RequestMapping("/{imp_uid}")
+		@ResponseBody
+		public IamportResponse<Payment> paymentByUid(@PathVariable String imp_uid) throws IOException, IamportResponseException{
+			log.debug("<<결제 검증>> : "+imp_uid);
+			return api.paymentByImpUid(imp_uid);	
+		}
 	}
 	//주문 성공시 주문 내역 저장
 	@RequestMapping("/bookstore/payment/orderAction.do")

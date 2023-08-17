@@ -286,7 +286,25 @@ $(function(){
 				console.log(rsp.success);
 					//rsp.imp_uid 값으로 결제 단건조뢰 API를 호출하여 결제결과를 판단합니다.
                 if (rsp.success) {
-					ajaxPaycomplete(rsp);
+					$.ajax({
+                            url: "/verifyIamport/"+rsp.imp_uid,
+                            method: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                imp_uid: rsp.imp_uid,            // 결제 고유번호
+                                merchant_uid: rsp.merchant_uid,   // 주문번호
+                                amount: rsp.paid_amount
+                            }),
+                        }).done(function (data) {
+                            // 가맹점 서버 결제 API 성공시 로직
+							if(rsp.paid_amount == data.response.amount){
+								console.log(rsp);
+								console.log(data);
+								ajaxPaycomplete(rsp);
+							}else{
+								alert('결제 실패');
+							}
+                        })
                 } else {
 					alert('결제 취소')
                     console.log(typeof rsp);
