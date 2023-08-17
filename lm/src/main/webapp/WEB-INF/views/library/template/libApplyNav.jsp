@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- Admin 메뉴 시작 -->
-<style>
-	.side-bar {
-		display:flex;
-		margin-top:50px;
-		border : solid 2px green;
-		border-radius: 20px;
-	}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/sidebar.css">
 <div class="side-bar">
 	<ul>
+		<li>
+			<input type="button" class="menu-btn" value="희망도서신청"
+			  onclick="location.href='${pageContext.request.contextPath}/library/bookApplyMain.do'">
+		</li>
 		<li>
 			<input type="button" class="menu-btn" value="시설 이용"
 			  onclick="location.href='${pageContext.request.contextPath}/library/facilityList.do'">
