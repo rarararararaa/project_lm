@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.library.bookapply.dao.BookApplyMapper">
+
+	<insert id="insertBookApply" parameterType="bookApplyVO">
+		INSERT INTO lib_book_apply(
+		  book_apply_num,
+		  mem_num,
+		  book_apply_content,
+		  book_apply_status,
+		  book_apply_reg_date,
+		  book_apply_title)
+		VALUES(
+		  lib_book_apply_seq.nextval,
+		  #{mem_num},
+		  #{book_apply_content},
+		  0,
+		  SYSDATE,
+		  #{book_apply_title}
+		)
+	</insert>
+	
+	<select id="selectBookApplyListByMem_num" parameterType="map" resultType="bookApplyVO">
+		SELECT
+		   *
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM (SELECT
+		              *
+		            FROM lib_book_apply
+		            WHERE mem_num=#{mem_num}
+		            ORDER BY book_apply_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]> 
+	</select>
+	
+	<select id="countBookApplyListByMem_num" parameterType="map" resultType="integer">
+		SELECT
+		   COUNT(*)
+		FROM lib_book_apply
+		WHERE mem_num=#{mem_num}
+	</select>
+</mapper>

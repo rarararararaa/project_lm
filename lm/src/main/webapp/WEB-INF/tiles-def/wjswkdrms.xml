@@ -104,6 +104,18 @@
     	<put-attribute name="title" value="프로그램 목록"/>
 	    <put-attribute name="body" value="/WEB-INF/views/library/apply/programList.jsp"/>
     </definition>
+    <definition name="bookApplyWrite" extends="libApplyMain">
+    	<put-attribute name="title" value="희망도서 신청"/>
+	    <put-attribute name="body" value="/WEB-INF/views/library/apply/bookApplyWrite.jsp"/>
+    </definition>
+    <definition name="bookApplyMain" extends="libApplyMain">
+    	<put-attribute name="title" value="희망도서 신청"/>
+	    <put-attribute name="body" value="/WEB-INF/views/library/apply/bookApplyMain.jsp"/>
+    </definition>
+    <definition name="bookApplyUserList" extends="libApplyMain">
+    	<put-attribute name="title" value="희망도서 신청"/>
+	    <put-attribute name="body" value="/WEB-INF/views/library/apply/bookApplyUserList.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

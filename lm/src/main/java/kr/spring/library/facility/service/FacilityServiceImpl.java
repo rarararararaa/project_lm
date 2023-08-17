@@ -1,17 +1,18 @@
 package kr.spring.library.facility.service;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.library.facility.dao.FacilityMapper;
 import kr.spring.library.facility.vo.FacilityApplyVO;
 import kr.spring.library.facility.vo.FacilityVO;
 
 @Service
+@Transactional
 public class FacilityServiceImpl implements FacilityService{
 
 	@Autowired

@@ -6,13 +6,11 @@
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 		    <li>
-				<form:label path="facility_name">시설 이름</form:label>
-				<form:input path="facility_name"/>
+				<form:input path="facility_name" class="input-box" placeholder="시설이름을 입력하세요."/>
 				<form:errors path="facility_name" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="facility_name">시설 설명</form:label>
-				<form:textarea path="facility_content"/>
+				<form:textarea path="facility_content" class="input-textarea" placeholder="시설설명을 입력하세요."/>
 				<form:errors path="facility_content" cssClass="error-color"/>
 			</li>
 			<li>	

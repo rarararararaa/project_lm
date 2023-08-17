@@ -199,3 +199,7 @@ input[type="checkbox"]:checked+label {
 .form-default li{
 	margin:10px;
 }
+
+.page-main{
+	padding:0 20px;
+}
