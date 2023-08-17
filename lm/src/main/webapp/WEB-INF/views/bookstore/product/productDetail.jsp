@@ -26,7 +26,7 @@
 					</c:if>
 				</div>
 				<div class="review-box">
-					<div class="star-ratings">
+					<div class="star-ratings stop-dragging">
 						<div class="star-ratings-fill" style="--rating: ${product.store_product_ratingScore};">
 							<span>⭐</span>
 							<span>⭐</span>
@@ -77,6 +77,7 @@
 			<div id="scrollProdInfo">
 				<div>
 					<h2>책 소개</h2>
+					${product.store_product_description }
 				</div>
 
 			</div>
@@ -87,101 +88,12 @@
 						<span>* 구매 후 리뷰 작성 시, e교환권 150원 적립 </span>
 						 <input id="review" type="button" class="sm-button review" value="리뷰 작성" 
 						 		data-num="${product.store_product_num}" onclick="fnShowPop('re_pwd')">
-					<!-- 리뷰 등록 다이얼로그 시작 -->
-					<div id="re_pwd">
-						<div class="modal_container">
-							<form id="new_form" enctype="multipart/form-data" action="/bookstore/review/reviewWrite.do" method="post">
-								<input type="hidden" name="store_product_isbn13" value="${product.store_product_isbn13}">
-								<input type="hidden" name="store_product_num" value="${product.store_product_num}">
-								<img src="${ pageContext.request.contextPath }/images/modal-btn.png" onclick="fnHidePop('re_pwd')" class="modal-btn">
-								<ul class="modal-ul">
-									<li style="font-size:18px;font-weight:500;">
-										${product.store_product_title}
-									</li>
-									<li class="review-rating">
-										<img src="${product.store_product_cover}" width="70">
-										<fieldset class="review_rating" >
-										<div class="starpoint_box">
-			                                <label class="label_star" for="rating1" title="0.5점">
-			                                	<span class="blind">
-			                                	</span>
-			                                </label>
-			                                <label class="label_star" for="rating2" title="1점">
-			                                	<span class="blind">
-			                                	</span>
-			                                </label>
-			                                <label class="label_star" for="rating3" title="1.5점">
-			                                	<span class="blind">
-			                                	</span>
-			                                </label>
-			                                <label class="label_star" for="rating4" title="2점">
-			                                	<span class="blind">
-			                                	</span>
-			                                </label>
-			                                <label class="label_star" for="rating5" title="2.5점">
-			                                	<span class="blind">
-			                                	</span>
-			                                </label>
-			                                <label class="label_star" for="rating6" title="3점">
-			                                	<span class="blind">
-			                                	</span>
-			                                </label>
-			                                <label class="label_star" for="rating7" title="3.5점">
-			                                	<span class="blind">
-			                                	</span>
-			                                </label>
-			                                <label class="label_star" for="rating8" title="4점">
-			                                	<span class="blind">
-			                                	</span>
-			                                </label>
-			                                <label class="label_star" for="rating9" title="4.5점">
-			                                	<span class="blind">
-			                                	</span>
-			                                </label>
-			                                <label class="label_star" for="rating10" title="5점">
-			                                	<span class="blind">
-			                                	</span>
-			                                </label>
-				                            <input type="radio" id="rating1" name="review_rating" class="star_radio" value="1">
-				                            <input type="radio" id="rating2" name="review_rating" class="star_radio" value="2">
-			                                <input type="radio" id="rating3" name="review_rating" class="star_radio" value="3">
-											<input type="radio" id="rating4" name="review_rating" class="star_radio" value="4">
-				                            <input type="radio" id="rating5" name="review_rating" class="star_radio" value="5">
-				                            <input type="radio" id="rating6" name="review_rating" class="star_radio" value="6">
-				                            <input type="radio" id="rating7" name="review_rating" class="star_radio" value="7">
-				                            <input type="radio" id="rating8" name="review_rating" class="star_radio" value="8">
-			                                <input type="radio" id="rating9" name="review_rating" class="star_radio" value="9">
-			                                <input type="radio" id="rating10" name="review_rating" class="star_radio" value="10">
-			                                <span class="starpoint_bg"></span>
-		                           		</div>
-										<textarea rows="3" cols="50" name="review_content" id="review_content"
-												  style="resize:none;" placeholder="후기를 작성해주세요."></textarea>
-		                           		</fieldset>
-									</li>
-									<li>
-									</li>
-									<li>
-										<label for="review_image">
-											<div class="file-button"></div>
-										</label>
-										<div id="image_container"></div>
-										<input type="file" name="upload" id="review_image"
-										accept="image/gif,image/png,image/jpeg" onchange="setThumbnail();"> 									
-									</li>
-								</ul>
-								
-								<div class="align-center">
-									<input id="review_button" type="button" class="sm-button review_submit_btn" value="리뷰 등록">
-								</div>
-							</form>
-						</div>
-					</div>
-					<!-- 리뷰 등록 다이얼로그 끝 -->						 		
+					<jsp:include page="product_modal.jsp"/>
 					</div>
 				</div>
 				<div class="review-box">
 					<div class="box-left">
-						<div class="star-ratings">
+						<div class="star-ratings stop-dragging">
 							<div class="star-ratings-fill" style="--rating: ${product.store_product_ratingScore};">
 								<span>⭐</span>
 								<span>⭐</span>
@@ -200,7 +112,7 @@
 						</div>
 					</div>
 					<div class="box-right">
-						<div class="star-ratings">
+						<div class="star-ratings stop-dragging">
 							<div class="star-ratings-fill" style="--rating: 2;">
 								<span>⭐</span>
 								<span>⭐</span>
@@ -210,7 +122,7 @@
 							</div>
 							<div>0</div>
 						</div>					
-						<div class="star-ratings">
+						<div class="star-ratings stop-dragging">
 							<div class="star-ratings-fill" style="--rating: 4;">
 								<span>⭐</span>
 								<span>⭐</span>
@@ -220,7 +132,7 @@
 							</div>
 							<div>0</div>
 						</div>					
-						<div class="star-ratings">
+						<div class="star-ratings stop-dragging">
 							<div class="star-ratings-fill" style="--rating: 6;">
 								<span>⭐</span>
 								<span>⭐</span>
@@ -230,7 +142,7 @@
 							</div>
 							<div>0</div>
 						</div>					
-						<div class="star-ratings">
+						<div class="star-ratings stop-dragging">
 							<div class="star-ratings-fill" style="--rating: 8;">
 								<span>⭐</span>
 								<span>⭐</span>
@@ -240,7 +152,7 @@
 							</div>
 							<div>0</div>
 						</div>					
-						<div class="star-ratings">
+						<div class="star-ratings stop-dragging">
 							<div class="star-ratings-fill" style="--rating: 10;">
 								<span>⭐</span>
 								<span>⭐</span>
@@ -264,7 +176,7 @@
 										${review.mem_id} / ${review.review_reg_date }
 									</div>
 									<div class="right-area">
-										<div class="star-ratings">
+										<div class="star-ratings stop-dragging">
 											<div class="star-ratings-fill" style="--rating: ${review.review_rating};">
 												<span>⭐</span>
 												<span>⭐</span>
@@ -280,9 +192,16 @@
 									 	${review.review_content}
 									</div>
 									<div class="right-area">
-										<img src="${pageContext.request.contextPath}/bookstore/product/imageView.do?review_num=${review.review_num}" width="64" height="64">							
+										<img src="${pageContext.request.contextPath}/bookstore/product/imageView.do?review_num=${review.review_num}" width="64" height="64">
 									</div>
 								</div>
+								<div class="button-box">
+								<c:if test="${sessionScope.mem_num ==review.mem_num}">
+									<input type="button" class="small-button review-detail" value="수정" onclick="fnShowPop('re_mopwd')" data-num="${review.review_num }">
+									<input type="button" class="small-button" value="삭제" onclick="">
+								</c:if>
+								</div>
+										
 							</c:forEach>
 						</div>
 						<div>
@@ -293,28 +212,25 @@
 			</div>
 			<div id="scrollProdClaim">
 				<div>
+					<h2>교환/반품/품절 안내</h2>
 				</div>
 				<ul>
 					<li>
-						<div>
-						</div>
+						<div><b>반품/교환방법</b></div>
 						마이룸 > 주문관리 > 주문/배송내역 > 주문조회 > 반품/교환 신청, [1:1 상담 > 반품/교환/환불] 또는 고객센터 (1544-1900)<br>
 						* 오픈마켓, 해외배송 주문, 기프트 주문시 [1:1 상담>반품/교환/환불] 또는 고객센터 (1544-1900)
 					</li>
 					<li>
-						<div>
-						</div>
+						<div><b>반품/교환가능 기간</b></div>
 						변심반품의 경우 수령 후 7일 이내,<br>
 						상품의 결함 및 계약내용과 다를 경우 문제점 발견 후 30일 이내
 					</li>
 					<li>
-						<div>
-						</div>
+						<div><b>반품/교환비용</b></div>
 						변심 혹은 구매착오로 인한 반품/교환은 반송료 고객 부담					
 					</li>
 					<li>
-						<div>
-						</div>
+						<div><b>반품/교환 불가 사유</b></div>
 						1) 소비자의 책임 있는 사유로 상품 등이 손실 또는 훼손된 경우<br>
 						(단지 확인을 위한 포장 훼손은 제외)<br>
 						2) 소비자의 사용, 포장 개봉에 의해 상품 등의 가치가 현저히 감소한 경우<br>
@@ -340,11 +256,11 @@
 				</ul>
 			</div>
 		</div>
-		<div class="right-area">
+		<div class="right-wrap">
 			<div>
 				<h2>중고책</h2>
+				<c:forEach var="list" items="${list}">
 				<div class="used-product">
-					<c:forEach var="list" items="${list}">
 					<form id="used_product">
 						<input type="hidden" name="used_product_num" value="${list.used_product_num }">
 						<input type="hidden" name="store_product_num" value="${product.store_product_num }">
@@ -363,10 +279,19 @@
 							<input type="button" class="sm-button" value="장바구니" onclick="submitUsedProduct();">
 						</div>
 					</form>	
-					</c:forEach>
 				</div>
+				</c:forEach>
 			</div>		
-			<div>이벤트</div>
+			<div>
+				<h2>이벤트</h2>
+				<div class="event">
+				<c:forEach var="event" items="${event }">
+					<a class="wid" href="/bookstore/event/detail.do?event_board_num=${event.event_board_num}">
+						<img src="/bookstore/event/imageView.do?event_board_num=${event.event_board_num}&event_board_type=1" width="258px">
+					</a>
+				</c:forEach>
+				</div>
+			</div>
 			<div>추천 도서</div>
 		</div>
 	</div>
@@ -391,8 +316,8 @@
 						<button class="increase adjust" id="increase"></button>
 					</span>
 				</div>
-						<input type="hidden" name="store_product_num" value="${product.store_product_num}" id="product">
-						<input type="hidden" name="store_product_pricestandard" value="${product.store_product_pricestandard}" id="price">
+						<input type="hidden" name="store_product_num" value="${product.store_product_num}">
+						<input type="hidden" name="store_product_pricestandard" value="${product.store_product_pricestandard}">
 						<input type="hidden" name="store_product_stock" value="${product.store_product_stock}">
 						<input type="hidden" name="store_product_title" value="${product.store_product_title}">
 						

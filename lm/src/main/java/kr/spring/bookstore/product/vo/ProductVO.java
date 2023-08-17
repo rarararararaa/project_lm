@@ -1,6 +1,5 @@
 package kr.spring.bookstore.product.vo;
 
-import kr.spring.bookstore.used.vo.UsedVO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.product.vo.ProductVO;
@@ -15,6 +16,7 @@ import kr.spring.bookstore.service.vo.OrderDetailVO;
 import kr.spring.lm.point.dao.PointMapper;
 
 @Service
+@Transactional
 public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	private ReviewMapper reviewMapper;
@@ -38,6 +40,9 @@ public class ReviewServiceImpl implements ReviewService{
 		reviewMapper.updateMemberPoint(reviewVO.getMem_num());
 		reviewMapper.updateProductReviewCount(reviewVO.getProductVO());
 		pointMapper.insertReviewPoint(reviewVO.getPointVO());
+		ProductVO product=reviewVO.getProductVO();
+		product.setStore_product_ratingScore(reviewMapper.selectUpdateProductRating(product));
+		reviewMapper.updateProductRating(product);
 	}
 
 
@@ -48,7 +53,16 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public void updateReview(ReviewVO reviewVO) {
-		
+		ReviewVO db_review=reviewMapper.selectReview(reviewVO.getReview_num());
+		int old_review_rating=db_review.getReview_rating();
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("old_review_rating", old_review_rating);
+		reviewMapper.updateReview(reviewVO);
+		ProductVO product=reviewVO.getProductVO();
+		map.put("review_rating", reviewVO.getReview_rating());
+		map.put("store_product_num", product.getStore_product_num());
+		product.setStore_product_ratingScore(reviewMapper.selectModifyRating(map));
+		reviewMapper.updateProductRating(product);
 	}
 
 	@Override
@@ -77,18 +91,10 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void updateProductRating(Map<String, Object> map) {
-		Map<String, Object> map2=new HashMap<String, Object>();
-		map2.put("store_product_num", map.get("store_product_num"));
-		map2.put("store_product_ratingscore", reviewMapper.selectUpdateProductRating(map));
-		
-		reviewMapper.updateProductRating(map2);
-	}
-
-	@Override
 	public ProductVO selectProductVO(int store_product_num) {
 		return reviewMapper.selectProductVO(store_product_num);
 	}
+
 
 
 }

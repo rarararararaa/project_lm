@@ -44,18 +44,75 @@ $(function(){
 	
 	 $("input[type='file']").change(function(e){
 		  setThumbnail(e);
+		  setThumbnail2(e);
 	      //div 내용 비워주기
 	      $('#image_container').empty();
+	      $('#image_container2').empty();
 	 });  	
 	$('#image_container').on('click', '.del', function () {
 	    $("#image_container").empty()
 	    $("#review_image").val("");
+	});	
+	$('#image_container2').on('click', '.del', function () {
+	    $("#image_container2").empty()
+	    $("#review_image2").val("");
 	});	
 	
 	//리뷰 등록
 	$("#review_button").on('click',function(event){
 		$('#new_form').submit();
 	});
+	$("#review_button2").on('click',function(event){
+		$('#new_form2').submit();
+	});
+	
+	$("#re_mopwd").change(function(e){
+	});
+	
+	$("#re_pwd").change(function(e){
+		$('.star-radio').prop('checked',false);
+	});
+	
+	
+	
+	//리뷰 수정
+	//서버와 통신
+	$('.review-detail').click(function(){
+		let test = $(this).attr('data-num');
+		$.ajax({
+			url:'/bookstore/review/reviewModifyAjax.do',
+			type:'post',
+			data:{review_num:test},
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('로그인 후 댓글 수정 가능합니다.');
+					location.replace();
+				}else if(param.result == 'success'){
+					$('#review_num').val(test);
+					let detail=param.reviewDetail;
+					var div=document.querySelector(
+							"div#image_container2");
+					$('#review_content2').val(detail.review_content);
+					let img = document
+							.createElement("img");
+					var span=document.createElement("span");
+					span.classList.add("del");
+					if(div.children.length>0){
+						div.replaceChildren();	
+					}
+					img.setAttribute("src","/bookstore/product/imageView.do?review_num="+detail.review_num);					
+					div.append(img);
+					div.append(span);
+				}else{
+					alert('댓글 수정 오류 발생');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	})
 });
 //썸네일 함수
 	function setThumbnail(event) {
@@ -81,11 +138,29 @@ $(function(){
 
 		reader.readAsDataURL(event.target.files[0]);
 	}
-	//댓글 작성 폼 초기화
-	function initForm(){
-		$('textarea').val('');
-		$('#re_first .letter-count').text('300/300');
+	function setThumbnail2(event) {
+		
+		var reader = new FileReader();
+
+		reader.onload = function(event) {
+			var img = document
+					.createElement("img");
+			img.setAttribute("src",
+					event.target.result);
+			var div=document.querySelector(
+					"div#image_container2");
+			var span=document.createElement("span");
+			span.classList.add("del");
+			if(div.children.length>0){
+				div.replaceChildren();	
+			}
+			div.appendChild(img);
+			div.appendChild(span);
+		};
+
+		reader.readAsDataURL(event.target.files[0]);
 	}
+
 //증감 함수
 function changeNum(tag,num){
 	let number=parseInt(num);
@@ -180,13 +255,7 @@ function submitOrder(){
 			event.preventDefault();
 						
 			let cartInfo=[];
-			let book_info = {};
-			book_info.cart_quantity = $('#number').val();
-			book_info.store_product_pricestandard = $('#price').val();
-			book_info.store_product_num = $('#product').val();
-
-			cartInfo.push({...book_info});
-			console.log(cartInfo); 
+			cartInfo.push($('#product_cart').serialize());
 			//서버와 통신
 			$.ajax({
 				url:'/bookstore/payment/cartAction.do',
@@ -201,7 +270,7 @@ function submitOrder(){
 					}else if(param.result == 'success'){
 						let check=confirm('결제창으로 이동하시겠습니까?');
 						if(check){
-							location.href='/bookstore/payment/order.do';
+							location.href='/bookstore/payment/cartAction.do';
 						}else{
 							location.reload();
 						}
@@ -232,11 +301,21 @@ function fnHidePop(sGetName){
     $("#"+ sGetName).removeClass("on");
 	if(sGetName == 're_pwd'){
 		document.body.classList.remove("scroll");
+		$('.star_radio').prop('checked',false);
+		$('.')
 	}else{
 		$('re_pwd').removeClass("scroll");
-		 closeDaumPostcode();
-		$('#deli_form')[0].reset();
+		$('#new_form')[0].reset();
 	}
+	if(sGetName == 're_mopwd'){
+		document.body.classList.remove("scroll");
+		$('.star_radio').prop('checked',false);
+	}else{
+		$('re_pwd').removeClass("scroll");
+		$('#new_form2')[0].reset();
+	}
+	
+	
 }
 
 

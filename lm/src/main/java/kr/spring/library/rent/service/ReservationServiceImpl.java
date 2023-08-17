@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.library.rent.dao.RentMapper;
 import kr.spring.library.rent.dao.ReservationMapper;
@@ -12,6 +13,7 @@ import kr.spring.library.rent.vo.RentVO;
 import kr.spring.library.rent.vo.ReservationVO;
 
 @Service
+@Transactional
 public class ReservationServiceImpl implements ReservationService{
 	@Autowired
 	private ReservationMapper reservationMapper;

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.review.service.ReviewService;
 import kr.spring.bookstore.review.vo.ReviewVO;
 import kr.spring.bookstore.service.vo.OrderDetailVO;
@@ -107,7 +108,56 @@ public class ReviewController {
 	    return "common/resultView";
 	}
 	
-	
+	/*==========================
+	 * 리뷰 수정
+	 *==========================*/
+	//리뷰 수정 폼 호출
+	@RequestMapping("/bookstore/review/reviewModifyAjax.do")
+	@ResponseBody
+	public Map<String, Object> reviewModifyAjax(@RequestParam int review_num, HttpSession session){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
+		int user=0;
+		user=(Integer)session.getAttribute("mem_num");
+		if(user == 0) {
+			//로그인 X
+			mapJson.put("result", "logout");
+		}else {
+			//로그인 O
+			ReviewVO review=reviewService.selectReview(review_num);
+			mapJson.put("result", "success");
+			mapJson.put("reviewDetail", review);
+		}
+		return mapJson;
+	}
+	//리뷰 수정
+	@RequestMapping("/bookstore/review/reviewModify.do")
+	public String reviewModify(@Valid ReviewVO reviewVO, BindingResult result, Model model,
+			HttpServletRequest request, HttpSession session,
+						@RequestParam(value="store_product_isbn13", required=false) String store_product_isbn13,
+						@RequestParam int store_product_num) {
+		
+		//상품 이미지 유효성 체크 //MultipartFile -> byte[]로 변환한 경우 파일을 업로드 하지 않으면 byte[]는 생성되고 length는 0이다. 
+		if(reviewVO.getReview_image().length == 0) {
+			result.rejectValue("review_image", "required"); 
+		}
+
+		Map<String, Object> map=new HashMap<String, Object>();
+		//용량체크 - byte[] 이므로 용량 체크 가능 
+		if(reviewVO.getReview_image().length >= 5*1024*1024) { //5 MB // 자바빈의 필드명, 에러 코드, 에러문구에 전달할 값, 기본 오류(에러) 문구
+			result.rejectValue("review_image", "limitIploadSize", new Object[] {"5MB"}, null); 
+		}
+	    
+	    Integer mem_num=(Integer)session.getAttribute("mem_num");
+	    reviewVO.setMem_num(mem_num);
+	    reviewVO.setProductVO(reviewService.selectProductVO(store_product_num));
+		log.debug("<<reviewVO : >>"+reviewVO);
+		reviewService.updateReview(reviewVO);
+	    model.addAttribute("message", "댓글 수정 완료");
+	    model.addAttribute("url",request.getContextPath()+"/bookstore/product/productDetail.do?store_product_isbn13="+store_product_isbn13);
+	 
+	    return "common/resultView";
+	}
 }
 
 

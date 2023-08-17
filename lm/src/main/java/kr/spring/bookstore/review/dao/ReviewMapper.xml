@@ -21,12 +21,13 @@
 		)
 	</select>
 	<select id="selectOrderDetail" parameterType="kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO" resultType="kr.spring.bookstore.service.vo.OrderDetailVO">
-        SELECT 
+		SELECT 
 		    * 
 		FROM store_order_detail d
-        LEFT OUTER JOIN store_order_manage m
-        USING(order_Num)
+		LEFT OUTER JOIN store_order_manage m
+		USING(order_Num)
 		WHERE store_product_num = #{store_product_num} AND m.mem_num=#{mem_num}
+		AND order_status = 2
 		AND order_detail_num NOT IN (
 		    SELECT order_detail_num 
 		    FROM lm_review
@@ -63,6 +64,8 @@
 			  		FROM lm_review r
 			  		JOIN store_order_detail d
 			  		USING (ORDER_Detail_num)
+			  		LEFT OUTER JOIN LM_MEMBER_MANAGE
+			  		USING (mem_num)
                     WHERE d.store_product_num=#{store_product_num}
 			  		)a)	
 	</select>
@@ -87,23 +90,55 @@
 	</select>
 	
 	<!-- 상품에 별점 업데이트 -->
-	<select id="selectUpdateProductRating" parameterType="map" resultType="float">
+	<select id="selectUpdateProductRating" parameterType="productVO" resultType="float">
 		SELECT 
-		    (
-		        (p.STORE_PRODUCT_RATINGSCORE * p.STORE_PRODUCT_RATINGCOUNT + SUM(r.review_rating)) 
-		        / (p.STORE_PRODUCT_RATINGCOUNT + COUNT(r.review_rating))
-		    ) AS calculated_rating 
+		    ((
+		        p.STORE_PRODUCT_RATINGSCORE * p.STORE_PRODUCT_RATINGCOUNT 
+		        + SUM(r.review_rating)
+		    ) 
+		    / (
+		        p.STORE_PRODUCT_RATINGCOUNT 
+		        + COUNT(r.review_rating)
+		    )) AS calculated_rating 
 		FROM store_product_detail p
 		LEFT JOIN store_order_detail d ON p.store_product_num = d.store_product_num
 		LEFT JOIN lm_review r ON d.order_detail_num = r.order_detail_num
 		WHERE p.store_product_num = #{store_product_num}
-		GROUP BY p.STORE_PRODUCT_RATINGSCORE, p.STORE_PRODUCT_RATINGCOUNT	
+		GROUP BY p.STORE_PRODUCT_RATINGSCORE, p.STORE_PRODUCT_RATINGCOUNT
 	</select>
-	<update id="updateProductRating" parameterType="map">
+	<!-- 변경된 리뷰의 기존 평점 가져오기 -->
+	<select id="selectOldRating" parameterType="integer" resultType="integer">
+		SELECT review_rating AS old_review_rating
+		FROM lm_review
+		WHERE review_num = #{review_num}
+	</select>
+	<!-- 리뷰 수정 -->
+	<update id="updateReview" parameterType="reviewVO">
+		UPDATE 
+			lm_review
+		SET 
+			review_content=#{review_content},
+			review_rating=#{review_rating},
+			review_image=#{review_image}
+		WHERE review_num=#{review_num}
+	</update>
+	<!-- 변경 평점 계산 -->
+	<select id="selectModifyRating" parameterType="map"  resultType="float">
+		SELECT 
+		    (p.STORE_PRODUCT_RATINGSCORE * p.STORE_PRODUCT_RATINGCOUNT 
+		    - #{old_review_rating}
+		    + #{review_rating}) 
+		    / p.STORE_PRODUCT_RATINGCOUNT
+		    AS calculated_rating 
+		FROM store_product_detail p
+		WHERE p.store_product_num = #{store_product_num}	
+	</select>
+	<update id="updateProductRating" parameterType="productVO">
 		UPDATE store_product_detail
-		SET STORE_PRODUCT_RATINGSCORE=#{store_product_ratingscore}
+		SET STORE_PRODUCT_RATINGSCORE=#{store_product_ratingScore}
 		WHERE store_product_num = #{store_product_num}
 	</update>
+	
 </mapper>
 
 

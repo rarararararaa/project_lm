@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.bookstore.product.dao.ProductMapper;
 import kr.spring.bookstore.product.vo.ProductFavVO;
@@ -12,6 +13,7 @@ import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.used.vo.UsedVO;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService{
 	@Autowired
 	ProductMapper productMapper;

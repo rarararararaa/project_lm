@@ -25,9 +25,6 @@ public interface ReviewService {
 	
 	//별점당 리뷰 개수
 	public int selectReviewCountBetween(Map<String, Object> map);
-	
-	//별점 상품에 업데이트
-	public void updateProductRating(Map<String,Object> map);	
 	//상품당 리뷰 개수 -> 상품에도 업데이트
 	public int selectReviewCount(Map<String,Object> map);
 	//리뷰 수정

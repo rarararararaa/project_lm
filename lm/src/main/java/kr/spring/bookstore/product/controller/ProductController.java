@@ -1,5 +1,6 @@
 package kr.spring.bookstore.product.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.bookstore.event.service.BsEventService;
+import kr.spring.bookstore.event.vo.BsEventVO;
+import kr.spring.bookstore.event_announce.service.EventAnnounceBoardService;
+import kr.spring.bookstore.event_announce.vo.EventAnnounceBoardVO;
 import kr.spring.bookstore.product.service.ProductService;
 import kr.spring.bookstore.product.service.ProductServiceapi;
 import kr.spring.bookstore.product.vo.ProductFavVO;
@@ -37,6 +42,8 @@ public class ProductController {
 	private ProductService productService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private BsEventService bsEventService;
 	
 	
 	@RequestMapping("/lm/product.do")
@@ -100,6 +107,7 @@ public class ProductController {
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("store_product_num", product.getStore_product_num());
 		List<UsedVO> list=productService.selectUsedNum(product.getStore_product_num());
+		List<BsEventVO> list2=new ArrayList<BsEventVO>();
 		log.debug("<<list>> : " + list);
 
 		//전체/검색 레코드수
@@ -113,14 +121,16 @@ public class ProductController {
 			"productDetail.do","&order="+order);
 		
 		List<ReviewVO> review= null;
+		ReviewVO reviewDetail=null;
 		if(count > 0) {
 			map.put("count", count);
 			map.put("order",order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
+			map.put("event_board_status", 1);
+			list2 =bsEventService.selectEventList(map);
 			
-			reviewService.updateProductRating(map);
-			review = reviewService.selectReviewList(map);			
+			review = reviewService.selectReviewList(map);
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("productDetail");
@@ -128,6 +138,7 @@ public class ProductController {
 		mav.addObject("count", count);
 		mav.addObject("review", review);
 		mav.addObject("list", list);
+		mav.addObject("event", list2);
 		mav.addObject("page", page.getPage());
 		log.debug("<<mav>> : "+mav);
 		return mav;
@@ -228,8 +239,6 @@ public class ProductController {
 		}
 		return mapJson;
 	}
-		
-	
 	
 	
 }
