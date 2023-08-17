@@ -33,13 +33,10 @@
 					href="${pageContext.request.contextPath}/lm/mypage/programapplylist/programApplyListMain.do?lo=${lo}">프로그램
 						신청 내역</a></li>
 				<li><a class="detail-menu"
-					href="${pageContext.request.contextPath}/lm/mypage/donatebooklist/donateBookListMain.do?lo=${lo}">책
-						기증 신청 내역</a></li>
-				<li><a class="detail-menu"
 					href="${pageContext.request.contextPath}/lm/mypage/facilityapplylist/facilityApplyListMain.do?lo=${lo}">시설
 						이용 신청 내역</a></li>
 				<li><a class="detail-menu"
-					href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">책
+					href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">도서
 						예약 내역</a></li>
 				<li><a class="detail-menu"
 					href="${pageContext.request.contextPath}/lm/mypage/booklostlist/bookLostListMain.do?lo=${lo}">분실

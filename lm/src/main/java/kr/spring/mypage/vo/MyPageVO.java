@@ -23,7 +23,7 @@ import lombok.ToString;
 //출력하지 않도록 제외시킴
 @Getter
 @Setter
-@ToString(exclude = {"mem_photo"})
+@ToString(exclude = {"mem_photo","facility_image"})
 public class MyPageVO {
 	public int mem_num;
 	public int mem_grade;
@@ -81,7 +81,31 @@ public class MyPageVO {
 	public String order_notice;
 	public int payment_type;
 	public int order_pay_status;
+	public int program_num;
+	public String program_title;
+	public String program_content;
+	public String program_reg_date;
+	public String program_date;
+	public int facility_apply_num;
+	public int facility_num;
+	public String facility_apply_reg_date;
+	public String facility_apply_start;
+	public String facility_apply_end;
+	public String facility_name;
+	public String facility_content;
+	public String facility_imagename;
+	public int reservation_num;
+	public int reservation_status;
+	public String reservation_submit_date;
+	public String lib_product_isbn;
+	public String lib_product_authors;
+	public String lib_product_publisher;
+	public int lib_product_product_status;
+	public String lib_product_bookimageurl;
+	public int order_status_confirm;
 	
+	
+	private byte[] facility_image;
 	private byte[] mem_photo; //myEdit.jsp에서 입력받은 이미지 파일
 	//MultipartFile to byte 이미지 처리 
 	public void setUpload(MultipartFile upload) throws IOException {

@@ -66,11 +66,6 @@
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/programapplylist/programApplyList.jsp"/>
     </definition>
     
-    <definition name="donateBookListMain" extends="myPageMain">
-    	<put-attribute name="myPageTitle" value="책 기증 신청 내역"/>
-    	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/donatebooklist/donateBookList.jsp"/>
-    </definition>
-    
     <definition name="facilityApplyListMain" extends="myPageMain">
     	<put-attribute name="myPageTitle" value="시설 이용 신청 내역"/>
     	<put-attribute name="myPage" value="/WEB-INF/views/lm/mypage/facilityapplylist/facilityApplyList.jsp"/>

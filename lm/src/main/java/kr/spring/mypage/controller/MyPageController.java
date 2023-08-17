@@ -43,10 +43,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class MyPageController {
-	
+
 	@Autowired
 	private MyPageService mypageService;
-	
+
 	/*=======================
 	 * 자바빈 초기화
 	 *=======================*/
@@ -54,15 +54,15 @@ public class MyPageController {
 	public MyPageVO initCommand() {
 		return new MyPageVO();
 	}
-	
+
 	//intercepter에서 마이페이지 공용 데이터 처리하여 SELECT SQL 실행 후 반환. AppConfig.java,MyPageHeaderInterceptor.java
 	//페이지 추가 시 appconfig에 추가 해줘야 함
-	
+
 	/*=======================
 	 * 마이페이지 + 주문내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/main/myPageMain.do")
-	public ModelAndView myPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+	public String myPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
@@ -72,7 +72,7 @@ public class MyPageController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("mem_num", session.getAttribute("mem_num"));
-		
+
 		// 전체/검색 레코드수
 		int count = mypageService.selectRowCountOrderList(map);
 
@@ -102,12 +102,22 @@ public class MyPageController {
 			price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
 			list.get(i).setOrder_total_price(price);
 		}
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myPageMain");
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		mav.addObject("page", page.getPage());
-		return mav;
+		model.addAttribute("myPageMain");
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+
+		return "myPageMain"; //타일스 설정의 식별자
+	}
+	@PostMapping("/lm/mypage/main/myPageMain.do")
+	public String myPageHandle(@Valid MyPageVO mypageVO,@RequestParam int lo,BindingResult result, Model model,HttpServletRequest request) {
+		log.debug("<<order-status-update2>>");
+		HttpSession session = request.getSession();
+		//주문번호의 배송상태를 구매확정으로 수정
+		mypageService.setOrderStatus(mypageVO.getOrder_status_confirm(),(Integer)session.getAttribute("mem_num"));
+		
+		model.addAttribute("lo",lo);
+		return "common/notice_edit";
 	}
 	/*=======================
 	 * 주문 내역 상세
@@ -116,14 +126,15 @@ public class MyPageController {
 	public ModelAndView formMyPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,@RequestParam int order_num,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order, @Valid MyPageVO mypageVO) {
-		
+
 		HttpSession session = request.getSession();
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("order_num",order_num);
-		
+		map.put("mem_num",mem_num);
+
 		// 전체/검색 레코드수
 		int count = mypageService.selectRowCountOrderListDetail(map);
 
@@ -137,8 +148,14 @@ public class MyPageController {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			//주문내역 가져오기
+			//주문내역상세 가져오기
 			list = mypageService.getOrderListDetail(map);
+		}
+		if(list==null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("myPageMain");
+			mav.addObject("error", "일치하는 주문 내역이 없습니다.");
+			return mav;
 		}
 		//배송지, 결제 정보
 		mypageVO = mypageService.getHomeOrderList(order_num,mem_num);
@@ -149,7 +166,7 @@ public class MyPageController {
 			price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
 			list.get(i).setOrder_total_price(price);
 		}
-		*/
+		 */
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("orderListMain");
 		mav.addObject("count", count);
@@ -172,7 +189,7 @@ public class MyPageController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("mem_num", session.getAttribute("mem_num"));
-		
+
 		// 전체/검색 레코드수
 		int count = mypageService.selectRowCountAskList(map);
 
@@ -186,7 +203,7 @@ public class MyPageController {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			//주문내역 가져오기
+			//문의내역 가져오기
 			list = mypageService.getAskList(map);
 		}
 		//제목 길이가 길면 잘라내고 .. 추가
@@ -223,7 +240,7 @@ public class MyPageController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("mem_num", session.getAttribute("mem_num"));
-		
+
 		// 전체/검색 레코드수
 		int count = mypageService.selectRowCountCheckList(map);
 
@@ -237,7 +254,7 @@ public class MyPageController {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			//주문내역 가져오기
+			//대출/반납내역 가져오기
 			list = mypageService.getCheckList(map);
 		}
 		ModelAndView mav = new ModelAndView();
@@ -261,7 +278,7 @@ public class MyPageController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("mem_num", session.getAttribute("mem_num"));
-		
+
 		// 전체/검색 레코드수
 		int count = mypageService.selectRowCountWantBookList(map);
 
@@ -275,7 +292,7 @@ public class MyPageController {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			//주문내역 가져오기
+			//희망도서신청내역 가져오기
 			list = mypageService.getWantBookList(map);
 		}
 		ModelAndView mav = new ModelAndView();
@@ -299,7 +316,7 @@ public class MyPageController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("mem_num", session.getAttribute("mem_num"));
-		
+
 		// 전체/검색 레코드수
 		int count = mypageService.selectRowCountProgramList(map);
 
@@ -313,7 +330,7 @@ public class MyPageController {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			//주문내역 가져오기
+			//프로그램신청내역 가져오기
 			list = mypageService.getProgramList(map);
 		}
 		ModelAndView mav = new ModelAndView();
@@ -324,40 +341,79 @@ public class MyPageController {
 		return mav;
 	}
 	/*=======================
-	 * 책기증신청내역
-	 *=======================*/
-	@RequestMapping("/lm/mypage/donatebooklist/donateBookListMain.do")
-	public String donateBookList() {
-		return "donateBookListMain"; //타일스 설정의 식별자
-	}
-	@GetMapping("/lm/mypage/donatebooklist/donateBookListMain.do")
-	public String donateBookListHandle(@RequestParam int lo) {
-
-		return "donateBookListMain";
-	}
-	/*=======================
 	 * 시설이용신청내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
-	public String facilityApplyList() {
-		return "facilityApplyListMain"; //타일스 설정의 식별자
-	}
-	@GetMapping("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
-	public String facilityApplyListHandle(@RequestParam int lo) {
+	public ModelAndView facilityApplyList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+		HttpSession session = request.getSession();
 
-		return "facilityApplyListMain";
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountFacilityList(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "facilityApplyListMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//시설이용신청내역 가져오기
+			list = mypageService.getFacilityList(map);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("facilityApplyListMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 	/*=======================
-	 * 책예약내역
+	 * 도서예약내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/bookreservationlist/bookReservationListMain.do")
-	public String bookReservationList() {
-		return "bookReservationListMain"; //타일스 설정의 식별자
-	}
-	@GetMapping("/lm/mypage/bookreservationlist/bookReservationListMain.do")
-	public String bookReservationListHandle(@RequestParam int lo) {
+	public ModelAndView bookReservationList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+		HttpSession session = request.getSession();
 
-		return "bookReservationListMain";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountBookReservationList(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "bookReservationListMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//도서예약신청내역 가져오기
+			list = mypageService.getBookReservationList(map);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bookReservationListMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 	/*=======================
 	 * 분실도서신고내역
@@ -441,7 +497,7 @@ public class MyPageController {
 	@GetMapping("/lm/mypage/couponlist/couponListMain.do")
 	public String couponListHandle(@RequestParam int lo) {
 
-		
+
 		return "couponListMain";
 	}
 	/*=======================
@@ -524,32 +580,48 @@ public class MyPageController {
 	 *=======================*/
 	@RequestMapping("/lm/mypage/myedit/photoView.do")
 	public String getProfile(HttpSession session,
-			                 HttpServletRequest request,
-			                 Model model,@RequestParam int mem_num) {
+			HttpServletRequest request,
+			Model model,@RequestParam int mem_num) {
 		log.debug("<<photoView>> : " + mem_num);
-			MyPageVO mypageVO = mypageService.getPhoto(mem_num);
-			viewProfile(mypageVO,request,model);
+		MyPageVO mypageVO = mypageService.getPhoto(mem_num);
+		viewProfile(mypageVO,request,model);
 		return "imageView";
 		//<img src="${pageContext.request.contextPath}/lm/mypage/myedit/photoView.do?mem_num=${mem_num}" class="view-photo" width="500" height="500">
 		//형태로 이미지 사용 가능
 	}
+	@RequestMapping("/lm/mypage/facilityapplylist/facilityView.do")
+	public String getFacility(HttpSession session,
+			HttpServletRequest request,
+			Model model,@RequestParam int facility_num) {
+		log.debug("<<facilityView>> : " + facility_num);
+		MyPageVO mypageVO = mypageService.getFacility(facility_num);
+		viewFacility(mypageVO,request,model);
+		return "imageView";
+	}
 	//프로필 사진 처리를 위한 공통 코드
 	public void viewProfile(MyPageVO mypageVO,
-			                HttpServletRequest request,
-			                Model model) {
+			HttpServletRequest request,
+			Model model) {
 		if(mypageVO.getMem_photo()==null 
 				//|| memberVO.getPhoto_name()==null
 				) {
 			//기본 이미지 읽기
 			byte[] readbyte = FileUtil.getBytes(
-					      request.getServletContext().getRealPath(
-					    		                "/image_basic/basic3.png"));
+					request.getServletContext().getRealPath(
+							"/image_basic/basic3.png"));
 			model.addAttribute("imageFile", readbyte);
 			model.addAttribute("filename", "lm_photo.png");
 		}else {//업로드한 프로필 사진이 있는 경우
 			model.addAttribute("imageFile", mypageVO.getMem_photo());
 			model.addAttribute("filename", "lm_photo.png");
 		}
+	}
+	//시설 사진 처리
+	public void viewFacility(MyPageVO mypageVO,
+			HttpServletRequest request,
+			Model model) {
+		model.addAttribute("imageFile", mypageVO.getFacility_image());
+		model.addAttribute("filename", mypageVO.getFacility_imagename());
 	}
 	/*=======================
 	 * 사용가능포인트정보
@@ -599,7 +671,7 @@ public class MyPageController {
 		}
 		model.addAttribute("mem_order_price_str",mem_order_price_str);
 		model.addAttribute("mem_grade_point",mem_grade_point);
-		
+
 		return "gradeInfoMain";
 	}
 	/*=======================
@@ -624,7 +696,7 @@ public class MyPageController {
 	@PostMapping("/lm/mypage/memberout/memberOutMain.do")
 	public String memberOutHandle(@RequestParam int lo,MyPageVO mypageVO,HttpServletRequest request,Model model,BindingResult result) {
 		log.debug("<<회원탈퇴>> : " + mypageVO);
-		
+
 		HttpSession session = request.getSession();
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 

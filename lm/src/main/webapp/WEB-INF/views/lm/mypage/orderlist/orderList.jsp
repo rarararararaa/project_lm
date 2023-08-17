@@ -33,13 +33,10 @@
 					href="${pageContext.request.contextPath}/lm/mypage/programapplylist/programApplyListMain.do?lo=${lo}">프로그램
 						신청 내역</a></li>
 				<li><a class="detail-menu"
-					href="${pageContext.request.contextPath}/lm/mypage/donatebooklist/donateBookListMain.do?lo=${lo}">책
-						기증 신청 내역</a></li>
-				<li><a class="detail-menu"
 					href="${pageContext.request.contextPath}/lm/mypage/facilityapplylist/facilityApplyListMain.do?lo=${lo}">시설
 						이용 신청 내역</a></li>
 				<li><a class="detail-menu"
-					href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">책
+					href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">도서
 						예약 내역</a></li>
 				<li><a class="detail-menu"
 					href="${pageContext.request.contextPath}/lm/mypage/booklostlist/bookLostListMain.do?lo=${lo}">분실
@@ -56,16 +53,11 @@
 			<div class="list-name">
 				<h2>주문 내역 상세 정보</h2>
 			</div>
-			<div class="status">
-				<div class="status-info" id="step1">미확인</div>
-				<div class="status-info" id="step2">확인 완료</div>
-				<div class="status-info" id="step3">등록 완료</div>
-			</div>
 			<hr id="status-hr">
 			<div class="title-list">
-				<div id="t-program-num">상품 정보</div>
-				<div id="t-program-content">금액</div>
-				<div id="t-program-date">구매 수량</div>
+				<div id="t-order-list-detail">상품 정보</div>
+				<div id="t-order-list-price">금액</div>
+				<div id="t-order-list-amount">구매 수량</div>
 			</div>
 			<hr id="title-list-hr">
 			<c:forEach var="list" items="${list}">
@@ -77,17 +69,17 @@
 						</a>
 					</div>
 					<div id="item-list-detail">
-						<div id="c-program-content">
+						<div id="c-order-list-content">
 							제목 : <a
 								href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${list.store_product_isbn13}">${list.store_product_title}</a>
 						</div>
-						<div id="c-program-content">글쓴이 :
+						<div id="c-order-list-content">글쓴이 :
 							${list.store_product_author}</div>
-						<div id="c-program-content">출판사 :
+						<div id="c-order-list-content">출판사 :
 							${list.store_product_publisher}</div>
 					</div>
-					<div id="c-program-content">${list.order_product_price}</div>
-					<div id="c-program-date">${list.order_product_quantity}</div>
+					<div id="c-order-list-price">${list.order_product_price}</div>
+					<div id="c-order-list-amount">${list.order_product_quantity}</div>
 				</div>
 			</c:forEach>
 			<div class="bottom-div">
@@ -129,17 +121,18 @@
 					<c:if test="${mypageVO.payment_type==2}">
 						<div class="order-form-info">결제 방법 : 카카오페이 결제</div>
 					</c:if>
-					<c:if test="${mypageVO.payment_type==0}">
+					<c:if test="${mypageVO.order_status==0}">
 						<div class="order-form-info">상품 배송 상태 : 주문 완료</div>
 					</c:if>
-					<c:if test="${mypageVO.payment_type==1}">
+					<c:if test="${mypageVO.order_status==1}">
 						<div class="order-form-info">상품 배송 상태 : 배송 중</div>
 					</c:if>
-					<c:if test="${mypageVO.payment_type==2}">
+					<c:if test="${mypageVO.order_status==2}">
 						<div class="order-form-info">상품 배송 상태 : 배송 완료</div>
 					</c:if>
 				</div>
 			</div>
+			${error}
 			<div class="align-center">${page}</div>
 		</div>
 	</div>

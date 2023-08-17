@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +11,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/js/Myorder.js"></script>
 <body>
+<form:form modelAttribute="myPageVO" action="myPageMain.do" id="myPage-form" class="myPage-form">
 	<!-- 파라미터 세팅 -->
 	<%
 	pageContext.setAttribute("lo", request.getParameter("lo"));
@@ -35,13 +38,10 @@
 					href="${pageContext.request.contextPath}/lm/mypage/programapplylist/programApplyListMain.do?lo=${lo}">프로그램
 						신청 내역</a></li>
 				<li><a class="detail-menu"
-					href="${pageContext.request.contextPath}/lm/mypage/donatebooklist/donateBookListMain.do?lo=${lo}">책
-						기증 신청 내역</a></li>
-				<li><a class="detail-menu"
 					href="${pageContext.request.contextPath}/lm/mypage/facilityapplylist/facilityApplyListMain.do?lo=${lo}">시설
 						이용 신청 내역</a></li>
 				<li><a class="detail-menu"
-					href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">책
+					href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">도서
 						예약 내역</a></li>
 				<li><a class="detail-menu"
 					href="${pageContext.request.contextPath}/lm/mypage/booklostlist/bookLostListMain.do?lo=${lo}">분실
@@ -86,16 +86,23 @@
 						<button name="order_num" value="${list.order_num}" class="cancelPay">주문 취소</button>
 						</div>
 					</c:if>
-					<c:if test="${list.order_status == 1}">
+					<c:if test="${list.order_status == 1 && list.order_pay_status != 0}">
 						<div id="c-mypage-status">배송 중</div>
 					</c:if>
-					<c:if test="${list.order_status == 2}">
-						<div id="c-mypage-status">배송 완료</div>
+					<c:if test="${list.order_status == 2 && list.order_pay_status != 0}">
+					
+						<input type="hidden" name="order_status_confirm" value="${list.order_num}">
+						<div id="c-mypage-status">배송 완료<form:button  class="order_status_confirm">구매 확정</form:button></div>
+						
+					</c:if>
+									<c:if test="${list.order_status == 3 && list.order_pay_status != 0}">
+						<div id="c-mypage-status">구매 확정</div>
 					</c:if>
 				</div>
 			</c:forEach>
 			<div class="align-center">${page}</div>
 		</div>
 	</div>
+	</form:form>
 </body>
 </html>

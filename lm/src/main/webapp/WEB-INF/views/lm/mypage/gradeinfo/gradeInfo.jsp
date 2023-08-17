@@ -19,9 +19,8 @@
         <li><a class="detail-menu" href="${pageContext.request.contextPath}/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do?lo=${lo}">대출/반납 내역</a></li>
         <li><a class="detail-menu" href="${pageContext.request.contextPath}/lm/mypage/wantbooklist/wantBookListMain.do?lo=${lo}">희망도서 신청 내역</a></li>
         <li><a class="detail-menu" href="${pageContext.request.contextPath}/lm/mypage/programapplylist/programApplyListMain.do?lo=${lo}">프로그램 신청 내역</a></li>
-        <li><a class="detail-menu" href="${pageContext.request.contextPath}/lm/mypage/donatebooklist/donateBookListMain.do?lo=${lo}">책 기증 신청 내역</a></li>
         <li><a class="detail-menu" href="${pageContext.request.contextPath}/lm/mypage/facilityapplylist/facilityApplyListMain.do?lo=${lo}">시설 이용 신청 내역</a></li>
-        <li><a class="detail-menu" href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">책 예약 내역</a></li>
+        <li><a class="detail-menu" href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">도서 예약 내역</a></li>
         <li><a class="detail-menu" href="${pageContext.request.contextPath}/lm/mypage/booklostlist/bookLostListMain.do?lo=${lo}">분실 도서 신고 내역</a></li>
         <li><a class="detail-menu" href="${pageContext.request.contextPath}/lm/mypage/eventparticipatelist/eventParticipateListMain.do?lo=${lo}">이벤트 참여 내역</a></li>
         <li><a class="detail-menu" href="${pageContext.request.contextPath}/lm/mypage/usedbookapplylist/usedBookApplyListMain.do?lo=${lo}">중고 도서 등록 내역</a></li>

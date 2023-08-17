@@ -109,6 +109,11 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	@Override
+	public MyPageVO getFacility(int facility_num) {
+		return mypageMapper.getFacility(facility_num);
+	}
+	
+	@Override
 	public void updateModifyDate(MyPageVO mypageVO) {
 		mypageMapper.updateModifyDate(mypageVO);
 	}
@@ -176,6 +181,31 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public MyPageVO getHomeOrderList(int order_num,int mem_num) {
 		return mypageMapper.getHomeOrderList(order_num,mem_num);
+	}
+	
+	@Override
+	public List<MyPageVO> getFacilityList(Map<String,Object> map) {
+		return mypageMapper.getFacilityList(map);
+	}
+
+	@Override
+	public int selectRowCountFacilityList(Map<String, Object> map) {
+		return mypageMapper.selectRowCountFacilityList(map);
+	}
+	
+	@Override
+	public List<MyPageVO> getBookReservationList(Map<String,Object> map) {
+		return mypageMapper.getBookReservationList(map);
+	}
+
+	@Override
+	public int selectRowCountBookReservationList(Map<String, Object> map) {
+		return mypageMapper.selectRowCountBookReservationList(map);
+	}
+
+	@Override
+	public void setOrderStatus(int order_num, int mem_num) {
+		mypageMapper.setOrderStatus(order_num,mem_num);
 	}
 	
 }

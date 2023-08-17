@@ -1,209 +1,246 @@
 @charset "UTF-8";
+
 @font-face {
-    font-family: 'NEXON Lv1 Gothic OTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'NEXON Lv1 Gothic OTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-body{
-	font-family : 'NEXON Lv1 Gothic OTF';
+
+body {
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
+
 .whole {
 	line-height: 1.15;
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
-.top-div{
-	display:flex;
-	width:1200px;
-	height:300px;
-	margin:0 auto;
-	margin-top:50px;
-	margin-bottom:50px;	
-	flex-direction:row;
+
+.top-div {
+	display: flex;
+	width: 1200px;
+	height: 300px;
+	margin: 0 auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	flex-direction: row;
 }
-hr{
-	width:1200px;
+
+hr {
+	width: 1200px;
 }
-.top-left-div{ /*사진*/
-	display:flex;
-	width:300px;
-	height:300px;
+
+.top-left-div { /*사진*/
+	display: flex;
+	width: 300px;
+	height: 300px;
 }
-.photo{
-	width:280px;
-	height:280px;
-	margin:10px auto;
-	border:1px solid black;
+
+.photo {
+	width: 280px;
+	height: 280px;
+	margin: 10px auto;
+	border: 1px solid black;
 }
-.list-first{
-	display:flex;
-	width:900px;
-	height:300px;
-	margin-left:50px;
-	margin-top:50px;
-	margin-bottom:150px;
-	flex-direction:row;
+
+.list-first {
+	display: flex;
+	width: 900px;
+	height: 300px;
+	margin-left: 50px;
+	margin-top: 50px;
+	margin-bottom: 150px;
+	flex-direction: row;
 }
-.list-first .photo{
-	width:280px;
-	height:280px;
-	margin:10px auto;
-	border:1px solid black;
+
+.list-first .photo {
+	width: 280px;
+	height: 280px;
+	margin: 10px auto;
+	border: 1px solid black;
 }
-.list-first-data{
-	display:flex;
-	width:550px;
-	height:300px;
-	flex-direction:column;
-}
-.list-first-data-detail{
-	font-size:22px;
-	margin-top:26px;
-}
-.list-second{
-	display:flex;
-	width:900px;
-	height:300px;
-	margin-left:50px;
-	margin-top:50px;
-	margin-bottom:150px;
-	flex-direction:column;
-}
-.list-second-first{
-	display:flex;
-	width:900px;
-	height:40px;
-	flex-direction:row;
-	font-size:17px;
-}
-.list-second-second{
-	display:flex;
-	width:900px;
-	height:80px;
-	flex-direction:row;
-	font-size:17px;
-}
-.list-second-third{
-	display:flex;
-	width:900px;
-	height:80px;
-	flex-direction:row;
-	font-size:17px;	
-}
-.lsf{
-	display:flex;
-	width:150px;
-}
-.top-right-div{
-	display:flex;
-	width:900px;
-	height:300px;
-}
-.top-right-left-div{
-	display:flex;
-	width:300px;
-	flex-direction:column;
-}
-.fir-content{
-	display:flex;
-	width:280px;
-	height:90px;
-	margin:0 auto;
-	flex-direction:row;
-}
-.sec-content{
-	display:flex;
-	width:280px;
-	height:110px;
-	margin:0 auto;
-	flex-direction:column;
-}
-.thi-content{
-	display:flex;
-	width:280px;
-	height:50px;
-	margin:0 auto;
-	flex-direction:row;
-}
-.content-id{
-	display:inline;
-	width:200px;
-	height:90px;
-	font-size:25px;
-	padding-top:57px;
-}
-.content-change{
-	display:inline;
-	width:90px;
-	height:90px;
-	padding-top:70px;
-}
-.sec-content-top{
-	width:280px;
-	height:60px;
-}
-.sec-content-bottom{
-	width:280px;
-	height:40px;
-}
-.content-grade{
-	display:inline-block;
-	width:60px;
-	height:60px;
-	padding-top:40px;
-	font-size:15px;
-}
-.content-reg-date{
-	display:inline-block;
-	width:100px;
-	height:60px;
-	padding-top:40px;
-}
-.content-edit-date{
-	display:inline-block;
-	width:100px;
-	height:60px;
-	padding-top:40px;
-}
-.content-remain-grade{
-	display:inline-block;
-	width:280px;
-	height:50px;
-	font-size:18px;
-	margin-top:40px;
-}
-.content-point{
-	display:inline-block;
-	width:280px;
-	height:50px;
-	margin-top:30px;
-	margin-bottom:40px;
-	font-size:18px;
-}
-.top-right-right-div{
-	display:flex;
-	width:600px;
-	height:300px;
-	margin-left:20px;
-}
-.sub-button{
-	display:flex;
-	width:120px;
-	height:200px;
-	margin:50px auto;
-	text-align:center;
+
+.list-first-data {
+	display: flex;
+	width: 550px;
+	height: 300px;
 	flex-direction: column;
 }
-.sub-title{
-	display:inline-block;
-	margin-top:50px;
-	margin-bottom:50px;
+
+.list-first-data-detail {
+	font-size: 22px;
+	margin-top: 26px;
 }
-.sub-content{
-	display:inline-block;
+
+.list-second {
+	display: flex;
+	width: 900px;
+	height: 300px;
+	margin-left: 50px;
+	margin-top: 50px;
+	margin-bottom: 150px;
+	flex-direction: column;
 }
+
+.list-second-first {
+	display: flex;
+	width: 900px;
+	height: 40px;
+	flex-direction: row;
+	font-size: 17px;
+}
+
+.list-second-second {
+	display: flex;
+	width: 900px;
+	height: 80px;
+	flex-direction: row;
+	font-size: 17px;
+}
+
+.list-second-third {
+	display: flex;
+	width: 900px;
+	height: 80px;
+	flex-direction: row;
+	font-size: 17px;
+}
+
+.lsf {
+	display: flex;
+	width: 150px;
+}
+
+.top-right-div {
+	display: flex;
+	width: 900px;
+	height: 300px;
+}
+
+.top-right-left-div {
+	display: flex;
+	width: 300px;
+	flex-direction: column;
+}
+
+.fir-content {
+	display: flex;
+	width: 280px;
+	height: 90px;
+	margin: 0 auto;
+	flex-direction: row;
+}
+
+.sec-content {
+	display: flex;
+	width: 280px;
+	height: 110px;
+	margin: 0 auto;
+	flex-direction: column;
+}
+
+.thi-content {
+	display: flex;
+	width: 280px;
+	height: 50px;
+	margin: 0 auto;
+	flex-direction: row;
+}
+
+.content-id {
+	display: inline;
+	width: 200px;
+	height: 90px;
+	font-size: 25px;
+	padding-top: 57px;
+}
+
+.content-change {
+	display: inline;
+	width: 90px;
+	height: 90px;
+	padding-top: 70px;
+}
+
+.sec-content-top {
+	width: 280px;
+	height: 60px;
+}
+
+.sec-content-bottom {
+	width: 280px;
+	height: 40px;
+}
+
+.content-grade {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	padding-top: 40px;
+	font-size: 15px;
+}
+
+.content-reg-date {
+	display: inline-block;
+	width: 100px;
+	height: 60px;
+	padding-top: 40px;
+}
+
+.content-edit-date {
+	display: inline-block;
+	width: 100px;
+	height: 60px;
+	padding-top: 40px;
+}
+
+.content-remain-grade {
+	display: inline-block;
+	width: 280px;
+	height: 50px;
+	font-size: 18px;
+	margin-top: 40px;
+}
+
+.content-point {
+	display: inline-block;
+	width: 280px;
+	height: 50px;
+	margin-top: 30px;
+	margin-bottom: 40px;
+	font-size: 18px;
+}
+
+.top-right-right-div {
+	display: flex;
+	width: 600px;
+	height: 300px;
+	margin-left: 20px;
+}
+
+.sub-button {
+	display: flex;
+	width: 120px;
+	height: 200px;
+	margin: 50px auto;
+	text-align: center;
+	flex-direction: column;
+}
+
+.sub-title {
+	display: inline-block;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.sub-content {
+	display: inline-block;
+}
+
 .container {
 	width: 1200px;
 	padding: 50px 0px 80px;
@@ -211,6 +248,7 @@ hr{
 	display: flex;
 	min-height: 500px;
 }
+
 .left-div {
 	width: 200px;
 }
@@ -274,9 +312,9 @@ ul.menu-box {
 }
 
 ul.list li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 ul.list {
@@ -292,40 +330,44 @@ ul.list {
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	justify-content: space-between;
-	padding-top:-10px;
+	padding-top: -10px;
 }
 /* 구매 정보 */
-.status{
-	display:flex;
-	width:900px;
-	height:30px;
+.status {
+	display: flex;
+	width: 900px;
+	height: 30px;
 	flex-direction: row;
 }
-.status .status-info{
-	display:flex;
-	margin-right:20px;
-	color:gray;
+
+.status .status-info {
+	display: flex;
+	margin-right: 20px;
+	color: gray;
 }
-#status-hr{ /*내용 hr태그*/
-	display:inline-block;
-	border-bottom : 2px solid black;
-	margin-bottom : 15px;
-	width:970px;
+
+#status-hr { /*내용 hr태그*/
+	display: inline-block;
+	border-bottom: 2px solid black;
+	margin-bottom: 15px;
+	width: 970px;
 }
-#title-list-hr{
-	display:inline-block;
-	border-bottom : 2px solid black;
-	margin-bottom : 10px;
-	width:970px;
+
+#title-list-hr {
+	display: inline-block;
+	border-bottom: 2px solid black;
+	margin-bottom: 10px;
+	width: 970px;
 }
+
 .title-list {
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	justify-content: space-between;
-	width:970px;
+	width: 970px;
 	display: flex;
 	flex-direction: row;
-	margin-bottom:10px;
+	margin-bottom: 10px;
 }
 
 ul.menu-box li {
@@ -339,30 +381,36 @@ ul.menu-box li {
 	justify-content: space-between;
 	width: 100%;
 }
-.list-name2{
-	width:100%;
-	text-align:center;
+
+.list-name2 {
+	width: 100%;
+	text-align: center;
 }
-.stop{
-	color:#f08902;
+
+.stop {
+	color: #f08902;
 }
-.expire{
-	color:#cc0619;
+
+.expire {
+	color: #cc0619;
 }
-.list-name div{
-	display:flex;
+
+.list-name div {
+	display: flex;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
-	justify-content: space-between;	
+	justify-content: space-between;
 }
-.list-content{
+
+.list-content {
 	padding: 5px 0px 1px;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	justify-content: space-between;
 	padding-bottom: 27px;
-	width: 100%;	
+	width: 100%;
 }
+
 .list-name h2 {
 	margin: 0;
 	padding: 0.83em 0;
@@ -701,7 +749,7 @@ select.select {
 	padding: .8em .5em;
 	border: 1px solid #999;
 	background: url('../images/arrow.jpg') no-repeat 95% 50%;
-	background-size:12%;
+	background-size: 12%;
 	border-radius: 5px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -711,390 +759,667 @@ select.select {
 select.select::-ms-expand {
 	display: none;
 }
-.right-div-form{
-	display:flex;
-	width:950px;
-	height:700px;
-	flex-direction:column;
+
+.right-div-form {
+	display: flex;
+	width: 950px;
+	height: 700px;
+	flex-direction: column;
 }
 /* 내용 투명화 */
-#input-area-passwd{
-	display:none;
-}
-#input-area-email{
-	display:none;
-}
-#input-area-email2{
-	display:none;
-}
-#input-area-cell{
-	display:none;
-}
-#input-area-photo{
-	display:none;
-}
-input{
-	width:100px;
-	height:30px;
-}
-.photo-form{
-	width:1000px;
-	height:350px;
-}
-.view-photo{
-	width:280px;
-	height:280px;
-	border:1px solid black;
-}
-.view-photo2{
-	width:120px;
-	height:120px;
-	border:1px solid black;
-}
-.edit-button{
-	width:100px;
-	height:35px;
-	margin-right:5px;
-}
-.edit-button-photo{
-	width:200px;
-	height:35px;
-	margin-right:5px;
-	margin-top:5px;
+#input-area-passwd {
+	display: none;
 }
 
-.input-button{
-	width:150px;
-	height:30px;
-	margin-top:5px;
+#input-area-email {
+	display: none;
 }
-.hr-edit{
-	width:1000px;
+
+#input-area-email2 {
+	display: none;
 }
-.id-form{
-	display:flex;
-	width:300px;
-	height:100px;
-	flex-direction:row;
+
+#input-area-cell {
+	display: none;
 }
-.view-data{
-	width:100px;
-	height:50px;
-	font-size:18px;
+
+#input-area-photo {
+	display: none;
 }
-.view-data-title{
-	width:100px;
-	height:50px;
-	font-size:18px;	
+
+input {
+	width: 100px;
+	height: 30px;
 }
-.view-data-title2{
-	width:200px;
-	height:50px;
+
+.photo-form {
+	width: 1000px;
+	height: 350px;
 }
-.view-data-email{
-	width:250px;
-	height:50px;
-	font-size:18px;
+
+.view-photo {
+	width: 280px;
+	height: 280px;
+	border: 1px solid black;
 }
-.view-data-cell{
-	width:170px;
-	height:50px;
-	font-size:18px;
+
+.view-photo2 {
+	width: 120px;
+	height: 120px;
+	border: 1px solid black;
 }
-.passwd-form{
-	display:flex;
-	width:500px;
-	height:100px;
-	flex-direction:column;
+
+
+.edit-button {
+	width: 100px;
+	height: 35px;
+	margin-right: 5px;
 }
-.passwd-btn-form{
-	display:flex;
-	flex-direction:row;
+
+.edit-button-photo {
+	width: 200px;
+	height: 35px;
+	margin-right: 5px;
+	margin-top: 5px;
 }
-#input-area-passwd{
-	flex-direction:column;
+
+.input-button {
+	width: 150px;
+	height: 30px;
+	margin-top: 5px;
 }
-.input-area-form{
-	display:flex;
-	width:300px;
-	flex-direction:row;
+
+.hr-edit {
+	width: 1000px;
 }
-.name-form{
-	display:flex;
-	width:300px;
-	height:100px;
-	flex-direction:row;
+
+.id-form {
+	display: flex;
+	width: 300px;
+	height: 100px;
+	flex-direction: row;
 }
-.email-form{
-	display:flex;
-	width:800px;
-	height:100px;
-	flex-direction:column;
+
+.view-data {
+	width: 100px;
+	height: 50px;
+	font-size: 18px;
 }
-.email-btn-form{
-	display:flex;
-	width:800px;
-	height:50px;
-	flex-direction:row;
+
+.view-data-title {
+	width: 100px;
+	height: 50px;
+	font-size: 18px;
 }
-#input-area-passwd{
-	width:500px;
-	height:5000px;
+
+.view-data-title2 {
+	width: 200px;
+	height: 50px;
 }
-#email-tip{
-	margin-bottom:10px;
+
+.view-data-email {
+	width: 250px;
+	height: 50px;
+	font-size: 18px;
 }
-.cell-form{
-	display:flex;
-	width:800px;
-	height:100px;
-	flex-direction:column;
+
+.view-data-cell {
+	width: 170px;
+	height: 50px;
+	font-size: 18px;
 }
-.cell-btn-form{
-	display:flex;
-	width:800px;
-	height:50px;
-	flex-direction:row;
+
+.passwd-form {
+	display: flex;
+	width: 500px;
+	height: 100px;
+	flex-direction: column;
 }
-.member-out{
-	display:block;
-	width:1000px;
+
+.passwd-btn-form {
+	display: flex;
+	flex-direction: row;
 }
-.member-out input{
-	float:right;
+
+#input-area-passwd {
+	flex-direction: column;
 }
+
+.input-area-form {
+	display: flex;
+	width: 300px;
+	flex-direction: row;
+}
+
+.name-form {
+	display: flex;
+	width: 300px;
+	height: 100px;
+	flex-direction: row;
+}
+
+.email-form {
+	display: flex;
+	width: 800px;
+	height: 100px;
+	flex-direction: column;
+}
+
+.email-btn-form {
+	display: flex;
+	width: 800px;
+	height: 50px;
+	flex-direction: row;
+}
+
+#input-area-passwd {
+	width: 500px;
+	height: 5000px;
+}
+
+#email-tip {
+	margin-bottom: 10px;
+}
+
+.cell-form {
+	display: flex;
+	width: 800px;
+	height: 100px;
+	flex-direction: column;
+}
+
+.cell-btn-form {
+	display: flex;
+	width: 800px;
+	height: 50px;
+	flex-direction: row;
+}
+
+.member-out {
+	display: block;
+	width: 1000px;
+}
+
+.member-out input {
+	float: right;
+}
+
 .button-more-info {
-  display:block;
-  background: url("https://cdn.icon-icons.com/icons2/1883/PNG/512/downarrow_120663.png") no-repeat;
-  width: 20px;
-  height: 20px;
-  background-size: cover;
-  border:none;
+	display: block;
+	background:
+		url("https://cdn.icon-icons.com/icons2/1883/PNG/512/downarrow_120663.png")
+		no-repeat;
+	width: 20px;
+	height: 20px;
+	background-size: cover;
+	border: none;
 }
+
 .button-more-info-close {
-  display:none;
-  background: url("https://cdn.icon-icons.com/icons2/1883/PNG/512/caretsymbol_120671.png") no-repeat;
-  width: 20px;
-  height: 20px;
-  background-size: cover;
-  border:none;
+	display: none;
+	background:
+		url("https://cdn.icon-icons.com/icons2/1883/PNG/512/caretsymbol_120671.png")
+		no-repeat;
+	width: 20px;
+	height: 20px;
+	background-size: cover;
+	border: none;
 }
-.cancelPay{
-	background-color:lighthgray;
-	border-radius:3px;
-	border:1px solid black;
-	width:80px;
-	margin:0 auto;
+
+.cancelPay {
+	background-color: lighthgray;
+	border-radius: 3px;
+	border: 1px solid black;
+	width: 80px;
+	margin: 0 auto;
 }
-.show-detail{
-	display:none;
-	margin:0 auto;
-	margin-top:-30px;
-	margin-bottom:30px;
+.order_status_confirm{
+	background-color: lighthgray;
+	border-radius: 3px;
+	border: 1px solid black;
+	width: 80px;
+	margin: 0 auto;
 }
-#item-list2{
-	display:flex;
-	width:970px;
-	height:120px;
-	margin-bottom:20px;
+.show-detail {
+	display: none;
+	margin: 0 auto;
+	margin-top: -30px;
+	margin-bottom: 30px;
 }
-#item-list-detail{
-	display:flex;
-	width:300px;
-	height:120px;
-	flex-direction:column;
-	margin-left:10px;
+
+.bottom-div {
+	display: flex;
+	width: 970px;
+	height: 250px;
+	flex-direction: row;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
-.bottom-div{
-	display:flex;
-	width:970px;
-	height:250px;
-	flex-direction:row;
-	margin-top:50px;
-	margin-bottom:50px;
+
+.order-form {
+	display: flex;
+	width: 300px;
+	flex-direction: column;
+	margin: 0 auto;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
 }
-.order-form{
-	display:flex;
-	width:300px;
-	height:250px;
-	flex-direction:column;
-	margin:0 auto;
-	border-top:2px solid black;
-	border-bottom:2px solid black;
-}
-.order-form-info{
-	display:inline;
-	width:290px;
-	margin-left:5px;
-	margin-bottom:3px;
+
+.order-form-info {
+	display: inline;
+	width: 290px; margin-left : 5px;
+	margin-bottom: 3px;
+	margin-left: 5px;
 }
 /* 마이페이지 주문내역 설정 */
-.title-list { 
-	display:flex;
-	width:970px;
+.title-list {
+	display: flex;
+	width: 970px;
 }
-.item-list{
-	display:flex;
-	width:970px;
-	height:70px;
+
+.item-list {
+	display: flex;
+	width: 970px;
+	height: 70px;
 }
-#t-mypage-num{
-	display:inline-block;
-	width:70px;
-	text-align:center;
+.item-list3 {
+	display: flex;
+	width: 970px;
+	height: 120px;
 }
-#t-mypage-title{
-	display:inline-block;
-	width:430px;
-	text-align:center;
+#t-mypage-num {
+	display: inline-block;
+	width: 70px;
+	text-align: center;
 }
-#t-mypage-price{
-	display:inline-block;
-	width:150px;
-	text-align:center;
+
+#t-mypage-title {
+	display: inline-block;
+	width: 430px;
+	text-align: center;
 }
-#t-mypage-date{
-	display:inline-block;
-	width:170px;
-	text-align:center;
+
+#t-mypage-price {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
 }
-#t-mypage-status{
-	display:inline-block;
-	width:150px;
-	text-align:center;
+
+#t-mypage-date {
+	display: inline-block;
+	width: 170px;
+	text-align: center;
 }
-#c-mypage-num{
-	display:inline-block;
-	width:70px;
-	text-align:center;
+
+#t-mypage-status {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
 }
-#c-mypage-title{
-	display:inline-block;
-	width:430px;
-	text-align:center;
+
+#c-mypage-num {
+	display: inline-block;
+	width: 70px;
+	text-align: center;
 }
-#c-mypage-price{
-	display:inline-block;
-	width:150px;
-	text-align:center;
+
+#c-mypage-title {
+	display: inline-block;
+	width: 430px;
+	text-align: center;
 }
-#c-mypage-date{
-	display:inline-block;
-	width:170px;
-	text-align:center;
+
+#c-mypage-price {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
 }
-#c-mypage-status{
-	display:flex;
-	flex-direction:column;
-	width:150px;
-	text-align:center;
+
+#c-mypage-date {
+	display: inline-block;
+	width: 170px;
+	text-align: center;
+}
+
+#c-mypage-status {
+	display: flex;
+	flex-direction: column;
+	width: 150px;
+	text-align: center;
 }
 
 /* 마이페이지 대출/반납 설정 */
-#t-check-num{
-	display:inline-block;
-	width:70px;
-	text-align:center;
+#t-check-num {
+	display: inline-block;
+	width: 70px;
+	text-align: center;
 }
-#t-check-title{
-	display:inline-block;
-	width:350px;
-	text-align:center;
+
+#t-check-title {
+	display: inline-block;
+	width: 350px;
+	text-align: center;
 }
-#t-check-date1{
-	display:inline-block;
-	width:140px;
-	text-align:center;
+
+#t-check-date1 {
+	display: inline-block;
+	width: 140px;
+	text-align: center;
 }
-#t-check-date2{
-	display:inline-block;
-	width:140px;
-	text-align:center;
+
+#t-check-date2 {
+	display: inline-block;
+	width: 140px;
+	text-align: center;
 }
-#t-check-date3{
-	display:inline-block;
-	width:140px;
-	text-align:center;
+
+#t-check-date3 {
+	display: inline-block;
+	width: 140px;
+	text-align: center;
 }
-#t-check-status{
-	display:inline-block;
-	width:130px;
-	text-align:center;
+
+#t-check-status {
+	display: inline-block;
+	width: 130px;
+	text-align: center;
 }
-#c-check-num{
-	display:inline-block;
-	width:70px;
-	text-align:center;
+
+#c-check-num {
+	display: inline-block;
+	width: 70px;
+	text-align: center;
 }
-#c-check-title{
-	display:inline-block;
-	width:350px;
-	text-align:center;
+
+#c-check-title {
+	display: inline-block;
+	width: 350px;
+	text-align: center;
 }
-#c-check-date1{
-	display:inline-block;
-	width:140px;
-	text-align:center;
+
+#c-check-date1 {
+	display: inline-block;
+	width: 140px;
+	text-align: center;
 }
-#c-check-date2{
-	display:inline-block;
-	width:140px;
-	text-align:center;
+
+#c-check-date2 {
+	display: inline-block;
+	width: 140px;
+	text-align: center;
 }
-#c-check-date3{
-	display:inline-block;
-	width:140px;
-	text-align:center;
+
+#c-check-date3 {
+	display: inline-block;
+	width: 140px;
+	text-align: center;
 }
-#c-check-status{
-	display:inline-block;
-	width:130px;
-	text-align:center;
+
+#c-check-status {
+	display: inline-block;
+	width: 130px;
+	text-align: center;
 }
 
 /* 희망도서신청내역 설정 */
-#t-want-num{
-	display:inline-block;
-	width:70px;
-	text-align:center;
+#t-want-num {
+	display: inline-block;
+	width: 70px;
+	text-align: center;
 }
-#t-want-title{
-	display:inline-block;
-	width:600px;
-	text-align:center;
+
+#t-want-title {
+	display: inline-block;
+	width: 600px;
+	text-align: center;
 }
-#t-want-date{
-	display:inline-block;
-	width:150px;
-	text-align:center;
+
+#t-want-date {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
 }
-#t-want-status{
-	display:inline-block;
-	width:100px;
-	text-align:center;
+
+#t-want-status {
+	display: inline-block;
+	width: 100px;
+	text-align: center;
 }
-#t-want-void{
-	display:inline-block;
-	width:50px;
-	text-align:center;
+
+#t-want-void {
+	display: inline-block;
+	width: 50px;
+	text-align: center;
 }
-#c-want-num{
-	display:inline-block;
-	width:70px;
-	text-align:center;
+
+#c-want-num {
+	display: inline-block;
+	width: 70px;
+	text-align: center;
 }
-#c-want-title{
-	display:inline-block;
-	width:600px;
-	text-align:center;
+
+#c-want-title {
+	display: inline-block;
+	width: 600px;
+	text-align: center;
 }
-#c-want-date{
-	display:inline-block;
-	width:150px;
-	text-align:center;
+
+#c-want-date {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
 }
-#c-want-status{
-	display:inline-block;
-	width:100px;
-	text-align:center;
-} 
+
+#c-want-status {
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+}
+/* 주문내역상세 설정 */
+#item-list2 {
+	display: flex;
+	width: 970px;
+	height: 120px;
+	margin-bottom: 20px;
+}
+#t-order-list-detail {
+	display: inline-block;
+	width: 600px;
+	text-align: center;
+}
+
+#t-order-list-price {
+	display: inline-block;
+	width: 200px;
+	text-align: center;
+}
+
+#t-order-list-amount {
+	display: inline-block;
+	width: 170px;
+	text-align: center;
+}
+
+#item-list-detail {
+	display: flex;
+	width: 480px;
+	height: 120px;
+	flex-direction: column;
+	margin-left: 10px;
+}
+#item-list-detail2{
+	display: flex;
+	width: 600px;
+	height: 120px;
+	flex-direction: column;
+	margin-left: 10px;	
+}
+#c-order-list-price {
+	display: inline-block;
+	width: 200px;
+	text-align: center;
+}
+
+#c-order-list-amount {
+	display: inline-block;
+	width: 170px;
+	text-align: center;
+}
+
+/* 프로그램신청내역 설정 */
+#t-program-num {
+	display: inline-block;
+	width: 70px;
+	text-align: center;
+}
+
+#t-program-title {
+	display: inline-block;
+	width: 600px;
+	text-align: center;
+}
+
+#t-program-date {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
+}
+
+#t-program-time {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
+}
+
+#c-program-num {
+	display: inline-block;
+	width: 70px;
+	text-align: center;
+}
+
+#c-program-title {
+	display: inline-block;
+	width: 600px;
+	text-align: center;
+}
+
+#c-program-date {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
+}
+
+#c-program-time {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+}
+
+/* 시설이용신청내역 설정 */
+#t-facility-detail {
+	display: inline-block;
+	width: 600px;
+	text-align: center;
+}
+
+#t-facility-time {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+}
+
+#t-facility-time2 {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+}
+
+#t-facility-date {
+	display: inline-block;
+	width: 130px;
+	text-align: center;
+}
+
+#c-facility-title {
+	display: inline-block;
+	width: 450px;
+	margin:5px auto;
+}
+
+#c-facility-content {
+	display: inline-block;
+	width: 450px;
+	margin:5px auto;
+}
+
+#c-facility-time {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+	margin:40px auto;
+}
+
+#c-facility-time2 {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+	margin:40px auto;
+}
+
+#c-facility-date {
+	display: inline-block;
+	width: 130px;
+	text-align: center;
+	margin:40px auto;
+}
+
+/* 도서예약내역 설정 */
+#t-reservation-detail {
+	display: inline-block;
+	width: 730px;
+	text-align: center;
+}
+
+#t-reservation-time {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+}
+
+#t-reservation-status {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+}
+
+#c-reservation-title {
+	display: inline-block;
+	width: 600px;
+	margin:5px auto;
+}
+
+#c-reservation-authors {
+	display: inline-block;
+	width: 600px;
+	margin:5px auto;
+}
+
+#c-reservation-publisher {
+	display: inline-block;
+	width: 600px;
+	margin:5px auto;
+}
+
+#c-reservation-date {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+	margin:40px auto;
+}
+
+#c-reservation-status {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+	margin:40px auto;
+}

@@ -35,13 +35,10 @@
 					href="${pageContext.request.contextPath}/lm/mypage/programapplylist/programApplyListMain.do?lo=${lo}">프로그램
 						신청 내역</a></li>
 				<li><a class="detail-menu"
-					href="${pageContext.request.contextPath}/lm/mypage/donatebooklist/donateBookListMain.do?lo=${lo}">책
-						기증 신청 내역</a></li>
-				<li><a class="detail-menu"
 					href="${pageContext.request.contextPath}/lm/mypage/facilityapplylist/facilityApplyListMain.do?lo=${lo}">시설
 						이용 신청 내역</a></li>
 				<li><a class="detail-menu"
-					href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">책
+					href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">도서
 						예약 내역</a></li>
 				<li><a class="detail-menu"
 					href="${pageContext.request.contextPath}/lm/mypage/booklostlist/bookLostListMain.do?lo=${lo}">분실
@@ -75,7 +72,8 @@
 			<c:forEach var="list" items="${list}" varStatus="status">
 				<div class="item-list">
 					<div id="c-want-num">${list.book_apply_num}</div>
-					<div id="c-want-title">${list.book_apply_title}</div>
+					<div id="c-want-title"><a
+							href="${pageContext.request.contextPath}/library/bookApplyUserList.do?lo=${lo}">${list.book_apply_title}</a></div>
 					<div id="c-want-date">${list.book_apply_reg_date}</div>
 					<c:if test="${list.book_apply_status == 0}">
 						<div id="c-want-status">미확인</div>
@@ -90,7 +88,7 @@
 					<input type="button" id="button-more-info-close-${status.count}" class="button-more-info-close" onclick="HideDetail(${status.count})">
 				</div>
 				<!-- 버튼 클릭 시 활성화 시작 -->
-				<div id="show-detail-${status.count}" class="show-detail">${list.book_apply_content}</div>
+				<div id="show-detail-${status.count}" class="show-detail" style="width:900px; margin-bottom:50px;">ㄴ ${list.book_apply_content}</div>
 				<!-- 버튼 클릭 시 활성화 끝 -->
 			</c:forEach>
 			<div class="align-center">${page}</div>

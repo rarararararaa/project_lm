@@ -31,6 +31,7 @@ public interface MyPageService {
 	public void updatePhoto(MyPageVO mypageVO);
 	//이미지 유무 확인
 	public MyPageVO getPhoto(int mem_num);
+	public MyPageVO getFacility(int facility_num);
 	//회원정보 수정일 수정
 	public void updateModifyDate(MyPageVO mypageVO);
 	//배송지,결제 정보
@@ -39,7 +40,7 @@ public interface MyPageService {
 	//주문내역
 	public List<MyPageVO> getOrderList(Map<String,Object> map);
 	public int selectRowCountOrderList(Map<String,Object> map);
-	
+	public void setOrderStatus(int order_num,int mem_num);
 	//주문내역 상세
 	public List<MyPageVO> getOrderListDetail(Map<String,Object> map);
 	public int selectRowCountOrderListDetail(Map<String,Object> map);
@@ -59,6 +60,13 @@ public interface MyPageService {
 	//프로그램신청내역
 	public List<MyPageVO> getProgramList(Map<String,Object> map);
 	public int selectRowCountProgramList(Map<String,Object> map);
-
+	
+	//시설이용신청내역
+	public List<MyPageVO> getFacilityList(Map<String,Object> map);
+	public int selectRowCountFacilityList(Map<String,Object> map);
+	
+	//도서예약신청내역
+	public List<MyPageVO> getBookReservationList(Map<String,Object> map);
+	public int selectRowCountBookReservationList(Map<String,Object> map);
 
 }

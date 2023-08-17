@@ -73,7 +73,6 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
 		.addPathPatterns("/lm/mypage/wantbooklist/wantBookListMain.do")
 		.addPathPatterns("/lm/mypage/programapplylist/programApplyListMain.do")
-		.addPathPatterns("/lm/mypage/donatebooklist/donateBookListMain.do")
 		.addPathPatterns("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
 		.addPathPatterns("/lm/mypage/bookreservationlist/bookReservationListMain.do")
 		.addPathPatterns("/lm/mypage/booklostlist/bookLostListMain.do")

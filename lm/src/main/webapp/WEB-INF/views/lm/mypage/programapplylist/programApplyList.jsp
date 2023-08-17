@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 </head>
 <body>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/js/showDetail.js"></script>
 	<!-- 파라미터 세팅 -->
 	<%
 	pageContext.setAttribute("lo", request.getParameter("lo"));
@@ -33,13 +35,10 @@
 					href="${pageContext.request.contextPath}/lm/mypage/programapplylist/programApplyListMain.do?lo=${lo}">프로그램
 						신청 내역</a></li>
 				<li><a class="detail-menu"
-					href="${pageContext.request.contextPath}/lm/mypage/donatebooklist/donateBookListMain.do?lo=${lo}">책
-						기증 신청 내역</a></li>
-				<li><a class="detail-menu"
 					href="${pageContext.request.contextPath}/lm/mypage/facilityapplylist/facilityApplyListMain.do?lo=${lo}">시설
 						이용 신청 내역</a></li>
 				<li><a class="detail-menu"
-					href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">책
+					href="${pageContext.request.contextPath}/lm/mypage/bookreservationlist/bookReservationListMain.do?lo=${lo}">도서
 						예약 내역</a></li>
 				<li><a class="detail-menu"
 					href="${pageContext.request.contextPath}/lm/mypage/booklostlist/bookLostListMain.do?lo=${lo}">분실
@@ -64,20 +63,26 @@
 			<hr id="status-hr">
 			<div class="title-list">
 				<div id="t-program-num">신청 번호</div>
-				<div id="t-program-title">프로그램명</div>
-				<div id="t-program-content">내용</div>
+				<div id="t-program-title">프로그램명(신청 내용)</div>
 				<div id="t-program-date">신청 날짜</div>
 				<div id="t-program-time">프로그램 시간</div>
 			</div>
 			<hr id="title-list-hr">
-			<c:forEach var="list" items="${list}">
+			<c:forEach var="list" items="${list}" varStatus="status">
 				<div class="item-list">
 					<div id="c-program-num">${list.program_num}</div>
 					<div id="c-program-title">${list.program_title}</div>
-					<div id="c-program-content">${list.program_content}</div>
 					<div id="c-program-date">${list.program_reg_date}</div>
 					<div id="c-program-time">${list.program_date}</div>
+					<input type="button" id="button-more-info-${status.count}"
+						class="button-more-info" onclick="ShowContent(${status.count})">
+					<input type="button" id="button-more-info-close-${status.count}"
+						class="button-more-info-close"
+						onclick="HideContent(${status.count})">
 				</div>
+				<!-- 버튼 클릭 시 활성화 시작 -->
+				<div id="show-content-${status.count}" class="show-detail" style="width:900px; margin-bottom:50px;">ㄴ ${list.program_content}</div>
+				<!-- 버튼 클릭 시 활성화 끝 -->
 			</c:forEach>
 			<div class="align-center">${page}</div>
 		</div>
