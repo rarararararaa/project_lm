@@ -34,6 +34,6 @@
 	<div class="align-center">${page}</div>
 	</c:if>
 	<c:if test="${mem_auth==9}">
-	<input type="button" value="추가 신청하기" onclick="location.href='insertProgram.do'">
+	<input type="button" value="추가 신청하기" onclick="location.href='bookApplyWrite.do'">
 	</c:if>
 </div>

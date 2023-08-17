@@ -22,7 +22,9 @@ public interface ProgramMapper {
 	public Integer selectProgramStatus(int program_num);
 	public Integer selectRowCount();
 	//프로그램 상세
+	@Select("SELECT * FROM lib_program_admin WHERE program_num=#{program_num}")
 	public ProgramVO selectProgram(int program_num);
+	@Select("SELECT * FROM lib_program_times WHERE program_num=#{program_num}")
 	public List<ProgramTimesVO> selectProgramTimes(int program_num);
 	public Integer CountApply(int program_times_num);
 	//프로그램 신청

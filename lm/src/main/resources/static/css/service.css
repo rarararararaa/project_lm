@@ -95,12 +95,12 @@ table.striped-table tr:nth-child(odd){
 }
 .facility-list{
 	display:flex;
+	border:solid 2px #4dac27;
 }
 .facility-list li{
 	padding:10px;
 	width:200px;
 	font-size:14pt;
-	background-color:#ccc;
 }
 .facility-list li.fac-name{
 	width:400px;

@@ -1,6 +1,7 @@
 package kr.spring.library.program.vo;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,14 @@ public class ProgramTimesVO {
 	private Date program_end;
 	private int program_admit;
 	
-	
+	public String getStart() {
+		SimpleDateFormat fmt = new SimpleDateFormat("hh");
+		return fmt.format(program_start);
+	}
+	public String getEnd() {
+		SimpleDateFormat fmt = new SimpleDateFormat("hh");
+		return fmt.format(program_end);
+	}
 	/*PROGRAM_NUM	NUMBER
 	PROGRAM_TIMES_NUM	NUMBER
 	PROGRAM_START	DATE

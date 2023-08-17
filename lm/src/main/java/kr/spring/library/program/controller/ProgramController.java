@@ -126,4 +126,13 @@ public class ProgramController {
 		mav.addObject("page", page.getPage());
 		return mav;
 	}
+	
+	@GetMapping("/library/programDetail.do")
+	public String programDetail(@RequestParam(value="program_num") int program_num, Model model,HttpServletRequest request) {
+		ProgramVO program = programService.selectProgram(program_num);
+		List<ProgramTimesVO> times = programService.selectProgramTimes(program_num);
+		model.addAttribute("program", program);
+		model.addAttribute("times", times);
+		return "programDetail";
+	}
 }

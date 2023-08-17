@@ -43,14 +43,12 @@ public class ProgramServiceImpl implements ProgramService{
 
 	@Override
 	public ProgramVO selectProgram(int program_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return programMapper.selectProgram(program_num);
 	}
 
 	@Override
 	public List<ProgramTimesVO> selectProgramTimes(int program_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return programMapper.selectProgramTimes(program_num);
 	}
 
 	@Override
