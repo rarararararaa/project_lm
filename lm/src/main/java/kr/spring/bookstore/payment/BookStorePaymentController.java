@@ -25,6 +25,7 @@ import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.used.vo.UsedVO;
+import kr.spring.lm.point.vo.PointVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
@@ -126,6 +127,10 @@ public class BookStorePaymentController {
 			//재고 변경
 			List<BookStorePaymentOrderVO> list = bookStorePaymentOrderService.listOrder(order_num);
 			bookStorePaymentOrderService.updateQuantity(list);
+			//주문 취소 포인트 전환
+			String point_reason = String.valueOf(order_num);
+			//해당 주문 건의 포인트 조회
+			bookStorePaymentOrderService.selectPoint(point_reason);
 			mapJson.put("result", "success");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -303,7 +308,7 @@ public class BookStorePaymentController {
 	//주문 성공시 주문 내역 저장
 	@RequestMapping("/bookstore/payment/orderAction.do")
 	@ResponseBody
-	public Map<String, Object> payBook(String orderInfo, HttpSession session, String notice) {
+	public Map<String, Object> payBook(String orderInfo, HttpSession session, String notice, int point) {
 		log.debug("<<결제 데이터 확인>> : "+orderInfo);
 		log.debug("<<배송시 요청사항>> : "+notice);
 		int mem_num = (Integer)session.getAttribute("mem_num");		
@@ -311,9 +316,9 @@ public class BookStorePaymentController {
 		//boolean result = jObject.getBoolean("success");
 		List<BookStorePaymentCartVO> list = (ArrayList)session.getAttribute("cartList");
 		log.debug("<<주문완료 - cartList>> : "+list);
-		int total = (Integer)session.getAttribute("total");
 		BookStorePaymentOrderVO order = new BookStorePaymentOrderVO();
 		//데이터 뽑기
+		int total = (int)session.getAttribute("total");
 		MemberVO mem_home = bookStorePaymentOrderService.selectDefaultHome(mem_num);
 		order.setHome_num(mem_home.getHome_num());
 		order.setMem_num(mem_home.getMem_num());
@@ -329,11 +334,25 @@ public class BookStorePaymentController {
 		order.setIMP_UID(jObject.getString("imp_uid"));
 		log.debug("<<result-order>> : "+order);
 		log.debug("<<result-cartList>> : "+list);
+		//order 테이블 insert + 카트 정보 작세 + 재고 변경
 		bookStorePaymentOrderService.insertOrder(order, list);
 		
+		//포인트 증감 - 회원 정보와 총금액
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberVO member = memberService.selectMember(mem_num);
+		double grade = getPoint(member.getMem_grade());
+		int addPoint = (int) Math.round(total*grade);//적립되는 포인트
+		map.put("mem_num", mem_num);
+		map.put("addPoint", (point*-1));//사용한 포인트
+		map.put("order_num", order.getOrder_num());
+		log.debug("<<포인트 - controller>> : "+map+','+addPoint);
+		bookStorePaymentOrderService.updatePoint(map, addPoint);
+		
+		//세션 정보 삭제
 		session.removeAttribute("cartList");
 		session.removeAttribute("total");
 		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
 		mapJson.put("result", "success");
 		mapJson.put("order", order);
 		return mapJson;

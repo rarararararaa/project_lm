@@ -1,11 +1,12 @@
 package kr.spring.bookstore.payment.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.product.vo.ProductVO;
+import kr.spring.lm.point.vo.PointVO;
 import kr.spring.member.vo.MemberVO;
 
 public interface BookStorePaymentOrderService {
@@ -41,4 +42,8 @@ public interface BookStorePaymentOrderService {
 	public String selectImp_uid(int order_num);
 	//주문 취소후 주문상태와 취소 메시지 넣기
 	public void updateCancelInfo(int order_num, String cancel_notice);
+	//주문 후 포인트 차감&적립
+	public void updatePoint(Map<String, Object> map, int addPoint);
+	//주문 포인트 조회 후 차감
+	public void selectPoint(String point_reason);
 }

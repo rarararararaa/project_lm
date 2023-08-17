@@ -1,15 +1,20 @@
 package kr.spring.bookstore.payment.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.spring.bookstore.event.dao.BsEventMapper;
 import kr.spring.bookstore.payment.dao.BookStorePaymentCartMapper;
 import kr.spring.bookstore.payment.dao.BookStorePaymentOrderMapper;
 import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.product.vo.ProductVO;
+import kr.spring.lm.point.dao.PointMapper;
+import kr.spring.lm.point.vo.PointVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +28,10 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 	BookStorePaymentCartMapper	bookStorePaymentCartMapper;
 	@Autowired
 	MemberService memberService;
+	@Autowired 
+	BsEventMapper bsEventMapper; //포인트 적립 관련
+	@Autowired
+	PointMapper pointMapper;
 	//주문 테이블 저장
 	@Override
 	public void insertOrder(BookStorePaymentOrderVO bookStorePaymentOrderVO, List<BookStorePaymentCartVO> cartInfo) {
@@ -118,6 +127,47 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 			}
 			bookStorePaymentOrderMapper.updateProductPlus(vo.getStore_product_num());
 		}
-	} 
+	}
+
+
+	@Override
+	public void updatePoint(Map<String, Object> map,int addPoint) {
+		//포인트 차감 & 적립
+		PointVO vo = new PointVO();
+		vo.setMem_num((Integer)map.get("mem_num"));
+		String order = String.valueOf(map.get("order_num"));
+		vo.setPoint_reason(order);
+		vo.setPoint_value((Integer)map.get("addPoint"));
+		vo.setPoint_status(3);
+		bsEventMapper.updateMemberPoint(map);
+		//포인트 내역 등록
+		pointMapper.insertOrderPoint(vo);
+		log.debug("<<포인트 등록>> : "+vo);
+		//적립 예정 포인트
+		map.put("addPoint", addPoint);
+		vo.setPoint_value((Integer)map.get("addPoint"));
+		vo.setPoint_status(0);
+		bsEventMapper.updateMemberPoint(map);
+		pointMapper.insertOrderPoint(vo);
+		//포인트 로그 등록
+	}
+
+	//주문 취소 포인트 조회
+	@Override
+	public void selectPoint(String point_reason) {
+		//포인트 조회
+		List<PointVO> point = pointMapper.selectPoint(point_reason);
+		log.debug("<<주문 취소-포인트 조회>> : "+point);
+		Map<String, Object> map = new HashMap<String, Object>();
+		for(PointVO vo : point) {
+			map.put("mem_num", vo.getMem_num());
+			map.put("addPoint", (vo.getPoint_value()*-1));
+			//내 포인트 변경
+			bsEventMapper.updateMemberPoint(map);
+		}
+		//포인트 테이블 status 변경
+		pointMapper.updatePointStatus(point_reason);
+	}
+
 
 }

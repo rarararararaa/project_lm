@@ -354,13 +354,15 @@ function deliList(list){
 //결제 처리 
 function ajaxPaycomplete(rsp){
 	let notice = $('#deli-request').val();
+	let point = parseInt($('#mem_point').val());
 	console.log(rsp);
 	$.ajax({
 		url:'orderAction.do',
 		type:'post',
 		data:{
 			orderInfo:JSON.stringify(rsp),
-			notice:notice
+			notice:notice,
+			point:point
 			},
 		dataType:'json',
 		success:function(param){

@@ -19,4 +19,22 @@
 			1
 		)
 	</insert>
+	<insert id="insertOrderPoint" parameterType="kr.spring.bookstore.review.vo.ReviewVO">
+		INSERT INTO LM_POINT(
+			point_num,
+			mem_num,
+			point_value,
+			point_date,
+			point_reason,
+			point_status
+		)
+		VALUES(
+			lm_point_seq.nextval,
+			#{mem_num},
+			#{point_value},
+			SYSDATE,
+			#{point_reason},
+			#{point_status}
+		)
+	</insert>
 </mapper>
