@@ -251,7 +251,7 @@ a:hover {
 		categoryNum=10&orderByNum=1&keyword=">자료검색</a></li>
 				<li><a href="${pageContext.request.contextPath}/library/facilityList.do">신청 참여</a></li>
 				<li><a href="#">시설이용</a></li>
-				<li><a href="#">도서관소개</a></li>
+				<li><a href="${pageContext.request.contextPath}/library/basic/informationUse1.do">도서관이용</a></li>
 			</ul>
 		</div>
 	</div>

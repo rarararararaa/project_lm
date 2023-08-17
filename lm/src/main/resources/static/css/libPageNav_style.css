@@ -1,0 +1,208 @@
+@charset "UTF-8";
+.sb-page-nav{
+	width: 235px;
+    margin-right: 32px;
+}
+.sb-page-nav ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.sb-title {
+    /*position: relative;*/
+    display: block;
+    width: 100%;
+    min-height: 109px;
+    padding: 36px 5px;
+    border-bottom: 1px solid #fff;
+    background: #16488a;
+    font-size: 26px;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    letter-spacing: -2px;
+    line-height: 1.3;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.sb-menu-item>a {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 55px;
+    margin-top: -1px;
+    padding: 17px 33px 17px 14px;
+    border-top: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+    border-top-color: #c4c4c4;
+    background: #fff;
+    font-size: 16px;
+    color: #282828;
+    font-weight: 700;
+    text-align: left;
+    line-height: 1.3;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.sb-menu-sub {
+    display: none;
+    padding: 15px 15px 21px 15px;
+    border-top: 0;
+    border-bottom: 0;
+    background: #fff;
+}
+
+
+.sb-menu-sub:last-child {
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.sb-menu-sub__item {
+    width: 100%;
+    margin-top: 2px;
+}
+
+.sb-menu-sub__item:first-child {
+    margin: 0;
+}
+
+.sb-menu-sub__item.is_menu_opened a {
+    color: #3980b2;
+}
+
+.sb-menu-sub__item.is_menu_opened a:after {
+    width: 5px;
+    height: 10px;
+    margin: 5px 0 0 10px;
+    background-position: -264px -49px;
+    content: '';
+}
+
+.sb-menu-sub__item a {
+    display: block;
+    position: relative;
+    padding: 4px 0px 4px 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #6a6a6a;
+}
+
+.sb-menu-sub__item a:before {
+    position: absolute;
+    top: 12px;
+    left: -1px;
+    width: 2px;
+    height: 2px;
+    background: #003964;
+    content: '';
+}
+
+.sb-menu-sub__item a:hover,
+.sb-menu-sub__item a:focus {
+    color: #3465a7;
+}
+
+.sb-menu-sub__item a:hover:after {
+    width: 5px;
+    height: 10px;
+    margin: 6px 0 0 10px;
+    background-position: -264px -49px;
+    content: '';
+}
+
+.sb-menu-sub__item a:focus:after {
+    width: 5px;
+    height: 10px;
+    margin: 6px 0 0 10px;
+    background-position: -264px -49px;
+    content: '';
+}
+
+.sb-menu-item>a.is_menu__sub--opened {
+    background-color: #3980b2;
+    color: #fff;
+}
+
+.sub-items:after {
+    position: absolute;
+    top: 23px;
+    right: 13px;
+    width: 10px;
+    height: 10px;
+    background: url(/resource/templete/nl/common/img/common/lnb_open.png) 0 0 no-repeat;
+    content: '';
+}
+
+/* .sub-items.is_menu__sub--opened:after{background-position:-157px -161px} */
+.is_menu1--opened>a {
+    border: 0;
+    background: #3465a7;
+    color: #fff;
+}
+
+.is_menu1--opened>a:hover {
+    color: #fff;
+}
+
+.is_menu1--opened .sub-items:after {
+    width: 10px;
+    height: 10px;
+    margin: 5px 0 0 10px;
+    background: url(/resource/templete/nl/common/img/common/lnb_close.png) 0 0 no-repeat;
+    content: '';
+}
+
+.is_menu2--opened a {
+    color: #1d77b7;
+}
+
+.is_menu--opened .sub-items:after {
+    width: 10px;
+    height: 10px;
+    margin: 5px 0 0 10px;
+    background: url(/resource/templete/nl/common/img/common/lnb_close.png) 0 0 no-repeat;
+    content: '';
+}
+
+.is_menu2--opened a:after {
+    display: inline-block;
+    width: 5px;
+    height: 11px;
+    margin: 5px 0 0 10px;
+    background: url(/resource/templete/nl/common/img/common/layout.png) -264px -49px no-repeat;
+    content: '';
+}
+
+.is_menu1--opened .sb-menu-sub {
+    display: block;
+}
+
+.sb-menu-item.is_current_page>a {
+    border: 0;
+    background: #3465a7;
+    color: #fff;
+}
+
+.sb-menu-item.is_current_page>a:after {
+    width: 10px;
+    height: 10px;
+    margin: 5px 0 0 10px;
+    background: #3465a7 url(/resource/templete/nl/common/img/common/lnb_open2.png) 0 0 no-repeat;
+    content: '';
+}
+
+.sb-menu-item.is_current_page.is_menu1--opened.is_menu2--slideUp>a:after {
+    background-image: url(/resource/templete/nl/common/img/common/lnb_open2.png);
+    margin-top: 0;
+}
+
+.sb-menu-item.is_current_page.is_menu1--opened>a:after,
+.sb-menu-item.is_current_page.is_menu--opened>a:after {
+    background-image: url(/resource/templete/nl/common/img/common/lnb_close.png);
+}
+
+.sb-menu-item.is_menu--opened .sub-items {
+    background: #3465a7;
+    color: #fff;
+}
