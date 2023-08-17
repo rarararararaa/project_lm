@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 1:1문의 등록 시작 -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!-- 내가 쓴 1:1문의 수정 시작 -->
 <div class="page-main">
-	<h2>1:1문의글 작성</h2>
-	<form:form modelAttribute="boardAskVO" action="boardAskWrite.do" id="register_form" enctype="multipart/form-data">
+	<h2>1:1문의글 수정</h2>
+	<form:form modelAttribute="boardAskVO" action="boardAskUpdate.do" id="modify_form" enctype="multipart/form-data">
+		<form:hidden path="ask_num"/>
 		<form:errors element="div" cssClass="error-color"/>
 		<ul class="form-default">
 		    <li>
@@ -24,13 +25,10 @@
 			</li>
 		</ul>
 		<div class="align-center">
-			<form:button>작성</form:button>
-			<input type="button" value="목록">
+			<form:button>수정</form:button>
+			<input type="button" value="목록" onclick="location.href='boardAskList.do'">
 		</div>	                               
 	</form:form>
 </div>
-<!-- 1:1문의 등록 등록 끝 -->
-
-
-
+<!-- 내가 쓴 1:1문의 수정 끝 -->
 

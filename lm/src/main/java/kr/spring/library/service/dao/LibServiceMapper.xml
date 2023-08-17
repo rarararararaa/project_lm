@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.library.service.dao.LibServiceMapper">
-
+	
+	<!-- 1:1문의글 레코드 수 -->
+	<select id="selectRowCount" parameterType="map"
+		resultType="integer">
+		SELECT
+		COUNT(*)
+		FROM lib_board_ask
+	</select>
+	
+	<!-- 1:1문의글 작성 -->
 	<insert id="insertBoardAsk" parameterType="boardAskVO">
 		INSERT INTO lib_board_ask(
 		  ask_num,
@@ -23,6 +32,7 @@
 		  0)
 	</insert>
 	
+	<!-- (관리자) 1:1문의글 답변 작성 -->
 	<insert id="insertBoardAnswer" parameterType="boardAnswerVO">
 		INSERT INTO lib_board_answer(
 		  answer_num,

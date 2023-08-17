@@ -5,7 +5,7 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<!-- 사용자 - 고객센터 -->
+	<!-- (유저)고객센터 -->
 	<definition name="libService" template="/WEB-INF/views/library/template/libServiceLayout.jsp">
     	<put-attribute name="libTitle" value="고객센터"/>
     	<put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
@@ -14,21 +14,36 @@
 	    <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/> 
     </definition>
     
-    <definition name="boardMainDesk" extends="libService">
-    	<put-attribute name="libTitle" value="1:1문의사항"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/serviceDeskMain.jsp"/>
-    </definition>
+    <!-- (유저)고객센터 > 1:1문의사항 > boardAsk -->
     <definition name="boardAskWrite" extends="libService">
-    	<put-attribute name="libTitle" value="1:1문의작성"/>
+    	<put-attribute name="libTitle" value="1:1문의사항 작성"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAskWrite.jsp"/>
     </definition>
+    <definition name="user_boardAskList" extends="libService">
+    	<put-attribute name="libTitle" value="내가 쓴 1:1문의사항 목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/user_boardAskList.jsp"/>
+    </definition>
+    <definition name="boardAskView" extends="libService">
+    	<put-attribute name="libTitle" value="내가 쓴 1:1문의사항 상세정보"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAskView.jsp"/>
+    </definition>
+    <definition name="boardAskModify" extends="libService">
+    	<put-attribute name="libTitle" value="내가 쓴 1:1문의사항 수정"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAskModify.jsp"/>
+    </definition>
+    
+    <!-- 고객센터 > 1:1문의사항 > boardAnswer -->
     <definition name="boardAnswerWrite" extends="libService">
-    	<put-attribute name="libTitle" value="1:1문의답변"/>
+    	<put-attribute name="libTitle" value="1:1문의답변 작성"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAnswerWrite.jsp"/>
     </definition>
-    <definition name="boardAnswerDetail" extends="libService">
-    	<put-attribute name="libTitle" value="1:1문의답변"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAnswerDetail.jsp"/>
+    <definition name="boardAnswerView" extends="libService">
+    	<put-attribute name="libTitle" value="1:1문의답변 상세보기"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAnswerView.jsp"/>
+    </definition>
+        <definition name="boardAnswerModify" extends="libService">
+    	<put-attribute name="libTitle" value="(관리자)1:1문의사항 수정"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAnswerModify.jsp"/>
     </definition>
 
 	<!-- 회원목록 -->
@@ -87,6 +102,20 @@
     <definition name="libLostItemModify" extends="libAdmin">
     	<put-attribute name="libTitle" value="분실물 수정"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemModify.jsp"/>
+    </definition>
+    
+    <!-- 1:1문의 -->
+    <definition name="admin_boardAskList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="1:1문의사항 목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/admin_boardAskList.jsp"/>
+    </definition>
+    <definition name="admin_boardAnswerWrite" extends="libAdmin">
+    	<put-attribute name="libTitle" value="1:1문의답변 작성"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/admin_boardAnswerWrite.jsp"/>
+    </definition>
+    <definition name="admin_boardAnswerDetail" extends="libAdmin">
+    	<put-attribute name="libTitle" value="1:1문의답변"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/admin_boardAnswerDetail.jsp"/>
     </definition>
     
     

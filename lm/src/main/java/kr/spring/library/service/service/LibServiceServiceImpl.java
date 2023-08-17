@@ -1,6 +1,7 @@
 package kr.spring.library.service.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class LibServiceServiceImpl implements LibServiceService{
 	@Autowired
 	private LibServiceMapper libServiceMapper;
 	
+	@Override
+	public int selectRowCount(Map<String, Object> map) {
+		return libServiceMapper.selectRowCount(map);
+	}
+
 	@Override
 	public void insertBoardAsk(BoardAskVO boardAskVO) {
 		libServiceMapper.insertBoardAsk(boardAskVO);
@@ -39,13 +45,35 @@ public class LibServiceServiceImpl implements LibServiceService{
 	}
 
 	@Override
+	public void updateBoardAsk(BoardAskVO boardAsk) {
+		libServiceMapper.updateBoardAsk(boardAsk);
+	}
+
+	@Override
+	public void deleteBoardAsk(Integer ask_num) {
+		libServiceMapper.deleteAnswerByAskNum(ask_num);
+		libServiceMapper.deleteBoardAsk(ask_num);
+	}
+
+	@Override
 	public void insertBoardAnswer(BoardAnswerVO boardAnswerVO) {
+		libServiceMapper.updateBoardAskStatus(boardAnswerVO.getAsk_num());
 		libServiceMapper.insertBoardAnswer(boardAnswerVO);
 	}
 
 	@Override
-	public void updateBoardAskStatus(Integer ask_num) {
-		libServiceMapper.updateBoardAskStatus(ask_num);
+	public void updateAnswer(BoardAnswerVO boardAnswer) {
+		libServiceMapper.updateAnswer(boardAnswer);
+	}
+
+	@Override
+	public void deleteAnswer(Integer answer_num) {
+		libServiceMapper.deleteAnswer(answer_num);
+	}
+
+	@Override
+	public void updateBoardAskStatus2(Integer ask_num) {
+		libServiceMapper.updateBoardAskStatus2(ask_num);
 	}
 
 	@Override
@@ -53,5 +81,4 @@ public class LibServiceServiceImpl implements LibServiceService{
 		return libServiceMapper.selectBoardAnswer(ask_num);
 	}
 
-	
 }

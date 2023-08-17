@@ -17,18 +17,19 @@ $(function(){
 <!-- 1:1문의 등록 시작 -->
 <div class="page-main">
 	<h2>문의답변 작성</h2>
-	<h3>작성한 문의 내역</h3>
+	
+	<h3>문의 내용</h3>
 	<ul>
-		<li>제목 : ${boardAsk.ask_title}</li>
-		<li>내용 : ${boardAsk.ask_content}</li>
-		<li>작성일 : ${boardAsk.ask_reg_date}</li>
-		<li><span id="image_controller"><B>이미지 열기</B></span><br><img id="ask_image" src="boardAskImageView.do?ask_num=${boardAsk.ask_num}"></li>
+		<li>제목 : ${boardAskVO.ask_title}</li>
+		<li>내용 : ${boardAskVO.ask_content}</li>
+		<li>작성일 : ${boardAskVO.ask_reg_date}</li>
+		<li><span id="image_controller"><B>이미지 열기</B></span><br><img id="ask_image" src="admin_boardAskImageView.do?ask_num=${boardAsk.ask_num}"></li>
 	</ul>
 	
 	<h3>답변 작성</h3>
-	<form:form modelAttribute="boardAnswerVO" action="boardAnswerWrite.do" id="register_form" enctype="multipart/form-data">
+	<form:form modelAttribute="boardAnswerVO" action="admin_boardAnswerWrite.do" id="register_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
-		<input type="hidden" name="ask_num" value="${boardAsk.ask_num}"/>
+		<form:hidden path="ask_num" value="${boardAsk.ask_num}"/>
 		<ul class="form-default">
 			<li>
 				<form:label path="answer_content">내용</form:label>

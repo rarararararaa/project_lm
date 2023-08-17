@@ -10,7 +10,7 @@
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="1:1문의"
-			  onclick="location.href='${pageContext.request.contextPath}/library/service/boardMainDesk.do'">
+			  onclick="location.href='${pageContext.request.contextPath}/library/service/user_boardAskList.do'">
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="분실 도서 신고"

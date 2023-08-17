@@ -32,9 +32,13 @@ a:hover{
 	width:1000px;
 	float:left;
 	display:flex;
+	flex-direction: column;
 }
 .page_clear{
 	clear:both;
+}
+ul{
+	list-style:none;
 }
 /* 페이지 기본 레이아웃
 ------------------------*/

@@ -33,6 +33,7 @@ a:hover{
 	width:1000px;
 	float:left;
 	display:flex;
+	flex-direction: column;
 }
 .page_clear{
 	clear:both;
