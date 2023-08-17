@@ -1,6 +1,9 @@
 package kr.spring.library.product;
 
+import java.sql.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.library.product.vo.BookProductVO;
+import kr.spring.library.rent.vo.RentVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -30,15 +34,21 @@ public class LIB_BookProductController {
 		bookProductService.updateLIB_P_description();
 		log.debug("<<도서 API 등록>> : ");
 	}
-	
+
 	//도서 상세
 	@GetMapping("/library/lib_book/bookDetail.do")
-	public String cartForm(@RequestParam String callNumber, Model model) {
+	public String cartForm(@RequestParam String callNumber, Model model, HttpSession session) {
 		BookProductVO book = bookProductService.selectDetailLIB_P(callNumber);
 		log.debug("<<도서 상세>> : "+book);
 		//대출 도서 리스트
 		List<BookProductVO> list = bookProductService.selectListLIB_P(book.getLib_product_isbn());
 		//도서분류
+		for(BookProductVO vo : list) {
+			RentVO rent = bookProductService.selectDate(vo.getCallNumber());
+			if(rent != null) {
+				vo.setReturn_reg_deadline(rent.getReturn_reg_deadline());
+			}
+		}
 		String class_name = getClassName(book.getLib_product_class_no());
 		
 		model.addAttribute("book", book);

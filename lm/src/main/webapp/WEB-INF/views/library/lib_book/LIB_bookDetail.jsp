@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +63,9 @@
 					<c:if test="${bookList.lib_product_product_status == 1}">대출중</c:if>
 				</td>
 				<td>
-					<c:if test="${bookList.lib_product_product_status == 1}">2023-08-08</c:if>
+					<c:if test="${bookList.lib_product_product_status == 1}">
+						${bookList.return_reg_deadline}
+					</c:if>
 				</td>
 				<c:if test="${status.index == 0}">
 					<td rowspan="${fn:length(list)}">

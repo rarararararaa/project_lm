@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.library.product.dao.BookProductMapper;
 import kr.spring.library.product.vo.BookProductVO;
+import kr.spring.library.rent.vo.RentVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -102,7 +103,7 @@ public class BookProductServiceImpl implements BookProductService {
 						classno, (String)doc.get("bookname"), 
 						author, publisher,
 						 year,
-						(String)doc.get("class_nm"), 0, 1, photo, null, null);
+						(String)doc.get("class_nm"), 0, 1, photo, null, null,null);
 				log.debug("<<API 등록 확인>> : "+book);
 				bookProductMapper.insertLIB_P(book);
 			}
@@ -188,5 +189,11 @@ public class BookProductServiceImpl implements BookProductService {
 	@Override
 	public List<BookProductVO> searchDetailLIB_P(String lib_product_bookname) {
 		return bookProductMapper.searchDetailLIB_P(lib_product_bookname);
+	}
+
+
+	@Override
+	public RentVO selectDate(String callNumber) {
+		return bookProductMapper.selectDate(callNumber);
 	}
 }

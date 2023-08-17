@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -68,7 +69,10 @@
 				</td>
 				<td colspan="2"><!-- 배송 정보 -->
 					<p class="delivery-img">배송정보</p>
-					<p class="delivery-text">내일(7/25, 화)도착예정</p>
+					<p class="delivery-text">
+						<c:set var="ymd" value="<%=new Date(new Date().getTime() + 60*60*24*1000)%>" />
+						내일(<fmt:formatDate value="${ymd}" pattern="M/dd, E" />)도착예정
+					</p>
 				</td>
 				<td>
 					<img src="${pageContext.request.contextPath}/images/delete_btn.png" class="del-btn" data-num="${cart.mem_cart_num}">
@@ -137,7 +141,10 @@
 				</td>
 				<td colspan="2"><!-- 배송 정보 -->
 					<p class="delivery-img">배송정보</p>
-					<p class="delivery-text">내일(7/25, 화)도착예정</p>
+					<p class="delivery-text">
+					<c:set var="ymd" value="<%=new Date(new Date().getTime() + 60*60*24*1000)%>" />
+					내일(<fmt:formatDate value="${ymd}" pattern="M/dd, E" />)도착예정
+					</p>
 				</td>
 				<td>
 					<img src="${pageContext.request.contextPath}/images/delete_btn.png" class="del-btn" data-num="${cart.mem_cart_num}">

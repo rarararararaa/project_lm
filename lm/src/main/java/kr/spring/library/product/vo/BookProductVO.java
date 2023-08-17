@@ -1,5 +1,7 @@
 package kr.spring.library.product.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +29,6 @@ public class BookProductVO {
 	private String lib_product_bookImageData;//null값 안쓰는 거임
 	private String lib_product_detail;
 	
-	
+	private Date return_reg_deadline;
 
 }

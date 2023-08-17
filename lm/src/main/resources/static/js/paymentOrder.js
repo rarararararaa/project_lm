@@ -438,6 +438,7 @@ function fnHidePop(sGetName){
     $("#"+ sGetName).removeClass("on");
 	if(sGetName == 're_pwd'){
 		document.body.classList.remove("scroll");
+		$('#home_default').prop('checked',false);
 	}else{
 		$('re_pwd').removeClass("scroll");
 		 closeDaumPostcode();

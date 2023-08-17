@@ -80,8 +80,9 @@ $(function(){
 //주문하기 버튼 이벤트[submit] - cartInfo 
 $('#payForm').submit(function(event){
 	let checked = $('.LM-item').closest('table').find('input[type=checkbox]:checked').length;
-	if(checked == 0){
-		alert('1 개이상의 상품을 선택하세요!');
+	let sub_total = $('#due').attr('data-due'); 
+	if(checked == 0 || sub_total == 3000){
+		alert('1개 이상의 상품을 선택하세요!');
 		return false;
 	}
 	event.preventDefault();
