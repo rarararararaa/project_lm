@@ -201,7 +201,7 @@ function submitOrder(){
 					}else if(param.result == 'success'){
 						let check=confirm('결제창으로 이동하시겠습니까?');
 						if(check){
-							location.href='order.do';
+							location.href='/bookstore/payment/order.do';
 						}else{
 							location.reload();
 						}
