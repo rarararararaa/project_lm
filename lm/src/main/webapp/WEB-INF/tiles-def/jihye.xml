@@ -35,6 +35,16 @@
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lib_book/LIB_bookDetail.jsp"/>
     </definition>
     
+    <!-- 관리자 페이지 -->
+    <definition name="admin_programList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="프로그램등록리스트"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/libProgramAdmin.jsp"/>
+    </definition>
+    
+    <definition name="admin_programWrite" extends="libAdmin">
+    	<put-attribute name="libTitle" value="프로그램등록리스트"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/insertProgram.jsp"/>
+    </definition>
     
 </tiles-definitions>
 
