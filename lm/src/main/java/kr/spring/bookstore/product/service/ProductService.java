@@ -24,4 +24,6 @@ public interface ProductService {
 	
 	//메인 페이지
 	public List<ProductVO> selectBestBook();
+	public List<ProductVO> selectNewBook();
+	public List<ProductVO> selectFuture();
 }

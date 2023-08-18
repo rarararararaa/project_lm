@@ -54,4 +54,10 @@ public interface ProductMapper {
 	//상품 댓글 수 & 평점 수 상위 5개 도서 뽑기
 	@Select("SELECT * FROM( SELECT * FROM store_product_manage m JOIN store_product_detail USING(store_product_num) ORDER BY store_product_ratingCount DESC)  WHERE rownum >= 1 AND rownum <=5 ORDER BY store_product_ratingscore DESC")
 	public List<ProductVO> selectBestBook();
+	//신간 도서
+	@Select("SELECT * FROM store_product_manage m JOIN store_product_detail USING(store_product_num) WHERE store_product_pubdate <= SYSDATE  AND rownum <=5 ORDER BY store_product_pubdate DESC")
+	public List<ProductVO> selectNewBook();
+	//출판 예정 도서
+	@Select("SELECT * FROM (SELECT * FROM store_product_manage m JOIN store_product_detail USING(store_product_num) ORDER BY store_product_pubdate DESC) WHERE rownum <= 5")
+	public List<ProductVO> selectFuture();
 }

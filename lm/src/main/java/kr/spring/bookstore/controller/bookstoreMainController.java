@@ -32,7 +32,7 @@ public class bookstoreMainController {
 	
 	@RequestMapping("/bookstore/template/bsMain.do")
 	public String main(Model model) {
-		//최신 등록 상품 읽어오기
+		//인기 도서 읽어오기
 		List<ProductVO> product = productService.selectBestBook();
 		log.debug("<<메인 페이지 - 베스트 도서>> : "+product);
 		//이벤트 정보 가져오기
@@ -52,10 +52,18 @@ public class bookstoreMainController {
 			
 			list = bsEventService.selectEventList(map);
 		}
+		//신간 도서 읽어오기
+		List<ProductVO> newBook = productService.selectNewBook();
+		log.debug("<<메인 페이지 - 신간>> : "+newBook);
+		//출판 예쩡 도서 읽어오기
+		List<ProductVO> FutureBook = productService.selectFuture();
+		log.debug("<<메인 페이지 - 출판예정>> : "+FutureBook);
 		log.debug("<<메인 페이지 - 이벤트>> : "+list);
 		model.addAttribute("list", list);
 		model.addAttribute("count", count);
 		model.addAttribute("best", product);
+		model.addAttribute("newBook", newBook);
+		model.addAttribute("futureBook", FutureBook);
 
 		return "bsMain";//타일스 설정의 식별자
 	}

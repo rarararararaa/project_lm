@@ -63,4 +63,14 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.selectBestBook();
 	}
 
+	@Override
+	public List<ProductVO> selectNewBook() {
+		return productMapper.selectNewBook();
+	}
+
+	@Override
+	public List<ProductVO> selectFuture() {
+		return productMapper.selectFuture();
+	}
+
 }

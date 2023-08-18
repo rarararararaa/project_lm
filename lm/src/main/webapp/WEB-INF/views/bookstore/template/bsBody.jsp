@@ -8,13 +8,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
-	const myCarouselElement = document.querySelector('#myCarousel')
-	
-	const carousel = new bootstrap.Carousel(myCarouselElement, {
-	  interval: 2000,
-	  touch: false
+const myCarouselElement = document.querySelector('#myCarousel')
+
+const carousel = new bootstrap.Carousel(myCarouselElement, {
+  interval: 2000,
+  touch: false
 })
 </script>
+
 <style>
 body {
   font-family: sans-serif;
@@ -85,8 +86,8 @@ img {
 			<!-- indicator 시작 -->
 			<div class="carousel-indicators">
 				<button class="active" type="button" data-bs-target="#carouselExample" data-bs-slide-to="0"></button>
-				<c:forEach var="c" items="${list}" varStatus="status" begin="1" end="4">
-				<button type="button" data-bs-target="#carouselExample" data-bs-slide-to="${status.index}"></button>
+				<c:forEach var="c" items="${list}" varStatus="status" begin="0" end="${count}">
+				<button type="button" data-bs-target="#carouselExample" data-bs-slide-to="${status.index+1}"></button>
 				</c:forEach>
 			</div>
 			<!-- indicator 끝 -->
@@ -96,7 +97,7 @@ img {
 				<div class="carousel-item active">
 					<p>
 						오늘 출석하셨나요?<br>
-						꾸준히 출셕하면 최대 600포인트 지급!
+						꾸준히 출석하면 최대 600포인트 지급!
 					</p>
 					<div class="carousel-caption">
 					</div>
@@ -106,7 +107,7 @@ img {
 				</div>
 				<!-- item 끝 -->
 				<!-- item 시작 -->
-				<c:forEach var="event" items="${list}" varStatus="status" begin="0" end="3">
+				<c:forEach var="event" items="${list}" varStatus="status" begin="0" end="${count}">
 				<div class="carousel-item">
 					<p>${event.event_title}</p>
 					<div class="carousel-caption">
@@ -135,7 +136,8 @@ img {
 		</div>
 		</div>
 		<!-- 메인 이미지 끝 -->
-		<div class="best-book">
+		<!-- 인기도서 시작 -->
+		<div class="best-book main-book">
 			<span>요즘 HOT한 인기도서</span>
 			<table>
 				<tr>
@@ -160,6 +162,67 @@ img {
 				</tr>
 			</table>
 		</div>
+		<!-- 인기도서 끝 -->
+		<!-- 신간 도서 시작 -->
+		<div class="new-book main-book">
+			<span>신간도서</span>
+			<table>
+				<tr>
+				<c:forEach var="image" items="${newBook}">
+						<td>
+						<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${image.store_product_isbn13}">
+							<c:if test="${image.store_product_cover == ' '}">
+								<img src="${pageContext.request.contextPath}/images/noImage.png">
+							</c:if>
+							<img alt="" src="${image.store_product_cover}">
+						</a>
+						</td>
+				</c:forEach>
+				</tr>
+				<tr>
+				<c:forEach var="Info" items="${newBook}">
+					<td>
+						<ul>
+							<li>${Info.store_product_searchcategoryName}</li>
+							<li>${Info.store_product_title}</li>
+							<li>${Info.store_product_author}</li>
+						</ul>
+					</td>
+				</c:forEach>
+				</tr>
+			</table>
+		</div>
+		<!-- 신간 도서 끝 -->
+		<!-- 출판 예쩡 도서 시작 -->
+		<div class="future-book main-book">
+			<span>출판예정도서</span>
+			<table>
+				<tr>
+				<c:forEach var="image" items="${futureBook}">
+						<td>
+						<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${image.store_product_isbn13}">
+							<c:if test="${image.store_product_cover == ' '}">
+								<img src="${pageContext.request.contextPath}/images/noImage.png">
+							</c:if>
+							<img alt="" src="${image.store_product_cover}">
+						</a>
+						</td>
+				</c:forEach>
+				</tr>
+				<tr>
+				<c:forEach var="Info" items="${futureBook}">
+					<td>
+						<ul>
+							<li>${Info.store_product_searchcategoryName}</li>
+							<li>${Info.store_product_title}</li>
+							<li>${Info.store_product_author}</li>
+						</ul>
+					</td>
+				</c:forEach>
+				</tr>
+			</table>
+		</div>
+		<!-- 출판 예정 도서 끝 -->
 	</div>
 <div>
 </div>
