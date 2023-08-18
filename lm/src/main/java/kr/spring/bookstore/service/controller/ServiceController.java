@@ -1,5 +1,6 @@
 package kr.spring.bookstore.service.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,15 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.product.service.ProductService;
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.service.service.ServiceService;
 import kr.spring.bookstore.service.vo.AnnounceVO;
 import kr.spring.bookstore.service.vo.AnswerVO;
 import kr.spring.bookstore.service.vo.FaqVO;
+import kr.spring.bookstore.service.vo.OrderDetailVO;
 import kr.spring.bookstore.service.vo.AskVO;
-import kr.spring.library.board_announce.controller.BoardAnnounceController;
-import kr.spring.library.facility.vo.FacilityVO;
 import kr.spring.library.memberadmin.service.MemberAdminService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
@@ -71,6 +72,15 @@ public class ServiceController {
 	public AnswerVO initCommand6() {
 		return new AnswerVO();
 	}
+	@ModelAttribute
+	public BookStorePaymentOrderVO initCommand7() {
+		return new BookStorePaymentOrderVO();
+	}
+	@ModelAttribute
+	public OrderDetailVO initCommand8() {
+		return new OrderDetailVO();
+	}
+	
 	@RequestMapping("/bookstore/service/main.do")
 	public String serviceMain() {
 		return "service";
@@ -417,4 +427,31 @@ public class ServiceController {
 		
 		return mav;
 	}
+	
+	@GetMapping("/bookstore/adminProductModify.do")
+	public String productModifyForm(@RequestParam String store_product_isbn13,Model model) {
+		ProductVO productVO = productService.selectProduct(store_product_isbn13);
+		model.addAttribute("productVO",productVO);
+		return "adminProductModify";
+	}
+	
+	@PostMapping("/bookstore/adminProductModify.do")
+	public String productModify(@Valid ProductVO productVO, Model model,HttpServletRequest request) {
+		log.debug("<<productVO>> : " + productVO);
+		serviceService.updateProduct(productVO);
+		
+		model.addAttribute("message", "상품 수정이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath()+"/bookstore/adminProductList.do");
+		return "common/resultView";
+	}
+	
+	@RequestMapping("/bookstore/adminOrderList.do")
+	public String adminOrderList(Model model) {
+		List<BookStorePaymentOrderVO> list = new ArrayList<BookStorePaymentOrderVO>();
+				
+		list = serviceService.adminOrderList();
+		model.addAttribute("list", list);
+		return "adminOrderList";
+	}
+	
 }

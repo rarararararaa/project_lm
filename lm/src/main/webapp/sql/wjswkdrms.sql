@@ -117,3 +117,27 @@ CREATE TABLE LM_BOARD_ANSWER (
     CONSTRAINT FK_LM_BOARD_ANSWER_2 FOREIGN KEY (ask_num)    
                                  REFERENCES lm_board_ask(ask_num)                                 
 );
+
+CREATE TABLE LIB_PROGRAM_APPLY_USER (
+	program_apply_num	number	NOT NULL,
+	mem_num	number(5)	NOT NULL,
+	program_times_num	number	NOT NULL,
+	program_reg_date	date	DEFAULT SYSDATE	NOT NULL,
+    CONSTRAINT PK_LIB_PROGRAM_APPLY_USER PRIMARY KEY (program_apply_num),
+  CONSTRAINT FK_LIB_PROGRAM_APPLY_USER_1 FOREIGN KEY (mem_num)    
+                                REFERENCES lm_member_manage(mem_num),
+  CONSTRAINT FK_LIB_PROGRAM_APPLY_USER_2 FOREIGN KEY (program_times_num)    
+                                REFERENCES lib_program_times(program_times_num)                                
+);
+
+CREATE TABLE LIB_BOOK_APPLY (
+	book_apply_num	number	NOT NULL,
+	mem_num	number(5)	NOT NULL,
+	book_apply_content	varchar2(1000)	NOT NULL,
+	book_apply_status	number(1)	DEFAULT 0	NOT NULL,
+	book_apply_reg_date	date	DEFAULT SYSDATE	NOT NULL,
+	book_apply_title	varchar2(200)	NOT NULL,
+    CONSTRAINT PK_LIB_BOOK_APPLY PRIMARY KEY (book_apply_num),
+    CONSTRAINT FK_LIB_BOOK_APPLY_1 FOREIGN KEY (mem_num)    
+                                REFERENCES lm_member_manage(mem_num)    
+);

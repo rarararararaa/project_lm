@@ -13,6 +13,7 @@ public class OrderDetailVO {
 	private int store_product_num;
 	private int order_product_price;
 	private int cart_quantity;
+	private int used_product_num;
 	private String product_name;
 	private int mem_num;
 }

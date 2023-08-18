@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.library.program.service.ProgramService;
+import kr.spring.library.program.vo.ProgramApplyVO;
 import kr.spring.library.program.vo.ProgramTimesVO;
 import kr.spring.library.program.vo.ProgramVO;
 import kr.spring.util.PagingUtil;
@@ -134,5 +135,23 @@ public class ProgramController {
 		model.addAttribute("program", program);
 		model.addAttribute("times", times);
 		return "programDetail";
+	}
+	@PostMapping("/library/programDetail.do")
+	public String programApply(@Valid ProgramTimesVO time, BindingResult result, Model model, HttpSession session) {
+		int mem_num = (Integer)session.getAttribute("mem_num");
+		ProgramApplyVO apply = new ProgramApplyVO();
+		
+		log.debug("<<time>> : " + time);
+		
+		apply.setMem_num(mem_num);
+		apply.setProgram_times_num(time.getProgram_times_num());
+		
+		log.debug("<<apply>> : " + apply);
+		programService.insertProgramApply(apply);
+		
+		model.addAttribute("message", "프로그램 신청이 완료되었습니다.");
+		model.addAttribute("url", "programList.do");
+		
+		return "common/resultView";
 	}
 }

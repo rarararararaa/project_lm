@@ -66,4 +66,20 @@
 	  COUNT(*)
 	FROM lib_program_admin
 </select>
+
+<insert id="insertProgramApply">
+
+	INSERT INTO lib_program_apply_user(
+	  program_apply_num,
+	  mem_num,
+	  program_times_num,
+	  program_reg_date)
+	VALUES(
+	  lib_program_apply_user_seq.nextval,
+	  #{mem_num},
+	  #{program_times_num},
+	  SYSDATE
+	)
+
+</insert>
 </mapper>

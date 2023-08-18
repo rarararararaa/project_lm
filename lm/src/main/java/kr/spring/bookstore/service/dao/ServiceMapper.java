@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.service.vo.AnnounceVO;
 import kr.spring.bookstore.service.vo.AnswerVO;
@@ -56,6 +57,13 @@ public interface ServiceMapper {
 	@Select("SELECT * FROM lm_board_answer WHERE ask_num=#{ask_num}")
 	public AnswerVO selectAnswer(Integer ask_num);
 	
-	//주문 목록 구하기 개같은거 
-	public List<OrderDetailVO> orderList();
+	//상품 수정
+	@Update("UPDATE store_product_detail SET store_product_description=#{store_product_description}, store_product_pricesales=#{store_product_pricesales}, store_product_stock=#{store_product_stock} WHERE store_product_num=#{store_product_num}")
+	public void updateProduct(ProductVO productVO);
+	@Update("UPDATE store_product_manage SET store_product_stockstatus=#{store_product_stockstatus} WHERE store_product_num=#{store_product_num}")
+	public void updateProductStatus(ProductVO productVO);
+	//주문 상세 정보
+
+	@Select("SELECT * FROM store_order_detail")
+	public List<BookStorePaymentOrderVO> adminOrderList();
 }
