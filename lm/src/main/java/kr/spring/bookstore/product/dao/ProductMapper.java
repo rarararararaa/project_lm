@@ -49,4 +49,9 @@ public interface ProductMapper {
 	public void deleteFav(Integer ZZIM_NUM);
 	@Delete("DELETE FROM STORE_MEMBER_ZZIM WHERE store_product_num=#{store_product_num}")
 	public void deleteFavByProductNum(Integer store_product_num);	
+	
+	//메인 페이지
+	//상품 댓글 수 & 평점 수 상위 5개 도서 뽑기
+	@Select("SELECT * FROM( SELECT * FROM store_product_manage m JOIN store_product_detail USING(store_product_num) ORDER BY store_product_ratingCount DESC)  WHERE rownum >= 1 AND rownum <=5 ORDER BY store_product_ratingscore DESC")
+	public List<ProductVO> selectBestBook();
 }

@@ -57,6 +57,10 @@ public class ProductServiceImpl implements ProductService{
 	public List<UsedVO> selectUsedNum(int store_product_num) {
 		return productMapper.selectUsedNum(store_product_num);
 	}
-
+	
+	@Override
+	public List<ProductVO> selectBestBook() {
+		return productMapper.selectBestBook();
+	}
 
 }

@@ -21,4 +21,7 @@ public interface ProductService {
 	public int selectFavCount(Integer store_product_num);
 	public void insertFav(ProductFavVO fav);
 	public void deleteFav(Integer ZZIM_NUM);
+	
+	//메인 페이지
+	public List<ProductVO> selectBestBook();
 }
