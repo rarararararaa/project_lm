@@ -15,7 +15,7 @@
 	});
 </script>
 <div class="page-main">
-	<h2>기증품 목록</h2>
+	<h2>기증목록</h2>
 	<form action="admin_donationlist.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -31,7 +31,7 @@
 			</li>
 			<li>
 				<input type="submit" value="조회">
-				<input type="button" value="기증목록" 
+				<input type="button" value="목록" 
 				   onclick="location.href='admin_donationlist.do'">
 			</li>
 		</ul>
@@ -42,7 +42,7 @@
 	<c:if test="${count > 0}">
 	<table class="striped-table">
 		<tr>
-			<th>기증번호</th>
+			<th>No</th>
 			<th>제목</th>
 			<th>내용</th>
 			<th>등록날짜</th>

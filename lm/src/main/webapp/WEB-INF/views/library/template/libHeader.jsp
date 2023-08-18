@@ -223,7 +223,6 @@ a:hover {
 					<a href="${pageContext.request.contextPath}/library/template/libAdmin.do">관리자페이지</a>
 				</c:if>
 				</li>
-				<li><a href="${pageContext.request.contextPath}/library/service/main.do">고객센터</a></li>
 				<li><a href="#">서재</a></li>
 			</ul>
 		</div>

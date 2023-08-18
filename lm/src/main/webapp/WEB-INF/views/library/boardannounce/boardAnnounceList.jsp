@@ -56,7 +56,7 @@
 	<c:if test="${count > 0}">
 	<table class="striped-table">
 		<tr>
-			<th>번호</th>
+			<th>No</th>
 			<th>제목</th>
 			<th>작성자</th>
 			<th>작성일</th>

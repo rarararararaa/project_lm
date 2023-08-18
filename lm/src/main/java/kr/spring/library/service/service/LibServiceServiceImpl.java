@@ -62,21 +62,6 @@ public class LibServiceServiceImpl implements LibServiceService{
 	}
 
 	@Override
-	public void updateAnswer(BoardAnswerVO boardAnswer) {
-		libServiceMapper.updateAnswer(boardAnswer);
-	}
-
-	@Override
-	public void deleteAnswer(Integer answer_num) {
-		libServiceMapper.deleteAnswer(answer_num);
-	}
-
-	@Override
-	public void updateBoardAskStatus2(Integer ask_num) {
-		libServiceMapper.updateBoardAskStatus2(ask_num);
-	}
-
-	@Override
 	public BoardAnswerVO selectBoardAnswer(Integer ask_num) {
 		return libServiceMapper.selectBoardAnswer(ask_num);
 	}
