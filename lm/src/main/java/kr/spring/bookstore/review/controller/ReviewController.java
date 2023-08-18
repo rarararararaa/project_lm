@@ -158,6 +158,26 @@ public class ReviewController {
 	 
 	    return "common/resultView";
 	}
+	
+	//리뷰 삭제
+	@RequestMapping("/bookstore/review/reviewDelete.do")
+	public String reviewDelete(@Valid ReviewVO reviewVO, BindingResult result, Model model,
+			HttpServletRequest request, HttpSession session,
+						@RequestParam int store_product_num) {
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+	    
+	    Integer mem_num=(Integer)session.getAttribute("mem_num");
+	    reviewVO.setMem_num(mem_num);
+	    reviewVO.setProductVO(reviewService.selectProductVO(store_product_num));
+	    String store_product_isbn13=reviewVO.getProductVO().getStore_product_isbn13();
+		log.debug("<<reviewVO : >>"+reviewVO);
+		reviewService.deleteReview(reviewVO);
+	    model.addAttribute("message", "댓글 삭제 완료");
+	    model.addAttribute("url",request.getContextPath()+"/bookstore/product/productDetail.do?store_product_isbn13="+store_product_isbn13);
+	 
+	    return "common/resultView";
+	}	
 }
 
 

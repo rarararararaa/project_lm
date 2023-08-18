@@ -26,7 +26,7 @@ $(function(){
 					location.reload();
 				}else if(param.result == 'success'){
 					//리뷰 등록 UI호출
-					$('#dialog').dialog('open');
+					fnShowPop('re_pwd');					
 					//초기화
 					$('#book_search').val('');
 					$('#search_area1').empty();
@@ -89,6 +89,7 @@ $(function(){
 					alert('로그인 후 댓글 수정 가능합니다.');
 					location.replace();
 				}else if(param.result == 'success'){
+					fnShowPop('re_mopwd');					
 					$('#review_num').val(test);
 					let detail=param.reviewDetail;
 					var div=document.querySelector(

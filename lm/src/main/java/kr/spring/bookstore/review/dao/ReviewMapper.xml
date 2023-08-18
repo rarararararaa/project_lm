@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.bookstore.review.dao.ReviewMapper">
-	<select id="selectReviewCheck" parameterType="map" resultType="kr.spring.bookstore.review.vo.ReviewVO">
-		SELECT 
-		    * 
-		FROM lm_review 
-		WHERE order_detail_num IN (
-		    SELECT 
-		        order_detail_num 
-		    FROM store_order_detail d
-		    RIGHT OUTER JOIN STORE_ORDER_MANAGE m
-		    USING(ORDER_NUM) 
-		    WHERE store_product_num = #{store_product_num} AND m.mem_num = #{mem_num}
-		)
-		AND order_detail_num NOT IN (
-		    SELECT 
-		        order_detail_num 
-		    FROM lm_review 
-		    WHERE mem_num = #{mem_num}
-		)
+	<select id="selectReviewDeleteCheck" parameterType="map" resultType="integer">
+		SELECT COUNT(*) AS review_count
+		FROM lm_review
+		LEFT OUTER JOIN store_order_detail USING(order_detail_num)
+		WHERE mem_num = #{mem_num}
+		      AND store_product_num = #{store_product_num}
+		      AND review_deleted = 0
 	</select>
 	<select id="selectOrderDetail" parameterType="kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO" resultType="kr.spring.bookstore.service.vo.OrderDetailVO">
 		SELECT 
@@ -27,7 +16,7 @@
 		LEFT OUTER JOIN store_order_manage m
 		USING(order_Num)
 		WHERE store_product_num = #{store_product_num} AND m.mem_num=#{mem_num}
-		AND order_status = 2
+		AND order_status > 1
 		AND order_detail_num NOT IN (
 		    SELECT order_detail_num 
 		    FROM lm_review
@@ -55,19 +44,23 @@
 	<!-- 댓글 목록 -->
 	<select id="selectReviewList" parameterType="map" resultType="kr.spring.bookstore.review.vo.ReviewVO">
 		SELECT
-			*
-		FROM (SELECT
-				a.*,
-				rownum rnum
-			  FROM (SELECT
-						*
-			  		FROM lm_review r
-			  		JOIN store_order_detail d
-			  		USING (ORDER_Detail_num)
-			  		LEFT OUTER JOIN LM_MEMBER_MANAGE
-			  		USING (mem_num)
-                    WHERE d.store_product_num=#{store_product_num}
-			  		)a)	
+		    *
+		FROM (
+		    SELECT
+		        a.*,
+		        rownum rnum
+		    FROM (
+		        SELECT
+		            *
+		        FROM lm_review r
+		        JOIN store_order_detail d
+		        USING (ORDER_Detail_num)
+		        LEFT OUTER JOIN LM_MEMBER_MANAGE
+		        USING (mem_num)
+		        WHERE d.store_product_num = #{store_product_num}
+		        AND r.review_deleted = 0
+		    ) a
+		)
 	</select>
 	
 	<!-- 리뷰 갯수 -->
@@ -86,20 +79,28 @@
 		    COUNT(*) 
 		FROM lm_review r
 		LEFT OUTER JOIN store_order_detail d USING (order_detail_num) 
-		WHERE (review_rating BETWEEN #{start} AND #{end}) AND store_product_num=#{store_product_num}
+		WHERE 
+		<![CDATA[
+		#{review_start}<review_rating AND review_rating<=#{review_end} AND store_product_num=#{store_product_num}
+		]]>
+		AND review_deleted=0
 	</select>
 	
 	<!-- 상품에 별점 업데이트 -->
-	<select id="selectUpdateProductRating" parameterType="productVO" resultType="float">
+	<select id="selectUpdateProductRating" parameterType="map" resultType="float">
 		SELECT 
-		    ((
-		        p.STORE_PRODUCT_RATINGSCORE * p.STORE_PRODUCT_RATINGCOUNT 
-		        + SUM(r.review_rating)
-		    ) 
-		    / (
-		        p.STORE_PRODUCT_RATINGCOUNT 
-		        + COUNT(r.review_rating)
-		    )) AS calculated_rating 
+		    ROUND(
+		        (
+		            (
+		                p.STORE_PRODUCT_RATINGSCORE * p.STORE_PRODUCT_RATINGCOUNT 
+		                + #{review_rating}
+		            ) 
+		            / (
+		                p.STORE_PRODUCT_RATINGCOUNT 
+		                + 1
+		            )
+		        ), 1
+		    ) AS calculated_rating 
 		FROM store_product_detail p
 		LEFT JOIN store_order_detail d ON p.store_product_num = d.store_product_num
 		LEFT JOIN lm_review r ON d.order_detail_num = r.order_detail_num
@@ -125,11 +126,14 @@
 	<!-- 변경 평점 계산 -->
 	<select id="selectModifyRating" parameterType="map"  resultType="float">
 		SELECT 
-		    (p.STORE_PRODUCT_RATINGSCORE * p.STORE_PRODUCT_RATINGCOUNT 
-		    - #{old_review_rating}
-		    + #{review_rating}) 
-		    / p.STORE_PRODUCT_RATINGCOUNT
-		    AS calculated_rating 
+		    ROUND(
+		        (
+		            (p.STORE_PRODUCT_RATINGSCORE * p.STORE_PRODUCT_RATINGCOUNT 
+		            - #{old_review_rating}
+		            + #{review_rating}) 
+		            / p.STORE_PRODUCT_RATINGCOUNT
+		        ), 1
+		    ) AS calculated_rating 
 		FROM store_product_detail p
 		WHERE p.store_product_num = #{store_product_num}	
 	</select>
@@ -138,7 +142,37 @@
 		SET STORE_PRODUCT_RATINGSCORE=#{store_product_ratingScore}
 		WHERE store_product_num = #{store_product_num}
 	</update>
+	<!-- 리뷰 삭제 시 변경 평점 계산 -->
+	<select id="selectModifyRating2" parameterType="map" resultType="float">
+		SELECT 
+		    ROUND(
+		        CASE 
+		            WHEN p.STORE_PRODUCT_RATINGCOUNT - 1 = 0 THEN 0
+		            ELSE (
+		                (
+		                    p.STORE_PRODUCT_RATINGSCORE * p.STORE_PRODUCT_RATINGCOUNT 
+		                    - #{review_rating}
+		                ) 
+		                / (
+		                    p.STORE_PRODUCT_RATINGCOUNT - 1
+		                )
+		            )
+		        END, 1) AS calculated_rating 
+		FROM store_product_detail p
+		LEFT OUTER JOIN store_order_detail d ON p.store_product_num = d.store_product_num
+		LEFT OUTER JOIN lm_review r ON d.order_detail_num = r.order_detail_num
+		WHERE p.store_product_num = #{store_product_num}
+		FETCH FIRST 1 ROW ONLY
+	</select>
 	
+	<!-- productVO 선택 -->
+	<select id="selectProductVO" parameterType="integer" resultType="productVO">
+		SELECT 
+			* 
+		FROM store_product_detail d
+		LEFT OUTER JOIN store_product_manage m USING(store_product_num) 
+		WHERE store_product_num=#{store_product_num}	
+	</select>
 </mapper>
 
 
