@@ -316,8 +316,8 @@
 						<button class="increase adjust" id="increase"></button>
 					</span>
 				</div>
-						<input type="hidden" name="store_product_num" value="${product.store_product_num}">
-						<input type="hidden" name="store_product_pricestandard" value="${product.store_product_pricestandard}">
+						<input type="hidden" name="store_product_num" value="${product.store_product_num}" id="product">
+						<input type="hidden" name="store_product_pricestandard" value="${product.store_product_pricestandard}" id="price">
 						<input type="hidden" name="store_product_stock" value="${product.store_product_stock}">
 						<input type="hidden" name="store_product_title" value="${product.store_product_title}">
 						

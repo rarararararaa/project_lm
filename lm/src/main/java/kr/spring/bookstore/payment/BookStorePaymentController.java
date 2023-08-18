@@ -33,14 +33,12 @@ import kr.spring.bookstore.payment.vo.BookStorePaymentCartVO;
 import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
 import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.used.vo.UsedVO;
-import kr.spring.lm.point.vo.PointVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import okhttp3.internal.http2.Header;
 
 @Controller
 @Slf4j
@@ -219,6 +217,7 @@ public class BookStorePaymentController {
 			List<Map<String, String>> list = new ArrayList<Map<String,String>>();
 			for(int i=0;i<array.size();i++) {
 				JSONObject obj = (JSONObject)array.get(i);
+				log.debug("<<fsjkdlkfjkals>> : "+obj);
 				Map<String, String> re = new HashMap<String, String>();
 				
 				re.put("mem_cart_num", (String)obj.get("mem_cart_num"));
@@ -229,7 +228,6 @@ public class BookStorePaymentController {
 				
 				list.add(re);
 			}
-			log.debug("<<fsjkdlkfjkals>> : "+list);
 			List<BookStorePaymentCartVO> cartList = new ArrayList<BookStorePaymentCartVO>();
 			
 			for(Map<String, String> map : list) {
