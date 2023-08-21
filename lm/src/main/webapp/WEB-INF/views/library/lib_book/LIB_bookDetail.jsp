@@ -69,7 +69,7 @@
 				</td>
 				<c:if test="${status.index == 0}">
 					<td rowspan="${fn:length(list)}">
-						<button class="book-btn" data-num=${bookList.lib_product_isbn}>예약하기</button>
+						<button class="book-btn" data-num="${bookList.lib_product_isbn}">예약하기</button>
 					</td>
 				</c:if>
 			</tr>
