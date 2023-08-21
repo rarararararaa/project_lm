@@ -3,10 +3,13 @@ package kr.spring.bookstore.service.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.service.vo.AnnounceVO;
 import kr.spring.bookstore.service.vo.AnswerVO;
 import kr.spring.bookstore.service.vo.AskVO;
 import kr.spring.bookstore.service.vo.FaqVO;
+import kr.spring.bookstore.service.vo.OrderDetailVO;
 
 
 public interface ServiceService {
@@ -40,4 +43,8 @@ public interface ServiceService {
 	
 	//답변 보기
 	public AnswerVO selectAnswer(Integer ask_num);
+	
+	public void updateProduct(ProductVO productVO);
+	
+	public List<BookStorePaymentOrderVO> adminOrderList();
 }

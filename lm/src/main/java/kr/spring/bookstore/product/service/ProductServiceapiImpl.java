@@ -135,7 +135,8 @@ public class ProductServiceapiImpl implements ProductServiceapi{
 	    try {
 			URL apiUrl2=new URL("http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey="+ttbkey
 					+ "&itemIdType=ISBN13&ItemId="+isbn13
-					+"&output=js&Version=20131101&OptResult=cardReviewImgList,bestSellerRank,ratingInfo");
+					+"&output=js&Version=20131101&OptResult=cardReviewImgList,bestSellerRank,ratingInfo"
+					+ "&Cover=Big");
 			conn=(HttpURLConnection)apiUrl2.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Content-type", "application/json; charset=utf-8");

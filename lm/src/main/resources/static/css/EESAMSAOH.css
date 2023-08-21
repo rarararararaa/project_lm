@@ -292,7 +292,7 @@ div.box-right div.star-ratings{
 	display:flex;
     flex-direction: row;
     padding:0;
-    justify-content: space-between;    
+    justify-content: space-evenly;
 }
 div.box-right{
     flex-direction: column;

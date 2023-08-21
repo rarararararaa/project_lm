@@ -11,9 +11,9 @@
 		${program.program_content}
 	</div>
 	<form:form modelAttribute="programTimesVO" action="programDetail.do">
-	<select>
+	<select name="program_times_num">
 	<c:forEach var="time" items="${times}">
-		<option value="${time}">${time.program_start} ${time.start}:00 ~ ${time.end}:00 신청 가능 인원 : ${time.program_admit}</option>
+		<option value="${time.program_times_num}">${time.program_start} ${time.start}:00 ~ ${time.end}:00 신청 가능 인원 : ${time.program_admit}</option>
 	</c:forEach>
 	</select>
 	<form:button id="submit">신청</form:button>

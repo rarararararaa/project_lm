@@ -52,6 +52,7 @@ public class bookstoreMainController {
 			
 			list = bsEventService.selectEventList(map);
 		}
+		
 		//신간 도서 읽어오기
 		List<ProductVO> newBook = productService.selectNewBook();
 		log.debug("<<메인 페이지 - 신간>> : "+newBook);

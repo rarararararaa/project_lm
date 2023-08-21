@@ -25,8 +25,8 @@ public class ReviewServiceImpl implements ReviewService{
 	
 
 	@Override
-	public List<ReviewVO> selectReviewCheck(Map<String, Object> map) {
-		return reviewMapper.selectReviewCheck(map);
+	public int selectReviewDeleteCheck(Map<String, Object> map) {
+		return reviewMapper.selectReviewDeleteCheck(map);
 	}
 
 	@Override
@@ -38,10 +38,13 @@ public class ReviewServiceImpl implements ReviewService{
 	public void insertReview(ReviewVO reviewVO) {
 		reviewMapper.insertReview(reviewVO);
 		reviewMapper.updateMemberPoint(reviewVO.getMem_num());
-		reviewMapper.updateProductReviewCount(reviewVO.getProductVO());
 		pointMapper.insertReviewPoint(reviewVO.getPointVO());
 		ProductVO product=reviewVO.getProductVO();
-		product.setStore_product_ratingScore(reviewMapper.selectUpdateProductRating(product));
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("store_product_num", product.getStore_product_num());
+		map.put("review_rating", reviewVO.getReview_rating());
+		product.setStore_product_ratingScore(reviewMapper.selectUpdateProductRating(map));
+		reviewMapper.updateProductReviewCount(reviewVO.getProductVO());
 		reviewMapper.updateProductRating(product);
 	}
 
@@ -66,8 +69,21 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void deleteReview(Integer review_num) {
-		
+	public void deleteReview(ReviewVO reviewVO) {
+		ReviewVO db_review=reviewMapper.selectReview(reviewVO.getReview_num());
+		int review_rating=db_review.getReview_rating();
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("review_rating", review_rating);
+		ProductVO product=reviewVO.getProductVO();
+		map.put("store_product_num", product.getStore_product_num());
+		float store_product_ratingScore=reviewMapper.selectModifyRating2(map);
+		if(store_product_ratingScore>10) {
+			store_product_ratingScore=10;
+		}
+		product.setStore_product_ratingScore(store_product_ratingScore);
+		reviewMapper.updateProductRating(product);		
+		reviewMapper.updateProductReviewCount2(product);
+		reviewMapper.UpdateDeleteReview(reviewVO);
 	}
 
 	@Override

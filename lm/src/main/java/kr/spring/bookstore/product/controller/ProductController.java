@@ -121,17 +121,15 @@ public class ProductController {
 			"productDetail.do","&order="+order);
 		
 		List<ReviewVO> review= null;
-		ReviewVO reviewDetail=null;
-		if(count > 0) {
-			map.put("count", count);
-			map.put("order",order);
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			map.put("event_board_status", 1);
-			list2 =bsEventService.selectEventList(map);
+		map.put("count", count);
+		map.put("order",order);
+		map.put("start", page.getStartRow());
+		map.put("end", page.getEndRow());
+		map.put("event_board_status", 1);
+		review = reviewService.selectReviewList(map);
+		list2 =bsEventService.selectEventList(map);
 			
-			review = reviewService.selectReviewList(map);
-		}
+		log.debug("<<event : >>"+list2);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("productDetail");
 		mav.addObject("product", product);
@@ -139,6 +137,12 @@ public class ProductController {
 		mav.addObject("review", review);
 		mav.addObject("list", list);
 		mav.addObject("event", list2);
+		for(int i=0;i<6;i++) {
+			map.put("review_start", 2*i);
+			map.put("review_end", 2*(i+1));
+			int review_count=reviewService.selectReviewCountBetween(map);
+			mav.addObject("review_count_"+i, review_count);
+		}
 		mav.addObject("page", page.getPage());
 		log.debug("<<mav>> : "+mav);
 		return mav;
@@ -150,7 +154,6 @@ public class ProductController {
 		ReviewVO reviewVO = reviewService.selectReview(review_num);
 		
 		log.debug("<<reviewVO>>" + reviewVO);
-		ModelAndView mav = new ModelAndView();
 		viewReview(reviewVO, request, model);
 		return "imageView";
 	}

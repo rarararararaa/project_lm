@@ -36,7 +36,7 @@
 				class="sub-items">일정 등록</a>
 		</li>
 		<li class="sb-menu-item">
-			<a href="#" 
+			<a href="${pageContext.request.contextPath}/library/apply/programAdminList.do" 
 				class="sub-items">프로그램 등록</a>
 		</li>
 		<li class="sb-menu-item">

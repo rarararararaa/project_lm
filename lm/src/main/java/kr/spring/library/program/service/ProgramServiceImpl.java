@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.library.program.dao.ProgramMapper;
+import kr.spring.library.program.vo.ProgramApplyVO;
 import kr.spring.library.program.vo.ProgramTimesVO;
 import kr.spring.library.program.vo.ProgramVO;
 
@@ -51,15 +52,20 @@ public class ProgramServiceImpl implements ProgramService{
 		return programMapper.selectProgramTimes(program_num);
 	}
 
-	@Override
-	public Integer CountApply(int program_times_num) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Integer selectRowCount() {
 		return programMapper.selectRowCount();
+	}
+
+	@Override
+	public void insertProgramApply(ProgramApplyVO programApplyVO) {
+		int admit = programMapper.selectAdmit(programApplyVO.getProgram_times_num());
+		ProgramTimesVO time = new ProgramTimesVO();
+		time.setProgram_admit(admit - 1);
+		time.setProgram_times_num(programApplyVO.getProgram_times_num());
+		programMapper.updateAdmit(time);
+		programMapper.insertProgramApply(programApplyVO);
 	}
 
 

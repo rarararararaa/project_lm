@@ -15,8 +15,7 @@ public interface ReviewService {
 	public List<OrderDetailVO> selectOrderDetail(Map<String, Object> map);
 	//주문내역 불러오기
 	public List<BookStorePaymentOrderVO> selectOrderVO(Map<String, Object> map);
-	//이미 작성한 구매 내역건인지 체크
-	public List<ReviewVO> selectReviewCheck(Map<String, Object> map);
+	public int selectReviewDeleteCheck(Map<String, Object> map);
 	//리뷰 리스트
 	public List<ReviewVO> selectReviewList(Map<String, Object> map);
 	//리뷰 작성
@@ -30,7 +29,7 @@ public interface ReviewService {
 	//리뷰 수정
 	public void updateReview(ReviewVO reviewVO);
 	//리뷰 삭제
-	public void deleteReview(Integer review_num);
+	public void deleteReview(ReviewVO reviewVO);
 	//리뷰
 	public ReviewVO selectReview(int review_num);	
 	//상품 VO

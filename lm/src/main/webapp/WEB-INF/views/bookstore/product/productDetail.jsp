@@ -87,7 +87,7 @@
 					<div class="right-area">
 						<span>* 구매 후 리뷰 작성 시, e교환권 150원 적립 </span>
 						 <input id="review" type="button" class="sm-button review" value="리뷰 작성" 
-						 		data-num="${product.store_product_num}" onclick="fnShowPop('re_pwd')">
+						 		data-num="${product.store_product_num}">
 					<jsp:include page="product_modal.jsp"/>
 					</div>
 				</div>
@@ -120,7 +120,7 @@
 								<span>⭐</span>
 								<span>⭐</span>
 							</div>
-							<div>0</div>
+							<div>${review_count_1} 개</div>
 						</div>					
 						<div class="star-ratings stop-dragging">
 							<div class="star-ratings-fill" style="--rating: 4;">
@@ -130,7 +130,7 @@
 								<span>⭐</span>
 								<span>⭐</span>
 							</div>
-							<div>0</div>
+							<div>${review_count_2} 개</div>
 						</div>					
 						<div class="star-ratings stop-dragging">
 							<div class="star-ratings-fill" style="--rating: 6;">
@@ -140,7 +140,7 @@
 								<span>⭐</span>
 								<span>⭐</span>
 							</div>
-							<div>0</div>
+							<div>${review_count_3} 개</div>
 						</div>					
 						<div class="star-ratings stop-dragging">
 							<div class="star-ratings-fill" style="--rating: 8;">
@@ -150,7 +150,7 @@
 								<span>⭐</span>
 								<span>⭐</span>
 							</div>
-							<div>0</div>
+							<div>${review_count_4} 개</div>
 						</div>					
 						<div class="star-ratings stop-dragging">
 							<div class="star-ratings-fill" style="--rating: 10;">
@@ -160,7 +160,7 @@
 								<span>⭐</span>
 								<span>⭐</span>
 							</div>
-							<div>0</div>
+							<div>${review_count_5} 개</div>
 						</div>					
 					</div>					
 					<div>
@@ -192,13 +192,16 @@
 									 	${review.review_content}
 									</div>
 									<div class="right-area">
-										<img src="${pageContext.request.contextPath}/bookstore/product/imageView.do?review_num=${review.review_num}" width="64" height="64">
+										<c:if test="${!empty review.review_image }">
+											<img src="${pageContext.request.contextPath}/bookstore/product/imageView.do?review_num=${review.review_num}" width="64" height="64">
+										</c:if>
 									</div>
 								</div>
 								<div class="button-box">
 								<c:if test="${sessionScope.mem_num ==review.mem_num}">
-									<input type="button" class="small-button review-detail" value="수정" onclick="fnShowPop('re_mopwd')" data-num="${review.review_num }">
-									<input type="button" class="small-button" value="삭제" onclick="">
+									<input type="button" class="small-button review-detail" value="수정" data-num="${review.review_num }">
+									<input type="button" class="small-button" value="삭제"
+									onclick="location.href='/bookstore/review/reviewDelete.do?store_product_num=${product.store_product_num}&review_num=${review.review_num }'">
 								</c:if>
 								</div>
 										
@@ -285,7 +288,7 @@
 			<div>
 				<h2>이벤트</h2>
 				<div class="event">
-				<c:forEach var="event" items="${event }">
+				<c:forEach var="event" items="${event}">
 					<a class="wid" href="/bookstore/event/detail.do?event_board_num=${event.event_board_num}">
 						<img src="/bookstore/event/imageView.do?event_board_num=${event.event_board_num}&event_board_type=1" width="258px">
 					</a>

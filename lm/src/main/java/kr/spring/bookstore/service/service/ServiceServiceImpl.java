@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
+import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.service.dao.ServiceMapper;
 import kr.spring.bookstore.service.vo.AnnounceVO;
 import kr.spring.bookstore.service.vo.AnswerVO;
 import kr.spring.bookstore.service.vo.AskVO;
 import kr.spring.bookstore.service.vo.FaqVO;
+import kr.spring.bookstore.service.vo.OrderDetailVO;
 
 @Service
 @Transactional
@@ -89,6 +92,17 @@ public class ServiceServiceImpl implements ServiceService{
 	@Override
 	public AnswerVO selectAnswer(Integer ask_num) {
 		return serviceMapper.selectAnswer(ask_num);
+	}
+
+	@Override
+	public List<BookStorePaymentOrderVO> adminOrderList() {
+		return serviceMapper.adminOrderList();
+	}
+
+	@Override
+	public void updateProduct(ProductVO productVO) {
+		serviceMapper.updateProductStatus(productVO);
+		serviceMapper.updateProduct(productVO);
 	}
 
 }

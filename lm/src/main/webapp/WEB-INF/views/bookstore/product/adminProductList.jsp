@@ -47,7 +47,7 @@
 		<tr>
 			<td class="align-center">${product.store_product_num}</td>
 			<td width="400">
-				<a href="adminProductModify.do?product.store_product_num=${product.store_product_num}">${product.store_product_title}</a>
+				<a href="adminProductModify.do?store_product_isbn13=${product.store_product_isbn13}">${product.store_product_title}</a>
 			</td>
 			<td class="align-center">${product.store_product_pricesales}</td>
 			<td class="align-center">${product.store_product_stock}</td>

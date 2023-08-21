@@ -14,7 +14,7 @@
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="주문관리"
-			  onclick="location.href='#'">
+			  onclick="location.href='${pageContext.request.contextPath}/bookstore/adminOrderList.do'">
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="매출내역"

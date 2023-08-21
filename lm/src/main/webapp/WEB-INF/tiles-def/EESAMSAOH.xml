@@ -13,7 +13,7 @@
     
 	<!-- 상품 상세 -->
     <definition name="productDetail" extends="bsMain"> 
-    	<put-attribute name="bsTitle" value="SpringPage"/>
+    	<put-attribute name="bsTitle" value="상품 상세"/>
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/product/productDetail.jsp"/>
     </definition> 
     
