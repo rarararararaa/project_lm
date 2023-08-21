@@ -59,16 +59,7 @@
     	<put-attribute name="title" value="도서 분실 결제확인"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostCheck.jsp"/>
     </definition>
-    <definition name="informationUse1" extends="libService">
-    	<put-attribute name="libTitle" value="이용안내"/>
-    	<put-attribute name="libServiceNav" value="/WEB-INF/views/library/template/libPageNav.jsp"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_InformationUse1.jsp"/>
-    </definition>
-    <definition name="informationUse2" extends="libService">
-    	<put-attribute name="libTitle" value="대출·반납·연장·예약"/>
-    	<put-attribute name="libServiceNav" value="/WEB-INF/views/library/template/libPageNav.jsp"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_InformationUse2.jsp"/>
-    </definition>
+    
 </tiles-definitions>
 
 
