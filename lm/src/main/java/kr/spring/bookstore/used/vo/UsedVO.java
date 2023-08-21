@@ -37,7 +37,7 @@ public class UsedVO {
 	
 	//store product detail 영역
 	private String store_product_title;    //책 제목
-	private String store_product_author;   //저자
+	private String store_product_author;   //저자 
 	private String store_product_pubdate; //등록 날짜
 	private int store_product_status;   //판매 상태??
 	private int store_product_discount; //할인률
