@@ -121,11 +121,15 @@ public class bookLostReportController {
 	
 	@GetMapping("/library/basic/informationUse1.do")
 	public String informationUSE1() {
-		return "informationUse1";
+		return "libBasicPage";
 	}
 	@GetMapping("/library/basic/informationUse2.do")
 	public String informationUSE2() {
 		return "informationUse2";
+	}
+	@GetMapping("/library/basic/informationUse3.do")
+	public String informationUSE3() {
+		return "informationUse3";
 	}
 	
 }

@@ -21,10 +21,10 @@
 			</ul>
 		</li>
 		<li class="sb-menu-item">
-			<a href="" class="sub-items">자료실 안내</a>
+			<a href="${pageContext.request.contextPath}/library/basic/informationUse3.do" class="sub-items">자료실 안내</a>
 			<ul class="sb-menu-sub">
 				<li class="sb-menu-sub-item">
-					일반 자료실 안내
+					<a href="${pageContext.request.contextPath}/library/basic/informationUse3.do">일반 자료실 안내</a>
 				</li>
 				<li class="sb-menu-sub-item">
 					준수 사항
@@ -32,10 +32,10 @@
 			</ul>
 		</li>
 		<li class="sb-menu-item">
-			<a href="" class="sub-items">도서관 일정</a>
+			<a href="${pageContext.request.contextPath}/library/basic/libCalendar.do" class="sub-items">도서관 일정</a>
 		</li>
 		<li class="sb-menu-item">
-			<a href="" class="sub-items">분실물 찾기</a>
+			<a href="${pageContext.request.contextPath}/library/basic/lostitemList.do" class="sub-items">분실물 찾기</a>
 		</li>
 	</ul>
 </div>
