@@ -9,6 +9,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import kr.spring.intercepter.BsLoginCheckInterceptor;
+import kr.spring.intercepter.LibAdminCheckInterceptor;
 import kr.spring.intercepter.MyPageHeaderInterceptor;
 import kr.spring.intercepter.BsAdminCheckInterceptor;
 
@@ -19,6 +20,7 @@ public class AppConfig implements WebMvcConfigurer{
 	private MyPageHeaderInterceptor myPageHeader;
 	private BsLoginCheckInterceptor bsLoginCheck;
 	private BsAdminCheckInterceptor bsAdminCheck;
+	private LibAdminCheckInterceptor libAdminCheck;
 	
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
@@ -63,6 +65,11 @@ public class AppConfig implements WebMvcConfigurer{
 		bsAdminCheck = new BsAdminCheckInterceptor();
 		return bsAdminCheck;
 	}
+	@Bean
+	public LibAdminCheckInterceptor interceptor4() {
+		libAdminCheck = new LibAdminCheckInterceptor();
+		return libAdminCheck;
+	}
 	//마이페이지 헤더 경로 설정
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -96,6 +103,18 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/bookstore/event/write.do")
 		.addPathPatterns("/bookstore/event/update.do")
 		.addPathPatterns("/bookstore/event/eventAnnounceWrite.do");
+		
+		//도서관 관리자 체크
+		registry.addInterceptor(libAdminCheck)
+		.addPathPatterns("/library/template/libAdmin.do")
+		.addPathPatterns("/library/member/admin_list.do")
+		.addPathPatterns("/library/bookproductadmin/admin_booklist.do")
+		.addPathPatterns("/library/donationadmin/admin_donationlist.do")
+		.addPathPatterns("/library/boardannounce/list.do")
+		.addPathPatterns("/library/liblostitem/list.do")
+		.addPathPatterns("/library/service/admin_boardAskList.do")
+		.addPathPatterns("/library/apply/programAdminList.do");
+		
 	}
 }
 
