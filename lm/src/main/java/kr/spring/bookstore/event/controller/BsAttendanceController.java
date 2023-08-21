@@ -158,6 +158,7 @@ public class BsAttendanceController {
 					bsEventService.updateMemberPoint(mapJson);
 					
 					mapPointStatus.put("get1", "add");
+					mapJson.put("alertStatus", "get1");
 					mapPointStatus.put("event_attendance_point_num", attPointVO.getEvent_attendance_point_num());
 					bsEventService.updateAttendancePointGet(mapPointStatus);
 					
@@ -169,6 +170,7 @@ public class BsAttendanceController {
 					bsEventService.updateMemberPoint(mapJson);
 					
 					mapPointStatus.put("get2", "add");
+					mapJson.put("alertStatus", "get2");
 					mapPointStatus.put("event_attendance_point_num", attPointVO.getEvent_attendance_point_num());
 					bsEventService.updateAttendancePointGet(mapPointStatus);
 					
@@ -180,6 +182,7 @@ public class BsAttendanceController {
 					bsEventService.updateMemberPoint(mapJson);
 					
 					mapPointStatus.put("get3", "add");
+					mapJson.put("alertStatus", "get");
 					mapPointStatus.put("event_attendance_point_num", attPointVO.getEvent_attendance_point_num());
 					bsEventService.updateAttendancePointGet(mapPointStatus);
 					

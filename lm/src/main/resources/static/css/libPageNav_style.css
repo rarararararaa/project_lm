@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .sb-page-nav{
-	width: 235px;
+	width: 200px;
     margin-right: 32px;
 }
 .sb-page-nav ul{
@@ -54,9 +54,10 @@
 }
 
 
+/*
 .sb-menu-sub:last-child {
     border-bottom: 1px solid #dcdcdc;
-}
+}*/
 
 .sb-menu-sub__item {
     width: 100%;
@@ -205,4 +206,13 @@
 .sb-menu-item.is_menu--opened .sub-items {
     background: #3465a7;
     color: #fff;
+}
+.sb-menu-sub-item{
+	height: 30px;
+	line-height: 30px;
+}
+ul.sb-menu-sub{
+	margin-left: 15px;
+	margin-top: 7px;
+	margin-bottom: 7px;
 }

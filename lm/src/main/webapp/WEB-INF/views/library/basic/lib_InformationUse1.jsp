@@ -21,6 +21,7 @@
 	</div>
 	<div>
 		<h3>이용시간 안내</h3>
+		<div class="div-tb">
 		<table class="tg">
 			<thead>
 				<tr>
@@ -34,8 +35,8 @@
 			<tbody>
 				<tr>
 					<td class="tg-nrix">일반자료실 1, 2</td>
-					<td class="tg-nrix" rowspan="2">09:~21:00</td>
-					<td class="tg-nrix" rowspan="2">18:00 ~ 21:00<br>(야간 도서관
+					<td class="tg-nrix" rowspan="2">09:00 ~ 18:00</td>
+					<td class="tg-nrix" rowspan="2">09:00 ~ 21:00<br>(야간 도서관
 						운영)
 					</td>
 					<td class="tg-nrix" rowspan="2">09:00 ~ 18:00</td>
@@ -47,6 +48,15 @@
 				</tr>
 			</tbody>
 		</table>
+		</div>
+	</div>
+	<div>
+		<h3>휴관일 안내</h3>
+		<ul>
+			<li>매주 월요일</li>
+			<li>일요일을 제외한 법정공휴일 및 국가가 정한 임시 휴일</li>
+			<li>기타 관장이 필요하다고 인정하는 날 미리 공지 후 휴관</li>
+		</ul>
 	</div>
 	</div>
 </body>

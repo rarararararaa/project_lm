@@ -52,15 +52,15 @@ $(function(){
 			
 			if(param.attendance.point_get1==1){
 				document.getElementById('point_get1').className = 'yesPoint';
-				alert('출석 도장 10개 획득 완료! 100Point가 지급되었습니다.');
+				//alert('출석 도장 10개 획득 완료! 100Point가 지급되었습니다.');
 			}
 			if(param.attendance.point_get2==1){
 				document.getElementById('point_get2').className = 'yesPoint';
-				alert('출석 도장 20개 획득 완료! 200Point가 지급되었습니다.');
+				//alert('출석 도장 20개 획득 완료! 200Point가 지급되었습니다.');
 			}
 			if(param.attendance.point_get3==1){
 				document.getElementById('point_get3').className = 'yesPoint';
-				alert('출석 한달 완주 성공! 300Point가 지급되었습니다.');
+				//alert('출석 한달 완주 성공! 300Point가 지급되었습니다.');
 			}
 		}else if(param.status == 'noCount'){
 			$('#attendance_count').text(' ');
@@ -69,6 +69,19 @@ $(function(){
 		}
 		//문서객체에 추가
 	} //end of display
+	
+	//출석이벤트로 포인트 얻을시 안내 alert창
+	function alertPointGet(param){
+		if(param.alertStatus == 'get1'){
+			alert('출석 도장 10개 획득 완료! 100Point가 지급되었습니다.');
+		}else if(param.alertStatus == 'get2'){
+			alert('출석 도장 20개 획득 완료! 200Point가 지급되었습니다.');
+		}else if(param.alertStatus == 'get3'){
+			alert('출석 도장 30개 획득 완료! 300Point가 지급되었습니다.');
+		}else{
+			
+		}
+	}
 	
 	//stamp표시 공통
 	function displayStamp(todayNum){
@@ -94,6 +107,7 @@ $(function(){
 				}else if(param.result == 'success'){
 					displayStamp(currentDay);
 					displayStatus(param);
+					alertPointGet(param);
 				}else if(param.result == 'Check'){
 					alert('오늘은 이미 출석을 완료 했습니다.');
 				}

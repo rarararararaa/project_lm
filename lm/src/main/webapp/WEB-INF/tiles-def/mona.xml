@@ -11,6 +11,8 @@
 	    <put-attribute name="bsbody" value="/WEB-INF/views/main/main.jsp"/>
     </definition>  -->
     
+    
+    
     <definition name="bsEventWrite" extends="bsMain">
     	<put-attribute name="bsTitle" value="이벤트 작성"/>
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventWrite.jsp"/>
@@ -44,22 +46,49 @@
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventAnnounceDetail.jsp"/>
     </definition>
     
-    <!-- 도서관 도서 분실 신고 페이지 -->
-   
-    <definition name="bookLostInfo" extends="libMain">
-    	<put-attribute name="title" value="도서 분실 신고 안내"/>
+    <definition name="libBasicPage" template="/WEB-INF/views/library/template/libBasicPage_layout.jsp">
+        <put-attribute name="libTitle" value="이용안내"/>
+        <put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
+    	<put-attribute name="libNav" value="/WEB-INF/views/library/template/libPageNav.jsp"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_InformationUse1.jsp"/>
+	    <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/> 
+    </definition>
+    
+    <definition name="informationUse2" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="대출·반납·연장·예약"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_InformationUse2.jsp"/>
+    </definition>
+    <definition name="informationUse3" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="자료실안내"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_InformationUse3.jsp"/>
+    </definition>
+    <definition name="lostitemListUser" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="분실물 찾기"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemList.jsp"/>
+    </definition>
+    <definition name="libCalendar" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="도서관 일정"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_Calendar.jsp"/>
+    </definition>
+    
+    <definition name="bookLostInfo" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="도서 분실 신고 안내"/>
+    	<put-attribute name="libNav" value="/WEB-INF/views/library/template/libPageNav2.jsp"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostInfo.jsp"/>
     </definition>
      
-    <definition name="bookLostReport" extends="libMain">
-    	<put-attribute name="title" value="도서 분실 신고"/>
+    <definition name="bookLostReport" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="도서 분실 신고"/>
+    	<put-attribute name="libNav" value="/WEB-INF/views/library/template/libPageNav2.jsp"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostReport.jsp"/>
     </definition>
-    <definition name="bookLostCheck" extends="libMain">
+    <definition name="bookLostCheck" extends="libBasicPage">
     	<put-attribute name="title" value="도서 분실 결제확인"/>
+    	<put-attribute name="libNav" value="/WEB-INF/views/library/template/libPageNav2.jsp"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostCheck.jsp"/>
     </definition>
     
+   
 </tiles-definitions>
 
 

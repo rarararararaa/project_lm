@@ -1,16 +1,20 @@
 @charset "UTF-8";
 #libBasicPage-1{
-	width: 900px;
+	width: 950px;
 	margin-top: 22px;
 }
+table.tg{
+	margin: 10px auto;
+}
 
-#libBasicPage-1 .tg {
+#libBasicPage-1 .tg, #libBasicPage-3 .tg{
 	border-collapse: collapse;
 	border-color: #ccc;
 	border-spacing: 0;
 }
 
-#libBasicPage-1 .tg td {
+#libBasicPage-1 .tg td , #libBasicPage-3 .tg td{
+	width: 140px;
 	background-color: #fff;
 	border-color: #ccc;
 	border-style: solid;
@@ -23,7 +27,8 @@
 	word-break: normal;
 }
 
-#libBasicPage-1 .tg th {
+#libBasicPage-1 .tg th, #libBasicPage-3 .tg th {
+	width: 150px;
 	background-color: #f0f0f0;
 	border-color: #ccc;
 	border-style: solid;
@@ -38,6 +43,34 @@
 }
 
 #libBasicPage-1 .tg .tg-nrix {
+	text-align: center;
+	vertical-align: middle
+}
+#libBasicPage-1 .tg .tg-9wq8 {
+	text-align: center;
+	vertical-align: middle
+}
+#libBasicPage-1 .tg .tg-9wq9 {
+	width:200px;
+	text-align: center;
+	vertical-align: middle
+}
+#libBasicPage-1 h3, #libBasicPage-3 h3{
+	margin-left: 20px;
+}
+
+#libBasicPage-3 .tg .tg-9wq8 {
+	text-align: center;
+	vertical-align: middle
+}
+#libBasicPage-3 .tg .tg-9wq9 {
+	width:400px;
+	text-align: center;
+	vertical-align: middle
+}
+
+#libBasicPage-3 .tg .tg-9wq7 {
+	width:500px;
 	text-align: center;
 	vertical-align: middle
 }
