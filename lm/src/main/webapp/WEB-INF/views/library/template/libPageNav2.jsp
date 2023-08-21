@@ -9,16 +9,19 @@
 	<h2 class="sb-title">신청·참여</h2>
 	<ul class="sb-menu">
 		<li class="sb-menu-item">
-			<a href="${pageContext.request.contextPath}" class="sub-items">희망도서신청</a>
+			<a href="${pageContext.request.contextPath}/library/bookApplyMain.do" class="sub-items">희망도서신청</a>
 		</li>
 		<li class="sb-menu-item">
-			<a href="" class="sub-items">도서 기증</a>
+			<a href="${pageContext.request.contextPath}/library/donationMain.do" class="sub-items">도서 기증</a>
 		</li>
 		<li class="sb-menu-item">
-			<a href="" class="sub-items">시설 예약</a>
+			<a href="${pageContext.request.contextPath}/library/facilityList.do" class="sub-items">시설 예약</a>
 		</li>
 		<li class="sb-menu-item">
-			<a href="" class="sub-items">프로그램</a>
+			<a href="${pageContext.request.contextPath}/library/programList.do" class="sub-items">프로그램</a>
+		</li>
+		<li class="sb-menu-item">
+			<a href="${pageContext.request.contextPath}/library/liblostitem/list.do" class="sub-items">분실물</a>
 		</li>
 		<li class="sb-menu-item">
 			<a href="${pageContext.request.contextPath}/library/lostReport/bookLostInfo.do" class="sub-items">분실도서신고</a>

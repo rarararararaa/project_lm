@@ -47,4 +47,12 @@ public interface ServiceService {
 	public void updateProduct(ProductVO productVO);
 	
 	public List<BookStorePaymentOrderVO> adminOrderList();
+	
+	public List<OrderDetailVO> adminOrderDetailList(Integer order_num);
+	
+	public BookStorePaymentOrderVO adminSelectOrder(Integer order_num);
+	
+	public ProductVO selectProductByNum(int product_num);
+	
+	public void updateOrderStatus(BookStorePaymentOrderVO orderVO);
 }

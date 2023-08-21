@@ -77,11 +77,15 @@
     	<put-attribute name="title" value="회원관리"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/admin/orderList.jsp"/>
     </definition>
+    <definition name="adminOrderDetail" extends="bsadmin">
+    	<put-attribute name="title" value="회원관리"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/admin/adminOrderDetail.jsp"/>
+    </definition>
     <definition name="libApplyMain" template="/WEB-INF/views/library/template/libApplyLayout.jsp">
     	<put-attribute name="title" value="시설 목록"/>
     	<put-attribute name="header" value="/WEB-INF/views/library/template/libHeader.jsp"/>
-    	<put-attribute name="nav" value="/WEB-INF/views/library/template/libApplyNav.jsp"/>
-    	<put-attribute name="body" value="/WEB-INF/views/library/apply/facilityList.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/library/template/libPageNav2.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/library/apply/bookApplyMain.do"/>
     	<put-attribute name="footer" value="/WEB-INF/views/library/template/libFooter.jsp"/>                                        
     </definition>
     <definition name="insertFacility" extends="libApplyMain">

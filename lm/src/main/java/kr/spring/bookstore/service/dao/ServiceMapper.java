@@ -64,6 +64,17 @@ public interface ServiceMapper {
 	public void updateProductStatus(ProductVO productVO);
 	//주문 상세 정보
 
-	@Select("SELECT * FROM store_order_detail")
+	@Select("SELECT * FROM store_order_manage")
 	public List<BookStorePaymentOrderVO> adminOrderList();
+	@Select("SELECT * FROM store_order_detail WHERE order_num=#{order_num}")
+	public List<OrderDetailVO> adminOrderDetailList(Integer order_num);
+	@Select("SELECT store_product_title FROM store_product_detail WHERE store_product_num IN (SELECT store_product_num FROM store_order_detail WHERE order_num=#{order_num})")
+	public List<String> adminOrderProductName(Integer order_num);
+	@Select("SELECT * FROM store_order_manage WHERE order_num=#{order_num}")
+	public BookStorePaymentOrderVO adminSelectOrder(Integer order_num);
+	
+	public ProductVO selectProductByNum(int product_num);
+	
+	@Select("UPDATE store_order_manage SET order_status=#{order_status} WHERE order_num=#{order_num} ")
+	public void updateOrderStatus(BookStorePaymentOrderVO orderVO);
 }

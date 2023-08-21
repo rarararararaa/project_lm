@@ -34,4 +34,6 @@ public class BookStorePaymentOrderVO {
 	private int order_product_quantity;
 	private int used_product_num;
 	private int cart_quantity;
+	private String product_name;
+	
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -453,5 +454,32 @@ public class ServiceController {
 		model.addAttribute("list", list);
 		return "adminOrderList";
 	}
-	
+	@GetMapping("/bookstore/adminOrderDetail.do")
+	public String orderDetail(@RequestParam("order_num") int order_num,Model model) {
+		BookStorePaymentOrderVO order = serviceService.adminSelectOrder(order_num);
+		log.debug("<<order>> : " + order);
+		List<OrderDetailVO> detailList = serviceService.adminOrderDetailList(order_num);
+		
+		for(OrderDetailVO detail : detailList) {
+			log.debug("<<detail>> : "+detail);
+			String product_name = serviceService.selectProductByNum(detail.getStore_product_num()).getStore_product_title();
+			
+			detail.setProduct_name(product_name);
+		}
+		
+		model.addAttribute("order", order);
+		model.addAttribute("detailList", detailList);
+		
+		return "adminOrderDetail";
+	}
+	@PostMapping("/bookstore/adminOrderDetail.do")
+	public String statusChange(BookStorePaymentOrderVO orderVO, Model model, HttpServletRequest request) {
+		log.debug("<<orderVO>> : " + orderVO);
+		serviceService.updateOrderStatus(orderVO);
+		
+		model.addAttribute("message","주문 상태 수정이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath()+"/bookstore/adminOrderList.do");
+		
+		return "common/resultView";
+	}
 }

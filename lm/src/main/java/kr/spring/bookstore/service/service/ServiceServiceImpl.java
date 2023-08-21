@@ -1,5 +1,6 @@
 package kr.spring.bookstore.service.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -96,13 +97,45 @@ public class ServiceServiceImpl implements ServiceService{
 
 	@Override
 	public List<BookStorePaymentOrderVO> adminOrderList() {
-		return serviceMapper.adminOrderList();
+		List<BookStorePaymentOrderVO> list = new ArrayList<BookStorePaymentOrderVO>();
+		list = serviceMapper.adminOrderList();
+		for(BookStorePaymentOrderVO order:list) {
+			List<String> name = new ArrayList<String>();
+			name = serviceMapper.adminOrderProductName(order.getOrder_num());
+			String ordername = name.get(0);
+			if(name.size() > 1) {
+				ordername += "외 " + (name.size()-1) + "개";
+			}
+			
+			order.setProduct_name(ordername);
+		}
+		return list;
 	}
 
 	@Override
 	public void updateProduct(ProductVO productVO) {
 		serviceMapper.updateProductStatus(productVO);
 		serviceMapper.updateProduct(productVO);
+	}
+
+	@Override
+	public List<OrderDetailVO> adminOrderDetailList(Integer order_num) {
+		return serviceMapper.adminOrderDetailList(order_num);
+	}
+
+	@Override
+	public BookStorePaymentOrderVO adminSelectOrder(Integer order_num) {
+		return serviceMapper.adminSelectOrder(order_num);
+	}
+
+	@Override
+	public ProductVO selectProductByNum(int product_num) {
+		return serviceMapper.selectProductByNum(product_num);
+	}
+
+	@Override
+	public void updateOrderStatus(BookStorePaymentOrderVO orderVO) {
+		serviceMapper.updateOrderStatus(orderVO);
 	}
 
 }

@@ -108,4 +108,12 @@
 		FROM lm_order_detail d JOIN lm_order_manage m
 		USING(order_num)
 	</select>
+	
+	<!-- 상품 상세 -->
+	<select id="selectProductByNum" parameterType="int">
+		SELECT
+		  * 
+		FROM STORE_PRODUCT_DETAIL d JOIN STORE_PRODUCT_MANAGE p USING(store_product_num)
+		WHERE store_product_num=#{store_product_num}
+	</select>
 </mapper>
