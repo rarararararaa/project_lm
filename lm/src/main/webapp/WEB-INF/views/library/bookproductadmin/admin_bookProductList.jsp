@@ -47,7 +47,7 @@
 	<c:if test="${count > 0}">
 	<table class="striped-table">
 		<tr>
-			<th>도서청구번호</th>
+			<th>청구번호</th>
 			<th>도서명</th>
 			<th>주제(분류)</th>
 			<th>작가(저자명)</th>

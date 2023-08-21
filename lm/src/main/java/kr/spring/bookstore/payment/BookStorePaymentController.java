@@ -143,7 +143,7 @@ public class BookStorePaymentController {
 			e.printStackTrace();
 			mapJson.put("result", "errorCancel");
 		}
-		
+		log.debug("<<주문 취소-map>> : "+mapJson);
 		return mapJson;
 	}
 	//======================장바구니FORM===========================//  
@@ -288,7 +288,6 @@ public class BookStorePaymentController {
 			book_list.add(product);
 			count += vo.getCart_quantity();
 		}
-		log.debug("<<listCart 확인>> : "+book_list);
 		
 		MemberVO member = memberService.selectMember(mem_num);
 		//배송정보
@@ -331,6 +330,7 @@ public class BookStorePaymentController {
 			return api.paymentByImpUid(imp_uid);	
 		}
 	}
+	
 	//주문 성공시 주문 내역 저장
 	@RequestMapping("/bookstore/payment/orderAction.do")
 	@ResponseBody
@@ -364,7 +364,7 @@ public class BookStorePaymentController {
 		bookStorePaymentOrderService.insertOrder(order, list);
 		
 		//포인트 증감 - 회원 정보와 총금액
-		/*Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		MemberVO member = memberService.selectMember(mem_num);
 		double grade = getPoint(member.getMem_grade());
 		int addPoint = (int) Math.round(total*grade);//적립되는 포인트
@@ -372,7 +372,7 @@ public class BookStorePaymentController {
 		map.put("addPoint", (point*-1));//사용한 포인트
 		map.put("order_num", order.getOrder_num());
 		log.debug("<<포인트 - controller>> : "+map+','+addPoint);
-		bookStorePaymentOrderService.updatePoint(map, addPoint);*/
+		bookStorePaymentOrderService.updatePoint(map, addPoint);
 		
 		//세션 정보 삭제
 		session.removeAttribute("cartList");

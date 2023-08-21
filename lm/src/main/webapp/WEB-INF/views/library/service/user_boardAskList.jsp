@@ -34,7 +34,7 @@
 			</c:if>
 		</c:if>
 		<c:if test="${boardAsk.ask_status==1}">
-			<a href="boardAnswerDetail.do?ask_num=${boardAsk.ask_num}">
+			<a href="boardAskDetail.do?ask_num=${boardAsk.ask_num}">
 				<span style="color: blue;">답변완료</span>
 			</a>
 		</c:if>

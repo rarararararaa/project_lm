@@ -8,6 +8,7 @@ $(function(){
 			type:'get',
 			dataType:'json',
 			success:function(param){
+				//alert('tlqkf 왜 이상한데로가는거야 rowhwrkxdms');
 				if(param.result == 'errorCancel'){
 					alert('취소에 실패했습니다. 카드사에 연락해주세요');
 				}else if(param.result == 'success'){

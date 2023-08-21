@@ -26,7 +26,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>수정</form:button>
-			<input type="button" value="목록" onclick="location.href='boardAskList.do'">
+			<input type="button" value="목록" onclick="location.href='user_boardAskList.do'">
 		</div>	                               
 	</form:form>
 </div>

@@ -1,39 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- service 메뉴 시작 -->
-<div class="side-bar">
-	<ul>
-		<li>
-			<input type="button" class="menu-btn" value="공지사항"
-			  onclick="location.href='${pageContext.request.contextPath}/library/boardAnnounce/list.do'">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/libPageNav.js"></script>
+<!-- 고객센터 사이드바 시작 -->
+<div class="sb-page-nav">
+	<h2 class="sb-title">고객센터</h2>
+	<ul class="sb-menu">
+		<li class="sb-menu-item">
+			<a href="${pageContext.request.contextPath}/library/boardannounce/list.do" class="sub-items">공지사항</a>
 		</li>
-		<li>
-			<input type="button" class="menu-btn" value="1:1문의"
-			  onclick="location.href='${pageContext.request.contextPath}/library/service/user_boardAskList.do'">
+		<li class="sb-menu-item">
+			<a href="${pageContext.request.contextPath}/library/service/user_boardAskList.do" class="sub-items">1:1문의</a>
 		</li>
-		<li>
-			<input type="button" class="menu-btn" value="분실 도서 신고"
-			  onclick="#">
+		<li class="sb-menu-item">
+			<a href="" class="sub-items">도서관 일정</a>
 		</li>
-		<li class="call-center">
-			<span class="img-cover">고객센터 이용안내</span>
-			<img src="${pageContext.request.contextPath}/images/call.png" width="30"><br>
-			전화 상담 : 02-0000-0000<br>
-			e-mail : lmlib@lmlib.com<br>
-			평일 09:00 ~ 18:00 (12:00~13:00 점심시간)
+		<li class="sb-menu-item">
+			<a href="" class="sub-items">분실물 찾기</a>
 		</li>
-		<c:if test="${mem_auth==9}">
-		<li>
-			<input type="button" class="menu-btn" value="관리자 페이지"
-			  onclick="location.href='${pageContext.request.contextPath}/library/template/libAdmin.do'">
-		</li>
-		</c:if>
 	</ul>
 </div>
-<!-- service 메뉴 끝 -->
-
-
-
-
-
+<!-- 고객센터 사이드바 끝 -->

@@ -50,7 +50,8 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 				bookStorePaymentOrderMapper.updateUsed(0,vo.getUsed_product_num());
 				continue;
 			}
-			bookStorePaymentOrderMapper.updateProduct(vo.getStore_product_status());
+			int quantity = vo.getCart_quantity()*-1;
+			bookStorePaymentOrderMapper.updateProduct(vo.getStore_product_num(),quantity);
 		}
 	}
 	
@@ -120,15 +121,17 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 	}
 	@Override
 	public void updateQuantity(List<BookStorePaymentOrderVO> order) {
+		log.debug("<<결제 취소 재고 변경>> : "+order);
 		for(BookStorePaymentOrderVO vo : order) {
 			if(vo.getUsed_product_num() != 0) {
 				bookStorePaymentOrderMapper.updateUsed(1, vo.getUsed_product_num());
 				continue;
 			}
-			bookStorePaymentOrderMapper.updateProductPlus(vo.getStore_product_num());
+			int quantity = vo.getCart_quantity();
+			bookStorePaymentOrderMapper.updateProduct(vo.getStore_product_num(),quantity);
 		}
 	}
-
+	
 
 	@Override
 	public void updatePoint(Map<String, Object> map,int addPoint) {
@@ -144,11 +147,11 @@ public class BookStorePaymentOrderServiceImpl implements BookStorePaymentOrderSe
 		pointMapper.insertOrderPoint(vo);
 		log.debug("<<포인트 등록>> : "+vo);
 		//적립 예정 포인트
-		map.put("addPoint", addPoint);
+		/*map.put("addPoint", addPoint);
 		vo.setPoint_value((Integer)map.get("addPoint"));
 		vo.setPoint_status(0);
 		bsEventMapper.updateMemberPoint(map);
-		pointMapper.insertOrderPoint(vo);
+		pointMapper.insertOrderPoint(vo);*/
 		//포인트 로그 등록
 	}
 
