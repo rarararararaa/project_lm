@@ -56,7 +56,7 @@ public class BoardAnnounceController {
 		log.debug("<<ALL-board-count>> : " + count);
 
 		// 페이지처리 부가적인 파라미터
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "list.do", "&order=" + order);
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 15, 10, "list.do", "&order=" + order);
 
 		List<BoardAnnounceVO> list = null;
 		if (count > 0) {
