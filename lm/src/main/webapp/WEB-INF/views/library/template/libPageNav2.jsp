@@ -4,7 +4,7 @@
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/libPageNav.js"></script>
-<!-- 도서관 이용 메뉴 시작 -->
+<!-- 도서관 이용 메뉴 시작 ㅇㄴㅇ-->
 <div class="sb-page-nav">
 	<h2 class="sb-title">신청·참여</h2>
 	<ul class="sb-menu">
