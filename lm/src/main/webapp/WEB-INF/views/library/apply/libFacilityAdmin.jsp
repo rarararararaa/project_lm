@@ -15,7 +15,7 @@
 	});
 </script>
 <div class="page-main">
-	<h2>프로그램 목록</h2>
+	<h2>시설 목록</h2>
 	<form action="list.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -49,35 +49,27 @@
 			</script>
 		</div>
 	</form>
-				<button onclick="location.href='programAdminWrite.do'">프로그램 등록</button>
+				<button onclick="location.href='insertAdminFacility.do'">시설 등록</button>
 	<c:if test="${count == 0}">
-	<div class="result-display">표시할 프로그램이 없습니다.</div>
+	<div class="result-display">표시할 시설이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
 	<table class="striped-table">
 		<tr>
 			<th >번호</th>
-			<th >프로그램명</th>
-			<th >등록일</th>
-			<th >진행상황</th>
-			<th >프로그램 수정</th>
+			<th >시설명</th>
+			<th >예약현황</th>
+			<th>예약 비활성화</th>
 		</tr>
-		<c:forEach var="lib_program" items="${list}">
+		<c:forEach var="lib_facility" items="${list}">
 		<tr>
-			<td class="align-center">${lib_program.program_num}</td>
+			<td class="align-center">${lib_facility.facility_num}</td>
 			<td class="align-center">	
-				<a href="${pageContext.request.contextPath }/library/programDetail.do?program_num=${lib_program.program_num}">${lib_program.program_title}</a>
+				<a href="${pageContext.request.contextPath }/library/facApplyWrite.do?facility_num=${lib_facility.facility_num}">${lib_facility.facility_name}</a>
 			</td>
-			<td class="align-center">${lib_program.program_reg_date}</td>
+			<td class="align-center">예약가능</td>
 			<td class="align-center">
-				<c:if test="${lib_program.status==0}">진행예정</c:if>
-				<c:if test="${lib_program.status==1}"><span style="color: red;">종료</span></c:if>
-				<c:if test="${lib_program.status==2}">진행중</c:if>
-			</td>
-			<td style="text-align: center;">
-				<c:if test="${lib_program.status!=1 }">
-					<button>프로그램 수정</button>
-				</c:if>
+				<button>비활성화</button>
 			</td>
 		</tr>
 		</c:forEach>

@@ -10,7 +10,7 @@
     	<put-attribute name="title" value="SpringPage"/>
 	    <put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
     </definition> 
-    
+    <!-- LM문고 -->
     <!-- 장바구니 -->
      <definition name="cart" extends="bsMain">
     	<put-attribute name="title" value="장바구니"/>
@@ -26,26 +26,35 @@
      <definition name="receipt" extends="bsMain">
     	<put-attribute name="title" value="영수증"/>
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/payment/receipt.jsp"/>
-    </definition> 
+    </definition>
+    <!-- 도서 리스트 --> 
+    <definition name="productListAll" extends="bsMain">
+    	<put-attribute name="title" value="도서목록"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/product/productListAll.jsp"/>
+    </definition>
     
-    
+    <!-- LM도서 -->    
     <!-- 도서관 도서 상세 -->
      <definition name="bookDetail" extends="libMain">
     	<put-attribute name="title" value="도서상세"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lib_book/LIB_bookDetail.jsp"/>
     </definition>
     
-    <!-- 관리자 페이지 -->
+    <!-- 관리자 페이지-프로그램 -->
     <definition name="admin_programList" extends="libAdmin">
     	<put-attribute name="libTitle" value="프로그램등록리스트"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/libProgramAdmin.jsp"/>
     </definition>
-    
     <definition name="admin_programWrite" extends="libAdmin">
     	<put-attribute name="libTitle" value="프로그램등록리스트"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/insertProgram.jsp"/>
     </definition>
     
+    <!-- 관리자 페이지-시설관리 -->
+    <definition name="admin_facilityList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="프로그램등록리스트"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/libFacilityAdmin.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

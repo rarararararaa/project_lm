@@ -60,4 +60,10 @@ public interface ProductMapper {
 	//출판 예정 도서
 	@Select("SELECT * FROM (SELECT * FROM store_product_manage m JOIN store_product_detail USING(store_product_num) ORDER BY store_product_pubdate DESC) WHERE rownum <= 5")
 	public List<ProductVO> selectFuture();
+	
+	//카테고리 별 도서 검색
+	public List<ProductVO> selectCategoryBook(Map<String, Object> map);
+	//카데고리 별 도서 개수
+	public int selectCategoryCount(Map<String, Object> map);
+	
 }

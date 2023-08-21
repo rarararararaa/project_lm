@@ -206,7 +206,7 @@
 			<!-- 메뉴 -->
 			<ul class="gnb_list">
 				<li class="gnb_item">
-					<a class="gnb_link"><em>책함순</em></a>
+					<a class="gnb_link" href="/bookstore/product/productCeteList.do"><em>전체도서</em></a>
 				</li>
 				<li class="gnb_item">
 					<a class="gnb_link"><em>나나나</em></a>

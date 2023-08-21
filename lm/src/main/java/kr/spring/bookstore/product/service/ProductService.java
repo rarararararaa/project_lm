@@ -26,4 +26,7 @@ public interface ProductService {
 	public List<ProductVO> selectBestBook();
 	public List<ProductVO> selectNewBook();
 	public List<ProductVO> selectFuture();
+	//도서 전체 리스트(분류)
+	public List<ProductVO> selectCategoryBook(Map<String, Object> map);
+	public int selectCategoryCount(Map<String, Object> map);
 }

@@ -197,6 +197,25 @@
 	
 	
 	</insert>
+	
+	<!-- 상품 리스트 -->
+	<select id="selectCategoryBook" parameterType="map" resultType="productVO">
+		SELECT * FROM
+		(SELECT a.*, rownum rnum FROM 
+		(SELECT * FROM store_product_manage m JOIN store_product_detail d USING(store_product_num) 
+		WHERE m.store_product_searchcategoryname = #{store_product_searchcategoryName}
+		AND d.store_product_categoryname LIKE '%' || #{store_product_categoryname} || '%')a)
+	<![CDATA[
+		WHERE rnum>=#{start} AND rnum<=#{end}
+		]]>
+	</select>
+	
+	<select id="selectCategoryCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM 
+		(SELECT * FROM store_product_manage m JOIN store_product_detail d USING(store_product_num) 
+		WHERE m.store_product_searchcategoryname = #{store_product_searchcategoryName}
+		AND d.store_product_categoryname LIKE '%' || #{store_product_categoryname} || '%')a 
+	</select>
 </mapper>
 
 

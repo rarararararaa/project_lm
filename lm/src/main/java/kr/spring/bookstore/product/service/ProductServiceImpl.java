@@ -73,4 +73,14 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.selectFuture();
 	}
 
+	@Override
+	public List<ProductVO> selectCategoryBook(Map<String, Object> map) {
+		return productMapper.selectCategoryBook(map);
+	}
+
+	@Override
+	public int selectCategoryCount(Map<String, Object> map) {
+		return productMapper.selectCategoryCount(map);
+	}
+
 }

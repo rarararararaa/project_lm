@@ -140,7 +140,7 @@ public class MemberController {
 				if(lo == 1) { //bs인 경우
 					if(member.getMem_auth() == 0) {
 						//탈퇴회원
-						return "redirect:/bookstore/template/bsMain.do";
+						return "redirect:/bookstore/template/bsMain.do";	
 					}else if(member.getMem_auth() == 1) { //정지회원
 						return "redirect:/bookstore/template/bsMain.do";
 					}else if(member.getMem_auth() == 2){ //휴면회원
