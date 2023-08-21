@@ -35,9 +35,21 @@
 			<a href="" 
 				class="sub-items">일정 등록</a>
 		</li>
+<<<<<<< HEAD
 		<li class="sb-menu-item">
 			<a href="#" 
 				class="sub-items">프로그램 등록</a>
+=======
+<<<<<<< HEAD
+		<li>
+			<input type="button" class="menu-btn" value="프로그램 등록"
+			  onclick="location.href='${pageContext.request.contextPath}/library/apply/programAdminList.do'">
+=======
+		<li class="sb-menu-item">
+			<a href="#" 
+				class="sub-items">프로그램 등록</a>
+>>>>>>> branch 'main' of https://github.com/favau/lm.git
+>>>>>>> branch 'main' of https://github.com/favau/lm.git
 		</li>
 		<li class="sb-menu-item">
 			<a href="#" 
