@@ -127,7 +127,7 @@ public class LibServiceController {
 		BoardAskVO boardAskVO = libServiceService.selectBoardAsk(ask_num);
 
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
-
+		
 		ModelAndView mav = new ModelAndView();
 
 		if(mem_num!=boardAskVO.getMem_num()) {
@@ -238,90 +238,5 @@ public class LibServiceController {
 
 		return "common/resultView";
 	}
-	
-	/*========================
-	 * 고객센터(1:1 문의하기) - 1:1문의답변 상세보기(질문 + 답변)
-	 *========================*/
-	@RequestMapping("/library/service/boardAnswerDetail.do")
-	public ModelAndView answerDetail(@RequestParam int ask_num,HttpSession session) {
-		BoardAnswerVO boardAnswerVO = libServiceService.selectBoardAnswer(ask_num);
-		BoardAskVO boardAskVO = libServiceService.selectBoardAsk(ask_num);
-
-		Integer mem_num = (Integer)session.getAttribute("mem_num");
-		
-		ModelAndView mav = new ModelAndView();
-
-		if(mem_num!=boardAskVO.getMem_num()) {
-			mav.setViewName("common/resultView");
-			mav.addObject("message","회원정보가 일치 하지 않습니다.");
-			mav.addObject("url", "user_boardAskList.do");
-
-			return mav;
-		}
-
-		mav.setViewName("boardAnswerView");
-		mav.addObject("boardAnswerVO",boardAnswerVO);
-		mav.addObject("boardAskVO",boardAskVO);
-
-		return mav;
-	}
-	
-	/*========================
-	 * 고객센터(1:1 문의하기) - 1:1문의답변 수정
-	 *========================*/
-	//수정 폼 호출
-		@GetMapping("/library/service/boardAnswerUpdate.do")
-		public String formAnswerUpdate(@RequestParam int answer_num,
-				                  Model model) {
-			BoardAnswerVO boardAnswerVO = 
-					libServiceService.selectBoardAnswer(answer_num);
-			model.addAttribute("boardAnswerVO", boardAnswerVO);
-			
-			return "boardAnswerModify";
-		}
-		//전송된 데이터 처리
-		@PostMapping("/library/service/boardAnswerUpdate.do")
-		public String submitAnswerUpdate(
-				    @Valid BoardAnswerVO boardAnswerVO,
-				    BindingResult result,
-				    HttpServletRequest request,
-				    Model model) {
-			log.debug("<<1:1문의답변 수정 - BoardAnswerVO>> : " + boardAnswerVO);
-			
-			//유효성 체크 결과 오류가 있으면 폼 호출
-			if(result.hasErrors()) {
-				return "boardAnswerModify";
-			}
-
-			//글 수정
-			libServiceService.updateAnswer(boardAnswerVO);
-			
-			//View에 표시할 메시지
-			model.addAttribute("message", "1:1문의답변 수정 완료!");
-			model.addAttribute("url", 
-					request.getContextPath()
-					+"/library/service/boardAnswerDetail.do?answer_num="
-							+boardAnswerVO.getAnswer_num());
-
-			return "common/resultView";
-		}
-		
-		/*========================
-		 * 고객센터(1:1 문의하기) - (관리자)1:1문의답변 삭제
-		 *========================*/
-		@RequestMapping("/library/service/boardAnswerDelete.do")
-		public String submitAnswerDelete(
-				     @RequestParam int answer_num,HttpSession session) {
-			log.debug("<<1:1문의답변 삭제 - answer_num>> : " + answer_num);
-			
-			Integer ask_num = (Integer)session.getAttribute("ask_num");
-			
-			//삭제시 boardAsk의 status값 변경(1->0)
-			libServiceService.updateBoardAskStatus2(ask_num);
-			//글삭제
-			libServiceService.deleteAnswer(answer_num);
-			
-			return "redirect:/library/service/user_boardAskList.do";
-		}
 	
 }

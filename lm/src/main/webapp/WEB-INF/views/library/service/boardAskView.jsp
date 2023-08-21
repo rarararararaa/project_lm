@@ -4,7 +4,7 @@
 <!-- 내가 쓴 1:1문의 게시글 상세 시작 -->
 <div class="result-main">
 	<ul class="detail">
-		<li class="title">작성한 문의 내역</li>
+		<li class="title">회원번호(${boardAskVO.ask_num})님 문의 내역</li>
 		<li>제목 : ${boardAskVO.ask_title}</li>
 		<li>내용 : ${boardAskVO.ask_content}</li>
 		<li>
@@ -36,7 +36,7 @@
 			};
 		</script>             
 		<input type="button" value="목록"
-		          onclick="location.href='user_boardAsklist.do'">
+		          onclick="location.href='user_boardAskList.do'">
 		<input type="button" value="재문의" 
 				onclick="location.href='boardAskWrite.do'">  
 	</div>

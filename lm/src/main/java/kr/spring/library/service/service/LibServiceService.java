@@ -30,12 +30,6 @@ public interface LibServiceService {
 	//관리자
 	//1:1문의 답변 작성
 	public void insertBoardAnswer(BoardAnswerVO boardAnswerVO);
-	//1:1문의 답변 수정
-	public void updateAnswer(BoardAnswerVO boardAnswer);
-	//1:1문의 답변 삭제 
-	public void deleteAnswer(Integer answer_num);
-	//1:1문의 답변 삭제시 질문글의 status값 변경
-	public void updateBoardAskStatus2(Integer ask_num);
 	//1:1문의 답변 내용
 	public BoardAnswerVO selectBoardAnswer(Integer ask_num);
 	

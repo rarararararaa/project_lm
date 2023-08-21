@@ -43,7 +43,7 @@
 	<c:if test="${count > 0}">
 	<table class="striped-table">
 		<tr>
-			<th>아이디</th>
+			<th>ID</th>
 			<th>이름</th>
 			<th>전화번호</th>
 			<th>이메일</th>
