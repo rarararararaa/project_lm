@@ -15,10 +15,10 @@ public interface UsedMapper {
 		
 		//중고 책 List 로 반환
 		@Select("select * FROM store_product_manage RIGHT JOIN ("
-				+ "select COUNT(store_product_num) used_product_match_count, store_product_num, store_product_title, store_product_author,"
+				+ "select COUNT(store_product_num) used_product_match_count, store_product_num, store_product_title, store_product_author, store_product_ratingcount, store_product_ratingscore,"
 				+ "store_product_pubdate, store_product_pricesales, store_product_cover, store_product_publisher, store_product_description "
-				+ "FROM store_product_detail RIGHT INNER JOIN (select * FROM store_used_product_detail d RIGHT JOIN store_used_product_manage m ON m.used_product_num = d.used_product_num) USING (store_product_num) GROUP BY store_product_num, store_product_title, "
-				+ "store_product_author, store_product_pubdate, store_product_pricesales, store_product_cover, store_product_publisher, store_product_description"
+				+ "FROM store_product_detail RIGHT INNER JOIN (select * FROM store_used_product_detail d RIGHT JOIN store_used_product_manage m ON m.used_product_num = d.used_product_num) USING (store_product_num) "
+				+ "GROUP BY store_product_num, store_product_title, store_product_author, store_product_pubdate, store_product_pricesales, store_product_cover, store_product_publisher, store_product_description, store_product_ratingcount, store_product_ratingscore"
 				+ ") USING (store_product_num)")
 		public List<UsedVO> selectAllUsed();
 		
@@ -33,7 +33,7 @@ public interface UsedMapper {
 		/////////////////////////////////수정 필요...
 		@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM("
 				+ "SELECT sm.store_product_ISBN13, sd.store_product_num, sd.store_product_title, um.used_product_num, um.used_product_approve, sd.store_product_cover, "
-				+ "sd.store_product_pricesales, 100 - (floor((used_product_price / store_product_pricestandard) * 100)) AS devide_product_by_used, ud.used_product_info "
+				+ "sd.store_product_pricesales, um.used_product_condition, ud.used_product_price, 100 - (floor((used_product_price / store_product_pricestandard) * 100)) AS devide_product_by_used, ud.used_product_info "
 				+ "FROM store_used_product_manage um JOIN store_used_product_detail ud ON ud.used_product_num = um.used_product_num "
 				+ "JOIN store_product_detail sd ON sd.store_product_num = um.store_product_num "
 				+ "JOIN store_product_manage sm ON um.store_product_num = sm.store_product_num WHERE um.mem_num = #{mem_num} )a) WHERE rnum >= #{start} AND rnum <= #{end}")

@@ -158,7 +158,7 @@ $(function(){
 			<li>
 				<!-- 기존 책 찾기 -->
 				<form:label path="used_product_price" >판매 희망 가격</form:label>
-				<form:input path="used_product_price" class="used-price"/>
+				<form:input path="used_product_price" class="used-price" maxLength="6"/>
 				<span id="message_used_product_price"></span>
 				<form:errors element="div" cssClass="error-color"/>
 			</li>

@@ -22,18 +22,14 @@ public class UsedVO {
 	private int used_product_condition;
 	private int used_product_approve;
 	private int used_product_hit;
+	private int used_product_price;
 	
 	private Date used_product_reg_date;
 	private Date used_product_sales_date;
-	
-	
 	private String used_product_info;
 	
 	private byte[] used_product_photo1;
-	
 	private byte[] used_product_photo2;
-	
-	private int used_product_price;
 	
 	//store product manage 영역
 	private String store_product_categoryname;
@@ -45,7 +41,8 @@ public class UsedVO {
 	private String store_product_pubdate; //등록 날짜
 	private int store_product_status;   //판매 상태??
 	private int store_product_discount; //할인률
-	private int store_product_ratingscore; //점수
+	private double store_product_ratingscore; //점수
+	private int store_product_ratingcount; //리뷰 갯수...
 	private int store_product_pricesales; //판매 가격
 	private String store_product_cover; //이미지 경로
 	private String store_product_publisher; //출판사

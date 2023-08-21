@@ -33,14 +33,18 @@
 		display:flex;
 		justify-content:center;
 		align-items:center;
-		border: 2px solid green;
+		
 		
 }
 .used-book-nav div a {
 	text-decoration: none;
 	color:black;
 }
+
+.used-book-nav div a:hover {
 	
+	color:green;
+}
 .used-contents {
 	margin-top : 50px;
 	display:flex;

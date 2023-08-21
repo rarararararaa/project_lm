@@ -276,7 +276,7 @@ $(function() {
     	$('#recommend-01').mouseenter();
 	});
 </script>
-<a href="${pageContext.request.contextPath}/library/template/testpage.do">Test Page</a>
+<%-- <a href="${pageContext.request.contextPath}/library/template/testpage.do">Test Page</a> --%>
 <div class="used-contents">
 	<div class="promotion-box" id="promotion_docker">
 		<div class="arrow-right">

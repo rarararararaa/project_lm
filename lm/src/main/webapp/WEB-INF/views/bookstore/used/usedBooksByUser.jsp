@@ -7,6 +7,7 @@
 			<div class="used-all-contents-div-width">
 				<div class="used-all-contents-img">
 					<img src="${list.store_product_cover}">
+					
 				</div>
 				<div class="used-all-contents-column">
 					<div class="used-all-contents-box" data-store_product_num="${list.store_product_num}">책 이름 : ${list.store_product_title}</div>
@@ -34,9 +35,11 @@
 						<c:if test="${list.devide_product_by_used > 0}">기존 책 대비 ${list.devide_product_by_used}% 할인</c:if>
 						<c:if test="${list.devide_product_by_used <= 0}">기존 대비 가격이 높습니다 (수정 및 관리자 컨택 필요)</c:if>
 					</div>
-					<div class="used-all-contents-box">요청 사항 : ${list.used_product_info}</div>
+					<div class="used-all-contents-box">요청 사항 : ${list.used_product_info} | 
+					<input type="button" class="default-btn" value="수정하기" onclick="location.href='${pageContext.request.contextPath}/bookstore/used/usedUpdate.do?used_product_num=${list.used_product_num}'"></div>
+					
 				</div>
-				<input type="button" class="default-btn" value="수정하기" onclick="location.href='${pageContext.request.contextPath}/bookstore/used/usedUpdate.do?used_product_num=${list.used_product_num}'">
+				
 			</div>
 		</c:forEach>
 		<div class="paging">${page}</div>

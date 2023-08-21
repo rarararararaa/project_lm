@@ -141,7 +141,7 @@ hr {
 	width:100%;
 	list-style:none;
 	font-size:30px;
-	border:solid 1px red;
+	
 }
 
 .lists ul li {
@@ -205,6 +205,11 @@ span img {
 #main-result {
 	
 }
+
+li:hover {
+	color:green;
+	cursor: pointer;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -237,12 +242,11 @@ $(function(){
 	    output += '<span>';
 	    output += '<img src="${pageContext.request.contextPath}/images/spring_logo.svg">';
 	    output += 'Spring Boot<br>FrameWork</span>';
-	    
 	    output += '</div>';
 		$('#main-result').append(output);
 	});
 	
-	
+	$('#introduce').click();
 });
 
 </script>
@@ -269,7 +273,6 @@ $(function(){
 				<ul>
 					<li id="introduce">회사 소개</li>
 					<li id="devstack">기술 스택</li>
-					<li id="primaryvalue">가치 목표</li>
 					<li id="workers">프로젝트 담당</li>
 				</ul>
 			</div>

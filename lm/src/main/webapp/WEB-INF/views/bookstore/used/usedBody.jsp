@@ -15,7 +15,7 @@
 					<div class="used-all-contents-box">${list.store_product_title}</div>
 					<div class="used-all-contents-box">저자 : ${list.store_product_author} | 등록 날짜 : ${list.store_product_pubdate} | 출판사 : ${list.store_product_publisher} | 판매 가격 : ${list.store_product_pricesales}원</div>
 					<div class="used-all-contents-box">내용 : ${list.store_product_description }</div>
-					<div class="used-all-contents-box">후기 : X개 | 리뷰 점수 : X점</div>
+					<div class="used-all-contents-box">후기 : ${list.store_product_ratingcount}개 | 리뷰 점수 : ${list.store_product_ratingscore}점</div>
 				</div>
 			</div>
 		</c:forEach>

@@ -183,7 +183,7 @@ public class UsedController {
 		usedVO.setStore_product_num(store_product_num);
 		log.debug("<<등록한 중고책 데이터>> : " + usedVO);
 		usedVO.setMem_num((Integer) session.getAttribute("mem_num"));
-		
+		usedVO.setUsed_product_status(1);
 		usedService.insertUsed(usedVO);
 	
 		
