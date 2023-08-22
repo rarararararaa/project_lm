@@ -131,6 +131,7 @@ public class BsEventServiceImpl implements BsEventService{
 
 	@Override
 	public void deleteEventBoard(Integer event_board_num) {
+		bsEventMapper.deleteReplyByBoardNum(event_board_num);
 		bsEventMapper.deleteEventBoard(event_board_num);
 	}
 

@@ -37,11 +37,11 @@
 			<div class="cal-div2">
 				<div class="div-date">
 					<form:label path="start_date">시작일</form:label>
-					<form:input type="text" path="start_date" class="text-st"/>
+					<form:input type="text" path="start_date" class="text-st" autocomplete="off"/>
 				</div>
 				<div class="div-time start-time">
 					<form:label path="start_time">시작시간</form:label>
-					<form:input type="text" path="start_time" class="text-st"/>
+					<form:input type="text" path="start_time" class="text-st" autocomplete="off"/>
 				</div>
 			</div>
 			<div class="cal-div4">
@@ -50,11 +50,11 @@
 			<div class="cal-div3">
 				<div class="div-date">
 					<form:label path="end_date">종료일</form:label>
-					<form:input type="text" path="end_date" class="text-st"/>
+					<form:input type="text" path="end_date" class="text-st" autocomplete="off"/>
 				</div>
 				<div class="div-time end-time">
 					<form:label path="end_time">종료시간</form:label>
-					<form:input type="text" path="end_time" class="text-st"/>
+					<form:input type="text" path="end_time" class="text-st" autocomplete="off"/>
 				</div>
 			</div>
 		</div>

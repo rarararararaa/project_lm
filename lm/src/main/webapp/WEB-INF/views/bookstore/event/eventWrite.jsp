@@ -50,7 +50,9 @@
 				</li>
 				<li>
 					<form:label path="store_product_num" >연관 상품</form:label> 
-					<form:input path="store_product_num"/>
+					<form:input path="store_product_num" autocomplete="off"/>
+					<ul id="search_area"></ul>
+					<div id="talk_member"></div> 
 				</li>
 			</ul>
 		</div>

@@ -81,7 +81,7 @@ public class BsEventController {
 
 		model.addAttribute("message", "글쓰기가 완료되었습니다.");
 		model.addAttribute("url", 
-				request.getContextPath()+"/bookstore/event/adminlist.do");
+				request.getContextPath()+"/bookstore/event/list.do");
 
 		return "common/resultView";
 	}
@@ -111,7 +111,7 @@ public class BsEventController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "글 수정 완료!");
-		model.addAttribute("url", request.getContextPath()+"/bookstore/event/adminlist.do");
+		model.addAttribute("url", request.getContextPath()+"/bookstore/event/list.do");
 		
 		return "common/resultView";
 	}
@@ -153,7 +153,8 @@ public class BsEventController {
 	@RequestMapping("/bookstore/event/delete.do")
 	public String submitDelete(@RequestParam int event_board_num) {
 		log.debug("<<글삭제 - event_board_num>> : " + event_board_num);
-		
+		BsEventVO event = bsEventService.selectEvent(event_board_num);
+	
 		//삭제
 		bsEventService.deleteEventBoard(event_board_num);
 		

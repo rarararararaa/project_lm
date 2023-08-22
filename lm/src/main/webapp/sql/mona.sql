@@ -1,7 +1,7 @@
 -- 문고 이벤트 폼
 CREATE TABLE STORE_EVENT_BOARD (
 	event_board_num	number	NOT NULL,
-	store_product_num	number(5)	NOT NULL,
+	store_product_num	number(5),
 	event_board_status	number	NOT NULL,
 	event_board_category	number	NOT NULL,
 	event_title	varchar2(500)	NOT NULL,
@@ -15,10 +15,9 @@ CREATE TABLE STORE_EVENT_BOARD (
 	event_hit	number(9)	default 0 NOT NULL,
 	event_quiz_sel1	varchar2(100)	NULL,
 	event_quiz_sel2	varchar2(100)	NULL,
-	event_quiz_an	varchar2(100)	NULL,
+	event_quiz_an	number	NULL,
+	event_modify_date date,
     CONSTRAINT PK_STORE_EVENT_BOARD PRIMARY KEY (event_board_num),
-    CONSTRAINT FK_STORE_EVENT_BOARD_1 FOREIGN KEY (store_product_num)
-                                            REFERENCES store_product_manage(store_product_num)     
 );
 create sequence store_event_board_seq;
 
