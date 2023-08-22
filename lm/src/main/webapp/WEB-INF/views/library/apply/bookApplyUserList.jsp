@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/service.css">
 <div class="page-main">
-	<h2>프로그램 목록</h2>
+	<h2>신청도서 현황</h2>
 	<c:if test="${count == 0}">
-	<div class="result-display">표시할 시설이 없습니다.</div>
+	<div class="result-display">신청한 희망도서가 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
 	<div>1개월동안 신청한 희망도서수 : ${month}</div>

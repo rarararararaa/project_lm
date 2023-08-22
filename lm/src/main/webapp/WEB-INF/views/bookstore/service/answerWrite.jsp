@@ -22,9 +22,11 @@ $(function(){
 	<ul>
 		<li>${ask.ask_category}</li>
 		<li>제목 : ${ask.ask_title}</li>
-		<li>내용 : ${ask.ask_content}</li>
 		<li>작성일 : ${ask.ask_reg_date}</li>
+		<li>내용 : ${ask.ask_content}</li>
+		<c:if test="${ask.ask_image!=null}">
 		<li><span id="image_controller"><B>이미지 열기</B></span><br><img id="ask_image" src="askImageView.do?ask_num=${ask.ask_num}"></li>
+		</c:if>
 	</ul>
 	
 	<h3>답변 작성</h3>

@@ -19,11 +19,11 @@
 		</li>
 		<li>
 			<input type="button" class="menu-btn" value="매출내역"
-			  onclick="location.href='#'">
+			  onclick="location.href='${pageContext.request.contextPath}/bookstore/adminOrderTotal.do'">
 		</li>
 		<li>
-			<input type="button" class="menu-btn" value="쿠폰/이벤트 관리"
-			  onclick="location.href='#'">
+			<input type="button" class="menu-btn" value="이벤트 관리"
+			  onclick="location.href='${pageContext.request.contextPath}/bookstore/event/list.do'">
 		</li>
 	</ul>
 </div>

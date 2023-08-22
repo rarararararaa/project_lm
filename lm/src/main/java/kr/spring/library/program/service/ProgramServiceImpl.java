@@ -1,5 +1,7 @@
 package kr.spring.library.program.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +39,29 @@ public class ProgramServiceImpl implements ProgramService{
 		
 		List<ProgramVO> list = programMapper.selectProgramList(map);
 		for(ProgramVO program : list) {
-			program.setStatus(programMapper.selectProgramStatus(program.getProgram_num()));
+			program.setProgram_start(programMapper.selectProgramStart(program.getProgram_num()));
+			program.setProgram_end(programMapper.selectProgramEnd(program.getProgram_num()));
+			
+			/*Calendar cal = Calendar.getInstance();
+			Calendar start = Calendar.getInstance();
+			Calendar end = Calendar.getInstance();
+			
+			Date ustart = new java.util.Date(program.getProgram_start().getTime());
+			Date uend = new java.util.Date(program.getProgram_end().getTime());
+			
+			
+			start.setTime(ustart);
+			end.setTime(uend);
+			
+			if(cal.before(start)){
+				program.setStatus(0);
+			}else if(cal.after(end)) {
+				program.setStatus(1);
+			}else {
+				program.setStatus(2);
+			}*/
+				
+			
 		}
 		return list;
 	}

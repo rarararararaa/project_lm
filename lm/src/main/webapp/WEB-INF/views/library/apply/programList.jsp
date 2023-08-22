@@ -12,8 +12,7 @@
 	<ul class="facility-list">
 		<li style="width:100px;">NO.</li>
 		<li style="width:500px;">프로그램명</li>
-		<li>등록일</li>
-		<li>진행상황</li>
+		<li>진행기간</li>
 	</ul>
 	<c:forEach var="program" items="${list}">
 	<ul class="facility-list">
@@ -21,10 +20,7 @@
 		<li style="width:500px;">
 		<a href="programDetail.do?program_num=${program.program_num}">${program.program_title}</a>
 		</li>
-		<li>${program.program_reg_date}</li>
-		<c:if test="${program.status==0}"><li>진행예정</li></c:if>
-		<c:if test="${program.status==1}"><li>종료</li></c:if>
-		<c:if test="${program.status==2}"><li>진행중</li></c:if>
+		<li>${program.program_start}~${program.program_end}</li>
 	</ul>
 	</c:forEach>
 		

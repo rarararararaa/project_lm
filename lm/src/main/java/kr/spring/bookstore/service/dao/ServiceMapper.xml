@@ -116,4 +116,14 @@
 		FROM STORE_PRODUCT_DETAIL d JOIN STORE_PRODUCT_MANAGE p USING(store_product_num)
 		WHERE store_product_num=#{store_product_num}
 	</select>
+	
+	<!-- 월별 매출 구하기 -->
+	<select id="selectOrderTotal">
+		SELECT
+		  SUM(d.order_product_price * d.cart_quantity) 
+		FROM
+		  store_order_detail d JOIN store_order_manage m
+		USING(order_num)
+		WHERE to_char(m.order_date,'YYYY-MM-DD') LIKE '%' || #{keyword} || '%'
+	</select>
 </mapper>

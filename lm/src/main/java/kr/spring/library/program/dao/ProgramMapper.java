@@ -1,9 +1,9 @@
 package kr.spring.library.program.dao;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -21,7 +21,8 @@ public interface ProgramMapper {
 	public void insertProgramTimes(ProgramTimesVO programTimesVO);
 	//프로그램 목록
 	public List<ProgramVO> selectProgramList(Map<String, Object> map);
-	public Integer selectProgramStatus(int program_num);
+	public Date selectProgramStart(int program_num);
+	public Date selectProgramEnd(int program_num);
 	public Integer selectRowCount();
 	//프로그램 상세
 	@Select("SELECT * FROM lib_program_admin WHERE program_num=#{program_num}")

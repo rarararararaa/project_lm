@@ -17,6 +17,9 @@ public class ProgramVO {
 	private int program_admit;//정원
 	private int program_hit;//조회수
 	
+	
+	private Date program_start;
+	private Date program_end;
 	private int status;
 	private Date program_date;
 	private int start;

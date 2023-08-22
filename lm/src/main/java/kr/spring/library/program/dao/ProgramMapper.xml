@@ -34,15 +34,17 @@
 	  #{program_admit})
 </insert>
 
-<select id="selectProgramStatus" parameterType="integer" resultType="integer">
-	SELECT CASE
-		<![CDATA[
-		WHEN SYSDATE < (SELECT MIN(program_start) FROM lib_program_times WHERE program_num=#{program_num}) THEN 0
-		WHEN SYSDATE > (SELECT MAX(program_end) FROM lib_program_times WHERE program_num=#{program_num}) THEN 1
-		]]>
-		ELSE 2
-		END AS status
-	FROM dual
+<select id="selectProgramStart" parameterType="integer" resultType="java.sql.Date">
+	SELECT 
+	  MIN(program_start) AS program_start
+	FROM lib_program_times
+	WHERE program_num = #{program_num}
+</select>
+<select id="selectProgramEnd" parameterType="integer" resultType="java.sql.Date">
+	SELECT
+	  MAX(program_end) AS program_end
+	FROM lib_program_times
+	WHERE program_num = #{program_num}
 </select>
 
 <select id="selectProgramList" parameterType="map" resultType="programVO">

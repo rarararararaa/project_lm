@@ -42,7 +42,7 @@ public interface ServiceMapper {
 	@Select("SELECT * FROM lm_board_ask WHERE mem_num=#{mem_num} ORDER BY ask_status DESC, ask_reg_date DESC")
 	public List<AskVO> selectAskListByMem_num(Integer mem_num);
 	//목록-전체
-	@Select("SELECT * FROM lm_board_ask ORDER BY ask_status DESC, ask_reg_date DESC")
+	@Select("SELECT * FROM lm_board_ask ORDER BY ask_status, ask_reg_date DESC")
 	public List<AskVO> selectAskList();
 	//상세
 	@Select("SELECT * FROM lm_board_ask WHERE ask_num=#{ask_num}")
@@ -77,4 +77,6 @@ public interface ServiceMapper {
 	
 	@Select("UPDATE store_order_manage SET order_status=#{order_status} WHERE order_num=#{order_num} ")
 	public void updateOrderStatus(BookStorePaymentOrderVO orderVO);
+	
+	public Integer selectOrderTotal(Map<String, Object> map); 
 }

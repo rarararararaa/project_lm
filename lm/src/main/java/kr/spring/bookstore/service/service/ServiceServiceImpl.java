@@ -138,4 +138,9 @@ public class ServiceServiceImpl implements ServiceService{
 		serviceMapper.updateOrderStatus(orderVO);
 	}
 
+	@Override
+	public Integer selectOrderTotal(Map<String, Object> map) {
+		return serviceMapper.selectOrderTotal(map);
+	}
+
 }

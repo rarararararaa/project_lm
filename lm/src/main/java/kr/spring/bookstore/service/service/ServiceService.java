@@ -55,4 +55,6 @@ public interface ServiceService {
 	public ProductVO selectProductByNum(int product_num);
 	
 	public void updateOrderStatus(BookStorePaymentOrderVO orderVO);
+	
+	public Integer selectOrderTotal(Map<String, Object> map); 
 }

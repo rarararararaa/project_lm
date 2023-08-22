@@ -1,11 +1,12 @@
 package kr.spring.bookstore.service.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -481,5 +482,27 @@ public class ServiceController {
 		model.addAttribute("url", request.getContextPath()+"/bookstore/adminOrderList.do");
 		
 		return "common/resultView";
+	}
+	@RequestMapping("/bookstore/adminOrderTotal.do")
+	public String orderTotal(String keyword,String keyfield,Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(keyword == null) {
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat month = new SimpleDateFormat("yyyy-MM");
+			keyword = month.format(cal.getTime());
+		}
+		if(keyfield == null) {
+			keyfield = "1";
+		}
+		map.put("keyword", keyword);
+		map.put("keyfield", keyfield);
+		
+		int total = serviceService.selectOrderTotal(map);
+		
+		model.addAttribute("total",total);
+		model.addAttribute("keyfield", keyfield);
+		model.addAttribute("keyword", keyword);
+		
+		return "adminOrderTotal";
 	}
 }

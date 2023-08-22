@@ -18,7 +18,7 @@ ul{
 
 
 #main{
-	width:1024px;
+	width:900px;
 	margin:0 auto;
 	font-size:10pt;
 	font-family:"맑은 고딕";
@@ -99,7 +99,6 @@ table.striped-table tr:nth-child(odd){
 }
 .facility-list li{
 	padding:10px;
-	width:200px;
 	font-size:14pt;
 }
 .facility-list li.fac-name{
