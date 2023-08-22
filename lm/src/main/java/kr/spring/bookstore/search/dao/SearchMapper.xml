@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.bookstore.search.dao.SearchMapper">
+	<!-- categoryNum = 1 이면 통합검색, 2 = 책제목 3 = 작가 4 = 출판사 -->
+	<sql id="keywordSearch">
+		<where>
+		    <if test="keyword!=null and keyword!=''">
+				<choose>
+					<when test="categoryNum==1">
+						sd.store_product_title LIKE '%' || #{keyword} || '%'
+						or sd.store_product_author LIKE '%' || #{keyword} || '%'
+						or sd.store_product_publisher LIKE '%' || #{keyword} || '%'
+					</when>
+					<when test="categoryNum==2">
+						sd.store_product_title LIKE '%' || #{keyword} || '%'
+					</when>
+					<when test="categoryNum==3">
+						sd.store_product_author LIKE '%' || #{keyword} || '%'
+					</when>
+					<otherwise>
+						sd.store_product_publisher LIKE '%' || #{keyword} || '%'
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+	</sql>
+	<select id="searchProductAll" parameterType="map" resultType="kr.spring.bookstore.search.vo.SearchVO">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT sm.store_product_isbn13, sd.store_product_title, sd.store_product_author, 
+		sd.store_product_publisher, sd.store_product_description, sd.store_product_pubdate, sd.store_product_pricestandard, sd.store_product_cover,
+		sd.store_product_ratingcount, sd.store_product_ratingscore FROM STORE_PRODUCT_MANAGE sm LEFT JOIN STORE_PRODUCT_DETAIL sd 
+		ON sd.store_product_num = sm.store_product_num 
+		<include refid="keywordSearch"></include> )a) <![CDATA[ WHERE rnum >= #{startRow} AND rnum <= #{endRow} ]]>
+	</select>
+	
+	<select id="searchProductAllCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM (SELECT sm.*, sd.* FROM STORE_PRODUCT_MANAGE sm LEFT JOIN STORE_PRODUCT_DETAIL sd 
+		ON sd.store_product_num = sm.store_product_num 
+		<include refid="keywordSearch"></include>)
+	</select>
+	<!-- searchProductAllCount
+	<select id="searchProductAll" parameterType="map" resultType="kr.spring.bookstore.search.vo.SearchVO">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM( select * FROM (select * FROM lib_product_manage
+		<include refid="keywordSearch"></include>
+		) <include refid="categoryNumSearch"></include>
+		<choose>
+			<when test="orderByNum == 1">
+				ORDER BY lib_product_publication_year DESC
+			</when>
+			<when test="orderByNum == 2">
+				ORDER BY lib_product_bookname
+			</when>
+			<when test="orderByNum == 3">
+				ORDER BY lib_product_authors
+			</when>
+			<otherwise>
+				ORDER BY lib_product_publisher
+			</otherwise>
+		</choose>
+		)a) <![CDATA[ WHERE rnum >= #{start} AND rnum <= #{end} ]]>
+	</select> 
+	
+	<select id="selectLibraryByCategoryAndOrderNumCount" parameterType="map" resultType="integer">
+		select COUNT(*) FROM (select * FROM lib_product_manage
+		<include refid="keywordSearch"></include>
+		)
+		<include refid="categoryNumSearch"></include>
+	</select>-->
+</mapper>

@@ -7,7 +7,6 @@
 			<div class="used-all-contents-div-width">
 				<div class="used-all-contents-img">
 					<img src="${list.store_product_cover}">
-					
 				</div>
 				<div class="used-all-contents-column">
 					<div class="used-all-contents-box" data-store_product_num="${list.store_product_num}">책 이름 : ${list.store_product_title}</div>

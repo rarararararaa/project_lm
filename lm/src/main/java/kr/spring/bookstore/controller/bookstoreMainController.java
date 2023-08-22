@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.bookstore.event.service.BsEventService;
 import kr.spring.bookstore.event.vo.BsEventVO;
 import kr.spring.bookstore.product.service.ProductService;
 import kr.spring.bookstore.product.vo.ProductVO;
+import kr.spring.bookstore.search.service.SearchService;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +25,8 @@ public class bookstoreMainController {
 	private BsEventService bsEventService;
 	@Autowired
 	private ProductService productService;
-
+	@Autowired
+	private SearchService searchService;
 	@RequestMapping("/")
 	public String getbsMain() {
 		return "redirect:/library/template/testpage.do";
@@ -69,5 +72,21 @@ public class bookstoreMainController {
 		return "bsMain";//타일스 설정의 식별자
 	}
 
+	@RequestMapping("/bookstore/search/searchMain.do")
+	public String searchMain(@RequestParam int categoryNum, 
+			@RequestParam int orderByNum,
+			@RequestParam(value="keyword", defaultValue="") String keyword, Model model) {
+		Map<String,Object> map = new HashMap<>();
+		//categoryNum=1&orderByNum=1&keyword=ㄹㄹ
+		map.put("categoryNum", categoryNum);
+		map.put("orderByNum", orderByNum);
+		map.put("keyword", keyword);
+		int totalCount = searchService.searchProductAllCount(map); //고치기...
+		model.addAttribute("categoryNum",categoryNum);
+		model.addAttribute("orderByNum",orderByNum);
+		model.addAttribute("keyword",keyword);
+		model.addAttribute("totalCount",totalCount);
+		return "/bookstore/search/searchMain";
+	}
 
 }
