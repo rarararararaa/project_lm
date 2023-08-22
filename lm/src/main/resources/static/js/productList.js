@@ -1,8 +1,28 @@
 $(function(){
 	$('.select-cate').click(function(){
 		let detail = $(this).attr('data-category');
+		let cate = $('.search-cate').attr('data-cate');
 		//alert(detail);
-		location.href='/bookstore/product/productCeteList.do?detail='+detail;
+		location.href='/bookstore/product/productCeteList.do?detail='+detail+'&cate='+cate;
+	})
+	$('#order').change(function(){
+		let order = $(this).val();
+		let detail = $('#cate_title').attr('data-category');
+		let count_num  = $('#count_num').val();
+		let cate = $('.search-cate').attr('data-cate');
+		//alert(cate);
+		location.href='/bookstore/product/productCeteList.do?detail='+detail+'&order='+order+'&count_num='+count_num+'&cate='+cate;
+	})
+	$('#count_num').change(function(){
+		let order = $('#order').val();
+		let detail = $('#cate_title').attr('data-category');
+		let count_num = $(this).val();
+		let cate = $('.search-cate').attr('data-cate');
+		//alert(cate);
+		location.href='/bookstore/product/productCeteList.do?detail='+detail+'&order='+order+'&count_num='+count_num+'&cate='+cate;
+	})
+	$('#drop_down , .search-cate').hover(function(){
+		$('.search-cate').toggleClass('hidden-place');
 	})
 })
 //===================함수====================//
