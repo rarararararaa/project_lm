@@ -18,6 +18,7 @@ public class RentVO {
 	private int mem_num;
 	private int lib_product_status; 
 	private Date rent_reg_date;
+	private int overdue_value;
 	private Date return_reg_deadline;
 	private Date return_reg_date;
 	
