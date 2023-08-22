@@ -100,7 +100,7 @@ public class BoardAnnounceController {
 		// 글쓰기
 		boardAnnounceService.insertBoardAnnounce(boardAnnounceVO);
 
-		model.addAttribute("message", "공지사항 글 등록이 완료되었습니다.");
+		model.addAttribute("message", "공지사항 등록이 완료되었습니다.");
 		model.addAttribute("url", request.getContextPath() + "/library/boardannounce/list.do");
 
 		return "common/resultView";
@@ -122,8 +122,6 @@ public class BoardAnnounceController {
 		// 제목에 태그를 허용하지 않음
 		boardAnnounce.setNotice_title(StringUtil.useNoHtml(boardAnnounce.getNotice_title()));
 
-		// CKEditor를 사용하지 않을 경우 내용에 태그 불허
-		// board.setContent(StringUtil.useBrNoHtml(board.getContent()));
 		// 뷰 이름 속성명 속성값
 		return new ModelAndView("boardAnnounceView", "boardAnnounce", boardAnnounce);
 	}
@@ -158,7 +156,7 @@ public class BoardAnnounceController {
 		boardAnnounceService.updateBoardAnnounce(boardAnnounceVO);
 
 		//View에 표시할 메시지
-		model.addAttribute("message","글 수정 완료!");
+		model.addAttribute("message","공지사항 수정 완료!");
 		model.addAttribute("url", 
 				request.getContextPath() 
 				+ "/library/boardannounce/detail.do?notice_num="
@@ -234,8 +232,6 @@ public class BoardAnnounceController {
 		// 제목에 태그를 허용하지 않음
 		boardAnnounce.setNotice_title(StringUtil.useNoHtml(boardAnnounce.getNotice_title()));
 
-		// CKEditor를 사용하지 않을 경우 내용에 태그 불허
-		// board.setContent(StringUtil.useBrNoHtml(board.getContent()));
 		// 뷰 이름 속성명 속성값
 		return new ModelAndView("boardAnnounceUserView", "boardAnnounce", boardAnnounce);
 	}
