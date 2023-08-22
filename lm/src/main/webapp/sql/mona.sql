@@ -123,3 +123,17 @@ CREATE TABLE LIB_BOOK_LOST_REPORT (
 );
 
 create sequence lib_book_lost_report_seq;
+
+CREATE TABLE lib_calendar(
+	calendar_num number not null,
+	title varchar2(50) not null,
+	start_date varchar2(10) not null,
+	start_time varchar2(10),
+	end_date varchar2(10),
+	end_time varchar2(10),
+	allday number not null,
+	event_status number,
+	CONSTRAINT PK_LiB_CALENDAR PRIMARY KEY (calendar_num)
+);
+
+create sequence lib_calendar_seq;

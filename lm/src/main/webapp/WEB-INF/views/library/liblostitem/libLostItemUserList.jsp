@@ -47,7 +47,9 @@
 					});
 				});
 			</script>
+			<c:if test="${mem_auth == 9}">
 			<input type="button" value="글쓰기" onclick="location.href='write.do'">
+			</c:if>
 		</div>
 	</form>
 	<c:if test="${count == 0}">

@@ -40,14 +40,14 @@ $(function() {
         // start_date 값이 null인 경우
         if (!start_date) {
             // start_time 입력 필드를 비활성화
-            $('#start_time').prop('disabled', true);
+             $('.start-time').css('display', 'none');
 
             // (옵션) 시간 입력 필드의 값을 초기화
             $('#start_time').val('');
         } else {
             // start_date 값이 있을 경우 start_time 입력 필드 활성화
-            $('#start_time').prop('disabled', false);
-        }
+             $('.start-time').css('display', 'flex');
+		}
 		
 	};
 	function time_end_dis(){
@@ -56,13 +56,13 @@ $(function() {
         // start_date 값이 null인 경우
         if (!end_date) {
             // start_time 입력 필드를 비활성화
-            $('#end_time').prop('disabled', true);
+            $('.end-time').css('display', 'none');
 
             // (옵션) 시간 입력 필드의 값을 초기화
             $('#end_time').val('');
         } else {
             // start_date 값이 있을 경우 start_time 입력 필드 활성화
-            $('#end_time').prop('disabled', false);
+            $('.end-time').css('display', 'flex');
         }
 		
 	};

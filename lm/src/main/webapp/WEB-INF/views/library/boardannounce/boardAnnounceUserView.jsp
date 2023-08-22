@@ -22,6 +22,7 @@
 	</div>
 	<hr size="1" width="100%">
 	<div class="align-right">
+		<c:if test="${mem_auth == 9}">
 		<input type="button" value="수정"
 		 onclick="location.href='update.do?notice_num=${boardAnnounce.notice_num}'">
 		<input type="button" value="삭제" id="delete_btn">
@@ -33,8 +34,9 @@
 					location.replace('delete.do?notice_num=${boardAnnounce.notice_num}');
 				}
 			};
-		</script>             
-		<input type="button" value="목록" onclick="location.href='list.do'">
+		</script>
+		</c:if>             
+		<input type="button" value="목록" onclick="location.href='Userlist.do'">
 	</div>
 </div>
 <!-- 공지사항 글상세 끝 -->

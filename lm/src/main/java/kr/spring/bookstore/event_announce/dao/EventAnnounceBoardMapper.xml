@@ -44,7 +44,7 @@
 	</select>
 	
 	<!-- 전체/검색 목록 -->
-	<select id="selectList" parameterType="map" resultType="EventAnnounceBoardVO">
+	<select id="selectList" parameterType="map" resultType="eventAnnounceBoardVO">
 		SELECT
 			*
 		FROM (SELECT 

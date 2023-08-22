@@ -39,7 +39,7 @@
 					<form:label path="start_date">시작일</form:label>
 					<form:input type="text" path="start_date" class="text-st"/>
 				</div>
-				<div class="div-time">
+				<div class="div-time start-time">
 					<form:label path="start_time">시작시간</form:label>
 					<form:input type="text" path="start_time" class="text-st"/>
 				</div>
@@ -52,7 +52,7 @@
 					<form:label path="end_date">종료일</form:label>
 					<form:input type="text" path="end_date" class="text-st"/>
 				</div>
-				<div class="div-time">
+				<div class="div-time end-time">
 					<form:label path="end_time">종료시간</form:label>
 					<form:input type="text" path="end_time" class="text-st"/>
 				</div>

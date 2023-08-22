@@ -116,6 +116,11 @@
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostCheck.jsp"/>
     </definition>
     
+    
+    <definition name="libScehduleAdminList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="일정 목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_ScheduleAdminList.jsp"/>
+    </definition> 
    
 </tiles-definitions>
 
