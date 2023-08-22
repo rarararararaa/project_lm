@@ -224,7 +224,7 @@
 					<a class="gnb_link"><em>나나나</em></a>
 				</li>
 				<li class="gnb_item">
-					<a class="gnb_link">베스트</a>
+					<a class="gnb_link" href="/bookstore/product/productBestList.do">베스트</a>
 				</li>
 				<li class="gnb_item">
 					<a class="gnb_link">신상품</a>

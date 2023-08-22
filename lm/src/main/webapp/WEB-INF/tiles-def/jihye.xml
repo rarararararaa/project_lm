@@ -32,6 +32,10 @@
     	<put-attribute name="title" value="도서목록"/>
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/product/productListAll.jsp"/>
     </definition>
+    <definition name="productListBest" extends="bsMain">
+    	<put-attribute name="title" value="도서목록"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/product/productListBest.jsp"/>
+    </definition>
     
     <!-- LM도서 -->    
     <!-- 도서관 도서 상세 -->

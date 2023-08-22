@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.bookstore.product.service.ProductService;
 import kr.spring.bookstore.product.vo.ProductVO;
@@ -64,5 +65,30 @@ public class ProductViewController {
 		                 "수험서/자격증","참고서","만화","대학교재",
 		                 "달력/기타","잡지","에세이","건강/취미"};
 		return list;
+	}
+	@RequestMapping("/bookstore/product/productBestList.do")
+	public ModelAndView BestListProduct() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("productListBest");
+		List<ProductVO> best = productService.selectBestBookList(0,1);
+		for(ProductVO vo : best) {
+			if(vo.getStore_product_title().length()>=10) {
+				String title = vo.getStore_product_title().substring(0, 10)+"...";
+				vo.setStore_product_title(title);
+			}
+		}
+		List<ProductVO> best_y = productService.selectBestBookList(1,12);
+		for(ProductVO vo : best_y) {
+			if(vo.getStore_product_title().length()>=10) {
+				String title = vo.getStore_product_title().substring(0, 10)+"...";
+				log.debug("<<자름>> : "+title);
+				vo.setStore_product_title(title);
+			}
+		}
+		
+		mav.addObject("bestList", best);
+		mav.addObject("bestYear", best_y);
+		log.debug("<<베스트 셀러>> : "+best);
+		return mav;
 	}
 }

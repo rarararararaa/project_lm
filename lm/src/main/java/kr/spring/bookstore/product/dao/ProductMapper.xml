@@ -223,6 +223,17 @@
 		WHERE m.store_product_searchcategoryname = #{store_product_searchcategoryName}
 		AND d.store_product_categoryname LIKE '%' || #{store_product_categoryname} || '%')a 
 	</select>
+	
+	<select id="selectBestBookList" parameterType="integer" resultType="productVO">
+		SELECT * FROM
+		(SELECT a.*, rownum rnum FROM
+		(SELECT * FROM store_product_manage m JOIN store_product_detail d USING (store_product_num) 
+		WHERE MONTHS_BETWEEN(LAST_DAY(SYSDATE),store_product_pubdate) BETWEEN #{start} AND #{end}
+		ORDER BY store_product_ratingcount DESC, store_product_ratingscore DESC)a)
+			<![CDATA[
+			WHERE rnum>=1 AND rnum<=10
+			]]>
+	</select>
 </mapper>
 
 

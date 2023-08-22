@@ -83,4 +83,10 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.selectCategoryCount(map);
 	}
 
+	@Override
+	public List<ProductVO> selectBestBookList(int start, int end) {
+		return productMapper.selectBestBookList(start, end);
+	}
+
+
 }

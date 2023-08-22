@@ -65,5 +65,7 @@ public interface ProductMapper {
 	public List<ProductVO> selectCategoryBook(Map<String, Object> map);
 	//카데고리 별 도서 개수
 	public int selectCategoryCount(Map<String, Object> map);
+	//Best 도서
+	public List<ProductVO> selectBestBookList(int start, int end);
 	
 }

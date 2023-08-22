@@ -1,0 +1,163 @@
+/*=====공통=====*/
+body{
+	margin: 0 auto;
+	position: relative;
+	width: 1440px;
+}
+.main-page{
+	margin: 0 auto;
+	width: 1200px;
+	min-height: 928.2px;
+	font-size: 16px;
+}
+.float-left{
+	float: left;
+	position: relative;
+}
+.clear-both{
+	clear: both;
+}
+.side-bar b{
+	font-size: 40px;
+	position: relative;
+    left: 20px;
+}
+select{
+	padding-left: 10px;
+	width: 125.185px;
+	height: 45px;
+	border-radius: 10px;
+	border: 1px solid #ABABAB;
+	background: #FFF;
+}
+.best ul{
+	padding-left: 40px;
+	list-style: none;
+	font-size: 16px !important;
+	font-weight: normal;
+	text-align: justify;
+}
+.best ul li:first-child{
+	font-weight: bold;
+}
+.best ul li:last-child{
+	margin-top: 10px;
+}
+table{
+	margin: 15px 0 45px 0;
+	border-collapse: collapse;
+}
+tr{
+	margin-bottom: 10px;
+	border-bottom: 1px solid #e3e3e3;
+}
+a{
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+}
+a:visited{
+	color: black;
+}
+.hidden-place{
+	display:none; 
+}
+button:hover{
+	cursor: pointer;
+}
+b{
+	position: relative;
+	top: 30px;
+	font-size: 48px;
+		
+}
+p{
+	color: #000;
+	font-size: 36px;
+}
+/*=====도서 목록=====*/
+/*주간 베스트*/
+.months-best{
+	margin-top: 60px;
+	border-top: 1px solid #CACACA;
+}
+.detail{
+	text-align: center;
+}
+.detail li{
+	width: 162px;
+}
+/*=====swiper=====*/
+.swiper-wrapper{
+	top: 50px;
+}
+.swiper {
+	text-align: center;
+	height: 510px; 
+}
+.swiper-slide img{
+	width: 162px;
+	height: 248px;
+}
+.swiper .swiper-slide {
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.material-icons {
+  font-size: 30px;
+  color: white;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after{
+  content: "";
+  display: none;
+}
+
+.swiper-pagination {
+  color: white;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  top: 700px !important;
+  width: 60px !important;
+  height: 59px !important;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: 90%;
+  background-repeat: no-repeat;
+}
+.swiper-button-prev {
+	margin-left: 60px;
+	background-image: url("/images/left.png");
+}
+.swiper-button-next {
+	margin-right: 40px;
+	background-image: url("/images/right.png");
+}
+.point{
+	margin: 0 20px;
+	position: relative;
+    top: -40px;
+}
+.point img{
+	width: 242px !important;
+	height: 328px !important;
+}
+.point ul{
+	padding-left: 10px;
+	font-size: 20px !important;
+}
+.point li{
+	width: 242px;
+}
+
