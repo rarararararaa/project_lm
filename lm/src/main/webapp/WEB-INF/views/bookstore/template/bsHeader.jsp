@@ -144,7 +144,7 @@
 							<option value="3">작가</option>
 							<option value="4">출판사</option>
 						</select>
-						<!-- <span class="select_box_button">
+						<!-- <span class="select_box_button"> 
 							<span class="text">통합검색</span>
 							<span class="select-icon"></span>
 							<ul class="optionList">
