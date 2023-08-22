@@ -24,32 +24,83 @@ $(function(){
 	$('#drop_down , .search-cate').hover(function(){
 		$('.search-cate').toggleClass('hidden-place');
 	})
-})
-//===================함수====================//
-/*function showList(bookList){
-	let output = '';
-	$(bookList).foreach(function(index,item){
-		output += '<tr>';
-		output += '<td>';
-		output += '<a href="/bookstore/product/productDetail.do?store_product_isbn13='+bookList.store_product_isbn13+'"><img src="'+bookList.store_product_cover+'"></a>'
-		output += '<div class="book-detail"><ul id="test">';
-		output += '<li data-num="'+bookList.store_product_num+'"><a href="/bookstore/product/productDetail.do?store_product_isbn13='+bookList.store_product_isbn13+'">'+bookList.store_product_title+'</a></li>';
-		output += '<li>'+bookList.store_product_discount+'%</li>'
-		output += '<li>'+bookList.store_product_pricestandard+'원</li>'
-		output += '<li>('+bookList.store_product_pricestandard*point+'P)</li>'
-		output += '</ul></div>'
-		output += '</td>';
-		output += '<td colspan="2">'
-		if(bookListstore_product_description == ' '){
-			output += '<div> 도서 상세 정보가 없습니다. </div>'
-		}else{
-			output += '<div> '+bookList.store_product_description+' </div>'
-		}
-		output += '</td>'
-		output += '<td>';
-		output += '<button class="product-btn" id="cart">장바구니</button>'
-		output += '<button class="product-btn" id="pay">바로구매</button>'
-		output += '</td>';
-		output += '</tr>';
+	$('.payGo').click(function(){
+		let total= $(this).closest('tr').find('.price').val();
+		let cartInfo=[];
+			let book_info = {};
+			book_info.cart_quantity = '1';
+			book_info.store_product_pricestandard = $(this).closest('tr').find('.price').val();
+			book_info.store_product_num = $(this).closest('tr').find('.product').val();
+			//alert(book_info.store_product_num);
+			cartInfo.push({...book_info});
+			console.log(cartInfo); 
+			
+			submitOrder(cartInfo,total);
 	})
-}*/
+	
+})
+
+//중고 장바구니
+function submitUsedProduct(){
+	let form_data = $('.book-cart').serialize();	
+	console.log(form_data);	
+	//서버와 통신
+	$.ajax({
+		url:'/bookstore/payment/cart.do',
+		type:'post',
+		data:form_data,
+		dataType:'json',
+		success:function(param){
+			if(param.result == 'logout'){
+				alert('로그인 후 사용하세요');
+			}else if(param.result == 'existBook'){
+				alert('장바구니에 이미 담겨있습니다.');
+			}else if(param.result == 'success'){
+				let check=confirm('장바구니로 이동하시겠습니까?');
+				if(check){
+					location.href='/bookstore/payment/cart.do';
+				}else{
+					location.reload();
+				}
+			}else{
+				alert('장바구니 담기 오류');
+			}
+		},
+		error:function(){
+			alert('네트워크 오류 발생');
+		}
+	});	
+}			
+
+function submitOrder(cartInfo,total){
+			//기본 이벤트 제거
+			event.preventDefault();
+						
+			//서버와 통신
+			$.ajax({
+				url:'/bookstore/payment/cartAction.do',
+				type:'post',
+				data:{
+					data:JSON.stringify(cartInfo),total
+				},
+				dataType:'json',
+				success:function(param){
+					if(param.result == 'logout'){
+						alert('로그인 후 사용하세요');
+					}else if(param.result == 'success'){
+						let check=confirm('결제창으로 이동하시겠습니까?');
+						if(check){
+							location.href='/bookstore/payment/order.do';
+						}else{
+							location.reload();
+						}
+					}else{
+						alert('바로결제 오류');
+					}
+				},
+				error:function(){
+					alert('네트워크 오류 발생');
+				}
+			});
+
+}

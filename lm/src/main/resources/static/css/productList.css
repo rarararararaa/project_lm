@@ -47,6 +47,9 @@ a:visited{
 .hidden-place{
 	display:none; 
 }
+button:hover{
+	cursor: pointer;
+}
 
 /*=====국내/외국======*/
 .search-main{

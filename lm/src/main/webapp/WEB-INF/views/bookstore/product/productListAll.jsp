@@ -49,10 +49,11 @@
 		<table>
 		<!-- 반복문 -->
 			<c:forEach var="book" items="${list}">
-			<tr>
+			<tr id="tregsd">
 				<td>
 					<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}"><img src="${book.store_product_cover}"></a>
 					<div class="book-detail">
+					<form action="cart.do" method="post" class="book-cart">
 						<ul id="test">
 							<li data-num="${book.store_product_num}"><a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">${book.store_product_title}</a>
 							<c:if test="${now < book.store_product_pubdate}"><span style="color: blue;">[예약판매]</span></c:if>
@@ -63,8 +64,12 @@
 							</li>
 							<li>
 							(<fmt:formatNumber value="${book.store_product_pricestandard*0.005}"/>P)
+							<input type="hidden" name="store_product_num" value="${book.store_product_num}" class="product">
+							<input type="hidden" name="cart_quantity" value="1"> 
+							<input type="hidden" class="price" value="${book.store_product_pricestandard}">
 							</li>
 						</ul>
+					</form>
 					</div>
 				</td>
 				<td colspan="2">
@@ -76,8 +81,8 @@
 					</div>
 				</td>
 				<td>
-					<button class="product-btn" id="cart">장바구니</button>
-					<button class="product-btn" id="pay">바로구매</button>
+					<button class="product-btn" id="cart" onclick="submitUsedProduct()">장바구니</button>
+					<button class="product-btn payGo" id="pay">바로구매</button>
 				</td>
 			</tr>				
 			</c:forEach>
