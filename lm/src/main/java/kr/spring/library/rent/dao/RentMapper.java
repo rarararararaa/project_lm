@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.library.product.vo.BookProductVO;
 import kr.spring.library.rent.vo.RentVO;
+import kr.spring.library.rent.vo.ReservationVO;
 import kr.spring.member.vo.MemberVO;
 
 @Mapper
@@ -24,6 +25,9 @@ public interface RentMapper {
 	public RentVO selectRent(Integer rent_num);
 	@Select("SELECT * FROM lib_product_manage WHERE callNumber=#{callNumber}")
 	public BookProductVO selectBook(String callNumber);
+	//대여 상세
+	@Select("SELECT * FROM lib_reservation WHERE mem_num=#{mem_num} AND lib_product_ISBN=#{lib_product_ISBN}")
+	public ReservationVO selectReservationByMemnum(RentVO rentVO);
 	//대출 기록
 	public List<RentVO> selectRentHistory(Map<String, Object> map);
 	//페이징 처리 위한 횟수

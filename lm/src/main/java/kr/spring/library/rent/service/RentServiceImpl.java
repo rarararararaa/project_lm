@@ -11,6 +11,7 @@ import kr.spring.library.product.dao.BookProductMapper;
 import kr.spring.library.product.vo.BookProductVO;
 import kr.spring.library.rent.dao.RentMapper;
 import kr.spring.library.rent.vo.RentVO;
+import kr.spring.library.rent.vo.ReservationVO;
 import kr.spring.member.vo.MemberVO;
 
 @Service
@@ -72,6 +73,11 @@ public class RentServiceImpl implements RentService{
 	@Override
 	public BookProductVO selectBook(String callNumber) {
 		return rentMapper.selectBook(callNumber);
+	}
+
+	@Override
+	public ReservationVO selectReservationByMemnum(RentVO rentVO) {
+		return rentMapper.selectReservationByMemnum(rentVO);
 	}
 
 }

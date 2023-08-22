@@ -114,6 +114,8 @@ $(function(){
 			}
 		});
 	})
+	
+	
 });
 //썸네일 함수
 	function setThumbnail(event) {

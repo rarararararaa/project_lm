@@ -146,6 +146,16 @@ public class RentController {
 						mapJson.put("result", "alreadyRent");
 						return mapJson;
 					}
+					vo.setBookVO(rentService.selectBook(i));
+					map.put("lib_product_isbn", vo.getBookVO().getLib_product_isbn());
+					//예약중인 도서인지 확인
+					if(reservationService.selectReservationCountByISBN(map)>0) {
+						ReservationVO reservation=rentService.selectReservationByMemnum(vo);
+						if(reservation.getMem_num()!=vo.getMem_num()) {
+							mapJson.put("result", "reservationFirst");
+							return mapJson;
+						}
+					}
 					rentService.insertRentHistory(vo);
 					log.debug("<<vo>> : "+vo);
 				}
@@ -155,7 +165,7 @@ public class RentController {
 		}
 		
 		return mapJson;
-	}	
+	}		
 	
 	//대출 반납
 	@RequestMapping("/library/rent/updateRentHistory.do")

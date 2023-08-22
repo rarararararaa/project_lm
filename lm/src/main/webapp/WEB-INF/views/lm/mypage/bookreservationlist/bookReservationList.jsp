@@ -85,6 +85,11 @@
 					</c:if>
 					<c:if test="${list.reservation_status == 1}">
 						<div id="c-reservation-status">예약 확정</div>
+						<input type="button" value="대출" 
+								onclick="location.href='${pageContext.request.contextPath}/library/rent/rentReservationBook.do?lo=${lo}&reservation_num=${list.reservation_num}'">
+						<input type="button" value="취소" 
+								onclick="location.href='${pageContext.request.contextPath}/library/rent/cancelReservationBook.do?lo=${lo}&reservation_num=${list.reservation_num}'">
+						
 					</c:if>
 					<c:if test="${list.reservation_status == 2}">
 						<div id="c-reservation-status">대출 완료</div>
