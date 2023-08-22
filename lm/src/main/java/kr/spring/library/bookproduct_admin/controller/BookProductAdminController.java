@@ -51,7 +51,7 @@ public class BookProductAdminController {
 		//페이지 처리
 		PagingUtil page = 
 				new PagingUtil(keyfield,keyword,currentPage,
-						count,20,10,"admin_booklist.do");
+						count,15,10,"admin_booklist.do");
 
 		List<BookProductVO> list = null;
 		if(count > 0) {

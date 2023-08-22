@@ -47,7 +47,7 @@ public class RentController {
 		int count=rentService.selectRentRowCount(map);
 		PagingUtil page = 
 				new PagingUtil(keyfield,keyword,
-						currentPage,count,20,10,
+						currentPage,count,10,10,
 						"/library/rent/rentHistoryList.do",null);		
 		
 		List<RentVO> list=null;

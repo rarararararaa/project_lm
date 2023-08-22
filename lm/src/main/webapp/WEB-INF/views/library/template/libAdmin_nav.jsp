@@ -32,7 +32,7 @@
 				class="sub-items">1:1문의</a>
 		</li>
 		<li class="sb-menu-item">
-			<a href="" 
+			<a href="${pageContext.request.contextPath}/library/basic/lib_ScheduleAdminList.do" 
 				class="sub-items">일정 등록</a>
 		</li>
 		<li class="sb-menu-item">
@@ -40,7 +40,7 @@
 				class="sub-items">프로그램 등록</a>
 		</li>
 		<li class="sb-menu-item">
-			<a href="#" 
+			<a href="${pageContext.request.contextPath}/library/apply/facilityAdminList.do" 
 				class="sub-items">시설 등록</a>
 		</li>
 	</ul>

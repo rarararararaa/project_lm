@@ -1,0 +1,101 @@
+
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 50px auto;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+th {
+  font-weight: bold;
+  text-align: center;
+}
+
+td.al-c {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.lostPage {
+  background-color: #fff;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.lostPage h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+.lostPage .table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.lostPage .table th, .lostPage .table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.lostPage .table th {
+  font-weight: bold;
+  text-align: center;
+}
+
+.lostPage .table td.al-c {
+  text-align: center;
+}
+
+.lostPage .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.lostPage .btn:hover {
+  background-color: #000000;
+  color: #fff;
+}
+.align-center{
+	margin: 0 auto;
+}

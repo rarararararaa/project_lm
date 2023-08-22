@@ -37,6 +37,9 @@ public interface BsEventMapper {
 	//이벤트 글 삭제
 	@Delete("DELETE FROM store_event_board WHERE event_board_num=#{event_board_num}")
 	public void deleteEventBoard(Integer event_board_num);
+	//이벤트 글에달린 댓글 삭제
+	@Delete("DELETE FROM store_event_board_reply WHERE event_board_num=#{event_board_num}")
+	public void deleteReplyByBoardNum(Integer event_board_num);
 	//이벤트 연관상품 - isbn 불러오기
 	@Select("SELECT store_product_isbn13 FROM store_product_manage WHERE store_product_num=#{store_product_num}")
 	public String selectEventItemIsbn(Integer store_product_num);

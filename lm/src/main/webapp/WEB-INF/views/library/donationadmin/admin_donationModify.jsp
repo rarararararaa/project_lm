@@ -4,56 +4,53 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 기증상태 수정 시작 -->
 <div class="page-main">
-	<h2>기증상태 수정</h2>
+<div class="box">
+	<div class="title">기증 상세</div>
 	<form:form modelAttribute="donationVO" action="admin_donationupdate.do"
-	             id="modify_form">
+	             id="modify_form" class="content-box">
 	    <form:hidden path="donation_num"/>         
 	    <form:errors element="div" cssClass="error-color"/>         
-		<ul>
-			<li>
-				<label>제목</label>
-				${donationVO.donation_title}
-			</li>
-			<li>
-				<label>등록날짜</label>
-				${donationVO.donation_reg_date}
-			</li>
-		</ul>
-		<hr size="1" width="100%">
-		<ul>	
-			<li>
-				<label>기증자 이름</label>
-				${donationVO.donation_name}      
-			</li>
-			<li>
-				<label>기증자 정보</label>
-				${donationVO.donation_info}      
-			</li>
-			<li>
-				<label>내용</label>
-				${donationVO.donation_content}      
-			</li>
-			<li>
-				<label>기증도서정보</label>
-				${donationVO.donation_book_info}    
-			</li>
-		</ul>
-		<hr size="1" width="100%">
-		<ul>
-			<li>
-				<label>(관리자 확인용)상태수정 </label>
-				<form:radiobutton path="donation_status" value="0"/>확인전
-				<form:radiobutton path="donation_status" value="1"/>기증수락
-				<form:radiobutton path="donation_status" value="2"/>기증거부
-				<form:button>상태수정</form:button>
-			</li>
-		</ul>
-		<hr size="1" width="100%">
-		
-		<div class="align-center">
-			<input type="button" value="기증목록"
+		<div class="content-detail">
+			<div class="detail-title">기증번호</div>
+			<div class="specific">${donationVO.donation_num}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">제목</div>
+			<div class="specific">${donationVO.donation_title}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">등록일</div>
+			<div class="specific">${donationVO.donation_reg_date}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">기증자</div>
+			<div class="specific">${donationVO.donation_name}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">기증자 정보</div>
+			<div class="specific">${donationVO.donation_info}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">내용</div>
+			<div class="specific">${donationVO.donation_content}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">기증도서정보</div>
+			<div class="specific">${donationVO.donation_book_info}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">관리자 확인</div>
+			<div class="specific">
+				<form:radiobutton path="donation_status" value="0"/><div>미확인</div>
+				<form:radiobutton path="donation_status" value="1"/><div>기증수락</div>
+				<form:radiobutton path="donation_status" value="2"/><div>기증거부</div>
+				<form:button class="small-button">수정</form:button>
+			</div>
+		</div>
+		<div class="button-box">
+			<input class="small-button" type="button" value="목록"
 			   onclick="location.href='admin_donationlist.do'"> 
-			<input type="button" value="삭제" id="delete_btn">
+			<input class="small-button" type="button" value="삭제" id="delete_btn">
 			<script type="text/javascript">
 				let delete_btn = document.getElementById('delete_btn');
 				delete_btn.onclick = function() {
@@ -66,6 +63,7 @@
 			</script>
 		</div>          
 	</form:form>
+	</div>
 </div>
 <!-- 기증글 상태수정 끝 -->
 

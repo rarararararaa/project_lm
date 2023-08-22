@@ -1,6 +1,7 @@
 package kr.spring.library.lib_calendar.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,17 @@ public class Lib_CalendarServiceImpl implements Lib_CalendarService{
 	@Override
 	public void deleteCalendarEvent(Integer calendar_num) {
 		calendarMapper.deleteCalendarEvent(calendar_num);
+	}
+
+	@Override
+	public int selectCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return calendarMapper.selectCount(map);
+	}
+
+	@Override
+	public List<Lib_CalendarVO> selectList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return calendarMapper.selectList(map);
 	}
 }

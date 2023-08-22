@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/libBasicPage_style.css">
+
 <!-- 1:1문의 등록 시작 -->
 <div class="page-main">
 	<h2>1:1문의글 작성</h2>

@@ -56,7 +56,7 @@ public class BoardAnnounceController {
 		log.debug("<<ALL-board-count>> : " + count);
 
 		// 페이지처리 부가적인 파라미터
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "list.do", "&order=" + order);
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 15, 10, "list.do", "&order=" + order);
 
 		List<BoardAnnounceVO> list = null;
 		if (count > 0) {
@@ -100,7 +100,7 @@ public class BoardAnnounceController {
 		// 글쓰기
 		boardAnnounceService.insertBoardAnnounce(boardAnnounceVO);
 
-		model.addAttribute("message", "공지사항 글 등록이 완료되었습니다.");
+		model.addAttribute("message", "공지사항 등록이 완료되었습니다.");
 		model.addAttribute("url", request.getContextPath() + "/library/boardannounce/list.do");
 
 		return "common/resultView";
@@ -122,8 +122,6 @@ public class BoardAnnounceController {
 		// 제목에 태그를 허용하지 않음
 		boardAnnounce.setNotice_title(StringUtil.useNoHtml(boardAnnounce.getNotice_title()));
 
-		// CKEditor를 사용하지 않을 경우 내용에 태그 불허
-		// board.setContent(StringUtil.useBrNoHtml(board.getContent()));
 		// 뷰 이름 속성명 속성값
 		return new ModelAndView("boardAnnounceView", "boardAnnounce", boardAnnounce);
 	}
@@ -158,7 +156,7 @@ public class BoardAnnounceController {
 		boardAnnounceService.updateBoardAnnounce(boardAnnounceVO);
 
 		//View에 표시할 메시지
-		model.addAttribute("message","글 수정 완료!");
+		model.addAttribute("message","공지사항 수정 완료!");
 		model.addAttribute("url", 
 				request.getContextPath() 
 				+ "/library/boardannounce/detail.do?notice_num="
@@ -180,6 +178,63 @@ public class BoardAnnounceController {
 		return "redirect:/library/boardannounce/list.do";
 	}
 	
+	
+	/*
+	 * ============================== 게시판 목록(사용자) ==============================
+	 */
+	@RequestMapping("/library/boardannounce/Userlist.do")
+	public ModelAndView getUserList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
+			@RequestParam(value = "order", defaultValue = "1") int order, String keyfield, String keyword) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+
+		// 전체/검색 레코드수
+		int count = boardAnnounceService.selectRowCount(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "list.do", "&order=" + order);
+
+		List<BoardAnnounceVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+
+			list = boardAnnounceService.selectList(map);
+		}
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("boardAnnounceUserList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+
+		return mav;
+	}
+	
+	/*
+	 * ============================== 게시판 글 상세 ==============================
+	 */
+	@RequestMapping("/library/boardannounce/detailUser.do")
+	public ModelAndView getUserDetail(@RequestParam int notice_num) {
+		log.debug("<<글상세 - notice_num>> : " + notice_num);
+
+		// 해당 글의 조회수 증가
+		boardAnnounceService.updateHit(notice_num);
+		// 글상세
+		
+		BoardAnnounceVO boardAnnounce = boardAnnounceService.selectBoardAnnounce(notice_num);
+
+		// 제목에 태그를 허용하지 않음
+		boardAnnounce.setNotice_title(StringUtil.useNoHtml(boardAnnounce.getNotice_title()));
+
+		// 뷰 이름 속성명 속성값
+		return new ModelAndView("boardAnnounceUserView", "boardAnnounce", boardAnnounce);
+	}
 }
 
 

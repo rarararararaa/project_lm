@@ -15,7 +15,7 @@
 	});
 </script>
 <div class="page-main">
-	<h2>프로그램 목록</h2>
+	<h2>분실목록</h2>
 	<form action="list.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -47,38 +47,32 @@
 					});
 				});
 			</script>
+			<c:if test="${mem_auth == 9}">
+			<input type="button" value="글쓰기" onclick="location.href='write.do'">
+			</c:if>
 		</div>
 	</form>
-				<button onclick="location.href='programAdminWrite.do'">프로그램 등록</button>
 	<c:if test="${count == 0}">
-	<div class="result-display">표시할 프로그램이 없습니다.</div>
+	<div class="result-display">표시할 분실물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
 	<table class="striped-table">
 		<tr>
-			<th >번호</th>
-			<th >프로그램명</th>
-			<th >등록일</th>
-			<th >진행상황</th>
-			<th >프로그램 수정</th>
+			<th>No</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+			<th>조회수</th>
 		</tr>
-		<c:forEach var="lib_program" items="${list}">
+		<c:forEach var="lib_lost_item" items="${list}">
 		<tr>
-			<td class="align-center">${lib_program.program_num}</td>
-			<td class="align-center">	
-				<a href="${pageContext.request.contextPath }/library/programDetail.do?program_num=${lib_program.program_num}">${lib_program.program_title}</a>
-			</td>
-			<td class="align-center">${lib_program.program_reg_date}</td>
+			<td class="align-center">${lib_lost_item.item_num}</td>
 			<td class="align-center">
-				<c:if test="${lib_program.status==0}">진행예정</c:if>
-				<c:if test="${lib_program.status==1}"><span style="color: red;">종료</span></c:if>
-				<c:if test="${lib_program.status==2}">진행중</c:if>
+				<a href="detailUser.do?item_num=${lib_lost_item.item_num}">${lib_lost_item.item_title}</a>
 			</td>
-			<td style="text-align: center;">
-				<c:if test="${lib_program.status!=1 }">
-					<button>프로그램 수정</button>
-				</c:if>
-			</td>
+			<td class="align-center">관리자</td>
+			<td class="align-center">${lib_lost_item.item_reg_date}</td>
+			<td class="align-center">${lib_lost_item.item_hit}</td>
 		</tr>
 		</c:forEach>
 	</table>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/libPageNav_style.css">
-<!-- jQuery -->
+<!-- jQuery 1-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/libPageNav.js"></script>
@@ -35,7 +35,18 @@
 			<a href="${pageContext.request.contextPath}/library/basic/libCalendar.do" class="sub-items">도서관 일정</a>
 		</li>
 		<li class="sb-menu-item">
-			<a href="${pageContext.request.contextPath}/library/basic/lostitemList.do" class="sub-items">분실물 찾기</a>
+			<a href="${pageContext.request.contextPath}/library/liblostitem/listUser.do" class="sub-items">분실물 찾기</a>
+		</li>
+		<li class="sb-menu-item">
+			<a href="${pageContext.request.contextPath}/library/basic/" class="sub-items">문의하기</a>
+			<ul class="sb-menu-sub">
+				<li class="sb-menu-sub-item">
+					<a href="${pageContext.request.contextPath}/library/boardannounce/Userlist.do">공지사항</a>
+				</li>
+				<li class="sb-menu-sub-item">
+					<a href="${pageContext.request.contextPath}/library/service/user_boardAskList.do">1:1문의</a>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </div>

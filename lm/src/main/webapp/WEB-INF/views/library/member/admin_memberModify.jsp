@@ -2,60 +2,104 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+    .member-grade-bronze {
+      color: #CD7F32;
+    }
+
+    .member-grade-silver {
+      color: #C0C0C0;
+    }
+
+    .member-grade-gold {
+      color: #FFD700;
+    }
+
+    .member-grade-platinum {
+      color: #D9D9D9;
+    }
+
+    .member-grade-diamond {
+      color: #00D9FF;
+    }
+  </style>
 <!-- 회원권한 수정 시작 -->
 <div class="page-main">
-	<h2>회원 권한 수정</h2>
+	<div class="box">
+	<div class="title">회원 상세</div>
 	<form:form modelAttribute="memberVO" action="admin_update.do"
-	             id="modify_form">
+	             id="modify_form" class="content-box">
 	    <form:hidden path="mem_num"/>         
-	    <form:errors element="div" cssClass="error-color"/>         
-		<ul>
-			<li>
-				<label>회원권한</label>
+	    <form:errors element="div" cssClass="error-color"/>
+	    <div class="content-detail">
+			<div class="detail-title">회원번호</div>
+			<div class="specific">${memberVO.mem_num}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">회원등급</div>
+			<div class="specific">
+				<c:if test="${memberVO.mem_grade==0}"><p class="member-grade-bronze">Bronze</p></c:if>
+				<c:if test="${memberVO.mem_grade==1}"><p class="member-grade-silver">Silver</p></c:if>
+				<c:if test="${memberVO.mem_grade==2}"><p class="member-grade-gold">Gold</p></c:if>
+				<c:if test="${memberVO.mem_grade==3}"><p class="member-grade-platinum">Platinum</p></c:if>
+				<c:if test="${memberVO.mem_grade==4}"><p class="member-grade-diamond">Diamond</p></c:if>
+			</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">아이디</div>
+			<div class="specific">${memberVO.mem_id}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">이름</div>
+			<div class="specific">${memberVO.mem_name}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">주민등록번호</div>
+			<div class="specific">${memberVO.mem_identify}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">전화번호</div>
+			<div class="specific">${memberVO.mem_cell}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">이메일</div>
+			<div class="specific">${memberVO.mem_email}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">보유포인트</div>
+			<div class="specific">${memberVO.mem_point}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">가입일</div>
+			<div class="specific">${memberVO.mem_reg_date}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">회원권한</div>
+			<div class="specific">
 				<c:if test="${memberVO.mem_auth < 9}">
-				<form:radiobutton path="mem_auth" value="0"/>탈퇴
-				<form:radiobutton path="mem_auth" value="1"/>정지
-				<form:radiobutton path="mem_auth" value="2"/>휴면
-				<form:radiobutton path="mem_auth" value="3"/>일반
-				<form:radiobutton path="mem_auth" value="4"/>미인증
+				<form:radiobutton path="mem_auth" value="0"/>
+					<div class="expire"><b>탈퇴</b></div>
+				<form:radiobutton path="mem_auth" value="1"/>
+					<div class="stop"><b>정지</b></div>
+				<form:radiobutton path="mem_auth" value="2"/>
+					<div class="sleep"><b>휴면</b></div>
+				<form:radiobutton path="mem_auth" value="3"/>
+					<b>일반</b>
+				<form:radiobutton path="mem_auth" value="4"/>
+					<div class="notcheck"><b>미인증</b></div>
 				</c:if>      
-				<c:if test="${memberVO.mem_auth == 9}">관리</c:if>
-			</li>
-		</ul>
-		<ul>	
-			<li>
-				<label>이름</label>
-				${memberVO.mem_name}    
-			</li>
-			<li>
-				<label>주민등록번호</label>
-				${memberVO.mem_identify}      
-			</li>
-			<li>
-				<label>전화번호</label>
-				${memberVO.mem_cell}      
-			</li>
-			<li>
-				<label>이메일</label>
-				${memberVO.mem_email}      
-			</li>
-			<li>
-				<label>보유 포인트</label>
-				${memberVO.mem_point}      
-			</li>
-			<li>
-				<label>가입일</label>
-				${memberVO.mem_reg_date} 
-			</li>
-		</ul>
-		<div class="align-center">
-			<c:if test="${memberVO.mem_auth != 9}">
-			<form:button>권한수정</form:button>
-			</c:if>
-			<input type="button" value="회원목록"
+				<c:if test="${memberVO.mem_auth == 9}">
+					<div class="answer"><b>관리자</b></div>
+				</c:if>
+			</div>
+		</div>
+		<div class="button-box">
+			<form:button class="small-button">권한수정</form:button>
+			<input class="small-button" type="button" value="회원목록"
 			   onclick="location.href='admin_list.do'">
-		</div>          
+		</div>
 	</form:form>
+</div>
 </div>
 <!-- 회원권한 수정 끝 -->
 

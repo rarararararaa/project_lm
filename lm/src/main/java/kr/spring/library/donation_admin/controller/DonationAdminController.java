@@ -49,7 +49,7 @@ public class DonationAdminController {
 		//페이지 처리
 		PagingUtil page = 
 				new PagingUtil(keyfield,keyword,currentPage,
-						count,20,10,"admin_donationlist.do");
+						count,15,10,"admin_donationlist.do");
 
 		List<DonationVO> list = null;
 		if(count > 0) {

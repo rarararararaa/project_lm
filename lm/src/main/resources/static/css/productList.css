@@ -1,0 +1,172 @@
+/*=====공통=====*/
+.main-page{
+	margin: 0 auto;
+	width: 1200px;
+	min-height: 928.2px;
+	font-size: 16px;
+}
+.float-left{
+	float: left;
+	position: relative;
+}
+.clear-both{
+	clear: both;
+}
+.side-bar b{
+	font-size: 40px;
+	position: relative;
+    left: 20px;
+}
+select{
+	padding-left: 10px;
+	width: 125.185px;
+	height: 45px;
+	border-radius: 10px;
+	border: 1px solid #ABABAB;
+	background: #FFF;
+}
+ul{
+	list-style: none;
+}
+table{
+	margin: 15px 0 45px 0;
+	border-collapse: collapse;
+}
+tr{
+	margin-bottom: 10px;
+	border-bottom: 1px solid #e3e3e3;
+}
+a{
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+}
+a:visited{
+	color: black;
+}
+.hidden-place{
+	display:none; 
+}
+button:hover{
+	cursor: pointer;
+}
+
+/*=====국내/외국======*/
+.search-main{
+	display: flex;
+	margin-bottom: 35px;
+}
+.search-cate{
+	margin: -35px 0 0 -5px;
+	width: 87px;
+	height: 50px;
+    position: absolute;
+    font-size: 14px;
+    color: #5c5c5c;
+	text-align: center;	
+	border-radius: 7px;
+	background-color: white;
+	border: 1px solid #999999;
+	z-index: 10;
+}
+.search-cate p{
+	margin: 4px 0;
+}
+.search-cate a{
+	font-weight: normal;
+}
+/*=====사이드 메뉴=====*/
+.category{
+	margin-top: 50px;
+	color: #5c5c5c;
+}
+.category ul{
+	margin-top: 40px;
+	padding: 0;
+}
+.category ul li{
+	margin-bottom: 15px;
+}
+.select-cate:hover{
+	cursor: pointer;
+}
+/*=====본문=====*/
+.content{
+	width: 100%;
+}
+.product-event{
+	padding-top: 40px;
+	height: 56px;
+	text-align: right;	
+	background: #F7F7F7;
+}
+/*======상품목록========*/
+.book-list{
+	min-height: 175px;
+}
+.book-list td:first-child{
+	display: flex;
+	vertical-align: middle;
+	width: 350px;
+}
+.book-list td:nth-child(2){
+	width: 600px;
+	padding-left: 10px;
+	padding-right: 20px;
+    text-align: justify;
+}
+.book-list td:last-child{
+	text-align: right;
+	vertical-align: middle;
+	width: 100px;
+}
+.book-list img{
+	padding-top: 15px;
+	width: 123px;
+	height: 163px;
+}
+.book-list tr{
+	height: 200px;
+}
+.book-table{
+	min-height: 770px;
+}
+.book-detail li:first-child{
+	padding-bottom: 17px;
+}
+.book-detail li:not(:first-child){
+	padding-right: 5px;
+	float: left;
+}
+.book-detail li:nth-child(2){
+	color: #149200;
+}
+.book-detail li:last-child{
+	color: #A3A2A2;
+}
+.product-btn{
+	margin-bottom: 5px;
+	width: 124px;
+	height: 49px;
+	border-radius: 7px;
+	border: none;
+	color: white;
+	font-weight: bold;
+}
+/*정렬*/
+#count_num{
+	margin: 0 15px 0 5px;
+}
+#cart{
+	background: #7A7A7A;
+}
+#pay{
+	background: #5055B1;
+}
+.page{
+	text-align: center;
+}
+/*도서가 없을 경우*/
+.non-list{
+	text-align: center;
+}

@@ -22,12 +22,12 @@
 	
 }
 
-.cal-div2, .cal-div3, .div-time{
+.cal-div2, .cal-div3, .start-time, .end-time{
 	display: flex;
 	flex-direction: row;
 }
 
-.cal-div1, .div-date, .div-time{
+.cal-div1, .div-date, .start-time, .end-time{
 	margin: 5px 10px;
 }
 .cal-div1 #title{
