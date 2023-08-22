@@ -77,8 +77,15 @@
 			<div id="scrollProdInfo">
 				<div>
 					<h2>책 소개</h2>
+					<div>${product.store_product_categoryname }</div>
 					${product.store_product_description }
 				</div>
+				<c:if test="${!empty product.store_product_seriesName }">
+					<div>
+						<h2>시리즈</h2>
+						${product.store_product_seriesName }
+					</div>
+				</c:if>
 
 			</div>
 			<div id="scrollProdReview">
@@ -262,8 +269,8 @@
 		<div class="right-wrap">
 			<div>
 				<h2>중고책</h2>
-				<c:forEach var="list" items="${list}">
 				<div class="used-product">
+				<c:forEach var="list" items="${list}">
 					<form id="used_product">
 						<input type="hidden" name="used_product_num" value="${list.used_product_num }">
 						<input type="hidden" name="store_product_num" value="${product.store_product_num }">
@@ -282,8 +289,8 @@
 							<input type="button" class="sm-button" value="장바구니" onclick="submitUsedProduct();">
 						</div>
 					</form>	
-				</div>
 				</c:forEach>
+				</div>
 			</div>		
 			<div>
 				<h2>이벤트</h2>

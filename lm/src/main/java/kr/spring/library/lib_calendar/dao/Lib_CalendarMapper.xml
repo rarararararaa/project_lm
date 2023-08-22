@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="kr.spring.library.lib_calendar.dao.Lib_CalendarMapper">
-	
 	<insert id="insertCalendarEvent" parameterType="lib_CalendarVO">
 		INSERT INTO lib_calendar (
 			calendar_num,
@@ -23,4 +22,53 @@
 			#{allday},
 			#{event_status})
 	</insert>
+	
+	<!-- 게시판 검색  -->
+	<sql id="boardSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					title LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					start_date LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					end_date LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 전체/검색 일정 레코드 수 -->
+	<select id="selectCount" parameterType="map" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM lib_calendar
+		<include refid="boardSearch"></include>
+	</select>
+	<!-- 전체/검색 일정 목록 -->
+	<select id="selectList" parameterType="map" resultType="lib_CalendarVO">
+		SELECT
+			*
+		FROM (SELECT 
+				a.*,
+				rownum rnum
+			  	FROM (SELECT 
+			  			calendar_num,
+			  			<![CDATA[
+		             	REPLACE(REPLACE(title,'<','&lt;'),'>','&gt;') title, 
+		            	]]>
+			  			start_date,
+			  			start_time,
+			  			end_date,
+			  			end_time,
+			  			allday 
+			  		  FROM lib_calendar
+			  		  <include refid="boardSearch"></include>) a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end} 
+		]]>
+		ORDER BY start_date DESC
+	</select>
 </mapper>

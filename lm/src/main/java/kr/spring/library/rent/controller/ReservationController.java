@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.library.product.BookProductService;
@@ -87,16 +90,79 @@ public class ReservationController {
 		return mapJson;
 	}
 	
-	/*
-	 * @Scheduled(cron="* 0/10 * * * *") public void testSchedule(){
-	 * List<ReservationVO> list=reservationService.selectAllReservation();
-	 * Map<String, Object> map=new HashMap<String, Object>(); if(list!=null) {//예약
-	 * 대기인 책들 존재 for(ReservationVO reservationVO:list) {
-	 * if(reservationService.selectCheckRentStatus2(reservationVO.getBookVO().
-	 * getLib_product_isbn())){ //반납된 책 //알림주기 //예약확정으로 바꾸기 } //대출중인 책 return; }
-	 * }else { return; }
-	 * 
-	 * }
-	 */
+	//예약 중인 책 반납 시 대출 버튼 누름
+	@RequestMapping("/library/rent/rentReservationBook.do")
+	public String rentReservationBook(@RequestParam int reservation_num,@RequestParam int lo,
+										HttpSession session,
+										HttpServletRequest request,Model model) {
+		Map<String, Object> map=new HashMap<String, Object>();
+		int mem_num=(Integer)session.getAttribute("mem_num");
+		//예약자 본인인지 확인
+		ReservationVO reservation=reservationService.selectReservationDetailtoRent(reservation_num);
+		if(reservation.getMem_num()!=mem_num) {
+			model.addAttribute("message", "예약한 아이디로만 대출 가능합니다.");
+			model.addAttribute("url", request.getContextPath()+"/lm/mypage/bookreservationlist/bookReservationListMain.do?lo="+lo);
+		}else {
+			//대출
+			RentVO rentVO=new RentVO();
+			String callNumber=reservationService.selectCallNumbertoRent(reservation);
+			int count=rentService.selectRentCountByMem_num(map);
+			if(count>3) {
+				model.addAttribute("message", "최대 세권까지 대출 가능합니다.");
+				model.addAttribute("url", request.getContextPath()+"/lm/mypage/bookreservationlist/bookReservationListMain.do?lo="+lo);
+			}else {
+				rentVO.setCallNumber(callNumber);
+				rentVO.setMem_num(mem_num);
+				rentService.insertRentHistory(rentVO);
+				reservationService.updateReservationtoRent(reservation);
+				model.addAttribute("message", "대출 성공");
+				model.addAttribute("url", request.getContextPath()+"/lm/mypage/bookreservationlist/bookReservationListMain.do?lo="+lo);
+			} 
+			
+		}
+		
+		return "common/resultView";
+		
+	}
+	
+	//취소 버튼 누름
+	@RequestMapping("/library/rent/cancelReservationBook.do")
+	public String cancelReservationBook(@RequestParam int reservation_num,@RequestParam int lo,
+										HttpSession session,
+										HttpServletRequest request,Model model) {
+		Map<String, Object> map=new HashMap<String, Object>();
+		int mem_num=(Integer)session.getAttribute("mem_num");
+		//예약자 본인인지 확인
+		ReservationVO reservation=reservationService.selectReservationDetailtoRent(reservation_num);
+		if(reservation.getMem_num()!=mem_num) {
+			model.addAttribute("message", "예약한 아이디로만 취소 가능합니다.");
+			model.addAttribute("url", request.getContextPath()+"/lm/mypage/bookreservationlist/bookReservationListMain.do?lo="+lo);
+		}else {
+			//취소
+			reservationService.updateCancelReservation(reservation);
+			model.addAttribute("message", "취소 성공");
+			model.addAttribute("url", request.getContextPath()+"/lm/mypage/bookreservationlist/bookReservationListMain.do?lo="+lo);
+		}
+		
+		return "common/resultView";
+		
+	}	
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

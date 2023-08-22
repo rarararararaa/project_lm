@@ -26,11 +26,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/EESAMSAOH.css">
 <div class="product-main">
 	<h2 class="align-center">대출/반납 관리</h2>
-		<input class="small-button" type="button" value="도서목록" onclick="location.href='/library/bookproductadmin/admin_booklist.do'">
-		<input class="small-button" type="button" value="대출목록" onclick="location.href='/library/rent/rentHistoryList.do'">
-		<input class="small-button" type="button" value="희망도서" onclick="#">
+		<input type="button" value="도서목록" onclick="location.href='/library/bookproductadmin/admin_booklist.do'">
+		<input type="button" value="대출목록" onclick="location.href='/library/rent/rentHistoryList.do'">
+		<input type="button" value="희망도서" onclick="#">
 	<div class="button-box">
-		<input type="button" id="opener" value="대출 등록" class="small-button">
+		<input type="button" id="opener" value="대출 등록">
 	</div>
 
 		<!-- 대출 등록 다이얼로그 시작 -->
@@ -79,10 +79,10 @@
 									                    value="${param.keyword}">
 								</li>
 								<li>
-									<input class="small-button" type="submit" value="검색">
+									<input type="submit" value="검색">
 								</li>
 								<li>
-									<input class="small-button" type="button" value="목록" onclick="location.href='/library/rent/rentHistoryList.do'">
+									<input type="button" value="목록" onclick="location.href='/library/rent/rentHistoryList.do'">
 								</li>
 						</ul>
 				</div>                          

@@ -1,7 +1,7 @@
 -- 문고 이벤트 폼
 CREATE TABLE STORE_EVENT_BOARD (
 	event_board_num	number	NOT NULL,
-	store_product_num	number(5)	NOT NULL,
+	store_product_num	number(5),
 	event_board_status	number	NOT NULL,
 	event_board_category	number	NOT NULL,
 	event_title	varchar2(500)	NOT NULL,
@@ -15,10 +15,9 @@ CREATE TABLE STORE_EVENT_BOARD (
 	event_hit	number(9)	default 0 NOT NULL,
 	event_quiz_sel1	varchar2(100)	NULL,
 	event_quiz_sel2	varchar2(100)	NULL,
-	event_quiz_an	varchar2(100)	NULL,
+	event_quiz_an	number	NULL,
+	event_modify_date date,
     CONSTRAINT PK_STORE_EVENT_BOARD PRIMARY KEY (event_board_num),
-    CONSTRAINT FK_STORE_EVENT_BOARD_1 FOREIGN KEY (store_product_num)
-                                            REFERENCES store_product_manage(store_product_num)     
 );
 create sequence store_event_board_seq;
 
@@ -123,3 +122,17 @@ CREATE TABLE LIB_BOOK_LOST_REPORT (
 );
 
 create sequence lib_book_lost_report_seq;
+
+CREATE TABLE lib_calendar(
+	calendar_num number not null,
+	title varchar2(50) not null,
+	start_date varchar2(10) not null,
+	start_time varchar2(10),
+	end_date varchar2(10),
+	end_time varchar2(10),
+	allday number not null,
+	event_status number,
+	CONSTRAINT PK_LiB_CALENDAR PRIMARY KEY (calendar_num)
+);
+
+create sequence lib_calendar_seq;

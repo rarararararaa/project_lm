@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,13 +43,9 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public List<ReservationVO> selectReservationList(Map<String, Object> map) {
-		return null;
-	}
-
-	@Override
-	public void updateReservation3(ReservationVO reservationVO) {
-		
+	@Scheduled(cron = "0 0/5 * * * *")
+	public void updateReservationCancel() {
+		reservationMapper.updateReservationCancel();
 	}
 
 	@Override
@@ -75,6 +72,27 @@ public class ReservationServiceImpl implements ReservationService{
 	public ReservationVO selectReservationDetail(Map<String, Object> map) {
 		return reservationMapper.selectReservationDetail(map);
 	}
+
+	@Override
+	public ReservationVO selectReservationDetailtoRent(int reservation_num) {
+		return reservationMapper.selectReservationDetailtoRent(reservation_num);
+	}
+
+	@Override
+	public String selectCallNumbertoRent(ReservationVO reservationVO) {
+		return reservationMapper.selectCallNumbertoRent(reservationVO);
+	}
+
+	@Override
+	public void updateReservationtoRent(ReservationVO reservationVO) {
+		reservationMapper.updateReservationtoRent(reservationVO);
+	}
+
+	@Override
+	public void updateCancelReservation(ReservationVO reservationVO) {
+		reservationMapper.updateCancelReservaiton(reservationVO);
+	}
+
 
 
 }

@@ -182,6 +182,8 @@ $(function(){
 					alert('대출은 최대 3권까지만 가능합니다.');
 				}else if(param.result=='alreadyRent'){
 					alert('이미 대출중인 도서입니다.');
+				}else if(param.result=='reservationFirst'){
+					alert('예약한 사람이 있는 도서입니다.');
 				}else{
 					alert('도서 대출 오류 발생');
 				}

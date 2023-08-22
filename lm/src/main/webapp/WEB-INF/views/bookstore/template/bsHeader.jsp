@@ -89,6 +89,12 @@
 	align-items: center;
 }
 
+.search_input {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
 
 </style>
 	<div class="header_wrapper">
@@ -132,7 +138,13 @@
 				<div class="logo_box"><a class="logo_link"></a></div>
 				<div class="search_box">
 					<div class="search_select">
-						<span class="select_box_button">
+						<select id="categoryNum" class="select_box_button">
+							<option value="1">통합검색</option>
+							<option value="2">책제목</option>
+							<option value="3">작가</option>
+							<option value="4">출판사</option>
+						</select>
+						<!-- <span class="select_box_button"> 
 							<span class="text">통합검색</span>
 							<span class="select-icon"></span>
 							<ul class="optionList">
@@ -141,7 +153,7 @@
 								<li class="optionItem">작가</li>
 								<li class="optionItem">출판사</li>
 							</ul>
-						</span>
+						</span> -->
 					</div>
 					<div class="search_input">
 						<input type="search" class="ip_search" autocomplete="off" title="통합검색어 입력">

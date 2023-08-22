@@ -49,7 +49,9 @@
 		    COUNT(*)
 		FROM lib_reservation r 
 		LEFT OUTER JOIN lib_product_manage m USING (callNumber)
-		WHERE r.lib_product_isbn = #{lib_product_isbn} AND reservation_status<![CDATA[<]]>2
+		<![CDATA[
+		WHERE r.lib_product_isbn = #{lib_product_isbn} AND reservation_status<2
+		]]>
 	</select>
 	
 	<!-- 예약 상세 불러오기 -->
@@ -60,7 +62,28 @@
 		WHERE lib_product_isbn=#{lib_product_isbn}
 		AND reservation_status=0
 	</select>
-
+	
+	<!-- 대출할 도서의 callNumber 지정 -->
+	<select id="selectCallNumbertoRent" parameterType="reservationVO" resultType="string">
+		SELECT 
+		    r.callNumber 
+		FROM lib_reservation r 
+		LEFT OUTER JOIN lib_history h using (mem_num)
+		WHERE lib_product_status=1 AND lib_product_isbn=#{lib_product_isbn}
+		FETCH FIRST 1 ROW ONLY
+	</select>
+	
+	<!-- 기한 내에 미대출 -->
+	<update id="updateReservationCancel">
+		UPDATE lib_reservation r
+		SET r.reservation_status = 3
+		WHERE r.reservation_status = 1
+		      AND r.mem_num IN (SELECT h.mem_num
+		                        FROM lib_history h
+		<![CDATA[
+		                        WHERE h.return_reg_date + INTERVAL '5' MINUTE < SYSTIMESTAMP)	
+		]]>
+	</update>
 </mapper>
 
 

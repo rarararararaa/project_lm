@@ -1,6 +1,7 @@
 package kr.spring.library.lib_calendar.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,6 +15,12 @@ public interface Lib_CalendarMapper {
 	//일정 가져오기
 	@Select("SELECT * FROM lib_calendar")
 	public List<Lib_CalendarVO> selectCalendarEvent();
+	
+	//일정 개수
+	public int selectCount (Map<String, Object> map);
+	//일정 목록 - admin 관리용
+	public List<Lib_CalendarVO> selectList(Map<String,Object> map);
+		
 	
 	//일정 추가하기
 	public void insertCalendarEvent(Lib_CalendarVO calendarVO);

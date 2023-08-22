@@ -111,6 +111,7 @@ public class bookLostReportController {
 	@RequestMapping("/library/lostReport/bookLostCheck.do")
 	public String showBookLostCheck(int lost_report_num, HttpSession session, Model model) {
 		LostBookReportVO lostBook = lostBookReportService.selectLostBookInfo(lost_report_num);
+		log.debug("lostBookVO: "+lostBook);
 		if(lostBook == null) {
 			
 		}

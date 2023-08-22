@@ -32,7 +32,7 @@
 				class="sub-items">1:1문의</a>
 		</li>
 		<li class="sb-menu-item">
-			<a href="" 
+			<a href="${pageContext.request.contextPath}/library/basic/lib_ScheduleAdminList.do" 
 				class="sub-items">일정 등록</a>
 		</li>
 		<li class="sb-menu-item">

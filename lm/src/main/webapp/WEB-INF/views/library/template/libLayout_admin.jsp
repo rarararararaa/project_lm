@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title><tiles:getAsString name="libTitle"/></title>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bookstoreStyle.css">
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/libAdmin.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/Lib_Admin_MSB.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>

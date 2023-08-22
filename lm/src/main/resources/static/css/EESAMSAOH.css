@@ -48,7 +48,7 @@ div.right-wrap{
 	margin: 0 0 0 56px;
 }
 div.used-product{
-    display: block;
+    display: flex;
     padding: 36px 30px 36px;
     box-sizing: border-box;
   	overflow: auto;
@@ -65,6 +65,7 @@ div.used-product{
 }
 
 form#used_product div{
+	margin-right:26px;
 	width:100px;
 	display:flex;
 	flex-direction: column;

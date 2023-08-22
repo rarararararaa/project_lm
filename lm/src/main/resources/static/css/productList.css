@@ -7,18 +7,19 @@
 }
 .float-left{
 	float: left;
+	position: relative;
 }
 .clear-both{
 	clear: both;
 }
-p{
-	margin-bottom: 50px;
-}
 .side-bar b{
 	font-size: 40px;
+	position: relative;
+    left: 20px;
 }
 select{
-	width: 135.185px;
+	padding-left: 10px;
+	width: 125.185px;
 	height: 45px;
 	border-radius: 10px;
 	border: 1px solid #ABABAB;
@@ -28,7 +29,7 @@ ul{
 	list-style: none;
 }
 table{
-	margin: 45px 0;
+	margin: 15px 0 45px 0;
 	border-collapse: collapse;
 }
 tr{
@@ -43,7 +44,42 @@ a{
 a:visited{
 	color: black;
 }
+.hidden-place{
+	display:none; 
+}
+button:hover{
+	cursor: pointer;
+}
+
+/*=====국내/외국======*/
+.search-main{
+	display: flex;
+	margin-bottom: 35px;
+}
+.search-cate{
+	margin: -35px 0 0 -5px;
+	width: 87px;
+	height: 50px;
+    position: absolute;
+    font-size: 14px;
+    color: #5c5c5c;
+	text-align: center;	
+	border-radius: 7px;
+	background-color: white;
+	border: 1px solid #999999;
+	z-index: 10;
+}
+.search-cate p{
+	margin: 4px 0;
+}
+.search-cate a{
+	font-weight: normal;
+}
 /*=====사이드 메뉴=====*/
+.category{
+	margin-top: 50px;
+	color: #5c5c5c;
+}
 .category ul{
 	margin-top: 40px;
 	padding: 0;
@@ -59,7 +95,8 @@ a:visited{
 	width: 100%;
 }
 .product-event{
-	height: 96px;
+	padding-top: 40px;
+	height: 56px;
 	text-align: right;	
 	background: #F7F7F7;
 }
@@ -70,7 +107,7 @@ a:visited{
 .book-list td:first-child{
 	display: flex;
 	vertical-align: middle;
-	width: 300px;
+	width: 350px;
 }
 .book-list td:nth-child(2){
 	width: 600px;
@@ -90,6 +127,9 @@ a:visited{
 }
 .book-list tr{
 	height: 200px;
+}
+.book-table{
+	min-height: 770px;
 }
 .book-detail li:first-child{
 	padding-bottom: 17px;
@@ -113,6 +153,10 @@ a:visited{
 	color: white;
 	font-weight: bold;
 }
+/*정렬*/
+#count_num{
+	margin: 0 15px 0 5px;
+}
 #cart{
 	background: #7A7A7A;
 }
@@ -120,5 +164,9 @@ a:visited{
 	background: #5055B1;
 }
 .page{
+	text-align: center;
+}
+/*도서가 없을 경우*/
+.non-list{
 	text-align: center;
 }

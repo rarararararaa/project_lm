@@ -1,3 +1,8 @@
+//관리자 이벤트 클릭수 수정
+function clickSchedule(calendar_num) {
+	let option = "width=600, height=400, left=100, top=50, location=no"
+	window.open('lib_ScheduleModify.do?calendar_num=' + calendar_num, '일정추가', option);
+}
 $(function() {
 	//날짜 형식
 	function dateFormat(date) {
@@ -20,6 +25,8 @@ $(function() {
 		let option = "width=600, height=400, left=100, top=50, location=no"
 		window.open('lib_SchedulePopup.do', '일정추가', option);
 	});
+
+
 
 	function displayCalendar() {
 
@@ -50,7 +57,7 @@ $(function() {
 						info.jsEvent.cancelBubble = true;
 						info.jsEvent.preventDefault();
 
-						if (info.event.title === '휴관일' || info.event.extendedProps.description =='공휴일') {
+						if (info.event.title === '휴관일' || info.event.extendedProps.description == '공휴일') {
 							return; // 클릭 이벤트 무시
 						}
 
@@ -80,9 +87,6 @@ $(function() {
 					eventSources: [
 						{
 							googleCalendarId: 'ko.south_korea#holiday@group.v.calendar.google.com',
-							extendedProps: {
-								customName: 'kor-PH'
-							},
 							color: '#be5683', //rgb,#ffffff 등의 형식으로 할 수 있어요.
 							//textColor: 'black' 
 							editable: false
@@ -131,11 +135,7 @@ $(function() {
 		});
 
 	}
-	//관리자 이벤트 클릭수 수정
-	function clickSchedule(calendar_num) {
-		let option = "width=600, height=400, left=100, top=50, location=no"
-		window.open('lib_ScheduleModify.do?calendar_num=' + calendar_num, '일정추가', option);
-	}
+
 
 	displayCalendar();
 
