@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList.css">   
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/productList.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
@@ -41,7 +42,9 @@
 						<ul id="test">
 							<li data-num="${book.store_product_num}"><a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}">${book.store_product_title}</a></li>
 							<li>${book.store_product_discount}%</li>
-							<li>${book.store_product_pricestandard}원</li>
+							<li>
+							<fmt:formatNumber value="${book.store_product_pricestandard}"/>원
+							</li>
 							<li>(${book.store_product_pricestandard*point}P)</li>
 						</ul>
 					</div>

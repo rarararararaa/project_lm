@@ -37,7 +37,7 @@ public class ProductViewController {
 		PagingUtil page = 
 				new PagingUtil(null,null,
 						currentPage,count,10,10,
-						"/bookstore/product/productCeteList.do","&order="+order);
+						"/bookstore/product/productCeteList.do","&detail="+detail+"&order="+order);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
 		List<ProductVO> list = productService.selectCategoryBook(map);
@@ -51,10 +51,10 @@ public class ProductViewController {
 	}
 
 	public String[] category(){
-		String[] list = {"소설/시/희곡","인문학","컴퓨터","소년","종교/역학","자기계발","유아",
-		                 "외국어","예술/대중문화","역사", "에세이","어린이",
-		                 "수험서/자격증","잡지","사회과학","만화","대학교재",
-		                 "달력/기타", "과학","참고서","경제경영","건강/취미"};
+		String[] list = {"소설/시/희곡","인문학","컴퓨터","종교/역학","예술/대중문화","자기계발","외국어",
+		                 "역사","경제경영","사회과학","과학","유아","어린이","소년",
+		                 "수험서/자격증","참고서","만화","대학교재",
+		                 "달력/기타","잡지","에세이","건강/취미"};
 		return list;
 	}
 }
