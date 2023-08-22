@@ -93,11 +93,9 @@ public class LibMainController {
 		int totalCount = libraryMainService.selectLibraryByCategoryAndOrderNumCount(map);
 		int selectedCategoryNum = categoryNum;
 		int rnum = rnumNum;
-		PagingUtil page = new PagingUtil(currentPage, totalCount, rnum, 20, "libSearchMain.do", "&keyword="+keyword+"&orderByNum="+orderByNum+"&categoryNum="+categoryNum);
+		PagingUtil page = new PagingUtil(currentPage, totalCount, rnum, 20, "libSearchMain.do", "&keyword="+keyword+"&orderByNum="+orderByNum+"&categoryNum="+categoryNum+"&rnumNum="+rnum);
 		//list = libraryMainService.selectLibraryAllPorducts();
 		navs = libraryMainService.selectLibraryCategoryNav();
-		
-		
 		map.put("orderByNum",orderByNum);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
