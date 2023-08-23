@@ -82,7 +82,14 @@ img {
 	<div class="content">
 			<!-- 메인 이미지 시작 -->
 		<div class="container">
-		<div id="carouselExample" class="carousel slide event" data-ride="carousel">
+		
+			<!-- 상단 링크 버튼 시작-->
+			<div class="service-up">
+				<jsp:include page="/WEB-INF/views/common/up_button.jsp" />
+			</div>
+			<!-- 상단 링크 버튼 끝-->
+			
+			<div id="carouselExample" class="carousel slide event" data-ride="carousel">
 			<!-- indicator 시작 -->
 			<div class="carousel-indicators">
 				<button class="active" type="button" data-bs-target="#carouselExample" data-bs-slide-to="0"></button>

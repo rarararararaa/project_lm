@@ -15,6 +15,20 @@
 			<div class="specific">${donationVO.donation_num}</div>
 		</div>
 		<div class="content-detail">
+			<div class="detail-title">관리자 확인</div>
+			<div class="specific">
+				<c:if test="${donationVO.donation_status==0}"><div style="color: orange;"><b>미확인</b></div></c:if>
+				<c:if test="${donationVO.donation_status==1}"><div style="color: blue;"><b>기증수락</b></div></c:if>
+				<c:if test="${donationVO.donation_status==2}"><div style="color: red;"><b>기증거부</b></div></c:if>
+			</div>
+			<div class="specific">
+				<form:radiobutton path="donation_status" value="0"/><div style="color: orange;">미확인</div>
+				<form:radiobutton path="donation_status" value="1"/><div style="color: blue;">기증수락</div>
+				<form:radiobutton path="donation_status" value="2"/><div style="color: red;">기증거부</div>
+				<form:button class="small-button-B">수정</form:button>
+			</div>
+		</div>
+		<div class="content-detail">
 			<div class="detail-title">제목</div>
 			<div class="specific">${donationVO.donation_title}</div>
 		</div>
@@ -37,15 +51,6 @@
 		<div class="content-detail">
 			<div class="detail-title">기증도서정보</div>
 			<div class="specific">${donationVO.donation_book_info}</div>
-		</div>
-		<div class="content-detail">
-			<div class="detail-title">관리자 확인</div>
-			<div class="specific">
-				<form:radiobutton path="donation_status" value="0"/><div>미확인</div>
-				<form:radiobutton path="donation_status" value="1"/><div>기증수락</div>
-				<form:radiobutton path="donation_status" value="2"/><div>기증거부</div>
-				<form:button class="small-button-B">수정</form:button>
-			</div>
 		</div>
 		<div class="button-box">
 			<input class="small-button" type="button" value="목록"

@@ -48,7 +48,7 @@
 						<th class="row-title"><b>내용</b></th>
 						<th class="row-title"><b>등록일</b></th>
 						<th class="row-title"><b>기증자</b></th>
-						<th class="row-title"><b>관리자 확인</b></th>
+						<th class="row-title"><b>승인 여부</b></th>
 					</tr>
 					<c:forEach var="donation" items="${list}">
 						<tr class="align-center">
@@ -61,7 +61,7 @@
 							<td class="row-title">${donation.donation_name}</td>
 							<td class="row-title"><c:if
 									test="${donation.donation_status == 0}">
-									<span style="color: blue;"><b>미확인</b></span>
+									<span style="color: orange;"><b>미확인</b></span>
 								</c:if> <c:if test="${donation.donation_status == 1}">
 									<span style="color: blue;"><b>기증 수락</b></span>
 								</c:if> <c:if test="${donation.donation_status == 2}">
