@@ -135,7 +135,7 @@
 		</div>
 		<div class="header_inner">
 			<div class="search_wrap">
-				<div class="logo_box"><a class="logo_link"></a></div>
+				<div class="logo_box"><a href="${pageContext.request.contextPath}/bookstore/template/bsMain.do" class="logo_link"></a></div>
 				<div class="search_box">
 					<div class="search_select">
 						<select id="categoryNum" class="select_box_button">
@@ -200,7 +200,6 @@
 												<li class="category-item"><a><span>국내도서</span></a></li>
 												<li class="category-item"><a><span>서양도서</span></a></li>
 												<li class="category-item"><a><span>일본도서</span></a></li>
-												<li class="category-item"><a><span>교보Only</span></a></li>
 											</ul>
 										</div>
 									<!-- 도서 분류 상세 -->
@@ -221,9 +220,6 @@
 					<a class="gnb_link" href="/bookstore/product/productCeteList.do"><em>전체도서</em></a>
 				</li>
 				<li class="gnb_item">
-					<a class="gnb_link"><em>나나나</em></a>
-				</li>
-				<li class="gnb_item">
 					<a class="gnb_link" href="/bookstore/product/productBestList.do">베스트</a>
 				</li>
 				<li class="gnb_item">
@@ -231,18 +227,6 @@
 				</li>
 				<li class="gnb_item">
 					<a class="gnb_link"  href="${pageContext.request.contextPath}/bookstore/event/list.do">이벤트</a>
-				</li>
-				<li class="gnb_item">
-					<a class="gnb_link">사은품</a>
-				</li>
-				<li class="gnb_item">
-					<a class="gnb_link">PICKS</a>
-				</li>
-				<li class="gnb_item">
-					<a class="gnb_link">CASTing</a>
-				</li>
-				<li class="gnb_item">
-					<a class="gnb_link">교보ONLY</a>
 				</li>
 				<li class="gnb_item">
 					<a class="gnb_link" href="${pageContext.request.contextPath}/bookstore/used/usedMain.do">중고</a>
