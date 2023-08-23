@@ -23,17 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.library.bookapply.service.BookApplyService;
 import kr.spring.library.bookapply.vo.BookApplyVO;
-import kr.spring.library.lib_lost_item.service.LibLostItemService;
-import kr.spring.library.lib_lost_item.vo.LibLostItemVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 public class BookApplyController {
-	@Autowired
-	private LibLostItemService libLostItemService;
-	
 	
 	@Autowired
 	private BookApplyService bookApplyService;
@@ -41,10 +36,6 @@ public class BookApplyController {
 	@ModelAttribute
 	public BookApplyVO initCommand() {
 		return new BookApplyVO();
-	}
-	@ModelAttribute
-	public LibLostItemVO initCommand2() {
-		return new LibLostItemVO();
 	}
 	@RequestMapping("/library/bookApplyMain.do")
 	public String main() {

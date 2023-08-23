@@ -10,7 +10,7 @@
 	</ul>
 	<h3 class="sub-title">기증 대상 자료</h3>
 	<ul class="info">
-		<li>이런 자료를 보내주세요</li>
+		<li><b>이런 자료를 보내주세요</b></li>
 		<li>세계자료, 다문화자료, 한국을 소개하는 외국어자료</li>
 		<li>서울시정에 관련된 전문도서(최근 5년 이내 출판된 도서)</li>
 		<li>정부 및 지방자치단체 발간물</li>
@@ -27,5 +27,7 @@
 		<li>내용 및 삽화 등이 유해한 자료</li>
 		<li>기타 도서관에서 소장하기 부적합하다고 판단되는 자료</li>
 	</ul>
-	<input type="button" value="기증하기" onclick="location.href='donationApply.do'" class="submit">
+	<div class="align-center">
+	<input type="button" value="기증하기" onclick="location.href='donationApply.do'" class="submit-btn">
+	</div>
 </div>

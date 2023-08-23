@@ -2,8 +2,6 @@ package kr.spring.library.donation.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-
 import kr.spring.library.donation.vo.DonationVO;
 
 public interface DonationService {

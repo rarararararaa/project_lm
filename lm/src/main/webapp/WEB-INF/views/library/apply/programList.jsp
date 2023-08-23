@@ -9,24 +9,19 @@
 	</c:if>
 	<c:if test="${count > 0}">
 	
-	<ul class="facility-list">
-		<li style="width:100px;">NO.</li>
-		<li style="width:500px;">프로그램명</li>
-		<li>진행기간</li>
-	</ul>
 	<c:forEach var="program" items="${list}">
 	<ul class="facility-list">
 		<li style="width:100px;">${program.program_num}</li>
 		<li style="width:500px;">
 		<a href="programDetail.do?program_num=${program.program_num}">${program.program_title}</a>
 		</li>
-		<li>${program.program_start}~${program.program_end}</li>
+		<li style="font-size:16px;">${program.program_start}~${program.program_end}</li>
 	</ul>
 	</c:forEach>
 		
 	<div class="align-center">${page}</div>
 	</c:if>
 	<c:if test="${mem_auth==9}">
-	<input type="button" value="글쓰기" onclick="location.href='insertProgram.do'">
+	<input type="button" value="글쓰기" onclick="location.href='insertProgram.do'" class="submit-btn">
 	</c:if>
 </div>

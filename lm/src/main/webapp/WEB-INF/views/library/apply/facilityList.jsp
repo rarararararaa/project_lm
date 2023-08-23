@@ -20,6 +20,6 @@
 	<div class="align-center">${page}</div>
 	</c:if>
 	<c:if test="${mem_auth==9}">
-	<input type="button" value="글쓰기" onclick="location.href='insertFacility.do'">
+	<input type="button" value="글쓰기" onclick="location.href='insertFacility.do'" class="submit-btn">
 	</c:if>
 </div>
