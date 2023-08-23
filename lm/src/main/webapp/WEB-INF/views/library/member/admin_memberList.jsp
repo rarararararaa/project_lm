@@ -16,7 +16,7 @@
 </script>
 <div class="page-main">
 	<div class="box">
-		<div class="title">회원 목록</div>
+		<div class="title">전체 회원 목록</div>
 		<div class="content-box">
 			<!-- 검색창 시작 -->
 			<form action="admin_list.do" id="search_form" method="get">

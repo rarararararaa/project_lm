@@ -2,27 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style>
-    .member-grade-bronze {
-      color: #CD7F32;
-    }
-
-    .member-grade-silver {
-      color: #C0C0C0;
-    }
-
-    .member-grade-gold {
-      color: #FFD700;
-    }
-
-    .member-grade-platinum {
-      color: #D9D9D9;
-    }
-
-    .member-grade-diamond {
-      color: #00D9FF;
-    }
-  </style>
 <!-- 회원권한 수정 시작 -->
 <div class="page-main">
 	<div class="box">
@@ -34,6 +13,31 @@
 	    <div class="content-detail">
 			<div class="detail-title">회원번호</div>
 			<div class="specific">${memberVO.mem_num}</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">회원권한</div>
+			<div class="specific">
+				<c:if test="${memberVO.mem_auth==0}"><div class="expire"><b>탈퇴</b></div></c:if>
+				<c:if test="${memberVO.mem_auth==1}"><div class="stop"><b>정지</b></div></c:if>
+				<c:if test="${memberVO.mem_auth==2}"><div class="sleep"><b>휴면</b></div></c:if>
+				<c:if test="${memberVO.mem_auth==3}"><b>일반</b></c:if>
+				<c:if test="${memberVO.mem_auth==4}"><div class="notcheck"><b>미인증</b></div></c:if>
+				<c:if test="${memberVO.mem_auth==9}"><div class="answer"><b>관리자</b></div></c:if>
+			</div>
+			<div class="specific">
+				<form:radiobutton path="mem_auth" value="0"/>
+					<div class="expire"><b>탈퇴</b></div>
+				<form:radiobutton path="mem_auth" value="1"/>
+					<div class="stop"><b>정지</b></div>
+				<form:radiobutton path="mem_auth" value="2"/>
+					<div class="sleep"><b>휴면</b></div>
+				<form:radiobutton path="mem_auth" value="3"/>
+					<b>일반</b>
+				<form:radiobutton path="mem_auth" value="4"/>
+					<div class="notcheck"><b>미인증</b></div>
+				<form:radiobutton path="mem_auth" value="9"/>
+					<div class="answer"><b>관리자</b></div>
+			</div>
 		</div>
 		<div class="content-detail">
 			<div class="detail-title">회원등급</div>
@@ -73,28 +77,8 @@
 			<div class="detail-title">가입일</div>
 			<div class="specific">${memberVO.mem_reg_date}</div>
 		</div>
-		<div class="content-detail">
-			<div class="detail-title">회원권한</div>
-			<div class="specific">
-				<c:if test="${memberVO.mem_auth < 9}">
-				<form:radiobutton path="mem_auth" value="0"/>
-					<div class="expire"><b>탈퇴</b></div>
-				<form:radiobutton path="mem_auth" value="1"/>
-					<div class="stop"><b>정지</b></div>
-				<form:radiobutton path="mem_auth" value="2"/>
-					<div class="sleep"><b>휴면</b></div>
-				<form:radiobutton path="mem_auth" value="3"/>
-					<b>일반</b>
-				<form:radiobutton path="mem_auth" value="4"/>
-					<div class="notcheck"><b>미인증</b></div>
-				</c:if>      
-				<c:if test="${memberVO.mem_auth == 9}">
-					<div class="answer"><b>관리자</b></div>
-				</c:if>
-			</div>
-		</div>
 		<div class="button-box">
-			<form:button class="small-button">권한수정</form:button>
+			<form:button class="small-button-B">권한수정</form:button>
 			<input class="small-button" type="button" value="회원목록"
 			   onclick="location.href='admin_list.do'">
 		</div>
