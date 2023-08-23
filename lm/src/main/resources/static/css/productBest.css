@@ -124,7 +124,6 @@ p{
 
 .swiper-button-prev,
 .swiper-button-next {
-  top: 700px !important;
   width: 60px !important;
   height: 59px !important;
   position: absolute;
@@ -143,6 +142,12 @@ p{
 .swiper-button-next {
 	margin-right: 40px;
 	background-image: url("/images/right.png");
+}
+.month-prev, .month-next{
+  top: 700px !important;
+}
+.year-prev, .year-next{
+  top: 1300px !important;
 }
 .point{
 	margin: 0 20px;

@@ -14,7 +14,7 @@
 	<div class="months-best best">
 		<p style="margin-bottom: 0">종합 월간 베스트</p>
 		<!-- Slider main container -->
-		<div class="swiper">
+		<div class="swiper month">
 			<!-- Additional required wrapper -->
 			<div class="swiper-wrapper">
 				<!-- Slides -->
@@ -40,16 +40,16 @@
 			<!-- If we need scrollbar -->
 			<div class="swiper-scrollbar"></div>
 		</div>
-			<div class="swiper-button-prev"></div>
-			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev month-prev"></div>
+			<div class="swiper-button-next month-next"></div>
 		<!-- Slider main container -->	
 	</div>
 	<!-- 월간 베스트 -->
 	<!-- 연간 베스트 -->
-	<div class="year-best">
+	<div class="year-best best">
 		<p style="margin-bottom: 0">종합 연간 베스트</p>
 		<!-- Slider main container -->
-		<div class="swiper">
+		<div class="swiper year">
 			<!-- Additional required wrapper -->
 			<div class="swiper-wrapper">
 				<!-- Slides -->
@@ -75,8 +75,8 @@
 			<!-- If we need scrollbar -->
 			<div class="swiper-scrollbar"></div>
 		</div>
-			<div class="swiper-button-prev"></div>
-			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev year-prev"></div>
+			<div class="swiper-button-next year-next"></div>
 		<!-- Slider main container -->	
 	</div>
 	<!-- 연간 베스트 -->
