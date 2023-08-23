@@ -222,13 +222,10 @@ public class ProductController {
 		
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
-		int user=0;
-		if(session.getAttribute("mem_num")!=null) {
-			user = (Integer)session.getAttribute("mem_num");
-		}
-		if(user==0) {
+		if(session.getAttribute("mem_num")==null) {
 			mapJson.put("result", "logout");
 		}else {
+			int user = (Integer)session.getAttribute("mem_num");
 			//로그인된 회원번호 셋팅
 			fav.setMem_num(user);
 			fav.setStore_product_num(store_product_num);
