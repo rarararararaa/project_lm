@@ -88,5 +88,10 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.selectBestBookList(start, end);
 	}
 
+	@Override
+	public List<ProductVO> selectCateTop3(String cate) {
+		return productMapper.selectCateTop3(cate);
+	}
+
 
 }
