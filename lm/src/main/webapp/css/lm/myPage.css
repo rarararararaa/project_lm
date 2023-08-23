@@ -1026,6 +1026,7 @@ input {
 	display: flex;
 	width: 970px;
 	height: 120px;
+	margin-bottom:10px;
 }
 #t-mypage-num {
 	display: inline-block;

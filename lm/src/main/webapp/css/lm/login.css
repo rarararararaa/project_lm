@@ -57,8 +57,15 @@
     height: 30px;
     flex-direction:row;
     margin-left: 400px;
+    margin-top:50px;
 }
-
+.error-color{
+	display:inline-block;
+	height:40px;
+	font-size:16px;
+	padding-top:12px;
+	color:red;
+}
 .page-button .button1{
     display: inline;
     width:90px;

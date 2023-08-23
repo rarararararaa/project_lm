@@ -35,6 +35,15 @@
 		<put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/>
     </definition>
     
+    <definition name="findPasswdMain" template="/WEB-INF/views/lm/findPasswd/template/findPasswdLayout.jsp">
+    	<put-attribute name="findPasswdTitle" value="비밀번호 찾기"/>
+    	<put-attribute name="findPasswd" value="/WEB-INF/views/lm/findPasswd/template/findPasswd.jsp"/>
+    	<put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
+        <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/>
+		<put-attribute name="bsHeader" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
+		<put-attribute name="bsFooter" value="/WEB-INF/views/bookstore/template/bsFooter.jsp"/>
+    </definition>
+    
     <definition name="myPageMain" template="/WEB-INF/views/lm/mypage/main/myPageLayout.jsp">
     	<put-attribute name="myPageTitle" value="주문 내역"/>
     	<put-attribute name="myPageHeader" value="/WEB-INF/views/lm/mypage/header/myPageHeader.jsp"/>

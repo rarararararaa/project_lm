@@ -28,8 +28,9 @@ public interface MemberService {
 	
 	//회원정보 수정
 	public void updateMember(MemberVO member);
-	//비밀번호 수정
-	public void updateMem_password(MemberVO member);
+	//비밀번호 변경
+	public MemberVO changePasswdCheck(MemberVO member);
+	public void changePasswd(MemberVO member);
 	//회원탈퇴
 	public void deleteMember(Integer mem_num);
 	//자동 로그인

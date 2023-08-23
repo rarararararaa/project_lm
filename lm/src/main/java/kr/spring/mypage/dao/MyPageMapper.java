@@ -45,7 +45,7 @@ public interface MyPageMapper {
 	public void updateEmail(MyPageVO mypageVO);
 	@Update("UPDATE lm_member_detail SET mem_cell = #{mem_new_cell} WHERE mem_num = #{mem_num}")
 	public void updateCell(MyPageVO mypageVO);
-	@Update("UPDATE lm_member_manage SET mem_auth = 4 WHERE mem_num = #{mem_num}")
+	@Update("UPDATE lm_member_manage SET mem_auth = #{mem_auth} WHERE mem_num = #{mem_num}")
 	public void updateAuth(MyPageVO mypageVO);
 	@Select("SELECT mem_salt FROM lm_member_detail WHERE mem_num =#{mem_num}")
 	public String getSalt(int mem_num);
@@ -71,6 +71,9 @@ public interface MyPageMapper {
 	//회원정보 수정일 수정
 	@Update("UPDATE lm_member_detail SET mem_modify_date = SYSDATE WHERE mem_num = #{mem_num}")
 	public void updateModifyDate(MyPageVO mypageVO);
+	//비밀번호 변경
+	@Update("UPDATE lm_member_detail SET mem_passwd = #{mem_passwd} WHERE mem_num = #{mem_num}")
+	public void passwdChangeApply(MyPageVO mypageVO);
 	//배송지, 결제 정보
 	//주문상태 수정
 	@Update("UPDATE store_order_manage SET order_status = 3 WHERE mem_num = #{mem_num} AND order_num = #{order_num}")

@@ -55,6 +55,13 @@ body{
       font-size: 13px;
       flex-direction:column;
     }
+    #page-input-passwd{ /* 입력칸 외부 박스 크기 조절 */
+      display:flex;
+      width: 100%;
+      height: 220px; /* 입력창 조절 */
+      font-size: 13px;
+      flex-direction:column;
+    }
     .page-input .page-input-box{ /* 입력창 내부 박스 크기 조절 */
       display: inline-block;
       height: 54px;

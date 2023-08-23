@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -66,7 +66,9 @@
 					<!-- 폼 시작 -->
 					<div class="photo-form">
 						<div class="view-photo">
-							<img src="${pageContext.request.contextPath}/lm/mypage/myedit/photoView.do?mem_num=${mem_num}" class="view-photo">
+							<img
+								src="${pageContext.request.contextPath}/lm/mypage/myedit/photoView.do?mem_num=${mem_num}"
+								class="view-photo">
 						</div>
 						<input type="button" onclick="ShowUploadPhoto();" value="사진 변경"
 							id="upload-photo" class="edit-button-photo">
@@ -75,7 +77,7 @@
 							<input type="file" id="upload-photo-file"
 								class="edit-button-photo" name="upload"
 								accept="image/gif,image/png,image/jpeg"> <br>
-							<form:button class="edit-button">확인</form:button>
+							<form:button class="edit-button" id="photo_confirm">확인</form:button>
 							<input type="button" onclick="HideUploadPhoto();" value="취소"
 								id="cancel-photo" class="edit-button-photo">
 						</div>
@@ -111,11 +113,11 @@
 							</div>
 							<div class="input-area-form">
 								<div class="view-data-title2">신규 비밀번호 재입력</div>
-								<input type="password" id="nmew-passwd2" maxlength="20"
+								<input type="password" maxlength="20"
 									placeholder="신규 비밀번호 재입력" class="input-button" id="pw3" />
 							</div>
 							<div class="input-area-form">
-								<form:button class="edit-button">확인</form:button>
+								<form:button class="edit-button" id="passwd_confirm">확인</form:button>
 								<span id="message_new_passwd2"></span> <input type="button"
 									onclick="hideChangePasswd();" value="취소" id="cancel-passwd"
 									class="edit-button">
@@ -133,9 +135,13 @@
 						<div class="email-btn-form">
 							<div class="view-data-title">이메일</div>
 							<div class="view-data-email">${mypageVO.mem_email}</div>
-							<!-- 이메일 미인증 유저만 보임 3-->
+							<input type="hidden" value="${mypageVO.mem_email}" id="hidden_email">
+							<c:if test="${mem_auth==4}">
+							<!-- 이메일 미인증 유저만 보임 auth=4-->
 							<input type="button" onclick="showConfirmEmail();" value="이메일 인증"
-								id="confirm-email" class="edit-button"> <input
+								id="confirm-email" class="edit-button">
+								</c:if> 
+								<input
 								type="button" onclick="showChangeEmail();" value="이메일 변경"
 								id="change-email" class="edit-button">
 						</div>
@@ -145,11 +151,14 @@
 								발송됩니다.</div>
 							<div id="email-tip">아래에 인증 번호를 입력하시면 인증이 완료됩니다.</div>
 							<input id="mem_email" maxlength="50" placeholder="이메일 주소 입력"
-								class="input-button" /> <input type="button" onclick=""
-								value="인증" id="check-email" class="edit-button"> <input
+								class="input-button" /> <input type="button"
+								value="인증" id="check-email" class="edit-button"
+								onclick="emailCheck();"> <input
 								id="mem_confirm_email" maxlength="50" placeholder="인증번호 입력"
 								class="input-button" />
-							<form:button class="edit-button">확인</form:button>
+							<input type="button"
+								value="확인" id="confirm-email2" class="edit-button"
+								onclick="emailConfirm();">
 							<input type="button" onclick="hideConfirmEmail();" value="취소"
 								id="cancel-email" class="edit-button">
 						</div>
@@ -161,7 +170,7 @@
 								placeholder="현재 이메일 입력" class="input-button" />
 							<form:input path="mem_new_email" maxlength="50"
 								placeholder="신규 이메일 입력" class="input-button" />
-							<form:button class="edit-button">확인</form:button>
+							<form:button class="edit-button" id="email_confirm">확인</form:button>
 							<input type="button" onclick="hideChangeEmail();" value="취소"
 								id="cancel-email" class="edit-button">
 						</div>
@@ -172,16 +181,17 @@
 						<div class="cell-btn-form">
 							<div class="view-data-title">전화번호</div>
 							<div class="view-data-cell">${mypageVO.mem_cell}</div>
-							<input type="button" onclick="showChangecell();" value="전화번호 변경"
+							<input type="hidden" value="${mypageVO.mem_cell}" id="hidden_cell">
+							<input type="button" onclick="showChangecell();" value="전화번호 변경" id="change-cell"
 								class="edit-button">
 						</div>
 						<!-- 선택 버튼 클릭 시 활성화 -->
 						<div id="input-area-cell" class="input-area">
 							<form:input path="mem_old_cell" maxlength="50"
-								placeholder="현재 전화번호 입력" class="input-button" />
+								placeholder="현재 전화번호 입력" class="input-button" id="cell1"/>
 							<form:input path="mem_new_cell" maxlength="50"
-								placeholder="신규 전화번호 입력" class="input-button" />
-							<form:button class="edit-button">확인</form:button>
+								placeholder="신규 전화번호 입력" class="input-button" id="cell2"/>
+							<form:button class="edit-button" id="cell_confirm">확인</form:button>
 							<input type="button" onclick="hideChangecell();" value="취소"
 								id="cancel-cell" class="edit-button">
 						</div>

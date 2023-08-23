@@ -15,14 +15,10 @@
 		<h2>안내</h2>
 		<div class="result-display">
 			<div class="align-center">
-				<c:if test="${accessMsg==1}">
-				<input type="button" value="이동"
-							onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
+				<c:if test="${!empty answer}">
+				${answer}
 			</c:if>
-				<c:if test="${!empty accessMsg}">
-				${accessMsg}
-			</c:if>
-				<c:if test="${empty accessMsg}">
+				<c:if test="${empty answer}">
 				잘못된 접속입니다.
 			</c:if>
 				<p>
@@ -31,8 +27,14 @@
 							onclick="location.href='${accessUrl}'">
 					</c:if>
 					<c:if test="${empty accessUrl}">
-						<input type="button" value="이동"
-							onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
+						<c:if test="${lo == 1}">
+							<input type="button" value="이동"
+								onclick="location.href='${pageContext.request.contextPath}/lm/mypage/myedit/myEditMain.do?lo=1'">
+						</c:if>
+						<c:if test="${lo != 1}">
+							<input type="button" value="이동"
+								onclick="location.href='${pageContext.request.contextPath}/lm/mypage/myedit/myEditMain.do?lo=2'">
+						</c:if>
 					</c:if>
 			</div>
 		</div>

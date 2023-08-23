@@ -1,20 +1,14 @@
 package kr.spring.mypage.controller;
 
-import java.sql.Blob;
-import java.util.Date;
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-import java.util.regex.Pattern;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,13 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.spring.library.board_announce.vo.BoardAnnounceVO;
-import kr.spring.library.lib_lost_item.vo.LibLostItemVO;
-import kr.spring.member.service.MemberService;
-import kr.spring.member.vo.MemberVO;
+import kr.spring.mypage.email.Email;
+import kr.spring.mypage.email.EmailSender;
 import kr.spring.mypage.service.MyPageService;
 import kr.spring.mypage.vo.MyPageVO;
-import kr.spring.util.AuthCheckException;
+import kr.spring.util.EmailUtil;
 import kr.spring.util.EncryptionPasswd;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PagingUtil;
@@ -46,6 +38,10 @@ public class MyPageController {
 
 	@Autowired
 	private MyPageService mypageService;
+	@Autowired
+	private Email email;
+	@Autowired
+	private EmailSender emailSender;
 
 	/*=======================
 	 * 자바빈 초기화
@@ -90,17 +86,19 @@ public class MyPageController {
 			list = mypageService.getOrderList(map);
 		}
 		//제목 길이가 길면 잘라내고 .. 추가
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getStore_product_title().length() >= 90) {
-				String new_title = list.get(i).getStore_product_title().substring(0, 85)+"..";
-				list.get(i).setStore_product_title(new_title);
+		if(list != null) {
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getStore_product_title().length() >= 90) {
+					String new_title = list.get(i).getStore_product_title().substring(0, 85)+"..";
+					list.get(i).setStore_product_title(new_title);
+				}
 			}
-		}
-		//금액 천단위 , 처리
-		for (int i = 0; i < list.size(); i++) {
-			String price = list.get(i).getOrder_total_price();
-			price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
-			list.get(i).setOrder_total_price(price);
+			//금액 천단위 , 처리
+			for (int i = 0; i < list.size(); i++) {
+				String price = list.get(i).getOrder_total_price();
+				price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+				list.get(i).setOrder_total_price(price);
+			}
 		}
 		model.addAttribute("myPageMain");
 		model.addAttribute("count", count);
@@ -115,7 +113,7 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		//주문번호의 배송상태를 구매확정으로 수정
 		mypageService.setOrderStatus(mypageVO.getOrder_status_confirm(),(Integer)session.getAttribute("mem_num"));
-		
+
 		model.addAttribute("lo",lo);
 		return "common/notice_edit";
 	}
@@ -206,21 +204,9 @@ public class MyPageController {
 			//문의내역 가져오기
 			list = mypageService.getAskList(map);
 		}
-		//제목 길이가 길면 잘라내고 .. 추가
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getStore_product_title().length() >= 90) {
-				String new_title = list.get(i).getStore_product_title().substring(0, 85)+"..";
-				list.get(i).setStore_product_title(new_title);
-			}
-		}
-		//금액 천단위 , 처리
-		for (int i = 0; i < list.size(); i++) {
-			String price = list.get(i).getOrder_total_price();
-			price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
-			list.get(i).setOrder_total_price(price);
-		}
+
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myPageMain");
+		mav.setViewName("askListMain");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
@@ -558,13 +544,17 @@ public class MyPageController {
 		}
 		if(!mypageVO.getMem_new_email().equals("")) {
 			mypageService.updateEmail(mypageVO);
+			//이메일 변경 시 미인증이므로 auth=4 변경
+			mypageVO.setMem_auth(4);
+			mypageService.updateAuth(mypageVO);
+			//세션에 auth 적용;
+			session.setAttribute("mem_auth", 4);
 			model.addAttribute("accessMsg", "이메일 수정 완료.");
 			check = true;
 		}
 		if(!mypageVO.getMem_new_cell().equals("")) {
 			mypageService.updateCell(mypageVO);
-			//이메일 변경 시 미인증이므로 auth=4 변경
-			mypageService.updateAuth(mypageVO);
+
 			model.addAttribute("accessMsg", "전화번호 수정 완료.");
 			check = true;
 		}
@@ -574,6 +564,82 @@ public class MyPageController {
 		}
 		model.addAttribute("lo",lo);
 		return "common/notice_edit";
+	}
+	/*=======================
+	 * 이메일 인증 처리
+	 *=======================*/
+	@ResponseBody
+	@PostMapping("/emailCheck.do")
+	public Map<String,String> emailCheck(@Valid MyPageVO mypageVO) throws Exception{
+		log.debug("<<이메일 인증>> : " + mypageVO.getUserEmail());
+
+		//8자리 인증코드 생성
+		String data = EmailUtil.createKey();
+		log.debug("<<임시 비밀번호>> : " + data);
+		//이메일 제목,수신자,내용 입력
+		email.setSubject("lm그룹 통합 홈페이지 이메일 인증 요청.");
+		email.setContent("다음 이메일 인증 코드를 입력해 주세요. " + data);
+		email.setReceiver(mypageVO.getUserEmail());
+		//이메일 발송
+		emailSender.sendEmail(email);
+
+		Map<String,String> mapJson = new HashMap<String,String>();
+		mapJson.put("result", data);
+		return mapJson;
+	}
+	/*=======================
+	 * 이메일 인증 적용(auth 변경) 처리
+	 *=======================*/
+	@PostMapping("/emailCheckApply.do")
+	public Map<String,String> emailCheckApply(@Valid MyPageVO mypageVO, HttpServletRequest request) throws Exception{
+		log.debug("<<이메일 인증 적용>> : " + mypageVO.getUserEmailApply());
+		if(mypageVO.getUserEmailApply().equals("true")) {
+			//mem_num 가져오기
+			HttpSession session = request.getSession();
+			Integer mem_num = (Integer)session.getAttribute("mem_num");
+			//VO에 mem_num 등록
+			mypageVO.setMem_num(mem_num);
+			//이메일 인증 시 auth=3
+			mypageVO.setMem_auth(3);
+			mypageService.updateAuth(mypageVO);
+			//세션에 auth 적용
+			session.setAttribute("mem_auth", 3);
+			Map<String,String> mapJson = new HashMap<String,String>();
+			mapJson.put("result", "이메일 인증 완료");
+			return mapJson;
+		}
+		Map<String,String> mapJson = new HashMap<String,String>();
+		mapJson.put("result", "네트워크 오류발생");
+		return mapJson;
+	}
+	/*=======================
+	 * 비밀번호 변경 처리
+	 *=======================*/
+	@PostMapping("/passwdChangeApply.do")
+	public Map<String,String> passwdChangeApply(@Valid MyPageVO mypageVO, HttpServletRequest request) throws Exception{
+		log.debug("<<비밀번호 찾기>> : ");
+		//mem_num 가져오기
+		HttpSession session = request.getSession();
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		//VO에 mem_num 등록
+		mypageVO.setMem_num(mem_num);
+		
+		//입력받은 비밀번호 sha-256+salt 암호화 처리 시작
+		String passwd = mypageVO.getMem_passwd();
+		//db에 저장된 salt값 가져오기
+		String salt = mypageService.getSalt(mem_num);
+		//입력받은 비밀번호 암호화 (salt + mem_passwd)
+		String mem_passwd = EncryptionPasswd.encryptionPasswd(salt,passwd);
+		//VO에 SHA-256 passwd 적재
+		mypageVO.setMem_passwd(mem_passwd);
+		
+		mypageService.passwdChangeApply(mypageVO);
+		
+		
+		Map<String,String> mapJson = new HashMap<String,String>();
+		mapJson.put("result", "비밀번호 변경 완료");
+		return mapJson;
+		
 	}
 	/*=======================
 	 * 사진 관련

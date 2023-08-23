@@ -207,5 +207,9 @@ public class MyPageServiceImpl implements MyPageService{
 	public void setOrderStatus(int order_num, int mem_num) {
 		mypageMapper.setOrderStatus(order_num,mem_num);
 	}
-	
+
+	@Override
+	public void passwdChangeApply(MyPageVO mypageVO) {
+		mypageMapper.passwdChangeApply(mypageVO);
+	}
 }

@@ -34,6 +34,8 @@ public interface MyPageService {
 	public MyPageVO getFacility(int facility_num);
 	//회원정보 수정일 수정
 	public void updateModifyDate(MyPageVO mypageVO);
+	//비밀번호 변경
+	public void passwdChangeApply(MyPageVO mypageVO);
 	//배송지,결제 정보
 	public MyPageVO getHomeOrderList(int order_num,int mem_num);
 

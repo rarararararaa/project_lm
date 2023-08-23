@@ -26,6 +26,7 @@ import lombok.ToString;
 @ToString(exclude = {"mem_photo","facility_image"})
 public class MyPageVO {
 	public int mem_num;
+	public int mem_auth;
 	public int mem_grade;
 	public int mem_point;
 	public int zzim_num; 
@@ -103,8 +104,18 @@ public class MyPageVO {
 	public int lib_product_product_status;
 	public String lib_product_bookimageurl;
 	public int order_status_confirm;
+	//이메일 인증
+	public String userEmail;
+	public int ask_num;
+	public int ask_category;
+	public int ask_status;
+	public String ask_title;
+	public String ask_content;
+	public String ask_reg_date;
+	public String ask_image_name;
+	public String userEmailApply;
 	
-	
+	private byte[] ask_image;
 	private byte[] facility_image;
 	private byte[] mem_photo; //myEdit.jsp에서 입력받은 이미지 파일
 	//MultipartFile to byte 이미지 처리 

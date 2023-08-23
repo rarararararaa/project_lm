@@ -25,11 +25,11 @@ public class MemberServiceImpl implements MemberService{
 		//member_detail에 넣기 전 주민등록번호 합치기
 		member.setMem_identify(member.getMem_identify()+"-"+member.getMem_identify2());
 		memberMapper.insertMember_detail(member);
-		//선택사항인 주소 정보 입력 유무 판별
-		if(!member.getHome_zipcode().equals("")) {
-			member.setHome_num(memberMapper.selectHome_num()); //nextval
-			memberMapper.insertHome(member);
-		}
+	}
+	@Override
+	public void insertHome(MemberVO member) {
+		member.setHome_num(memberMapper.selectHome_num()); //nextval
+		memberMapper.insertHome(member);
 	}
 
 	@Override
@@ -41,13 +41,6 @@ public class MemberServiceImpl implements MemberService{
 	public String selectSalt(String mem_id) {
 		return memberMapper.selectSalt(mem_id);
 	}
-
-	@Override
-	public void insertHome(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public String findId(MemberVO member) {
 		return memberMapper.findId(member);
@@ -119,9 +112,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void updateMem_password(MemberVO member) {
-		// TODO Auto-generated method stub
-		
+	public MemberVO changePasswdCheck(MemberVO member) {
+		return memberMapper.changePasswdCheck(member);
+	}
+	
+	@Override
+	public void changePasswd(MemberVO member) {
+		memberMapper.changePasswd(member);
 	}
 //배송 관련
 
