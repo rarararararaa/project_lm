@@ -19,7 +19,7 @@ public interface RentService {
 	public RentVO selectRent(Integer rent_num);	
 	public BookProductVO selectBook(String callNumber);	
 	//대여 상세
-	public ReservationVO selectReservationByMemnum(RentVO rentVO);	
+	public ReservationVO selectReservationByMemnum(Map<String, Object> map);	
 	//대출 기록
 	public List<RentVO> selectRentHistory(Map<String, Object> map);
 	//페이징 처리 위한 횟수

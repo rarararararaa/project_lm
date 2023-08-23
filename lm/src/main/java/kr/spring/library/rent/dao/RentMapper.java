@@ -26,8 +26,8 @@ public interface RentMapper {
 	@Select("SELECT * FROM lib_product_manage WHERE callNumber=#{callNumber}")
 	public BookProductVO selectBook(String callNumber);
 	//대여 상세
-	@Select("SELECT * FROM lib_reservation WHERE mem_num=#{mem_num} AND lib_product_ISBN=#{lib_product_ISBN}")
-	public ReservationVO selectReservationByMemnum(RentVO rentVO);
+	@Select("SELECT * FROM lib_reservation WHERE reservation_status=1 AND lib_product_isbn=#{lib_product_isbn}")
+	public ReservationVO selectReservationByMemnum(Map<String, Object> map);
 	//대출 기록
 	public List<RentVO> selectRentHistory(Map<String, Object> map);
 	//페이징 처리 위한 횟수
