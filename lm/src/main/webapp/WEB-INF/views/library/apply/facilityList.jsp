@@ -9,11 +9,6 @@
 	</c:if>
 	<c:if test="${count > 0}">
 	
-	<ul class="facility-list">
-		<li></li>
-		<li class="fac-name">시설명</li>
-		<li>예약가능</li>
-	</ul>
 	<c:forEach var="facility" items="${list}">
 	<ul class="facility-list">
 		<li><img src="imageView.do?facility_num=${facility.facility_num}" width="200" height="200"></li>

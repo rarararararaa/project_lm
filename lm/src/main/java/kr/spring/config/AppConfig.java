@@ -97,7 +97,16 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/lm/mypage/orderlist/orderListMain.do");
 		
 		registry.addInterceptor(bsLoginCheck)
-				.addPathPatterns("/bookstore/service/askWrite.do");
+				.addPathPatterns("/bookstore/service/askWrite.do")
+				.addPathPatterns("/bookstore/payment/cart.do")
+				.addPathPatterns("/bookstore/payment/cartAction.do")
+				.addPathPatterns("/bookstore/payment/order.do")
+				.addPathPatterns("/bookstore/review/reviewWrite.do")
+				.addPathPatterns("/bookstore/review/reviewModify.do")
+				.addPathPatterns("/bookstore/review/reviewDelete.do")
+				.addPathPatterns("/library/rent/updateRentDeadline.do")
+				.addPathPatterns("/library/rent/rentReservationBook.do")
+				.addPathPatterns("/library/rent/cancelReservationBook.do");
 		
 		registry.addInterceptor(bsAdminCheck)
 		.addPathPatterns("/bookstore/event/write.do")
@@ -113,7 +122,9 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/library/boardannounce/list.do")
 		.addPathPatterns("/library/liblostitem/list.do")
 		.addPathPatterns("/library/service/admin_boardAskList.do")
-		.addPathPatterns("/library/apply/programAdminList.do");
+		.addPathPatterns("/library/apply/programAdminList.do")
+		.addPathPatterns("/library/rent/rentHistoryList.do")
+		.addPathPatterns("/library/rent/updateRentHistory.do");
 		
 	}
 }
