@@ -76,8 +76,8 @@ public class RentServiceImpl implements RentService{
 	}
 
 	@Override
-	public ReservationVO selectReservationByMemnum(RentVO rentVO) {
-		return rentMapper.selectReservationByMemnum(rentVO);
+	public ReservationVO selectReservationByMemnum(Map<String, Object> map) {
+		return rentMapper.selectReservationByMemnum(map);
 	}
 
 

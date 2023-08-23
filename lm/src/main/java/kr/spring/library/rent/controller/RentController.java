@@ -160,13 +160,15 @@ public class RentController {
 						}
 						vo.setBookVO(rentService.selectBook(i));
 						map.put("lib_product_isbn", vo.getBookVO().getLib_product_isbn());
+						log.debug("<<lib_product_isbn>> : "+vo.getBookVO().getLib_product_isbn());
 						//예약중인 도서인지 확인
 						if(reservationService.selectReservationCountByISBN(map)>0) {
-							ReservationVO reservation=rentService.selectReservationByMemnum(vo);
+							ReservationVO reservation=rentService.selectReservationByMemnum(map);
 							if(reservation.getMem_num()!=vo.getMem_num()) {
 								mapJson.put("result", "reservationFirst");
 								return mapJson;
 							}
+							reservationService.updateReservationtoRent(reservation);
 						}
 						rentService.insertRentHistory(vo);
 						log.debug("<<vo>> : "+vo);
@@ -232,7 +234,9 @@ public class RentController {
 		}else {
 				RentVO vo=rentService.selectRent(rent_num);
 				Map<String, Object> map=new HashMap<String, Object>();
+				vo.setBookVO(rentService.selectBook(vo.getCallNumber()));
 				map.put("callNumber", vo.getCallNumber());
+				map.put("lib_product_isbn", vo.getBookVO().getLib_product_isbn());
 				if(reservationService.selectReservationCountByISBN(map)>0) {
 					model.addAttribute("message", "예약자가 있어 연장이 불가능합니다.");
 					model.addAttribute("url", "/library/rent/rentHistoryList.do");
