@@ -126,4 +126,23 @@
 		USING(order_num)
 		WHERE to_char(m.order_date,'YYYY-MM-DD') LIKE '%' || #{keyword} || '%'
 	</select>
+	
+	<select id="selectOrderTotalOrderBy">
+		select store_product_num, store_product_title, total, total_quantity, rownum
+FROM
+(SELECT
+         d.store_product_num,
+		  SUM(d.order_product_price * d.cart_quantity) AS total,
+		  sum(d.cart_quantity) AS total_quantity
+		FROM
+		  store_order_detail d JOIN store_order_manage m
+		USING(order_num)
+		WHERE to_char(m.order_date,'YYYY-MM-DD') LIKE '%' || #{keyword} || '%'
+        GROUP by d.store_product_num
+        order BY total dESC) a JOIN store_product_detail d
+USING(store_product_num)
+<![CDATA[
+WHERE rownum <= 5
+]]>
+	</select>
 </mapper>

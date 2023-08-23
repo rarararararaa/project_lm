@@ -57,4 +57,6 @@ public interface ServiceService {
 	public void updateOrderStatus(BookStorePaymentOrderVO orderVO);
 	
 	public Integer selectOrderTotal(Map<String, Object> map); 
+	
+	public List<Map<String,Object>> selectOrderTotalOrderBy(Map<String,Object> map);
 }

@@ -61,11 +61,16 @@ public interface ProductMapper {
 	@Select("SELECT * FROM (SELECT * FROM store_product_manage m JOIN store_product_detail USING(store_product_num) ORDER BY store_product_pubdate DESC) WHERE rownum <= 5")
 	public List<ProductVO> selectFuture();
 	
+	//분야별 랜덤 도서 추천 5개
+	public List<ProductVO> selectCateRandom(String cate);
+	
 	//카테고리 별 도서 검색
 	public List<ProductVO> selectCategoryBook(Map<String, Object> map);
 	//카데고리 별 도서 개수
 	public int selectCategoryCount(Map<String, Object> map);
 	//Best 도서
 	public List<ProductVO> selectBestBookList(int start, int end);
+	//분야별 TOP3
+	public List<ProductVO> selectCateTop3(String cate);
 	
 }

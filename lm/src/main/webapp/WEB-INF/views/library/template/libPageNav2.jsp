@@ -21,9 +21,6 @@
 			<a href="${pageContext.request.contextPath}/library/programList.do" class="sub-items">프로그램</a>
 		</li>
 		<li class="sb-menu-item">
-			<a href="${pageContext.request.contextPath}/library/liblostitem/list.do" class="sub-items">분실물</a>
-		</li>
-		<li class="sb-menu-item">
 			<a href="${pageContext.request.contextPath}/library/lostReport/bookLostInfo.do" class="sub-items">분실도서신고</a>
 		</li>
 	</ul>

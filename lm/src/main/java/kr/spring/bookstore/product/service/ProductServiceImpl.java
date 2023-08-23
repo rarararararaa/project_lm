@@ -85,7 +85,31 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<ProductVO> selectBestBookList(int start, int end) {
+		List<ProductVO> list = productMapper.selectBestBookList(start, end);
+		for(ProductVO vo : list) {
+			if(vo.getStore_product_title().length()>=10) {
+				String title = vo.getStore_product_title().substring(0, 10)+"...";
+				vo.setStore_product_title(title);
+			}
+		}
 		return productMapper.selectBestBookList(start, end);
+	}
+
+	@Override
+	public List<ProductVO> selectCateTop3(String cate) {
+		List<ProductVO> list = productMapper.selectCateTop3(cate);
+		for(ProductVO vo : list) {
+			if(vo.getStore_product_author().length()>=10) {
+				String author = vo.getStore_product_author().substring(0, 10)+"...";
+				vo.setStore_product_author(author);
+			}
+		}
+		return productMapper.selectCateTop3(cate);
+	}
+
+	@Override
+	public List<ProductVO> selectCateRandom(String cate) {
+		return productMapper.selectCateRandom(cate);
 	}
 
 

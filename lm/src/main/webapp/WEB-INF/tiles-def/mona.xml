@@ -46,14 +46,19 @@
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/event/eventAnnounceDetail.jsp"/>
     </definition>
     
+    <!-- 도서관 이용 -->
     <definition name="libBasicPage" template="/WEB-INF/views/library/template/libBasicPage_layout.jsp">
-        <put-attribute name="libTitle" value="이용안내"/>
+        <put-attribute name="libTitle" value="도서관 이용"/>
         <put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
     	<put-attribute name="libNav" value="/WEB-INF/views/library/template/libPageNav.jsp"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_InformationUse1.jsp"/>
 	    <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/> 
     </definition>
     
+    <definition name="informationUse1" extends="libBasicPage">
+        <put-attribute name="libTitle" value="이용안내"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_InformationUse1.jsp"/>
+    </definition>
     <definition name="informationUse2" extends="libBasicPage">
     	<put-attribute name="libTitle" value="대출·반납·연장·예약"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_InformationUse2.jsp"/>
@@ -97,7 +102,7 @@
     
     
     
-    
+    <!-- 도서관 신청 참여 -->
     
     <definition name="bookLostInfo" extends="libBasicPage">
     	<put-attribute name="libTitle" value="도서 분실 신고 안내"/>
@@ -116,7 +121,7 @@
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostCheck.jsp"/>
     </definition>
     
-    
+    <!-- 관리자 페이지 일정 -->
     <definition name="libScehduleAdminList" extends="libAdmin">
     	<put-attribute name="libTitle" value="일정 목록"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_ScheduleAdminList.jsp"/>

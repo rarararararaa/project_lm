@@ -31,4 +31,8 @@ public interface ProductService {
 	public int selectCategoryCount(Map<String, Object> map);
 	//Best 도서
 	public List<ProductVO> selectBestBookList(int start, int end);
+	//문야별 TOP3
+	public List<ProductVO> selectCateTop3(String cate);
+	//분야별 랜덤 도서 추천 5개
+	public List<ProductVO> selectCateRandom(String cate);	
 }

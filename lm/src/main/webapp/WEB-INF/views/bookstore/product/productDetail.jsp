@@ -20,11 +20,6 @@
 			<div class="prod-detail-content">
 				<div class="prod-author">${product.store_product_author}</div>
 				<div class="prod-pub">${product.store_product_publisher} · ${product.store_product_pubdate}</div>
-				<div >
-					<c:if test="${product.store_product_customerReviewRank!=0}">
-						${product.store_product_searchcategoryName} ${product.store_product_customerReviewRank}위
-					</c:if>
-				</div>
 				<div class="review-box">
 					<div class="star-ratings stop-dragging">
 						<div class="star-ratings-fill" style="--rating: ${product.store_product_ratingScore};">
@@ -46,28 +41,43 @@
 				</div>
 			</div>
 			<div class="prod-detail-content">
-				<img src="${product.store_product_cover}">
+				<img src="${product.store_product_cover}" width="380px">
 			</div>
 			<div class="prod-detail-content">
 				<div class="prod-price">
-					<span>
-						<c:if test="${product.store_product_discount>0 }">
-							${product.store_product_discount} %
-						</c:if>
+					<span class="discount">
+						${product.store_product_discount}% 
 					</span>
 					<span class="price">
 						<span class="val">
 							<fmt:formatNumber value="${product.store_product_pricestandard}"/>
 						</span>
-						<span class="unit"> 원</span>
+						<span class="unit">원</span>
 					</span>
 				</div>
+				<div class="point">
+					<div>
+						적립 
+					</div>
+					<div class="point-value">
+					<fmt:formatNumber value=" ${product.store_product_pricestandard*0.005}" pattern="0"/>P
+					</div>
+				</div>
+				<div class="point">
+					<div>
+						배송안내
+					</div>
+					<div style="font-weight:400;font-size:15px;">
+						도서 포함 50,000원 이상 무료배송
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>
 	<div class="tabs-area">
 		<ul class="tabs">
-			<li class="tab_item"><a href="#scrollProdInfo">상품정보</a></li>
+			<li class="tab_item"><a href="#scrollProdInfo" >상품정보</a></li>
 			<li class="tab_item"><a href="#scrollProdReview">리뷰 (${product.store_product_ratingCount})</a></li>
 			<li class="tab_item"><a href="#scrollProdClaim">교환/반품/품절</a></li>
 		</ul>
@@ -75,9 +85,15 @@
 	<div class="content-wrap">
 		<div class="left-area">
 			<div id="scrollProdInfo">
-				<div>
-					<h2>책 소개</h2>
-					<div>${product.store_product_categoryname }</div>
+				<h2>책 소개</h2>
+				<p>이 책이 속한 분야</p>
+				<div class="category">
+				<c:forEach var="category" items="${categoryname }" varStatus="status">
+					<a <c:if test="${status.first}">href="/bookstore/product/productCeteList.do?cate=${category}"</c:if>
+					   <c:if test="${not status.first}">href="/bookstore/product/productCeteList.do?detail=${category}&cate=${categoryname[0]}"</c:if>>${category }</a><c:if test="${not status.last}"> > </c:if>
+				</c:forEach>
+				</div>
+				<div class="description">
 					${product.store_product_description }
 				</div>
 				<c:if test="${!empty product.store_product_seriesName }">
@@ -222,7 +238,9 @@
 			</div>
 			<div id="scrollProdClaim">
 				<div>
-					<h2>교환/반품/품절 안내</h2>
+					<div>교환/반품/품절 안내</div>
+					<input id="review" type="button" class="sm-button review" value="1:1문의" width="76%"
+							onclick="location.href='/bookstore/service/mainDesk.do'">
 				</div>
 				<ul>
 					<li>
@@ -253,13 +271,11 @@
 						7) 전자상거래 등에서의 소비자보호에 관한 법률이 정하는 소비자 청약철회 제한 내용에 해당되는 경우					
 					</li>
 					<li>
-						<div>
-						</div>
+						<div><b>상품 품절</b></div>
 						공급사(출판사) 재고 사정에 의해 품절/지연될 수 있으며, 품절 시 관련 사항에 대해서는 이메일과 문자로 안내드리겠습니다.					
 					</li>
 					<li>
-						<div>
-						</div>
+						<div><b>소비자 피해보상 환불 지연에 따른 배상</b></div>
 						1) 상품의 불량에 의한 교환, A/S, 환불, 품질보증 및 피해보상 등에 관한 사항은 소비자분쟁 해결 기준 (공정거래위원회 고시)에 준하여 처리됨<br>
 						2) 대금 환불 및 환불지연에 따른 배상금 지급 조건, 절차 등은 전자상거래 등에서의 소비자 보호에 관한 법률에 따라 처리함					
 					</li>
@@ -267,6 +283,7 @@
 			</div>
 		</div>
 		<div class="right-wrap">
+			<c:if test="${!empty list}">
 			<div>
 				<h2>중고책</h2>
 				<div class="used-product">
@@ -291,7 +308,8 @@
 					</form>	
 				</c:forEach>
 				</div>
-			</div>		
+			</div>
+			</c:if>		
 			<div>
 				<h2>이벤트</h2>
 				<div class="event">
@@ -302,7 +320,18 @@
 				</c:forEach>
 				</div>
 			</div>
-			<div>추천 도서</div>
+			<c:if test="${!empty randomRecommend}">
+			<div>
+				<h2>${categoryname[1]}에 이런 책도 있어요!</h2>
+				<div class="random">
+				<c:forEach var="random" items="${randomRecommend}">
+					<a href="/bookstore/product/productDetail.do?store_product_isbn13=${random.store_product_isbn13 }">
+						<img src="${random.store_product_cover}" width="94px">
+					</a>
+				</c:forEach>
+				</div>
+			</div>
+			</c:if>
 		</div>
 	</div>
 		
