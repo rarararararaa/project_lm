@@ -12,7 +12,7 @@
 	</ul>
 	<h3 class="sub-title">신청가능횟수</h3>
 	<ul class="info">
-		<li>1달에 5권 1년에 15권 이하만 신청 가능합니다.</li>
+		<li>1달에 5권 / 1년에 15권 이하만 신청 가능합니다.</li>
 	</ul>
 	<h3 class="sub-title">신청 제한자료</h3>
 	<ul class="info">
@@ -31,6 +31,8 @@
 		<li>서지불명도서나 미간행도서, 비매품, 품절이나 절판 도서</li>
 		<li>유사도서가 많이 소장되어 있는 경우</li>
 	</ul>
-	<input type="button" value="희망도서 신청하기" onclick="location.href='bookApplyWrite.do'">
-	<input type="button" value="내 희망도서 신청현황" onclick="location.href='bookApplyUserList.do'">
+	<div class="align-center">
+	<input type="button" value="희망도서 신청" onclick="location.href='bookApplyWrite.do'" class="submit-btn">
+	<input type="button" value="내 신청현황" onclick="location.href='bookApplyUserList.do'" class="submit-btn">
+	</div>
 </div>

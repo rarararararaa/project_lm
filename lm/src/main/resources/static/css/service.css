@@ -213,4 +213,18 @@ h3{
 ul.info li{
 	font-size:16px;
 	margin:5px 0;
+	position: relative;
+}
+.submit-btn{
+	width: 103px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #58c53f;
+    color: #58c53f;
+    font-weight: 700;
+}
+.submit-btn:hover{
+	cursor: pointer;
+	background-color: #58c53f;
+	color: white;
 }
