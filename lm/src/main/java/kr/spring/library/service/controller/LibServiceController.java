@@ -213,18 +213,6 @@ public class LibServiceController {
 
 		return "boardAnswerWrite";
 	}
-	//이미지 출력
-	@RequestMapping("/library/service/boardAskImageView.do")
-	public ModelAndView viewImageAnswer(@RequestParam int ask_num) {
-
-		BoardAskVO vo = libServiceService.selectBoardAsk(ask_num);
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("boardAskImageView");
-		mav.addObject("imageFile", vo.getAsk_image());
-		mav.addObject("filename", vo.getAsk_imagename());
-		return mav;
-	}
 	@PostMapping("/library/service/boardAnswerWrite.do")
 	public String answerInsert(BoardAnswerVO boardAnswer, HttpSession session,Model model) {
 		log.debug("<<BoardAnswerVO>> : " + boardAnswer);

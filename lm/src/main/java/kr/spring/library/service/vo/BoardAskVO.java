@@ -27,11 +27,4 @@ public class BoardAskVO {
 	private String ask_imagename;
 	private int ask_status;//답변확인여부(dafault 0:확인전, 1:확인)
 	
-	public void setUpload1(MultipartFile upload1)
-			throws IOException{
-		//MultipartFile -> byte[] 변환
-		setAsk_image(upload1.getBytes());
-		setAsk_imagename(upload1.getOriginalFilename());
-	}
-
 }

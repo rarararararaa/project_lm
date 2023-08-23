@@ -215,7 +215,68 @@ table.form-box {
 	outline: 0;
 	border-radius: 6px;
 }
+/* 1:1 문의 커스텀 버튼*/
+.small-button-R {
+	border: 1px solid #f2f2f2;
+	color: #fa5a5a;
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 0 10px;
+	min-width: 100px;
+	height: 25px;
+	padding: 0 23px 1px;
+	border-radius: 6px;
+}
 
+.small-button-R:hover {
+	border: 1px solid #cccaca;
+	background: #fa5a5a;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 0 10px;
+	min-width: 100px;
+	height: 25px;
+	padding: 0 23px 1px;
+	border-radius: 6px;
+	transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.small-button-B {
+	border: 1px solid #f2f2f2;
+	color: #6698cb;
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 0 10px;
+	min-width: 100px;
+	height: 25px;
+	padding: 0 23px 1px;
+	border-radius: 6px;
+}
+
+.small-button-B:hover {
+	border: 1px solid #cccaca;
+	background: #6698cb;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 0 10px;
+	min-width: 100px;
+	height: 25px;
+	padding: 0 23px 1px;
+	border-radius: 6px;
+	transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+/* 보통 input 버튼  */
 .small-button {
 	border: 1px solid #f2f2f2;
 	color: #a19f9f;
