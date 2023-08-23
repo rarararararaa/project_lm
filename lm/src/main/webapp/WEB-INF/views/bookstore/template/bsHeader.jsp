@@ -73,16 +73,14 @@
 						href="${pageContext.request.contextPath}/library/template/libMain.do">LM도서관</a>
 				</div>
 			</div>
-			<c:if test="${mem_id != null }">
-				<div class="bs-main-icons">
-					<div class="bs-cart">
-						<a href="${pageContext.request.contextPath}/bookstore/payment/cart.do"><img src="../../images/cart_alt.png"></a>
-					</div>
-					<div class="bs-person">
-						<a href="${pageContext.request.contextPath}/lm/mypage/main/myPageMain.do?lo=1"><img src="../../images/person_outline.png"></a>
-					</div>
+			<div class="bs-main-icons">
+				<div class="bs-cart">
+					<a href="${pageContext.request.contextPath}/bookstore/payment/cart.do"><img src="../../images/cart_alt.png"></a>
 				</div>
-			</c:if>
+				<div class="bs-person">
+					<a href="${pageContext.request.contextPath}/lm/mypage/main/myPageMain.do?lo=1"><img src="../../images/person_outline.png"></a>
+				</div>
+			</div>
 	</div>
 	<div class="bookstore-header-botbox">
 		<div class="gnb_wrap">

@@ -75,7 +75,14 @@ img {
 .product .info .author-publisher {
   font-size: 12px;
 }
-
+a {
+	text-decoration: none; /* 언더바 제거 */
+	color: black;
+}
+a:hover {
+	text-decoration: none; /* 호버링 시 언더바 제거 */
+	color: #E19B50;
+}
 </style>
 
 <div class="main-body">

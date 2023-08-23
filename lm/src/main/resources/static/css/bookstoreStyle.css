@@ -37,19 +37,11 @@ a:hover {
 	width: 560px;
 	height: 48px;
 	border-radius: 25px;
-	border: 2px solid green;
+	border: 2px solid #5055b1;
 	display: flex;
 	align-items: center;
 	margin-left: 50px;
 	margin-right: 30px;
-}
-.search_select {
-	text-align:center;
-	width: 135px;
-	height: 48px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 .bs-text-img {
 	display: flex;
@@ -68,13 +60,6 @@ a:hover {
 .bs-search img {
 	height: 18px;
 	width: 18px;
-}
-.ip_search {
-	height: 48px;
-	width: 370px;
-	background-color: inherit;
-	border: none;
-	outline: none;
 }
 .bs-move-main {
 	width: 200px;
@@ -95,11 +80,6 @@ a:hover {
 	display: flex;
 	justify-content: center;
 	list-style-type: none;
-}
-.search_input {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 .booksotre-header-botbox {
 	width: 1200px;
@@ -143,49 +123,8 @@ a:hover {
 	width: 32px;
 	height: 32px;
 }
-/*상단 바로가기 버튼*/
-.service-up{
-	margin-right: 30px;
-	position: fixed;
-    right: 24px;
-    bottom: 24px;
-    z-index: 50;
-}
-.link-service img{
-	width: 50px;
-	height: 50px;
-}
-/*스크롤바*/
-/* 스크롤바 전체 영역 */
-::-webkit-scrollbar {
-	height: 15px; /* 가로축 스크롤바 폭 너비 */
-	width: 5px; /* 세로축 스크롤바 폭 너비 */
-}
-/* 스크롤바 막대 */
-::-webkit-scrollbar-thumb {
-	background: #cbd1cc; /* 스크롤바 막대 색상 */
-	border-radius: 12px 12px 12px 12px;
-}
 
-/* 공통 */
-body {
-	font-size: 14px;
-	line-height: 1.4;
-	font-family: "Roboto", "Noto Sans KR", "PingFang SC",
-		"Apple SD Gothic Neo", "Microsoft YaHei UI", "Malgun Gothic",
-		sans-serif;
-	min-width: 1440px;
-	color: #000;
-	margin: 0;
-}
-
-/*header*/
-.header_inner {
-	position: relative;
-	width: 1200px;
-	margin: 0 auto;
-}
-
+/*bookstore-header-botbox*/
 .gnb_wrap {
 	position: relative;
 	display: -webkit-flex;
@@ -198,13 +137,10 @@ body {
 	flex-direction: row;
 	padding: 22px 0 20px;
 }
-
-/*메뉴바*/
 .gnb_item {
 	display: inline-block;
 	vertical-align: top;
 }
-
 .gnb_link {
 	display: inline-block;
 	font-size: 16px;
@@ -216,11 +152,9 @@ body {
 	text-decoration: none;
 	color: black;
 }
-
 address, em {
 	font-style: normal;
 }
-
 em {
 	color: #4dac27;
 }
@@ -258,6 +192,41 @@ em {
 	background-image: url(https://contents.kyobobook.co.kr/resources/fo/images/common/ink/btn_gnb_service_more@2x.png);
 	transition: background 0.23s;
 }
+/* 공통 */
+body {
+	font-size: 14px;
+	line-height: 1.4;
+	font-family: "Roboto", "Noto Sans KR", "PingFang SC",
+		"Apple SD Gothic Neo", "Microsoft YaHei UI", "Malgun Gothic",
+		sans-serif;
+	min-width: 1440px;
+	color: #000;
+	margin: 0;
+}
+/*상단 바로가기 버튼*/
+.service-up{
+	margin-right: 30px;
+	position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 50;
+}
+.link-service img{
+	width: 50px;
+	height: 50px;
+}
+/*스크롤바*/
+/* 스크롤바 전체 영역 */
+::-webkit-scrollbar {
+	height: 15px; /* 가로축 스크롤바 폭 너비 */
+	width: 5px; /* 세로축 스크롤바 폭 너비 */
+}
+/* 스크롤바 막대 */
+::-webkit-scrollbar-thumb {
+	background: #cbd1cc; /* 스크롤바 막대 색상 */
+	border-radius: 12px 12px 12px 12px;
+}
+
 /*footer*/
 .footer_wrapper {
 	margin-top: 150px;
@@ -445,13 +414,6 @@ em {
 }
 
 /*로고 검색*/
-.header_wrapper {
-	margin: 0 auto;
-	padding: 0;
-	position: relative;
-	background-color: #fff;
-	border-bottom: 1px solid #eaeaea;
-}
 
 .header_wrapper .service_mall .service_mall_inner {
 	display: flex;
@@ -490,44 +452,11 @@ ul.service_mall_list, ul.customer_service_list, ul.user_menu_list {
 }
 
 /*검색*/
-.search_wrap .logo_box {
-	position: absolute;
-	top: 9px;
-	left: 0;
-	display: block;
-	width: 200px;
-	height: 92px;
-}
-
-.search_wrap .logo_box .logo_link {
-	display: block;
-	height: 100%;
-	background-position: 40px 30px;
-	background-repeat: no-repeat;
-	background-size: 180px;
-	background-image: url(../images/logo.png);
-}
-
-.search_box {
-	display: -webkit-flex;
-	-webkit-box-pack: start;
-	justify-content: flex-start;
-	-webkit-box-align: center;
-	align-items: center;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	flex-direction: row;
-	width: 560px;
-	height: 48px;
-	padding-right: 14px;
-	border-radius: 25px;
-	background: #fff;
-	border: 1px solid #5055b1;
-	box-sizing: border-box;
-}
-
 .search_input {
 	width: 382px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .btn_search {
@@ -541,18 +470,18 @@ ul.service_mall_list, ul.customer_service_list, ul.user_menu_list {
 }
 
 .ip_search {
-	border: 0;
+	border: none;
 	border-radius: 0;
 	vertical-align: middle;
-	width: 100%;
-	height: 100%;
+	height: 48px;
+	width: 370px;
+	background-color: inherit;
 	background: none;
 	outline: none;
 	font-size: 14px;
 	line-height: 22px;
 	letter-spacing: -0.01em;
 }
-
 .select_box_button {
     text-align: -webkit-auto;	
 	position: relative;
@@ -632,68 +561,19 @@ span.search_select:has(.active) {
 	transition: background-color 0.2s ease-out;
 	background-color: #f5f5f5;
 }
-
 .search_select {
+	text-align:center;
+	width: 135px;
+	height: 48px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	align-self: flex-start;
     margin: -1px 0 0 -1px;
-    width: 134px;
 }
-
-.select-icon {
-	right: 16px;
-	top: 21px;
-	width: 6px;
-	height: 4px;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 15px;
-	background-image: url(../images/arrow.jpg);
-	z-index:100;
-	position:absolute;
-	transition: .3s; 	
-}
-
 .select_box_button.active .select-icon{
   transform: rotate(180deg);
   transition: .3s; 
-}
-
-/* 셀렉트 끝 */
-.user_menu_list {
-	position: absolute;
-	top: 31px;
-	right: 0;
-	display: flex;
-	align-items: center;
-	flex-direction: row;
-}
-
-.user_menu_item {
-	position: relative;
-	vertical-align: top;
-	width: 50px;
-	height: 50px;
-	margin-left: 28px;
-}
-
-.cart_icon {
-	display: block;
-	height: 100%;
-	background-repeat: no-repeat;
-	background-position: 0 10px;
-	background-size: 32px;
-	background-image: url(../images/cart_alt.png);
-	cursor: pointer;
-}
-
-.mypage_icon {
-	display: block;
-	height: 100%;
-	background-repeat: no-repeat;
-	background-position: 0 10px;
-	background-size: 36px;
-	background-image: url(../images/person_outline.png);
-	cursor: pointer;
 }
 
 .customer_service_list .customer_service_item:not(:first-of-type)::before,
