@@ -200,5 +200,6 @@ input[type="checkbox"]:checked+label {
 }
 
 .page-main{
-	padding:0 20px;
+	width: 900px;
+    margin: 50px auto;
 }

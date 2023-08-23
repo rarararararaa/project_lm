@@ -295,7 +295,7 @@ public class ServiceController {
 		model.addAttribute("message", "회원권한 수정 완료");
 		model.addAttribute("url", 
 				request.getContextPath()
-				+"/bookstore/member/admin_update.do?mem_num="+memberVO.getMem_num());
+				+"/bookstore/admin_update.do?mem_num="+memberVO.getMem_num());
 		
 		return "common/resultView";
 	}

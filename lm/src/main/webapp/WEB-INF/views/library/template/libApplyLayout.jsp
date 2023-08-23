@@ -8,12 +8,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bookstoreStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/used.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/service.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/libBasicPage_layout.css">
 </head>
 <div id="main" class="wrapper">
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>
-	<div class="side-height">
+	<div id="basic_main_body">
 		<div id="page_nav">
 			<tiles:insertAttribute name="nav"/>
 		</div>

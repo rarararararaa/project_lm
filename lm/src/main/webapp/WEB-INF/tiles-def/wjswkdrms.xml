@@ -51,7 +51,7 @@
     </definition>
     
     <definition name="bsadmin" template="/WEB-INF/views/bookstore/template/bsAdminLayout.jsp">
-    	<put-attribute name="title" value="고객센터"/>
+    	<put-attribute name="title" value="관리자 메인"/>
     	<put-attribute name="header" value="/WEB-INF/views/bookstore/template/bsHeader.jsp"/>
     	<put-attribute name="nav" value="/WEB-INF/views/bookstore/template/admin_nav.jsp"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/admin/main.jsp"/>
@@ -109,7 +109,7 @@
 	    <put-attribute name="body" value="/WEB-INF/views/library/apply/bookDonationMain.jsp"/>
     </definition>
     <definition name="bookDonationApply" extends="libApplyMain">
-    	<put-attribute name="title" value="기증 안내"/>
+    	<put-attribute name="title" value="기증 신청"/>
 	    <put-attribute name="body" value="/WEB-INF/views/library/apply/bookDonationApply.jsp"/>
     </definition>
     <definition name="insertProgram" extends="libApplyMain">
