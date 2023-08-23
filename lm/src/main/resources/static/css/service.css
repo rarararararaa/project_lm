@@ -203,3 +203,14 @@ input[type="checkbox"]:checked+label {
 	width: 900px;
     margin: 50px auto;
 }
+h3{
+	font-size:24px;
+	color:#549f6e;
+	font-weight: 400;
+	line-height: 26px;
+	margin-top: 55px;
+}
+ul.info li{
+	font-size:16px;
+	margin:5px 0;
+}

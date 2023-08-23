@@ -3,19 +3,19 @@
 <div class="page-main">
 	<h2>희망도서신청</h2>
 	<h3 class="sub-title">신청자격</h3>
-	<ul class="text-lixt">
+	<ul class="info">
 		<li>도서관 회원증을 발급받은 회원만 신청이 가능합니다.</li>
 	</ul>
 	<h3 class="sub-title">신청방법</h3>
-	<ul class="text-lixt">
+	<ul class="info">
 		<li>하단 신청버튼을 클릭하여 신청양식 작성후 신청</li>
 	</ul>
 	<h3 class="sub-title">신청가능횟수</h3>
-	<ul class="text-lixt">
+	<ul class="info">
 		<li>1달에 5권 1년에 15권 이하만 신청 가능합니다.</li>
 	</ul>
 	<h3 class="sub-title">신청 제한자료</h3>
-	<ul class="text-lixt">
+	<ul class="info">
 		<li>문제집, 수험서, 중고등 참고서</li>
 		<li>판타지, 로맨스소설, 무협지</li>
 		<li>웹툰, 라이트노벨 등 각종 만화류</li>
