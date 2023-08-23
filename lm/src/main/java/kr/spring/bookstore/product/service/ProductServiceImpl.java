@@ -93,5 +93,10 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.selectCateTop3(cate);
 	}
 
+	@Override
+	public List<ProductVO> selectCateRandom(String cate) {
+		return productMapper.selectCateRandom(cate);
+	}
+
 
 }

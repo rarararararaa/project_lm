@@ -42,6 +42,31 @@ div.prod-detail-content{
 div.content div.prod-detail-content:not(:first-child) {
 	margin-left: 80px;
 }
+/* 오른쪽 */
+div.content-wrap div.right-wrap div:not(:last-child){
+	padding-bottom:30px;
+}
+/* 추천 도서 */
+div.random{
+	display:flex;
+	flex-direction: row;
+	align-items: flex-start;
+  	overflow: auto;
+  	white-space: nowrap;
+	padding: 16px 15px 22px;
+}
+div.random a{
+	margin-right:10px;
+}
+.random::-webkit-scrollbar {
+	height: 3px; /* 가로축 스크롤바 길이 */
+	background-color: #eee;
+}
+.random::-webkit-scrollbar-thumb{
+	background-color:black;	
+	height: 80%;
+    border-radius: 10px;	
+}
 /* 중고 상품 */
 div.right-wrap{
 	width:330px;
@@ -49,7 +74,7 @@ div.right-wrap{
 }
 div.used-product{
     display: flex;
-    padding: 36px 30px 36px;
+    padding: 16px 15px 22px;
     box-sizing: border-box;
   	overflow: auto;
   	white-space: nowrap;	
@@ -96,7 +121,25 @@ div.event img{
 	height: 80%;
     border-radius: 10px;	
 }
-	
+/* 카테고리 */	
+div.category a{
+	font-weight:400;
+	color:#7b7b7b;
+	text-decoration-line: none;
+	font-size:16px;
+}
+div.category{
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 40px;	
+}
+/* 설명 */
+#scrollProdInfo p{
+	font-size:16px;
+}
+div.description{
+	font-size:16px;
+	padding-top: 30px;
+}
 /* 상품 리뷰 */
 div.prod-detail-content div.review-box {
 	border: 1px solid #eaeaea;
@@ -128,10 +171,6 @@ div.prod-detail-content div.review-box {
 	font-weight: 700;
 	color: #474c98;
 	color: #474c98;
-}
-/* 상품 사진 */
-div.prod-detail-content img {
-	width: 380px;
 }
 /* 상품 가격 */
 span.val{
@@ -262,9 +301,33 @@ div#scrollProdReview div.first{
     padding-bottom: 16px;	
 	display:flex;
     align-items: center;
+    padding-top: 20px;
 }
 div#scrollProdReview div h2+div.right-area{
 	margin-left:auto;
+}
+/* 교환/반품 */
+div#scrollProdClaim >div{
+	font-weight:700;
+	font-size:22.5px;
+	padding-top: 20px;
+	padding-bottom:16px;
+	margin:0;
+	display:flex;
+    justify-content: space-between;	
+}
+div#scrollProdClaim{
+	font-size:16px;
+}
+div#scrollProdClaim li:first-child{
+	border-top:1px solid #000;
+}
+div#scrollProdClaim li{
+	padding:30px 0;
+	border-bottom:1px solid #ccc;
+}
+div#scrollProdClaim li div{
+    padding-bottom: 12px;	
 }
 div.first + div.review-box{
     padding: 35px 49px;
@@ -408,6 +471,10 @@ div.tabs-area{
     border-bottom: 1px solid #d5d5d5;
     box-sizing: border-box;
     height: 72px;
+}
+div.tabs-area.drop{
+	position:fixed;
+	top:0;
 }
 ul.tabs{
 	color:#767676;
