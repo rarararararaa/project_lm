@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.spring.bookstore.payment.vo.BookStorePaymentOrderVO;
-import kr.spring.bookstore.product.vo.ProductVO;
 import kr.spring.bookstore.review.service.ReviewService;
 import kr.spring.bookstore.review.vo.ReviewVO;
 import kr.spring.bookstore.service.vo.OrderDetailVO;
@@ -51,6 +51,7 @@ public class ReviewController {
 		if(session.getAttribute("mem_num")==null) {
 			mapJson.put("result", "logout");
 		}else {
+
 			log.debug("<<item_num>> : "+store_product_num);
 			mapJson.put("mem_num", session.getAttribute("mem_num"));
 			mapJson.put("store_product_num", store_product_num);
@@ -69,7 +70,7 @@ public class ReviewController {
 	
 	// 리뷰 작성
 	@RequestMapping("/bookstore/review/reviewWrite.do")
-	public String reviewWrite(@Valid ReviewVO reviewVO, BindingResult result, Model model,
+	public String reviewWrite(@Valid ReviewVO reviewVO, Model model,BindingResult result,
 			HttpServletRequest request, HttpSession session,
 						@RequestParam(value="store_product_isbn13", required=false) String store_product_isbn13,
 						@RequestParam int store_product_num) {
@@ -152,12 +153,12 @@ public class ReviewController {
 			result.rejectValue("review_image", "limitIploadSize", new Object[] {"5MB"}, null); 
 		}
 	    
+	    
 	    Integer mem_num=(Integer)session.getAttribute("mem_num");
 	    reviewVO.setMem_num(mem_num);
 	    reviewVO.setProductVO(reviewService.selectProductVO(store_product_num));
 		log.debug("<<reviewVO : >>"+reviewVO);
 		reviewService.updateReview(reviewVO);
-	    model.addAttribute("message", "댓글 수정 완료");
 	    model.addAttribute("url",request.getContextPath()+"/bookstore/product/productDetail.do?store_product_isbn13="+store_product_isbn13);
 	 
 	    return "common/resultView";

@@ -106,6 +106,7 @@ public class ReservationController {
 			//대출
 			RentVO rentVO=new RentVO();
 			String callNumber=reservationService.selectCallNumbertoRent(reservation);
+			map.put("mem_num",mem_num);
 			int count=rentService.selectRentCountByMem_num(map);
 			if(count>3) {
 				model.addAttribute("message", "최대 세권까지 대출 가능합니다.");
