@@ -60,11 +60,15 @@ $(function(){
 	
 	//리뷰 등록
 	$("#review_button").on('click',function(){
+		var chk = false;
 		for(var i = 0; i < new_form.review_rating.length; i++) {
             if(new_form.review_rating[i].checked) {
-				alert('별점을 입력하세요!');
-				return false;
+				chk = true;
             }
+        }
+ 		if(chk == false) { // 하나도 체크되지 않았을 경우
+			alert('별점을 입력하세요!');
+			return false;
         }
 		if($('#review_content').val().trim()==''){
 			alert('내용을 입력하세요!');
@@ -74,10 +78,16 @@ $(function(){
 		$('#new_form').submit();
 	});
 	$("#review_button2").on('click',function(){
-		if(!$('input[type="checkbox"]').checked){
+		var chk = false;
+		for(var i = 0; i < new_form2.review_rating.length; i++) {
+            if(new_form2.review_rating[i].checked) {
+				chk = true;
+            }
+        }
+ 		if(chk == false) { // 하나도 체크되지 않았을 경우
 			alert('별점을 입력하세요!');
 			return false;
-		}
+        }
 		if($('#review_content2').val().trim()==''){
 			alert('내용을 입력하세요!');
 			$('#review_content2').val('').focus();
