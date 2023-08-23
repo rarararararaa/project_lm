@@ -143,4 +143,9 @@ public class ServiceServiceImpl implements ServiceService{
 		return serviceMapper.selectOrderTotal(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectOrderTotalOrderBy(Map<String, Object> map) {
+		return serviceMapper.selectOrderTotalOrderBy(map);
+	}
+
 }
