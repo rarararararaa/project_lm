@@ -232,7 +232,7 @@
 					<a class="gnb_link" href="${pageContext.request.contextPath}/bookstore/used/usedMain.do">중고</a>
 				</li>
 			</ul>
-			<!-- 메뉴 -->
+			<!-- 메뉴 -->  
 			<!-- 할인혜택 / 출석 체크 -->
 			<ul class="gnb_sub_list">
 				<li class="gnb_sub_item">
