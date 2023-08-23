@@ -44,6 +44,14 @@ public interface BsEventMapper {
 	@Select("SELECT store_product_isbn13 FROM store_product_manage WHERE store_product_num=#{store_product_num}")
 	public String selectEventItemIsbn(Integer store_product_num);
 	
+	
+	
+	//종료 기간 지난 이벤트 수정
+	@Update("UPDATE store_event_board SET event_board_status=3 WHERE event_board_status=2 AND TO_CHAR(SYSDATE,'YYYY-MM-DD') > event_date_end")
+	public void updateEndList();
+	
+	
+	
 	//출석 이벤트 - 출석 처리
 	@Insert("INSERT INTO store_event_attendance_point (event_attendance_point_num, mem_num, event_month) VALUES(store_event_attendance_point_seq.nextval, #{mem_num}, #{event_month})")
 	public void insertAttendancePoint(BsAttendancePointVO attendancePoint);

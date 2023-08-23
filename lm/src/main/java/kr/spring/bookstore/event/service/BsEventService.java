@@ -30,6 +30,8 @@ public interface BsEventService {
 	//이벤트 글 삭제
 	public void deleteEventBoard(Integer event_board_num);
 	public String selectEventItemIsbn(Integer store_product_num);
+	//이벤트 종료기간 업데이트
+	public void updateEndList();
 
 
 	/* ---------------

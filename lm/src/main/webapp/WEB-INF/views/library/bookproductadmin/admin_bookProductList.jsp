@@ -16,7 +16,7 @@
 </script>
 <div class="page-main">
 	<div class="box">
-		<div class="title">도서 목록</div>
+		<div class="title">전체 도서 목록</div>
 
 		<div class="button-box">
 			<input type="button" class="small-button" value="도서목록"
@@ -40,7 +40,10 @@
 						</select></li>
 						<li><input type="search" name="keyword" id="keyword"
 							value="${param.keyword}"></li>
-						<li><input type="submit" value="조회" class="small-button">
+						<li><input class="small-button" type="submit" value="조회">
+						</li>
+						<li><input class="small-button" type="button" value="목록"
+							onclick="location.href='/library/bookproductadmin/admin_booklist.do'">
 						</li>
 					</ul>
 				</div>
@@ -53,7 +56,7 @@
 					<tr>
 						<th class="row-title"><b>도서청구번호</b></th>
 						<th class="row-title"><b>분류</b></th>
-						<th class="row-title"><b>도서명/작가(저자명)</b></th>
+						<th class="row-title" colspan="4"><b>도서명/작가(저자명)</b></th>
 						<th class="row-title"><b>출판사(출판년도)</b></th>
 						<th class="row-title"><b>대출상태(대여횟수)</b></th>
 					</tr>
@@ -71,8 +74,12 @@
 									test="${bookProduct.lib_product_class_no == 7}">언어</c:if> <c:if
 									test="${bookProduct.lib_product_class_no == 8}">문학</c:if> <c:if
 									test="${bookProduct.lib_product_class_no == 9}">역사</c:if></td>
-							<td class="row-title"><a
-								href="/library/lib_book/bookDetail.do?callNumber=${bookProduct.callNumber}">${bookProduct.lib_product_bookName}/${bookProduct.lib_product_authors}</a>
+							<td class="row-content"><a
+								href="/library/lib_book/admin_bookDetail.do?callNumber=${bookProduct.callNumber}">
+									<img src="${bookProduct.lib_product_bookImageUrl }" width="100">
+							</a></td>
+							<td class="row-title" colspan="3"><a
+								href="/library/lib_book/admin_bookDetail.do?callNumber=${bookProduct.callNumber}">${bookProduct.lib_product_bookName}/${bookProduct.lib_product_authors}</a>
 							</td>
 							<td class="row-title">${bookProduct.lib_product_publisher}(${bookProduct.lib_product_publication_year})</td>
 							<td class="row-title"><c:if

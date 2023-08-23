@@ -1,46 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 내가 쓴 1:1문의 게시글 상세 시작 -->
-<div class="result-main">
-	<ul class="detail">
-		<li class="title">회원번호(${boardAskVO.ask_num})님 문의 내역</li>
-		<li>제목 : ${boardAskVO.ask_title}</li>
-		<li>내용 : ${boardAskVO.ask_content}</li>
-		<li>
-			<c:if test="${!empty boardAskVO.ask_modify_date}">
-				최근 수정일 : ${boardAskVO.ask_modify_date}
-			</c:if>
-			<c:if test="${empty boardAskVO.ask_modify_date}">
-				작성일 : ${boardAskVO.ask_reg_date}
-			</c:if>
-		</li>
-	</ul>
-	<hr>
-	<ul class="detail">
-		<li class="title">관리자 답변</li>
-		<li>${boardAnswerVO.answer_content}</li>
-	</ul>
-	<hr size="1" width="100%">
-	<div class="align-right">
-		<input type="button" value="수정"
-		 onclick="location.href='boardAskUpdate.do?ask_num=${boardAskVO.ask_num}'">
-		<input type="button" value="삭제" id="delete_btn">
-		<script type="text/javascript">
-			let delete_btn = document.getElementById('delete_btn');
-			delete_btn.onclick=function(){
-				let choice = confirm('삭제하시겠습니까?');
-				if(choice){
-					location.replace('boardAskDelete.do?ask_num=${boardAskVO.ask_num}');
-				}
-			};
-		</script>             
-		<input type="button" value="목록"
-		          onclick="location.href='user_boardAskList.do'">
-		<input type="button" value="재문의" 
-				onclick="location.href='boardAskWrite.do'">  
+<div class="page-main">
+	<div class="box">
+		<div class="title">" 회원번호(${boardAskVO.ask_num})님의 1:1문의 내역 "</div>
+		<div class="content-box">
+			<div class="content-detail">
+				<div class="detail-title">제목</div>
+				<div class="specific">${boardAskVO.ask_title}</div>
+			</div>
+			<div class="content-detail">
+				<div class="detail-title">내용</div>
+				<div class="specific">${boardAskVO.ask_content}</div>
+			</div>
+			<div class="content-detail">
+				<c:if test="${empty boardAskVO.ask_modify_date}">
+					<div class="detail-title">최근 수정일</div>
+					<div class="specific">${boardAskVO.ask_modify_date}</div>
+				</c:if>
+				<c:if test="${empty boardAskVO.ask_modify_date}">
+					<div class="detail-title">작성일</div>
+					<div class="specific">${boardAskVO.ask_reg_date}</div>
+				</c:if>
+			</div>
+		</div>
+		<div class="title">" 관리자 답변 "</div>
+		<div class="content-box">
+			<div class="content-detail">
+				<div class="detail-title">답변</div>
+				<div class="specific">${boardAnswerVO.answer_content}</div>
+			</div>
+			<div class="content-detail">
+				<div class="detail-title">답변 등록일</div>
+				<div class="specific">${boardAnswerVO.answer_reg_date}</div>
+			</div>
+
+			<div class="button-box">
+				<input class="small-button" type="button" value="수정"
+					onclick="location.href='boardAskUpdate.do?ask_num=${boardAskVO.ask_num}'">
+				<input class="small-button" type="button" value="삭제" id="delete_btn">
+				<script type="text/javascript">
+					let delete_btn = document.getElementById('delete_btn');
+					delete_btn.onclick=function(){
+						let choice = confirm('삭제하시겠습니까?');
+						if(choice){
+							location.replace('boardAskDelete.do?ask_num=${boardAskVO.ask_num}');
+						}
+					};
+				</script>
+				<input class="small-button" type="button" value="목록"
+					onclick="location.href='user_boardAskList.do'"> 
+				<input class="small-button" type="button" value="재문의"
+					onclick="location.href='boardAskWrite.do'">
+			</div>
+		</div>
 	</div>
-	
 </div>
 <!-- 내가 쓴 1:1문의 게시글 상세 끝 -->
 

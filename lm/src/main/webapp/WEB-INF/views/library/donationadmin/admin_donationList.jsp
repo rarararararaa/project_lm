@@ -16,7 +16,7 @@
 </script>
 <div class="page-main">
 	<div class="box">
-		<div class="title">기증 목록</div>
+		<div class="title">전체 기증 목록</div>
 		<div class="content-box">
 			<form action="admin_donationlist.do" id="search_form" method="get">
 				<div class="button-box">
@@ -61,11 +61,11 @@
 							<td class="row-title">${donation.donation_name}</td>
 							<td class="row-title"><c:if
 									test="${donation.donation_status == 0}">
-									<span style="color: blue;">확인 전</span>
+									<span style="color: blue;"><b>미확인</b></span>
 								</c:if> <c:if test="${donation.donation_status == 1}">
-									<span style="color: blue;">기증 수락</span>
+									<span style="color: blue;"><b>기증 수락</b></span>
 								</c:if> <c:if test="${donation.donation_status == 2}">
-									<span style="color: red;">기증 거부</span>
+									<span style="color: red;"><b>기증 거부</b></span>
 								</c:if></td>
 						</tr>
 					</c:forEach>

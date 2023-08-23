@@ -102,6 +102,25 @@ ul.menu-box li {
 }
 /*관리자페이지 - 회원관리(권한) 글씨색  
 ============================*/
+.member-grade-bronze {
+  color: #CD7F32;
+}
+
+.member-grade-silver {
+  color: #C0C0C0;
+}
+
+.member-grade-gold {
+  color: #FFD700;
+}
+
+.member-grade-platinum {
+  color: #D9D9D9;
+}
+
+.member-grade-diamond {
+  color: #00D9FF;
+}
 .expire{
 	color:red;
 }
@@ -215,7 +234,68 @@ table.form-box {
 	outline: 0;
 	border-radius: 6px;
 }
+/* 1:1 문의 커스텀 버튼*/
+.small-button-R {
+	border: 1px solid #f2f2f2;
+	color: #fa5a5a;
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 0 10px;
+	min-width: 100px;
+	height: 25px;
+	padding: 0 23px 1px;
+	border-radius: 6px;
+}
 
+.small-button-R:hover {
+	border: 1px solid #cccaca;
+	background: #fa5a5a;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 0 10px;
+	min-width: 100px;
+	height: 25px;
+	padding: 0 23px 1px;
+	border-radius: 6px;
+	transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.small-button-B {
+	border: 1px solid #f2f2f2;
+	color: #6698cb;
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 0 10px;
+	min-width: 100px;
+	height: 25px;
+	padding: 0 23px 1px;
+	border-radius: 6px;
+}
+
+.small-button-B:hover {
+	border: 1px solid #cccaca;
+	background: #6698cb;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	margin: 0 10px;
+	min-width: 100px;
+	height: 25px;
+	padding: 0 23px 1px;
+	border-radius: 6px;
+	transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+/* 보통 input 버튼  */
 .small-button {
 	border: 1px solid #f2f2f2;
 	color: #a19f9f;

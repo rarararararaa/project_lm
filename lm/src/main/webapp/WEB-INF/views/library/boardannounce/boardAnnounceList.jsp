@@ -16,7 +16,7 @@
 </script>
 <div class="page-main">
 	<div class="box">
-		<div class="title">공지사항 목록</div>
+		<div class="title">전체 공지사항 목록</div>
 		<div class="content-box">
 			<form action="list.do" id="search_form" method="get">
 				<div class="button-box">
@@ -59,10 +59,10 @@
 						</select></li>
 						<li><input type="search" name="keyword" id="keyword"
 							value="${param.keyword}"></li>
-						<li><input class="small-button" type="submit" value="찾기">
+						<li><input class="small-button" type="submit" value="조회">
 							<input class="small-button" type="button" value="목록"
 							onclick="location.href='list.do'"></li>
-						<li><input class="small-button" type="button" value="글쓰기"
+						<li><input class="small-button-B" type="button" value="신규 등록"
 							onclick="location.href='write.do'"></li>
 					</ul>
 				</div>

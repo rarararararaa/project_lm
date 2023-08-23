@@ -36,9 +36,9 @@
 			</div>
 			<div class="main-content">${boardAnnounce.notice_content}</div>
 			<div class="button-box">
-				<input class="small-button" type="button" value="수정"
+				<input class="small-button-B" type="button" value="수정"
 					onclick="location.href='update.do?notice_num=${boardAnnounce.notice_num}'">
-				<input class="small-button" type="button" value="삭제" id="delete_btn">
+				<input class="small-button-R" type="button" value="삭제" id="delete_btn">
 				<script type="text/javascript">
 					let delete_btn = document.getElementById('delete_btn');
 					delete_btn.onclick = function() {

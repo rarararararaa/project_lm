@@ -70,6 +70,12 @@ public class ProductViewController {
 		Map<String, List<ProductVO>> top3 = new HashMap<String, List<ProductVO>>();
 		for(String cate : category) {
 			List<ProductVO> top = productService.selectCateTop3(cate);
+			for(ProductVO vo : top) {
+				if(vo.getStore_product_title().length()>=10) {
+					String title = vo.getStore_product_title().substring(0, 10)+"...";
+					vo.setStore_product_title(title);
+				}
+			}
 			top3.put(cate, top);
 		}
 		mav.addObject("top3", top3);
@@ -84,17 +90,21 @@ public class ProductViewController {
 		}
 		//연간 베스트 도서
 		List<ProductVO> best_y = productService.selectBestBookList(1,12);
-		for(ProductVO vo : best_y) {
-			if(vo.getStore_product_title().length()>=10) {
-				String title = vo.getStore_product_title().substring(0, 10)+"...";
-				vo.setStore_product_title(title);
-			}
-		}
 		
 		mav.addObject("bestList", best);
 		mav.addObject("bestYear", best_y);
 		log.debug("<<베스트 셀러>> : "+top3);
 		return mav;
+	}
+	
+	//제목 자르기
+	public void cutTitle(List<ProductVO> list) {
+		for(ProductVO vo : list) {
+			if(vo.getStore_product_title().length()>=10) {
+				String title = vo.getStore_product_title().substring(0, 10)+"...";
+				vo.setStore_product_title(title);
+			}
+		}
 	}
 	public String[] category(){
 		String[] list = {"소설/시/희곡","인문학","컴퓨터","종교/역학","예술/대중문화","자기계발","외국어",

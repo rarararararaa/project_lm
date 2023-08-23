@@ -115,8 +115,50 @@ $(function(){
 		});
 	})
 	
-	
+	fixed();
+
+//링크 클릭시 헤당 섹션으로 부드럽게 이동시키기
+  $("a").on('click', function(event) {
+
+    if (this.hash !== "") {
+
+      event.preventDefault();
+
+      var hash = this.hash;
+
+      $('html, body').animate({
+
+        scrollTop: $(hash).offset().top
+
+      }, 300, function(){
+
+        window.location.hash = hash;
+
+      });
+
+    } 
+
+  });
+
 });
+
+
+
+//fixed 함수
+function fixed(){
+	let header = document.querySelector("#scrollProdInfo");
+	let tab=document.querySelector(".tabs-area");
+	let headerHeight = header.offsetHeight;
+	
+	window.onscroll = function () {
+	  let windowTop = header.getBoundingClientRect().top;
+	  if (headerHeight >= windowTop) {
+	    tab.classList.add("drop");
+	  } else {
+	    tab.classList.remove("drop");
+	  }
+	};
+}
 //썸네일 함수
 	function setThumbnail(event) {
 		

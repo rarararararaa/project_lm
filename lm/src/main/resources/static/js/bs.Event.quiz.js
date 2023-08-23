@@ -11,7 +11,10 @@ $(function(){
 			success:function(param){
 				if(param.status == 'logOut'){
 					alert('로그인 후 사용하세요');
-				}else if(param.status == 'already'){
+				}else if(param.status == 'fin'){
+					alert("종료된 이벤트 입니다.")
+				}
+				else if(param.status == 'already'){
 					alert('이미 참여한 이벤트 입니다.');
 				}else if(param.status == 'wrongAnswer'){
 					alert('오답입니다. 다른 답을 선택해보세요');

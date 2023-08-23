@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div class="button-box">
-				<form:button class="small-button">전송</form:button>
+				<form:button class="small-button-B">등록</form:button>
 				<input class="small-button" type="button" value="목록"
 					onclick="location.href='list.do'">
 			</div>

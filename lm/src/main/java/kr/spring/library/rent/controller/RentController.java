@@ -74,16 +74,18 @@ public class RentController {
 	public Map<String, Object> memberSearchAjax(@RequestParam String mem_id, HttpSession session){
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
-		int user=0;
-		user=(Integer)session.getAttribute("mem_num");
-		if(user == 0) {
+		if(session.getAttribute("mem_num") == null) {
 			//로그인 X
 			mapJson.put("result", "logout");
 		}else {
-			//로그인 O
-			List<MemberVO> member = rentService.selectSearchMember(mem_id);
-			mapJson.put("result", "success");
-			mapJson.put("member", member);
+			if((Integer)session.getAttribute("mem_auth")==9) {
+				//로그인 O
+				List<MemberVO> member = rentService.selectSearchMember(mem_id);
+				mapJson.put("result", "success");
+				mapJson.put("member", member);
+			}else {
+				mapJson.put("result", "notAdmin");
+			}
 		}
 		return mapJson;
 	}
@@ -95,16 +97,19 @@ public class RentController {
 	@ResponseBody
 	public Map<String, Object> bookSearchAjax(@RequestParam String lib_product_bookname, HttpSession session){
 		Map<String, Object> mapJson = new HashMap<String, Object>();
-		int user=0;
-		user=(Integer)session.getAttribute("mem_num");
-		if(user == 0) {
+		if(session.getAttribute("mem_num") == null) {
 			//로그인 X
 			mapJson.put("result", "logout");
 		}else {
-			//로그인 O
-			List<BookProductVO> book= bookProductService.searchDetailLIB_P(lib_product_bookname);
-			mapJson.put("result", "success");
-			mapJson.put("book", book);
+			
+			if((Integer)session.getAttribute("mem_auth")==9) {
+				//로그인 O
+				List<BookProductVO> book= bookProductService.searchDetailLIB_P(lib_product_bookname);
+				mapJson.put("result", "success");
+				mapJson.put("book", book);
+			}else {
+				mapJson.put("result", "notAdmin");
+			}
 		}
 		return mapJson;
 	}	
@@ -118,58 +123,60 @@ public class RentController {
 		
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
-		int user =0;
-		user=(Integer)session.getAttribute("mem_num");
-		if(user == 0) {
-			//로그인 X인 경우
+		if(session.getAttribute("mem_num") == null) {
+			//로그인 X
 			mapJson.put("result", "logout");
 		}else {//로그인 O인 경우
-			
-			//회원당 대출권수 확인
-			Map<String, Object> map=new HashMap<String, Object>();
-			map.put("mem_num", vo.getMem_num());
-			List<RentVO> overdue_list=rentService.selectOverdue(vo.getMem_num());
-			if(overdue_list.size()!=0) {
-				int overdue_value=0;
-				for(RentVO overdue_rent:overdue_list) {
-					overdue_value+=overdue_rent.getOverdue_value();
-				}
-				mapJson.put("result", "overDue");
-				mapJson.put("overdue_value", overdue_value);
-				return mapJson;
-			}
-			log.debug("<<mem_num>> : "+vo.getMem_num());
-			int count=rentService.selectRentCountByMem_num(map);
-			log.debug("<<rent_count>> : "+count);
-			String[] list;
-			list=vo.getCallNumber().split(",");
-			log.debug("<<list_length>> : "+list.length);
-			if((count+list.length)>3) {
-				mapJson.put("result", "overValue");
-			}else {
-				log.debug("<<total>> : "+(count+list.length));
-				for(String i:list) {
-					vo.setCallNumber(i);
-					//대출중인 도서인지 확인
-					if(reservationService.selectCheckRentStatus(i)) {//대출중
-						mapJson.put("result", "alreadyRent");
-						return mapJson;
+			if((Integer)session.getAttribute("mem_auth")==9) {
+				//회원당 대출권수 확인
+				Map<String, Object> map=new HashMap<String, Object>();
+				map.put("mem_num", vo.getMem_num());
+				List<RentVO> overdue_list=rentService.selectOverdue(vo.getMem_num());
+				if(overdue_list.size()!=0) {
+					int overdue_value=0;
+					for(RentVO overdue_rent:overdue_list) {
+						overdue_value+=overdue_rent.getOverdue_value();
 					}
-					vo.setBookVO(rentService.selectBook(i));
-					map.put("lib_product_isbn", vo.getBookVO().getLib_product_isbn());
-					//예약중인 도서인지 확인
-					if(reservationService.selectReservationCountByISBN(map)>0) {
-						ReservationVO reservation=rentService.selectReservationByMemnum(vo);
-						if(reservation.getMem_num()!=vo.getMem_num()) {
-							mapJson.put("result", "reservationFirst");
+					mapJson.put("result", "overDue");
+					mapJson.put("overdue_value", overdue_value);
+					return mapJson;
+				}
+				log.debug("<<mem_num>> : "+vo.getMem_num());
+				int count=rentService.selectRentCountByMem_num(map);
+				log.debug("<<rent_count>> : "+count);
+				String[] list;
+				list=vo.getCallNumber().split(",");
+				log.debug("<<list_length>> : "+list.length);
+				if((count+list.length)>3) {
+					mapJson.put("result", "overValue");
+				}else {
+					log.debug("<<total>> : "+(count+list.length));
+					for(String i:list) {
+						vo.setCallNumber(i);
+						//대출중인 도서인지 확인
+						if(reservationService.selectCheckRentStatus(i)) {//대출중
+							mapJson.put("result", "alreadyRent");
 							return mapJson;
 						}
+						vo.setBookVO(rentService.selectBook(i));
+						map.put("lib_product_isbn", vo.getBookVO().getLib_product_isbn());
+						//예약중인 도서인지 확인
+						if(reservationService.selectReservationCountByISBN(map)>0) {
+							ReservationVO reservation=rentService.selectReservationByMemnum(vo);
+							if(reservation.getMem_num()!=vo.getMem_num()) {
+								mapJson.put("result", "reservationFirst");
+								return mapJson;
+							}
+						}
+						rentService.insertRentHistory(vo);
+						log.debug("<<vo>> : "+vo);
 					}
-					rentService.insertRentHistory(vo);
-					log.debug("<<vo>> : "+vo);
-				}
-				mapJson.put("result", "success");
-			} 
+					mapJson.put("result", "success");
+				} 
+				
+			}else {
+				mapJson.put("result", "notAdmin");
+			}
 			
 		}
 		

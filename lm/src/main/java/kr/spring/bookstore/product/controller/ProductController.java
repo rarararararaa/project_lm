@@ -128,15 +128,23 @@ public class ProductController {
 		map.put("event_board_status", 1);
 		review = reviewService.selectReviewList(map);
 		list2 =bsEventService.selectEventList(map);
-			
+		String[] str;
+		str=product.getStore_product_categoryname().split(">");
+		log.debug("<<카테고리>> : "+str);
+		
+		List<ProductVO> randomRecommend=productService.selectCateRandom(str[1]);
+		log.debug("<<랜덤>> : "+randomRecommend);
+		
 		log.debug("<<event : >>"+list2);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("productDetail");
 		mav.addObject("product", product);
+		mav.addObject("categoryname",str);
 		mav.addObject("count", count);
 		mav.addObject("review", review);
 		mav.addObject("list", list);
 		mav.addObject("event", list2);
+		mav.addObject("randomRecommend", randomRecommend);
 		for(int i=0;i<6;i++) {
 			map.put("review_start", 2*i);
 			map.put("review_end", 2*(i+1));
@@ -214,13 +222,10 @@ public class ProductController {
 		
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
-		int user=0;
-		if(session.getAttribute("mem_num")!=null) {
-			user = (Integer)session.getAttribute("mem_num");
-		}
-		if(user==0) {
+		if(session.getAttribute("mem_num")==null) {
 			mapJson.put("result", "logout");
 		}else {
+			int user = (Integer)session.getAttribute("mem_num");
 			//로그인된 회원번호 셋팅
 			fav.setMem_num(user);
 			fav.setStore_product_num(store_product_num);

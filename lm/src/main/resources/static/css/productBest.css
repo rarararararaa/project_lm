@@ -68,12 +68,15 @@ button:hover{
 b{
 	position: relative;
 	top: 30px;
+	left: 150px;
 	font-size: 48px;
-		
 }
 p{
 	color: #000;
-	font-size: 36px;
+	font-size: 30px;
+}
+.non-border{
+	border: none;
 }
 /*=====도서 목록=====*/
 /*주간 베스트*/
@@ -87,20 +90,53 @@ p{
 .detail li{
 	width: 162px;
 }
+.medal{
+	position: absolute;
+}
 /*===분야별 TOP=====*/
+.category-best{
+	margin-top: 150px;	
+}
 .cate-wrapper{
 	min-height: 400px;
 }
 .cate-top3{
 	display: flex !important;
+	vertical-align: middle;
+}
+.cate-list{
+	margin-top: 50px;
+	width: 348px;
+	font-size: 40px;
+	font-weight: bold;
+}
+.cate-list-position{
+	position: relative;
+    top: -70px;
+    margin: 10px 0;
+}
+.cate-info-detail{
+	margin: 0 50px;
+}
+.cate-info-detail div{
+	width: 162px;
+}
+#ca-btn{
+	margin: 15px 0 15px 74px;
+	position: inherit;
+	top: 780px !important;
+	font-size: 25px;
+	color: gray !important;
+	width: 200px !important;
 }
 /*=====swiper=====*/
 .swiper-wrapper{
 	top: 50px;
+	min-height: 400px;	
 }
 .swiper {
 	text-align: center;
-	height: 510px; 
+	height: 380px !important; 
 }
 .swiper-slide img{
 	width: 162px;
@@ -129,8 +165,8 @@ p{
   color: white;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
+.swiper-button-prev:not(.cate-prev),
+.swiper-button-next:not(.cate-next) {
   width: 60px !important;
   height: 59px !important;
   position: absolute;
@@ -142,19 +178,26 @@ p{
   background-size: 90%;
   background-repeat: no-repeat;
 }
-.swiper-button-prev {
+.swiper-button-prev:not(.cate-prev) {
 	margin-left: 60px;
 	background-image: url("/images/left.png");
 }
-.swiper-button-next {
+.swiper-button-next:not(.cate-next) {
 	margin-right: 40px;
 	background-image: url("/images/right.png");
 }
+.m-y-wrapper{
+	top: 30px;
+	width: 450px !important;
+}
 .month-prev, .month-next{
-  top: 1300px !important;
+  top: 1250px !important;
+}
+.year-best{
+	margin-top: 100px;
 }
 .year-prev, .year-next{
-  top: 1900px !important;
+  top: 1780px !important;
 }
 .point{
 	margin: 0 20px;

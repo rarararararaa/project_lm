@@ -32,6 +32,8 @@ $(function(){
 				if(param.result == 'logout'){
 					$('#member_search').attr('disabled',true);
 					$('#member_search').val('로그인해야 회원 검색이 가능합니다.');
+				}else if(param.result=='notAdmin'){
+					alert('관리자만 접근가능합니다.');
 				}else if(param.result == 'success'){
 					$('#search_area').empty();
 					$(param.member).each(function(index,item){
@@ -101,6 +103,8 @@ $(function(){
 				if(param.result == 'logout'){
 					$('#book_search').attr('disabled',true);
 					$('#book_search').val('로그인해야 도서 검색이 가능합니다.');
+				}else if(param.result=='notAdmin'){
+					alert('관리자만 접근가능합니다.');
 				}else if(param.result == 'success'){
 					$('#search_area1').empty();
 					$(param.book).each(function(index,item){
@@ -174,6 +178,8 @@ $(function(){
 			success: function(param){
 				if(param.result == 'logout'){
 					alert('로그인해야 사용할 수 있습니다.');
+				}else if(param.result=='notAdmin'){
+					alert('관리자만 접근가능합니다.');
 				}else if(param.result == 'success'){
 					$('#dialog').dialog('close');	//다이얼로그 닫기
 					alert('정상적으로 도서를 대출했습니다.');

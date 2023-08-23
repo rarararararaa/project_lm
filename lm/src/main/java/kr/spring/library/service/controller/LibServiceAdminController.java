@@ -59,19 +59,6 @@ public class LibServiceAdminController {
 
 		return "admin_boardAnswerWrite";
 	}
-	//이미지 출력
-	@RequestMapping("/library/service/admin_boardAskImageView.do")
-	public ModelAndView viewImageAsk(@RequestParam int ask_num) {
-
-		BoardAskVO boardAsk = 
-				libServiceService.selectBoardAsk(ask_num);
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin_boardAskImageView");
-		mav.addObject("imageFile", boardAsk.getAsk_image());
-		mav.addObject("filename", boardAsk.getAsk_imagename());
-		return mav;
-	}
 	//전송된 데이터 처리
 	@PostMapping("/library/service/admin_boardAnswerWrite.do")
 	public String answerInsert(BoardAnswerVO boardAnswer, HttpSession session,Model model) {
