@@ -28,6 +28,9 @@ public interface RentService {
 	public int selectRentCountByMem_num(Map<String, Object> map);
 	//대출 연장 -> 예약하면 대출 연장 불가->reservationService 연동
 	public void updateRentDeadline(RentVO rentVO);
+	//대출 연체
+	//연체일 상세
+	public List<RentVO> selectOverdue(int mem_num);	
 	//회원 검색
 	public List<MemberVO> selectSearchMember(String mem_id);
 	//반납 자동 검색

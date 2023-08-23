@@ -46,6 +46,7 @@ public class ReservationServiceImpl implements ReservationService{
 	@Scheduled(cron = "0 0/5 * * * *")
 	public void updateReservationCancel() {
 		reservationMapper.updateReservationCancel();
+		rentMapper.updateOverdue();
 	}
 
 	@Override

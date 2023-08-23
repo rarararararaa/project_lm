@@ -37,7 +37,12 @@ public interface RentMapper {
 	//대출 연장 -> 예약하면 대출 연장 불가->reservationService 연계
 	@Update("UPDATE lib_history SET return_reg_deadline=#{return_reg_deadline}+7,lib_product_status=3 WHERE rent_num=#{rent_num}")
 	public void updateRentDeadline(RentVO rentVO);
-	
+	//대출 연체
+	//자동화 -> 반납일 지난거 연체일수에 업데이트처리
+	public void updateOverdue();
+	//연체일 상세
+	@Select("SELECT * FROM lib_history WHERE overdue_value IS NOT NULL AND mem_num=#{mem_num} AND lib_product_status=2")
+	public List<RentVO> selectOverdue(int mem_num);
 	//반납 자동 검색
 	@Select("SELECT * FROM lib_history WHERE LIB_PRODUCT_STATUS=1")
 	public List<RentVO> selectAllRent();

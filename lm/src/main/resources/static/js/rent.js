@@ -180,6 +180,8 @@ $(function(){
 					location.reload();
 				}else if(param.result=='overValue'){
 					alert('대출은 최대 3권까지만 가능합니다.');
+				}else if(param.result=='overDue'){
+					alert('연체일수만큼 대출이 불가합니다. 연체일수 : '+param.overdue_value);
 				}else if(param.result=='alreadyRent'){
 					alert('이미 대출중인 도서입니다.');
 				}else if(param.result=='reservationFirst'){

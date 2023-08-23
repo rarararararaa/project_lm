@@ -123,12 +123,21 @@ public class RentController {
 		if(user == 0) {
 			//로그인 X인 경우
 			mapJson.put("result", "logout");
-		}else {
-			//로그인 O인 경우
+		}else {//로그인 O인 경우
 			
 			//회원당 대출권수 확인
 			Map<String, Object> map=new HashMap<String, Object>();
 			map.put("mem_num", vo.getMem_num());
+			List<RentVO> overdue_list=rentService.selectOverdue(vo.getMem_num());
+			if(overdue_list.size()!=0) {
+				int overdue_value=0;
+				for(RentVO overdue_rent:overdue_list) {
+					overdue_value+=overdue_rent.getOverdue_value();
+				}
+				mapJson.put("result", "overDue");
+				mapJson.put("overdue_value", overdue_value);
+				return mapJson;
+			}
 			log.debug("<<mem_num>> : "+vo.getMem_num());
 			int count=rentService.selectRentCountByMem_num(map);
 			log.debug("<<rent_count>> : "+count);

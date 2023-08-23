@@ -80,4 +80,10 @@ public class RentServiceImpl implements RentService{
 		return rentMapper.selectReservationByMemnum(rentVO);
 	}
 
+
+	@Override
+	public List<RentVO> selectOverdue(int mem_num) {
+		return rentMapper.selectOverdue(mem_num);
+	}
+
 }

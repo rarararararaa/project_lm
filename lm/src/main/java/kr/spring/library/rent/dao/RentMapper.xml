@@ -108,4 +108,11 @@
 			lib_product_product_status=0
 		WHERE callNumber=#{callNumber}		
 	</update>
+	
+	<!-- 연체일 처리 -->
+	<update id="updateOverdue">
+		UPDATE lib_history
+		SET overdue_value = TRUNC(sysdate - return_reg_deadline)
+		WHERE lib_product_status = 2 AND sysdate > return_reg_deadline
+	</update>
 </mapper>
