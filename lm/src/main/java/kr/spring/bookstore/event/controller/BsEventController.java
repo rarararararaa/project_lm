@@ -67,14 +67,18 @@ public class BsEventController {
 	
 		//상품 이미지 유효성 체크 //MultipartFile -> byte[]로 변환한 경우 파일을 업로드 하지 않으면 byte[]는 생성되고 length는 0이다. 
 		if(vo.getEvent_img_small().length == 0) {
-			result.rejectValue("img_Small", "required"); 
+			result.rejectValue("event_img_small", "required"); 
 		}
 
 		//용량체크 - byte[] 이므로 용량 체크 가능 
 		if(vo.getEvent_img_small().length >= 5*1024*1024) { //5 MB // 자바빈의 필드명, 에러 코드, 에러문구에 전달할 값, 기본 오류(에러) 문구
 			result.rejectValue("img_Small", "limitIploadSize", new Object[] {"5MB"}, null); 
 		}
-
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return form();
+		}
 
 		//글쓰기
 		bsEventService.insertEvent(vo);
@@ -170,6 +174,8 @@ public class BsEventController {
 	public ModelAndView EventList(@RequestParam(value="order",defaultValue="1") int order,
 									@RequestParam(value="pageNum", defaultValue="1") int CurrentPage,
 									String keyfield, String keyword) {
+		bsEventService.updateEndList();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -227,36 +233,47 @@ public class BsEventController {
 		Integer mem_num = (Integer) session.getAttribute("mem_num");
 		log.debug("<<mem_num>> : " + mem_num);
 		log.debug("<<event_board_num>> : " + event_board_num);
-		
-		if(mem_num == null) {
-			//로그인X
+
+		// 종료된 이벤트 확인을 위해
+		BsEventVO event = bsEventService.selectEvent(event_board_num);
+		int event_status = event.getEvent_board_status();
+
+		if (mem_num == null) {
+			// 로그인X
 			mapJson.put("status", "logOut");
-		}else {
-			//로그인 O
-			quizVO.setEvent_board_num(event_board_num);
-			quizVO.setMem_num(mem_num);
-			
-			BsQuizVO checkQuizVO = new BsQuizVO();
-			checkQuizVO = bsEventService.selectQuizStatus(quizVO);
-			if(checkQuizVO !=null) {
-				mapJson.put("status", "already");
-			}else {
-				BsEventVO event = bsEventService.selectEvent(event_board_num);
-				
-				if(event.getEvent_quiz_an() == answer) {
-					Map<String, Object> mapPoint = new HashMap<String, Object>();
-					mapPoint.put("mem_num", mem_num);
-					mapPoint.put("addPoint", 50);
-					bsEventService.updateMemberPoint(mapPoint);
-					
-					bsEventService.insetQuizStatus(quizVO);
-					
-					mapJson.put("status", "success");
-				}else {
-					mapJson.put("status", "wrongAnswer");
-					
+		} else {
+			// 로그인 O
+			// 퀴즈 status 확인
+			if (event_status == 3) {
+				mapJson.put("status", "fin");
+			} else if (event_status == 2) {
+				quizVO.setEvent_board_num(event_board_num);
+				quizVO.setMem_num(mem_num);
+
+				BsQuizVO checkQuizVO = new BsQuizVO();
+				checkQuizVO = bsEventService.selectQuizStatus(quizVO);
+				if (checkQuizVO != null) {
+					mapJson.put("status", "already");
+				} else {
+					// 위에서 사용
+					// BsEventVO event = bsEventService.selectEvent(event_board_num);
+
+					if (event.getEvent_quiz_an() == answer) {
+						Map<String, Object> mapPoint = new HashMap<String, Object>();
+						mapPoint.put("mem_num", mem_num);
+						mapPoint.put("addPoint", 50);
+						bsEventService.updateMemberPoint(mapPoint);
+
+						bsEventService.insetQuizStatus(quizVO);
+
+						mapJson.put("status", "success");
+					} else {
+						mapJson.put("status", "wrongAnswer");
+
+					}
 				}
 			}
+
 		}
 		return mapJson;
 	}

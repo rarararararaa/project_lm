@@ -186,6 +186,11 @@ public class BsEventServiceImpl implements BsEventService{
 		bsEventMapper.deleteReply(reply_num);
 	}
 
+	@Override
+	public void updateEndList() {
+		bsEventMapper.updateEndList();
+	}
+
 	
 
 
