@@ -44,13 +44,13 @@
 				<form:radiobutton path="donation_status" value="0"/><div>미확인</div>
 				<form:radiobutton path="donation_status" value="1"/><div>기증수락</div>
 				<form:radiobutton path="donation_status" value="2"/><div>기증거부</div>
-				<form:button class="small-button">수정</form:button>
+				<form:button class="small-button-B">수정</form:button>
 			</div>
 		</div>
 		<div class="button-box">
 			<input class="small-button" type="button" value="목록"
 			   onclick="location.href='admin_donationlist.do'"> 
-			<input class="small-button" type="button" value="삭제" id="delete_btn">
+			<input class="small-button-R" type="button" value="삭제" id="delete_btn">
 			<script type="text/javascript">
 				let delete_btn = document.getElementById('delete_btn');
 				delete_btn.onclick = function() {

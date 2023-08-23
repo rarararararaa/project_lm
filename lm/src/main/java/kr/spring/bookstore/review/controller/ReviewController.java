@@ -47,19 +47,24 @@ public class ReviewController {
 	public Map<String, Object> reviewForm(@RequestParam int store_product_num,HttpSession session,
 							 HttpServletRequest request) {
 		
-		log.debug("<<item_num>> : "+store_product_num);
 		Map<String, Object> mapJson=new HashMap<String, Object>();
-		mapJson.put("mem_num", session.getAttribute("mem_num"));
-		mapJson.put("store_product_num", store_product_num);
-		List<OrderDetailVO> list=reviewService.selectOrderDetail(mapJson);
-		if(list.size()==0) {
-			mapJson.put("result", "reviewAlready");
-			return mapJson;
+		if(session.getAttribute("mem_num")==null) {
+			mapJson.put("result", "logout");
 		}else {
-			mapJson.put("result", "success");
-			return mapJson;
-			
+			log.debug("<<item_num>> : "+store_product_num);
+			mapJson.put("mem_num", session.getAttribute("mem_num"));
+			mapJson.put("store_product_num", store_product_num);
+			List<OrderDetailVO> list=reviewService.selectOrderDetail(mapJson);
+			if(list.size()==0) {
+				mapJson.put("result", "reviewAlready");
+				return mapJson;
+			}else {
+				mapJson.put("result", "success");
+				return mapJson;
+				
+			}
 		}
+		return mapJson;
 	}	
 	
 	// 리뷰 작성
@@ -68,6 +73,7 @@ public class ReviewController {
 			HttpServletRequest request, HttpSession session,
 						@RequestParam(value="store_product_isbn13", required=false) String store_product_isbn13,
 						@RequestParam int store_product_num) {
+		
 		
 		//상품 이미지 유효성 체크 //MultipartFile -> byte[]로 변환한 경우 파일을 업로드 하지 않으면 byte[]는 생성되고 length는 0이다. 
 		if(reviewVO.getReview_image().length == 0) {
@@ -117,9 +123,7 @@ public class ReviewController {
 	public Map<String, Object> reviewModifyAjax(@RequestParam int review_num, HttpSession session){
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
-		int user=0;
-		user=(Integer)session.getAttribute("mem_num");
-		if(user == 0) {
+		if(session.getAttribute("mem_num") == null) {
 			//로그인 X
 			mapJson.put("result", "logout");
 		}else {

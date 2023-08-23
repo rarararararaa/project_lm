@@ -69,7 +69,7 @@
 				</div>
 			</div>
 				<div class="button-box">
-					<form:button class="small-button">작성</form:button>
+					<form:button class="small-button-B">작성</form:button>
 					<input class="small-button" type="button" value="목록"
 						onclick="location.href='admin_boardAskList.do'">
 				</div>
