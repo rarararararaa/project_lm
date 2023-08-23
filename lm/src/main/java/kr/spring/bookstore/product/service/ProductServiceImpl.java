@@ -104,12 +104,36 @@ public class ProductServiceImpl implements ProductService{
 				vo.setStore_product_author(author);
 			}
 		}
-		return productMapper.selectCateTop3(cate);
+		return list;
 	}
 
 	@Override
 	public List<ProductVO> selectCateRandom(String cate) {
 		return productMapper.selectCateRandom(cate);
+	}
+
+	@Override
+	public List<ProductVO> selectCateNew(String cate) {
+		List<ProductVO> list =  productMapper.selectCateNew(cate);
+		for(ProductVO vo : list) {
+			if(vo.getStore_product_author().length()>=10) {
+				String author = vo.getStore_product_author().substring(0, 10)+"...";
+				vo.setStore_product_author(author);
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<ProductVO> selectNew(String cate) {
+		List<ProductVO> list =  productMapper.selectNew(cate);
+		for(ProductVO vo : list) {
+			if(vo.getStore_product_title().length()>=10) {
+				String title = vo.getStore_product_title().substring(0, 10)+"...";
+				vo.setStore_product_title(title);
+			}
+		}
+		return list;
 	}
 
 

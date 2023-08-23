@@ -33,6 +33,10 @@ public interface ProductService {
 	public List<ProductVO> selectBestBookList(int start, int end);
 	//문야별 TOP3
 	public List<ProductVO> selectCateTop3(String cate);
+	//분야별 신규도서
+	public List<ProductVO> selectCateNew(String cate);
+	//국내&외국도서 신규
+	public List<ProductVO> selectNew(String cate);
 	//분야별 랜덤 도서 추천 5개
 	public List<ProductVO> selectCateRandom(String cate);	
 }

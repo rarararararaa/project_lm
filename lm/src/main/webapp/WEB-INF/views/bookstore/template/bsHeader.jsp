@@ -227,7 +227,7 @@
 					<a class="gnb_link" href="/bookstore/product/productBestList.do">베스트</a>
 				</li>
 				<li class="gnb_item">
-					<a class="gnb_link">신상품</a>
+					<a class="gnb_link" href="/bookstore/product/productNewList.do">신상품</a>
 				</li>
 				<li class="gnb_item">
 					<a class="gnb_link"  href="${pageContext.request.contextPath}/bookstore/event/list.do">이벤트</a>

@@ -33,8 +33,12 @@
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/product/productListAll.jsp"/>
     </definition>
     <definition name="productListBest" extends="bsMain">
-    	<put-attribute name="title" value="도서목록"/>
+    	<put-attribute name="title" value="베스트도서목록"/>
 	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/product/productListBest.jsp"/>
+    </definition>
+    <definition name="productListNew" extends="bsMain">
+    	<put-attribute name="title" value="신규도서목록"/>
+	    <put-attribute name="bsBody" value="/WEB-INF/views/bookstore/product/productListNew.jsp"/>
     </definition>
     
     <!-- LM도서 -->    

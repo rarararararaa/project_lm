@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductViewController {
 	@Autowired
 	ProductService 	productService; 
-	
+	//전체 도서
 	@RequestMapping("/bookstore/product/productCeteList.do")
 	public String listProduct(HttpSession session, Model model, 
 			@RequestParam(value="pageNum",defaultValue="1") int currentPage,
@@ -61,6 +61,7 @@ public class ProductViewController {
 		model.addAttribute("now", now); 
 		return "productListAll";
 	}
+	//베스트 도서
 	@RequestMapping("/bookstore/product/productBestList.do")
 	public ModelAndView BestListProduct() {
 		ModelAndView mav = new ModelAndView();
@@ -70,24 +71,12 @@ public class ProductViewController {
 		Map<String, List<ProductVO>> top3 = new HashMap<String, List<ProductVO>>();
 		for(String cate : category) {
 			List<ProductVO> top = productService.selectCateTop3(cate);
-			for(ProductVO vo : top) {
-				if(vo.getStore_product_title().length()>=10) {
-					String title = vo.getStore_product_title().substring(0, 10)+"...";
-					vo.setStore_product_title(title);
-				}
-			}
 			top3.put(cate, top);
 		}
 		mav.addObject("top3", top3);
 		mav.addObject("category", category);
 		//월간 베스트 도서
 		List<ProductVO> best = productService.selectBestBookList(0,1);
-		for(ProductVO vo : best) {
-			if(vo.getStore_product_title().length()>=10) {
-				String title = vo.getStore_product_title().substring(0, 10)+"...";
-				vo.setStore_product_title(title);
-			}
-		}
 		//연간 베스트 도서
 		List<ProductVO> best_y = productService.selectBestBookList(1,12);
 		
@@ -96,16 +85,28 @@ public class ProductViewController {
 		log.debug("<<베스트 셀러>> : "+top3);
 		return mav;
 	}
-	
-	//제목 자르기
-	public void cutTitle(List<ProductVO> list) {
-		for(ProductVO vo : list) {
-			if(vo.getStore_product_title().length()>=10) {
-				String title = vo.getStore_product_title().substring(0, 10)+"...";
-				vo.setStore_product_title(title);
-			}
+	//베스트 도서
+	@RequestMapping("/bookstore/product/productNewList.do")
+	public ModelAndView NewListProduct() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("productListNew");
+		//분야별 신규
+		String[] category = category();
+		Map<String, List<ProductVO>> new3 = new HashMap<String, List<ProductVO>>();
+		for(String cate : category) {
+			List<ProductVO> top = productService.selectCateNew(cate);
+			new3.put(cate, top);
 		}
+		mav.addObject("new3", new3);
+		mav.addObject("category", category);
+		//국내&외국도서별 신규 도서
+		List<ProductVO> inNew = productService.selectNew("국내도서");
+		List<ProductVO> outNew = productService.selectNew("외국도서");
+		mav.addObject("inNew", inNew);
+		mav.addObject("outNew", outNew);
+		return mav;
 	}
+
 	public String[] category(){
 		String[] list = {"소설/시/희곡","인문학","컴퓨터","종교/역학","예술/대중문화","자기계발","외국어",
 				"역사","경제경영","사회과학","과학","유아","어린이","소년",
