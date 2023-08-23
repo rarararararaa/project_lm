@@ -11,6 +11,53 @@
 <div class="main-page">
 	<b>베스트셀러</b>
 	<!-- 월간 베스트 -->
+	<div class="category-best best">	
+		<p style="margin: 60px 0 0 0;">분야별 TOP 3</p>
+		<!-- Slider main container -->
+		<div class="swiper category">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper cate-wrapper">
+				<!-- Slides -->
+					<c:forEach var="cate" items="${category}">
+					
+					<div class="swiper-slide cate-top3">
+						<div class="cate-list">
+							${cate}
+						</div>
+						<div>
+							<table>
+							<c:forEach var="top" items="${top3}">
+							<c:if test="${top.key == cate }">
+							<tr>
+								<td>
+								<ul>
+									<c:forEach var="topInfo" items="${top.value }">
+									<li class="float-left">
+										<img src="${topInfo.store_product_cover}"><br>
+										${topInfo.store_product_author}
+									</li>
+									</c:forEach>
+								</ul>
+								</td>
+							</tr>							
+							</c:if>
+							</c:forEach>
+							</table>
+						</div>
+					</div>
+					</c:forEach>
+			</div>
+			<!-- If we need pagination -->
+			<div class="swiper-pagination"></div>
+			<!-- If we need navigation buttons -->
+			<!-- If we need scrollbar -->
+			<div class="swiper-scrollbar"></div>
+		</div>
+			<!-- <div class="swiper-button-prev cate-prev"></div>
+			<div class="swiper-button-next cate-next"></div> -->
+		<!-- Slider main container -->	
+	</div>
+	
 	<div class="months-best best">
 		<p style="margin-bottom: 0">종합 월간 베스트</p>
 		<!-- Slider main container -->
@@ -38,7 +85,6 @@
 			<div class="swiper-pagination"></div>
 			<!-- If we need navigation buttons -->
 			<!-- If we need scrollbar -->
-			<div class="swiper-scrollbar"></div>
 		</div>
 			<div class="swiper-button-prev month-prev"></div>
 			<div class="swiper-button-next month-next"></div>
@@ -73,7 +119,6 @@
 			<div class="swiper-pagination"></div>
 			<!-- If we need navigation buttons -->
 			<!-- If we need scrollbar -->
-			<div class="swiper-scrollbar"></div>
 		</div>
 			<div class="swiper-button-prev year-prev"></div>
 			<div class="swiper-button-next year-next"></div>

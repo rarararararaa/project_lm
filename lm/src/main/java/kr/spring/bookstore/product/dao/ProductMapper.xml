@@ -234,6 +234,17 @@
 			WHERE rnum>=1 AND rnum<=10
 			]]>
 	</select>
+	<!-- 분야별 TOP3 -->
+	<select id="selectCateTop3" parameterType="string" resultType="productVO">
+		SELECT * FROM
+		(SELECT a.*, rownum rnum FROM
+		(SELECT * FROM store_product_manage m JOIN store_product_detail d USING (store_product_num) 
+		WHERE store_product_categoryname LIKE '%' || #{store_product_categoryname} || '%'
+		ORDER BY store_product_ratingcount DESC, store_product_ratingscore DESC)a)
+			<![CDATA[
+			WHERE rnum>=1 AND rnum<=3
+			]]>
+	</select>
 </mapper>
 
 
