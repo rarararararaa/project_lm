@@ -105,7 +105,7 @@ p{
 	vertical-align: middle;
 }
 .cate-list{
-	margin-top: 50px;
+	margin-top: 30px;
 	width: 348px;
 	font-size: 40px;
 	font-weight: bold;
@@ -122,7 +122,7 @@ p{
 	width: 162px;
 }
 #ca-btn{
-	margin: 15px 0 15px 74px;
+	margin: 35px 0 30px 74px;
 	position: inherit;
 	top: 780px !important;
 	font-size: 25px;

@@ -1,7 +1,10 @@
 $(function(){
-	$('.cancelPay').click(function(){
+	$('.cancelPay').click(function(event){
+		event.preventDefault();
 		let order_num = $(this).val();
 		//alert(order_num);
+		let check = confirm('주문을 취소하시겠습니까?');
+		if(check){
 		$.ajax({
 			url:'/bookstore/payment/cancelPay.do',
 			data:{order_num:order_num},
@@ -20,5 +23,6 @@ $(function(){
 				alert('네트워크 오류');
 			}
 		})
+		}
 	})
 })

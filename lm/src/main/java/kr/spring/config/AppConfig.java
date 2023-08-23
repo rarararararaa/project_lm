@@ -98,9 +98,6 @@ public class AppConfig implements WebMvcConfigurer{
 		
 		registry.addInterceptor(bsLoginCheck)
 				.addPathPatterns("/bookstore/service/askWrite.do")
-				.addPathPatterns("/bookstore/payment/cart.do")
-				.addPathPatterns("/bookstore/payment/cartAction.do")
-				.addPathPatterns("/bookstore/payment/order.do")
 				.addPathPatterns("/bookstore/review/reviewWrite.do")
 				.addPathPatterns("/bookstore/review/reviewModify.do")
 				.addPathPatterns("/bookstore/review/reviewDelete.do")

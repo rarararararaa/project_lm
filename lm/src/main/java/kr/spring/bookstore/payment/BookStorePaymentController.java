@@ -66,8 +66,13 @@ public class BookStorePaymentController {
 	@PostMapping("/bookstore/payment/cart.do")
 	@ResponseBody
 	public Map<String,String> insertcartForm(HttpSession session, Model model, BookStorePaymentCartVO product) {
-		int mem_num = (Integer)session.getAttribute("mem_num");
+		String mem_id = (String)session.getAttribute("mem_id");
 		Map<String, String> mapJson = new HashMap<String, String>();
+		if(mem_id == null) {
+			mapJson.put("result", "logout");
+			return mapJson;
+		}
+		int mem_num = (Integer)session.getAttribute("mem_num");
 		log.debug("<<도서 정보>> : "+product);
 		product.setMem_num(mem_num);
 		Boolean check = true;
@@ -187,8 +192,11 @@ public class BookStorePaymentController {
 	@RequestMapping("/bookstore/payment/Cartdelete.do")
 	@ResponseBody
 	public Map<String, Object> deleteCartBook(Integer mem_cart_num, HttpSession session){
-		Map<String, Object> mapJson = new HashMap<String, Object>();
 		String mem_id = (String)session.getAttribute("mem_id");
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		if(mem_id == null) {
+			mapJson.put("result", "logout");
+		}
 		log.debug("<<카드 삭제 번호>> : "+mem_cart_num);
 		if(mem_id == null) {
 			mapJson.put("result", "logout");
@@ -203,12 +211,13 @@ public class BookStorePaymentController {
 	@ResponseBody 
 	public Map<String, Object> actionCart(@RequestParam Map<String, Object> data, HttpSession session, int total){
 		log.debug("<<total>>"+total);
-		int mem_num = (Integer)session.getAttribute("mem_num");
-		String mem_id = (String)session.getAttribute("mem_id");
 		Map<String, Object> mapJson = new HashMap<String, Object>();
+		String mem_id = (String)session.getAttribute("mem_id");
 		if(mem_id == null) {
 			mapJson.put("result", "logout");
+			return mapJson;
 		}
+		int mem_num = (Integer)session.getAttribute("mem_num");
 		log.debug("<<ACTION!>> : "+data.get("data"));
 		String test = (String)data.get("data");
 		try {
@@ -477,6 +486,10 @@ public class BookStorePaymentController {
 	@ResponseBody
 	public Map<String, Object> ChangeDefault(Integer home_num, HttpSession session){
 		Map<String, Object> mapJson = new HashMap<String, Object>();
+		String mem_id = (String)session.getAttribute("mem_id");
+		if(mem_id == null) {
+			mapJson.put("result", "logout");
+		}
 		int mem_num = (Integer)session.getAttribute("mem_num");
 		MemberVO memberVO = memberService.selectMember(mem_num);
 		memberVO.setMem_num(mem_num);
