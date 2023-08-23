@@ -558,6 +558,12 @@ public class MyPageController {
 			model.addAttribute("accessMsg", "전화번호 수정 완료.");
 			check = true;
 		}
+		if(!mypageVO.getHome_title().equals("")) {
+			mypageService.insertHome(mypageVO);
+			
+			model.addAttribute("accessMsg", "주소지 추가 완료.");
+			check = true;
+		}
 		//개인정보가 수정되었으면 modify_date 수정
 		if(check) {
 			mypageService.updateModifyDate(mypageVO);

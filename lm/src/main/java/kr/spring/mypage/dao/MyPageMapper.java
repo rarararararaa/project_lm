@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.member.vo.MemberVO;
 import kr.spring.mypage.vo.MyPageVO;
 
 @Mapper
@@ -49,6 +50,11 @@ public interface MyPageMapper {
 	public void updateAuth(MyPageVO mypageVO);
 	@Select("SELECT mem_salt FROM lm_member_detail WHERE mem_num =#{mem_num}")
 	public String getSalt(int mem_num);
+	//시퀀스를 이용한 unique속성 home_num 자동 생성
+	@Select("SELECT store_member_home_seq.nextval FROM dual")
+	public int selectHome_num();
+	@Insert("INSERT INTO store_member_home (home_num,mem_num,home_title,home_zipcode,home_address,home_address_detail,home_cell,home_name) VALUES (#{home_num},#{mem_num},#{home_title},#{home_zipcode},#{home_address},#{home_address_detail},#{home_cell},#{home_name})")
+	public void insertHome(MyPageVO mypageVO);
 	//db의 mem_num과 session의 mem_num 비교
 	@Select("SELECT m.mem_num FROM lm_member_detail d INNER JOIN lm_member_manage m ON d.mem_num = m.mem_num WHERE m.mem_id = #{mem_id} AND d.mem_passwd = #{mem_passwd}")
 	public int memberOutCheck(MyPageVO mypageVO);

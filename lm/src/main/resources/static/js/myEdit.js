@@ -161,17 +161,25 @@ function emailConfirm(){
 
 //동적 버튼 설정
 //1
+var container_edit = 700;
 function ShowUploadPhoto() {
   document.getElementById("input-area-photo").style.display = "block";
   document.getElementById("upload-photo").style.display = "none";
   const element = document.querySelector('.photo-form');
   element.style.height = '500px';
+  const container = document.querySelector('.container');
+  container_edit += 80;
+  container.style.height = (container_edit)+'px';
 }
 
 function HideUploadPhoto() {
   document.getElementById("input-area-photo").style.display = "none";
   document.getElementById("upload-photo").style.display = "block";
-  element.style.height = '0px';
+   const element = document.querySelector('.photo-form');
+  element.style.height = '500px';
+    const container = document.querySelector('.container');
+  container_edit -= 80;
+  container.style.height = (container_edit)+'px';
 }
 //2
 function ShowChangePasswd() {
@@ -179,6 +187,9 @@ function ShowChangePasswd() {
   document.getElementById("change-passwd").style.display = "none";
   const element = document.querySelector('.passwd-form');
   element.style.height = '250px';
+    const container = document.querySelector('.container');
+  container_edit += 200;
+  container.style.height = (container_edit)+'px';
 }
 
 function hideChangePasswd() {
@@ -189,6 +200,9 @@ function hideChangePasswd() {
   $('#pw2').val('').focus();
   $('#pw3').val('').focus();
   element.style.height = '50px';
+    const container = document.querySelector('.container');
+  container_edit -= 200;
+  container.style.height = (container_edit)+'px';
 }
 //3
 function showConfirmEmail() {
@@ -197,14 +211,20 @@ function showConfirmEmail() {
   document.getElementById("change-email").style.display = "none";
   const element = document.querySelector('.email-form');
   element.style.height = '300px';
+    const container = document.querySelector('.container');
+  container_edit += 86;
+  container.style.height = (container_edit)+'px';
 }
 
 function hideConfirmEmail() {
   document.getElementById("input-area-email").style.display = "none";
   document.getElementById("confirm-email").style.display = "block";
   document.getElementById("change-email").style.display = "block";
-  const element = document.querySelector('.input-area-email');
-element.style.height = '0px';
+  const element = document.querySelector('.email-form');
+element.style.height = '300px';
+  const container = document.querySelector('.container');
+  container_edit -= 86;
+  container.style.height = (container_edit)+'px';
 }
 //4
 function showChangeEmail() {
@@ -212,13 +232,22 @@ function showChangeEmail() {
   document.getElementById("change-email").style.display = "none";
   document.getElementById("confirm-email").style.display = "none";
   document.getElementById("input-area-email").style.display = "none";
+    const element = document.querySelector('.email-form');
+element.style.height = '300px';
+  const container = document.querySelector('.container');
+  container_edit += 37;
+  container.style.height = (container_edit)+'px';
 }
 
 function hideChangeEmail() {
   document.getElementById("input-area-email2").style.display = "none";
   document.getElementById("change-email").style.display = "block";
   document.getElementById("confirm-email").style.display = "block";
-  element.style.height = '0px';
+    const element = document.querySelector('.email-form');
+element.style.height = '300px';
+    const container = document.querySelector('.container');
+  container_edit -= 37;
+  container.style.height = (container_edit)+'px';
 }
 //5
 function showChangecell() {
@@ -226,13 +255,63 @@ function showChangecell() {
   document.getElementById("change-cell").style.display = "none";
     const element = document.querySelector('.cell-btn-form');
   element.style.height = '300px';
+    const container = document.querySelector('.container');
+  container_edit += 37;
+  container.style.height = (container_edit)+'px';
 }
 
 function hideChangecell() {
   document.getElementById("input-area-cell").style.display = "none";
   document.getElementById("change-cell").style.display = "block";
     const element = document.querySelector('.cell-btn-form');
-  element.style.height = '0px';
+  element.style.height = '50px';
+    const container = document.querySelector('.container');
+  container_edit -=37;
+  container.style.height = (container_edit)+'px';
+}
+function showAddHome(){
+ document.getElementById("show-home").style.display = "none";
+  document.getElementById("pib1").style.display = "flex";
+  document.getElementById("pib2").style.display = "flex";
+  document.getElementById("pib3").style.display = "flex";
+  document.getElementById("pib4").style.display = "flex";
+  document.getElementById("pib5").style.display = "flex";
+  document.getElementById("pib6").style.display = "flex";
+  document.getElementById("home_confirm").style.display = "block";
+  document.getElementById("hide-home").style.display = "block";
+   document.getElementById("show-edit-home").style.display = "none";
+       const element = document.querySelector('.home-form');
+  element.style.height = '400px';
+    const container = document.querySelector('.container');
+  container_edit += 300;
+  container.style.height = (container_edit)+'px';
+}
+function hideAddHome(){
+ document.getElementById("hide-home").style.display = "none";
+  document.getElementById("pib1").style.display = "none";
+  document.getElementById("pib2").style.display = "none";
+  document.getElementById("pib3").style.display = "none";
+  document.getElementById("pib4").style.display = "none";
+  document.getElementById("pib5").style.display = "none";
+  document.getElementById("pib6").style.display = "none";
+  document.getElementById("home_confirm").style.display = "none";
+  document.getElementById("show-home").style.display = "block";
+   document.getElementById("show-edit-home").style.display = "block";
+          const element = document.querySelector('.home-form');
+  element.style.height = '400px';
+    const container = document.querySelector('.container');
+  container_edit -= 300;
+  container.style.height = (container_edit)+'px';
+}
+function showEditHome(){
+ document.getElementById("show-edit-home").style.display = "none";
+ document.getElementById("hide-edit-home").style.display = "block";
+  document.getElementById("show-home").style.display = "none";
+}
+function hideEditHome(){
+ document.getElementById("show-edit-home").style.display = "block";
+ document.getElementById("hide-edit-home").style.display = "none";
+  document.getElementById("show-home").style.display = "block";
 }
 
 

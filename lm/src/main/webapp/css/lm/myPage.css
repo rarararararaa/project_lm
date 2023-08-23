@@ -248,7 +248,6 @@ hr {
 	display: flex;
 	min-height: 500px;
 }
-
 .left-div {
 	width: 200px;
 }
@@ -815,7 +814,6 @@ input {
 	height: 35px;
 	margin-right: 5px;
 }
-
 .edit-button-photo {
 	width: 200px;
 	height: 35px;
@@ -826,7 +824,6 @@ input {
 .input-button {
 	width: 150px;
 	height: 30px;
-	margin-top: 5px;
 }
 
 .hr-edit {
@@ -920,7 +917,60 @@ input {
 #email-tip {
 	margin-bottom: 10px;
 }
+.home-form{
+	display: flex;
+	width: 800px;
+	height: 500px;
+	flex-direction: column;
+}
+.page-input-box{
+	display:none;
+	flex-direction: row;
+	width: 800px;
+	height: 50px;
 
+}
+#button-form{
+	display:flex;
+	flex-direction: row;
+	width:800px;
+}
+#show-home{
+	display:block;
+}
+#hide-home{
+	display:none;
+}
+#hide-edit-home{
+	display:none;
+}
+#home_confirm{
+	display:none;
+}
+    .page-input-box .input-style-check{ /* 중복 체크 박스 설정 */
+	width: 150px;
+	height: 34px;
+	margin-left:10px;
+      font-size: 15px;
+      border: 1px solid black;
+      padding: 0px 11px 1px 15px;
+      border-radius: 4px;
+      background-color: #E19B50;
+      color:black;
+      cursor: pointer;
+    }
+    .page-input-box .input-style-check:hover{ /* 중복 체크 박스 호버 설정 */
+	width: 150px;
+	height: 34px;
+	margin-left:10px;
+      font-size: 15px;
+      border: 1px solid black;
+      padding: 0px 11px 1px 15px;
+      border-radius: 4px;
+      background-color: #E19B50;
+      color:white;
+      cursor: pointer;
+    }
 .cell-form {
 	display: flex;
 	width: 800px;

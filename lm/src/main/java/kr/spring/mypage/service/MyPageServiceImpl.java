@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.member.vo.MemberVO;
 import kr.spring.mypage.dao.MyPageMapper;
 import kr.spring.mypage.vo.MyPageVO;
 
@@ -211,5 +212,11 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public void passwdChangeApply(MyPageVO mypageVO) {
 		mypageMapper.passwdChangeApply(mypageVO);
+	}
+
+	@Override
+	public void insertHome(MyPageVO mypageVO) {
+		mypageVO.setHome_num(mypageMapper.selectHome_num()); //nextval
+		mypageMapper.insertHome(mypageVO);
 	}
 }

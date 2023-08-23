@@ -33,6 +33,7 @@ public class MyPageVO {
 	public int review_num;
 	public int rep_num;
 	public int coupon_num;
+	public int home_num;
 	public String mem_id;
 	public String mem_reg_date;
 	public String mem_modify_date;
