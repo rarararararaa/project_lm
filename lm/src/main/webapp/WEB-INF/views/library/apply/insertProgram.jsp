@@ -13,37 +13,44 @@
 <!-- include ckeditor js -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <div class="page-main">
-	<form:form modelAttribute="programVO" action="insertProgram.do" id="register_form" enctype="multipart/form-data">
+	<div class="box">
+	<div class="title">신규프로그램 등록</div>
+	<form:form modelAttribute="programVO" action="insertProgram.do" id="register_form" enctype="multipart/form-data" class="content-box">
 		<form:errors element="div" cssClass="error-color"/>
-		<ul>
-		    <li>
-				<form:label path="program_title">프로그램명</form:label>
-				<form:input path="program_title"/>
-				<form:errors path="program_title" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="program_content">프로그램 설명</form:label>
-				<form:textarea path="program_content"/>
-				<form:errors path="program_content" cssClass="error-color"/>
+		<div class="content-detail">
+			<div class="detail-title">
+				<form:label path="program_title">프로그램 제목</form:label>
+			</div>
+			<div class="specific">
+				<form:input path="program_title" />
+				<form:errors path="program_title" cssClass="error-color" />
+			</div>
+		</div>
+		<div class="content-detail">
+			<div class="detail-title">프로그램 설명</div>
+			<div class="specific">
+				<form:textarea path="program_content" />
+				<form:errors path="program_content" cssClass="error-color" />
 				<script>
-					function MyCustomUploadAdapterPlugin(editor){
-						editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-							return new UploadAdapter(loader);
-						}
+				function MyCustomUploadAdapterPlugin(editor){
+					editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+						return new UploadAdapter(loader);
 					}
-					
-					ClassicEditor.create(document.querySelector('#program_content'),{
-						           extraPlugins:[MyCustomUploadAdapterPlugin]
-					             })
-					             .then(editor => {
-					            	 window.editor = editor;
-					             })
-					             .catch(error => {
-					            	 console.error(error);
-					             });
-				</script>
-			</li>
-		
+				}
+				
+				ClassicEditor.create(document.querySelector('#program_content'),{
+					           extraPlugins:[MyCustomUploadAdapterPlugin]
+				             })
+				             .then(editor => {
+				            	 window.editor = editor;
+				             })
+				             .catch(error => {
+				            	 console.error(error);
+				             });
+			</script>
+			</div>
+		</div>
+		<ul>
 			<li>
 			시작 날짜:
 			<select name="startYear" id="yearSelect">
@@ -100,9 +107,10 @@
 				<form:errors path="program_admit" cssClass="error-color"/>
 			</li>
 		</ul>
-		<div class="align-center">
-			<form:button>등록</form:button>
-			<input type="button" value="목록" onclick ="history.go(-1);">
+		<div class="button-box">
+			<form:button class="small-button-B">등록</form:button>
+			<input class="small-button" type="button" value="목록" onclick ="location.href='programAdminList.do'">
 		</div>                        
 	</form:form>
+	</div>
 </div>

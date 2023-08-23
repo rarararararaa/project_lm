@@ -20,10 +20,10 @@
 
 		<div class="button-box">
 			<input type="button" class="small-button" value="도서목록"
-				onclick="location.href='admin_booklist.do'"> <input
+				onclick="location.href='/library/bookproductadmin/admin_booklist.do'"> <input
 				type="button" class="small-button" value="대출목록"
 				onclick="location.href='/library/rent/rentHistoryList.do'">
-			<input type="button" class="small-button" value="희망도서" onclick="#">
+			<input type="button" class="small-button" value="희망도서" onclick="location.href='/library/apply/admin_bookApplyList.do'">
 		</div>
 
 		<div class="content-box">

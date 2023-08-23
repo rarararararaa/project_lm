@@ -34,8 +34,7 @@
 				onclick="location.href='/library/bookproductadmin/admin_booklist.do'">
 			<input class="small-button" type="button" value="대출목록"
 				onclick="location.href='/library/rent/rentHistoryList.do'">
-			<input class="small-button" type="button" value="희망도서" onclick="#">
-			<input class="small-button-B" type="button" id="opener" value="대출 등록">
+			<input class="small-button" type="button" value="희망도서" onclick="location.href='/library/apply/admin_bookApplyList.do'">
 		</div>
 
 		<!-- 대출 등록 다이얼로그 시작 -->
@@ -81,6 +80,7 @@
 						<li><input class="small-button" type="button" value="목록"
 							onclick="location.href='/library/rent/rentHistoryList.do'">
 						</li>
+						<li><input class="small-button-B" type="button" id="opener" value="대출 등록"></li>
 					</ul>
 				</div>
 			</form>
