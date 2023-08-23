@@ -42,6 +42,26 @@ div.prod-detail-content{
 div.content div.prod-detail-content:not(:first-child) {
 	margin-left: 80px;
 }
+div.prod-price span.discount{
+	font-weight:700;
+	font-size:24px;
+	color:#4dac27;
+}
+div.prod-price{
+	margin-bottom:20px;
+}
+div.point{
+	border-top:1px solid #eaeaea;
+	font-size:16px;
+	font-weight:700;
+	padding-top:20px;
+	padding-bottom:20px;
+	display:flex;
+	justify-content: space-between;
+}
+div.point-value{
+	color:#4dac27;
+}
 /* 오른쪽 */
 div.content-wrap div.right-wrap div:not(:last-child){
 	padding-bottom:30px;
@@ -139,6 +159,17 @@ div.category{
 div.description{
 	font-size:16px;
 	padding-top: 30px;
+}
+/* 작가 */
+.prod-author{
+	font-weight:500;
+	font-size:16px;
+	padding:5px 0;
+}
+.prod-pub{
+	font-size:16px;
+	padding:0 0 10px;
+	color:#818181;
 }
 /* 상품 리뷰 */
 div.prod-detail-content div.review-box {
@@ -471,10 +502,20 @@ div.tabs-area{
     border-bottom: 1px solid #d5d5d5;
     box-sizing: border-box;
     height: 72px;
+    z-index:100;
 }
 div.tabs-area.drop{
 	position:fixed;
 	top:0;
+	animation:dropHeader 0.3s;
+}
+@keyframes dropHeader{
+	0%{
+	top:-5rem;
+	}
+	100%{
+	top:0;
+	}
 }
 ul.tabs{
 	color:#767676;

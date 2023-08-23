@@ -117,15 +117,32 @@ $(function(){
 	
 	fixed();
 
-  //링크 클릭시 헤당 섹션으로 부드럽게 이동시키기
-  $(document).on('click','#gnb a',function(event){
-  var headerHeight = $('header').outerHeight();
-  event.preventDefault();
-  	$("html,body").animate({
-    	scrollTop : $(this.hash).offset().top - headerHeight
-    },300)
+//링크 클릭시 헤당 섹션으로 부드럽게 이동시키기
+  $("a").on('click', function(event) {
+
+    if (this.hash !== "") {
+
+      event.preventDefault();
+
+      var hash = this.hash;
+
+      $('html, body').animate({
+
+        scrollTop: $(hash).offset().top
+
+      }, 300, function(){
+
+        window.location.hash = hash;
+
+      });
+
+    } 
+
   });
+
 });
+
+
 
 //fixed 함수
 function fixed(){

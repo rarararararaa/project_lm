@@ -20,11 +20,6 @@
 			<div class="prod-detail-content">
 				<div class="prod-author">${product.store_product_author}</div>
 				<div class="prod-pub">${product.store_product_publisher} · ${product.store_product_pubdate}</div>
-				<div >
-					<c:if test="${product.store_product_customerReviewRank!=0}">
-						${product.store_product_searchcategoryName} ${product.store_product_customerReviewRank}위
-					</c:if>
-				</div>
 				<div class="review-box">
 					<div class="star-ratings stop-dragging">
 						<div class="star-ratings-fill" style="--rating: ${product.store_product_ratingScore};">
@@ -50,17 +45,31 @@
 			</div>
 			<div class="prod-detail-content">
 				<div class="prod-price">
-					<span>
-						<c:if test="${product.store_product_discount>0 }">
-							${product.store_product_discount} %
-						</c:if>
+					<span class="discount">
+						${product.store_product_discount}% 
 					</span>
 					<span class="price">
 						<span class="val">
 							<fmt:formatNumber value="${product.store_product_pricestandard}"/>
 						</span>
-						<span class="unit"> 원</span>
+						<span class="unit">원</span>
 					</span>
+				</div>
+				<div class="point">
+					<div>
+						적립 
+					</div>
+					<div class="point-value">
+					<fmt:formatNumber value=" ${product.store_product_pricestandard*0.005}" pattern="0"/>P
+					</div>
+				</div>
+				<div class="point">
+					<div>
+						배송안내
+					</div>
+					<div style="font-weight:400;font-size:15px;">
+						도서 포함 50,000원 이상 무료배송
+					</div>
 				</div>
 				
 			</div>
@@ -68,7 +77,7 @@
 	</div>
 	<div class="tabs-area">
 		<ul class="tabs">
-			<li class="tab_item"><a href="#scrollProdInfo">상품정보</a></li>
+			<li class="tab_item"><a href="#scrollProdInfo" >상품정보</a></li>
 			<li class="tab_item"><a href="#scrollProdReview">리뷰 (${product.store_product_ratingCount})</a></li>
 			<li class="tab_item"><a href="#scrollProdClaim">교환/반품/품절</a></li>
 		</ul>
