@@ -82,7 +82,7 @@
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/admin/adminOrderDetail.jsp"/>
     </definition>
     <definition name="adminOrderTotal" extends="bsadmin">
-    	<put-attribute name="title" value="회원관리"/>
+    	<put-attribute name="title" value="매출내역"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/admin/adminOrderTotal.jsp"/>
     </definition>
     <definition name="libApplyMain" template="/WEB-INF/views/library/template/libApplyLayout.jsp">

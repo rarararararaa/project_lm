@@ -499,6 +499,10 @@ public class ServiceController {
 		
 		int total = serviceService.selectOrderTotal(map);
 		
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		list = serviceService.selectOrderTotalOrderBy(map);
+		log.debug(list.get(0).toString());
+		model.addAttribute("list", list);
 		model.addAttribute("total",total);
 		model.addAttribute("keyfield", keyfield);
 		model.addAttribute("keyword", keyword);
