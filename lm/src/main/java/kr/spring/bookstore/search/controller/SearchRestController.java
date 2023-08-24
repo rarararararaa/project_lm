@@ -42,5 +42,4 @@ public class SearchRestController {
 		mapJson.put("keywordResult", keyword);
 		return mapJson;
 	}
-	
 }
