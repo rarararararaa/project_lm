@@ -21,7 +21,7 @@
 <div class="page-main">
 	<div class="box">
 		<div class="title">" 회원번호(${boardAsk.ask_num})님의 1:1문의내역 "</div>
-		<div class="content-box">
+		<div class="content-box-U">
 			<div class="content-detail">
 				<div class="detail-title">제목</div>
 				<div class="specific">${boardAsk.ask_title}</div>
@@ -39,8 +39,8 @@
 		<div class="box">
 			<div class="title">" 관리자 답변 등록"</div>
 			<form:form modelAttribute="boardAnswerVO"
-				action="admin_boardAnswerWrite.do" id="register_form"
-				class="content-box" enctype="multipart/form-data">
+				action="boardAnswerWrite.do" id="register_form"
+				class="content-box-U" enctype="multipart/form-data">
 				<form:errors element="div" cssClass="error-color" />
 				<input type="hidden" name="ask_num" value="${boardAsk.ask_num}" />
 
@@ -69,9 +69,9 @@
 				</div>
 			</div>
 				<div class="button-box">
-					<form:button class="small-button">작성</form:button>
-					<input class="small-button" type="button" value="목록"
-						onclick="location.href='admin_boardAskList.do'">
+					<form:button class="small-button-B">작성</form:button>
+					<input class="small-button-U" type="button" value="목록"
+						onclick="location.href='user_boardAskList.do'">
 				</div>
 			</form:form>
 		</div>
