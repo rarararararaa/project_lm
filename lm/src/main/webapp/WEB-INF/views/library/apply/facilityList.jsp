@@ -3,21 +3,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/service.css">
 <div class="page-main">
-	<h2>시설 목록</h2>
+	<p>시설 예약</p>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 시설이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	
-	<c:forEach var="facility" items="${list}">
-	<ul class="facility-list">
-		<li><img src="imageView.do?facility_num=${facility.facility_num}" width="200" height="200"></li>
-		<li class="fac-name"><a href="facApplyWrite.do?facility_num=${facility.facility_num}">${facility.facility_name}</a></li>
-		<li>예약가능</li>
-	</ul>
-	</c:forEach>
-		
-	<div class="align-center">${page}</div>
+		<div class="facility-main">
+		<c:forEach var="facility" items="${list}">
+		<div class="facility-item">
+			<a href="facApplyWrite.do?facility_num=${facility.facility_num}">
+				<img src="imageView.do?facility_num=${facility.facility_num}">
+			</a>
+			<div class="faci-info">
+				<span>${facility.facility_name}</span><br>
+				<ul>
+					<li>${facility.facility_content }</li>
+					<li>예약가능</li>
+				</ul>
+			</div>
+		</div>
+		</c:forEach>
+			
+		<div class="align-center" style="clear: both;">${page}</div>
+	</div>
 	</c:if>
 	<c:if test="${mem_auth==9}">
 	<input type="button" value="글쓰기" onclick="location.href='insertFacility.do'" class="submit-btn">

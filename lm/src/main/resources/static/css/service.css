@@ -93,6 +93,54 @@ table.striped-table tr:nth-child(odd){
 	font-size:10pt;
 	color:#000;
 }
+.facility-main{
+	width: 900px;
+}
+.page-main p{
+	margin-top: 0;
+	padding: 25px 0 0 20px;
+	height: 84px;
+	font-size: 40px;
+	font-weight: bold;
+	background: #EFEFEF;
+}
+.facility-item{
+	margin-bottom: 100px;
+	text-align: center;
+	width: 300px;
+	height: 366px;
+	float: left;
+}
+.facility-item img{
+	width: 274px;
+	height: 210px;
+}
+.faci-info{
+	position: relative;
+    top: -5px;
+    left: 12px;
+	text-align:left;
+	width: 271px;
+	height: 196px;
+	border: 2px solid #D9D9D9;
+	background: #FFF;
+}
+.faci-info span{
+	position: relative;
+    top: 7px;
+	padding-left: 10px;
+	color: #000;
+	font-size: 25px;
+	font-weight: bold;
+}
+.faci-info ul{
+	list-style: circle;
+}
+.faci-info ul li{
+	padding: 10px;
+	text-align: justify;
+	font-size: 15px;
+}
 .facility-list{
 	display:flex;
 	border:solid 2px #4dac27;
@@ -201,7 +249,7 @@ input[type="checkbox"]:checked+label {
 
 .page-main{
 	width: 900px;
-    margin: 50px auto;
+    margin: 23px auto;
 }
 h3{
 	font-size:24px;

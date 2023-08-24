@@ -226,7 +226,6 @@ a:hover {
 						</c:if>
 					</li>
 				</c:if>
-				<li><a href="#">서재</a></li>
 			</ul>
 		</div>
 	</div>
@@ -273,7 +272,7 @@ a:hover {
 					<a class="gnb_link" href="${pageContext.request.contextPath}/library/bookApplyMain.do">신청참여</a>
 				</li>
 				<li>
-					<a class="gnb_link" href="#">시설이용</a>
+					<a class="gnb_link" href="${pageContext.request.contextPath}/library/facilityList.do">시설이용</a>
 				</li>
 				<li>
 					<a class="gnb_link" href="${pageContext.request.contextPath}/library/basic/informationUse1.do">도서관이용</a>
