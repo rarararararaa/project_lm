@@ -73,21 +73,24 @@
     </definition>
     
     <!-- 도서관 신청 참여 -->
-    
-    <definition name="bookLostInfo" extends="libBasicPage">
-    	<put-attribute name="libTitle" value="도서 분실 신고 안내"/>
+     <definition name="libBasicPage2" template="/WEB-INF/views/library/template/libBasicPage_layout.jsp">
+        <put-attribute name="libTitle" value="도서관 이용"/>
+        <put-attribute name="libHeader" value="/WEB-INF/views/library/template/libHeader.jsp"/>
     	<put-attribute name="libNav" value="/WEB-INF/views/library/template/libPageNav2.jsp"/>
+	    <put-attribute name="libFooter" value="/WEB-INF/views/library/template/libFooter.jsp"/> 
+    </definition>
+    
+    <definition name="bookLostInfo" extends="libBasicPage2">
+    	<put-attribute name="libTitle" value="도서 분실 신고 안내"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostInfo.jsp"/>
     </definition>
      
-    <definition name="bookLostReport" extends="libBasicPage">
+    <definition name="bookLostReport" extends="libBasicPage2">
     	<put-attribute name="libTitle" value="도서 분실 신고"/>
-    	<put-attribute name="libNav" value="/WEB-INF/views/library/template/libPageNav2.jsp"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostReport.jsp"/>
     </definition>
-    <definition name="bookLostCheck" extends="libBasicPage">
+    <definition name="bookLostCheck" extends="libBasicPage2">
     	<put-attribute name="title" value="도서 분실 결제확인"/>
-    	<put-attribute name="libNav" value="/WEB-INF/views/library/template/libPageNav2.jsp"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lostReport/bookLostCheck.jsp"/>
     </definition>
     
