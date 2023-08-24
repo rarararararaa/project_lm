@@ -20,7 +20,7 @@ public interface FacilityMapper {
 	@Select("SELECT * FROM lib_facility_admin WHERE facility_num=#{facility_num}")
 	public FacilityVO selectFacility(Integer facility_num);
 	
-	//시설 이용 신청 등록
+	//시설 이용 신청 등록.
 	public void insertFacilityApply(FacilityApplyVO fac_apply);
 	//시설별 신청 목록
 	public List<FacilityApplyVO> selectFacilityApplyList(Integer facility_num);
