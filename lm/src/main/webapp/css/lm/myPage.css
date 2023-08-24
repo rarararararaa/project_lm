@@ -758,7 +758,6 @@ select.select {
 select.select::-ms-expand {
 	display: none;
 }
-
 .right-div-form {
 	display: flex;
 	width: 950px;
@@ -813,6 +812,7 @@ input {
 	width: 100px;
 	height: 35px;
 	margin-right: 5px;
+	margin-top:5px;
 }
 .edit-button-photo {
 	width: 200px;
@@ -839,14 +839,16 @@ input {
 
 .view-data {
 	width: 100px;
-	height: 50px;
+	height: 40px;
 	font-size: 18px;
+	margin-top:10px;
 }
 
 .view-data-title {
 	width: 100px;
-	height: 50px;
+	height: 40px;
 	font-size: 18px;
+	margin-top:10px;
 }
 
 .view-data-title2 {
@@ -855,15 +857,17 @@ input {
 }
 
 .view-data-email {
-	width: 250px;
-	height: 50px;
+	height: 40px;
 	font-size: 18px;
+	margin-right:20px;
+	margin-top:10px;
 }
 
 .view-data-cell {
-	width: 170px;
-	height: 50px;
+	margin-right:20px;
+	height: 40px;
 	font-size: 18px;
+	margin-top:10px;
 }
 
 .passwd-form {
@@ -920,8 +924,49 @@ input {
 .home-form{
 	display: flex;
 	width: 800px;
-	height: 500px;
-	flex-direction: column;
+	height: 50px;
+	flex-direction: row;
+}
+.home-info-box{
+	width:200px;
+	display:none;
+	border:1px solid black;
+	border-radius:5px;
+	font-size:16px;
+	margin-right:10px;
+}
+.edit-home-info-detail{
+	text-align:center;
+	border-bottom:1px solid black;
+}
+.edit-home-info-detail-button{
+	width:130px;
+	height:22px;
+}
+#home_name2{
+	border-bottom:1px solid black;
+}
+#home_cell2{
+	border-bottom:1px solid black;
+}
+#home_title2{
+	border-bottom:1px solid black;
+}
+.home-info-detail{
+	padding-left:5px;
+	margin-top:5px;
+}
+.home-form-first{
+	display:flex;
+	flex-direction: row;
+	width:800px;
+	height:250px;
+}
+.home-form-second{
+	display:flex;
+	flex-direction: row;
+	width:800px;
+	height:350px;
 }
 .page-input-box{
 	display:none;

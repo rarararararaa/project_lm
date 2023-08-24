@@ -28,7 +28,7 @@ public interface MemberMapper {
 	@Insert("INSERT INTO lm_member_manage (mem_num,mem_id,mem_auth,mem_reg_date) VALUES (#{mem_num},#{mem_id},4,SYSDATE)")
 	public void insertMember(MemberVO member);
 	public void insertMember_detail(MemberVO member);
-	@Insert("INSERT INTO store_member_home (home_num,mem_num,home_title,home_zipcode,home_address,home_address_detail,home_cell,home_name) VALUES (#{home_num},#{mem_num},#{home_title},#{home_zipcode},#{home_address},#{home_address_detail},#{mem_cell},#{mem_name})")
+	@Insert("INSERT INTO store_member_home (home_num,mem_num,home_title,home_zipcode,home_address,home_address_detail,home_cell,home_name,home_default) VALUES (#{home_num},#{mem_num},#{home_title},#{home_zipcode},#{home_address},#{home_address_detail},#{mem_cell},#{mem_name},0)")
 	public void insertHome(MemberVO member);
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String mem_id); 

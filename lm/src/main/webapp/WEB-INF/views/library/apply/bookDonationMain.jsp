@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="page-main">
-<h2>도서 기증</h2>
+<p class="title">도서 기증</p>
 	<h3 class="sub-title">기증 절차</h3>
 	<ul class="info">
 		<li>기증자의 자료기증동의서 서명이나 구두 및 전화를 통한 lm도서관 기증절차 동의</li>

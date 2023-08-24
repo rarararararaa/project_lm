@@ -28,6 +28,8 @@ public interface MyPageService {
 	public int memberOutCheck(MyPageVO mypageVO);
 	public void memberOut(int mem_num);
 	public void insertHome(MyPageVO mypageVO);
+	public List<MyPageVO> getMyHome(int mem_num);
+	public void addDefaultHome(int home_num,int mem_num);
 	//회원정보수정 이미지 업로드
 	public void updatePhoto(MyPageVO mypageVO);
 	//이미지 유무 확인
@@ -71,5 +73,6 @@ public interface MyPageService {
 	//도서예약신청내역
 	public List<MyPageVO> getBookReservationList(Map<String,Object> map);
 	public int selectRowCountBookReservationList(Map<String,Object> map);
+
 
 }

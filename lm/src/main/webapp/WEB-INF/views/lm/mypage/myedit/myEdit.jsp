@@ -197,61 +197,98 @@
 					</div>
 					<hr class="hr-edit">
 					<div class="home-form">
-						<div id="button-form">
-							<input type="button" onclick="showAddHome();" value="주소지 추가"
-								id="show-home" class="edit-button"> <input type="button"
-								onclick="showEditHome();" value="주소지 관리" id="show-edit-home"
-								class="edit-button">
+						<div id="home-form-first">
+							<div id="button-form">
+								<input type="button" onclick="showAddHome();" value="주소지 추가"
+									id="show-home" class="edit-button"> <input
+									type="button" onclick="showEditHome();" value="주소지 관리"
+									id="show-edit-home" class="edit-button">
+							</div>
+							<div class="page-input-box" id="pib1">
+								<!-- 주소지 별명 입력 -->
+								<div class="view-data-title">주소지 별명</div>
+								<form:input path="home_title" maxlength="50"
+									class="input-button" />
+								<span id="message_title_null"></span>
+							</div>
+							<div class="page-input-box" id="pib2">
+								<!-- 주소지 전화번호 입력 가능-->
+								<div class="view-data-title">전화번호</div>
+								<form:input path="home_cell" maxlength="13" class="input-button" />
+							</div>
+							<div class="page-input-box" id="pib3">
+								<!-- 주소지 이름 입력 가능-->
+								<div class="view-data-title">수령인 이름</div>
+								<form:input path="home_name" maxlength="10" class="input-button" />
+							</div>
+							<div class="page-input-box" id="pib4">
+								<!-- 우편번호 입력 불가능-->
+								<div class="view-data-title">우편번호</div>
+								<form:input path="home_zipcode" maxlength="6"
+									class="input-button" readonly="true" />
+								<span id="message_zipcode_null"></span> <input type="button"
+									onclick="execDaumPostcode()" value="우편번호 찾기"
+									class="input-style-check">
+							</div>
+							<div class="page-input-box" id="pib5">
+								<!-- 주소 입력 불가능 -->
+								<div class="view-data-title">주소</div>
+								<span id="message_address_null"></span>
+								<form:input path="home_address" maxlength="150"
+									class="input-button" readonly="true" />
+							</div>
+							<div class="page-input-box" id="pib6">
+								<!-- 상세주소 입력 -->
+								<div class="view-data-title">상세주소</div>
+								<form:input path="home_address_detail" maxlength="150"
+									class="input-button" />
+								<span id="message_address_detail_null"></span>
+							</div>
+							<div id="button-form">
+								<form:button class="edit-button" id="home_confirm">확인</form:button>
+								<input type="button" onclick="hideAddHome();" value="취소"
+									id="hide-home" class="edit-button">
+							</div>
+
 						</div>
-						<div class="page-input-box" id="pib1">
-							<!-- 주소지 별명 입력 -->
-							<div class="view-data-title">주소지 별명</div>
-							<form:input path="home_title" maxlength="50" class="input-button" />
-							<span id="message_title_null"></span>
-						</div>
-						<div class="page-input-box" id="pib2">
-							<!-- 주소지 전화번호 입력 가능-->
-							<div class="view-data-title">전화번호</div>
-							<form:input path="home_cell" maxlength="13" class="input-button" />
-						</div>
-						<div class="page-input-box" id="pib3">
-							<!-- 주소지 이름 입력 가능-->
-							<div class="view-data-title">수령인 이름</div>
-							<form:input path="home_name" maxlength="10" class="input-button" />
-						</div>
-						<div class="page-input-box" id="pib4">
-							<!-- 우편번호 입력 불가능-->
-							<div class="view-data-title">우편번호</div>
-							<form:input path="home_zipcode" maxlength="6"
-								class="input-button" readonly="true" />
-							<span id="message_zipcode_null"></span> <input type="button"
-								onclick="execDaumPostcode()" value="우편번호 찾기"
-								class="input-style-check">
-						</div>
-						<div class="page-input-box" id="pib5">
-							<!-- 주소 입력 불가능 -->
-							<div class="view-data-title">주소</div>
-							<span id="message_address_null"></span>
-							<form:input path="home_address" maxlength="150"
-								class="input-button" readonly="true" />
-						</div>
-						<div class="page-input-box" id="pib6">
-							<!-- 상세주소 입력 -->
-							<div class="view-data-title">상세주소</div>
-							<form:input path="home_address_detail" maxlength="150"
-								class="input-button" />
-							<span id="message_address_detail_null"></span>
-						</div>
-						<div id="button-form">
-							<form:button class="edit-button" id="home_confirm">확인</form:button>
-							<input type="button" onclick="hideAddHome();" value="취소"
-								id="hide-home" class="edit-button">
-						</div>
-						<div id="button-form">
-							<input type="button" onclick="hideEditHome();" value="취소"
-								id="hide-edit-home" class="edit-button">
+						<div class="home-form-second">
+							<input type="hidden" name="count" id="count" value="${length}" />
+							<c:forEach var="list" items="${list}" varStatus="status">
+								<div class="home-info-box" id="home_info_box${status.index}">
+									<c:if test="${list.home_default==0}" >
+										<input type="button" class="edit-home-info-detail-button" value="기본배송지"/>
+									</c:if>
+									<c:if test="${list.home_default!=0}">
+										<form:button class="edit-home-info-detail-button" onclick="home_default(${list.home_num})">기본배송지 설정</form:button>
+									</c:if>
+									<div class="home-info-detail">
+										<strong>이름</strong>
+									</div>
+									<div class="home-info-detail" id="home_name2">${list.home_name}</div>
+									<div class="home-info-detail">
+										<strong>주소지 전화번호</strong>
+									</div>
+									<div class="home-info-detail" id="home_cell2">${list.home_cell}</div>
+
+									<div class="home-info-detail">
+										<strong>배송지명</strong>
+									</div>
+									<div class="home-info-detail" id="home_title2">${list.home_title}</div>
+									<div class="home-info-detail">
+										<strong>배송지 정보</strong>
+									</div>
+									<div class="home-info-detail" id="home_zipcode">${list.home_zipcode}</div>
+									<div class="home-info-detail" id="home_address">${list.home_address}</div>
+									<div class="home-info-detail" id="home_address_detail">${list.home_address_detail}</div>
+								</div>
+							</c:forEach>
+							<div id="button-form">
+								<input type="button" onclick="hideEditHome();" value="취소"
+									id="hide-edit-home" class="edit-button">
+							</div>
 						</div>
 					</div>
+
 					<hr class="hr-edit">
 					<div class="member-out">
 						<c:if test="${lo == 1}">

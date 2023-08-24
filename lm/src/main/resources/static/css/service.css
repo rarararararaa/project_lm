@@ -96,7 +96,7 @@ table.striped-table tr:nth-child(odd){
 .facility-main{
 	width: 900px;
 }
-.page-main p{
+.page-main p.title{
 	margin-top: 0;
 	padding: 25px 0 0 20px;
 	height: 84px;
@@ -275,4 +275,23 @@ ul.info li{
 	cursor: pointer;
 	background-color: #58c53f;
 	color: white;
+}
+.search li{
+	display:inline;
+	
+}
+.search{
+	text-align:right;
+}
+.search li input[type="button"], .search li input[type="submit"]{
+	background-color:#fff;
+	width:50px;
+	border:1px solid skyblue;
+	height:30px;
+}
+.search li input[type="button"]:hover, .search li input[type="submit"]:hover{
+	background-color:#fff;
+	width:50px;
+	border:2px solid skyblue;
+	height:30px;
 }

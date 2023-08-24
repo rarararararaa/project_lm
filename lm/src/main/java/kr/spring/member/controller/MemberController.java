@@ -288,6 +288,7 @@ public class MemberController {
 
 		//회원가입 manage, detail, home에 데이터 insert
 		memberService.insertMember(memberVO);
+		memberService.insertHome(memberVO);
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
 		if(lo==1) {
 			return "common/notice_bs";

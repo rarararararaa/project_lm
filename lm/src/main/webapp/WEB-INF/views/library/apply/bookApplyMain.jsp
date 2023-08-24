@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="page-main">
-	<h2>희망도서신청</h2>
+	<p class="title">희망도서신청</p>
 	<h3 class="sub-title">신청자격</h3>
 	<ul class="info">
 		<li>도서관 회원증을 발급받은 회원만 신청이 가능합니다.</li>

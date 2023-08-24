@@ -38,7 +38,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>작성</form:button>
-			<input type="button" value="목록">
+			<input type="button" value="목록" onclick="location.href='mainDesk.do'">
 		</div>	                               
 	</form:form>
 </div>

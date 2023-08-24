@@ -139,7 +139,6 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/library/bookApplyWrite.do")
 		.addPathPatterns("/library/bookApplyUserList.do")
 		.addPathPatterns("/library/bookApplyList.do")
-		.addPathPatterns("/library/donationApply.do")
 		.addPathPatterns("/library/insertFacility.do")
 		.addPathPatterns("/library/facApplyWrite.do")
 		.addPathPatterns("/library/insertProgram.do")

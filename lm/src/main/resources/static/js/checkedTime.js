@@ -51,6 +51,7 @@ $(function(){
 		}
 	});
 	function timeCheck(){
+		$('.hidecheck').attr("disabled", false);
 		let sdate = $('#yearSelect').val();
 		if($('#monthSelect').val()<10){
 			sdate += '0' + $('#monthSelect').val();
@@ -62,14 +63,14 @@ $(function(){
 		}else{
 			sdate += $('#dateSelect').val();
 		}
-		
+		let fnum = $('#facility_num').val();
 		for(let i = 9; i < 18;i++){
 			$('#'+i).removeClass("unckecked");
 		}
 		$.ajax({
 			url:'../library/timeCheck.do',
 			type:'post',
-			data:{date:sdate},
+			data:{date:sdate, facility_num:fnum},
 			dataType:'json',
 			success:function(param){
 				if(param.result == 'logout'){

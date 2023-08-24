@@ -32,6 +32,6 @@
 		<input type="text" value="0" name="start" id="start" readonly maxlength="5" size="5">시~
 		<input type="text" value="0" name="end" id="end" readonly maxlength="5" size="5">시
 		<input type="submit" value="신청">
-		<input type="button" value="목록">
+		<input type="button" value="목록" onclick="location.href='facilityList.do'">
 	</form>
 </div>

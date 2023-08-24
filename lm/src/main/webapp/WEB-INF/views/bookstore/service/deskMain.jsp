@@ -5,7 +5,6 @@
 
 <h2>1:1상담/문의</h2>
 <input type="button" value="1:1문의하기" onclick="location.href='askWrite.do'">
-<input type="button" value="실시간 채팅으로 문의하기">
 
 <c:if test="${mem_num!=null}">
 <h2>최근 문의 내역</h2>
