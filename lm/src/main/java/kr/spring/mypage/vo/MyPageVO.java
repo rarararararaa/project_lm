@@ -75,6 +75,7 @@ public class MyPageVO {
 	public String store_product_cover;
 	public String store_product_isbn13;
 	public String home_title;
+	public int home_default;
 	public String home_zipcode;
 	public String home_address;
 	public String home_address_detail;

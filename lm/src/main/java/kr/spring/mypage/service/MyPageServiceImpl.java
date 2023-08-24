@@ -219,4 +219,15 @@ public class MyPageServiceImpl implements MyPageService{
 		mypageVO.setHome_num(mypageMapper.selectHome_num()); //nextval
 		mypageMapper.insertHome(mypageVO);
 	}
+	
+	@Override
+	public List<MyPageVO> getMyHome(int mem_num) {
+		return mypageMapper.getMyHome(mem_num);
+	}
+	
+	@Override
+	public void addDefaultHome(int home_num,int mem_num) {
+		mypageMapper.deleteDefaultHome(mem_num);
+		mypageMapper.addDefaultHome(home_num);
+	}
 }

@@ -506,7 +506,13 @@ public class MyPageController {
 		}
 		//name,email,cell 가져오기
 		mypageVO = mypageService.getMyEdit(mem_num);
+		//store_member_home 가져오기
+		List<MyPageVO> list = null;
+		list = mypageService.getMyHome(mem_num);
+		log.debug(list.size()+"");
 		model.addAttribute("mypageVO", mypageVO);
+		model.addAttribute("list",list);
+		model.addAttribute("length",list.size());
 		return "myEditMain"; //타일스 설정의 식별자
 	}
 	@PostMapping("/lm/mypage/myedit/myEditMain.do")
@@ -574,8 +580,8 @@ public class MyPageController {
 	/*=======================
 	 * 이메일 인증 처리
 	 *=======================*/
-	@ResponseBody
 	@PostMapping("/emailCheck.do")
+	@ResponseBody
 	public Map<String,String> emailCheck(@Valid MyPageVO mypageVO) throws Exception{
 		log.debug("<<이메일 인증>> : " + mypageVO.getUserEmail());
 
@@ -594,9 +600,27 @@ public class MyPageController {
 		return mapJson;
 	}
 	/*=======================
+	 * 기본 배송지 변경
+	 *=======================*/
+	@PostMapping("/addDefaultHome.do")
+	@ResponseBody
+	public Map<String,String> addDefaultHome(@Valid MyPageVO mypageVO, HttpServletRequest request) throws Exception{
+		log.debug("<<기본 배송지 변경 : >>"+mypageVO.getHome_num());
+		//mem_num 가져오기
+		HttpSession session = request.getSession();
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		int home_num = mypageVO.getHome_num();
+		mypageService.addDefaultHome(home_num,mem_num);
+		Map<String,String> mapJson = new HashMap<String,String>();
+		mapJson.put("result", "기본 배송지 변경 완료");
+		return mapJson;
+	}
+	
+	/*=======================
 	 * 이메일 인증 적용(auth 변경) 처리
 	 *=======================*/
 	@PostMapping("/emailCheckApply.do")
+	@ResponseBody
 	public Map<String,String> emailCheckApply(@Valid MyPageVO mypageVO, HttpServletRequest request) throws Exception{
 		log.debug("<<이메일 인증 적용>> : " + mypageVO.getUserEmailApply());
 		if(mypageVO.getUserEmailApply().equals("true")) {
@@ -622,6 +646,7 @@ public class MyPageController {
 	 * 비밀번호 변경 처리
 	 *=======================*/
 	@PostMapping("/passwdChangeApply.do")
+	@ResponseBody
 	public Map<String,String> passwdChangeApply(@Valid MyPageVO mypageVO, HttpServletRequest request) throws Exception{
 		log.debug("<<비밀번호 찾기>> : ");
 		//mem_num 가져오기
@@ -640,7 +665,6 @@ public class MyPageController {
 		mypageVO.setMem_passwd(mem_passwd);
 		
 		mypageService.passwdChangeApply(mypageVO);
-		
 		
 		Map<String,String> mapJson = new HashMap<String,String>();
 		mapJson.put("result", "비밀번호 변경 완료");

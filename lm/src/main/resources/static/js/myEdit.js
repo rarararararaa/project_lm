@@ -298,7 +298,7 @@ function hideAddHome(){
   document.getElementById("show-home").style.display = "block";
    document.getElementById("show-edit-home").style.display = "block";
           const element = document.querySelector('.home-form');
-  element.style.height = '400px';
+  element.style.height = '50px';
     const container = document.querySelector('.container');
   container_edit -= 300;
   container.style.height = (container_edit)+'px';
@@ -306,15 +306,48 @@ function hideAddHome(){
 function showEditHome(){
  document.getElementById("show-edit-home").style.display = "none";
  document.getElementById("hide-edit-home").style.display = "block";
-  document.getElementById("show-home").style.display = "none";
+ var count = document.getElementById("count").value;
+ for(var i=0; i<count; i++){
+ 	document.getElementById("home_info_box"+i).style.display = "block";
+ }
+ document.getElementById("home-form-first").style.display = "none";
+ document.getElementById("show-home").style.display = "none";
+    const element = document.querySelector('.home-form');
+  element.style.height = '350px';
+    const container = document.querySelector('.container');
+  container_edit += 300;
+  container.style.height = (container_edit)+'px';
 }
 function hideEditHome(){
  document.getElementById("show-edit-home").style.display = "block";
  document.getElementById("hide-edit-home").style.display = "none";
+   var count = document.getElementById("count").value;
+ for(var i=0; i<count; i++){
+ 	document.getElementById("home_info_box"+i).style.display = "none";
+ }
+  document.getElementById("home-form-first").style.display = "block";
   document.getElementById("show-home").style.display = "block";
+            const element = document.querySelector('.home-form');
+  element.style.height = '50px';
+    const container = document.querySelector('.container');
+  container_edit -= 300;
+  container.style.height = (container_edit)+'px';
 }
 
-
+function home_default(home_num){
+	    $.ajax({
+	        url:'/addDefaultHome.do',
+	        type:'post',
+	        dataType:'json',
+	        data:{'home_num' : home_num},
+	        success: function(data){
+	            alert(data.result);
+	        },
+			error: function(){
+				alert('네트워크 오류발생');
+			}
+	    });
+}
 $(function(){ 
 	//이미지 처리 시작 ~~~~~~~~~~~~~~~~~
 	//처음 화면에 보여지는 이미지 읽기

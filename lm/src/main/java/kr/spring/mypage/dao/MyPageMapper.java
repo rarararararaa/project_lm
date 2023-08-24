@@ -50,10 +50,18 @@ public interface MyPageMapper {
 	public void updateAuth(MyPageVO mypageVO);
 	@Select("SELECT mem_salt FROM lm_member_detail WHERE mem_num =#{mem_num}")
 	public String getSalt(int mem_num);
+	//store_member_home Select
+	@Select("SELECT * FROM store_member_home WHERE mem_num=#{mem_num}")
+	public List<MyPageVO> getMyHome(int mem_num);
+	//기본배송지 변경
+	@Update("UPDATE store_member_home SET home_default=1 WHERE home_default=0 AND mem_num=#{mem_num}")
+	public void deleteDefaultHome(int mem_num);
+	@Update("UPDATE store_member_home SET home_default=0 WHERE home_num=#{home_num}")
+	public void addDefaultHome(int home_num);
 	//시퀀스를 이용한 unique속성 home_num 자동 생성
 	@Select("SELECT store_member_home_seq.nextval FROM dual")
 	public int selectHome_num();
-	@Insert("INSERT INTO store_member_home (home_num,mem_num,home_title,home_zipcode,home_address,home_address_detail,home_cell,home_name) VALUES (#{home_num},#{mem_num},#{home_title},#{home_zipcode},#{home_address},#{home_address_detail},#{home_cell},#{home_name})")
+	@Insert("INSERT INTO store_member_home (home_num,mem_num,home_title,home_zipcode,home_address,home_address_detail,home_cell,home_name,home_default) VALUES (#{home_num},#{mem_num},#{home_title},#{home_zipcode},#{home_address},#{home_address_detail},#{home_cell},#{home_name},1)")
 	public void insertHome(MyPageVO mypageVO);
 	//db의 mem_num과 session의 mem_num 비교
 	@Select("SELECT m.mem_num FROM lm_member_detail d INNER JOIN lm_member_manage m ON d.mem_num = m.mem_num WHERE m.mem_id = #{mem_id} AND d.mem_passwd = #{mem_passwd}")
