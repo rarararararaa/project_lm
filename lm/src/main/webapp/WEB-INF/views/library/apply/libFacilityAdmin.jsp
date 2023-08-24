@@ -21,23 +21,6 @@
 			<form action="list.do" id="search_form" method="get">
 				<div class="button-box">
 					<ul class="main-content">
-						<li>
-							<div class="align-right">
-								<select id="order" name="order">
-									<option value="1"
-										<c:if test="${param.order == 1}">selected</c:if>>최신</option>
-									<option value="2"
-										<c:if test="${param.order == 2}">selected</c:if>>조회수</option>
-								</select>
-								<script type="text/javascript">
-				$(function(){
-					$('#order').change(function(){
-						location.href='list.do?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
-					});
-				});
-			</script>
-							</div>
-						</li>
 						<li><select name="keyfield" id="keyfield">
 								<option value="1"
 									<c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
