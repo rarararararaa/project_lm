@@ -96,7 +96,7 @@ table.striped-table tr:nth-child(odd){
 .facility-main{
 	width: 900px;
 }
-.page-main p{
+.page-main p.title{
 	margin-top: 0;
 	padding: 25px 0 0 20px;
 	height: 84px;
