@@ -48,7 +48,7 @@
 			<script type="text/javascript">
 				$(function(){
 					$('#order').change(function(){
-						location.href='list.do?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
+						location.href='list.do?'+'order='+$('#order').val()+'&keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val();
 					});
 				});
 			</script>

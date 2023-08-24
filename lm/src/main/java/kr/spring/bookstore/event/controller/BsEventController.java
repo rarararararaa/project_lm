@@ -177,6 +177,7 @@ public class BsEventController {
 		bsEventService.updateEndList();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("order",order);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		//status가 1보다 큰 이벤트만 조회 | 1:미표시, 2:진행중,  3:종료
@@ -185,11 +186,10 @@ public class BsEventController {
 		//전체/검색 레코드 수
 		int count = bsEventService.selectEventCount(map);
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, CurrentPage, count, 20, 10, "list.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, CurrentPage, count, 20, 10, "list.do","&order="+order);
 				
 		List<BsEventVO> list = null;
 		if(count > 0) {
-			map.put("order",order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			
