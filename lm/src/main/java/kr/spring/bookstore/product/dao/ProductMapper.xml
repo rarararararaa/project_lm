@@ -99,18 +99,14 @@
 	<sql id="productSearch">
 			<if test="keyword != null and keyword != ''">
 				<if test="keyfield==1">
-					b.title LIKE '%' || #{keyword} || '%' AND 
+					d.STORE_PRODUCT_TITLE LIKE '%' || #{keyword} || '%'
 				</if>
 				<if test="keyfield==2">
-					m.id LIKE '%' || #{keyword} || '%' or
-					m.nick_name LIKE '%' || #{keyword} || '%' AND 
+					d.STORE_PRODUCT_DESCRIPTION LIKE '%' || #{keyword} || '%'
 				</if>
 				<if test="keyfield==3">
-					b.content LIKE '%' || #{keyword} || '%' AND 
-				</if>
-				<if test="keyfield==4">
-					b.title LIKE '%' || #{keyword} || '%' or
-					b.content LIKE '%' || #{keyword} || '%' AND 
+					d.STORE_PRODUCT_TITLE LIKE '%' || #{keyword} || '%' or 
+					d.STORE_PRODUCT_DESCRIPTION LIKE '%' || #{keyword} || '%'
 				</if>
 			</if>
 	</sql>

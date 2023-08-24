@@ -17,8 +17,10 @@
 	<h2>상품 관리</h2>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 상품이 없습니다.</div>
+	<input type="button" value="목록" onclick="location.href='adminProductList.do'">
 	</c:if>
 	<c:if test="${count > 0}">
+		<form action="adminProductList.do" id="search_form" method="get">
 		<ul class="search">
 			<li><select name="keyfield" id="keyfield">
 					<option value="1"
@@ -32,8 +34,9 @@
 				value="${param.keyword}"></li>
 			<li><input type="submit" value="찾기"> <input
 				type="button" value="목록"
-				onclick="location.href='adminProductList.do.do'"></li>
+				onclick="location.href='adminProductList.do'"></li>
 		</ul>
+		</form>
 		<table class="striped-table">
 		<tr>
 			<th>NO.</th>

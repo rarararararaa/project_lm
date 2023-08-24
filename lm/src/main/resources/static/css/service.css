@@ -276,3 +276,22 @@ ul.info li{
 	background-color: #58c53f;
 	color: white;
 }
+.search li{
+	display:inline;
+	
+}
+.search{
+	text-align:right;
+}
+.search li input[type="button"], .search li input[type="submit"]{
+	background-color:#fff;
+	width:50px;
+	border:1px solid skyblue;
+	height:30px;
+}
+.search li input[type="button"]:hover, .search li input[type="submit"]:hover{
+	background-color:#fff;
+	width:50px;
+	border:2px solid skyblue;
+	height:30px;
+}

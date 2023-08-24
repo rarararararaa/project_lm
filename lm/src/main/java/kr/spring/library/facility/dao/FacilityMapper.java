@@ -28,6 +28,6 @@ public interface FacilityMapper {
 	public List<FacilityApplyVO> selectFacilityApplyListByMem_num(Integer mem_num);
 	
 	//당일 시설 사용 시간 체크
-	@Select("select facility_apply_start, facility_apply_end FROM lib_facility_apply WHERE facility_apply_start LIKE to_date(#{date},'YYYYMMDD')")
-	public List<FacilityApplyVO> selectFacilityApplyListByDate(String date);
+	@Select("select facility_apply_start, facility_apply_end FROM lib_facility_apply WHERE facility_apply_start LIKE to_date(#{date},'YYYYMMDD') AND facility_num=#{facility_num}")
+	public List<FacilityApplyVO> selectFacilityApplyListByDate(String date,Integer facility_num);
 }

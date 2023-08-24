@@ -181,11 +181,11 @@ public class FacilityController {
 	
 	@RequestMapping("/library/timeCheck.do")
 	@ResponseBody
-	public Map<String, Object> timeCheck(String date){
+	public Map<String, Object> timeCheck(String date,Integer facility_num){
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		List<FacilityApplyVO> list;
 		log.debug("<<date>>"+date);
-		list = facilityService.selectFacilityApplyListByDate(date);
+		list = facilityService.selectFacilityApplyListByDate(date,facility_num);
 		log.debug("<<list>>"+list);
 		List<Integer> timeList = new ArrayList<Integer>();
 		for(FacilityApplyVO apply : list) {
