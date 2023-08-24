@@ -48,10 +48,6 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<div class="button-box">
-				<input class="small-button-B" type="button" value="추가 신청하기"
-					onclick="location.href='admin_bookApplyWrite.do'">
-			</div>
 			<div class="align-center"><b>${page}</b></div>
 		</c:if>
 	</div>
