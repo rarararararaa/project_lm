@@ -114,4 +114,9 @@ public class FacilityAdminController {
 
 		return mav;
 	}
+	@RequestMapping("/library/admin_facApplyWrite.do")
+	public String adminDetailFacility(int facility_num, Model model) {
+		model.addAttribute("facility_num",facility_num);
+		return "admin_deTailFacility";
+	}
 }

@@ -48,7 +48,7 @@
 				data-address="${home.home_address} ${home.home_address_detail}">
 					<p data-cell="${home.home_cell}" id="cell">${home.home_name } / ${home.home_cell}</p>
 					<c:if test="${empty home}">
-						설정된 배송지가 없습니다.
+						<span class="empty">설정된 배송지가 없습니다.</span>
 					</c:if>
 					<c:if test="${!empty home }">
 						<span id="default_deli">

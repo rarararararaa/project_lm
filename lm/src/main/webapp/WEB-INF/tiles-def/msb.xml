@@ -122,6 +122,10 @@
     	<put-attribute name="libTitle" value="신규시설등록"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/admin_insertFacility.jsp"/>
     </definition>
+    <definition name="admin_deTailFacility" extends="libAdmin">
+    	<put-attribute name="libTitle" value="신규시설등록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/facilityApplyForm.jsp"/>
+    </definition>
     
     <!-- 사용자 도서관페이지 -->
     <definition name="boardAnnounceUserList" extends="libBasicPage">
