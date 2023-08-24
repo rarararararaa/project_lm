@@ -136,9 +136,17 @@
     	<put-attribute name="libTitle" value="1:1문의 목록(사용자)"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/user_boardAskList.jsp"/>
     </definition>
+    <definition name="boardAskView" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="1:1문의 글상세(사용자)"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAskView.jsp"/>
+    </definition>
     <definition name="boardAskWrite" extends="libBasicPage">
     	<put-attribute name="libTitle" value="1:1문의 등록(사용자)"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAskWrite.jsp"/>
+    </definition>
+    <definition name="boardAnswerWrite" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="1:1문의 답변등록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAnswerWrite.jsp"/>
     </definition>
     <definition name="lostitemListUser" extends="libBasicPage">
     	<put-attribute name="libTitle" value="분실물 찾기"/>

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.library.board_announce.vo.BoardAnnounceVO;
+import kr.spring.library.facility.service.FacilityService;
+import kr.spring.library.facility.vo.FacilityVO;
 import kr.spring.library.lib_lost_item.vo.LibLostItemVO;
 import kr.spring.library.main.service.LibraryMainService;
 import kr.spring.library.main.vo.LibraryMainVO;
@@ -32,6 +34,9 @@ public class LibMainController {
 	@Autowired
 	LibraryMainService libraryMainService;
 	
+	@Autowired
+	FacilityService facilityService;
+	
 	@ModelAttribute
 	public LibraryMainVO initCommand() {
 		return new LibraryMainVO();
@@ -41,6 +46,7 @@ public class LibMainController {
 	@GetMapping("/library/template/libMain.do")
 	public ModelAndView libMain(LibraryMainVO libraryMainVO,BoardAnnounceVO boardAnnounceVO, 
 			HttpServletRequest request, HttpSession session) {
+		Map<String,Object> map = new HashMap<>();
 		
 		int end = 5;
 		
@@ -48,6 +54,10 @@ public class LibMainController {
 		List<LibraryMainVO> navs = null;
 		List<BoardAnnounceVO> ann = null;
 		List<LibLostItemVO> lost = null;
+		List<FacilityVO> faciList = null;
+		map.put("start", 2);
+		map.put("end", 3);
+		faciList = facilityService.selectFacilityList(map);
 		list = libraryMainService.selectLibraryAllPorducts();
 		navs = libraryMainService.selectLibraryCategoryNav();
 		ann = libraryMainService.selectAnnounceList(end);
@@ -59,7 +69,7 @@ public class LibMainController {
 		mav.addObject("navs",navs);
 		mav.addObject("ann",ann);
 		mav.addObject("lost",lost);
-		
+		mav.addObject("faciList",faciList);
 		return mav; //타일스 설정의 식별자
 	}
 	
@@ -93,7 +103,8 @@ public class LibMainController {
 		int totalCount = libraryMainService.selectLibraryByCategoryAndOrderNumCount(map);
 		int selectedCategoryNum = categoryNum;
 		int rnum = rnumNum;
-		PagingUtil page = new PagingUtil(currentPage, totalCount, rnum, 20, "libSearchMain.do", "&keyword="+keyword+"&orderByNum="+orderByNum+"&categoryNum="+categoryNum+"&rnumNum="+rnum);
+		PagingUtil page = new PagingUtil(currentPage, totalCount, rnum, 20, "libSearchMain.do", "&keyword="+keyword+"&orderByNum="+orderByNum+
+				"&categoryNum="+categoryNum+"&rnumNum="+rnum);
 		//list = libraryMainService.selectLibraryAllPorducts();
 		navs = libraryMainService.selectLibraryCategoryNav();
 		map.put("orderByNum",orderByNum);
@@ -162,7 +173,7 @@ public class LibMainController {
 		mapAjax.put("recommend",list);
 		return mapAjax;
 	}
-	
+	/* 개발 중...
 	@RequestMapping("/library/template/reviewbest.do")
 	@ResponseBody
 	public Map<String,Object> reviewbest(LibraryMainVO libraryMainVO){
@@ -173,7 +184,7 @@ public class LibMainController {
 		mapAjax.put("review",list);
 		return mapAjax;
 	}
-	
+	*/
 	@RequestMapping("/library/template/newbook.do")
 	@ResponseBody
 	public Map<String,Object> newbook(LibraryMainVO libraryMainVO){

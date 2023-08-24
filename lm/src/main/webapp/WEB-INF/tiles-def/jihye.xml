@@ -43,8 +43,9 @@
     
     <!-- LM도서 -->    
     <!-- 도서관 도서 상세 -->
-     <definition name="bookDetail" extends="libMain">
+     <definition name="bookDetail" extends="libBasicPage">
     	<put-attribute name="title" value="도서상세"/>
+    	<put-attribute name="libNav" value="/WEB-INF/views/library/template/libDetailNav.jsp"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/lib_book/LIB_bookDetail.jsp"/>
     </definition>
 

@@ -5,7 +5,7 @@
 <div class="page-main">
 	<div class="box">
 		<div class="title">" 회원번호(${boardAskVO.ask_num})님의 1:1문의 내역 "</div>
-		<div class="content-box">
+		<div class="content-box-U">
 			<div class="content-detail">
 				<div class="detail-title">제목</div>
 				<div class="specific">${boardAskVO.ask_title}</div>
@@ -15,7 +15,7 @@
 				<div class="specific">${boardAskVO.ask_content}</div>
 			</div>
 			<div class="content-detail">
-				<c:if test="${empty boardAskVO.ask_modify_date}">
+				<c:if test="${!empty boardAskVO.ask_modify_date}">
 					<div class="detail-title">최근 수정일</div>
 					<div class="specific">${boardAskVO.ask_modify_date}</div>
 				</c:if>
@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<div class="title">" 관리자 답변 "</div>
-		<div class="content-box">
+		<div class="content-box-U">
 			<div class="content-detail">
 				<div class="detail-title">답변</div>
 				<div class="specific">${boardAnswerVO.answer_content}</div>
@@ -37,21 +37,9 @@
 			</div>
 
 			<div class="button-box">
-				<input class="small-button" type="button" value="수정"
-					onclick="location.href='boardAskUpdate.do?ask_num=${boardAskVO.ask_num}'">
-				<input class="small-button" type="button" value="삭제" id="delete_btn">
-				<script type="text/javascript">
-					let delete_btn = document.getElementById('delete_btn');
-					delete_btn.onclick=function(){
-						let choice = confirm('삭제하시겠습니까?');
-						if(choice){
-							location.replace('boardAskDelete.do?ask_num=${boardAskVO.ask_num}');
-						}
-					};
-				</script>
-				<input class="small-button" type="button" value="목록"
+				<input class="small-button-U" type="button" value="목록"
 					onclick="location.href='user_boardAskList.do'"> 
-				<input class="small-button" type="button" value="재문의"
+				<input class="small-button-B" type="button" value="재문의"
 					onclick="location.href='boardAskWrite.do'">
 			</div>
 		</div>

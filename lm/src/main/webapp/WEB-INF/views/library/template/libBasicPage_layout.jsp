@@ -8,6 +8,7 @@
 <title><tiles:getAsString name="libTitle" /></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bookstoreStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/libBasicPage_layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/Lib_UserBasicPage_MSB.css">
 </head>
 <body>
 	<div id="Main" class="wrapper">

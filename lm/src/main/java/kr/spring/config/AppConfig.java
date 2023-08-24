@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import kr.spring.intercepter.BsLoginCheckInterceptor;
 import kr.spring.intercepter.LibAdminCheckInterceptor;
+import kr.spring.intercepter.LibLoginCheckInterceptor;
 import kr.spring.intercepter.MyPageHeaderInterceptor;
 import kr.spring.intercepter.BsAdminCheckInterceptor;
 
@@ -23,6 +24,7 @@ public class AppConfig implements WebMvcConfigurer{
 	private MyPageHeaderInterceptor myPageHeader;
 	private BsLoginCheckInterceptor bsLoginCheck;
 	private BsAdminCheckInterceptor bsAdminCheck;
+	private LibLoginCheckInterceptor libLoginCheck;
 	private LibAdminCheckInterceptor libAdminCheck;
 	
 	@Bean
@@ -69,7 +71,12 @@ public class AppConfig implements WebMvcConfigurer{
 		return bsAdminCheck;
 	}
 	@Bean
-	public LibAdminCheckInterceptor interceptor4() {
+	public LibLoginCheckInterceptor interceptor4() {
+		libLoginCheck = new LibLoginCheckInterceptor();
+		return libLoginCheck;
+	}
+	@Bean
+	public LibAdminCheckInterceptor interceptor5() {
 		libAdminCheck = new LibAdminCheckInterceptor();
 		return libAdminCheck;
 	}
@@ -127,6 +134,52 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/bookstore/event/write.do")
 		.addPathPatterns("/bookstore/event/update.do")
 		.addPathPatterns("/bookstore/event/eventAnnounceWrite.do");
+		
+		registry.addInterceptor(libLoginCheck)
+		.addPathPatterns("/library/bookApplyWrite.do")
+		.addPathPatterns("/library/bookApplyUserList.do")
+		.addPathPatterns("/library/bookApplyList.do")
+		.addPathPatterns("/library/donationApply.do")
+		.addPathPatterns("/library/insertFacility.do")
+		.addPathPatterns("/library/facApplyWrite.do")
+		.addPathPatterns("/library/insertProgram.do")
+		.addPathPatterns("/library/insertFacility.do")
+		.addPathPatterns("/library/service/user_boardAskList.do")
+		.addPathPatterns("/library/service/boardAskWrite.do")
+		.addPathPatterns("/library/service/boardAskDetail.do");
+		
+		registry.addInterceptor(libAdminCheck)
+		.addPathPatterns("/library/boardannounce/list.do")
+		.addPathPatterns("/library/boardannounce/write.do")
+		.addPathPatterns("/library/boardannounce/detail.do")
+		.addPathPatterns("/library/boardannounce/update.do")
+		.addPathPatterns("/library/boardannounce/delete.do")
+		.addPathPatterns("/library/boardannounce/update.do")
+		.addPathPatterns("/library/apply/admin_bookApplyWrite.do")
+		.addPathPatterns("/library/apply/admin_bookApplyList.do")
+		.addPathPatterns("/library/bookproductadmin/admin_booklist.do")
+		.addPathPatterns("/library/lib_book/admin_bookDetail.do")
+		.addPathPatterns("/library/donationadmin/admin_donationlist.do")
+		.addPathPatterns("/library/donationadmin/admin_donationupdate.do")
+		.addPathPatterns("/library/donationadmin/admin_donationdelete.do")
+		.addPathPatterns("/library/apply/admin_insertAdminFacility.do")
+		.addPathPatterns("/library/apply/facilityAdminList.do")
+		.addPathPatterns("/library/liblostitem/list.do")
+		.addPathPatterns("/library/liblostitem/write.do")
+		.addPathPatterns("/library/liblostitem/detail.do")
+		.addPathPatterns("/library/liblostitem/update.do")
+		.addPathPatterns("/library/liblostitem/delete.do")
+		.addPathPatterns("/library/member/admin_list.do")
+		.addPathPatterns("/library/member/admin_update.do")
+		.addPathPatterns("/library/apply/programAdminList.do")
+		.addPathPatterns("/library/apply/programAdminWrite.do")
+		.addPathPatterns("/library/apply/insertProgram.do")
+		.addPathPatterns("/library/apply/admin_programDetail.do")
+		.addPathPatterns("/library/service/admin_boardAnswerWrite.do")
+		.addPathPatterns("/library/service/admin_boardAskList.do")
+		.addPathPatterns("/library/service/admin_boardAskDetail.do")
+		.addPathPatterns("/library/service/boardAnswerWrite.do");
+		
 	}
 }
 

@@ -26,7 +26,7 @@
 .library-facility-box {
 	width: 1200px;
 	height: 500px;
-	border: solid 1px green;
+	
 }
 
 .library-recommend {
@@ -73,6 +73,40 @@
 	width: 40px;
 	height: 40px;
 	transform: rotate(180deg); /* 이미지를 180도 회전 */
+}
+
+.facility-list {
+	width:500px;
+	
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+}
+.library-facility-box {
+	margin-top: 100px;
+}
+
+.library-facility-box span {
+	margin-left:25px;
+}
+.facility-list a {
+	font-size:25px;
+	padding:10px;
+}
+
+.facility-list p {
+	margin:0;
+}
+.facility-box {
+	margin-top:50px;
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+}
+
+.facility-list {
+	font-size:15px;
 }
 </style>
 <script type="text/javascript">
@@ -303,13 +337,13 @@ $(function() {
 	
 	<div class="library-main-second-box">
 		<div class="library-board-box">
-			<span>공지사항 <a href="#">+</a></span>
+			<span>공지사항 <a href="${pageContext.request.contextPath}/library/boardannounce/Userlist.do">+</a></span>
 			<hr class="horizon-hr">
 			<div class="striped-cover-div">
 				<table class="striped-table">
 					<c:forEach var="ann" items="${ann}">
 						<tr>
-							<td class="align-center"><a href="detail.do?notice_num=${ann.notice_num}">${ann.notice_title} (${ann.notice_hit})</a></td>
+							<td class="align-center"><a href="${pageContext.request.contextPath}/library/boardannounce/detailUser.do?notice_num=${ann.notice_num}">${ann.notice_title} (${ann.notice_hit})</a></td>
 							<td class="align-center">${ann.notice_reg_date}</td>
 						</tr>
 					</c:forEach>
@@ -317,14 +351,14 @@ $(function() {
 			</div>
 		</div>
 		<div class="library-lost-box">
-			<span>분실물 목록 <a href="#">+</a></span>
+			<span>분실물 목록 <a href="${pageContext.request.contextPath}/library/liblostitem/listUser.do">+</a></span>
 			<hr class="horizon-hr">
 			<div class="striped-cover-div">
 				<table class="striped-table">
 					<c:forEach var="lost" items="${lost}">
 						<c:if test="${lost.item_status == 0 }">
 						<tr>
-							<td class="align-center"><a href="detail.do?notice_num=${lost.item_num}">${lost.item_title} (${lost.item_hit})</a></td>
+							<td class="align-center"><a href="${pageContext.request.contextPath}/library/liblostitem/detailUser.do?item_num=${lost.item_num}">${lost.item_title} (${lost.item_hit})</a></td>
 							<td class="align-center">${lost.item_reg_date}</td>
 						</tr>
 						</c:if>
@@ -337,7 +371,7 @@ $(function() {
 		<div class="align-column">
 			<div class="ajax-active" id="recommend-01">대출 TOP 5</div>
 			<div id="recommend-02">추천 도서</div>
-			<div id="recommend-03">Best 독후감</div>
+			<!-- <div id="recommend-03">Best 독후감</div> -->
 			<div id="recommend-04">신간 도서</div>
 		</div>
 		<div id="recommend-title"></div>
@@ -345,6 +379,16 @@ $(function() {
 		<div id="recommend-contents"></div>
 	</div>
 	<div class="library-facility-box">
-		<span>편의시설 들어갈 자리</span>
+		<span>편의 시설 <a href="${pageContext.request.contextPath}/library/facilityList.do">+</a></span>
+		<hr class="horizon-hr">
+		<div class="facility-box">
+		<c:forEach var="facility" items="${faciList}">
+			<div class="facility-list">
+				<img src="${pageContext.request.contextPath}/library/imageView.do?facility_num=${facility.facility_num}" width="400" height="300">
+				<a href="${pageContext.request.contextPath}/library/facApplyWrite.do?facility_num=${facility.facility_num}">${facility.facility_name}</a>
+				<p>${facility.facility_content }</p>
+			</div>
+		</c:forEach>
+		</div>
 	</div>
 </div>

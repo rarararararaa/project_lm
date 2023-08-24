@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/libBasicPage_style.css">
 <!-- include libraries (jquery,bootstrap) -->
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -21,9 +19,9 @@
 	src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <!-- 1:1문의 등록 시작 -->
 <div class="page-main">
-	<div class="box">
+	<div class="content-box">
 	<div class="title">1:1문의글 작성</div>
-	<form:form modelAttribute="boardAskVO" action="boardAskWrite.do" id="register_form" class="content-box">
+	<form:form modelAttribute="boardAskVO" action="boardAskWrite.do" id="register_form" class="content-box-U">
 		<form:errors element="div" cssClass="error-color"/>
 		<div class="content-detail">
 				<div class="detail-title">
@@ -59,8 +57,8 @@
 				</div>
 		</div>
 		<div class="button-box">
-			<form:button class="small-button">작성</form:button>
-			<input class="small-button" type="button" value="목록"
+			<form:button class="small-button-B">작성</form:button>
+			<input class="small-button-U" type="button" value="목록"
 				onclick="location.href='user_boardAskList.do'">
 		</div>	                               
 	</form:form>
