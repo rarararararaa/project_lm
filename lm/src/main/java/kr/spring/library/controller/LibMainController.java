@@ -103,7 +103,8 @@ public class LibMainController {
 		int totalCount = libraryMainService.selectLibraryByCategoryAndOrderNumCount(map);
 		int selectedCategoryNum = categoryNum;
 		int rnum = rnumNum;
-		PagingUtil page = new PagingUtil(currentPage, totalCount, rnum, 20, "libSearchMain.do", "&keyword="+keyword+"&orderByNum="+orderByNum+"&categoryNum="+categoryNum+"&rnumNum="+rnum);
+		PagingUtil page = new PagingUtil(currentPage, totalCount, rnum, 20, "libSearchMain.do", "&keyword="+keyword+"&orderByNum="+orderByNum+
+				"&categoryNum="+categoryNum+"&rnumNum="+rnum);
 		//list = libraryMainService.selectLibraryAllPorducts();
 		navs = libraryMainService.selectLibraryCategoryNav();
 		map.put("orderByNum",orderByNum);
@@ -172,7 +173,7 @@ public class LibMainController {
 		mapAjax.put("recommend",list);
 		return mapAjax;
 	}
-	
+	/* 개발 중...
 	@RequestMapping("/library/template/reviewbest.do")
 	@ResponseBody
 	public Map<String,Object> reviewbest(LibraryMainVO libraryMainVO){
@@ -183,7 +184,7 @@ public class LibMainController {
 		mapAjax.put("review",list);
 		return mapAjax;
 	}
-	
+	*/
 	@RequestMapping("/library/template/newbook.do")
 	@ResponseBody
 	public Map<String,Object> newbook(LibraryMainVO libraryMainVO){

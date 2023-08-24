@@ -83,6 +83,10 @@
 	justify-content:center;
 	align-items:center;
 }
+.library-facility-box {
+	margin-top: 100px;
+}
+
 .library-facility-box span {
 	margin-left:25px;
 }
