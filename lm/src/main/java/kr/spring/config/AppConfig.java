@@ -1,7 +1,10 @@
 package kr.spring.config;
 
+import java.util.Properties;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
@@ -70,6 +73,27 @@ public class AppConfig implements WebMvcConfigurer{
 		libAdminCheck = new LibAdminCheckInterceptor();
 		return libAdminCheck;
 	}
+	
+	//이메일 인증 설정 정보by.favau
+	@Bean
+    public JavaMailSenderImpl javaMailSenderImpl() {
+    	Properties prop = new Properties();
+    	prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+    	prop.put("mail.smtp.starttls.enable", "true");
+    	prop.put("mail.transport.protocol", "smtp");
+    	prop.put("mail.smtp.auth", "true");
+    	prop.put("mail.debug", "true");
+    	
+    	JavaMailSenderImpl javaMail = new JavaMailSenderImpl();
+    	javaMail.setHost("smtp.gmail.com");
+    	javaMail.setPort(587);
+    	javaMail.setDefaultEncoding("utf-8");
+    	javaMail.setUsername("guitiar1296@gmail.com");
+    	javaMail.setPassword("");
+    	javaMail.setJavaMailProperties(prop);
+    	return javaMail;
+    }
+	
 	//마이페이지 헤더 경로 설정
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -97,35 +121,12 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/lm/mypage/orderlist/orderListMain.do");
 		
 		registry.addInterceptor(bsLoginCheck)
-				.addPathPatterns("/bookstore/service/askWrite.do")
-				.addPathPatterns("/bookstore/payment/cart.do")
-				.addPathPatterns("/bookstore/payment/cartAction.do")
-				.addPathPatterns("/bookstore/payment/order.do")
-				.addPathPatterns("/bookstore/review/reviewWrite.do")
-				.addPathPatterns("/bookstore/review/reviewModify.do")
-				.addPathPatterns("/bookstore/review/reviewDelete.do")
-				.addPathPatterns("/library/rent/updateRentDeadline.do")
-				.addPathPatterns("/library/rent/rentReservationBook.do")
-				.addPathPatterns("/library/rent/cancelReservationBook.do");
+				.addPathPatterns("/bookstore/service/askWrite.do");
 		
 		registry.addInterceptor(bsAdminCheck)
 		.addPathPatterns("/bookstore/event/write.do")
 		.addPathPatterns("/bookstore/event/update.do")
 		.addPathPatterns("/bookstore/event/eventAnnounceWrite.do");
-		
-		//도서관 관리자 체크
-		registry.addInterceptor(libAdminCheck)
-		.addPathPatterns("/library/template/libAdmin.do")
-		.addPathPatterns("/library/member/admin_list.do")
-		.addPathPatterns("/library/bookproductadmin/admin_booklist.do")
-		.addPathPatterns("/library/donationadmin/admin_donationlist.do")
-		.addPathPatterns("/library/boardannounce/list.do")
-		.addPathPatterns("/library/liblostitem/list.do")
-		.addPathPatterns("/library/service/admin_boardAskList.do")
-		.addPathPatterns("/library/apply/programAdminList.do")
-		.addPathPatterns("/library/rent/rentHistoryList.do")
-		.addPathPatterns("/library/rent/updateRentHistory.do");
-		
 	}
 }
 

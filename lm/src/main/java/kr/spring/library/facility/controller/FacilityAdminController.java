@@ -1,5 +1,7 @@
 package kr.spring.library.facility.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.library.facility.service.FacilityService;
@@ -41,12 +44,12 @@ public class FacilityAdminController {
 		return new FacilityApplyVO();
 	}
 	
-	@GetMapping("/library/apply/insertAdminFacility.do")
+	@GetMapping("/library/apply/admin_insertAdminFacility.do")
 	public String insertForm(){
 		
-		return "insertFacility";
+		return "admin_insertFacility";
 	}
-	@PostMapping("/library/apply/insertFacility.do")
+	@PostMapping("/library/apply/admin_insertFacility.do")
 	public String insertFacility(@Valid FacilityVO facilityVO,
 								BindingResult result,
 								HttpSession session,
@@ -72,7 +75,7 @@ public class FacilityAdminController {
 		//View에 표시할 메시지
 		model.addAttribute("message", "시설 등록이 완료되었습니다.");
 		model.addAttribute("url", 
-				request.getContextPath()+"/library/facilityList.do");
+				request.getContextPath()+"/library/apply/facilityAdminList.do");
 
 		return "common/resultView";
 	}
@@ -93,7 +96,7 @@ public class FacilityAdminController {
 
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,
-				count,20,10,"facilityList.do");
+				count,20,10,"facilityAdminList.do");
 
 		List<FacilityVO> list = null;
 		if(count > 0) {

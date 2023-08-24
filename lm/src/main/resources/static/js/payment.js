@@ -135,6 +135,7 @@ $('.del-btn').click(function(){
 			success: function(param){
 				if(param.result == 'logout'){
 					alert('로그인 후 이용할 수 있습니다.');
+					location.href='/member/login.do';
 				}else if(param.result == 'success'){
 					location.reload();
 				}

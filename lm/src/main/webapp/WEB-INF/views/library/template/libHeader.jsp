@@ -1,7 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 body {
 	margin: 0;
@@ -10,7 +13,6 @@ body {
 .lib-header {
 	margin: 0 auto;
 	width: 1200px;
-	
 }
 
 a {
@@ -103,7 +105,7 @@ a:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size:18px;
+	font-size: 18px;
 }
 
 .lib-move-main div {
@@ -171,86 +173,111 @@ a:hover {
 }
 </style>
 <script type="text/javascript">
-	$(function(){
-		
+	$(function() {
+
 		function performSearch() {
 			let keyword = $('.search-text').val();
-	        let url = "${pageContext.request.contextPath}";
-	        // 검색 페이지로 이동
-	        window.location.href = url+'/library/template/libSearchMain.do?categoryNum=10&orderByNum=1&keyword='+keyword;
-	    }
+			let url = "${pageContext.request.contextPath}";
+			// 검색 페이지로 이동
+			window.location.href = url
+					+ '/library/template/libSearchMain.do?categoryNum=10&orderByNum=1&keyword='
+					+ keyword;
+		}
 
-	    $('.lib-text-img').click(function(){
-	        performSearch();
-	    });
+		$('.lib-text-img').click(function() {
+			performSearch();
+		});
 
-	    $('.search-text').keypress(function(event) {
-	        if (event.which === 13) {  // Enter 키의 keyCode는 13입니다.
-	            performSearch();
-	        }
-	    });
+		$('.search-text').keypress(function(event) {
+			if (event.which === 13) { // Enter 키의 keyCode는 13입니다.
+				performSearch();
+			}
+		});
 	});
 </script>
 <div class="lib-header">
 	<div class="lib-header-topbox">
 		<div class="lib-header-topmenu">
-		<input type="hidden" id="id_check_tag" value="${mem_id}">
+			<input type="hidden" id="id_check_tag" value="${mem_id}">
 			<ul>
-			<c:if test="${mem_id != null }">
 				<li>
-					임시 / mem_num = <strong>${mem_num}</strong>, mem_id = <strong>${mem_id}</strong>, mem_auth = <strong>${mem_auth}</strong> 
+					<c:if test="${mem_id == null }">
+						<li class="customer_service_item">
+							<a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do?lo=2">로그인</a>
+						</li>
+						<li>
+							<a href="${pageContext.request.contextPath}/lm/register/template/registerMain.do?lo=2">회원가입</a>
+						</li>
+					</c:if>
 				</li>
-				<li>
-					<a href="${pageContext.request.contextPath}/lm/mypage/main/myPageMain.do?lo=2">마이페이지</a>
-				</li>
-				<li>
-					<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do?lo=2">로그아웃</a>
-				</li>
+				<c:if test="${mem_id != null }">
+					<li>
+						" [ <strong>${mem_id}</strong> ]님 환영합니다. "
+					</li>
+					<li>
+						<a href="${pageContext.request.contextPath}/lm/logout/template/logoutMain.do?lo=2">로그아웃</a>
+					</li>
+					<li>
+						<c:if test="${mem_auth < 9}">
+							<a href="${pageContext.request.contextPath}/lm/mypage/main/myPageMain.do?lo=2">마이페이지</a>
+						</c:if> 
+						<c:if test="${mem_auth == 9}">
+							<a href="${pageContext.request.contextPath}/library/template/libAdmin.do">관리자페이지</a>
+						</c:if>
+					</li>
 				</c:if>
-				<li>
-				<c:if test="${mem_id == null }">
-					<a href="${pageContext.request.contextPath}/lm/register/template/registerMain.do?lo=2">회원가입</a>
-					<li class="customer_service_item"><a href="${pageContext.request.contextPath}/lm/login/template/loginMain.do?lo=2">로그인</a></li>
-				</c:if>
-				</li>
-				<li>
-				<c:if test="${mem_id == null }">
-					<a href="${pageContext.request.contextPath}/library/template/libMain.do">홈으로</a>
-				</c:if>
-				</li>
-				<li>
-				<c:if test="${mem_auth == 9}">
-					<a href="${pageContext.request.contextPath}/library/template/libAdmin.do">관리자페이지</a>
-				</c:if>
-				</li>
 				<li><a href="#">서재</a></li>
 			</ul>
 		</div>
 	</div>
 	<div class="lib-header-midbox">
-		<div class="lib-main-logo"><a href="${pageContext.request.contextPath}/library/template/libMain.do"><img src="../../images/lm_lib_logo.png"></a></div>
+		<div class="lib-main-logo">
+			<a
+				href="${pageContext.request.contextPath}/library/template/libMain.do"><img
+				src="../../images/lm_lib_logo.png"></a>
+		</div>
 		<div class="lib-search">
 			<div class="lib-search-title">통합검색</div>
-			<div class="lib-text-box"><input type="text" class="search-text"></div>
-			<div class="lib-text-img"><a href="#"><img src="../../images/search.png"></a></div>
+			<div class="lib-text-box">
+				<input type="text" class="search-text">
+			</div>
+			<div class="lib-text-img">
+				<a href="#"><img src="../../images/search.png"></a>
+			</div>
 		</div>
 		<div class="lib-move-main">
-			<div><a href="${pageContext.request.contextPath}/bookstore/template/bsMain.do">LM 문고</a></div>
-			<div><a href="${pageContext.request.contextPath}/library/template/libMain.do">LM 도서관</a></div>
+			<div>
+				<a href="${pageContext.request.contextPath}/bookstore/template/bsMain.do">LM문고</a>
+			</div>
+			<div>
+				<a href="${pageContext.request.contextPath}/library/template/libMain.do">LM도서관</a>
+			</div>
 		</div>
 		<div class="lib-main-icons">
-			<div class="lib-cart"><a href="#"><img src="../../images/cart_alt.png"></a></div>
-			<div class="lib-person"><a href="#"><img src="../../images/person_outline.png"></a></div>
+			<div class="lib-cart">
+				<a href="#"><img src="../../images/cart_alt.png"></a>
+			</div>
+			<div class="lib-person">
+				<a href="#"><img src="../../images/person_outline.png"></a>
+			</div>
 		</div>
 	</div>
 	<div class="library-header-botbox">
 		<div class="lib-header-menu">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/library/template/libSearchMain.do?
-		categoryNum=10&orderByNum=1&keyword=">자료검색</a></li>
-				<li><a href="${pageContext.request.contextPath}/library/bookApplyMain.do">신청 참여</a></li>
-				<li><a href="#">시설이용</a></li>
-				<li><a href="${pageContext.request.contextPath}/library/basic/informationUse1.do">도서관이용</a></li>
+				<li>
+					<a class="gnb_link" href="${pageContext.request.contextPath}/library/template/libSearchMain.do?
+						categoryNum=10&orderByNum=1&keyword="><em>자료검색</em></a>
+				</li>
+				<li>
+					<a class="gnb_link" href="${pageContext.request.contextPath}/library/bookApplyMain.do">신청참여</a>
+				</li>
+				<li>
+					<a class="gnb_link" href="#">시설이용</a>
+				</li>
+				<li>
+					<a class="gnb_link" href="${pageContext.request.contextPath}/library/basic/informationUse1.do">도서관이용</a>
+				</li>
 			</ul>
 		</div>
 	</div>

@@ -50,9 +50,9 @@
 							value="${param.keyword}"></li>
 						<li><input class="small-button" type="submit" value="조회">
 							<input class="small-button" type="button" value="목록"
-							onclick="location.href='list.do'"> <input
+							onclick="location.href='facilityAdminList.do'"> <input
 							class="small-button-B" type="button" value="신규시설등록"
-							onclick="location.href='insertAdminFacility.do'"></li>
+							onclick="location.href='admin_insertAdminFacility.do'"></li>
 					</ul>
 				</div>
 			</form>
@@ -71,7 +71,7 @@
 						<tr class="align-center">
 							<td class="row-title">${lib_facility.facility_num}</td>
 							<td class="row-title"><a
-								href="${pageContext.request.contextPath }/library/facApplyWrite.do?facility_num=${lib_facility.facility_num}">${lib_facility.facility_name}</a>
+								href="${pageContext.request.contextPath }/library/admin_facApplyWrite.do?facility_num=${lib_facility.facility_num}">${lib_facility.facility_name}</a>
 							</td>
 							<td class="row-title">예약가능</td>
 							<td class="row-title"><input class="small-button-R"

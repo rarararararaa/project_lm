@@ -63,7 +63,7 @@
 							value="${param.keyword}"></li>
 						<li><input class="small-button" type="submit" value="조회">
 							<input class="small-button" type="button" value="목록"
-							onclick="location.href='list.do'"> <input
+							onclick="location.href='programAdminList.do'"> <input
 							class="small-button-B" type="button" value="신규프로그램등록"
 							onclick="location.href='programAdminWrite.do'"></li>
 					</ul>
@@ -85,7 +85,7 @@
 						<tr class="align-center">
 							<td class="row-title">${lib_program.program_num}</td>
 							<td class="row-title"><a
-								href="${pageContext.request.contextPath }/library/programDetail.do?program_num=${lib_program.program_num}">${lib_program.program_title}</a>
+								href="${pageContext.request.contextPath }/library/apply/admin_programDetail.do?program_num=${lib_program.program_num}">${lib_program.program_title}</a>
 							</td>
 							<td class="row-title">${lib_program.program_reg_date}</td>
 							<td class="row-title"><c:if test="${lib_program.status==0}">진행예정</c:if>

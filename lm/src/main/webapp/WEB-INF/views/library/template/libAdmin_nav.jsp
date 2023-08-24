@@ -9,15 +9,15 @@
 	<ul class="sb-menu">
 		<li class="sb-menu-item">
 			<a href="${pageContext.request.contextPath}/library/member/admin_list.do" 
-				class="sub-items">회원관리</a>
+				class="sub-items">회원 관리</a>
 		</li>
 		<li class="sb-menu-item">
 			<a href="${pageContext.request.contextPath}/library/bookproductadmin/admin_booklist.do" 
-				class="sub-items">도서관리</a>
+				class="sub-items">도서 관리</a>
 		</li>
 		<li class="sb-menu-item">
 			<a href="${pageContext.request.contextPath}/library/donationadmin/admin_donationlist.do" 
-				class="sub-items">기증승인</a>
+				class="sub-items">기증 승인</a>
 		</li>
 		<li class="sb-menu-item">
 			<a href="${pageContext.request.contextPath}/library/boardannounce/list.do" 
@@ -33,15 +33,15 @@
 		</li>
 		<li class="sb-menu-item">
 			<a href="${pageContext.request.contextPath}/library/basic/lib_ScheduleAdminList.do" 
-				class="sub-items">일정 등록</a>
+				class="sub-items">일정 관리</a>
 		</li>
 		<li class="sb-menu-item">
 			<a href="${pageContext.request.contextPath}/library/apply/programAdminList.do" 
-				class="sub-items">프로그램 등록</a>
+				class="sub-items">프로그램 관리</a>
 		</li>
 		<li class="sb-menu-item">
 			<a href="${pageContext.request.contextPath}/library/apply/facilityAdminList.do" 
-				class="sub-items">시설 등록</a>
+				class="sub-items">시설 관리</a>
 		</li>
 	</ul>
 </div>

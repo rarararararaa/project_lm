@@ -14,7 +14,6 @@
 	<div class="page-outer">
 		<div class="page-inner">
 			<h2 id="h2_1">회원가입</h2>
-			예외처리 나중에 더 해야됨
 			<form:form modelAttribute="memberVO" action="registerMain.do" id="register-form" class="register-form">
 						<!-- 파라미터 세팅 -->
 			<% pageContext.setAttribute("lo",request.getParameter("lo")); %>
@@ -90,7 +89,7 @@
 			   	   <div class="page-button2">
 			   	    	<form:button class="button3">확인</form:button>
 			   	    	<c:if test="${lo == 1}">
-	      	        	<input type="button" value="홈으로" class="btn-5" onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
+	      	        	<input type="button" value="홈으로" class="button4" onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
 	      	        	</c:if>
 	      	        	<c:if test="${lo != 1}">
 	      	        	<input type="button" value="홈으로" class="button4" onclick="location.href='${pageContext.request.contextPath}/library/template/libMain.do'">

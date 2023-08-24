@@ -27,6 +27,7 @@ public interface MyPageService {
 	public void updateAuth(MyPageVO mypageVO);
 	public int memberOutCheck(MyPageVO mypageVO);
 	public void memberOut(int mem_num);
+	public void insertHome(MyPageVO mypageVO);
 	//회원정보수정 이미지 업로드
 	public void updatePhoto(MyPageVO mypageVO);
 	//이미지 유무 확인
@@ -34,6 +35,8 @@ public interface MyPageService {
 	public MyPageVO getFacility(int facility_num);
 	//회원정보 수정일 수정
 	public void updateModifyDate(MyPageVO mypageVO);
+	//비밀번호 변경
+	public void passwdChangeApply(MyPageVO mypageVO);
 	//배송지,결제 정보
 	public MyPageVO getHomeOrderList(int order_num,int mem_num);
 

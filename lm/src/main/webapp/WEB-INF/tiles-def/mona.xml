@@ -67,40 +67,10 @@
     	<put-attribute name="libTitle" value="자료실안내"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_InformationUse3.jsp"/>
     </definition>
-    <definition name="lostitemListUser" extends="libBasicPage">
-    	<put-attribute name="libTitle" value="분실물 찾기"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemList.jsp"/>
-    </definition>
     <definition name="libCalendar" extends="libBasicPage">
     	<put-attribute name="libTitle" value="도서관 일정"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/basic/lib_Calendar.jsp"/>
     </definition>
-    <definition name="boardAnnounceUserList" extends="libBasicPage">
-    	<put-attribute name="libTitle" value="공지사항 목록(사용자)"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceUserList.jsp"/>
-    </definition>
-    <definition name="boardAnnounceUserView" extends="libBasicPage">
-    	<put-attribute name="libTitle" value="공지사항 상세(사용자)"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceUserView.jsp"/>
-    </definition>
-    <definition name="user_boardAskList" extends="libBasicPage">
-    	<put-attribute name="libTitle" value="1:1문의 목록(사용자)"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/user_boardAskList.jsp"/>
-    </definition>
-    <definition name="boardAskWrite" extends="libBasicPage">
-    	<put-attribute name="libTitle" value="1:1문의 등록(사용자)"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAskWrite.jsp"/>
-    </definition>
-    <definition name="libLostItemUserList" extends="libBasicPage">
-    	<put-attribute name="libTitle" value="분실물 등록(사용자)"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemUserList.jsp"/>
-    </definition>
-    <definition name="libLostItemUserView" extends="libBasicPage">
-    	<put-attribute name="libTitle" value="분실물 상세(사용자)"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemUserView.jsp"/>
-    </definition>
-    
-    
     
     <!-- 도서관 신청 참여 -->
     

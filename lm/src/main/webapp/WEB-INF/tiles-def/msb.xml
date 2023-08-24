@@ -6,23 +6,6 @@
 
 <tiles-definitions>
 	<!-- 관리자 페이지 -->
-	    
-    <!-- 관리자 페이지-프로그램 -->
-    <definition name="admin_programList" extends="libAdmin">
-    	<put-attribute name="libTitle" value="프로그램등록리스트"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/libProgramAdmin.jsp"/>
-    </definition>
-    <definition name="admin_programWrite" extends="libAdmin">
-    	<put-attribute name="libTitle" value="프로그램등록리스트"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/insertProgram.jsp"/>
-    </definition>
-    
-    <!-- 관리자 페이지-시설관리 -->
-    <definition name="admin_facilityList" extends="libAdmin">
-    	<put-attribute name="libTitle" value="프로그램등록리스트"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/libFacilityAdmin.jsp"/>
-    </definition>
-    
 	<!-- 회원목록 -->
     <definition name="admin_memberList" extends="libAdmin">
     	<put-attribute name="libTitle" value="회원목록"/>
@@ -48,6 +31,22 @@
     <definition name="rentList" extends="libAdmin"> 
     	<put-attribute name="libTitle" value="대출목록"/>
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/rent/rentList.jsp"/>
+    </definition>
+    
+    <!-- 희망도서 -->
+    <definition name="admin_bookApplyList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="희망도서목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/admin_bookApplyList.jsp"/>
+    </definition>
+    
+    <!-- 기증승인 -->
+    <definition name="admin_donationList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="기증목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/donationadmin/admin_donationList.jsp"/>
+    </definition>
+    <definition name="admin_donationModify" extends="libAdmin">
+    	<put-attribute name="libTitle" value="기증상태 수정"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/donationadmin/admin_donationModify.jsp"/>
     </definition>
 
 	<!-- 공지사항 -->
@@ -100,18 +99,60 @@
 	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/admin_boardAskView.jsp"/>
     </definition>
     
-    
-    <!-- 기증목록 -->
-    <definition name="admin_donationList" extends="libAdmin">
-    	<put-attribute name="libTitle" value="기증목록"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/donationadmin/admin_donationList.jsp"/>
+    <!-- 프로그램등록 -->
+    <definition name="admin_programList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="프로그램리스트"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/libProgramAdmin.jsp"/>
     </definition>
-    <definition name="admin_donationModify" extends="libAdmin">
-    	<put-attribute name="libTitle" value="기증상태 수정"/>
-	    <put-attribute name="libBody" value="/WEB-INF/views/library/donationadmin/admin_donationModify.jsp"/>
+    <definition name="admin_programWrite" extends="libAdmin">
+    	<put-attribute name="libTitle" value="신규프로그램 등록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/insertProgram.jsp"/>
+    </definition>
+    <definition name="admin_programDetail" extends="libAdmin">
+    	<put-attribute name="libTitle" value="프로그램 상세"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/admin_programDetail.jsp"/>
     </definition>
     
+    <!-- 시설관리 -->
+    <definition name="admin_facilityList" extends="libAdmin">
+    	<put-attribute name="libTitle" value="시설목록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/libFacilityAdmin.jsp"/>
+    </definition>
+    <definition name="admin_insertFacility" extends="libAdmin">
+    	<put-attribute name="libTitle" value="신규시설등록"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/apply/admin_insertFacility.jsp"/>
+    </definition>
     
+    <!-- 사용자 도서관페이지 -->
+    <definition name="boardAnnounceUserList" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="공지사항 목록(사용자)"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceUserList.jsp"/>
+    </definition>
+    <definition name="boardAnnounceUserView" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="공지사항 상세(사용자)"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/boardannounce/boardAnnounceUserView.jsp"/>
+    </definition>
+    <definition name="user_boardAskList" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="1:1문의 목록(사용자)"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/user_boardAskList.jsp"/>
+    </definition>
+    <definition name="boardAskWrite" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="1:1문의 등록(사용자)"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/service/boardAskWrite.jsp"/>
+    </definition>
+    <definition name="lostitemListUser" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="분실물 찾기"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemList.jsp"/>
+    </definition>
+    <definition name="libLostItemUserList" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="분실물 등록(사용자)"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemUserList.jsp"/>
+    </definition>
+    <definition name="libLostItemUserView" extends="libBasicPage">
+    	<put-attribute name="libTitle" value="분실물 상세(사용자)"/>
+	    <put-attribute name="libBody" value="/WEB-INF/views/library/liblostitem/libLostItemUserView.jsp"/>
+    </definition>
+
 </tiles-definitions>
 
 

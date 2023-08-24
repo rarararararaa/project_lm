@@ -8,8 +8,18 @@ $(function(){
 	})
 	//포인트 전액 사용 버튼
 	$('#allPoint').click(function(){
-		let total = $('#total').attr('data-total');
+		let total = parseInt($('#total').attr('data-total'));
 		let maxpoint = $('#mem_point').attr('data-maxPoint');
+		let due = parseInt($('#paySubmit').attr('data-dueTotal'));
+		if(parseInt(maxpoint) >= due){
+			alert(due);
+			$('#due').text(0+'원');
+			$('#paySubmit').attr('data-dueTotal',0);
+			$('#mem_point').val(due);
+			$('#side_point').val(due);
+			$('#side_point').text(due.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
+			return;
+		}
 		$('#mem_point').val(maxpoint);
 		$('#side_point').val(maxpoint);
 		$('#side_point').text(maxpoint.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
@@ -19,6 +29,15 @@ $(function(){
 	$('#mem_point').on('keydown keyup',function(key){
 		let total = $('#total').attr('data-total');
 		let point = parseInt($(this).val());
+		let due = parseInt($('#paySubmit').attr('data-dueTotal'));
+		if(point >= due){
+			$('#due').text(0+'원');
+			$('#paySubmit').attr('data-dueTotal',0);
+			$('#mem_point').val(due);
+			$('#side_point').val(due);
+			$('#side_point').text(due.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
+			return;
+		}
 		overPoint(point); 
 		if(!((key.keyCode > 95 && key.keyCode < 106) || (key.keyCode > 47 && key.keyCode < 58)  || key.keyCode == 8)){
 			return false;
@@ -64,7 +83,11 @@ $(function(){
 				data:{home_num:home_num},
 				dataType:'json',
 				success:function(param){
-					if(param.result == 'success'){
+					if(param.result == 'logout'){
+						alert('로그인 후 이용하세요');
+						location.href='/member/login.do';
+					}
+					else if(param.result == 'success'){
 						alert('등록되었습니다.');
 						$('#deli_table').empty();
 						deliList(param.home_list);
@@ -94,6 +117,7 @@ $(function(){
 			success:function(param){
 				if(param.result == 'logout'){
 					alert('로그인 후 이용할 수 있습니다.');
+					location.href='/member/login.do';
 				}else if(param.result == 'success'){
 					let Info = param.homeInfo;
 					let modify_div = $('.deli-modal-con');
@@ -399,11 +423,17 @@ function ajaxPaycomplete(rsp){
 //가지고 있는 포인트 보다 많이 입력할 시 현재 가지고 있는 최대 포인트로 입력&사이드바 포인트 바꾸기
 function overPoint(point){
 	let maxpoint = $('#mem_point').attr('data-maxPoint');
+	let total = $('#due').attr('data-total');
 	if(point >= maxpoint){
 		$('#mem_point').val(maxpoint);
 		$('#side_point').text(maxpoint.toLocaleString('en')+'원');
 		console.log(point + ', '+maxpoint);
 		return;
+	}
+	if(point >= total){
+		alert('왜안됄민어리');
+		$('#due').text(0+'원');
+		$('#paySubmit').attr('data-dueTotal',0);
 	}
 	$('#side_point').text(point.toLocaleString('en')+'원');
 }

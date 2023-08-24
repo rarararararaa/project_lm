@@ -46,9 +46,11 @@ public interface MemberMapper {
 	@Update("UPDATE spmember SET nick_name=#{nick_name} WHERE mem_num=#{mem_num}")
 	public void updateMember(MemberVO member);
 	public void updateMember_detail(MemberVO member);
-	//비밀번호 수정
-	@Update("UPDATE spmember_detail SET passwd=#{passwd} WHERE mem_num=#{mem_num}")
-	public void updatePassword(MemberVO member);
+	//비밀번호 변경
+	@Select("SELECT m.mem_num FROM lm_member_detail d INNER JOIN lm_member_manage m ON d.mem_num = m.mem_num WHERE m.mem_id=#{mem_id} AND d.mem_name=#{mem_name} AND d.mem_email=#{mem_email}")
+	public MemberVO changePasswdCheck(MemberVO memberVO);
+	@Update("UPDATE lm_member_detail SET mem_passwd = #{mem_passwd_sha} WHERE mem_num = #{mem_num}")
+	public void changePasswd(MemberVO memberVO);
 	//회원탈퇴
 	@Update("UPDATE spmember SET auth=0 WHERE mem_num=#{mem_num}")
 	public void deleteMember(Integer mem_num);

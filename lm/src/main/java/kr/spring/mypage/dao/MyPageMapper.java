@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.member.vo.MemberVO;
 import kr.spring.mypage.vo.MyPageVO;
 
 @Mapper
@@ -45,10 +46,15 @@ public interface MyPageMapper {
 	public void updateEmail(MyPageVO mypageVO);
 	@Update("UPDATE lm_member_detail SET mem_cell = #{mem_new_cell} WHERE mem_num = #{mem_num}")
 	public void updateCell(MyPageVO mypageVO);
-	@Update("UPDATE lm_member_manage SET mem_auth = 4 WHERE mem_num = #{mem_num}")
+	@Update("UPDATE lm_member_manage SET mem_auth = #{mem_auth} WHERE mem_num = #{mem_num}")
 	public void updateAuth(MyPageVO mypageVO);
 	@Select("SELECT mem_salt FROM lm_member_detail WHERE mem_num =#{mem_num}")
 	public String getSalt(int mem_num);
+	//시퀀스를 이용한 unique속성 home_num 자동 생성
+	@Select("SELECT store_member_home_seq.nextval FROM dual")
+	public int selectHome_num();
+	@Insert("INSERT INTO store_member_home (home_num,mem_num,home_title,home_zipcode,home_address,home_address_detail,home_cell,home_name) VALUES (#{home_num},#{mem_num},#{home_title},#{home_zipcode},#{home_address},#{home_address_detail},#{home_cell},#{home_name})")
+	public void insertHome(MyPageVO mypageVO);
 	//db의 mem_num과 session의 mem_num 비교
 	@Select("SELECT m.mem_num FROM lm_member_detail d INNER JOIN lm_member_manage m ON d.mem_num = m.mem_num WHERE m.mem_id = #{mem_id} AND d.mem_passwd = #{mem_passwd}")
 	public int memberOutCheck(MyPageVO mypageVO);
@@ -71,6 +77,9 @@ public interface MyPageMapper {
 	//회원정보 수정일 수정
 	@Update("UPDATE lm_member_detail SET mem_modify_date = SYSDATE WHERE mem_num = #{mem_num}")
 	public void updateModifyDate(MyPageVO mypageVO);
+	//비밀번호 변경
+	@Update("UPDATE lm_member_detail SET mem_passwd = #{mem_passwd} WHERE mem_num = #{mem_num}")
+	public void passwdChangeApply(MyPageVO mypageVO);
 	//배송지, 결제 정보
 	//주문상태 수정
 	@Update("UPDATE store_order_manage SET order_status = 3 WHERE mem_num = #{mem_num} AND order_num = #{order_num}")

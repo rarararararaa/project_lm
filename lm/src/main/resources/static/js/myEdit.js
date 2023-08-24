@@ -103,78 +103,215 @@ $(document).ready(function() {
 	}); 
 });
 
+//이메일 인증
+var Confirm = document.getElementById("Confirm");
+var save = '';
+function emailCheck(){
+		if($('#mem_email').val().trim()==''){
+			alert('이메일을 입력하세요');
+			$('#mem_email').val('').focus();
+			return false;
+		}
+		if(!/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test($('#mem_email').val())){
+			alert('이메일은 영문자와 숫자 및 특정 특수문자 입력 가능합니다.');
+			$('#mem_email').val('').focus();
+			return false;
+		}
+		var hidden_email = document.getElementById("hidden_email").value;
+		var mem_email = $('#mem_email').val();
+		if(hidden_email!==mem_email){
+			alert('현재 이메일 불일치');
+			return false;
+		}
+	    $.ajax({
+	        url:'/emailCheck.do',
+	        type:'post',
+	        dataType:'json',
+	        data:{'userEmail' : $('#mem_email').val()},
+	        success: function(data){
+	            save = data.result;
+	            alert('인증번호 전송 완료.');
+	        },
+			error: function(){
+				alert('네트워크 오류발생');
+			}
+	    });
+}
+function emailConfirm(){
+	//.value 없으면 오브젝트로 받아옴 [object HTMLInputElement]
+	var save2 = document.getElementById("mem_confirm_email").value;
+	if(save!==save2){
+		$('#mem_confirm_email').val('').focus();
+		alert('인증번호가 일치하지 않습니다.');
+	}else{
+	    $.ajax({
+	        url:'/emailCheckApply.do',
+	        type:'post',
+	        dataType:'json',
+	        data:{'userEmailApply' : 'true'},
+	        success: function(data){
+	            alert(data.resut);
+	        },
+			error: function(){
+				alert(data.resut);
+			}
+    	});
+	}
+}
 
 //동적 버튼 설정
+//1
+var container_edit = 700;
 function ShowUploadPhoto() {
   document.getElementById("input-area-photo").style.display = "block";
   document.getElementById("upload-photo").style.display = "none";
   const element = document.querySelector('.photo-form');
   element.style.height = '500px';
+  const container = document.querySelector('.container');
+  container_edit += 80;
+  container.style.height = (container_edit)+'px';
 }
 
 function HideUploadPhoto() {
   document.getElementById("input-area-photo").style.display = "none";
   document.getElementById("upload-photo").style.display = "block";
-  
+   const element = document.querySelector('.photo-form');
+  element.style.height = '500px';
+    const container = document.querySelector('.container');
+  container_edit -= 80;
+  container.style.height = (container_edit)+'px';
 }
-
+//2
 function ShowChangePasswd() {
   document.getElementById("input-area-passwd").style.display = "flex";
   document.getElementById("change-passwd").style.display = "none";
   const element = document.querySelector('.passwd-form');
   element.style.height = '250px';
+    const container = document.querySelector('.container');
+  container_edit += 200;
+  container.style.height = (container_edit)+'px';
 }
 
 function hideChangePasswd() {
   document.getElementById("input-area-passwd").style.display = "none";
   document.getElementById("change-passwd").style.display = "block";
   const element = document.querySelector('.passwd-form');
-  element.style.height = '100px';
   $('#pw1').val('').focus();
   $('#pw2').val('').focus();
   $('#pw3').val('').focus();
+  element.style.height = '50px';
+    const container = document.querySelector('.container');
+  container_edit -= 200;
+  container.style.height = (container_edit)+'px';
 }
-
+//3
 function showConfirmEmail() {
   document.getElementById("input-area-email").style.display = "block";
   document.getElementById("confirm-email").style.display = "none";
   document.getElementById("change-email").style.display = "none";
   const element = document.querySelector('.email-form');
   element.style.height = '300px';
+    const container = document.querySelector('.container');
+  container_edit += 86;
+  container.style.height = (container_edit)+'px';
 }
 
 function hideConfirmEmail() {
   document.getElementById("input-area-email").style.display = "none";
   document.getElementById("confirm-email").style.display = "block";
   document.getElementById("change-email").style.display = "block";
-  const element = document.querySelector('.input-area-email');
-  element.style.height = '100px';
+  const element = document.querySelector('.email-form');
+element.style.height = '300px';
+  const container = document.querySelector('.container');
+  container_edit -= 86;
+  container.style.height = (container_edit)+'px';
 }
-
+//4
 function showChangeEmail() {
   document.getElementById("input-area-email2").style.display = "block";
   document.getElementById("change-email").style.display = "none";
   document.getElementById("confirm-email").style.display = "none";
+  document.getElementById("input-area-email").style.display = "none";
+    const element = document.querySelector('.email-form');
+element.style.height = '300px';
+  const container = document.querySelector('.container');
+  container_edit += 37;
+  container.style.height = (container_edit)+'px';
 }
 
 function hideChangeEmail() {
   document.getElementById("input-area-email2").style.display = "none";
   document.getElementById("change-email").style.display = "block";
   document.getElementById("confirm-email").style.display = "block";
+    const element = document.querySelector('.email-form');
+element.style.height = '300px';
+    const container = document.querySelector('.container');
+  container_edit -= 37;
+  container.style.height = (container_edit)+'px';
 }
-
+//5
 function showChangecell() {
   document.getElementById("input-area-cell").style.display = "block";
   document.getElementById("change-cell").style.display = "none";
     const element = document.querySelector('.cell-btn-form');
   element.style.height = '300px';
+    const container = document.querySelector('.container');
+  container_edit += 37;
+  container.style.height = (container_edit)+'px';
 }
 
 function hideChangecell() {
   document.getElementById("input-area-cell").style.display = "none";
   document.getElementById("change-cell").style.display = "block";
     const element = document.querySelector('.cell-btn-form');
-  element.style.height = '100px';
+  element.style.height = '50px';
+    const container = document.querySelector('.container');
+  container_edit -=37;
+  container.style.height = (container_edit)+'px';
+}
+function showAddHome(){
+ document.getElementById("show-home").style.display = "none";
+  document.getElementById("pib1").style.display = "flex";
+  document.getElementById("pib2").style.display = "flex";
+  document.getElementById("pib3").style.display = "flex";
+  document.getElementById("pib4").style.display = "flex";
+  document.getElementById("pib5").style.display = "flex";
+  document.getElementById("pib6").style.display = "flex";
+  document.getElementById("home_confirm").style.display = "block";
+  document.getElementById("hide-home").style.display = "block";
+   document.getElementById("show-edit-home").style.display = "none";
+       const element = document.querySelector('.home-form');
+  element.style.height = '400px';
+    const container = document.querySelector('.container');
+  container_edit += 300;
+  container.style.height = (container_edit)+'px';
+}
+function hideAddHome(){
+ document.getElementById("hide-home").style.display = "none";
+  document.getElementById("pib1").style.display = "none";
+  document.getElementById("pib2").style.display = "none";
+  document.getElementById("pib3").style.display = "none";
+  document.getElementById("pib4").style.display = "none";
+  document.getElementById("pib5").style.display = "none";
+  document.getElementById("pib6").style.display = "none";
+  document.getElementById("home_confirm").style.display = "none";
+  document.getElementById("show-home").style.display = "block";
+   document.getElementById("show-edit-home").style.display = "block";
+          const element = document.querySelector('.home-form');
+  element.style.height = '400px';
+    const container = document.querySelector('.container');
+  container_edit -= 300;
+  container.style.height = (container_edit)+'px';
+}
+function showEditHome(){
+ document.getElementById("show-edit-home").style.display = "none";
+ document.getElementById("hide-edit-home").style.display = "block";
+  document.getElementById("show-home").style.display = "none";
+}
+function hideEditHome(){
+ document.getElementById("show-edit-home").style.display = "block";
+ document.getElementById("hide-edit-home").style.display = "none";
+  document.getElementById("show-home").style.display = "block";
 }
 
 
@@ -206,4 +343,156 @@ $(function(){
 		};
 		
 	}); 
+});
+
+//예외처리
+$(function(){
+	//사진
+		$('#photo_confirm').click(function(){
+			if($('#upload-photo-file').val().trim()==''){
+				alert('파일을 선택하세요');
+				$('#upload-photo-file').val('').focus();
+				return false;
+			}
+		});
+	//비밀번호
+		$('#passwd_confirm').click(function(){
+			if($('#pw1').val().trim()==''){
+				alert('현재 비밀번호를 입력하세요');
+				$('#pw1').val('').focus();
+				return false;
+			}
+			if(!/^[a-zA-Z0-9_!@#$%^&*()-+=|\\/?.,<>;:'"~`]{8,20}$/.test($('#pw1').val())){
+				alert('비밀번호는 8~20자로 된 영문자와 특수문자 및 숫자만 입력 가능합니다.');
+				$('#pw1').val('').focus();
+				return false;
+			}
+			if($('#pw2').val().trim()==''){
+				alert('신규 비밀번호를 입력하세요');
+				$('#pw2').val('').focus();
+				return false;
+			}
+			if(!/^[a-zA-Z0-9_!@#$%^&*()-+=|\\/?.,<>;:'"~`]{8,20}$/.test($('#pw2').val())){
+				alert('비밀번호는 8~20자로 된 영문자와 특수문자 및 숫자만 입력 가능합니다.');
+				$('#pw2').val('').focus();
+				return false;
+			}
+			if($('#pw3').val().trim()==''){
+				alert('신규 비밀번호 재입력을 입력하세요');
+				$('#pw3').val('').focus();
+				return false;
+			}
+			if(!/^[a-zA-Z0-9_!@#$%^&*()-+=|\\/?.,<>;:'"~`]{8,20}$/.test($('#pw3').val())){
+				alert('비밀번호는 8~20자로 된 영문자와 특수문자 및 숫자만 입력 가능합니다.');
+				$('#pw3').val('').focus();
+				return false;
+			}
+			if($('#pw1').val() == $('#pw2').val() || $('#pw1').val() == $('#pw3').val()){
+				alert('현재 비밀번호와 신규 비밀번호가 같습니다.');
+				$('#pw3').val('').focus();
+				$('#pw2').val('').focus();
+				$('#pw1').val('').focus();
+				return false;
+			}
+			if($('#pw2').val() != $('#pw3').val()){
+				alert('신규 비밀번호와 신규 비밀번호 재입력이 다릅니다.');
+				$('#pw3').val('').focus();
+				$('#pw2').val('').focus();
+				return false;
+			}
+			
+		//통신
+	    $.ajax({
+	        url:'/passwdChangeApply.do',
+	        type:'post',
+	        dataType:'json',
+	        data:{'mem_passwd' : $('#passwd').val()},
+	        success: function(){
+	            alert('비밀번호 변경 완료');
+	        },
+			error: function(){
+				alert('네트워크 오류발생');
+			}
+    	});
+		});
+	//이메일 인증
+		$('#confirm-email2').click(function(){
+			if($('#mem_confirm_email').val().trim()==''){
+				alert('인증번호를 입력하세요');
+				$('#mem_confirm_email').val('').focus();
+				return false;
+			}
+		});
+	//이메일 변경
+		$('#email_confirm').click(function(){
+			if($('#mem_old_email').val().trim()==''){
+				alert('현재 이메일을 입력하세요');
+				$('#mem_old_email').val('').focus();
+				return false;
+			}
+			if($('#mem_new_email').val().trim()==''){
+				alert('신규 이메일을 입력하세요');
+				$('#mem_new_email').val('').focus();
+				return false;
+			}
+
+			var hidden_email = document.getElementById("hidden_email").value;
+			var mem_old_email = $('#mem_old_email').val();
+			if(hidden_email!==mem_old_email){
+				$('#mem_old_email').val('').focus();
+				alert('현재 이메일 불일치');
+				return false;
+			}
+			if($('#mem_old_email').val() === $('#mem_new_email').val()){
+				alert('현재 이메일과 신규 이메일이 같습니다.');
+				$('#mem_new_email').val('').focus();
+				$('#mem_old_email').val('').focus();
+				return false;
+			}
+			if(!/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test($('#mem_old_email').val())){
+				alert('이메일은 영문자와 숫자 및 특정 특수문자 입력 가능합니다.');
+				$('#mem_old_email').val('').focus();
+				return false;
+			}
+			if(!/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test($('#mem_new_email').val())){
+				alert('이메일은 영문자와 숫자 및 특정 특수문자 입력 가능합니다.');
+				$('#mem_new_email').val('').focus();
+				return false;
+			}
+		});	
+	//전화번호
+	$('#cell_confirm').click(function(){
+		if($('#cell1').val().trim()==''){
+			alert('현재 전화번호를 입력하세요');
+			$('#cell1').val('').focus();
+			return false;
+		}
+		if($('#cell2').val().trim()==''){
+			alert('신규 전화번호를 입력하세요');
+			$('#cell2').val('').focus();
+			return false;
+		}
+		if(!/^[0-9-]{10,13}$/.test($('#cell1').val())){
+			alert('전화번호는 10~13자리로 된숫자와 -만 입력 가능합니다.');
+			$('#cell1').val('').focus();
+			return false;
+		}
+		if(!/^[0-9-]{10,13}$/.test($('#cell2').val())){
+			alert('전화번호는 10~13자리로 된숫자와 -만 입력 가능합니다.');
+			$('#cell2').val('').focus();
+			return false;
+		}
+		var hidden_cell = document.getElementById("hidden_cell").value;
+		if(hidden_cell!==$('#cell1').val()){
+			alert('현재 전화번호 불일치');
+			$('#cell1').val('').focus();
+			return false;
+		}
+		if($('#cell1').val() == $('#cell2').val()){
+			alert('현재 전화번호와 신규 전화번호가 같습니다.');
+			$('#cell2').val('').focus();
+			$('#cell1').val('').focus();
+			return false;
+		}
+	})
 });
