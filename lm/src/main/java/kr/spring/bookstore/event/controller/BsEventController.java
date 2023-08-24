@@ -180,7 +180,7 @@ public class BsEventController {
 		map.put("order",order);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		//status가 1보다 큰 이벤트만 조회 | 1:미표시, 2:진행중,  3:종료
+		//status가 1보다 큰 이벤트만 조회! | 1:미표시, 2:진행중,  3:종료
 		map.put("event_board_status", 1);
 		
 		//전체/검색 레코드 수
