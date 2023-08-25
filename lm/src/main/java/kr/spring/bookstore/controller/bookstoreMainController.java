@@ -41,7 +41,7 @@ public class bookstoreMainController {
 		//이벤트 정보 가져오기
 		//status가 1보다 큰 이벤트만 조회 | 1:미표시, 2:진행중,  3:종료
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("event_board_status", 2);
+		map.put("order", 2);
 		
 		//전체/검색 레코드 수
 		int count = bsEventService.selectEventCount(map);
