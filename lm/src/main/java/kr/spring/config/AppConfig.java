@@ -104,7 +104,7 @@ public class AppConfig implements WebMvcConfigurer{
 	//마이페이지 헤더 경로 설정
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		//MyPageHeaderInterceptor 설정
+		//MyPageHeaderInterceptor 설정.
 		registry.addInterceptor(myPageHeader)
 		.addPathPatterns("/lm/mypage/main/myPageMain.do")
 		.addPathPatterns("/lm/mypage/asklist/askListMain.do")
