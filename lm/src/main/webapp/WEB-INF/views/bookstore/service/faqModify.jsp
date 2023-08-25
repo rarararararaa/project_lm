@@ -6,6 +6,7 @@
 <div class="page-main">
 	<form:form modelAttribute="faqVO" action="faqModify.do" id="update_form">
 		<form:errors element="div" cssClass="error-color"/>
+		<form:hidden path="faq_num"/>
 		<ul>
 			<li>
 				<select id="faq_category" name="faq_category">
@@ -16,6 +17,7 @@
 					<option value="5" <c:if test="${param.faq_category == 5}">selected</c:if>>상품</option>
 					<option value="6" <c:if test="${param.faq_category == 6}">selected</c:if>>회원관리</option>
 					<option value="7" <c:if test="${param.faq_category == 7}">selected</c:if>>주문/결제</option>
+					<option value="8" <c:if test="${param.faq_category == 8}">selected</c:if>>세금/계산서</option>
 				</select>
 			</li>
 		    <li>

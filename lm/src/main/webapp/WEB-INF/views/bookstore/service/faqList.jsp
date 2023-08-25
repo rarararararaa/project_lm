@@ -62,11 +62,12 @@ $(function(){
 				Q. ${faq.faq_title}
 				<div class="answer">A. ${faq.faq_content}</div>
 				
-				<c:if test="${mem_auth==9}">
-					<input type="button" value="수정" onclick="location.href='faqModify.do?faq_num=${faq.faq_num}">
-				</c:if>
+				
 			</div>
 		</li>
+		<c:if test="${mem_auth==9}">
+					<input type="button" value="수정" onclick="location.href='faqModify.do?faq_num=${faq.faq_num}'">
+				</c:if>
 		</c:forEach>
 		</c:if>
 	</ul>

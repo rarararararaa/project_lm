@@ -148,4 +148,9 @@ public class ServiceServiceImpl implements ServiceService{
 		return serviceMapper.selectOrderTotalOrderBy(map);
 	}
 
+	@Override
+	public FaqVO selectFaq(Integer faq_num) {
+		return serviceMapper.selectFaq(faq_num);
+	}
+
 }
