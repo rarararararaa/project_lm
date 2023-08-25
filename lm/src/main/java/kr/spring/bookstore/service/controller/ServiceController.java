@@ -197,6 +197,37 @@ public class ServiceController {
 		
 		return "common/resultView";
 	}
+	@GetMapping("/bookstore/service/faqModify.do")
+	public String mformFaq(int faq_num,Model model) {
+		FaqVO faq = serviceService.selectFaq(faq_num);
+		
+		model.addAttribute("faqVO", faq);
+		
+		return "faqModify";
+	}
+	@PostMapping("/bookstore/service/faqModify.do")
+	public String modifyFaq(@Valid FaqVO faqVO,
+								BindingResult result,
+								HttpSession session,
+								HttpServletRequest request,
+								Model model) {
+		log.debug("<<글 작성>> : " + faqVO);
+		
+		faqVO.setFaq_content(StringUtil.useBrNoHtml(faqVO.getFaq_content()));
+
+		//유효성 체크 결과 오류가 있으면 폼 호출.
+		if(result.hasErrors()) {
+			return mformFaq(faqVO.getFaq_num(),model);
+		}
+		//글 작성
+		
+		serviceService.updateFaq(faqVO);
+		model.addAttribute("message", "글수정이 완료되었습니다.");
+		model.addAttribute("url", 
+				request.getContextPath()+"/bookstore/service/faqList.do");
+		
+		return "common/resultView";
+	}
 	@RequestMapping("/bookstore/service/faqList.do")
 	public ModelAndView selectFaq(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 								  @RequestParam(value="order",defaultValue="1") int order,

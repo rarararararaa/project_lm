@@ -109,7 +109,7 @@ div.used-product{
     border-radius: 10px;	
 }
 
-form#used_product div{
+form.used_product div{
 	margin-right:26px;
 	width:100px;
 	display:flex;

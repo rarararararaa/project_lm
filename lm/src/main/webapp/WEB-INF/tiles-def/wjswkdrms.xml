@@ -29,6 +29,10 @@
     	<put-attribute name="title" value="자주묻는질문 작성"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/faqWrite.jsp"/>
     </definition>
+    <definition name="faqModify" extends="service">
+    	<put-attribute name="title" value="자주묻는질문 수정"/>
+	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/faqModify.jsp"/>
+    </definition>
     <definition name="faqList" extends="service">
     	<put-attribute name="title" value="자주묻는질문 목록"/>
 	    <put-attribute name="body" value="/WEB-INF/views/bookstore/service/faqList.jsp"/>
