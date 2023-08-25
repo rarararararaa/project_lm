@@ -65,7 +65,7 @@ public interface MyPageMapper {
 	public void insertHome(MyPageVO mypageVO);
 	//db의 mem_num과 session의 mem_num 비교
 	@Select("SELECT m.mem_num FROM lm_member_detail d INNER JOIN lm_member_manage m ON d.mem_num = m.mem_num WHERE m.mem_id = #{mem_id} AND d.mem_passwd = #{mem_passwd}")
-	public int memberOutCheck(MyPageVO mypageVO);
+	public Integer memberOutCheck(MyPageVO mypageVO);
 	//탈퇴회원 manage에 auth,탈퇴일 업데이트
 	@Update("UPDATE lm_member_manage SET mem_auth = 0, mem_exp_date = SYSDATE WHERE mem_num = #{mem_num}")
 	public void memberOut(int mem_num);

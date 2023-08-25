@@ -25,7 +25,7 @@ public interface MyPageService {
 	public void updateEmail(MyPageVO mypageVO);
 	public void updateCell(MyPageVO mypageVO);
 	public void updateAuth(MyPageVO mypageVO);
-	public int memberOutCheck(MyPageVO mypageVO);
+	public Integer memberOutCheck(MyPageVO mypageVO);
 	public void memberOut(int mem_num);
 	public void insertHome(MyPageVO mypageVO);
 	public List<MyPageVO> getMyHome(int mem_num);

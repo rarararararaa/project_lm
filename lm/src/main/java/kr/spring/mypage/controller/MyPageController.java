@@ -966,20 +966,15 @@ public class MyPageController {
 	/*=======================
 	 * 등급정보
 	 *=======================*/
-	@GetMapping("/lm/mypage/gradeinfo/gradeInfoMain.do")
-	public String gradeInfoCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "gradeInfoMain";	
-	}
 	@RequestMapping("/lm/mypage/gradeinfo/gradeInfoMain.do")
 	public String gradeInfo(@RequestParam int lo,Model model,HttpSession session,MyPageVO mypageVO) {
 		log.debug("<<등급정보>> : " + mypageVO);
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
+		//로그인 여부 체크
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
 		//회원의 총 주문 금액
 		int mem_order_price=0;
 		//회원의 등급 점수
@@ -1012,6 +1007,7 @@ public class MyPageController {
 		return "memberOutMain";
 	}
 	@PostMapping("/lm/mypage/memberout/memberOutMain.do")
+	@ResponseBody
 	public String memberOutHandle(@RequestParam int lo,MyPageVO mypageVO,HttpServletRequest request,Model model,BindingResult result) {
 		log.debug("<<회원탈퇴>> : " + mypageVO);
 
@@ -1032,11 +1028,8 @@ public class MyPageController {
 			session.invalidate();
 		}
 		model.addAttribute("accessMsg", "회원 탈퇴 완료.");
-		if(lo==1) {
-			return "common/notice_lib";
-		}else {
-			return "common/notice_bs";
-		}
+		
+		return "bsMain";
 	}
 }
 

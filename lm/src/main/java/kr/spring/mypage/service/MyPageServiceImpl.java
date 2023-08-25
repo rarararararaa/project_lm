@@ -86,7 +86,7 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public int memberOutCheck(MyPageVO mypageVO) {
+	public Integer memberOutCheck(MyPageVO mypageVO) {
 		return mypageMapper.memberOutCheck(mypageVO);
 	}
 	
