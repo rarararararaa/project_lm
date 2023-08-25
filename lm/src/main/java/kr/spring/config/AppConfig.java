@@ -133,7 +133,18 @@ public class AppConfig implements WebMvcConfigurer{
 		registry.addInterceptor(bsAdminCheck)
 		.addPathPatterns("/bookstore/event/write.do")
 		.addPathPatterns("/bookstore/event/update.do")
-		.addPathPatterns("/bookstore/event/eventAnnounceWrite.do");
+		.addPathPatterns("/bookstore/admin_list.do")
+		.addPathPatterns("/bookstore/admin_update.do")
+		.addPathPatterns("/bookstore/adminProductList.do")
+		.addPathPatterns("/bookstore/adminProductModify.do")
+		.addPathPatterns("/bookstore/adminOrderList.do")
+		.addPathPatterns("/bookstore/adminOrderDetail.do")
+		.addPathPatterns("/bookstore/service/announceWrite.do")
+		.addPathPatterns("/bookstore/service/faqWrite.do")
+		.addPathPatterns("/bookstore/service/faqModify.do")
+		.addPathPatterns("/bookstore/service/answerWrite.do")
+		.addPathPatterns("/bookstore/adminOrderTotal.do");
+
 		
 		registry.addInterceptor(libLoginCheck)
 		.addPathPatterns("/library/bookApplyWrite.do")
