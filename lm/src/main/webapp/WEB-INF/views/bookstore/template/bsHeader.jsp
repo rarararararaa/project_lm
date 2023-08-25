@@ -44,7 +44,7 @@
 		<div class="bs-main-logo">
 				<a
 					href="${pageContext.request.contextPath}/bookstore/template/bsMain.do">
-					<img src="../../images/logo.png"></a>
+					<img src="${pageContext.request.contextPath}/images/logo.png"></a>
 			</div>
 			<div class="bs-search">
 				<div class="search_select">
@@ -75,10 +75,10 @@
 			</div>
 			<div class="bs-main-icons">
 				<div class="bs-cart">
-					<a href="${pageContext.request.contextPath}/bookstore/payment/cart.do"><img src="../../images/cart_alt.png"></a>
+					<a href="${pageContext.request.contextPath}/bookstore/payment/cart.do"><img src="${pageContext.request.contextPath}/images/cart_alt.png"></a>
 				</div>
 				<div class="bs-person">
-					<a href="${pageContext.request.contextPath}/lm/mypage/main/myPageMain.do?lo=1"><img src="../../images/person_outline.png"></a>
+					<a href="${pageContext.request.contextPath}/lm/mypage/main/myPageMain.do?lo=1"><img src="${pageContext.request.contextPath}/images/person_outline.png"></a>
 				</div>
 			</div>
 	</div>
