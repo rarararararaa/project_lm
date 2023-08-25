@@ -53,9 +53,7 @@
 					<c:forEach var="lib_facility" items="${list}">
 						<tr class="align-center">
 							<td class="row-title">${lib_facility.facility_num}</td>
-							<td class="row-title"><a
-								href="${pageContext.request.contextPath }/library/admin_facApplyWrite.do?facility_num=${lib_facility.facility_num}">${lib_facility.facility_name}</a>
-							</td>
+							<td class="row-title">${lib_facility.facility_name}</td>
 							<td class="row-title">예약가능</td>
 							<td class="row-title"><input class="small-button-R"
 								type="button" value="비활성화" onclick="#"></td>
