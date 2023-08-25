@@ -290,7 +290,7 @@ function submitCart(){
 
 //중고 장바구니
 function submitUsedProduct(){
-	let form_data = $('#used_product').serialize();		
+	let form_data = $('.used_product').serialize();		
 	//서버와 통신
 	$.ajax({
 		url:'/bookstore/payment/cart.do',

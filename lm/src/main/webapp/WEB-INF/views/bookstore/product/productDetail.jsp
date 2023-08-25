@@ -288,7 +288,8 @@
 				<h2>중고책</h2>
 				<div class="used-product">
 				<c:forEach var="list" items="${list}">
-					<form id="used_product">
+					<form class="used_product">
+						<c:if test="${list.used_product_status==1 }">
 						<input type="hidden" name="used_product_num" value="${list.used_product_num }">
 						<input type="hidden" name="store_product_num" value="${product.store_product_num }">
 						<input type="hidden" name="store_product_status" value="1">
@@ -305,6 +306,7 @@
 							</c:if>
 							<input type="button" class="sm-button" value="장바구니" onclick="submitUsedProduct();">
 						</div>
+						</c:if>
 					</form>	
 				</c:forEach>
 				</div>
