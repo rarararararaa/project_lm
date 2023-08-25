@@ -316,9 +316,11 @@
 				<h2>이벤트</h2>
 				<div class="event">
 				<c:forEach var="event" items="${event}">
+					<c:if test="${event.event_board_status==2 }">
 					<a class="wid" href="/bookstore/event/detail.do?event_board_num=${event.event_board_num}">
 						<img src="/bookstore/event/imageView.do?event_board_num=${event.event_board_num}&event_board_type=1" width="258px">
 					</a>
+					</c:if>
 				</c:forEach>
 				</div>
 			</div>
