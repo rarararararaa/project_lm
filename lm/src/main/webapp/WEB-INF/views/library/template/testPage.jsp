@@ -215,7 +215,7 @@ li:hover {
 <script type="text/javascript">
 $(function(){
 	
-	$('#introduce').click(function(){
+	/*$('#introduce').click(function(){
 		$('#main-result').empty();
 		let output = '<div class="result-int">';
 	    output += '<p>LM 그룹은 이과와 문과를 합친 학습을 지원하는 학원으로, LM 문고와 LM 도서관으로 구성되어 있습니다.<br><br>';
@@ -226,7 +226,7 @@ $(function(){
 	    output += '</div>';
 		$('#main-result').append(output);
 	});
-	
+	*/
 	$('#devstack').click(function(){
 		$('#main-result').empty();
 		let output = '<div class="result-int">';
@@ -246,7 +246,7 @@ $(function(){
 		$('#main-result').append(output);
 	});
 	
-	$('#introduce').click();
+	$('#devstack').click();
 });
 
 </script>
@@ -271,9 +271,9 @@ $(function(){
 		<div class="second-box">
 			<div class="lists">
 				<ul>
-					<li id="introduce">회사 소개</li>
-					<li id="devstack">기술 스택</li>
-					<li id="workers">프로젝트 담당</li>
+					
+					<li id="devstack">사용 기술 스택</li>
+					
 				</ul>
 			</div>
 			<div id="main-result"></div>
