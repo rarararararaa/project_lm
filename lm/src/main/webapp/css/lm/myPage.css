@@ -248,6 +248,7 @@ hr {
 	display: flex;
 	min-height: 500px;
 }
+
 .left-div {
 	width: 200px;
 }
@@ -758,6 +759,7 @@ select.select {
 select.select::-ms-expand {
 	display: none;
 }
+
 .right-div-form {
 	display: flex;
 	width: 950px;
@@ -807,13 +809,13 @@ input {
 	border: 1px solid black;
 }
 
-
 .edit-button {
 	width: 100px;
 	height: 35px;
 	margin-right: 5px;
-	margin-top:5px;
+	margin-top: 5px;
 }
+
 .edit-button-photo {
 	width: 200px;
 	height: 35px;
@@ -841,14 +843,14 @@ input {
 	width: 100px;
 	height: 40px;
 	font-size: 18px;
-	margin-top:10px;
+	margin-top: 10px;
 }
 
 .view-data-title {
 	width: 100px;
 	height: 40px;
 	font-size: 18px;
-	margin-top:10px;
+	margin-top: 10px;
 }
 
 .view-data-title2 {
@@ -859,15 +861,15 @@ input {
 .view-data-email {
 	height: 40px;
 	font-size: 18px;
-	margin-right:20px;
-	margin-top:10px;
+	margin-right: 20px;
+	margin-top: 10px;
 }
 
 .view-data-cell {
-	margin-right:20px;
+	margin-right: 20px;
 	height: 40px;
 	font-size: 18px;
-	margin-top:10px;
+	margin-top: 10px;
 }
 
 .passwd-form {
@@ -921,101 +923,120 @@ input {
 #email-tip {
 	margin-bottom: 10px;
 }
-.home-form{
+
+.home-form {
 	display: flex;
 	width: 800px;
 	height: 50px;
 	flex-direction: row;
 }
-.home-info-box{
-	width:200px;
-	display:none;
-	border:1px solid black;
-	border-radius:5px;
-	font-size:16px;
-	margin-right:10px;
+
+.home-info-box {
+	width: 200px;
+	display: none;
+	border: 1px solid black;
+	border-radius: 5px;
+	font-size: 16px;
+	margin-right: 10px;
+	height: 380px;
 }
-.edit-home-info-detail{
-	text-align:center;
-	border-bottom:1px solid black;
+
+.edit-home-info-detail {
+	text-align: center;
+	border-bottom: 1px solid black;
 }
-.edit-home-info-detail-button{
-	width:130px;
-	height:22px;
+
+.edit-home-info-detail-button {
+	width: 130px;
+	height: 22px;
 }
-#home_name2{
-	border-bottom:1px solid black;
+
+#home_name2 {
+	border-bottom: 1px solid black;
 }
-#home_cell2{
-	border-bottom:1px solid black;
+
+#home_cell2 {
+	border-bottom: 1px solid black;
 }
-#home_title2{
-	border-bottom:1px solid black;
+
+#home_title2 {
+	border-bottom: 1px solid black;
 }
-.home-info-detail{
-	padding-left:5px;
-	margin-top:5px;
+
+.home-info-detail {
+	padding-left: 5px;
+	margin-top: 5px;
 }
-.home-form-first{
-	display:flex;
+
+.home-form-first {
+	display: flex;
 	flex-direction: row;
-	width:800px;
-	height:250px;
+	width: 800px;
+	height: 250px;
 }
-.home-form-second{
-	display:flex;
+
+.home-form-second {
+	display: flex;
 	flex-direction: row;
-	width:800px;
-	height:350px;
+	width: 800px;
+	height: 380px;
 }
-.page-input-box{
-	display:none;
+
+.page-input-box {
+	display: none;
 	flex-direction: row;
 	width: 800px;
 	height: 50px;
+}
 
-}
-#button-form{
-	display:flex;
+#button-form {
+	display: flex;
 	flex-direction: row;
-	width:800px;
+	width: 800px;
 }
-#show-home{
-	display:block;
+
+#show-home {
+	display: block;
 }
-#hide-home{
-	display:none;
+
+#hide-home {
+	display: none;
 }
-#hide-edit-home{
-	display:none;
+
+#hide-edit-home {
+	display: none;
 }
-#home_confirm{
-	display:none;
+
+#home_confirm {
+	display: none;
 }
-    .page-input-box .input-style-check{ /* 중복 체크 박스 설정 */
+
+.page-input-box .input-style-check { /* 중복 체크 박스 설정 */
 	width: 150px;
 	height: 34px;
-	margin-left:10px;
-      font-size: 15px;
-      border: 1px solid black;
-      padding: 0px 11px 1px 15px;
-      border-radius: 4px;
-      background-color: #E19B50;
-      color:black;
-      cursor: pointer;
-    }
-    .page-input-box .input-style-check:hover{ /* 중복 체크 박스 호버 설정 */
+	margin-left: 10px;
+	font-size: 15px;
+	border: 1px solid black;
+	padding: 0px 11px 1px 15px;
+	border-radius: 4px;
+	background-color: #E19B50;
+	color: black;
+	cursor: pointer;
+}
+
+.page-input-box .input-style-check:hover { /* 중복 체크 박스 호버 설정 */
 	width: 150px;
 	height: 34px;
-	margin-left:10px;
-      font-size: 15px;
-      border: 1px solid black;
-      padding: 0px 11px 1px 15px;
-      border-radius: 4px;
-      background-color: #E19B50;
-      color:white;
-      cursor: pointer;
-    }
+	margin-left: 10px;
+	font-size: 15px;
+	border: 1px solid black;
+	padding: 0px 11px 1px 15px;
+	border-radius: 4px;
+	background-color: #E19B50;
+	color: white;
+	cursor: pointer;
+}
+
 .cell-form {
 	display: flex;
 	width: 800px;
@@ -1068,13 +1089,15 @@ input {
 	width: 80px;
 	margin: 0 auto;
 }
-.order_status_confirm{
+
+.order_status_confirm {
 	background-color: lighthgray;
 	border-radius: 3px;
 	border: 1px solid black;
 	width: 80px;
 	margin: 0 auto;
 }
+
 .show-detail {
 	display: none;
 	margin: 0 auto;
@@ -1102,7 +1125,8 @@ input {
 
 .order-form-info {
 	display: inline;
-	width: 290px; margin-left : 5px;
+	width: 290px;
+	margin-left: 5px;
 	margin-bottom: 3px;
 	margin-left: 5px;
 }
@@ -1117,12 +1141,14 @@ input {
 	width: 970px;
 	height: 70px;
 }
+
 .item-list3 {
 	display: flex;
 	width: 970px;
 	height: 120px;
-	margin-bottom:10px;
+	margin-bottom: 10px;
 }
+
 #t-mypage-num {
 	display: inline-block;
 	width: 70px;
@@ -1318,6 +1344,7 @@ input {
 	height: 120px;
 	margin-bottom: 20px;
 }
+
 #t-order-list-detail {
 	display: inline-block;
 	width: 600px;
@@ -1343,13 +1370,15 @@ input {
 	flex-direction: column;
 	margin-left: 10px;
 }
-#item-list-detail2{
+
+#item-list-detail2 {
 	display: flex;
 	width: 600px;
 	height: 120px;
 	flex-direction: column;
-	margin-left: 10px;	
+	margin-left: 10px;
 }
+
 #c-order-list-price {
 	display: inline-block;
 	width: 200px;
@@ -1439,34 +1468,34 @@ input {
 #c-facility-title {
 	display: inline-block;
 	width: 450px;
-	margin:5px auto;
+	margin: 5px auto;
 }
 
 #c-facility-content {
 	display: inline-block;
 	width: 450px;
-	margin:5px auto;
+	margin: 5px auto;
 }
 
 #c-facility-time {
 	display: inline-block;
 	width: 120px;
 	text-align: center;
-	margin:40px auto;
+	margin: 40px auto;
 }
 
 #c-facility-time2 {
 	display: inline-block;
 	width: 120px;
 	text-align: center;
-	margin:40px auto;
+	margin: 40px auto;
 }
 
 #c-facility-date {
 	display: inline-block;
 	width: 130px;
 	text-align: center;
-	margin:40px auto;
+	margin: 40px auto;
 }
 
 /* 도서예약내역 설정 */
@@ -1491,31 +1520,218 @@ input {
 #c-reservation-title {
 	display: inline-block;
 	width: 600px;
-	margin:5px auto;
+	margin: 5px auto;
 }
 
 #c-reservation-authors {
 	display: inline-block;
 	width: 600px;
-	margin:5px auto;
+	margin: 5px auto;
 }
 
 #c-reservation-publisher {
 	display: inline-block;
 	width: 600px;
-	margin:5px auto;
+	margin: 5px auto;
 }
 
 #c-reservation-date {
 	display: inline-block;
 	width: 120px;
 	text-align: center;
-	margin:40px auto;
+	margin: 40px auto;
 }
 
 #c-reservation-status {
 	display: inline-block;
 	width: 120px;
 	text-align: center;
-	margin:40px auto;
+	margin: 40px auto;
+}
+
+#mem_id {
+	width: 200px;
+	height: 40px;
+	margin: 0 auto;
+	margin-top: 150px;
+}
+
+.outform {
+	display: flex;
+	width: 900px;
+	flex-direction: row;
+}
+
+#mem_passwd {
+	width: 200px;
+	height: 40px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.outbtn {
+	width: 150px;
+	height: 40px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+/* 분실도서신고내역 설정 */
+#t-lost-detail {
+	width: 500px;
+	text-align: center;
+}
+
+#t-lost-amount {
+	width: 180px;
+	text-align: center;
+}
+
+#t-lost-time {
+	width: 180px;
+	text-align: center;
+}
+
+#t-lost-status {
+	width: 110px;
+	text-align: center;
+}
+
+#c-lost-title {
+	width: 400px;
+}
+
+#c-lost-author {
+	width: 400px;
+}
+
+#c-lost-publisher {
+	width: 400px;
+}
+
+#c-lost-price {
+	width: 180px;
+	text-align: center;
+}
+
+#c-lost-time {
+	width: 180px;
+	text-align: center;
+}
+
+#item-list-detail3 {
+	display: flex;
+	flex-direction: column;
+}
+
+#item-list-detail4 {
+	display: flex;
+	width: 370px;
+	height: 120px;
+	flex-direction: column;
+	margin-left: 10px;
+}
+
+#c-lost-status {
+	width: 110px;
+	text-align: center;
+}
+
+#c-lost-type {
+	width: 110px;
+	text-align: center;
+}
+
+#t-point-amount {
+	width: 320px;
+	text-align: center;
+}
+
+#t-point-date {
+	width: 320px;
+	text-align: center;
+}
+
+#t-point-reason {
+	width: 320px;
+	text-align: center;
+}
+
+#c-point-amount {
+	width: 320px;
+	text-align: center;
+}
+
+#c-point-date {
+	width: 320px;
+	text-align: center;
+}
+
+#c-point-reason {
+	width: 320px;
+	text-align: center;
+}
+
+/* 찜한 도서 목록 */
+#t-zzim-detail {
+	width: 570px;
+	text-align: center;
+}
+
+#t-zzim-price {
+	width: 400px;
+	text-align: center;
+}
+
+#item-list-detail5 {
+	display: flex;
+	width: 470px;
+	height: 120px;
+	flex-direction: column;
+	margin-left: 10px;
+}
+
+#c-zzim-price {
+	width: 330px;
+	text-align: center;
+}
+
+/* 도서 후기 목록 */
+#t-write-detail {
+	width: 350px;
+	text-align: center;
+}
+
+#t-write-title {
+	width: 350px;
+	text-align: center;
+}
+
+#t-write-rating {
+	width: 135px;
+	text-align: center;
+}
+
+#t-write-date {
+	width: 135px;
+	text-align: center;
+}
+
+#c-write-detail {
+	width: 350px;
+	text-align: center;
+}
+
+#c-write-title {
+	width: 350px;
+	text-align: center;
+}
+
+#c-write-rating {
+	width: 135px;
+	text-align: center;
+}
+
+#c-write-date {
+	width: 135px;
+	text-align: center;
 }

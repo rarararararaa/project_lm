@@ -51,7 +51,7 @@
 		</div>
 		<div class="right-div">
 			<div class="list-name">
-				<h2>프로그램 신청 내역</h2>
+				<h2>문의 내역</h2>
 			</div>
 			<div class="status">
 				<div class="status-info" id="step1">미확인</div>
@@ -66,12 +66,11 @@
 				<div id="t-lost-time">답변 상태</div>
 			</div>
 			<hr id="title-list-hr">
-			<c:forEach var="list" items="${list}" varStatus="status">
+			<c:forEach var="list" items="${list}">
 				<div class="item-list">
-					<div id="c-program-num">${list.program_num}</div>
-					<div id="c-program-title">${list.program_title}</div>
-					<div id="c-program-date">${list.program_reg_date}</div>
-					<div id="c-program-time">${list.program_date}</div>
+					<div id="c-program-num">${list.ask_num}</div>
+					<div id="c-program-title">${list.ask_title}</div>
+					<div id="c-program-date">${list.ask_reg_date}</div>
 				</div>
 			</c:forEach>
 			<div class="align-center">${page}</div>

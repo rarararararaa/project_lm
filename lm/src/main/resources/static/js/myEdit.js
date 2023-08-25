@@ -141,7 +141,6 @@ function emailConfirm(){
 	//.value 없으면 오브젝트로 받아옴 [object HTMLInputElement]
 	var save2 = document.getElementById("mem_confirm_email").value;
 	if(save!==save2){
-		$('#mem_confirm_email').val('').focus();
 		alert('인증번호가 일치하지 않습니다.');
 	}else{
 	    $.ajax({
@@ -150,7 +149,10 @@ function emailConfirm(){
 	        dataType:'json',
 	        data:{'userEmailApply' : 'true'},
 	        success: function(data){
-	            alert(data.resut);
+	            alert('이메일 인증 완료');
+	            document.getElementById("confirm-email").style.display = "none";
+	            document.getElementById("input-area-email").style.display = "none";
+	            document.getElementById("change-email").style.display = "block";
 	        },
 			error: function(){
 				alert(data.resut);
@@ -313,7 +315,7 @@ function showEditHome(){
  document.getElementById("home-form-first").style.display = "none";
  document.getElementById("show-home").style.display = "none";
     const element = document.querySelector('.home-form');
-  element.style.height = '350px';
+  element.style.height = '380px';
     const container = document.querySelector('.container');
   container_edit += 300;
   container.style.height = (container_edit)+'px';

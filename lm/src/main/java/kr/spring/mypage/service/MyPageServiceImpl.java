@@ -31,22 +31,22 @@ public class MyPageServiceImpl implements MyPageService{
 
 	@Override
 	public int getZzimNumCount(int mem_num) {
-		return 0;
+		return mypageMapper.getZzimNumCount(mem_num);
 	}
 
 	@Override
 	public int getReviewNumCount(int mem_num) {
-		return 0;
+		return mypageMapper.getReviewNumCount(mem_num);
 	}
 
 	@Override
 	public int getRepNumCount(int mem_num) {
-		return 0;
+		return mypageMapper.getRepNumCount(mem_num);
 	}
 
 	@Override
 	public int getCouponNumCount(int mem_num) {
-		return 0;
+		return mypageMapper.getCouponNumCount(mem_num);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public int memberOutCheck(MyPageVO mypageVO) {
+	public Integer memberOutCheck(MyPageVO mypageVO) {
 		return mypageMapper.memberOutCheck(mypageVO);
 	}
 	
@@ -229,5 +229,45 @@ public class MyPageServiceImpl implements MyPageService{
 	public void addDefaultHome(int home_num,int mem_num) {
 		mypageMapper.deleteDefaultHome(mem_num);
 		mypageMapper.addDefaultHome(home_num);
+	}
+
+	@Override
+	public List<MyPageVO> getBookLostList(Map<String, Object> map) {
+		return mypageMapper.getBookLostList(map);
+	}
+
+	@Override
+	public int selectRowCountBookLostList(Map<String, Object> map) {
+		return mypageMapper.selectRowCountBookLostList(map);
+	}
+
+	@Override
+	public List<MyPageVO> getPointInfo(Map<String, Object> map) {
+		return mypageMapper.getPointInfo(map);
+	}
+
+	@Override
+	public int selectRowCountPointInfo(Map<String, Object> map) {
+		return mypageMapper.selectRowCountPointInfo(map);
+	}
+
+	@Override
+	public List<MyPageVO> getZzimBookList(Map<String, Object> map) {
+		return mypageMapper.getZzimBookList(map);
+	}
+
+	@Override
+	public int selectRowCountZzimBookList(Map<String, Object> map) {
+		return mypageMapper.selectRowCountZzimBookList(map);
+	}
+	
+	@Override
+	public List<MyPageVO> getBookWriteList(Map<String, Object> map) {
+		return mypageMapper.getBookWriteList(map);
+	}
+
+	@Override
+	public int selectRowCountBookWriteList(Map<String, Object> map) {
+		return mypageMapper.selectRowCountBookWriteList(map);
 	}
 }

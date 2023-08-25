@@ -54,7 +54,7 @@ public class MyPageVO {
 	public String order_date;
 	public int order_num;
 	public int rent_num;
-	public int callNumber;
+	public String callNumber;
 	public int lib_product_status;
 	public String rent_reg_date;
 	public String return_reg_deadline;
@@ -69,7 +69,7 @@ public class MyPageVO {
 	public int store_product_num;
 	public int order_product_quantity;
 	public int cart_quantity;
-	public int order_product_price;
+	public String order_product_price;
 	public String store_product_author;
 	public String store_product_publisher;
 	public String store_product_cover;
@@ -114,9 +114,24 @@ public class MyPageVO {
 	public String ask_title;
 	public String ask_content;
 	public String ask_reg_date;
-	public String ask_image_name;
+	public String ask_imagename;
 	public String userEmailApply;
+	public int lost_report_num;
+	public String store_product_pricesales;
+	public String lost_reg_date;
+	public int lost_payment_status;
+	public int lost_payment_type;
+	public int point_num;
+	public String point_value;
+	public String point_date;
+	public String point_reason;
+	public int point_status;
+	public String review_content;
+	public String review_reg_date;
+	public int review_rating;
+	public int review_deleted;
 	
+	private byte[] review_image;
 	private byte[] ask_image;
 	private byte[] facility_image;
 	private byte[] mem_photo; //myEdit.jsp에서 입력받은 이미지 파일

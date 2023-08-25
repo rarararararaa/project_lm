@@ -51,27 +51,47 @@
 		</div>
 		<div class="right-div">
 			<div class="list-name">
-				<h2>프로그램 신청 내역</h2>
-			</div>
-			<div class="status">
-				<div class="status-info" id="step1">미확인</div>
-				<div class="status-info" id="step2">확인 완료</div>
-				<div class="status-info" id="step3">등록 완료</div>
+				<h2>분실 도서 신고 내역</h2>
 			</div>
 			<hr id="status-hr">
 			<div class="title-list">
-				<div id="t-lost-num">신고 번호</div>
-				<div id="t-lost-title">도서명</div>
-				<div id="t-lost-date">도서 가격</div>
-				<div id="t-lost-time">신고 날짜</div>
+				<div id="t-lost-detail">분실 도서 정보</div>
+				<div id="t-lost-amount">분실 도서 가격</div>
+				<div id="t-lost-time">분실 신고 날짜</div>
+				<div id="t-lost-status">결제 상태/수단</div>
 			</div>
 			<hr id="title-list-hr">
 			<c:forEach var="list" items="${list}" varStatus="status">
-				<div class="item-list">
-					<div id="c-program-num">${list.program_num}</div>
-					<div id="c-program-title">${list.program_title}</div>
-					<div id="c-program-date">${list.program_reg_date}</div>
-					<div id="c-program-time">${list.program_date}</div>
+				<div class="item-list3">
+										<div class="view-photo2">
+							<a
+								href="${pageContext.request.contextPath}/library/lib_book/bookDetail.do?lo=${lo}&callNumber=${list.callNumber}">
+								<img src="${list.lib_product_bookimageurl}" class="view-photo2">
+							</a>
+						</div>
+					<div id="item-list-detail4">
+
+						<div id="c-lost-title"><a
+								href="${pageContext.request.contextPath}/library/lib_book/bookDetail.do?lo=${lo}&callNumber=${list.callNumber}"><strong>${list.lib_product_bookname}</strong></a></div>
+						<div id="c-lost-author">${list.lib_product_authors}</div>
+						<div id="c-lost-publisher">${list.lib_product_publisher}</div>
+					</div>
+					<div id="c-lost-price">${list.store_product_pricesales}</div>
+					<div id="c-lost-time">${list.lost_reg_date}</div>
+					<div id="item-list-detail3">
+						<c:if test="${list.lost_payment_status==0}">
+							<div id="c-lost-status">결제 취소</div>
+						</c:if>
+						<c:if test="${list.lost_payment_status==1}">
+							<div id="c-lost-status">결제 완료</div>
+						</c:if>
+						<c:if test="${list.lost_payment_type==1}">
+							<div id="c-lost-type">신용카드 결제</div>
+						</c:if>
+						<c:if test="${list.lost_payment_type==2}">
+							<div id="c-lost-type">카카오페이 결제</div>
+						</c:if>
+					</div>
 				</div>
 			</c:forEach>
 			<div class="align-center">${page}</div>
