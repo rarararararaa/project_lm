@@ -53,26 +53,42 @@ public interface MyPageService {
 	//문의내역
 	public List<MyPageVO> getAskList(Map<String,Object> map);
 	public int selectRowCountAskList(Map<String,Object> map);
-	
+
 	//대출/반납내역
 	public List<MyPageVO> getCheckList(Map<String,Object> map);
 	public int selectRowCountCheckList(Map<String,Object> map);
-	
+
 	//희망도서신청내역
 	public List<MyPageVO> getWantBookList(Map<String,Object> map);
 	public int selectRowCountWantBookList(Map<String,Object> map);
-	
+
 	//프로그램신청내역
 	public List<MyPageVO> getProgramList(Map<String,Object> map);
 	public int selectRowCountProgramList(Map<String,Object> map);
-	
+
 	//시설이용신청내역
 	public List<MyPageVO> getFacilityList(Map<String,Object> map);
 	public int selectRowCountFacilityList(Map<String,Object> map);
-	
+
 	//도서예약신청내역
 	public List<MyPageVO> getBookReservationList(Map<String,Object> map);
 	public int selectRowCountBookReservationList(Map<String,Object> map);
 
+	//분실도서신고내역
+	public List<MyPageVO> getBookLostList(Map<String,Object> map);
+	public int selectRowCountBookLostList(Map<String,Object> map);
+	
+	//포인트 로그
+	public List<MyPageVO> getPointInfo(Map<String,Object> map);
+	public int selectRowCountPointInfo(Map<String,Object> map);
+	
+	//찜한 도서 목록
+	public List<MyPageVO> getZzimBookList(Map<String,Object> map);
+	public int selectRowCountZzimBookList(Map<String,Object> map);
+	
+	//도서 후기 목록
+	public List<MyPageVO> getBookWriteList(Map<String,Object> map);
+	public int selectRowCountBookWriteList(Map<String,Object> map);
+	
 
 }

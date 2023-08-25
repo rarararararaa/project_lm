@@ -53,17 +53,15 @@
 				</ul>
 			</div>
 			<div class="right-div">
-				<div class="right-div-form">
+				<div class="right-div-form" id="outform">
 					<form:input path="mem_id" maxlength="15" placeholder="아이디를 입력하세요." />
 					<form:errors path="mem_id" cssClass="error-color" />
 					<form:password path="mem_passwd" maxlength="20"
 						placeholder="비밀번호를 입력하세요." />
 					<form:errors path="mem_passwd" cssClass="error-color" />
-					<div class="">
-						<form:button>탈퇴</form:button>
-						<input type="button" value="취소"
+						<form:button class="outbtn">탈퇴</form:button>
+						<input type="button" value="취소" class="outbtn"
 							onclick="location.href='${pageContext.request.contextPath}/lm/mypage/myedit/myEditMain.do?lo=${lo}'">
-					</div>
 				</div>
 			</div>
 		</div>

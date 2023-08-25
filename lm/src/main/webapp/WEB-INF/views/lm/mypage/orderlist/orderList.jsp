@@ -79,7 +79,7 @@
 							${list.store_product_publisher}</div>
 					</div>
 					<div id="c-order-list-price">${list.order_product_price}</div>
-					<div id="c-order-list-amount">${list.order_product_quantity}</div>
+					<div id="c-order-list-amount">${list.cart_quantity}</div>
 				</div>
 			</c:forEach>
 			<div class="bottom-div">

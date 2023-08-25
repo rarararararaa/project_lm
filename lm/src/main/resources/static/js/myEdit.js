@@ -313,7 +313,7 @@ function showEditHome(){
  document.getElementById("home-form-first").style.display = "none";
  document.getElementById("show-home").style.display = "none";
     const element = document.querySelector('.home-form');
-  element.style.height = '350px';
+  element.style.height = '380px';
     const container = document.querySelector('.container');
   container_edit += 300;
   container.style.height = (container_edit)+'px';

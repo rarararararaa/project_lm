@@ -58,12 +58,20 @@ public class MyPageController {
 	 * 마이페이지 + 주문내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/main/myPageMain.do")
+	public String myPageCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "myPageMain";	
+	}
+	@GetMapping("/lm/mypage/main/myPageMain.do")
 	public String myPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
-
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -121,6 +129,16 @@ public class MyPageController {
 	 * 주문 내역 상세
 	 *=======================*/
 	@RequestMapping("/lm/mypage/orderlist/orderListMain.do")
+	public String formMyPageCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "orderListMain";	
+	}
+	@GetMapping("/lm/mypage/orderlist/orderListMain.do")
 	public ModelAndView formMyPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,@RequestParam int order_num,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order, @Valid MyPageVO mypageVO) {
@@ -149,7 +167,17 @@ public class MyPageController {
 			//주문내역상세 가져오기
 			list = mypageService.getOrderListDetail(map);
 		}
+		if(list != null) {
+			//금액 천단위 , 처리
+			for (int i = 0; i < list.size(); i++) {
+				String price = list.get(i).getOrder_product_price();
+				price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+				list.get(i).setOrder_product_price(price);
+			}
+		}
+
 		if(list==null) {
+
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("myPageMain");
 			mav.addObject("error", "일치하는 주문 내역이 없습니다.");
@@ -157,14 +185,11 @@ public class MyPageController {
 		}
 		//배송지, 결제 정보
 		mypageVO = mypageService.getHomeOrderList(order_num,mem_num);
-		/*
-		//금액 천단위 , 처리
-		for (int i = 0; i < list.size(); i++) {
-			String price = list.get(i).getOrder_total_price();
-			price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
-			list.get(i).setOrder_total_price(price);
+		if(mypageVO.getOrder_total_price()!=null) {
+			String price2 = mypageVO.getOrder_total_price();
+			price2 = price2.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+			mypageVO.setOrder_total_price(price2);
 		}
-		 */
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("orderListMain");
 		mav.addObject("count", count);
@@ -177,6 +202,16 @@ public class MyPageController {
 	 * 문의 내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/asklist/askListMain.do")
+	public String askListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "askListMain";	
+	}
+	@GetMapping("/lm/mypage/asklist/askListMain.do")
 	public ModelAndView askList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
@@ -216,6 +251,16 @@ public class MyPageController {
 	 * 대출/반납내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
+	public String checkOutReturnListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "checkOutReturnListMain";	
+	}
+	@GetMapping("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
 	public ModelAndView checkOutReturnList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
@@ -254,6 +299,16 @@ public class MyPageController {
 	 * 희망도서신청내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/wantbooklist/wantBookListMain.do")
+	public String wantBookListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "wantBookListMain";	
+	}
+	@GetMapping("/lm/mypage/wantbooklist/wantBookListMain.do")
 	public ModelAndView wantBookList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
@@ -292,6 +347,16 @@ public class MyPageController {
 	 * 프로그램신청내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/programapplylist/programApplyListMain.do")
+	public String programApplyListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "programApplyListMain";	
+	}
+	@GetMapping("/lm/mypage/programapplylist/programApplyListMain.do")
 	public ModelAndView programApplyList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
@@ -330,6 +395,16 @@ public class MyPageController {
 	 * 시설이용신청내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
+	public String facilityApplyListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "facilityApplyListMain";	
+	}
+	@GetMapping("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
 	public ModelAndView facilityApplyList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
@@ -368,6 +443,16 @@ public class MyPageController {
 	 * 도서예약내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/bookreservationlist/bookReservationListMain.do")
+	public String bookReservationListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "bookReservationListMain";	
+	}
+	@GetMapping("/lm/mypage/bookreservationlist/bookReservationListMain.do")
 	public ModelAndView bookReservationList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
@@ -405,13 +490,97 @@ public class MyPageController {
 	 * 분실도서신고내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/booklostlist/bookLostListMain.do")
-	public String bookLostList() {
-		return "bookLostListMain"; //타일스 설정의 식별자
+	public String bookLostListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "bookLostListMain";	
 	}
 	@GetMapping("/lm/mypage/booklostlist/bookLostListMain.do")
-	public String bookLostListHandle(@RequestParam int lo) {
+	public ModelAndView bookLostList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+		HttpSession session = request.getSession();
 
-		return "bookLostListMain";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountBookLostList(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "bookLostListMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//도서예약신청내역 가져오기
+			list = mypageService.getBookLostList(map);
+		}
+		log.debug("list : " + list);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bookLostListMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
+	}
+	/*=======================
+	 * 포인트 로그
+	 *=======================*/
+	@RequestMapping("/lm/mypage/pointinfo/pointInfoMain.do")
+	public String pointInfoListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "pointInfoMain";	
+	}
+	@GetMapping("/lm/mypage/pointinfo/pointInfoMain.do")
+	public ModelAndView pointInfoList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+		HttpSession session = request.getSession();
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountPointInfo(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "pointInfoMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//도서예약신청내역 가져오기
+			list = mypageService.getPointInfo(map);
+		}
+		log.debug("list : " + list);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("pointInfoMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 	/*=======================
 	 * 이벤트참여내역
@@ -441,25 +610,105 @@ public class MyPageController {
 	 * 찜한도서내역
 	 *=======================*/
 	@RequestMapping("/lm/mypage/zzimbooklist/zzimBookListMain.do")
-	public String zzimBookList() {
-		return "zzimBookListMain"; //타일스 설정의 식별자
+	public String zzimBookListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "zzimBookListMain";	
 	}
 	@GetMapping("/lm/mypage/zzimbooklist/zzimBookListMain.do")
-	public String zzimBookListHandle(@RequestParam int lo) {
+	public ModelAndView zzimBookList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+		HttpSession session = request.getSession();
 
-		return "zzimBookListMain";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountZzimBookList(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "zzimBookListMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//도서예약신청내역 가져오기
+			list = mypageService.getZzimBookList(map);
+		}
+		if(list != null) {
+			//금액 천단위 , 처리
+			for (int i = 0; i < list.size(); i++) {
+				String price = list.get(i).getStore_product_pricesales();
+				price = price.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+				list.get(i).setStore_product_pricesales(price);
+			}
+		}
+		log.debug("list : " + list);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("zzimBookListMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 	/*=======================
 	 * 도서후기
 	 *=======================*/
 	@RequestMapping("/lm/mypage/bookwritelist/bookWriteListMain.do")
-	public String bookWriteList() {
-		return "bookWriteListMain"; //타일스 설정의 식별자
+	public String bookWriteListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
+		//로그인 여부 체크
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
+		}
+		return "bookWriteListMain";	
 	}
 	@GetMapping("/lm/mypage/bookwritelist/bookWriteListMain.do")
-	public String bookWriteListHandle(@RequestParam int lo) {
+	public ModelAndView bookWriteList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
+			@RequestParam(value = "order", defaultValue = "1") int order) {
+		HttpSession session = request.getSession();
 
-		return "bookWriteListMain";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", session.getAttribute("mem_num"));
+
+		// 전체/검색 레코드수
+		int count = mypageService.selectRowCountBookWriteList(map);
+
+		log.debug("<<ALL-board-count>> : " + count);
+
+		// 페이지처리 부가적인 파라미터
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "bookWriteListMain.do", "&order=" + order+"&lo="+lo);
+
+		List<MyPageVO> list = null;
+		if (count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			//도서예약신청내역 가져오기
+			list = mypageService.getBookWriteList(map);
+		}
+		log.debug("list : " + list);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bookWriteListMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 	/*=======================
 	 * 독후감작성
@@ -492,17 +741,12 @@ public class MyPageController {
 	//수정 폼 호출
 	@RequestMapping("/lm/mypage/myedit/myEditMain.do")
 	public String myEdit(@Valid MyPageVO mypageVO,HttpServletRequest request,@RequestParam int lo,Model model) {
-		HttpSession session = request.getSession();
 		//로그인 여부 체크
+		HttpSession session = request.getSession();
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
-		//로그인 안되어있을 시 로그인 화면으로 이동
-		if(mem_num==null) {
-			model.addAttribute("accessMsg", "먼저 로그인을 해주세요.");
-			if(lo==1) {
-				return "common/notice_bs";
-			}else {
-				return "common/notice_lib";
-			}
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
 		}
 		//name,email,cell 가져오기
 		mypageVO = mypageService.getMyEdit(mem_num);
@@ -566,7 +810,7 @@ public class MyPageController {
 		}
 		if(!mypageVO.getHome_title().equals("")) {
 			mypageService.insertHome(mypageVO);
-			
+
 			model.addAttribute("accessMsg", "주소지 추가 완료.");
 			check = true;
 		}
@@ -615,7 +859,7 @@ public class MyPageController {
 		mapJson.put("result", "기본 배송지 변경 완료");
 		return mapJson;
 	}
-	
+
 	/*=======================
 	 * 이메일 인증 적용(auth 변경) 처리
 	 *=======================*/
@@ -654,7 +898,7 @@ public class MyPageController {
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		//VO에 mem_num 등록
 		mypageVO.setMem_num(mem_num);
-		
+
 		//입력받은 비밀번호 sha-256+salt 암호화 처리 시작
 		String passwd = mypageVO.getMem_passwd();
 		//db에 저장된 salt값 가져오기
@@ -663,13 +907,13 @@ public class MyPageController {
 		String mem_passwd = EncryptionPasswd.encryptionPasswd(salt,passwd);
 		//VO에 SHA-256 passwd 적재
 		mypageVO.setMem_passwd(mem_passwd);
-		
+
 		mypageService.passwdChangeApply(mypageVO);
-		
+
 		Map<String,String> mapJson = new HashMap<String,String>();
 		mapJson.put("result", "비밀번호 변경 완료");
 		return mapJson;
-		
+
 	}
 	/*=======================
 	 * 사진 관련
@@ -720,38 +964,22 @@ public class MyPageController {
 		model.addAttribute("filename", mypageVO.getFacility_imagename());
 	}
 	/*=======================
-	 * 사용가능포인트정보
-	 *=======================*/
-	@RequestMapping("/lm/mypage/pointinfo/pointInfoMain.do")
-	public String pointInfo() {
-		return "pointInfoMain"; //타일스 설정의 식별자
-	}
-	@GetMapping("/lm/mypage/pointinfo/pointInfoMain.do")
-	public String pointInfoHandle(@RequestParam int lo) {
-
-		return "pointInfoMain";
-	}
-	/*=======================
 	 * 등급정보
 	 *=======================*/
-	@RequestMapping("/lm/mypage/gradeinfo/gradeInfoMain.do")
-	public String gradeInfo() {
-		return "gradeInfoMain"; //타일스 설정의 식별자
-	}
 	@GetMapping("/lm/mypage/gradeinfo/gradeInfoMain.do")
-	public String gradeInfoHandle(@RequestParam int lo,Model model,HttpSession session,MyPageVO mypageVO) {
-		log.debug("<<등급정보>> : " + mypageVO);
+	public String gradeInfoCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
 		//로그인 여부 체크
-		Integer mem_num = (Integer)session.getAttribute("mem_num");
-		//로그인 안되어있을 시 로그인 화면으로 이동
-		if(mem_num==null) {
-			model.addAttribute("accessMsg", "먼저 로그인을 해주세요.");
-			if(lo==1) {
-				return "common/notice_bs";
-			}else {
-				return "common/notice_lib";
-			}
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
 		}
+		return "gradeInfoMain";	
+	}
+	@RequestMapping("/lm/mypage/gradeinfo/gradeInfoMain.do")
+	public String gradeInfo(@RequestParam int lo,Model model,HttpSession session,MyPageVO mypageVO) {
+		log.debug("<<등급정보>> : " + mypageVO);
+		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		//회원의 총 주문 금액
 		int mem_order_price=0;
 		//회원의 등급 점수
@@ -777,15 +1005,9 @@ public class MyPageController {
 	public String memberOut(MyPageVO mypageVO,HttpServletRequest request,Model model,@RequestParam int lo) {
 		HttpSession session = request.getSession();
 		//로그인 여부 체크
-		Integer mem_num = (Integer)session.getAttribute("mem_num");
-		//로그인 안되어있을 시 로그인 화면으로 이동
-		if(mem_num==null) {
-			model.addAttribute("accessMsg", "먼저 로그인을 해주세요.");
-			if(lo==1) {
-				return "common/notice_bs";
-			}else {
-				return "common/notice_lib";
-			}
+		if(session.getAttribute("mem_num") == null) {
+			model.addAttribute("lo",1);
+			return "redirect:/lm/login/template/loginMain.do";
 		}
 		return "memberOutMain";
 	}
