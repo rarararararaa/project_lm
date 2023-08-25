@@ -57,21 +57,14 @@ public class MyPageController {
 	/*=======================
 	 * 마이페이지 + 주문내역
 	 *=======================*/
-	@RequestMapping("/lm/mypage/main/myPageMain.do")
-	public String myPageCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "myPageMain";	
-	}
 	@GetMapping("/lm/mypage/main/myPageMain.do")
 	public String myPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			return "redirect:/lm/login/template/loginMain.do?lo="+lo;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -128,22 +121,18 @@ public class MyPageController {
 	/*=======================
 	 * 주문 내역 상세
 	 *=======================*/
-	@RequestMapping("/lm/mypage/orderlist/orderListMain.do")
-	public String formMyPageCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "orderListMain";	
-	}
+
 	@GetMapping("/lm/mypage/orderlist/orderListMain.do")
 	public ModelAndView formMyPage(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,@RequestParam int order_num,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order, @Valid MyPageVO mypageVO) {
 
 		HttpSession session = request.getSession();
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
@@ -201,23 +190,16 @@ public class MyPageController {
 	/*=======================
 	 * 문의 내역
 	 *=======================*/
-	@RequestMapping("/lm/mypage/asklist/askListMain.do")
-	public String askListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "askListMain";	
-	}
 	@GetMapping("/lm/mypage/asklist/askListMain.do")
 	public ModelAndView askList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
-
-
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -250,22 +232,16 @@ public class MyPageController {
 	/*=======================
 	 * 대출/반납내역
 	 *=======================*/
-	@RequestMapping("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
-	public String checkOutReturnListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "checkOutReturnListMain";	
-	}
 	@GetMapping("/lm/mypage/checkoutreturnlist/checkOutReturnListMain.do")
 	public ModelAndView checkOutReturnList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
-
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
@@ -298,23 +274,17 @@ public class MyPageController {
 	/*=======================
 	 * 희망도서신청내역
 	 *=======================*/
-	@RequestMapping("/lm/mypage/wantbooklist/wantBookListMain.do")
-	public String wantBookListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "wantBookListMain";	
-	}
 	@GetMapping("/lm/mypage/wantbooklist/wantBookListMain.do")
 	public ModelAndView wantBookList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
 
-
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -346,23 +316,17 @@ public class MyPageController {
 	/*=======================
 	 * 프로그램신청내역
 	 *=======================*/
-	@RequestMapping("/lm/mypage/programapplylist/programApplyListMain.do")
-	public String programApplyListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "programApplyListMain";	
-	}
 	@GetMapping("/lm/mypage/programapplylist/programApplyListMain.do")
 	public ModelAndView programApplyList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
 
-
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -394,23 +358,17 @@ public class MyPageController {
 	/*=======================
 	 * 시설이용신청내역
 	 *=======================*/
-	@RequestMapping("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
-	public String facilityApplyListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "facilityApplyListMain";	
-	}
 	@GetMapping("/lm/mypage/facilityapplylist/facilityApplyListMain.do")
 	public ModelAndView facilityApplyList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
 
-
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -442,22 +400,16 @@ public class MyPageController {
 	/*=======================
 	 * 도서예약내역
 	 *=======================*/
-	@RequestMapping("/lm/mypage/bookreservationlist/bookReservationListMain.do")
-	public String bookReservationListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "bookReservationListMain";	
-	}
 	@GetMapping("/lm/mypage/bookreservationlist/bookReservationListMain.do")
 	public ModelAndView bookReservationList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
-
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -489,22 +441,16 @@ public class MyPageController {
 	/*=======================
 	 * 분실도서신고내역
 	 *=======================*/
-	@RequestMapping("/lm/mypage/booklostlist/bookLostListMain.do")
-	public String bookLostListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "bookLostListMain";	
-	}
 	@GetMapping("/lm/mypage/booklostlist/bookLostListMain.do")
 	public ModelAndView bookLostList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
-
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -537,22 +483,16 @@ public class MyPageController {
 	/*=======================
 	 * 포인트 로그
 	 *=======================*/
-	@RequestMapping("/lm/mypage/pointinfo/pointInfoMain.do")
-	public String pointInfoListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "pointInfoMain";	
-	}
 	@GetMapping("/lm/mypage/pointinfo/pointInfoMain.do")
 	public ModelAndView pointInfoList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
-
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -609,22 +549,16 @@ public class MyPageController {
 	/*=======================
 	 * 찜한도서내역
 	 *=======================*/
-	@RequestMapping("/lm/mypage/zzimbooklist/zzimBookListMain.do")
-	public String zzimBookListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "zzimBookListMain";	
-	}
 	@GetMapping("/lm/mypage/zzimbooklist/zzimBookListMain.do")
 	public ModelAndView zzimBookList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
-
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -665,22 +599,16 @@ public class MyPageController {
 	/*=======================
 	 * 도서후기
 	 *=======================*/
-	@RequestMapping("/lm/mypage/bookwritelist/bookWriteListMain.do")
-	public String bookWriteListCheck(@RequestParam int lo,HttpServletRequest request,Model model) {
-		//로그인 여부 체크
-		HttpSession session = request.getSession();
-		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
-		}
-		return "bookWriteListMain";	
-	}
 	@GetMapping("/lm/mypage/bookwritelist/bookWriteListMain.do")
 	public ModelAndView bookWriteList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
 			HttpServletRequest request,Model model,@RequestParam int lo,String keyfield, String keyword,
 			@RequestParam(value = "order", defaultValue = "1") int order) {
 		HttpSession session = request.getSession();
-
+		if(session.getAttribute("mem_num") == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/lm/login/template/loginMain.do?lo="+lo);
+			return mav;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -745,8 +673,8 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
+			ModelAndView mav = new ModelAndView();
+			return "redirect:/lm/login/template/loginMain.do?lo="+lo;
 		}
 		//name,email,cell 가져오기
 		mypageVO = mypageService.getMyEdit(mem_num);
@@ -819,7 +747,7 @@ public class MyPageController {
 			mypageService.updateModifyDate(mypageVO);
 		}
 		model.addAttribute("lo",lo);
-		return "common/notice_edit";
+		return "redirect:/lm/mypage/myedit/myEditMain.do?lo="+lo;
 	}
 	/*=======================
 	 * 이메일 인증 처리
@@ -840,7 +768,7 @@ public class MyPageController {
 		emailSender.sendEmail(email);
 
 		Map<String,String> mapJson = new HashMap<String,String>();
-		mapJson.put("result", data);
+		mapJson.put("result",data);
 		return mapJson;
 	}
 	/*=======================
@@ -972,8 +900,8 @@ public class MyPageController {
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		//로그인 여부 체크
 		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
+			ModelAndView mav = new ModelAndView();
+			return "redirect:/lm/login/template/loginMain.do?lo="+lo;
 		}
 		//회원의 총 주문 금액
 		int mem_order_price=0;
@@ -1001,8 +929,7 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		//로그인 여부 체크
 		if(session.getAttribute("mem_num") == null) {
-			model.addAttribute("lo",1);
-			return "redirect:/lm/login/template/loginMain.do";
+			return "redirect:/lm/login/template/loginMain.do?lo="+lo;
 		}
 		return "memberOutMain";
 	}
@@ -1028,7 +955,6 @@ public class MyPageController {
 			session.invalidate();
 		}
 		model.addAttribute("accessMsg", "회원 탈퇴 완료.");
-		
 		return "bsMain";
 	}
 }

@@ -34,7 +34,7 @@ public class MyPageHeaderInterceptor implements HandlerInterceptor{
 		if(mem_num == null) {
 			return true;
 		}else {
-		
+			logger.debug("<<MyPageHeaderInterceptor else 진입>>");
 		List<MyPageVO> list = null;
 		
 		//grade, point, modify_date list에 저장
