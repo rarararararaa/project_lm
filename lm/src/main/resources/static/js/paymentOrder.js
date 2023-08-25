@@ -30,14 +30,7 @@ $(function(){
 		let total = $('#total').attr('data-total');
 		let point = parseInt($(this).val());
 		let due = parseInt($('#paySubmit').attr('data-dueTotal'));
-		if(point >= due){
-			$('#due').text(0+'원');
-			$('#paySubmit').attr('data-dueTotal',0);
-			$('#mem_point').val(due);
-			$('#side_point').val(due);
-			$('#side_point').text(due.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
-			return;
-		}
+		
 		overPoint(point); 
 		if(!((key.keyCode > 95 && key.keyCode < 106) || (key.keyCode > 47 && key.keyCode < 58)  || key.keyCode == 8)){
 			return false;
@@ -430,11 +423,6 @@ function overPoint(point){
 		$('#side_point').text(maxpoint.toLocaleString('en')+'원');
 		console.log(point + ', '+maxpoint);
 		return;
-	}
-	if(point >= total){
-		alert('왜안됄민어리');
-		$('#due').text(0+'원');
-		$('#paySubmit').attr('data-dueTotal',0);
 	}
 	$('#side_point').text(point.toLocaleString('en')+'원');
 }

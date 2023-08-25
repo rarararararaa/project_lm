@@ -287,6 +287,7 @@ public class BookStorePaymentController {
 		int total = (int)session.getAttribute("total");
 		for(BookStorePaymentCartVO vo : list) {
 			ProductVO product = bookStorePaymentService.selectDetailBook(vo.getStore_product_num());
+			log.debug("<<fjidslkjf>> : "+vo.getUsed_product_num());
 			if(vo.getUsed_product_num() != 0) {//중고 상품 추가 정보
 				UsedVO used = bookStorePaymentService.selectUsedBook(vo.getUsed_product_num());
 				log.debug("<<도서 중고 정보>> : "+used);
