@@ -26,8 +26,8 @@ public interface BookStorePaymentCartMapper {
 	@Select("SELECT * FROM store_used_product_detail d JOIN store_used_product_manage m USING(used_product_num) WHERE used_product_num = #{used_product_num}")
 	public UsedVO selectUsedBook(int used_product_num);
 	//카트 중고도서 중복확인
-	@Select("SELECT * FROM store_cart WHERE used_product_num = #{used_product_num}")
-	public BookStorePaymentCartVO selectEmptyUsed(int used_product_num);
+	@Select("SELECT * FROM store_cart WHERE used_product_num = #{used_product_num} AND mem_num = #{mem_num}")
+	public BookStorePaymentCartVO selectEmptyUsed(int used_product_num,int mem_num);
 	//중복 도서 합치기
 	@Update("UPDATE store_cart SET cart_quantity = #{total} WHERE mem_cart_num = #{mem_cart_num}")
 	public void updateBookQuantity(int total, int mem_cart_num);

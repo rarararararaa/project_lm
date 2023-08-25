@@ -66,7 +66,7 @@ $(function() {
 
 							var startDate = info.event.start;
 							clickDate = dateFormat(startDate);
-							alert('id: ' + info.event);
+							//alert('id: ' + info.event);
 							clickSchedule(info.event.id);
 							console.log(info.event);
 							console.log(info.event.extendedProps.description);

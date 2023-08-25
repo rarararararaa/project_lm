@@ -60,8 +60,8 @@ public class BookStorePaymentServiceImpl implements BookStorePaymentService{
 	}
 	//중고도서 중복 확인
 	@Override
-	public BookStorePaymentCartVO selectEmptyUsed(int used_product_num) {
-		return bookStorePaymentCartMapper.selectEmptyUsed(used_product_num);
+	public BookStorePaymentCartVO selectEmptyUsed(int used_product_num, int mem_num) {
+		return bookStorePaymentCartMapper.selectEmptyUsed(used_product_num, mem_num);
 	}
 	//도서 상세
 	@Override

@@ -350,6 +350,7 @@ $(function(){
 //=========================함수 시작==========================//
 //기본 주소 변경-부모 화면 갱신
 function defaultMain(newHome){
+	$('.empty').empty();
 	//data속성 값 변경시 두 번째 인자에 값 입력
 	$('#memInfo').attr('data-zipcode',newHome.home_zipcode);
 	$('#memInfo').attr('data-address',newHome.home_address+newHome.home_address_detail);

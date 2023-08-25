@@ -94,6 +94,7 @@
 		SELECT
 			COUNT(*)
 		FROM store_event_board
+		<include refid="eventOrder"></include>
 		<include refid="eventSearch"></include>
 	</select>
 	

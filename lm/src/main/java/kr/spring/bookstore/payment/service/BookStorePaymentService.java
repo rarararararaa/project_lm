@@ -16,7 +16,7 @@ public interface BookStorePaymentService {
 	public ProductVO selectDetailBook(int store_product_num);
 	public UsedVO selectUsedBook(int used_product_num);
 	//카트 중고도서 중복확인
-	public BookStorePaymentCartVO selectEmptyUsed(int used_product_num);
+	public BookStorePaymentCartVO selectEmptyUsed(int used_product_num, int mem_num);
 	//중복 도서 수량 합치기
 	public void updateBookQuantity(int total, int mem_cart_num);
 	//장바구니 정보 업데이트

@@ -78,7 +78,7 @@ public class BookStorePaymentController {
 		Boolean check = true;
 		if(product.getUsed_product_num() != 0) {//중고 확인
 			//중고 중복 상품 확인
-			BookStorePaymentCartVO used = bookStorePaymentService.selectEmptyUsed(product.getUsed_product_num());
+			BookStorePaymentCartVO used = bookStorePaymentService.selectEmptyUsed(product.getUsed_product_num(),mem_num);
 			if(used != null) {
 				mapJson.put("result", "existBook");
 				return mapJson;

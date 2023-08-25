@@ -11,7 +11,7 @@
                 	<button class="deli-plus" onclick="fnShowPop('re_re_pwd')">배송지 추가</button>
                 <!-- 배송지 목록 시작 -->
                 	<div id="deli_list">
-                	<c:if test="${empty home}">
+                	<c:if test="${empty home_list}">
                 		<div class="non-deliInfo">
                 			<img alt="" src="${pageContext.request.contextPath}/images/stop.png">
 	                		<p>등록된 배송지가 없습니다.</p>

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/service.css">
 <div class="page-main">
-	<h2>프로그램 목록</h2>
+	<p class="title">프로그램 목록</p>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 시설이 없습니다.</div>
 	</c:if>
