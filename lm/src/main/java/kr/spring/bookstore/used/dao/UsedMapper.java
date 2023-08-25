@@ -91,4 +91,9 @@ public interface UsedMapper {
 		//중고 책 조회 수
 		public int updateHit(Integer used_product_num);
 		
+		@Select("select om.*, od.used_product_num , pd.store_product_cover, pd.store_product_title, om.order_date "
+				+ "from store_order_manage om RIGHT JOIN store_order_detail od "
+				+ "ON om.order_num = od.order_num LEFT JOIN store_product_detail pd ON pd.store_product_num = od.store_product_num "
+				+ "WHERE od.used_product_num != 0 AND om.mem_num = #{mem_num}")
+		public List<UsedVO> selectUsedSalesStatus(int mem_num);
 }

@@ -110,6 +110,12 @@ public class UsedServiceImpl implements UsedService {
 		return usedMapper.selectUsedProductByMemCount(mem_num);
 	}
 
+	@Override
+	public List<UsedVO> selectUsedSalesStatus(int mem_num) {
+		// TODO Auto-generated method stub
+		return usedMapper.selectUsedSalesStatus(mem_num);
+	}
+
 	
 
 

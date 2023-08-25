@@ -103,8 +103,19 @@ public class UsedController {
 	}
 
 	@RequestMapping("/bookstore/used/usedSalesStatus.do")
-	public String getUsedSalesStatus(Model model) { // 중고 판매 상태
-		return "usedSalesStatus";
+	public ModelAndView getUsedSalesStatus(HttpSession session) { // 중고 판매 상태
+		ModelAndView mav = new ModelAndView();
+		List<UsedVO> list = null;
+		if(session.getAttribute("mem_num") == null) {
+			mav.addObject("lo",1);
+			mav.setViewName("redirect:/lm/login/template/loginMain.do");
+			return mav;
+		}
+		int mem_num = (Integer)session.getAttribute("mem_num");
+		mav.setViewName("usedSalesStatus");
+		list = usedService.selectUsedSalesStatus(mem_num);
+		mav.addObject("list",list);
+		return mav;
 	}
 
 	

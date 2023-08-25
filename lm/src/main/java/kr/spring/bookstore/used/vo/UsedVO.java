@@ -53,6 +53,12 @@ public class UsedVO {
 	//연산 작업
 	private int devide_product_by_used;
 	
+	//order 관련 영역...
+	private int order_num;
+	private Date order_date;
+	private int order_pay_status;
+	
+	
 	//파일 처리 작업
 	private String store_product_photo1_name; //파일 1 처리
 	private String store_product_photo2_name; //파일 2 처리

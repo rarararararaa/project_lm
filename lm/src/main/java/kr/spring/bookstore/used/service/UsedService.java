@@ -48,4 +48,5 @@ public interface UsedService {
 	
 	public UsedVO selectUsedProductNumAndMemNum(int used_product_num, int mem_num);
 	
+	public List<UsedVO> selectUsedSalesStatus(int mem_num);
 }
