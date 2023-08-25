@@ -149,7 +149,7 @@ public class UsedController {
 		mav.addObject("success", 1);
 		mav.addObject("list", list);
 		mav.addObject("count",count);
-		mav.addObject("page",page.getPage());
+		mav.addObject("page",page.getPage()); 
 		return mav;
 	}
 
