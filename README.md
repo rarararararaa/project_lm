@@ -15,6 +15,7 @@ LM문고는 대중적으로 유명한 교보문고를, LM도서는 서울도서�
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=black">
 <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=black">
 ## 📌 주요 기능 - LM도서
+### 로그인
 ## 📌 주요 기능 - LM문고
 ## 기타 자료
 1. 요구사항 정의서
