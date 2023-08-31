@@ -1,4 +1,4 @@
-![image](https://github.com/rarararararaa/project_lm/assets/95171793/7a2c7561-17b1-490a-8af9-d1f1bac782ab)# SpringBoot-Project-LM문고&LM도서
+# SpringBoot-Project-LM문고&LM도서
 스프링 부트 + JSP 서점&도서관 통합 사이트
 ## 🖥️ 프로젝트 소개
 LM문고는 대중적으로 유명한 교보문고를, LM도서는 서울도서관을 벤치마킹한 프로젝트입니다. 
