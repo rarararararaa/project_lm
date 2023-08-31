@@ -92,3 +92,5 @@ LM문고는 대중적으로 유명한 교보문고를, LM도서는 서울도서�
 2. db설계서
     - https://docs.google.com/spreadsheets/d/1y1EzFjh9K01Tv36UtZnEML5xZEV-oSYSitNGMVSmTlo/edit#gid=1123229093
     - https://docs.google.com/spreadsheets/d/10GaoxegtEmQ8K1bXswDdkhSVNwfGi-EdtyNXa0eNjms/edit#gid=605851651
+3. ppt
+    - https://1drv.ms/p/s!AmR-6Gpvu3iT5CS19ptL3VrW0ZBy?e=hDN4FY
