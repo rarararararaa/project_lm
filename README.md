@@ -8,13 +8,14 @@ LM문고는 대중적으로 유명한 교보문고를, LM도서는 서울도서�
 ![image](https://github.com/rarararararaa/project_lm/assets/95171793/11399f0a-44d0-4acd-9b26-2f9f29d7623e)
 ## 개발환경
 
-<img src="https://img.shields.io/badge/Java-FCC624?style=for-the-badge&logoColor=black"> <img src="https://img.shields.io/badge/oracle 11g-F80000?style=for-the-badge&logo=oracle&logoColor=white">
+<img src="https://img.shields.io/badge/Java-FCC624?style=for-the-badge&logoColor=black"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=black">
+<img src="https://img.shields.io/badge/oracle 11g-F80000?style=for-the-badge&logo=oracle&logoColor=white">
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=black">
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=black">
 <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=black">
-<img src="https://img.shields.io/badge/Java-FCC624?style=for-the-badge&logoColor=black">
-<img src="https://img.shields.io/badge/Java-FCC624?style=for-the-badge&logoColor=black">
-<img src="https://img.shields.io/badge/oracle 11g-4479A1?style=for-the-badge&logo=oraclel&logoColor=white">
+
+
 
 ## 기타 자료
 요구사항 정의서
