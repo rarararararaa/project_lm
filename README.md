@@ -1,6 +1,7 @@
 # SpringBoot-Project-LM문고&LM도서
 스프링 부트 + JSP 서점&도서관 통합 사이트
 ## 프로젝트 소개
+## 기타 자료
 요구사항 정의서
 <br>
 https://docs.google.com/document/d/1sEtoJQzGN5lvC0VZm5iQrbz5MWUho4cKetY6kW3_Wb8/edit
