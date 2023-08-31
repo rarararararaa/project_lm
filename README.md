@@ -5,7 +5,8 @@ LM문고는 대중적으로 유명한 교보문고를, LM도서는 서울도서�
 ## 🕰️ 개발 기간
 23.07.12 ~ 23.08.25
 ## 🧑‍🤝‍🧑 맴버구성
-![image](https://github.com/rarararararaa/project_lm/assets/95171793/11399f0a-44d0-4acd-9b26-2f9f29d7623e)
+![image](https://github.com/rarararararaa/project_lm/assets/95171793/7dedd79a-0cb4-429d-8562-a9d6b9524e2c)
+
 ## ⚙️ 개발환경
 
 <img src="https://img.shields.io/badge/Java-FCC624?style=for-the-badge&logoColor=black"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=black">
