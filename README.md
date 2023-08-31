@@ -94,3 +94,5 @@ LM문고는 대중적으로 유명한 교보문고를, LM도서는 서울도서�
     - https://docs.google.com/spreadsheets/d/10GaoxegtEmQ8K1bXswDdkhSVNwfGi-EdtyNXa0eNjms/edit#gid=605851651
 3. ppt
     - https://1drv.ms/p/s!AmR-6Gpvu3iT5CS19ptL3VrW0ZBy?e=hDN4FY
+4. notion
+    - https://highfalutin-naranja-6a1.notion.site/LM-LM-8b22d40cf64741d3ae59303e229f79c3?pvs=4
