@@ -1,4 +1,4 @@
-# SpringBoot-Project-LM문고&LM도서
+![image](https://github.com/rarararararaa/project_lm/assets/95171793/7a2c7561-17b1-490a-8af9-d1f1bac782ab)# SpringBoot-Project-LM문고&LM도서
 스프링 부트 + JSP 서점&도서관 통합 사이트
 ## 🖥️ 프로젝트 소개
 LM문고는 대중적으로 유명한 교보문고를, LM도서는 서울도서관을 벤치마킹한 프로젝트입니다. 
@@ -16,6 +16,16 @@ LM문고는 대중적으로 유명한 교보문고를, LM도서는 서울도서�
 <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=black">
 ## 📌 주요 기능 - LM도서
 ### 로그인
+- DB값 검증
+- 아이디/비밀번호 찾기
+- 로그인 유지
+- 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
+### 회원가입
+- 비밀번호 SHA-256 해시 함수 암호화
+- 주소지 입력(선택)
+### 마이페이지
+### 회원가입
+
 ## 📌 주요 기능 - LM문고
 ## 기타 자료
 1. 요구사항 정의서
