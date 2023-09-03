@@ -34,7 +34,7 @@ LM문고는 대중적으로 유명한 교보문고를, LM도서는 서울도서�
 - 문의 내역
 - 이벤트 참여 내역
 - 중고도서 등록 내역
-### 도서구매 [- 상세보기](https://github.com/rarararararaa/project_lm/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%8F%84%EC%84%9C%EA%B5%AC%EB%A7%A4))
+### 도서구매 -[ 상세보기](https://github.com/rarararararaa/project_lm/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%8F%84%EC%84%9C%EA%B5%AC%EB%A7%A4))
 - 바로구매/장바구니
 - 도서 선택(전체 도서목록/베스트셀러/신규도서/도서상세페이지)
 - 수량 선택
