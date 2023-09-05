@@ -75,7 +75,7 @@
 					<li>
 						<label for="recipient">받는 분</label>
 						<input type="text" id="recipient" name="mem_name" placeholder="최대 7자까지 자유롭게 입력가능" maxlength="7">
-						<input type="text" id="phone" name="mem_cell" placeholder="휴대폰 번호를 -없이 입력해 주세요." maxlength="11">
+						<input type="text" id="phone" name="mem_cell" placeholder="휴대폰 번호를 -없이 입력해 주세요." maxlength="13" oninput="autoHyphen(this)">
 					</li>
 					<li>
 						<p>주소</p>
@@ -109,7 +109,7 @@
 					<li>
 						<label for="recipient">받는 분</label>
 						<input type="text" id="recipient" name="mem_name" placeholder="최대 7자까지 자유롭게 입력가능" maxlength="7" data-num=>
-						<input type="text" id="phone" name="mem_cell" placeholder="휴대폰 번호를 -없이 입력해 주세요." maxlength="11">
+						<input type="text" id="phone" name="mem_cell" placeholder="휴대폰 번호를 -없이 입력해 주세요." maxlength="13" oninput="autoHyphen(this)">
 					</li>
 					<li>
 						<p>주소</p>

@@ -203,7 +203,8 @@
 					<td id="due_point"><fmt:formatNumber value="${total * point}" maxFractionDigits="0"/>원</td>
 			</table>
 			<input type="submit" value="주문하기" id="paySubmit" data-type="" 
-			data-dueTotal=" <c:if test="${total < 50000 }">${total+3000}</c:if> <c:if test="${total >= 50000 }">${total}</c:if>">
+			data-dueTotal=" <c:if test="${total < 50000 }">${total+3000}</c:if> <c:if test="${total >= 50000 }">${total}</c:if>"
+			data-default="<c:if test="${total < 50000 }">${total+3000}</c:if> <c:if test="${total >= 50000 }">${total}</c:if>">
 			</form>
 		</div>
 			<button onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'" class="cancel-btn">주문취소</button>
