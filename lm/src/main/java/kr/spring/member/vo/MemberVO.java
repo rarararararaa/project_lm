@@ -47,6 +47,7 @@ public class MemberVO {
 	private String mem_salt;
 	private int mem_grade;
 	private String auto;
+	//store_member_home
 	private int home_num;
 	private String home_title;
 	private String home_zipcode;

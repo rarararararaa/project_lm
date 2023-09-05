@@ -15,7 +15,7 @@
 		<h2>안내</h2>
 		<div class="result-display">
 			<div class="align-center">
-				<c:if test="${accessMsg==1}">
+				<c:if test="${accessMsg=='1'}">
 				<input type="button" value="이동"
 							onclick="location.href='${pageContext.request.contextPath}/bookstore/template/bsMain.do'">
 			</c:if>

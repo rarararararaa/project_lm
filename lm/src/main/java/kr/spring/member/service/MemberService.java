@@ -3,9 +3,6 @@ package kr.spring.member.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
@@ -23,8 +20,8 @@ public interface MemberService {
 	public MemberVO selectMember(Integer mem_num);
 	//cell,name을 이용한 아이디 찾기
 	public String findId(MemberVO member);
-	
-	
+	//email를 이용한 회원정보 체크
+	public MemberVO selectCheckEmail(MemberVO member); 	
 	
 	//회원정보 수정
 	public void updateMember(MemberVO member);

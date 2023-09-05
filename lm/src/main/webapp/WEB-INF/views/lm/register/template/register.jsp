@@ -46,7 +46,7 @@
           				<div class="input-notice"><strong>*8~20자의 영문 대소문자, 숫자, 특수문자만 사용 가능</strong></div>
         			</div>
 					<div class="page-input-box"> <!-- 전화번호 입력 -->
-						<form:input path="mem_cell" maxlength="15" placeholder="*전화번호를 입력하세요." />
+						<form:input path="mem_cell" maxlength="13" placeholder="*전화번호를 입력하세요." onkeyup="autoHyphen(this)"/>
 						<span id="message_cell_null"></span>
 						<form:errors path="mem_cell" cssClass="error-color"/>      
 					</div>
@@ -55,15 +55,14 @@
 						<span id="message_email_null"></span>
 						<form:errors path="mem_email" cssClass="error-color"/>
 					</div>      
-					<div class="page-input-box"> <!-- 주민번호 입력 -->
+					<div class="page-input-box"> <!-- z 입력 -->
 						<div class="test">
-						<form:input path="mem_identify" id="identify_css" maxlength="6" placeholder="*주민등록번호 앞 6자리" />
-						<strong id="hi">-</strong>
-						<form:password path="mem_identify2" id="identify_css2" maxlength="7" placeholder="*주민등록번호 뒤 7자리"/>
+						<form:input path="mem_identify" id="identify_css" maxlength="6" placeholder="*생년월일을 입력하세요. 예) 890101" />
 						</div>
 						<span id="message_identify_null"></span>
 						<form:errors path="mem_identify" cssClass="error-color"/>
 					</div>
+					<div class="home_input">
 					<h2 id="h2_2">주소지 입력(선택)</h2>
 					<div class="page-input-box"> <!-- 주소지 별명 입력 -->
 						<form:input path="home_title" maxlength="50" placeholder="주소지 별명을 입력하세요." />
@@ -83,6 +82,7 @@
 						<form:input path="home_address_detail" maxlength="150" placeholder="상세주소를 입력해주세요" />
 						<span id="message_address_detail_null"></span>
 						<form:errors path="home_address_detail" cssClass="error-color"/>      
+					</div>
 					</div>
 			   </div>     
 			   <div class="align-center">

@@ -32,6 +32,9 @@ public interface MemberMapper {
 	public void insertHome(MemberVO member);
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String mem_id); 
+	//email&cell를 이용한 회원정보 체크
+	@Select("SELECT * FROM lm_member_detail WHERE mem_email = #{mem_email} OR mem_cell = #{mem_cell} AND rownum = 1")
+	public MemberVO selectCheckEmail(MemberVO member); 
 	//salt 가져오기
 	@Select("SELECT mem_salt FROM lm_member_detail WHERE mem_num = (SELECT mem_num FROM lm_member_manage WHERE mem_id = #{mem_id})")
 	public String selectSalt(String mem_id);

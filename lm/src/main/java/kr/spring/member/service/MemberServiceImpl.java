@@ -126,6 +126,12 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO homeDefault(int mem_num) {
 		return memberMapper.homeDefault(mem_num);
 	}
+	@Override
+	public MemberVO selectCheckEmail(MemberVO member) {
+		return memberMapper.selectCheckEmail(member);
+	}
+	
+	//이메일 중복 확인
 
 
 }

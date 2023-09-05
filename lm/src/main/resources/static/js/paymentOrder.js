@@ -1,5 +1,11 @@
 const IMP = window.IMP; 
 IMP.init("imp48405101"); //가맹점 식별코드
+//전화번호 자동 하이픈
+const autoHyphen = (target) => {
+ target.value = target.value
+   .replace(/[^0-9]/g, '')
+   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+}
 $(function(){
 //==주문 상품 리스트 보여주기==//
 	$('#book_detail').click(function(){

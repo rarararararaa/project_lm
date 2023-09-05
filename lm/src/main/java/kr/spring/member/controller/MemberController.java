@@ -270,6 +270,14 @@ public class MemberController {
 		if(result.hasErrors()) {
 			return registerForm();
 		}
+		MemberVO member = memberService.selectCheckEmail(memberVO);
+		if(member != null) {
+			if(memberVO.getMem_email().equals(member.getMem_email())) {
+				model.addAttribute("accessMsg", "이미 가입된 회원입니다.");
+				model.addAttribute("accessUrl", "/lm/login/template/loginMain.do?lo=1");
+				return "common/notice_bs";
+			}
+		}
 		String passwd = memberVO.getMem_passwd();
 		//비밀번호 암호화 salt 생성
 		String salt = SaltGenerate.getSalt();
@@ -288,7 +296,10 @@ public class MemberController {
 
 		//회원가입 manage, detail, home에 데이터 insert
 		memberService.insertMember(memberVO);
-		memberService.insertHome(memberVO);
+		if(memberVO.getHome_title() != "") {
+			log.debug("<<주소>> : "+memberVO.getHome_title());
+			memberService.insertHome(memberVO);
+		}
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
 		if(lo==1) {
 			return "common/notice_bs";
