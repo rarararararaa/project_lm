@@ -272,11 +272,9 @@ public class MemberController {
 		}
 		MemberVO member = memberService.selectCheckEmail(memberVO);
 		if(member != null) {
-			if(memberVO.getMem_email().equals(member.getMem_email())) {
 				model.addAttribute("accessMsg", "이미 가입된 회원입니다.");
 				model.addAttribute("accessUrl", "/lm/login/template/loginMain.do?lo=1");
 				return "common/notice_bs";
-			}
 		}
 		String passwd = memberVO.getMem_passwd();
 		//비밀번호 암호화 salt 생성
