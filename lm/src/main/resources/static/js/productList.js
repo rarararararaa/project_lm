@@ -40,9 +40,11 @@ $(function(){
 	
 })
 
-//중고 장바구니
-function submitUsedProduct(){
-	let form_data = $('.book-cart').serialize();	
+//장바구니
+function submitUsedProduct(target){
+	//let form_data = $(target).closest('.all-list').find('.book-cart').attr('class');	
+	//alert(form_data);
+	let form_data = $(target).closest('.all-list').find('.book-cart').serialize();	
 	console.log(form_data);	
 	//서버와 통신
 	$.ajax({

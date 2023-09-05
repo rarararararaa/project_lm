@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList.css">   
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/productList.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/productList.js"></script>
 <div class="main-page">
 	<div class="side-bar float-left">
 		<div class="search-main">
@@ -49,7 +49,7 @@
 		<table>
 		<!-- 반복문 -->
 			<c:forEach var="book" items="${list}">
-			<tr id="tregsd">
+			<tr id="tregsd" class="all-list">
 				<td>
 					<a href="${pageContext.request.contextPath}/bookstore/product/productDetail.do?store_product_isbn13=${book.store_product_isbn13}"><img src="${book.store_product_cover}"></a>
 					<div class="book-detail">
@@ -81,7 +81,7 @@
 					</div>
 				</td>
 				<td>
-					<button class="product-btn" id="cart" onclick="submitUsedProduct()">장바구니</button>
+					<button class="product-btn" id="cart" onclick="submitUsedProduct(this)">장바구니</button>
 					<button class="product-btn payGo" id="pay">바로구매</button>
 				</td>
 			</tr>				
